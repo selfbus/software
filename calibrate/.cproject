@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?fileVersion 4.0.0?>
+
+<cproject>
+<storageModule moduleId="org.eclipse.cdt.core.settings">
+<cconfiguration id="cdt.managedbuild.config.sdcc.exe.release.171813637">
+<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.sdcc.exe.release.171813637" moduleId="org.eclipse.cdt.core.settings" name="Release">
+<externalSettings/>
+<extensions>
+<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+<extension id="org.eclipse.cdt.core.MakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+</extensions>
+</storageModule>
+<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+<configuration artifactExtension="hex" artifactName="calibrate" buildProperties="" cleanCommand="rm -rf" description="" errorParsers="org.eclipse.cdt.core.MakeErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser" id="cdt.managedbuild.config.sdcc.exe.release.171813637" name="Release" parent="cdt.managedbuild.config.sdcc.exe.release" postannouncebuildStep="" postbuildStep="" preannouncebuildStep="" prebuildStep="">
+<folderInfo id="cdt.managedbuild.config.sdcc.exe.release.171813637." name="/" resourcePath="">
+<toolChain id="cdt.managedbuild.toolchain.sdcc.exe.release.1126986244" name="SDCC Tool Chain" superClass="cdt.managedbuild.toolchain.sdcc.exe.release">
+<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="cdt.managedbuild.target.sdcc.platform.exe.release.617032845" name="Release Platform" osList="solaris,linux,hpux,aix,qnx,win32" superClass="cdt.managedbuild.target.sdcc.platform.exe.release"/>
+<builder buildPath="${workspace_loc:/calibrate/Release}" id="cdt.managedbuild.target.sdcc.builder.exe.release.1334224302" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Sdcc Make" superClass="cdt.managedbuild.target.sdcc.builder.exe.release"/>
+<tool command="sdcc -c --stack-auto" id="cdt.managedbuild.tool.sdcc.c.compiler.exe.release.807132180" name="SDCC Compiler" superClass="cdt.managedbuild.tool.sdcc.c.compiler.exe.release">
+<option id="sdcc.c.compiler.option.preprocessor.nostdinc.1675448288" superClass="sdcc.c.compiler.option.preprocessor.nostdinc"/>
+<option id="sdcc.c.compiler.option.preprocessor.preprocess.95159908" superClass="sdcc.c.compiler.option.preprocessor.preprocess"/>
+<option id="sdcc.c.compiler.option.preprocessor.def.symbols.1132340636" superClass="sdcc.c.compiler.option.preprocessor.def.symbols"/>
+<option id="sdcc.c.compiler.option.preprocessor.undef.symbol.1652931322" superClass="sdcc.c.compiler.option.preprocessor.undef.symbol"/>
+<option id="sdcc.c.compiler.option.include.paths.871587515" superClass="sdcc.c.compiler.option.include.paths"/>
+<option id="sdcc.c.compiler.option.warnings.syntax.1078282244" superClass="sdcc.c.compiler.option.warnings.syntax"/>
+<option id="sdcc.c.compiler.option.warnings.pedantic.970251673" superClass="sdcc.c.compiler.option.warnings.pedantic"/>
+<option id="sdcc.c.compiler.option.warnings.pedantic.error.490242487" superClass="sdcc.c.compiler.option.warnings.pedantic.error"/>
+<option id="sdcc.c.compiler.option.warnings.nowarn.14652749" superClass="sdcc.c.compiler.option.warnings.nowarn"/>
+<option id="sdcc.c.compiler.option.warnings.allwarn.858186373" superClass="sdcc.c.compiler.option.warnings.allwarn"/>
+<option id="sdcc.c.compiler.option.warnings.toerrors.513838678" superClass="sdcc.c.compiler.option.warnings.toerrors"/>
+<option id="sdcc.c.compiler.option.misc.verbose.969290261" superClass="sdcc.c.compiler.option.misc.verbose"/>
+<option id="sdcc.c.compiler.option.misc.ansi.103151694" superClass="sdcc.c.compiler.option.misc.ansi"/>
+<option id="sdcc.c.compiler.category.other.codeseg.18856898" superClass="sdcc.c.compiler.category.other.codeseg"/>
+<option id="sdcc.c.compiler.category.other.constseg.679418218" superClass="sdcc.c.compiler.category.other.constseg"/>
+<option id="sdcc.c.compiler.category.other.memorymodel.1333454413" superClass="sdcc.c.compiler.category.other.memorymodel"/>
+<option id="sdcc.c.compiler.category.other.xstack.317125310" superClass="sdcc.c.compiler.category.other.xstack"/>
+<option id="sdcc.c.compiler.category.other.packiram.1366542759" superClass="sdcc.c.compiler.category.other.packiram"/>
+<option id="sdcc.c.compiler.category.other.iramsize.548052797" superClass="sdcc.c.compiler.category.other.iramsize" value="256" valueType="string"/>
+<option id="sdcc.c.compiler.category.other.xramsize.839609418" superClass="sdcc.c.compiler.category.other.xramsize"/>
+<option id="sdcc.c.compiler.category.other.codesize.187825478" superClass="sdcc.c.compiler.category.other.codesize"/>
+<option id="sdcc.c.compiler.category.other.stacksize.1068206909" superClass="sdcc.c.compiler.category.other.stacksize"/>
+<inputType id="cdt.managedbuild.tool.sdcc.c.compiler.input.653102406" superClass="cdt.managedbuild.tool.sdcc.c.compiler.input"/>
+</tool>
+<tool command="sdcc --stack-auto" id="cdt.managedbuild.tool.sdcc.c.linker.exe.release.591726072" name="SDCC Linker" superClass="cdt.managedbuild.tool.sdcc.c.linker.exe.release">
+<option id="sdcc.c.link.option.nostart.1022608816" superClass="sdcc.c.link.option.nostart"/>
+<option id="sdcc.c.link.option.nodeflibs.1831548998" superClass="sdcc.c.link.option.nodeflibs"/>
+<option id="sdcc.c.link.option.nostdlibs.2134340566" superClass="sdcc.c.link.option.nostdlibs"/>
+<option id="sdcc.c.link.option.strip.28003272" superClass="sdcc.c.link.option.strip"/>
+<option id="sdcc.c.link.option.noshared.1748553289" superClass="sdcc.c.link.option.noshared"/>
+<option id="sdcc.c.link.option.libs.711992232" superClass="sdcc.c.link.option.libs"/>
+<option id="sdcc.c.link.option.paths.230809299" superClass="sdcc.c.link.option.paths"/>
+<option id="sdcc.c.link.option.ldflags.1946385366" superClass="sdcc.c.link.option.ldflags"/>
+<option id="sdcc.c.link.option.other.83245244" superClass="sdcc.c.link.option.other"/>
+<option id="sdcc.c.link.option.userobjs.1250726737" superClass="sdcc.c.link.option.userobjs"/>
+<option id="sdcc.c.link.option.shared.961431061" superClass="sdcc.c.link.option.shared"/>
+<option id="sdcc.c.link.option.soname.285118839" superClass="sdcc.c.link.option.soname"/>
+<option id="sdcc.c.link.option.implname.1015706220" superClass="sdcc.c.link.option.implname"/>
+<option id="sdcc.c.link.option.defname.1401769798" superClass="sdcc.c.link.option.defname"/>
+</tool>
+<tool id="cdt.managedbuild.tool.sdcc.assembler.exe.release.1893590422" name="SDCC Assembler" superClass="cdt.managedbuild.tool.sdcc.assembler.exe.release">
+<inputType id="cdt.managedbuild.tool.sdcc.assembler.input.1204468340" superClass="cdt.managedbuild.tool.sdcc.assembler.input"/>
+</tool>
+</toolChain>
+</folderInfo>
+</configuration>
+</storageModule>
+<storageModule moduleId="scannerConfiguration">
+<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile"/>
+<profile id="org.eclipse.cdt.make.core.GCCStandardMakePerProjectProfile">
+<buildOutputProvider>
+<openAction enabled="true" filePath=""/>
+<parser enabled="true"/>
+</buildOutputProvider>
+<scannerInfoProvider id="specsFile">
+<runAction arguments="-E -P -v -dD ${plugin_state_location}/${specs_file}" command="gcc" useDefault="true"/>
+<parser enabled="true"/>
+</scannerInfoProvider>
+</profile>
+<profile id="org.eclipse.cdt.make.core.GCCStandardMakePerFileProfile">
+<buildOutputProvider>
+<openAction enabled="true" filePath=""/>
+<parser enabled="true"/>
+</buildOutputProvider>
+<scannerInfoProvider id="makefileGenerator">
+<runAction arguments="-f ${project_name}_scd.mk" command="make" useDefault="true"/>
+<parser enabled="true"/>
+</scannerInfoProvider>
+</profile>
+<profile id="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfile">
+<buildOutputProvider>
+<openAction enabled="true" filePath=""/>
+<parser enabled="true"/>
+</buildOutputProvider>
+<scannerInfoProvider id="specsFile">
+<runAction arguments="-E -P -v -dD ${plugin_state_location}/${specs_file}" command="gcc" useDefault="true"/>
+<parser enabled="true"/>
+</scannerInfoProvider>
+</profile>
+<profile id="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileCPP">
+<buildOutputProvider>
+<openAction enabled="true" filePath=""/>
+<parser enabled="true"/>
+</buildOutputProvider>
+<scannerInfoProvider id="specsFile">
+<runAction arguments="-E -P -v -dD ${plugin_state_location}/specs.cpp" command="g++" useDefault="true"/>
+<parser enabled="true"/>
+</scannerInfoProvider>
+</profile>
+<profile id="org.eclipse.cdt.managedbuilder.core.GCCManagedMakePerProjectProfileC">
+<buildOutputProvider>
+<openAction enabled="true" filePath=""/>
+<parser enabled="true"/>
+</buildOutputProvider>
+<scannerInfoProvider id="specsFile">
+<runAction arguments="-E -P -v -dD ${plugin_state_location}/specs.c" command="gcc" useDefault="true"/>
+<parser enabled="true"/>
+</scannerInfoProvider>
+</profile>
+<profile id="org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfile">
+<buildOutputProvider>
+<openAction enabled="true" filePath=""/>
+<parser enabled="true"/>
+</buildOutputProvider>
+<scannerInfoProvider id="specsFile">
+<runAction arguments="-E -P -v -dD ${plugin_state_location}/${specs_file}" command="gcc" useDefault="true"/>
+<parser enabled="true"/>
+</scannerInfoProvider>
+</profile>
+<profile id="org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfileCPP">
+<buildOutputProvider>
+<openAction enabled="true" filePath=""/>
+<parser enabled="true"/>
+</buildOutputProvider>
+<scannerInfoProvider id="specsFile">
+<runAction arguments="-E -P -v -dD ${plugin_state_location}/specs.cpp" command="g++" useDefault="true"/>
+<parser enabled="true"/>
+</scannerInfoProvider>
+</profile>
+<profile id="org.eclipse.cdt.managedbuilder.core.GCCWinManagedMakePerProjectProfileC">
+<buildOutputProvider>
+<openAction enabled="true" filePath=""/>
+<parser enabled="true"/>
+</buildOutputProvider>
+<scannerInfoProvider id="specsFile">
+<runAction arguments="-E -P -v -dD ${plugin_state_location}/specs.c" command="gcc" useDefault="true"/>
+<parser enabled="true"/>
+</scannerInfoProvider>
+</profile>
+<profile id="net.sourceforge.eclipsesdcc.SDCCManagedMakePerProjectProfile">
+<buildOutputProvider>
+<openAction enabled="false" filePath=""/>
+<parser enabled="false"/>
+</buildOutputProvider>
+<scannerInfoProvider id="specsFile">
+<runAction arguments="-V -E -Wp -P -dD ${plugin_state_location}/${specs_file}" command="sdcc" useDefault="true"/>
+<parser enabled="true"/>
+</scannerInfoProvider>
+</profile>
+</storageModule>
+<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+</cconfiguration>
+</storageModule>
+<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+<project id="calibrate.cdt.managedbuild.target.sdcc.exe.1171154672" name="MCS51 family (SDCC)" projectType="cdt.managedbuild.target.sdcc.exe"/>
+</storageModule>
+</cproject>

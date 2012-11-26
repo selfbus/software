@@ -1,0 +1,21 @@
+-muwx
+-i RS232_lib.hex
+-M
+-Y
+-b HOME = 0x0000
+-b ISEG = 0x0000
+-b BSEG = 0x0000
+-k C:\Freebus\C_Programme\oldisprogramm\lib_lpc922_mini\Release
+-k C:\Programme\SDCC\bin\..\lib\small-stack-auto
+-l fb_lpc922_mini.lib
+-l mcs51
+-l libsdcc
+-l libint
+-l liblong
+-l libfloat
+./fb_app_rs.rel
+./fb_rs.rel
+./fb_rs232.rel
+./watchdog.rel
+
+-e

@@ -1,0 +1,203 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 2.8.0 #5117 (Mar 23 2008) (MINGW32)
+                              4 ; This file was generated Fri Jul 08 06:33:15 2011
+                              5 ;--------------------------------------------------------
+                              6 	.module fb_delay
+                              7 	.optsdcc -mmcs51 --model-small
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _clear_delay_record
+                             13 	.globl _write_delay_record
+                             14 	.globl _delrec
+                             15 ;--------------------------------------------------------
+                             16 ; special function registers
+                             17 ;--------------------------------------------------------
+                             18 	.area RSEG    (DATA)
+                             19 ;--------------------------------------------------------
+                             20 ; special function bits
+                             21 ;--------------------------------------------------------
+                             22 	.area RSEG    (DATA)
+                             23 ;--------------------------------------------------------
+                             24 ; overlayable register banks
+                             25 ;--------------------------------------------------------
+                             26 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                      27 	.ds 8
+                             28 ;--------------------------------------------------------
+                             29 ; internal ram data
+                             30 ;--------------------------------------------------------
+                             31 	.area DSEG    (DATA)
+   0000                      32 _delrec::
+   0000                      33 	.ds 32
+                             34 ;--------------------------------------------------------
+                             35 ; overlayable items in internal ram 
+                             36 ;--------------------------------------------------------
+                             37 	.area OSEG    (OVR,DATA)
+                             38 ;--------------------------------------------------------
+                             39 ; indirectly addressable internal ram data
+                             40 ;--------------------------------------------------------
+                             41 	.area ISEG    (DATA)
+                             42 ;--------------------------------------------------------
+                             43 ; absolute internal ram data
+                             44 ;--------------------------------------------------------
+                             45 	.area IABS    (ABS,DATA)
+                             46 	.area IABS    (ABS,DATA)
+                             47 ;--------------------------------------------------------
+                             48 ; bit data
+                             49 ;--------------------------------------------------------
+                             50 	.area BSEG    (BIT)
+                             51 ;--------------------------------------------------------
+                             52 ; paged external ram data
+                             53 ;--------------------------------------------------------
+                             54 	.area PSEG    (PAG,XDATA)
+                             55 ;--------------------------------------------------------
+                             56 ; external ram data
+                             57 ;--------------------------------------------------------
+                             58 	.area XSEG    (XDATA)
+                             59 ;--------------------------------------------------------
+                             60 ; absolute external ram data
+                             61 ;--------------------------------------------------------
+                             62 	.area XABS    (ABS,XDATA)
+                             63 ;--------------------------------------------------------
+                             64 ; external initialized ram data
+                             65 ;--------------------------------------------------------
+                             66 	.area XISEG   (XDATA)
+                             67 	.area HOME    (CODE)
+                             68 	.area GSINIT0 (CODE)
+                             69 	.area GSINIT1 (CODE)
+                             70 	.area GSINIT2 (CODE)
+                             71 	.area GSINIT3 (CODE)
+                             72 	.area GSINIT4 (CODE)
+                             73 	.area GSINIT5 (CODE)
+                             74 	.area GSINIT  (CODE)
+                             75 	.area GSFINAL (CODE)
+                             76 	.area CSEG    (CODE)
+                             77 ;--------------------------------------------------------
+                             78 ; global & static initialisations
+                             79 ;--------------------------------------------------------
+                             80 	.area HOME    (CODE)
+                             81 	.area GSINIT  (CODE)
+                             82 	.area GSFINAL (CODE)
+                             83 	.area GSINIT  (CODE)
+                             84 ;--------------------------------------------------------
+                             85 ; Home
+                             86 ;--------------------------------------------------------
+                             87 	.area HOME    (CODE)
+                             88 	.area HOME    (CODE)
+                             89 ;--------------------------------------------------------
+                             90 ; code
+                             91 ;--------------------------------------------------------
+                             92 	.area CSEG    (CODE)
+                             93 ;------------------------------------------------------------
+                             94 ;Allocation info for local variables in function 'write_delay_record'
+                             95 ;------------------------------------------------------------
+                             96 ;delay_state               Allocated to stack - offset -3
+                             97 ;delay_target              Allocated to stack - offset -7
+                             98 ;objno                     Allocated to registers r2 
+                             99 ;------------------------------------------------------------
+                            100 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/com/fb_delay.c:34: void write_delay_record(unsigned char objno, unsigned char delay_state, long delay_target)
+                            101 ;	-----------------------------------------
+                            102 ;	 function write_delay_record
+                            103 ;	-----------------------------------------
+   0000                     104 _write_delay_record:
+                    0002    105 	ar2 = 0x02
+                    0003    106 	ar3 = 0x03
+                    0004    107 	ar4 = 0x04
+                    0005    108 	ar5 = 0x05
+                    0006    109 	ar6 = 0x06
+                    0007    110 	ar7 = 0x07
+                    0000    111 	ar0 = 0x00
+                    0001    112 	ar1 = 0x01
+   0000 C0*00               113 	push	_bp
+   0002 85 81*00            114 	mov	_bp,sp
+                            115 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/com/fb_delay.c:36: delrec[objno*4]=delay_state;
+   0005 E5 82               116 	mov	a,dpl
+   0007 25 E0               117 	add	a,acc
+   0009 25 E0               118 	add	a,acc
+   000B FA                  119 	mov	r2,a
+   000C 24r00               120 	add	a,#_delrec
+   000E F8                  121 	mov	r0,a
+   000F A9*00               122 	mov	r1,_bp
+   0011 19                  123 	dec	r1
+   0012 19                  124 	dec	r1
+   0013 19                  125 	dec	r1
+   0014 E7                  126 	mov	a,@r1
+   0015 F6                  127 	mov	@r0,a
+                            128 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/com/fb_delay.c:37: delrec[objno*4+1]=delay_target>>16;
+   0016 EA                  129 	mov	a,r2
+   0017 04                  130 	inc	a
+   0018 24r00               131 	add	a,#_delrec
+   001A F8                  132 	mov	r0,a
+   001B E5*00               133 	mov	a,_bp
+   001D 24 F9               134 	add	a,#0xf9
+   001F F9                  135 	mov	r1,a
+   0020 09                  136 	inc	r1
+   0021 09                  137 	inc	r1
+   0022 87 03               138 	mov	ar3,@r1
+   0024 A6 03               139 	mov	@r0,ar3
+                            140 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/com/fb_delay.c:38: delrec[objno*4+2]=delay_target>>8;
+   0026 74 02               141 	mov	a,#0x02
+   0028 2A                  142 	add	a,r2
+   0029 24r00               143 	add	a,#_delrec
+   002B F8                  144 	mov	r0,a
+   002C E5*00               145 	mov	a,_bp
+   002E 24 F9               146 	add	a,#0xf9
+   0030 F9                  147 	mov	r1,a
+   0031 09                  148 	inc	r1
+   0032 87 03               149 	mov	ar3,@r1
+   0034 A6 03               150 	mov	@r0,ar3
+                            151 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/com/fb_delay.c:39: delrec[objno*4+3]=delay_target;
+   0036 74 03               152 	mov	a,#0x03
+   0038 2A                  153 	add	a,r2
+   0039 24r00               154 	add	a,#_delrec
+   003B F8                  155 	mov	r0,a
+   003C E5*00               156 	mov	a,_bp
+   003E 24 F9               157 	add	a,#0xf9
+   0040 F9                  158 	mov	r1,a
+   0041 87 02               159 	mov	ar2,@r1
+   0043 A6 02               160 	mov	@r0,ar2
+   0045 D0*00               161 	pop	_bp
+   0047 22                  162 	ret
+                            163 ;------------------------------------------------------------
+                            164 ;Allocation info for local variables in function 'clear_delay_record'
+                            165 ;------------------------------------------------------------
+                            166 ;objno                     Allocated to registers r2 
+                            167 ;------------------------------------------------------------
+                            168 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/com/fb_delay.c:49: void clear_delay_record(unsigned char objno)
+                            169 ;	-----------------------------------------
+                            170 ;	 function clear_delay_record
+                            171 ;	-----------------------------------------
+   0048                     172 _clear_delay_record:
+                            173 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/com/fb_delay.c:51: delrec[objno*4]=0;
+   0048 E5 82               174 	mov	a,dpl
+   004A 25 E0               175 	add	a,acc
+   004C 25 E0               176 	add	a,acc
+   004E FA                  177 	mov	r2,a
+   004F 24r00               178 	add	a,#_delrec
+   0051 F8                  179 	mov	r0,a
+   0052 76 00               180 	mov	@r0,#0x00
+                            181 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/com/fb_delay.c:52: delrec[objno*4+1]=0;
+   0054 EA                  182 	mov	a,r2
+   0055 04                  183 	inc	a
+   0056 24r00               184 	add	a,#_delrec
+   0058 F8                  185 	mov	r0,a
+   0059 76 00               186 	mov	@r0,#0x00
+                            187 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/com/fb_delay.c:53: delrec[objno*4+2]=0;
+   005B 74 02               188 	mov	a,#0x02
+   005D 2A                  189 	add	a,r2
+   005E 24r00               190 	add	a,#_delrec
+   0060 F8                  191 	mov	r0,a
+   0061 76 00               192 	mov	@r0,#0x00
+                            193 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/com/fb_delay.c:54: delrec[objno*4+3]=0;
+   0063 74 03               194 	mov	a,#0x03
+   0065 2A                  195 	add	a,r2
+   0066 24r00               196 	add	a,#_delrec
+   0068 F8                  197 	mov	r0,a
+   0069 76 00               198 	mov	@r0,#0x00
+   006B 22                  199 	ret
+                            200 	.area CSEG    (CODE)
+                            201 	.area CONST   (CODE)
+                            202 	.area XINIT   (CODE)
+                            203 	.area CABS    (ABS,CODE)

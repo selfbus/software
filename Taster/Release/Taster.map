@@ -1,0 +1,480 @@
+ASxxxx Linker V03.00 + NoICE + sdld,  page 1.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CABS                                00000000    00000000 =           0. bytes (ABS,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+C:   00000000  l_CABS                          
+C:   00000000  l_GSINIT                        
+C:   00000000  l_GSINIT1                       
+C:   00000000  l_GSINIT5                       
+C:   00000000  l_IABS                          
+C:   00000000  l_ISEG                          
+C:   00000000  l_OSEG                          
+C:   00000000  l_PSEG                          
+C:   00000000  l_REG_BANK_1                    
+C:   00000000  l_REG_BANK_2                    
+C:   00000000  l_REG_BANK_3                    
+C:   00000000  l_RSEG                          
+C:   00000000  l_RSEG0                         
+C:   00000000  l_RSEG1                         
+C:   00000000  l_XABS                          
+C:   00000000  l_XINIT                         
+C:   00000000  l_XISEG                         
+C:   00000000  l_XSEG                          
+C:   00000000  l__CODE                         
+C:   00000000  s_BSEG                          
+C:   00000000  s_CABS                          
+C:   00000000  s_DSEG                          
+C:   00000000  s_HOME                          
+C:   00000000  s_IABS                          
+C:   00000000  s_ISEG                          
+C:   00000000  s_PSEG                          
+C:   00000000  s_REG_BANK_0                    
+C:   00000000  s_RSEG                          
+C:   00000000  s_RSEG0                         
+C:   00000000  s_RSEG1                         
+C:   00000000  s_XABS                          
+C:   00000000  s_XISEG                         
+C:   00000000  s_XSEG                          
+C:   00000001  l_BIT_BANK                      
+C:   00000003  l_BSEG_BYTES                    
+C:   00000003  l_GSFINAL                       
+C:   00000003  l_GSINIT0                       
+C:   00000008  l_CONST                         
+C:   00000008  l_REG_BANK_0                    
+C:   00000008  s_REG_BANK_1                    
+C:   0000000A  l_GSINIT2                       
+C:   00000010  s_REG_BANK_2                    
+C:   00000011  l_BSEG                          
+C:   00000018  s_REG_BANK_3                    
+C:   00000020  s_BSEG_BYTES                    
+C:   00000020  s__CODE                         
+C:   00000022  l_GSINIT3                       
+C:   00000023  l_HOME                          
+C:   00000023  s_BIT_BANK                      
+C:   00000023  s_GSINIT0                       
+ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CABS                                00000000    00000000 =           0. bytes (ABS,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+C:   00000023  s_OSEG                          
+C:   00000026  s_GSINIT1                       
+C:   00000026  s_GSINIT2                       
+C:   0000002A  l_GSINIT4                       
+C:   00000030  s_GSINIT3                       
+C:   00000052  s_GSINIT4                       
+C:   00000073  s_SSEG                          
+C:   00000075  l_DSEG                          
+C:   0000007C  s_GSFINAL                       
+C:   0000007C  s_GSINIT                        
+C:   0000007C  s_GSINIT5                       
+C:   0000007F  s_CSEG                          
+C:   0000008D  l_SSEG                          
+C:   00000100  l_IRAM                          
+C:   00001B86  l_CSEG                          
+C:   00001C05  s_CONST                         
+C:   00001C0D  s_XINIT                         
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00000000  .__.ABS.                           _startup
+     00000080  _P0                                fb_lpc922
+     00000080  _P0_0                              fb_lpc922
+     00000081  _P0_1                              fb_lpc922
+     00000081  _SP                                fb_lpc922
+     00000082  _DPL                               fb_lpc922
+     00000082  _P0_2                              fb_lpc922
+     00000083  _DPH                               fb_lpc922
+     00000083  _P0_3                              fb_lpc922
+     00000084  _P0M1                              fb_lpc922
+     00000084  _P0_4                              fb_lpc922
+     00000085  _P0M2                              fb_lpc922
+     00000085  _P0_5                              fb_lpc922
+     00000086  _KBMASK                            fb_lpc922
+     00000086  _P0_6                              fb_lpc922
+     00000087  _P0_7                              fb_lpc922
+     00000087  _PCON                              fb_lpc922
+     00000088  _TCON                              fb_lpc922
+     00000088  _TCON_0                            fb_lpc922
+     00000089  _TCON_1                            fb_lpc922
+     00000089  _TMOD                              fb_lpc922
+     0000008A  _TCON_2                            fb_lpc922
+     0000008A  _TL0                               fb_lpc922
+     0000008B  _TCON_3                            fb_lpc922
+     0000008B  _TL1                               fb_lpc922
+     0000008C  _TCON_4                            fb_lpc922
+     0000008C  _TH0                               fb_lpc922
+     0000008D  _TCON_5                            fb_lpc922
+     0000008D  _TH1                               fb_lpc922
+     0000008E  _TCON_6                            fb_lpc922
+     0000008F  _TAMOD                             fb_lpc922
+     0000008F  _TCON_7                            fb_lpc922
+     00000090  _P1                                fb_lpc922
+     00000090  _P1_0                              fb_lpc922
+     00000091  _P1M1                              fb_lpc922
+     00000091  _P1_1                              fb_lpc922
+     00000092  _P1M2                              fb_lpc922
+     00000092  _P1_2                              fb_lpc922
+     00000093  _KBPATN                            fb_lpc922
+     00000093  _P1_3                              fb_lpc922
+     00000094  _KBCON                             fb_lpc922
+     00000094  _P1_4                              fb_lpc922
+     00000095  _DIVM                              fb_lpc922
+     00000095  _P1_5                              fb_lpc922
+     00000096  _P1_6                              fb_lpc922
+     00000096  _TRIM                              fb_lpc922
+     00000097  _P1_7                              fb_lpc922
+     00000098  _SCON                              fb_lpc922
+     00000098  _SCON_0                            fb_lpc922
+     00000099  _SBUF                              fb_lpc922
+ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00000099  _SCON_1                            fb_lpc922
+     0000009A  _SCON_2                            fb_lpc922
+     0000009B  _SCON_3                            fb_lpc922
+     0000009C  _SCON_4                            fb_lpc922
+     0000009D  _SCON_5                            fb_lpc922
+     0000009E  _SCON_6                            fb_lpc922
+     0000009F  _SCON_7                            fb_lpc922
+     000000A0  __XPAGE                            
+     000000A2  _AUXR1                             fb_lpc922
+     000000A7  _WDCON                             fb_lpc922
+     000000A8  _IEN0                              fb_lpc922
+     000000A8  _IEN0_0                            fb_lpc922
+     000000A9  _IEN0_1                            fb_lpc922
+     000000A9  _SADDR                             fb_lpc922
+     000000AA  _IEN0_2                            fb_lpc922
+     000000AB  _IEN0_3                            fb_lpc922
+     000000AC  _CMP1                              fb_lpc922
+     000000AC  _IEN0_4                            fb_lpc922
+     000000AD  _CMP2                              fb_lpc922
+     000000AD  _IEN0_5                            fb_lpc922
+     000000AE  _IEN0_6                            fb_lpc922
+     000000AF  _IEN0_7                            fb_lpc922
+     000000B0  _P3                                fb_lpc922
+     000000B0  _P3_0                              fb_lpc922
+     000000B1  _P3M1                              fb_lpc922
+     000000B1  _P3_1                              fb_lpc922
+     000000B2  _P3M2                              fb_lpc922
+     000000B5  _PCONA                             fb_lpc922
+     000000B7  _IP0H                              fb_lpc922
+     000000B8  _IP0                               fb_lpc922
+     000000B8  _IP0_0                             fb_lpc922
+     000000B9  _IP0_1                             fb_lpc922
+     000000B9  _SADEN                             fb_lpc922
+     000000BA  _IP0_2                             fb_lpc922
+     000000BA  _SSTAT                             fb_lpc922
+     000000BB  _IP0_3                             fb_lpc922
+     000000BC  _IP0_4                             fb_lpc922
+     000000BD  _BRGCON                            fb_lpc922
+     000000BD  _IP0_5                             fb_lpc922
+     000000BE  _BRGR0                             fb_lpc922
+     000000BE  _IP0_6                             fb_lpc922
+     000000BF  _BRGR1                             fb_lpc922
+     000000C1  _WDL                               fb_lpc922
+     000000C2  _WFEED1                            fb_lpc922
+     000000C3  _WFEED2                            fb_lpc922
+     000000D0  _PSW                               fb_lpc922
+     000000D0  _PSW_0                             fb_lpc922
+     000000D1  _PSW_1                             fb_lpc922
+     000000D1  _RTCCON                            fb_lpc922
+     000000D2  _PSW_2                             fb_lpc922
+     000000D2  _RTCH                              fb_lpc922
+ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     000000D3  _PSW_3                             fb_lpc922
+     000000D3  _RTCL                              fb_lpc922
+     000000D4  _PSW_4                             fb_lpc922
+     000000D5  _PSW_5                             fb_lpc922
+     000000D6  _PSW_6                             fb_lpc922
+     000000D7  _PSW_7                             fb_lpc922
+     000000D8  _I2CON                             fb_lpc922
+     000000D8  _I2CON_0                           fb_lpc922
+     000000D9  _I2STAT                            fb_lpc922
+     000000DA  _I2CON_2                           fb_lpc922
+     000000DA  _I2DAT                             fb_lpc922
+     000000DB  _I2ADR                             fb_lpc922
+     000000DB  _I2CON_3                           fb_lpc922
+     000000DC  _I2CON_4                           fb_lpc922
+     000000DC  _I2SCLL                            fb_lpc922
+     000000DD  _I2CON_5                           fb_lpc922
+     000000DD  _I2SCLH                            fb_lpc922
+     000000DE  _I2CON_6                           fb_lpc922
+     000000DF  _RSTSRC                            fb_lpc922
+     000000E0  _ACC                               fb_lpc922
+     000000E4  _FMCON                             fb_lpc922
+     000000E5  _FMDATA                            fb_lpc922
+     000000E6  _FMADRL                            fb_lpc922
+     000000E7  _FMADRH                            fb_lpc922
+     000000E8  _IEN1                              fb_lpc922
+     000000E8  _IEN1_0                            fb_lpc922
+     000000E9  _IEN1_1                            fb_lpc922
+     000000EA  _IEN1_2                            fb_lpc922
+     000000F0  _B                                 fb_lpc922
+     000000F6  _PT0AD                             fb_lpc922
+     000000F7  _IP1H                              fb_lpc922
+     000000F8  _IP1                               fb_lpc922
+     000000F8  _IP1_0                             fb_lpc922
+     000000F9  _IP1_1                             fb_lpc922
+     000000FA  _IP1_2                             fb_lpc922
+     000000FE  _IP1_6                             fb_lpc922
+     00001C00  _userram                           fb_lpc922
+     00001D00  _eeprom                            fb_lpc922
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 6.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+BSEG_BYTES                          00000020    00000003 =           3. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00 + NoICE + sdld,  page 7.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+REG_BANK_0                          00000000    00000008 =           8. bytes (REL,OVR)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00 + NoICE + sdld,  page 8.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+BIT_BANK                            00000023    00000001 =           1. bytes (REL,OVR)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00 + NoICE + sdld,  page 9.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+DSEG                                00000000    00000075 =         117. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00000008  _object_value                      fb_taster
+     00000014  _bp                                _bp
+     00000024  _timer                             fb_app_taster
+     00000026  _timerflags                        fb_app_taster
+     00000028  _button_buffer                     fb_app_taster
+     00000029  _LEDSTATE                          fb_app_taster
+     0000002A  _dimmcompare                       fb_app_taster
+     0000002B  _dimmwert                          fb_app_taster
+     0000002C  _timercnt                          fb_app_taster
+     00000034  _timerbase                         fb_app_taster
+     0000003C  _timerstate                        fb_app_taster
+     00000044  _conh                              fb_lpc922
+     00000045  _conl                              fb_lpc922
+     00000046  _pcount                            fb_lpc922
+     00000047  _mem_length                        fb_lpc922
+     00000048  _mem_adrh                          fb_lpc922
+     00000049  _mem_adrl                          fb_lpc922
+     0000004A  _senders_pcount                    fb_lpc922
+     0000004B  _telegramm                         fb_lpc922
+     00000062  _tx_buffer                         fb_lpc922
+     0000006A  _telpos                            fb_lpc922
+     0000006B  _cs                                fb_lpc922
+     0000006C  _fbrx_byte                         fb_lpc922
+     0000006D  _fb_pattern                        fb_lpc922
+     0000006E  _fb_state                          fb_lpc922
+     0000006F  _repeat_count                      fb_lpc922
+     00000070  _tx_nextwrite                      fb_lpc922
+     00000071  _tx_nextsend                       fb_lpc922
+     00000072  _status60                          fb_lpc922
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 10.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+SSEG                                00000073    0000008D =         141. bytes (REL,OVR)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     00000073  __start__stack                     fb_taster
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 11.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+HOME                                00000000    00000023 =          35. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+C:   0000001E  __sdcc_program_startup             fb_taster
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 12.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+GSINIT0                             00000023    00000003 =           3. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+C:   00000023  __sdcc_gsinit_startup              
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 13.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+GSINIT2                             00000026    0000000A =          10. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00 + NoICE + sdld,  page 14.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+GSINIT3                             00000030    00000022 =          34. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+C:   00000030  __mcs51_genXINIT                   
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 15.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+GSINIT4                             00000052    0000002A =          42. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+C:   00000052  __mcs51_genRAMCLEAR                
+C:   00000058  __mcs51_genXRAMCLEAR               
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 16.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+GSFINAL                             0000007C    00000003 =           3. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V03.00 + NoICE + sdld,  page 17.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    00001B86 =        7046. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+C:   0000007F  _port_changed                      fb_app_taster
+C:   000000EF  _button_changed                    fb_app_taster
+C:   0000070C  _read_obj_value                    fb_app_taster
+C:   0000074C  _write_obj_value                   fb_app_taster
+C:   00000789  _write_value_req                   fb_app_taster
+C:   0000090B  _read_value_req                    fb_app_taster
+C:   0000095B  _switch_led                        fb_app_taster
+C:   000009F7  _timer0_int                        fb_app_taster
+C:   00000A16  _delay_timer                       fb_app_taster
+C:   00000ED0  _restart_app                       fb_app_taster
+C:   00000FD4  _main                              fb_taster
+C:   00001234  _watchdog_init                     watchdog
+C:   00001245  _watchdog_feed                     watchdog
+C:   00001250  _watchdog_start                    watchdog
+C:   00001264  _watchdog_stop                     watchdog
+C:   0000127C  _X1_int                            fb_lpc922
+C:   000012AC  _T1_int                            fb_lpc922
+C:   000015E8  _init_rx                           fb_lpc922
+C:   00001614  _init_tx                           fb_lpc922
+C:   0000165E  _gapos_in_gat                      fb_lpc922
+C:   000016B1  _build_tel                         fb_lpc922
+C:   000018B9  _send_obj_value                    fb_lpc922
+C:   000018EC  _process_tel                       fb_lpc922
+C:   000019EA  _write_memory                      fb_lpc922
+C:   00001ACA  _set_pa                            fb_lpc922
+C:   00001AE5  _read_objflags                     fb_lpc922
+C:   00001AFD  _find_first_objno                  fb_lpc922
+C:   00001B56  _find_ga                           fb_lpc922
+C:   00001BA2  _restart_hw                        fb_lpc922
+C:   00001C01  __sdcc_external_startup            _startup
+ASxxxx Linker V03.00 + NoICE + sdld,  page 18.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CONST                               00001C05    00000008 =           8. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+C:   00001C05  _tele_repeat_value                 fb_app_taster
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 19.
+
+Files Linked                              [ module(s) ]
+
+./fb_app_taster.rel                       [  ]
+./fb_taster.rel                           [  ]
+./watchdog.rel                            [  ]
+
+
+Libraries Linked                          [ object file ]
+
+C:\Freebus\C_Programme\oldisprogramm\lib_lpc922\Release/fb_lpc922.lib
+                                          [ fb_lpc922 ]
+C:\Programme\SDCC\bin\..\lib\small-stack-auto/mcs51.lib
+                                          [ crtclear.rel ]
+C:\Programme\SDCC\bin\..\lib\small-stack-auto/mcs51.lib
+                                          [ crtxinit.rel ]
+C:\Programme\SDCC\bin\..\lib\small-stack-auto/mcs51.lib
+                                          [ crtxclear.rel ]
+C:\Programme\SDCC\bin\..\lib\small-stack-auto/libsdcc.lib
+                                          [ _bp.rel ]
+C:\Programme\SDCC\bin\..\lib\small-stack-auto/mcs51.lib
+                                          [ crtpagesfr.rel ]
+C:\Programme\SDCC\bin\..\lib\small-stack-auto/mcs51.lib
+                                          [ crtstart.rel ]
+C:\Programme\SDCC\bin\..\lib\small-stack-auto/libsdcc.lib
+                                          [ _startup.rel ]
+
+ASxxxx Linker V03.00 + NoICE + sdld,  page 20.
+
+User Base Address Definitions
+
+HOME = 0x0000
+ISEG = 0x0000
+BSEG = 0x0000
+
+

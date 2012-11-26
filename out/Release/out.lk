@@ -1,0 +1,20 @@
+-muwx
+-i out.hex
+-M
+-Y
+-b HOME = 0x0000
+-b ISEG = 0x0000
+-b BSEG = 0x0000
+-k C:\Freebus\C_Programme\oldisprogramm\lib_lpc922\Release
+-k C:\Programme\SDCC\bin\..\lib\small-stack-auto
+-l fb_lpc922.lib
+-l mcs51
+-l libsdcc
+-l libint
+-l liblong
+-l libfloat
+./fb_app_out.rel
+./fb_out.rel
+./watchdog.rel
+
+-e

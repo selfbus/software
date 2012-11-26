@@ -1,0 +1,2730 @@
+ASxxxx Linker V02.00 + NoICE + sdld,  page 1.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CABS                                00000000    00000000 =           0. bytes (ABS,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   00000000  l_CABS                          
+     0C:   00000000  l_CONST                         
+     0C:   00000000  l_GSINIT                        
+     0C:   00000000  l_GSINIT1                       
+     0C:   00000000  l_GSINIT5                       
+     0C:   00000000  l_IABS                          
+     0C:   00000000  l_ISEG                          
+     0C:   00000000  l_OSEG                          
+     0C:   00000000  l_PSEG                          
+     0C:   00000000  l_REG_BANK_1                    
+     0C:   00000000  l_REG_BANK_2                    
+     0C:   00000000  l_REG_BANK_3                    
+     0C:   00000000  l_RSEG                          
+     0C:   00000000  l_RSEG0                         
+     0C:   00000000  l_RSEG1                         
+     0C:   00000000  l_XABS                          
+     0C:   00000000  l_XINIT                         
+     0C:   00000000  l_XISEG                         
+     0C:   00000000  l_XSEG                          
+     0C:   00000000  l__CODE                         
+     0C:   00000000  s_BSEG                          
+     0C:   00000000  s_CABS                          
+     0C:   00000000  s_DSEG                          
+     0C:   00000000  s_HOME                          
+     0C:   00000000  s_IABS                          
+     0C:   00000000  s_ISEG                          
+     0C:   00000000  s_PSEG                          
+     0C:   00000000  s_REG_BANK_0                    
+     0C:   00000000  s_RSEG                          
+     0C:   00000000  s_RSEG0                         
+     0C:   00000000  s_RSEG1                         
+     0C:   00000000  s_XABS                          
+     0C:   00000000  s_XISEG                         
+     0C:   00000000  s_XSEG                          
+     0C:   00000001  l_BIT_BANK                      
+     0C:   00000003  l_BSEG_BYTES                    
+     0C:   00000003  l_GSFINAL                       
+     0C:   00000003  l_GSINIT0                       
+     0C:   00000008  l_REG_BANK_0                    
+     0C:   00000008  s_REG_BANK_1                    
+     0C:   0000000A  l_GSINIT2                       
+     0C:   00000010  s_REG_BANK_2                    
+     0C:   00000012  l_BSEG                          
+     0C:   00000018  s_REG_BANK_3                    
+     0C:   00000020  s_BSEG_BYTES                    
+     0C:   00000020  s__CODE                         
+     0C:   00000022  l_GSINIT3                       
+     0C:   00000023  l_HOME                          
+     0C:   00000023  s_BIT_BANK                      
+     0C:   00000023  s_GSINIT0                       
+ASxxxx Linker V02.00 + NoICE + sdld,  page 2.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CABS                                00000000    00000000 =           0. bytes (ABS,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   00000023  s_OSEG                          
+     0C:   00000026  s_GSINIT1                       
+     0C:   00000026  s_GSINIT2                       
+     0C:   0000002A  l_GSINIT4                       
+     0C:   00000030  s_GSINIT3                       
+     0C:   00000052  s_GSINIT4                       
+     0C:   00000069  l_DSEG                          
+     0C:   0000006E  s_SSEG                          
+     0C:   0000007C  s_GSFINAL                       
+     0C:   0000007C  s_GSINIT                        
+     0C:   0000007C  s_GSINIT5                       
+     0C:   0000007F  s_CSEG                          
+     0C:   00000092  l_SSEG                          
+     0C:   00000100  l_IRAM                          
+     0C:   0000180E  l_CSEG                          
+     0C:   0000188D  s_CONST                         
+     0C:   0000188D  s_XINIT                         
+
+ASxxxx Linker V02.00 + NoICE + sdld,  page 3.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.	.ABS.                             00000000    00000000 =           0. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+           00000000  .__.ABS.                           _startup
+           00000080  G$P0$0$0                           fb_lpc922
+           00000080  G$P0_0$0$0                         fb_lpc922
+           00000080  _P0                                fb_lpc922
+           00000080  _P0_0                              fb_lpc922
+           00000081  G$P0_1$0$0                         fb_lpc922
+           00000081  G$SP$0$0                           fb_lpc922
+           00000081  _P0_1                              fb_lpc922
+           00000081  _SP                                fb_lpc922
+           00000082  G$DPL$0$0                          fb_lpc922
+           00000082  G$P0_2$0$0                         fb_lpc922
+           00000082  _DPL                               fb_lpc922
+           00000082  _P0_2                              fb_lpc922
+           00000083  G$DPH$0$0                          fb_lpc922
+           00000083  G$P0_3$0$0                         fb_lpc922
+           00000083  _DPH                               fb_lpc922
+           00000083  _P0_3                              fb_lpc922
+           00000084  G$P0M1$0$0                         fb_lpc922
+           00000084  G$P0_4$0$0                         fb_lpc922
+           00000084  _P0M1                              fb_lpc922
+           00000084  _P0_4                              fb_lpc922
+           00000085  G$P0M2$0$0                         fb_lpc922
+           00000085  G$P0_5$0$0                         fb_lpc922
+           00000085  _P0M2                              fb_lpc922
+           00000085  _P0_5                              fb_lpc922
+           00000086  G$KBMASK$0$0                       fb_lpc922
+           00000086  G$P0_6$0$0                         fb_lpc922
+           00000086  _KBMASK                            fb_lpc922
+           00000086  _P0_6                              fb_lpc922
+           00000087  G$P0_7$0$0                         fb_lpc922
+           00000087  G$PCON$0$0                         fb_lpc922
+           00000087  _P0_7                              fb_lpc922
+           00000087  _PCON                              fb_lpc922
+           00000088  G$TCON$0$0                         fb_lpc922
+           00000088  G$TCON_0$0$0                       fb_lpc922
+           00000088  _TCON                              fb_lpc922
+           00000088  _TCON_0                            fb_lpc922
+           00000089  G$TCON_1$0$0                       fb_lpc922
+           00000089  G$TMOD$0$0                         fb_lpc922
+           00000089  _TCON_1                            fb_lpc922
+           00000089  _TMOD                              fb_lpc922
+           0000008A  G$TCON_2$0$0                       fb_lpc922
+           0000008A  G$TL0$0$0                          fb_lpc922
+           0000008A  _TCON_2                            fb_lpc922
+           0000008A  _TL0                               fb_lpc922
+           0000008B  G$TCON_3$0$0                       fb_lpc922
+           0000008B  G$TL1$0$0                          fb_lpc922
+           0000008B  _TCON_3                            fb_lpc922
+           0000008B  _TL1                               fb_lpc922
+           0000008C  G$TCON_4$0$0                       fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 4.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.	.ABS.                             00000000    00000000 =           0. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+           0000008C  G$TH0$0$0                          fb_lpc922
+           0000008C  _TCON_4                            fb_lpc922
+           0000008C  _TH0                               fb_lpc922
+           0000008D  G$TCON_5$0$0                       fb_lpc922
+           0000008D  G$TH1$0$0                          fb_lpc922
+           0000008D  _TCON_5                            fb_lpc922
+           0000008D  _TH1                               fb_lpc922
+           0000008E  G$TCON_6$0$0                       fb_lpc922
+           0000008E  _TCON_6                            fb_lpc922
+           0000008F  G$TAMOD$0$0                        fb_lpc922
+           0000008F  G$TCON_7$0$0                       fb_lpc922
+           0000008F  _TAMOD                             fb_lpc922
+           0000008F  _TCON_7                            fb_lpc922
+           00000090  G$P1$0$0                           fb_lpc922
+           00000090  G$P1_0$0$0                         fb_lpc922
+           00000090  _P1                                fb_lpc922
+           00000090  _P1_0                              fb_lpc922
+           00000091  G$P1M1$0$0                         fb_lpc922
+           00000091  G$P1_1$0$0                         fb_lpc922
+           00000091  _P1M1                              fb_lpc922
+           00000091  _P1_1                              fb_lpc922
+           00000092  G$P1M2$0$0                         fb_lpc922
+           00000092  G$P1_2$0$0                         fb_lpc922
+           00000092  _P1M2                              fb_lpc922
+           00000092  _P1_2                              fb_lpc922
+           00000093  G$KBPATN$0$0                       fb_lpc922
+           00000093  G$P1_3$0$0                         fb_lpc922
+           00000093  _KBPATN                            fb_lpc922
+           00000093  _P1_3                              fb_lpc922
+           00000094  G$KBCON$0$0                        fb_lpc922
+           00000094  G$P1_4$0$0                         fb_lpc922
+           00000094  _KBCON                             fb_lpc922
+           00000094  _P1_4                              fb_lpc922
+           00000095  G$DIVM$0$0                         fb_lpc922
+           00000095  G$P1_5$0$0                         fb_lpc922
+           00000095  _DIVM                              fb_lpc922
+           00000095  _P1_5                              fb_lpc922
+           00000096  G$P1_6$0$0                         fb_lpc922
+           00000096  G$TRIM$0$0                         fb_lpc922
+           00000096  _P1_6                              fb_lpc922
+           00000096  _TRIM                              fb_lpc922
+           00000097  G$P1_7$0$0                         fb_lpc922
+           00000097  _P1_7                              fb_lpc922
+           00000098  G$SCON$0$0                         fb_lpc922
+           00000098  G$SCON_0$0$0                       fb_lpc922
+           00000098  _SCON                              fb_lpc922
+           00000098  _SCON_0                            fb_lpc922
+           00000099  G$SBUF$0$0                         fb_lpc922
+           00000099  G$SCON_1$0$0                       fb_lpc922
+           00000099  _SBUF                              fb_lpc922
+           00000099  _SCON_1                            fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 5.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.	.ABS.                             00000000    00000000 =           0. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+           0000009A  G$SCON_2$0$0                       fb_lpc922
+           0000009A  _SCON_2                            fb_lpc922
+           0000009B  G$SCON_3$0$0                       fb_lpc922
+           0000009B  _SCON_3                            fb_lpc922
+           0000009C  G$SCON_4$0$0                       fb_lpc922
+           0000009C  _SCON_4                            fb_lpc922
+           0000009D  G$SCON_5$0$0                       fb_lpc922
+           0000009D  _SCON_5                            fb_lpc922
+           0000009E  G$SCON_6$0$0                       fb_lpc922
+           0000009E  _SCON_6                            fb_lpc922
+           0000009F  G$SCON_7$0$0                       fb_lpc922
+           0000009F  _SCON_7                            fb_lpc922
+           000000A0  __XPAGE                            
+           000000A2  G$AUXR1$0$0                        fb_lpc922
+           000000A2  _AUXR1                             fb_lpc922
+           000000A7  G$WDCON$0$0                        fb_lpc922
+           000000A7  _WDCON                             fb_lpc922
+           000000A8  G$IEN0$0$0                         fb_lpc922
+           000000A8  G$IEN0_0$0$0                       fb_lpc922
+           000000A8  _IEN0                              fb_lpc922
+           000000A8  _IEN0_0                            fb_lpc922
+           000000A9  G$IEN0_1$0$0                       fb_lpc922
+           000000A9  G$SADDR$0$0                        fb_lpc922
+           000000A9  _IEN0_1                            fb_lpc922
+           000000A9  _SADDR                             fb_lpc922
+           000000AA  G$IEN0_2$0$0                       fb_lpc922
+           000000AA  _IEN0_2                            fb_lpc922
+           000000AB  G$IEN0_3$0$0                       fb_lpc922
+           000000AB  _IEN0_3                            fb_lpc922
+           000000AC  G$CMP1$0$0                         fb_lpc922
+           000000AC  G$IEN0_4$0$0                       fb_lpc922
+           000000AC  _CMP1                              fb_lpc922
+           000000AC  _IEN0_4                            fb_lpc922
+           000000AD  G$CMP2$0$0                         fb_lpc922
+           000000AD  G$IEN0_5$0$0                       fb_lpc922
+           000000AD  _CMP2                              fb_lpc922
+           000000AD  _IEN0_5                            fb_lpc922
+           000000AE  G$IEN0_6$0$0                       fb_lpc922
+           000000AE  _IEN0_6                            fb_lpc922
+           000000AF  G$IEN0_7$0$0                       fb_lpc922
+           000000AF  _IEN0_7                            fb_lpc922
+           000000B0  G$P3$0$0                           fb_lpc922
+           000000B0  G$P3_0$0$0                         fb_lpc922
+           000000B0  _P3                                fb_lpc922
+           000000B0  _P3_0                              fb_lpc922
+           000000B1  G$P3M1$0$0                         fb_lpc922
+           000000B1  G$P3_1$0$0                         fb_lpc922
+           000000B1  _P3M1                              fb_lpc922
+           000000B1  _P3_1                              fb_lpc922
+           000000B2  G$P3M2$0$0                         fb_lpc922
+           000000B2  _P3M2                              fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 6.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.	.ABS.                             00000000    00000000 =           0. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+           000000B5  G$PCONA$0$0                        fb_lpc922
+           000000B5  _PCONA                             fb_lpc922
+           000000B7  G$IP0H$0$0                         fb_lpc922
+           000000B7  _IP0H                              fb_lpc922
+           000000B8  G$IP0$0$0                          fb_lpc922
+           000000B8  G$IP0_0$0$0                        fb_lpc922
+           000000B8  _IP0                               fb_lpc922
+           000000B8  _IP0_0                             fb_lpc922
+           000000B9  G$IP0_1$0$0                        fb_lpc922
+           000000B9  G$SADEN$0$0                        fb_lpc922
+           000000B9  _IP0_1                             fb_lpc922
+           000000B9  _SADEN                             fb_lpc922
+           000000BA  G$IP0_2$0$0                        fb_lpc922
+           000000BA  G$SSTAT$0$0                        fb_lpc922
+           000000BA  _IP0_2                             fb_lpc922
+           000000BA  _SSTAT                             fb_lpc922
+           000000BB  G$IP0_3$0$0                        fb_lpc922
+           000000BB  _IP0_3                             fb_lpc922
+           000000BC  G$IP0_4$0$0                        fb_lpc922
+           000000BC  _IP0_4                             fb_lpc922
+           000000BD  G$BRGCON$0$0                       fb_lpc922
+           000000BD  G$IP0_5$0$0                        fb_lpc922
+           000000BD  _BRGCON                            fb_lpc922
+           000000BD  _IP0_5                             fb_lpc922
+           000000BE  G$BRGR0$0$0                        fb_lpc922
+           000000BE  G$IP0_6$0$0                        fb_lpc922
+           000000BE  _BRGR0                             fb_lpc922
+           000000BE  _IP0_6                             fb_lpc922
+           000000BF  G$BRGR1$0$0                        fb_lpc922
+           000000BF  _BRGR1                             fb_lpc922
+           000000C1  G$WDL$0$0                          fb_lpc922
+           000000C1  _WDL                               fb_lpc922
+           000000C2  G$WFEED1$0$0                       fb_lpc922
+           000000C2  _WFEED1                            fb_lpc922
+           000000C3  G$WFEED2$0$0                       fb_lpc922
+           000000C3  _WFEED2                            fb_lpc922
+           000000D0  G$PSW$0$0                          fb_lpc922
+           000000D0  G$PSW_0$0$0                        fb_lpc922
+           000000D0  _PSW                               fb_lpc922
+           000000D0  _PSW_0                             fb_lpc922
+           000000D1  G$PSW_1$0$0                        fb_lpc922
+           000000D1  G$RTCCON$0$0                       fb_lpc922
+           000000D1  _PSW_1                             fb_lpc922
+           000000D1  _RTCCON                            fb_lpc922
+           000000D2  G$PSW_2$0$0                        fb_lpc922
+           000000D2  G$RTCH$0$0                         fb_lpc922
+           000000D2  _PSW_2                             fb_lpc922
+           000000D2  _RTCH                              fb_lpc922
+           000000D3  G$PSW_3$0$0                        fb_lpc922
+           000000D3  G$RTCL$0$0                         fb_lpc922
+           000000D3  _PSW_3                             fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 7.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.	.ABS.                             00000000    00000000 =           0. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+           000000D3  _RTCL                              fb_lpc922
+           000000D4  G$PSW_4$0$0                        fb_lpc922
+           000000D4  _PSW_4                             fb_lpc922
+           000000D5  G$PSW_5$0$0                        fb_lpc922
+           000000D5  _PSW_5                             fb_lpc922
+           000000D6  G$PSW_6$0$0                        fb_lpc922
+           000000D6  _PSW_6                             fb_lpc922
+           000000D7  G$PSW_7$0$0                        fb_lpc922
+           000000D7  _PSW_7                             fb_lpc922
+           000000D8  G$I2CON$0$0                        fb_lpc922
+           000000D8  G$I2CON_0$0$0                      fb_lpc922
+           000000D8  _I2CON                             fb_lpc922
+           000000D8  _I2CON_0                           fb_lpc922
+           000000D9  G$I2STAT$0$0                       fb_lpc922
+           000000D9  _I2STAT                            fb_lpc922
+           000000DA  G$I2CON_2$0$0                      fb_lpc922
+           000000DA  G$I2DAT$0$0                        fb_lpc922
+           000000DA  _I2CON_2                           fb_lpc922
+           000000DA  _I2DAT                             fb_lpc922
+           000000DB  G$I2ADR$0$0                        fb_lpc922
+           000000DB  G$I2CON_3$0$0                      fb_lpc922
+           000000DB  _I2ADR                             fb_lpc922
+           000000DB  _I2CON_3                           fb_lpc922
+           000000DC  G$I2CON_4$0$0                      fb_lpc922
+           000000DC  G$I2SCLL$0$0                       fb_lpc922
+           000000DC  _I2CON_4                           fb_lpc922
+           000000DC  _I2SCLL                            fb_lpc922
+           000000DD  G$I2CON_5$0$0                      fb_lpc922
+           000000DD  G$I2SCLH$0$0                       fb_lpc922
+           000000DD  _I2CON_5                           fb_lpc922
+           000000DD  _I2SCLH                            fb_lpc922
+           000000DE  G$I2CON_6$0$0                      fb_lpc922
+           000000DE  _I2CON_6                           fb_lpc922
+           000000DF  G$RSTSRC$0$0                       fb_lpc922
+           000000DF  _RSTSRC                            fb_lpc922
+           000000E0  G$ACC$0$0                          fb_lpc922
+           000000E0  _ACC                               fb_lpc922
+           000000E4  G$FMCON$0$0                        fb_lpc922
+           000000E4  _FMCON                             fb_lpc922
+           000000E5  G$FMDATA$0$0                       fb_lpc922
+           000000E5  _FMDATA                            fb_lpc922
+           000000E6  G$FMADRL$0$0                       fb_lpc922
+           000000E6  _FMADRL                            fb_lpc922
+           000000E7  G$FMADRH$0$0                       fb_lpc922
+           000000E7  _FMADRH                            fb_lpc922
+           000000E8  G$IEN1$0$0                         fb_lpc922
+           000000E8  G$IEN1_0$0$0                       fb_lpc922
+           000000E8  _IEN1                              fb_lpc922
+           000000E8  _IEN1_0                            fb_lpc922
+           000000E9  G$IEN1_1$0$0                       fb_lpc922
+           000000E9  _IEN1_1                            fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 8.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.	.ABS.                             00000000    00000000 =           0. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+           000000EA  G$IEN1_2$0$0                       fb_lpc922
+           000000EA  _IEN1_2                            fb_lpc922
+           000000F0  G$B$0$0                            fb_lpc922
+           000000F0  _B                                 fb_lpc922
+           000000F6  G$PT0AD$0$0                        fb_lpc922
+           000000F6  _PT0AD                             fb_lpc922
+           000000F7  G$IP1H$0$0                         fb_lpc922
+           000000F7  _IP1H                              fb_lpc922
+           000000F8  G$IP1$0$0                          fb_lpc922
+           000000F8  G$IP1_0$0$0                        fb_lpc922
+           000000F8  _IP1                               fb_lpc922
+           000000F8  _IP1_0                             fb_lpc922
+           000000F9  G$IP1_1$0$0                        fb_lpc922
+           000000F9  _IP1_1                             fb_lpc922
+           000000FA  G$IP1_2$0$0                        fb_lpc922
+           000000FA  _IP1_2                             fb_lpc922
+           000000FE  G$IP1_6$0$0                        fb_lpc922
+           000000FE  _IP1_6                             fb_lpc922
+           00001C00  G$userram$0$0                      fb_lpc922
+           00001C00  _userram                           fb_lpc922
+           00001D00  G$eeprom$0$0                       fb_lpc922
+           00001D00  _eeprom                            fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 9.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+BSEG_BYTES                          00000020    00000003 =           3. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V02.00 + NoICE + sdld,  page 10.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+REG_BANK_0                          00000000    00000008 =           8. bytes (REL,OVR)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V02.00 + NoICE + sdld,  page 11.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+BSEG                                00000000    00000012 =          18. bytes (REL,CON,BIT)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0B:   00000000  _delay_toggle                      fb_app_out
+     0B:   00000001  _portchanged                       fb_app_out
+     0B:   00000002  G$parity_ok$0$0                    fb_lpc922
+     0B:   00000002  _parity_ok                         fb_lpc922
+     0B:   00000003  G$interrupted$0$0                  fb_lpc922
+     0B:   00000003  _interrupted                       fb_lpc922
+     0B:   00000004  G$fb_parity$0$0                    fb_lpc922
+     0B:   00000004  _fb_parity                         fb_lpc922
+     0B:   00000005  G$ack$0$0                          fb_lpc922
+     0B:   00000005  _ack                               fb_lpc922
+     0B:   00000006  G$nack$0$0                         fb_lpc922
+     0B:   00000006  _nack                              fb_lpc922
+     0B:   00000007  G$its_me$0$0                       fb_lpc922
+     0B:   00000007  _its_me                            fb_lpc922
+     0B:   00000008  G$tel_arrived$0$0                  fb_lpc922
+     0B:   00000008  _tel_arrived                       fb_lpc922
+     0B:   00000009  G$tel_sent$0$0                     fb_lpc922
+     0B:   00000009  _tel_sent                          fb_lpc922
+     0B:   0000000A  G$auto_ack$0$0                     fb_lpc922
+     0B:   0000000A  _auto_ack                          fb_lpc922
+     0B:   0000000B  G$fbtx_bit$0$0                     fb_lpc922
+     0B:   0000000B  _fbtx_bit                          fb_lpc922
+     0B:   0000000C  G$wait_for_ack$0$0                 fb_lpc922
+     0B:   0000000C  _wait_for_ack                      fb_lpc922
+     0B:   0000000D  G$send_ack$0$0                     fb_lpc922
+     0B:   0000000D  _send_ack                          fb_lpc922
+     0B:   0000000E  G$send_nack$0$0                    fb_lpc922
+     0B:   0000000E  _send_nack                         fb_lpc922
+     0B:   0000000F  G$transparency$0$0                 fb_lpc922
+     0B:   0000000F  _transparency                      fb_lpc922
+     0B:   00000010  G$connected$0$0                    fb_lpc922
+     0B:   00000010  _connected                         fb_lpc922
+     0B:   00000011  G$inc_pcount$0$0                   fb_lpc922
+     0B:   00000011  _inc_pcount                        fb_lpc922
+
+ASxxxx Linker V02.00 + NoICE + sdld,  page 12.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+BIT_BANK                            00000023    00000001 =           1. bytes (REL,OVR)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V02.00 + NoICE + sdld,  page 13.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+DSEG                                00000000    00000069 =         105. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+           00000008  _bp                                _bp
+           00000024  _timerbase                         fb_app_out
+           0000002C  _timercnt                          fb_app_out
+           00000034  _timer                             fb_app_out
+           00000036  _Tval                              fb_app_out
+           00000037  _out_state                         fb_app_out
+           00000038  _rm_state                          fb_app_out
+           00000039  _zf_state                          fb_app_out
+           0000003A  _portbuffer                        fb_app_out
+           0000003B  _oldportbuffer                     fb_app_out
+           0000003C  _blocked                           fb_app_out
+           0000003D  _logicstate                        fb_app_out
+           0000003E  _rm_send                           fb_app_out
+           0000003F  G$conh$0$0                         fb_lpc922
+           0000003F  _conh                              fb_lpc922
+           00000040  G$conl$0$0                         fb_lpc922
+           00000040  _conl                              fb_lpc922
+           00000041  G$pcount$0$0                       fb_lpc922
+           00000041  _pcount                            fb_lpc922
+           00000042  G$mem_length$0$0                   fb_lpc922
+           00000042  _mem_length                        fb_lpc922
+           00000043  G$mem_adrh$0$0                     fb_lpc922
+           00000043  _mem_adrh                          fb_lpc922
+           00000044  G$mem_adrl$0$0                     fb_lpc922
+           00000044  _mem_adrl                          fb_lpc922
+           00000045  G$senders_pcount$0$0               fb_lpc922
+           00000045  _senders_pcount                    fb_lpc922
+           00000046  G$telegramm$0$0                    fb_lpc922
+           00000046  _telegramm                         fb_lpc922
+           0000005D  G$tx_buffer$0$0                    fb_lpc922
+           0000005D  _tx_buffer                         fb_lpc922
+           00000065  G$telpos$0$0                       fb_lpc922
+           00000065  _telpos                            fb_lpc922
+           00000066  G$cs$0$0                           fb_lpc922
+           00000066  _cs                                fb_lpc922
+           00000067  G$fbrx_byte$0$0                    fb_lpc922
+           00000067  _fbrx_byte                         fb_lpc922
+           00000068  G$fb_pattern$0$0                   fb_lpc922
+           00000068  _fb_pattern                        fb_lpc922
+           00000069  G$fb_state$0$0                     fb_lpc922
+           00000069  _fb_state                          fb_lpc922
+           0000006A  G$repeat_count$0$0                 fb_lpc922
+           0000006A  _repeat_count                      fb_lpc922
+           0000006B  G$tx_nextwrite$0$0                 fb_lpc922
+           0000006B  _tx_nextwrite                      fb_lpc922
+           0000006C  G$tx_nextsend$0$0                  fb_lpc922
+           0000006C  _tx_nextsend                       fb_lpc922
+           0000006D  G$status60$0$0                     fb_lpc922
+           0000006D  _status60                          fb_lpc922
+
+ASxxxx Linker V02.00 + NoICE + sdld,  page 14.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+SSEG                                0000006E    00000092 =         146. bytes (REL,OVR)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+           0000006E  __start__stack                     fb_out
+
+ASxxxx Linker V02.00 + NoICE + sdld,  page 15.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+HOME                                00000000    00000023 =          35. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   0000001E  __sdcc_program_startup             fb_out
+
+ASxxxx Linker V02.00 + NoICE + sdld,  page 16.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+GSINIT0                             00000023    00000003 =           3. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   00000023  __sdcc_gsinit_startup              
+
+ASxxxx Linker V02.00 + NoICE + sdld,  page 17.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+GSINIT2                             00000026    0000000A =          10. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V02.00 + NoICE + sdld,  page 18.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+GSINIT3                             00000030    00000022 =          34. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   00000030  __mcs51_genXINIT                   
+
+ASxxxx Linker V02.00 + NoICE + sdld,  page 19.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+GSINIT4                             00000052    0000002A =          42. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   00000052  __mcs51_genRAMCLEAR                
+     0C:   00000058  __mcs51_genXRAMCLEAR               
+
+ASxxxx Linker V02.00 + NoICE + sdld,  page 20.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+GSFINAL                             0000007C    00000003 =           3. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V02.00 + NoICE + sdld,  page 21.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    0000180E =        6158. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   0000007F  _write_value_req                   fb_app_out
+     0C:   000003A8  _read_value_req                    fb_app_out
+     0C:   000003DB  _read_obj_value                    fb_app_out
+     0C:   00000483  _write_obj_value                   fb_app_out
+     0C:   0000053E  _object_schalten                   fb_app_out
+     0C:   000008B5  _delay_timer                       fb_app_out
+     0C:   000009F8  _port_schalten                     fb_app_out
+     0C:   00000A57  _sort_output                       fb_app_out
+     0C:   00000AA7  _spi_2_out                         fb_app_out
+     0C:   00000AE1  _bus_return                        fb_app_out
+     0C:   00000BA8  _restart_app                       fb_app_out
+     0C:   00000C18  _main                              fb_out
+     0C:   00000EA4  _watchdog_init                     watchdog
+     0C:   00000EB5  _watchdog_feed                     watchdog
+     0C:   00000EC0  _watchdog_start                    watchdog
+     0C:   00000ED4  _watchdog_stop                     watchdog
+     0C:   00000EEC  A$fb_lpc922$682                    fb_lpc922
+     0C:   00000EEC  C$fb_lpc922.c$60$0$0               fb_lpc922
+     0C:   00000EEC  G$X1_int$0$0                       fb_lpc922
+     0C:   00000EEC  _X1_int                            fb_lpc922
+     0C:   00000EEE  A$fb_lpc922$683                    fb_lpc922
+     0C:   00000EF0  A$fb_lpc922$686                    fb_lpc922
+     0C:   00000EF0  C$fb_lpc922.c$63$1$1               fb_lpc922
+     0C:   00000EF2  A$fb_lpc922$689                    fb_lpc922
+     0C:   00000EF2  C$fb_lpc922.c$64$1$1               fb_lpc922
+     0C:   00000EF4  A$fb_lpc922$692                    fb_lpc922
+     0C:   00000EF4  C$fb_lpc922.c$65$1$1               fb_lpc922
+     0C:   00000EF6  A$fb_lpc922$693                    fb_lpc922
+     0C:   00000EF8  A$fb_lpc922$694                    fb_lpc922
+     0C:   00000EFA  A$fb_lpc922$695                    fb_lpc922
+     0C:   00000EFC  A$fb_lpc922$698                    fb_lpc922
+     0C:   00000EFC  C$fb_lpc922.c$66$1$1               fb_lpc922
+     0C:   00000EFF  A$fb_lpc922$701                    fb_lpc922
+     0C:   00000EFF  C$fb_lpc922.c$67$1$1               fb_lpc922
+     0C:   00000F02  A$fb_lpc922$704                    fb_lpc922
+     0C:   00000F02  C$fb_lpc922.c$68$1$1               fb_lpc922
+     0C:   00000F04  A$fb_lpc922$707                    fb_lpc922
+     0C:   00000F04  C$fb_lpc922.c$69$1$1               fb_lpc922
+     0C:   00000F06  A$fb_lpc922$710                    fb_lpc922
+     0C:   00000F06  C$fb_lpc922.c$70$1$1               fb_lpc922
+     0C:   00000F08  A$fb_lpc922$713                    fb_lpc922
+     0C:   00000F08  C$fb_lpc922.c$71$1$1               fb_lpc922
+     0C:   00000F0B  A$fb_lpc922$716                    fb_lpc922
+     0C:   00000F0B  C$fb_lpc922.c$72$1$1               fb_lpc922
+     0C:   00000F0D  A$fb_lpc922$719                    fb_lpc922
+     0C:   00000F0D  C$fb_lpc922.c$73$1$1               fb_lpc922
+     0C:   00000F0F  A$fb_lpc922$722                    fb_lpc922
+     0C:   00000F0F  C$fb_lpc922.c$74$1$1               fb_lpc922
+     0C:   00000F12  A$fb_lpc922$725                    fb_lpc922
+     0C:   00000F12  C$fb_lpc922.c$75$1$1               fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 22.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    0000180E =        6158. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   00000F15  A$fb_lpc922$728                    fb_lpc922
+     0C:   00000F15  C$fb_lpc922.c$76$1$1               fb_lpc922
+     0C:   00000F17  A$fb_lpc922$729                    fb_lpc922
+     0C:   00000F19  A$fb_lpc922$730                    fb_lpc922
+     0C:   00000F1B  A$fb_lpc922$733                    fb_lpc922
+     0C:   00000F1B  C$fb_lpc922.c$77$1$1               fb_lpc922
+     0C:   00000F1B  XG$X1_int$0$0                      fb_lpc922
+     0C:   00000F1C  A$fb_lpc922$751                    fb_lpc922
+     0C:   00000F1C  C$fb_lpc922.c$81$1$1               fb_lpc922
+     0C:   00000F1C  G$T1_int$0$0                       fb_lpc922
+     0C:   00000F1C  _T1_int                            fb_lpc922
+     0C:   00000F1E  A$fb_lpc922$752                    fb_lpc922
+     0C:   00000F20  A$fb_lpc922$753                    fb_lpc922
+     0C:   00000F22  A$fb_lpc922$754                    fb_lpc922
+     0C:   00000F24  A$fb_lpc922$755                    fb_lpc922
+     0C:   00000F26  A$fb_lpc922$756                    fb_lpc922
+     0C:   00000F28  A$fb_lpc922$757                    fb_lpc922
+     0C:   00000F2A  A$fb_lpc922$758                    fb_lpc922
+     0C:   00000F2C  A$fb_lpc922$759                    fb_lpc922
+     0C:   00000F2E  A$fb_lpc922$760                    fb_lpc922
+     0C:   00000F30  A$fb_lpc922$761                    fb_lpc922
+     0C:   00000F32  A$fb_lpc922$762                    fb_lpc922
+     0C:   00000F34  A$fb_lpc922$763                    fb_lpc922
+     0C:   00000F36  A$fb_lpc922$764                    fb_lpc922
+     0C:   00000F38  A$fb_lpc922$765                    fb_lpc922
+     0C:   00000F3B  A$fb_lpc922$768                    fb_lpc922
+     0C:   00000F3B  C$fb_lpc922.c$87$1$1               fb_lpc922
+     0C:   00000F3D  A$fb_lpc922$769                    fb_lpc922
+     0C:   00000F3E  A$fb_lpc922$770                    fb_lpc922
+     0C:   00000F40  A$fb_lpc922$771                    fb_lpc922
+     0C:   00000F42  A$fb_lpc922$772                    fb_lpc922
+     0C:   00000F45  A$fb_lpc922$774                    fb_lpc922
+     0C:   00000F46  A$fb_lpc922$775                    fb_lpc922
+     0C:   00000F47  A$fb_lpc922$776                    fb_lpc922
+     0C:   00000F48  A$fb_lpc922$777                    fb_lpc922
+     0C:   00000F4B  A$fb_lpc922$778                    fb_lpc922
+     0C:   00000F4C  A$fb_lpc922$780                    fb_lpc922
+     0C:   00000F4F  A$fb_lpc922$781                    fb_lpc922
+     0C:   00000F52  A$fb_lpc922$782                    fb_lpc922
+     0C:   00000F55  A$fb_lpc922$783                    fb_lpc922
+     0C:   00000F58  A$fb_lpc922$784                    fb_lpc922
+     0C:   00000F5B  A$fb_lpc922$785                    fb_lpc922
+     0C:   00000F5E  A$fb_lpc922$786                    fb_lpc922
+     0C:   00000F61  A$fb_lpc922$787                    fb_lpc922
+     0C:   00000F64  A$fb_lpc922$788                    fb_lpc922
+     0C:   00000F67  A$fb_lpc922$789                    fb_lpc922
+     0C:   00000F6A  A$fb_lpc922$790                    fb_lpc922
+     0C:   00000F6D  A$fb_lpc922$791                    fb_lpc922
+     0C:   00000F70  A$fb_lpc922$792                    fb_lpc922
+     0C:   00000F73  A$fb_lpc922$793                    fb_lpc922
+     0C:   00000F76  A$fb_lpc922$794                    fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 23.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    0000180E =        6158. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   00000F79  A$fb_lpc922$800                    fb_lpc922
+     0C:   00000F79  C$fb_lpc922.c$91$2$2               fb_lpc922
+     0C:   00000F79  C$fb_lpc922.c$92$2$2               fb_lpc922
+     0C:   00000F7B  A$fb_lpc922$803                    fb_lpc922
+     0C:   00000F7B  C$fb_lpc922.c$93$2$2               fb_lpc922
+     0C:   00000F7D  A$fb_lpc922$804                    fb_lpc922
+     0C:   00000F7F  A$fb_lpc922$805                    fb_lpc922
+     0C:   00000F81  A$fb_lpc922$806                    fb_lpc922
+     0C:   00000F83  A$fb_lpc922$809                    fb_lpc922
+     0C:   00000F83  C$fb_lpc922.c$94$2$2               fb_lpc922
+     0C:   00000F86  A$fb_lpc922$812                    fb_lpc922
+     0C:   00000F86  C$fb_lpc922.c$95$2$2               fb_lpc922
+     0C:   00000F89  A$fb_lpc922$815                    fb_lpc922
+     0C:   00000F89  C$fb_lpc922.c$96$2$2               fb_lpc922
+     0C:   00000F8B  A$fb_lpc922$818                    fb_lpc922
+     0C:   00000F8B  C$fb_lpc922.c$97$2$2               fb_lpc922
+     0C:   00000F8D  A$fb_lpc922$821                    fb_lpc922
+     0C:   00000F8D  C$fb_lpc922.c$98$2$2               fb_lpc922
+     0C:   00000F8F  A$fb_lpc922$822                    fb_lpc922
+     0C:   00000F92  A$fb_lpc922$823                    fb_lpc922
+     0C:   00000F94  A$fb_lpc922$827                    fb_lpc922
+     0C:   00000F94  C$fb_lpc922.c$99$3$3               fb_lpc922
+     0C:   00000F96  A$fb_lpc922$828                    fb_lpc922
+     0C:   00000F98  A$fb_lpc922$829                    fb_lpc922
+     0C:   00000F99  A$fb_lpc922$830                    fb_lpc922
+     0C:   00000F9B  A$fb_lpc922$831                    fb_lpc922
+     0C:   00000F9E  A$fb_lpc922$832                    fb_lpc922
+     0C:   00000FA0  A$fb_lpc922$835                    fb_lpc922
+     0C:   00000FA0  C$fb_lpc922.c$100$4$4              fb_lpc922
+     0C:   00000FA2  A$fb_lpc922$838                    fb_lpc922
+     0C:   00000FA2  C$fb_lpc922.c$101$4$4              fb_lpc922
+     0C:   00000FA4  A$fb_lpc922$839                    fb_lpc922
+     0C:   00000FA6  A$fb_lpc922$842                    fb_lpc922
+     0C:   00000FA6  C$fb_lpc922.c$102$5$5              fb_lpc922
+     0C:   00000FA8  A$fb_lpc922$843                    fb_lpc922
+     0C:   00000FAA  A$fb_lpc922$844                    fb_lpc922
+     0C:   00000FAB  A$fb_lpc922$845                    fb_lpc922
+     0C:   00000FAC  A$fb_lpc922$846                    fb_lpc922
+     0C:   00000FAD  A$fb_lpc922$847                    fb_lpc922
+     0C:   00000FB0  A$fb_lpc922$850                    fb_lpc922
+     0C:   00000FB0  C$fb_lpc922.c$103$6$6              fb_lpc922
+     0C:   00000FB2  A$fb_lpc922$851                    fb_lpc922
+     0C:   00000FB3  A$fb_lpc922$852                    fb_lpc922
+     0C:   00000FB4  A$fb_lpc922$855                    fb_lpc922
+     0C:   00000FB4  C$fb_lpc922.c$104$6$6              fb_lpc922
+     0C:   00000FB7  A$fb_lpc922$859                    fb_lpc922
+     0C:   00000FB7  C$fb_lpc922.c$106$5$5              fb_lpc922
+     0C:   00000FB9  A$fb_lpc922$860                    fb_lpc922
+     0C:   00000FBB  A$fb_lpc922$861                    fb_lpc922
+     0C:   00000FBD  A$fb_lpc922$862                    fb_lpc922
+     0C:   00000FC0  A$fb_lpc922$863                    fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 24.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    0000180E =        6158. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   00000FC2  A$fb_lpc922$867                    fb_lpc922
+     0C:   00000FC2  C$fb_lpc922.c$108$6$7              fb_lpc922
+     0C:   00000FC4  A$fb_lpc922$870                    fb_lpc922
+     0C:   00000FC4  C$fb_lpc922.c$109$6$7              fb_lpc922
+     0C:   00000FC7  A$fb_lpc922$873                    fb_lpc922
+     0C:   00000FC7  C$fb_lpc922.c$110$6$7              fb_lpc922
+     0C:   00000FC9  A$fb_lpc922$876                    fb_lpc922
+     0C:   00000FC9  C$fb_lpc922.c$111$6$7              fb_lpc922
+     0C:   00000FCB  A$fb_lpc922$879                    fb_lpc922
+     0C:   00000FCB  C$fb_lpc922.c$112$6$7              fb_lpc922
+     0C:   00000FCE  A$fb_lpc922$882                    fb_lpc922
+     0C:   00000FCE  C$fb_lpc922.c$113$6$7              fb_lpc922
+     0C:   00000FD0  A$fb_lpc922$885                    fb_lpc922
+     0C:   00000FD0  C$fb_lpc922.c$114$6$7              fb_lpc922
+     0C:   00000FD3  A$fb_lpc922$888                    fb_lpc922
+     0C:   00000FD3  C$fb_lpc922.c$115$6$7              fb_lpc922
+     0C:   00000FD6  A$fb_lpc922$891                    fb_lpc922
+     0C:   00000FD6  C$fb_lpc922.c$116$6$7              fb_lpc922
+     0C:   00000FD8  A$fb_lpc922$895                    fb_lpc922
+     0C:   00000FD8  C$fb_lpc922.c$119$4$4              fb_lpc922
+     0C:   00000FDA  A$fb_lpc922$896                    fb_lpc922
+     0C:   00000FDD  A$fb_lpc922$900                    fb_lpc922
+     0C:   00000FDD  C$fb_lpc922.c$122$4$8              fb_lpc922
+     0C:   00000FDF  A$fb_lpc922$903                    fb_lpc922
+     0C:   00000FDF  C$fb_lpc922.c$123$4$8              fb_lpc922
+     0C:   00000FE2  A$fb_lpc922$904                    fb_lpc922
+     0C:   00000FE5  A$fb_lpc922$908                    fb_lpc922
+     0C:   00000FE5  C$fb_lpc922.c$127$3$9              fb_lpc922
+     0C:   00000FE7  A$fb_lpc922$911                    fb_lpc922
+     0C:   00000FE7  C$fb_lpc922.c$128$3$9              fb_lpc922
+     0C:   00000FE9  A$fb_lpc922$914                    fb_lpc922
+     0C:   00000FE9  C$fb_lpc922.c$130$2$2              fb_lpc922
+     0C:   00000FEC  A$fb_lpc922$920                    fb_lpc922
+     0C:   00000FEC  C$fb_lpc922.c$133$2$2              fb_lpc922
+     0C:   00000FEC  C$fb_lpc922.c$134$2$2              fb_lpc922
+     0C:   00000FEE  A$fb_lpc922$921                    fb_lpc922
+     0C:   00000FEF  A$fb_lpc922$922                    fb_lpc922
+     0C:   00000FF1  A$fb_lpc922$925                    fb_lpc922
+     0C:   00000FF1  C$fb_lpc922.c$135$2$2              fb_lpc922
+     0C:   00000FF3  A$fb_lpc922$928                    fb_lpc922
+     0C:   00000FF3  C$fb_lpc922.c$136$2$2              fb_lpc922
+     0C:   00000FF6  A$fb_lpc922$931                    fb_lpc922
+     0C:   00000FF6  C$fb_lpc922.c$137$2$2              fb_lpc922
+     0C:   00000FF9  A$fb_lpc922$934                    fb_lpc922
+     0C:   00000FF9  C$fb_lpc922.c$138$2$2              fb_lpc922
+     0C:   00000FFB  A$fb_lpc922$935                    fb_lpc922
+     0C:   00000FFD  A$fb_lpc922$938                    fb_lpc922
+     0C:   00000FFD  C$fb_lpc922.c$139$3$10             fb_lpc922
+     0C:   00001000  A$fb_lpc922$941                    fb_lpc922
+     0C:   00001000  C$fb_lpc922.c$140$3$10             fb_lpc922
+     0C:   00001002  A$fb_lpc922$944                    fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 25.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    0000180E =        6158. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   00001002  C$fb_lpc922.c$141$3$10             fb_lpc922
+     0C:   00001004  A$fb_lpc922$945                    fb_lpc922
+     0C:   00001007  A$fb_lpc922$949                    fb_lpc922
+     0C:   00001007  C$fb_lpc922.c$144$3$11             fb_lpc922
+     0C:   00001009  A$fb_lpc922$950                    fb_lpc922
+     0C:   0000100B  A$fb_lpc922$951                    fb_lpc922
+     0C:   0000100D  A$fb_lpc922$954                    fb_lpc922
+     0C:   0000100D  C$fb_lpc922.c$145$4$12             fb_lpc922
+     0C:   00001010  A$fb_lpc922$957                    fb_lpc922
+     0C:   00001010  C$fb_lpc922.c$146$5$13             fb_lpc922
+     0C:   00001012  A$fb_lpc922$960                    fb_lpc922
+     0C:   00001012  C$fb_lpc922.c$147$5$13             fb_lpc922
+     0C:   00001014  A$fb_lpc922$961                    fb_lpc922
+     0C:   00001016  A$fb_lpc922$962                    fb_lpc922
+     0C:   00001018  A$fb_lpc922$966                    fb_lpc922
+     0C:   00001018  C$fb_lpc922.c$149$4$12             fb_lpc922
+     0C:   0000101A  A$fb_lpc922$967                    fb_lpc922
+     0C:   0000101C  A$fb_lpc922$970                    fb_lpc922
+     0C:   0000101C  C$fb_lpc922.c$150$4$12             fb_lpc922
+     0C:   0000101E  A$fb_lpc922$971                    fb_lpc922
+     0C:   00001020  A$fb_lpc922$972                    fb_lpc922
+     0C:   00001023  A$fb_lpc922$974                    fb_lpc922
+     0C:   00001026  A$fb_lpc922$975                    fb_lpc922
+     0C:   00001029  A$fb_lpc922$979                    fb_lpc922
+     0C:   00001029  C$fb_lpc922.c$153$4$14             fb_lpc922
+     0C:   0000102B  A$fb_lpc922$982                    fb_lpc922
+     0C:   0000102B  C$fb_lpc922.c$154$4$14             fb_lpc922
+     0C:   0000102D  A$fb_lpc922$985                    fb_lpc922
+     0C:   0000102D  C$fb_lpc922.c$155$4$14             fb_lpc922
+     0C:   0000102F  A$fb_lpc922$986                    fb_lpc922
+     0C:   00001032  A$fb_lpc922$987                    fb_lpc922
+     0C:   00001033  A$fb_lpc922$989                    fb_lpc922
+     0C:   00001035  A$fb_lpc922$992                    fb_lpc922
+     0C:   00001035  C$fb_lpc922.c$156$5$15             fb_lpc922
+     0C:   00001037  A$fb_lpc922$993                    fb_lpc922
+     0C:   00001039  A$fb_lpc922$996                    fb_lpc922
+     0C:   00001039  C$fb_lpc922.c$157$6$16             fb_lpc922
+     0C:   0000103B  A$fb_lpc922$997                    fb_lpc922
+     0C:   0000103E  A$fb_lpc922$998                    fb_lpc922
+     0C:   00001040  A$fb_lpc922$1002                   fb_lpc922
+     0C:   00001040  C$fb_lpc922.c$158$6$16             fb_lpc922
+     0C:   00001042  A$fb_lpc922$1003                   fb_lpc922
+     0C:   00001045  A$fb_lpc922$1004                   fb_lpc922
+     0C:   00001047  A$fb_lpc922$1008                   fb_lpc922
+     0C:   00001047  C$fb_lpc922.c$160$5$15             fb_lpc922
+     0C:   0000104A  A$fb_lpc922$1009                   fb_lpc922
+     0C:   0000104D  A$fb_lpc922$1012                   fb_lpc922
+     0C:   0000104D  C$fb_lpc922.c$161$6$17             fb_lpc922
+     0C:   0000104F  A$fb_lpc922$1013                   fb_lpc922
+     0C:   00001051  A$fb_lpc922$1014                   fb_lpc922
+     0C:   00001052  A$fb_lpc922$1017                   fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 26.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    0000180E =        6158. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   00001052  C$fb_lpc922.c$162$6$17             fb_lpc922
+     0C:   00001054  A$fb_lpc922$1018                   fb_lpc922
+     0C:   00001055  A$fb_lpc922$1019                   fb_lpc922
+     0C:   00001057  A$fb_lpc922$1022                   fb_lpc922
+     0C:   00001057  C$fb_lpc922.c$163$6$17             fb_lpc922
+     0C:   00001059  A$fb_lpc922$1023                   fb_lpc922
+     0C:   0000105B  A$fb_lpc922$1027                   fb_lpc922
+     0C:   0000105B  C$fb_lpc922.c$166$4$14             fb_lpc922
+     0C:   0000105D  A$fb_lpc922$1033                   fb_lpc922
+     0C:   0000105D  C$fb_lpc922.c$168$4$14             fb_lpc922
+     0C:   0000105D  C$fb_lpc922.c$169$5$18             fb_lpc922
+     0C:   00001060  A$fb_lpc922$1034                   fb_lpc922
+     0C:   00001062  A$fb_lpc922$1038                   fb_lpc922
+     0C:   00001062  C$fb_lpc922.c$170$5$18             fb_lpc922
+     0C:   00001065  A$fb_lpc922$1039                   fb_lpc922
+     0C:   00001068  A$fb_lpc922$1042                   fb_lpc922
+     0C:   00001068  C$fb_lpc922.c$171$6$19             fb_lpc922
+     0C:   0000106B  A$fb_lpc922$1047                   fb_lpc922
+     0C:   0000106B  C$fb_lpc922.c$172$6$19             fb_lpc922
+     0C:   0000106B  C$fb_lpc922.c$173$7$20             fb_lpc922
+     0C:   0000106E  A$fb_lpc922$1048                   fb_lpc922
+     0C:   00001070  A$fb_lpc922$1052                   fb_lpc922
+     0C:   00001070  C$fb_lpc922.c$174$7$20             fb_lpc922
+     0C:   00001072  A$fb_lpc922$1053                   fb_lpc922
+     0C:   00001074  A$fb_lpc922$1054                   fb_lpc922
+     0C:   00001076  A$fb_lpc922$1057                   fb_lpc922
+     0C:   00001076  C$fb_lpc922.c$175$7$20             fb_lpc922
+     0C:   00001079  A$fb_lpc922$1061                   fb_lpc922
+     0C:   00001079  C$fb_lpc922.c$178$5$18             fb_lpc922
+     0C:   0000107C  A$fb_lpc922$1062                   fb_lpc922
+     0C:   0000107F  A$fb_lpc922$1066                   fb_lpc922
+     0C:   0000107F  C$fb_lpc922.c$181$5$21             fb_lpc922
+     0C:   00001082  A$fb_lpc922$1067                   fb_lpc922
+     0C:   00001085  A$fb_lpc922$1068                   fb_lpc922
+     0C:   00001088  A$fb_lpc922$1071                   fb_lpc922
+     0C:   00001088  C$fb_lpc922.c$182$6$22             fb_lpc922
+     0C:   0000108A  A$fb_lpc922$1072                   fb_lpc922
+     0C:   0000108C  A$fb_lpc922$1073                   fb_lpc922
+     0C:   0000108E  A$fb_lpc922$1074                   fb_lpc922
+     0C:   00001090  A$fb_lpc922$1077                   fb_lpc922
+     0C:   00001090  C$fb_lpc922.c$183$6$22             fb_lpc922
+     0C:   00001093  A$fb_lpc922$1080                   fb_lpc922
+     0C:   00001093  C$fb_lpc922.c$184$6$22             fb_lpc922
+     0C:   00001096  A$fb_lpc922$1083                   fb_lpc922
+     0C:   00001096  C$fb_lpc922.c$185$6$22             fb_lpc922
+     0C:   00001098  A$fb_lpc922$1086                   fb_lpc922
+     0C:   00001098  C$fb_lpc922.c$186$6$22             fb_lpc922
+     0C:   0000109B  A$fb_lpc922$1089                   fb_lpc922
+     0C:   0000109B  C$fb_lpc922.c$187$6$22             fb_lpc922
+     0C:   0000109D  A$fb_lpc922$1090                   fb_lpc922
+     0C:   000010A0  A$fb_lpc922$1094                   fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 27.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    0000180E =        6158. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   000010A0  C$fb_lpc922.c$189$5$21             fb_lpc922
+     0C:   000010A3  A$fb_lpc922$1097                   fb_lpc922
+     0C:   000010A3  C$fb_lpc922.c$193$2$2              fb_lpc922
+     0C:   000010A6  A$fb_lpc922$1103                   fb_lpc922
+     0C:   000010A6  C$fb_lpc922.c$195$2$2              fb_lpc922
+     0C:   000010A6  C$fb_lpc922.c$196$2$2              fb_lpc922
+     0C:   000010A9  A$fb_lpc922$1106                   fb_lpc922
+     0C:   000010A9  C$fb_lpc922.c$197$2$2              fb_lpc922
+     0C:   000010AC  A$fb_lpc922$1109                   fb_lpc922
+     0C:   000010AC  C$fb_lpc922.c$198$2$2              fb_lpc922
+     0C:   000010AF  A$fb_lpc922$1115                   fb_lpc922
+     0C:   000010AF  C$fb_lpc922.c$200$2$2              fb_lpc922
+     0C:   000010AF  C$fb_lpc922.c$201$2$2              fb_lpc922
+     0C:   000010B2  A$fb_lpc922$1116                   fb_lpc922
+     0C:   000010B4  A$fb_lpc922$1117                   fb_lpc922
+     0C:   000010B6  A$fb_lpc922$1118                   fb_lpc922
+     0C:   000010B8  A$fb_lpc922$1121                   fb_lpc922
+     0C:   000010B8  C$fb_lpc922.c$202$3$23             fb_lpc922
+     0C:   000010BA  A$fb_lpc922$1124                   fb_lpc922
+     0C:   000010BA  C$fb_lpc922.c$203$3$23             fb_lpc922
+     0C:   000010BC  A$fb_lpc922$1125                   fb_lpc922
+     0C:   000010BE  A$fb_lpc922$1126                   fb_lpc922
+     0C:   000010C0  A$fb_lpc922$1127                   fb_lpc922
+     0C:   000010C2  A$fb_lpc922$1130                   fb_lpc922
+     0C:   000010C2  C$fb_lpc922.c$204$3$23             fb_lpc922
+     0C:   000010C5  A$fb_lpc922$1133                   fb_lpc922
+     0C:   000010C5  C$fb_lpc922.c$205$3$23             fb_lpc922
+     0C:   000010C8  A$fb_lpc922$1136                   fb_lpc922
+     0C:   000010C8  C$fb_lpc922.c$206$3$23             fb_lpc922
+     0C:   000010CA  A$fb_lpc922$1139                   fb_lpc922
+     0C:   000010CA  C$fb_lpc922.c$207$3$23             fb_lpc922
+     0C:   000010CC  A$fb_lpc922$1140                   fb_lpc922
+     0C:   000010CE  A$fb_lpc922$1143                   fb_lpc922
+     0C:   000010CE  C$fb_lpc922.c$208$3$23             fb_lpc922
+     0C:   000010D0  A$fb_lpc922$1144                   fb_lpc922
+     0C:   000010D3  A$fb_lpc922$1147                   fb_lpc922
+     0C:   000010D3  C$fb_lpc922.c$209$4$24             fb_lpc922
+     0C:   000010D6  A$fb_lpc922$1148                   fb_lpc922
+     0C:   000010D8  A$fb_lpc922$1149                   fb_lpc922
+     0C:   000010DB  A$fb_lpc922$1150                   fb_lpc922
+     0C:   000010DD  A$fb_lpc922$1151                   fb_lpc922
+     0C:   000010DF  A$fb_lpc922$1152                   fb_lpc922
+     0C:   000010E2  A$fb_lpc922$1153                   fb_lpc922
+     0C:   000010E4  A$fb_lpc922$1155                   fb_lpc922
+     0C:   000010E6  A$fb_lpc922$1159                   fb_lpc922
+     0C:   000010E6  C$fb_lpc922.c$210$4$24             fb_lpc922
+     0C:   000010E8  A$fb_lpc922$1160                   fb_lpc922
+     0C:   000010EA  A$fb_lpc922$1161                   fb_lpc922
+     0C:   000010EC  A$fb_lpc922$1162                   fb_lpc922
+     0C:   000010EE  A$fb_lpc922$1163                   fb_lpc922
+     0C:   000010F0  A$fb_lpc922$1164                   fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 28.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    0000180E =        6158. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   000010F2  A$fb_lpc922$1168                   fb_lpc922
+     0C:   000010F2  C$fb_lpc922.c$212$3$23             fb_lpc922
+     0C:   000010F5  A$fb_lpc922$1169                   fb_lpc922
+     0C:   000010F6  A$fb_lpc922$1170                   fb_lpc922
+     0C:   000010F7  A$fb_lpc922$1171                   fb_lpc922
+     0C:   000010F8  A$fb_lpc922$1172                   fb_lpc922
+     0C:   000010FB  A$fb_lpc922$1173                   fb_lpc922
+     0C:   000010FE  A$fb_lpc922$1174                   fb_lpc922
+     0C:   000010FF  A$fb_lpc922$1175                   fb_lpc922
+     0C:   00001100  A$fb_lpc922$1176                   fb_lpc922
+     0C:   00001101  A$fb_lpc922$1177                   fb_lpc922
+     0C:   00001104  A$fb_lpc922$1178                   fb_lpc922
+     0C:   00001106  A$fb_lpc922$1182                   fb_lpc922
+     0C:   00001106  C$fb_lpc922.c$213$3$23             fb_lpc922
+     0C:   00001108  A$fb_lpc922$1183                   fb_lpc922
+     0C:   0000110B  A$fb_lpc922$1184                   fb_lpc922
+     0C:   0000110E  A$fb_lpc922$1185                   fb_lpc922
+     0C:   00001110  A$fb_lpc922$1189                   fb_lpc922
+     0C:   00001110  C$fb_lpc922.c$214$3$23             fb_lpc922
+     0C:   00001113  A$fb_lpc922$1190                   fb_lpc922
+     0C:   00001116  A$fb_lpc922$1194                   fb_lpc922
+     0C:   00001116  C$fb_lpc922.c$218$3$25             fb_lpc922
+     0C:   00001118  A$fb_lpc922$1195                   fb_lpc922
+     0C:   0000111A  A$fb_lpc922$1196                   fb_lpc922
+     0C:   0000111C  A$fb_lpc922$1197                   fb_lpc922
+     0C:   0000111E  A$fb_lpc922$1201                   fb_lpc922
+     0C:   0000111E  C$fb_lpc922.c$219$3$25             fb_lpc922
+     0C:   00001121  A$fb_lpc922$1204                   fb_lpc922
+     0C:   00001121  C$fb_lpc922.c$221$2$2              fb_lpc922
+     0C:   00001124  A$fb_lpc922$1210                   fb_lpc922
+     0C:   00001124  C$fb_lpc922.c$223$2$2              fb_lpc922
+     0C:   00001124  C$fb_lpc922.c$224$2$2              fb_lpc922
+     0C:   00001126  A$fb_lpc922$1213                   fb_lpc922
+     0C:   00001126  C$fb_lpc922.c$225$2$2              fb_lpc922
+     0C:   00001128  A$fb_lpc922$1214                   fb_lpc922
+     0C:   0000112B  A$fb_lpc922$1217                   fb_lpc922
+     0C:   0000112B  C$fb_lpc922.c$226$3$26             fb_lpc922
+     0C:   0000112E  A$fb_lpc922$1220                   fb_lpc922
+     0C:   0000112E  C$fb_lpc922.c$227$4$27             fb_lpc922
+     0C:   00001130  A$fb_lpc922$1223                   fb_lpc922
+     0C:   00001130  C$fb_lpc922.c$228$4$27             fb_lpc922
+     0C:   00001133  A$fb_lpc922$1226                   fb_lpc922
+     0C:   00001133  C$fb_lpc922.c$229$4$27             fb_lpc922
+     0C:   00001135  A$fb_lpc922$1227                   fb_lpc922
+     0C:   00001138  A$fb_lpc922$1231                   fb_lpc922
+     0C:   00001138  C$fb_lpc922.c$231$3$26             fb_lpc922
+     0C:   0000113B  A$fb_lpc922$1232                   fb_lpc922
+     0C:   0000113E  A$fb_lpc922$1236                   fb_lpc922
+     0C:   0000113E  C$fb_lpc922.c$234$3$28             fb_lpc922
+     0C:   00001140  A$fb_lpc922$1239                   fb_lpc922
+     0C:   00001140  C$fb_lpc922.c$235$3$28             fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 29.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    0000180E =        6158. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   00001143  A$fb_lpc922$1242                   fb_lpc922
+     0C:   00001143  C$fb_lpc922.c$236$3$28             fb_lpc922
+     0C:   00001145  A$fb_lpc922$1245                   fb_lpc922
+     0C:   00001145  C$fb_lpc922.c$238$2$2              fb_lpc922
+     0C:   00001148  A$fb_lpc922$1251                   fb_lpc922
+     0C:   00001148  C$fb_lpc922.c$242$2$2              fb_lpc922
+     0C:   00001148  C$fb_lpc922.c$243$2$2              fb_lpc922
+     0C:   0000114A  A$fb_lpc922$1252                   fb_lpc922
+     0C:   0000114C  A$fb_lpc922$1253                   fb_lpc922
+     0C:   0000114D  A$fb_lpc922$1254                   fb_lpc922
+     0C:   0000114F  A$fb_lpc922$1257                   fb_lpc922
+     0C:   0000114F  C$fb_lpc922.c$244$2$2              fb_lpc922
+     0C:   00001152  A$fb_lpc922$1258                   fb_lpc922
+     0C:   00001154  A$fb_lpc922$1262                   fb_lpc922
+     0C:   00001154  C$fb_lpc922.c$245$2$2              fb_lpc922
+     0C:   00001157  A$fb_lpc922$1263                   fb_lpc922
+     0C:   00001159  A$fb_lpc922$1267                   fb_lpc922
+     0C:   00001159  C$fb_lpc922.c$246$2$2              fb_lpc922
+     0C:   0000115B  A$fb_lpc922$1270                   fb_lpc922
+     0C:   0000115B  C$fb_lpc922.c$247$2$2              fb_lpc922
+     0C:   0000115D  A$fb_lpc922$1271                   fb_lpc922
+     0C:   00001160  A$fb_lpc922$1272                   fb_lpc922
+     0C:   00001162  A$fb_lpc922$1274                   fb_lpc922
+     0C:   00001165  A$fb_lpc922$1278                   fb_lpc922
+     0C:   00001165  C$fb_lpc922.c$248$3$29             fb_lpc922
+     0C:   00001167  A$fb_lpc922$1279                   fb_lpc922
+     0C:   00001169  A$fb_lpc922$1280                   fb_lpc922
+     0C:   0000116B  A$fb_lpc922$1283                   fb_lpc922
+     0C:   0000116B  C$fb_lpc922.c$249$4$30             fb_lpc922
+     0C:   0000116D  A$fb_lpc922$1284                   fb_lpc922
+     0C:   0000116E  A$fb_lpc922$1285                   fb_lpc922
+     0C:   00001170  A$fb_lpc922$1288                   fb_lpc922
+     0C:   00001170  C$fb_lpc922.c$251$5$31             fb_lpc922
+     0C:   00001172  A$fb_lpc922$1291                   fb_lpc922
+     0C:   00001172  C$fb_lpc922.c$253$5$31             fb_lpc922
+     0C:   00001174  A$fb_lpc922$1294                   fb_lpc922
+     0C:   00001174  C$fb_lpc922.c$254$5$31             fb_lpc922
+     0C:   00001176  A$fb_lpc922$1295                   fb_lpc922
+     0C:   00001178  A$fb_lpc922$1299                   fb_lpc922
+     0C:   00001178  C$fb_lpc922.c$256$4$30             fb_lpc922
+     0C:   0000117A  A$fb_lpc922$1303                   fb_lpc922
+     0C:   0000117A  C$fb_lpc922.c$257$4$30             fb_lpc922
+     0C:   0000117C  A$fb_lpc922$1304                   fb_lpc922
+     0C:   0000117E  A$fb_lpc922$1307                   fb_lpc922
+     0C:   0000117E  C$fb_lpc922.c$258$5$32             fb_lpc922
+     0C:   00001181  A$fb_lpc922$1310                   fb_lpc922
+     0C:   00001181  C$fb_lpc922.c$259$5$32             fb_lpc922
+     0C:   00001183  A$fb_lpc922$1311                   fb_lpc922
+     0C:   00001185  A$fb_lpc922$1315                   fb_lpc922
+     0C:   00001185  C$fb_lpc922.c$261$4$30             fb_lpc922
+     0C:   00001187  A$fb_lpc922$1316                   fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 30.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    0000180E =        6158. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   00001189  A$fb_lpc922$1317                   fb_lpc922
+     0C:   0000118B  A$fb_lpc922$1321                   fb_lpc922
+     0C:   0000118B  C$fb_lpc922.c$262$4$30             fb_lpc922
+     0C:   0000118D  A$fb_lpc922$1322                   fb_lpc922
+     0C:   0000118F  A$fb_lpc922$1323                   fb_lpc922
+     0C:   00001192  A$fb_lpc922$1327                   fb_lpc922
+     0C:   00001192  C$fb_lpc922.c$263$4$30             fb_lpc922
+     0C:   00001195  A$fb_lpc922$1328                   fb_lpc922
+     0C:   00001197  A$fb_lpc922$1332                   fb_lpc922
+     0C:   00001197  C$fb_lpc922.c$266$4$33             fb_lpc922
+     0C:   0000119A  A$fb_lpc922$1335                   fb_lpc922
+     0C:   0000119A  C$fb_lpc922.c$267$5$34             fb_lpc922
+     0C:   0000119C  A$fb_lpc922$1338                   fb_lpc922
+     0C:   0000119C  C$fb_lpc922.c$268$5$34             fb_lpc922
+     0C:   0000119E  A$fb_lpc922$1339                   fb_lpc922
+     0C:   000011A0  A$fb_lpc922$1343                   fb_lpc922
+     0C:   000011A0  C$fb_lpc922.c$270$4$33             fb_lpc922
+     0C:   000011A2  A$fb_lpc922$1347                   fb_lpc922
+     0C:   000011A2  C$fb_lpc922.c$271$4$33             fb_lpc922
+     0C:   000011A4  A$fb_lpc922$1350                   fb_lpc922
+     0C:   000011A4  C$fb_lpc922.c$272$4$33             fb_lpc922
+     0C:   000011A7  A$fb_lpc922$1353                   fb_lpc922
+     0C:   000011A7  C$fb_lpc922.c$273$4$33             fb_lpc922
+     0C:   000011AA  A$fb_lpc922$1357                   fb_lpc922
+     0C:   000011AA  C$fb_lpc922.c$275$3$29             fb_lpc922
+     0C:   000011AD  A$fb_lpc922$1360                   fb_lpc922
+     0C:   000011AD  C$fb_lpc922.c$277$2$2              fb_lpc922
+     0C:   000011B0  A$fb_lpc922$1366                   fb_lpc922
+     0C:   000011B0  C$fb_lpc922.c$279$2$2              fb_lpc922
+     0C:   000011B0  C$fb_lpc922.c$280$2$2              fb_lpc922
+     0C:   000011B2  A$fb_lpc922$1367                   fb_lpc922
+     0C:   000011B4  A$fb_lpc922$1368                   fb_lpc922
+     0C:   000011B6  A$fb_lpc922$1369                   fb_lpc922
+     0C:   000011B9  A$fb_lpc922$1372                   fb_lpc922
+     0C:   000011B9  C$fb_lpc922.c$281$3$35             fb_lpc922
+     0C:   000011BB  A$fb_lpc922$1376                   fb_lpc922
+     0C:   000011BB  C$fb_lpc922.c$283$2$2              fb_lpc922
+     0C:   000011BD  A$fb_lpc922$1379                   fb_lpc922
+     0C:   000011BD  C$fb_lpc922.c$284$2$2              fb_lpc922
+     0C:   000011BF  A$fb_lpc922$1380                   fb_lpc922
+     0C:   000011C1  A$fb_lpc922$1381                   fb_lpc922
+     0C:   000011C3  A$fb_lpc922$1384                   fb_lpc922
+     0C:   000011C3  C$fb_lpc922.c$285$3$36             fb_lpc922
+     0C:   000011C5  A$fb_lpc922$1387                   fb_lpc922
+     0C:   000011C5  C$fb_lpc922.c$286$3$36             fb_lpc922
+     0C:   000011C8  A$fb_lpc922$1388                   fb_lpc922
+     0C:   000011CA  A$fb_lpc922$1392                   fb_lpc922
+     0C:   000011CA  C$fb_lpc922.c$289$3$37             fb_lpc922
+     0C:   000011CD  A$fb_lpc922$1395                   fb_lpc922
+     0C:   000011CD  C$fb_lpc922.c$290$3$37             fb_lpc922
+     0C:   000011D0  A$fb_lpc922$1399                   fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 31.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    0000180E =        6158. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   000011D0  C$fb_lpc922.c$292$2$2              fb_lpc922
+     0C:   000011D2  A$fb_lpc922$1404                   fb_lpc922
+     0C:   000011D2  C$fb_lpc922.c$293$2$2              fb_lpc922
+     0C:   000011D2  C$fb_lpc922.c$299$2$2              fb_lpc922
+     0C:   000011D4  A$fb_lpc922$1408                   fb_lpc922
+     0C:   000011D4  C$fb_lpc922.c$300$2$2              fb_lpc922
+     0C:   000011D6  A$fb_lpc922$1411                   fb_lpc922
+     0C:   000011D6  C$fb_lpc922.c$301$2$2              fb_lpc922
+     0C:   000011D8  A$fb_lpc922$1414                   fb_lpc922
+     0C:   000011D8  C$fb_lpc922.c$302$2$2              fb_lpc922
+     0C:   000011DA  A$fb_lpc922$1415                   fb_lpc922
+     0C:   000011DC  A$fb_lpc922$1416                   fb_lpc922
+     0C:   000011DE  A$fb_lpc922$1417                   fb_lpc922
+     0C:   000011E0  A$fb_lpc922$1420                   fb_lpc922
+     0C:   000011E0  C$fb_lpc922.c$303$2$2              fb_lpc922
+     0C:   000011E3  A$fb_lpc922$1423                   fb_lpc922
+     0C:   000011E3  C$fb_lpc922.c$304$2$2              fb_lpc922
+     0C:   000011E6  A$fb_lpc922$1426                   fb_lpc922
+     0C:   000011E6  C$fb_lpc922.c$305$2$2              fb_lpc922
+     0C:   000011E8  A$fb_lpc922$1429                   fb_lpc922
+     0C:   000011E8  C$fb_lpc922.c$306$2$2              fb_lpc922
+     0C:   000011EB  A$fb_lpc922$1430                   fb_lpc922
+     0C:   000011EE  A$fb_lpc922$1434                   fb_lpc922
+     0C:   000011EE  C$fb_lpc922.c$307$3$38             fb_lpc922
+     0C:   000011F1  A$fb_lpc922$1435                   fb_lpc922
+     0C:   000011F3  A$fb_lpc922$1439                   fb_lpc922
+     0C:   000011F3  C$fb_lpc922.c$310$3$39             fb_lpc922
+     0C:   000011F5  A$fb_lpc922$1440                   fb_lpc922
+     0C:   000011F7  A$fb_lpc922$1441                   fb_lpc922
+     0C:   000011F8  A$fb_lpc922$1442                   fb_lpc922
+     0C:   000011FA  A$fb_lpc922$1443                   fb_lpc922
+     0C:   000011FC  A$fb_lpc922$1444                   fb_lpc922
+     0C:   000011FD  A$fb_lpc922$1445                   fb_lpc922
+     0C:   000011FE  A$fb_lpc922$1446                   fb_lpc922
+     0C:   000011FF  A$fb_lpc922$1447                   fb_lpc922
+     0C:   00001200  A$fb_lpc922$1448                   fb_lpc922
+     0C:   00001201  A$fb_lpc922$1449                   fb_lpc922
+     0C:   00001203  A$fb_lpc922$1450                   fb_lpc922
+     0C:   00001205  A$fb_lpc922$1451                   fb_lpc922
+     0C:   00001206  A$fb_lpc922$1452                   fb_lpc922
+     0C:   00001207  A$fb_lpc922$1453                   fb_lpc922
+     0C:   00001208  A$fb_lpc922$1454                   fb_lpc922
+     0C:   00001209  A$fb_lpc922$1455                   fb_lpc922
+     0C:   0000120B  A$fb_lpc922$1456                   fb_lpc922
+     0C:   0000120D  A$fb_lpc922$1457                   fb_lpc922
+     0C:   00001210  A$fb_lpc922$1458                   fb_lpc922
+     0C:   00001212  A$fb_lpc922$1459                   fb_lpc922
+     0C:   00001214  A$fb_lpc922$1462                   fb_lpc922
+     0C:   00001214  C$fb_lpc922.c$311$4$40             fb_lpc922
+     0C:   00001216  A$fb_lpc922$1465                   fb_lpc922
+     0C:   00001216  C$fb_lpc922.c$312$4$40             fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 32.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    0000180E =        6158. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   00001219  A$fb_lpc922$1466                   fb_lpc922
+     0C:   0000121B  A$fb_lpc922$1470                   fb_lpc922
+     0C:   0000121B  C$fb_lpc922.c$314$3$39             fb_lpc922
+     0C:   0000121E  A$fb_lpc922$1474                   fb_lpc922
+     0C:   0000121E  C$fb_lpc922.c$316$2$2              fb_lpc922
+     0C:   00001220  A$fb_lpc922$1479                   fb_lpc922
+     0C:   00001220  C$fb_lpc922.c$317$2$2              fb_lpc922
+     0C:   00001220  C$fb_lpc922.c$319$2$2              fb_lpc922
+     0C:   00001222  A$fb_lpc922$1483                   fb_lpc922
+     0C:   00001222  C$fb_lpc922.c$320$2$2              fb_lpc922
+     0C:   00001224  A$fb_lpc922$1486                   fb_lpc922
+     0C:   00001224  C$fb_lpc922.c$321$2$2              fb_lpc922
+     0C:   00001226  A$fb_lpc922$1487                   fb_lpc922
+     0C:   00001228  A$fb_lpc922$1488                   fb_lpc922
+     0C:   0000122A  A$fb_lpc922$1489                   fb_lpc922
+     0C:   0000122C  A$fb_lpc922$1492                   fb_lpc922
+     0C:   0000122C  C$fb_lpc922.c$322$2$2              fb_lpc922
+     0C:   0000122F  A$fb_lpc922$1495                   fb_lpc922
+     0C:   0000122F  C$fb_lpc922.c$323$2$2              fb_lpc922
+     0C:   00001232  A$fb_lpc922$1498                   fb_lpc922
+     0C:   00001232  C$fb_lpc922.c$324$2$2              fb_lpc922
+     0C:   00001234  A$fb_lpc922$1501                   fb_lpc922
+     0C:   00001234  C$fb_lpc922.c$325$2$2              fb_lpc922
+     0C:   00001236  A$fb_lpc922$1504                   fb_lpc922
+     0C:   00001236  C$fb_lpc922.c$326$2$2              fb_lpc922
+     0C:   00001239  A$fb_lpc922$1510                   fb_lpc922
+     0C:   00001239  C$fb_lpc922.c$331$1$1              fb_lpc922
+     0C:   00001239  C$fb_lpc922.c$332$1$1              fb_lpc922
+     0C:   0000123B  A$fb_lpc922$1511                   fb_lpc922
+     0C:   0000123D  A$fb_lpc922$1512                   fb_lpc922
+     0C:   0000123F  A$fb_lpc922$1513                   fb_lpc922
+     0C:   00001241  A$fb_lpc922$1514                   fb_lpc922
+     0C:   00001243  A$fb_lpc922$1515                   fb_lpc922
+     0C:   00001245  A$fb_lpc922$1516                   fb_lpc922
+     0C:   00001247  A$fb_lpc922$1517                   fb_lpc922
+     0C:   00001249  A$fb_lpc922$1518                   fb_lpc922
+     0C:   0000124B  A$fb_lpc922$1519                   fb_lpc922
+     0C:   0000124D  A$fb_lpc922$1520                   fb_lpc922
+     0C:   0000124F  A$fb_lpc922$1521                   fb_lpc922
+     0C:   00001251  A$fb_lpc922$1522                   fb_lpc922
+     0C:   00001253  A$fb_lpc922$1523                   fb_lpc922
+     0C:   00001255  A$fb_lpc922$1524                   fb_lpc922
+     0C:   00001257  A$fb_lpc922$1527                   fb_lpc922
+     0C:   00001257  C$fb_lpc922.c$333$1$1              fb_lpc922
+     0C:   00001257  XG$T1_int$0$0                      fb_lpc922
+     0C:   00001258  A$fb_lpc922$1540                   fb_lpc922
+     0C:   00001258  C$fb_lpc922.c$336$1$1              fb_lpc922
+     0C:   00001258  C$fb_lpc922.c$338$1$1              fb_lpc922
+     0C:   00001258  G$init_rx$0$0                      fb_lpc922
+     0C:   00001258  _init_rx                           fb_lpc922
+     0C:   0000125B  A$fb_lpc922$1543                   fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 33.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    0000180E =        6158. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   0000125B  C$fb_lpc922.c$339$1$1              fb_lpc922
+     0C:   0000125D  A$fb_lpc922$1546                   fb_lpc922
+     0C:   0000125D  C$fb_lpc922.c$340$1$1              fb_lpc922
+     0C:   0000125F  A$fb_lpc922$1549                   fb_lpc922
+     0C:   0000125F  C$fb_lpc922.c$341$1$1              fb_lpc922
+     0C:   00001261  A$fb_lpc922$1552                   fb_lpc922
+     0C:   00001261  C$fb_lpc922.c$342$1$1              fb_lpc922
+     0C:   00001264  A$fb_lpc922$1555                   fb_lpc922
+     0C:   00001264  C$fb_lpc922.c$343$1$1              fb_lpc922
+     0C:   00001267  A$fb_lpc922$1558                   fb_lpc922
+     0C:   00001267  C$fb_lpc922.c$344$1$1              fb_lpc922
+     0C:   00001269  A$fb_lpc922$1561                   fb_lpc922
+     0C:   00001269  C$fb_lpc922.c$345$1$1              fb_lpc922
+     0C:   0000126B  A$fb_lpc922$1562                   fb_lpc922
+     0C:   0000126D  A$fb_lpc922$1563                   fb_lpc922
+     0C:   0000126F  A$fb_lpc922$1564                   fb_lpc922
+     0C:   00001271  A$fb_lpc922$1567                   fb_lpc922
+     0C:   00001271  C$fb_lpc922.c$346$1$1              fb_lpc922
+     0C:   00001274  A$fb_lpc922$1570                   fb_lpc922
+     0C:   00001274  C$fb_lpc922.c$347$1$1              fb_lpc922
+     0C:   00001277  A$fb_lpc922$1573                   fb_lpc922
+     0C:   00001277  C$fb_lpc922.c$348$1$1              fb_lpc922
+     0C:   00001279  A$fb_lpc922$1576                   fb_lpc922
+     0C:   00001279  C$fb_lpc922.c$349$1$1              fb_lpc922
+     0C:   0000127B  A$fb_lpc922$1579                   fb_lpc922
+     0C:   0000127B  C$fb_lpc922.c$350$1$1              fb_lpc922
+     0C:   0000127D  A$fb_lpc922$1582                   fb_lpc922
+     0C:   0000127D  C$fb_lpc922.c$351$1$1              fb_lpc922
+     0C:   0000127F  A$fb_lpc922$1585                   fb_lpc922
+     0C:   0000127F  C$fb_lpc922.c$352$1$1              fb_lpc922
+     0C:   00001281  A$fb_lpc922$1588                   fb_lpc922
+     0C:   00001281  C$fb_lpc922.c$353$1$1              fb_lpc922
+     0C:   00001283  A$fb_lpc922$1591                   fb_lpc922
+     0C:   00001283  C$fb_lpc922.c$354$1$1              fb_lpc922
+     0C:   00001283  XG$init_rx$0$0                     fb_lpc922
+     0C:   00001284  A$fb_lpc922$1607                   fb_lpc922
+     0C:   00001284  C$fb_lpc922.c$357$1$1              fb_lpc922
+     0C:   00001284  C$fb_lpc922.c$361$1$1              fb_lpc922
+     0C:   00001284  G$init_tx$0$0                      fb_lpc922
+     0C:   00001284  _init_tx                           fb_lpc922
+     0C:   00001286  A$fb_lpc922$1610                   fb_lpc922
+     0C:   00001286  C$fb_lpc922.c$362$1$1              fb_lpc922
+     0C:   00001288  A$fb_lpc922$1611                   fb_lpc922
+     0C:   0000128A  A$fb_lpc922$1612                   fb_lpc922
+     0C:   0000128C  A$fb_lpc922$1613                   fb_lpc922
+     0C:   0000128E  A$fb_lpc922$1616                   fb_lpc922
+     0C:   0000128E  C$fb_lpc922.c$363$1$1              fb_lpc922
+     0C:   00001291  A$fb_lpc922$1619                   fb_lpc922
+     0C:   00001291  C$fb_lpc922.c$364$1$1              fb_lpc922
+     0C:   00001294  A$fb_lpc922$1622                   fb_lpc922
+     0C:   00001294  C$fb_lpc922.c$365$1$1              fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 34.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    0000180E =        6158. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   00001296  A$fb_lpc922$1625                   fb_lpc922
+     0C:   00001296  C$fb_lpc922.c$367$1$1              fb_lpc922
+     0C:   00001298  A$fb_lpc922$1626                   fb_lpc922
+     0C:   0000129A  A$fb_lpc922$1627                   fb_lpc922
+     0C:   0000129C  A$fb_lpc922$1628                   fb_lpc922
+     0C:   0000129D  A$fb_lpc922$1631                   fb_lpc922
+     0C:   0000129D  C$fb_lpc922.c$368$1$1              fb_lpc922
+     0C:   000012A0  A$fb_lpc922$1634                   fb_lpc922
+     0C:   000012A2  A$fb_lpc922$1636                   fb_lpc922
+     0C:   000012A3  A$fb_lpc922$1637                   fb_lpc922
+     0C:   000012A4  A$fb_lpc922$1638                   fb_lpc922
+     0C:   000012A5  A$fb_lpc922$1639                   fb_lpc922
+     0C:   000012A7  A$fb_lpc922$1642                   fb_lpc922
+     0C:   000012A7  C$fb_lpc922.c$370$2$2              fb_lpc922
+     0C:   000012A8  A$fb_lpc922$1643                   fb_lpc922
+     0C:   000012AA  A$fb_lpc922$1644                   fb_lpc922
+     0C:   000012AB  A$fb_lpc922$1645                   fb_lpc922
+     0C:   000012AC  A$fb_lpc922$1646                   fb_lpc922
+     0C:   000012AD  A$fb_lpc922$1647                   fb_lpc922
+     0C:   000012AF  A$fb_lpc922$1650                   fb_lpc922
+     0C:   000012AF  C$fb_lpc922.c$369$1$1              fb_lpc922
+     0C:   000012B0  A$fb_lpc922$1651                   fb_lpc922
+     0C:   000012B2  A$fb_lpc922$1655                   fb_lpc922
+     0C:   000012B2  C$fb_lpc922.c$372$1$1              fb_lpc922
+     0C:   000012B3  A$fb_lpc922$1656                   fb_lpc922
+     0C:   000012B5  A$fb_lpc922$1657                   fb_lpc922
+     0C:   000012B6  A$fb_lpc922$1658                   fb_lpc922
+     0C:   000012B8  A$fb_lpc922$1661                   fb_lpc922
+     0C:   000012B8  C$fb_lpc922.c$373$1$1              fb_lpc922
+     0C:   000012BA  A$fb_lpc922$1664                   fb_lpc922
+     0C:   000012BA  C$fb_lpc922.c$374$1$1              fb_lpc922
+     0C:   000012BC  A$fb_lpc922$1667                   fb_lpc922
+     0C:   000012BC  C$fb_lpc922.c$375$1$1              fb_lpc922
+     0C:   000012BE  A$fb_lpc922$1670                   fb_lpc922
+     0C:   000012BE  C$fb_lpc922.c$377$1$1              fb_lpc922
+     0C:   000012C1  A$fb_lpc922$1673                   fb_lpc922
+     0C:   000012C1  C$fb_lpc922.c$378$1$1              fb_lpc922
+     0C:   000012C4  A$fb_lpc922$1676                   fb_lpc922
+     0C:   000012C4  C$fb_lpc922.c$379$1$1              fb_lpc922
+     0C:   000012C7  A$fb_lpc922$1679                   fb_lpc922
+     0C:   000012C7  C$fb_lpc922.c$380$1$1              fb_lpc922
+     0C:   000012C9  A$fb_lpc922$1682                   fb_lpc922
+     0C:   000012C9  C$fb_lpc922.c$381$1$1              fb_lpc922
+     0C:   000012CB  A$fb_lpc922$1685                   fb_lpc922
+     0C:   000012CB  C$fb_lpc922.c$382$1$1              fb_lpc922
+     0C:   000012CD  A$fb_lpc922$1688                   fb_lpc922
+     0C:   000012CD  C$fb_lpc922.c$383$1$1              fb_lpc922
+     0C:   000012CD  XG$init_tx$0$0                     fb_lpc922
+     0C:   000012CE  A$fb_lpc922$1704                   fb_lpc922
+     0C:   000012CE  C$fb_lpc922.c$390$1$1              fb_lpc922
+     0C:   000012CE  G$gapos_in_gat$0$0                 fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 35.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    0000180E =        6158. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   000012CE  _gapos_in_gat                      fb_lpc922
+     0C:   000012D0  A$fb_lpc922$1705                   fb_lpc922
+     0C:   000012D3  A$fb_lpc922$1706                   fb_lpc922
+     0C:   000012D5  A$fb_lpc922$1709                   fb_lpc922
+     0C:   000012D5  C$fb_lpc922.c$394$1$1              fb_lpc922
+     0C:   000012D7  A$fb_lpc922$1712                   fb_lpc922
+     0C:   000012D7  C$fb_lpc922.c$395$1$1              fb_lpc922
+     0C:   000012DA  A$fb_lpc922$1713                   fb_lpc922
+     0C:   000012DB  A$fb_lpc922$1714                   fb_lpc922
+     0C:   000012DC  A$fb_lpc922$1715                   fb_lpc922
+     0C:   000012DD  A$fb_lpc922$1716                   fb_lpc922
+     0C:   000012E0  A$fb_lpc922$1718                   fb_lpc922
+     0C:   000012E2  A$fb_lpc922$1719                   fb_lpc922
+     0C:   000012E5  A$fb_lpc922$1722                   fb_lpc922
+     0C:   000012E5  C$fb_lpc922.c$396$2$2              fb_lpc922
+     0C:   000012E8  A$fb_lpc922$1723                   fb_lpc922
+     0C:   000012E9  A$fb_lpc922$1724                   fb_lpc922
+     0C:   000012EA  A$fb_lpc922$1725                   fb_lpc922
+     0C:   000012EC  A$fb_lpc922$1728                   fb_lpc922
+     0C:   000012EC  C$fb_lpc922.c$397$1$1              fb_lpc922
+     0C:   000012EE  A$fb_lpc922$1730                   fb_lpc922
+     0C:   000012F1  A$fb_lpc922$1731                   fb_lpc922
+     0C:   000012F2  A$fb_lpc922$1732                   fb_lpc922
+     0C:   000012F3  A$fb_lpc922$1733                   fb_lpc922
+     0C:   000012F4  A$fb_lpc922$1734                   fb_lpc922
+     0C:   000012F5  A$fb_lpc922$1735                   fb_lpc922
+     0C:   000012F6  A$fb_lpc922$1736                   fb_lpc922
+     0C:   000012F8  A$fb_lpc922$1739                   fb_lpc922
+     0C:   000012F8  C$fb_lpc922.c$398$4$4              fb_lpc922
+     0C:   000012F9  A$fb_lpc922$1740                   fb_lpc922
+     0C:   000012FA  A$fb_lpc922$1741                   fb_lpc922
+     0C:   000012FB  A$fb_lpc922$1742                   fb_lpc922
+     0C:   000012FD  A$fb_lpc922$1743                   fb_lpc922
+     0C:   00001300  A$fb_lpc922$1744                   fb_lpc922
+     0C:   00001301  A$fb_lpc922$1745                   fb_lpc922
+     0C:   00001302  A$fb_lpc922$1746                   fb_lpc922
+     0C:   00001303  A$fb_lpc922$1747                   fb_lpc922
+     0C:   00001306  A$fb_lpc922$1748                   fb_lpc922
+     0C:   00001308  A$fb_lpc922$1749                   fb_lpc922
+     0C:   00001309  A$fb_lpc922$1750                   fb_lpc922
+     0C:   0000130C  A$fb_lpc922$1751                   fb_lpc922
+     0C:   0000130D  A$fb_lpc922$1752                   fb_lpc922
+     0C:   0000130E  A$fb_lpc922$1753                   fb_lpc922
+     0C:   00001310  A$fb_lpc922$1754                   fb_lpc922
+     0C:   00001312  A$fb_lpc922$1755                   fb_lpc922
+     0C:   00001313  A$fb_lpc922$1756                   fb_lpc922
+     0C:   00001314  A$fb_lpc922$1757                   fb_lpc922
+     0C:   00001317  A$fb_lpc922$1758                   fb_lpc922
+     0C:   00001319  A$fb_lpc922$1762                   fb_lpc922
+     0C:   00001319  C$fb_lpc922.c$397$3$3              fb_lpc922
+     0C:   0000131A  A$fb_lpc922$1763                   fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 36.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    0000180E =        6158. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   0000131C  A$fb_lpc922$1767                   fb_lpc922
+     0C:   0000131C  C$fb_lpc922.c$402$1$1              fb_lpc922
+     0C:   0000131E  A$fb_lpc922$1768                   fb_lpc922
+     0C:   00001320  A$fb_lpc922$1771                   fb_lpc922
+     0C:   00001320  C$fb_lpc922.c$403$1$1              fb_lpc922
+     0C:   00001320  XG$gapos_in_gat$0$0                fb_lpc922
+     0C:   00001321  A$fb_lpc922$1792                   fb_lpc922
+     0C:   00001321  C$fb_lpc922.c$408$1$1              fb_lpc922
+     0C:   00001321  G$build_tel$0$0                    fb_lpc922
+     0C:   00001321  _build_tel                         fb_lpc922
+     0C:   00001323  A$fb_lpc922$1793                   fb_lpc922
+     0C:   00001325  A$fb_lpc922$1794                   fb_lpc922
+     0C:   00001327  A$fb_lpc922$1795                   fb_lpc922
+     0C:   00001329  A$fb_lpc922$1796                   fb_lpc922
+     0C:   0000132B  A$fb_lpc922$1797                   fb_lpc922
+     0C:   0000132D  A$fb_lpc922$1800                   fb_lpc922
+     0C:   0000132D  C$fb_lpc922.c$410$1$1              fb_lpc922
+     0C:   0000132F  A$fb_lpc922$1803                   fb_lpc922
+     0C:   0000132F  C$fb_lpc922.c$417$1$1              fb_lpc922
+     0C:   00001330  A$fb_lpc922$1804                   fb_lpc922
+     0C:   00001332  A$fb_lpc922$1805                   fb_lpc922
+     0C:   00001333  A$fb_lpc922$1806                   fb_lpc922
+     0C:   00001334  A$fb_lpc922$1807                   fb_lpc922
+     0C:   00001335  A$fb_lpc922$1808                   fb_lpc922
+     0C:   00001337  A$fb_lpc922$1809                   fb_lpc922
+     0C:   00001339  A$fb_lpc922$1812                   fb_lpc922
+     0C:   00001339  C$fb_lpc922.c$419$1$1              fb_lpc922
+     0C:   0000133C  A$fb_lpc922$1814                   fb_lpc922
+     0C:   0000133E  A$fb_lpc922$1815                   fb_lpc922
+     0C:   00001341  A$fb_lpc922$1819                   fb_lpc922
+     0C:   00001341  C$fb_lpc922.c$420$2$2              fb_lpc922
+     0C:   00001342  A$fb_lpc922$1820                   fb_lpc922
+     0C:   00001343  A$fb_lpc922$1821                   fb_lpc922
+     0C:   00001344  A$fb_lpc922$1822                   fb_lpc922
+     0C:   00001346  A$fb_lpc922$1823                   fb_lpc922
+     0C:   00001348  A$fb_lpc922$1824                   fb_lpc922
+     0C:   0000134A  A$fb_lpc922$1827                   fb_lpc922
+     0C:   0000134A  C$fb_lpc922.c$421$2$2              fb_lpc922
+     0C:   0000134D  A$fb_lpc922$1830                   fb_lpc922
+     0C:   0000134D  C$fb_lpc922.c$423$2$2              fb_lpc922
+     0C:   0000134F  A$fb_lpc922$1831                   fb_lpc922
+     0C:   00001351  A$fb_lpc922$1832                   fb_lpc922
+     0C:   00001353  A$fb_lpc922$1833                   fb_lpc922
+     0C:   00001356  A$fb_lpc922$1834                   fb_lpc922
+     0C:   00001358  A$fb_lpc922$1835                   fb_lpc922
+     0C:   0000135A  A$fb_lpc922$1836                   fb_lpc922
+     0C:   0000135C  A$fb_lpc922$1837                   fb_lpc922
+     0C:   0000135D  A$fb_lpc922$1838                   fb_lpc922
+     0C:   0000135F  A$fb_lpc922$1839                   fb_lpc922
+     0C:   00001361  A$fb_lpc922$1840                   fb_lpc922
+     0C:   00001363  A$fb_lpc922$1841                   fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 37.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    0000180E =        6158. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   00001364  A$fb_lpc922$1842                   fb_lpc922
+     0C:   00001366  A$fb_lpc922$1843                   fb_lpc922
+     0C:   00001367  A$fb_lpc922$1844                   fb_lpc922
+     0C:   00001369  A$fb_lpc922$1845                   fb_lpc922
+     0C:   0000136A  A$fb_lpc922$1846                   fb_lpc922
+     0C:   0000136C  A$fb_lpc922$1847                   fb_lpc922
+     0C:   0000136D  A$fb_lpc922$1848                   fb_lpc922
+     0C:   0000136F  A$fb_lpc922$1851                   fb_lpc922
+     0C:   0000136F  C$fb_lpc922.c$425$2$2              fb_lpc922
+     0C:   00001371  A$fb_lpc922$1852                   fb_lpc922
+     0C:   00001373  A$fb_lpc922$1853                   fb_lpc922
+     0C:   00001375  A$fb_lpc922$1854                   fb_lpc922
+     0C:   00001378  A$fb_lpc922$1855                   fb_lpc922
+     0C:   0000137A  A$fb_lpc922$1856                   fb_lpc922
+     0C:   0000137C  A$fb_lpc922$1857                   fb_lpc922
+     0C:   0000137E  A$fb_lpc922$1858                   fb_lpc922
+     0C:   00001380  A$fb_lpc922$1859                   fb_lpc922
+     0C:   00001382  A$fb_lpc922$1862                   fb_lpc922
+     0C:   00001382  C$fb_lpc922.c$426$2$2              fb_lpc922
+     0C:   00001383  A$fb_lpc922$1863                   fb_lpc922
+     0C:   00001384  A$fb_lpc922$1864                   fb_lpc922
+     0C:   00001386  A$fb_lpc922$1865                   fb_lpc922
+     0C:   00001389  A$fb_lpc922$1869                   fb_lpc922
+     0C:   00001389  C$fb_lpc922.c$428$3$3              fb_lpc922
+     0C:   0000138C  A$fb_lpc922$1872                   fb_lpc922
+     0C:   0000138C  C$fb_lpc922.c$429$3$3              fb_lpc922
+     0C:   0000138F  A$fb_lpc922$1873                   fb_lpc922
+     0C:   00001390  A$fb_lpc922$1874                   fb_lpc922
+     0C:   00001391  A$fb_lpc922$1875                   fb_lpc922
+     0C:   00001392  A$fb_lpc922$1876                   fb_lpc922
+     0C:   00001394  A$fb_lpc922$1879                   fb_lpc922
+     0C:   00001394  C$fb_lpc922.c$430$3$3              fb_lpc922
+     0C:   00001397  A$fb_lpc922$1880                   fb_lpc922
+     0C:   00001398  A$fb_lpc922$1881                   fb_lpc922
+     0C:   00001399  A$fb_lpc922$1882                   fb_lpc922
+     0C:   0000139A  A$fb_lpc922$1883                   fb_lpc922
+     0C:   0000139C  A$fb_lpc922$1886                   fb_lpc922
+     0C:   0000139C  C$fb_lpc922.c$431$3$3              fb_lpc922
+     0C:   0000139E  A$fb_lpc922$1887                   fb_lpc922
+     0C:   000013A0  A$fb_lpc922$1890                   fb_lpc922
+     0C:   000013A0  C$fb_lpc922.c$432$3$3              fb_lpc922
+     0C:   000013A2  A$fb_lpc922$1893                   fb_lpc922
+     0C:   000013A2  C$fb_lpc922.c$433$3$3              fb_lpc922
+     0C:   000013A5  A$fb_lpc922$1896                   fb_lpc922
+     0C:   000013A5  C$fb_lpc922.c$434$3$3              fb_lpc922
+     0C:   000013A8  A$fb_lpc922$1897                   fb_lpc922
+     0C:   000013AB  A$fb_lpc922$1898                   fb_lpc922
+     0C:   000013AD  A$fb_lpc922$1902                   fb_lpc922
+     0C:   000013AD  C$fb_lpc922.c$435$3$3              fb_lpc922
+     0C:   000013B0  A$fb_lpc922$1906                   fb_lpc922
+     0C:   000013B0  C$fb_lpc922.c$437$3$3              fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 38.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    0000180E =        6158. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   000013B3  A$fb_lpc922$1907                   fb_lpc922
+     0C:   000013B4  A$fb_lpc922$1908                   fb_lpc922
+     0C:   000013B5  A$fb_lpc922$1909                   fb_lpc922
+     0C:   000013B6  A$fb_lpc922$1910                   fb_lpc922
+     0C:   000013B7  A$fb_lpc922$1911                   fb_lpc922
+     0C:   000013BA  A$fb_lpc922$1912                   fb_lpc922
+     0C:   000013BB  A$fb_lpc922$1913                   fb_lpc922
+     0C:   000013BC  A$fb_lpc922$1914                   fb_lpc922
+     0C:   000013BE  A$fb_lpc922$1915                   fb_lpc922
+     0C:   000013C1  A$fb_lpc922$1916                   fb_lpc922
+     0C:   000013C2  A$fb_lpc922$1919                   fb_lpc922
+     0C:   000013C2  C$fb_lpc922.c$439$3$3              fb_lpc922
+     0C:   000013C3  A$fb_lpc922$1920                   fb_lpc922
+     0C:   000013C5  A$fb_lpc922$1921                   fb_lpc922
+     0C:   000013C7  A$fb_lpc922$1922                   fb_lpc922
+     0C:   000013C8  A$fb_lpc922$1923                   fb_lpc922
+     0C:   000013CA  A$fb_lpc922$1924                   fb_lpc922
+     0C:   000013CB  A$fb_lpc922$1925                   fb_lpc922
+     0C:   000013CD  A$fb_lpc922$1927                   fb_lpc922
+     0C:   000013CF  A$fb_lpc922$1931                   fb_lpc922
+     0C:   000013CF  C$fb_lpc922.c$440$3$3              fb_lpc922
+     0C:   000013D1  A$fb_lpc922$1932                   fb_lpc922
+     0C:   000013D2  A$fb_lpc922$1933                   fb_lpc922
+     0C:   000013D4  A$fb_lpc922$1936                   fb_lpc922
+     0C:   000013D4  C$fb_lpc922.c$441$3$3              fb_lpc922
+     0C:   000013D5  A$fb_lpc922$1937                   fb_lpc922
+     0C:   000013D7  A$fb_lpc922$1938                   fb_lpc922
+     0C:   000013D9  A$fb_lpc922$1939                   fb_lpc922
+     0C:   000013DB  A$fb_lpc922$1940                   fb_lpc922
+     0C:   000013DC  A$fb_lpc922$1941                   fb_lpc922
+     0C:   000013DE  A$fb_lpc922$1942                   fb_lpc922
+     0C:   000013DF  A$fb_lpc922$1943                   fb_lpc922
+     0C:   000013E1  A$fb_lpc922$1944                   fb_lpc922
+     0C:   000013E2  A$fb_lpc922$1945                   fb_lpc922
+     0C:   000013E4  A$fb_lpc922$1946                   fb_lpc922
+     0C:   000013E6  A$fb_lpc922$1947                   fb_lpc922
+     0C:   000013E8  A$fb_lpc922$1949                   fb_lpc922
+     0C:   000013EA  A$fb_lpc922$1950                   fb_lpc922
+     0C:   000013EB  A$fb_lpc922$1951                   fb_lpc922
+     0C:   000013ED  A$fb_lpc922$1952                   fb_lpc922
+     0C:   000013EE  A$fb_lpc922$1953                   fb_lpc922
+     0C:   000013EF  A$fb_lpc922$1954                   fb_lpc922
+     0C:   000013F0  A$fb_lpc922$1955                   fb_lpc922
+     0C:   000013F1  A$fb_lpc922$1956                   fb_lpc922
+     0C:   000013F2  A$fb_lpc922$1957                   fb_lpc922
+     0C:   000013F3  A$fb_lpc922$1958                   fb_lpc922
+     0C:   000013F4  A$fb_lpc922$1959                   fb_lpc922
+     0C:   000013F6  A$fb_lpc922$1960                   fb_lpc922
+     0C:   000013F8  A$fb_lpc922$1964                   fb_lpc922
+     0C:   000013F8  C$fb_lpc922.c$442$3$3              fb_lpc922
+     0C:   000013F9  A$fb_lpc922$1965                   fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 39.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    0000180E =        6158. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   000013FB  A$fb_lpc922$1966                   fb_lpc922
+     0C:   000013FD  A$fb_lpc922$1967                   fb_lpc922
+     0C:   000013FF  A$fb_lpc922$1968                   fb_lpc922
+     0C:   00001400  A$fb_lpc922$1969                   fb_lpc922
+     0C:   00001402  A$fb_lpc922$1970                   fb_lpc922
+     0C:   00001403  A$fb_lpc922$1971                   fb_lpc922
+     0C:   00001405  A$fb_lpc922$1972                   fb_lpc922
+     0C:   00001406  A$fb_lpc922$1973                   fb_lpc922
+     0C:   00001407  A$fb_lpc922$1974                   fb_lpc922
+     0C:   00001409  A$fb_lpc922$1975                   fb_lpc922
+     0C:   0000140B  A$fb_lpc922$1979                   fb_lpc922
+     0C:   0000140B  C$fb_lpc922.c$443$3$3              fb_lpc922
+     0C:   0000140C  A$fb_lpc922$1980                   fb_lpc922
+     0C:   0000140E  A$fb_lpc922$1981                   fb_lpc922
+     0C:   00001410  A$fb_lpc922$1982                   fb_lpc922
+     0C:   00001412  A$fb_lpc922$1983                   fb_lpc922
+     0C:   00001413  A$fb_lpc922$1984                   fb_lpc922
+     0C:   00001415  A$fb_lpc922$1985                   fb_lpc922
+     0C:   00001416  A$fb_lpc922$1986                   fb_lpc922
+     0C:   00001418  A$fb_lpc922$1987                   fb_lpc922
+     0C:   00001419  A$fb_lpc922$1988                   fb_lpc922
+     0C:   0000141A  A$fb_lpc922$1989                   fb_lpc922
+     0C:   0000141B  A$fb_lpc922$1990                   fb_lpc922
+     0C:   0000141D  A$fb_lpc922$1991                   fb_lpc922
+     0C:   0000141F  A$fb_lpc922$1995                   fb_lpc922
+     0C:   0000141F  C$fb_lpc922.c$444$3$3              fb_lpc922
+     0C:   00001420  A$fb_lpc922$1996                   fb_lpc922
+     0C:   00001422  A$fb_lpc922$1997                   fb_lpc922
+     0C:   00001424  A$fb_lpc922$1998                   fb_lpc922
+     0C:   00001426  A$fb_lpc922$1999                   fb_lpc922
+     0C:   00001427  A$fb_lpc922$2000                   fb_lpc922
+     0C:   00001429  A$fb_lpc922$2001                   fb_lpc922
+     0C:   0000142A  A$fb_lpc922$2002                   fb_lpc922
+     0C:   0000142C  A$fb_lpc922$2003                   fb_lpc922
+     0C:   0000142D  A$fb_lpc922$2004                   fb_lpc922
+     0C:   0000142E  A$fb_lpc922$2005                   fb_lpc922
+     0C:   0000142F  A$fb_lpc922$2006                   fb_lpc922
+     0C:   00001430  A$fb_lpc922$2007                   fb_lpc922
+     0C:   00001432  A$fb_lpc922$2008                   fb_lpc922
+     0C:   00001434  A$fb_lpc922$2012                   fb_lpc922
+     0C:   00001434  C$fb_lpc922.c$446$3$3              fb_lpc922
+     0C:   00001436  A$fb_lpc922$2013                   fb_lpc922
+     0C:   00001439  A$fb_lpc922$2017                   fb_lpc922
+     0C:   00001439  C$fb_lpc922.c$450$2$4              fb_lpc922
+     0C:   0000143C  A$fb_lpc922$2020                   fb_lpc922
+     0C:   0000143C  C$fb_lpc922.c$451$2$4              fb_lpc922
+     0C:   0000143F  A$fb_lpc922$2021                   fb_lpc922
+     0C:   00001440  A$fb_lpc922$2022                   fb_lpc922
+     0C:   00001441  A$fb_lpc922$2023                   fb_lpc922
+     0C:   00001442  A$fb_lpc922$2024                   fb_lpc922
+     0C:   00001444  A$fb_lpc922$2027                   fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 40.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    0000180E =        6158. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   00001444  C$fb_lpc922.c$452$2$4              fb_lpc922
+     0C:   00001447  A$fb_lpc922$2028                   fb_lpc922
+     0C:   00001448  A$fb_lpc922$2029                   fb_lpc922
+     0C:   00001449  A$fb_lpc922$2030                   fb_lpc922
+     0C:   0000144A  A$fb_lpc922$2031                   fb_lpc922
+     0C:   0000144C  A$fb_lpc922$2034                   fb_lpc922
+     0C:   0000144C  C$fb_lpc922.c$453$2$4              fb_lpc922
+     0C:   0000144F  A$fb_lpc922$2037                   fb_lpc922
+     0C:   0000144F  C$fb_lpc922.c$454$2$4              fb_lpc922
+     0C:   00001452  A$fb_lpc922$2040                   fb_lpc922
+     0C:   00001452  C$fb_lpc922.c$456$2$4              fb_lpc922
+     0C:   00001455  A$fb_lpc922$2041                   fb_lpc922
+     0C:   00001456  A$fb_lpc922$2042                   fb_lpc922
+     0C:   00001458  A$fb_lpc922$2043                   fb_lpc922
+     0C:   0000145A  A$fb_lpc922$2044                   fb_lpc922
+     0C:   0000145D  A$fb_lpc922$2046                   fb_lpc922
+     0C:   0000145E  A$fb_lpc922$2047                   fb_lpc922
+     0C:   0000145F  A$fb_lpc922$2048                   fb_lpc922
+     0C:   00001460  A$fb_lpc922$2049                   fb_lpc922
+     0C:   00001463  A$fb_lpc922$2050                   fb_lpc922
+     0C:   00001464  A$fb_lpc922$2052                   fb_lpc922
+     0C:   00001467  A$fb_lpc922$2053                   fb_lpc922
+     0C:   0000146A  A$fb_lpc922$2054                   fb_lpc922
+     0C:   0000146D  A$fb_lpc922$2055                   fb_lpc922
+     0C:   00001470  A$fb_lpc922$2056                   fb_lpc922
+     0C:   00001473  A$fb_lpc922$2057                   fb_lpc922
+     0C:   00001476  A$fb_lpc922$2063                   fb_lpc922
+     0C:   00001476  C$fb_lpc922.c$457$3$5              fb_lpc922
+     0C:   00001476  C$fb_lpc922.c$458$3$5              fb_lpc922
+     0C:   00001479  A$fb_lpc922$2066                   fb_lpc922
+     0C:   00001479  C$fb_lpc922.c$459$3$5              fb_lpc922
+     0C:   0000147B  A$fb_lpc922$2067                   fb_lpc922
+     0C:   0000147D  A$fb_lpc922$2068                   fb_lpc922
+     0C:   0000147F  A$fb_lpc922$2071                   fb_lpc922
+     0C:   0000147F  C$fb_lpc922.c$461$3$5              fb_lpc922
+     0C:   00001482  A$fb_lpc922$2077                   fb_lpc922
+     0C:   00001482  C$fb_lpc922.c$462$3$5              fb_lpc922
+     0C:   00001482  C$fb_lpc922.c$463$3$5              fb_lpc922
+     0C:   00001485  A$fb_lpc922$2080                   fb_lpc922
+     0C:   00001485  C$fb_lpc922.c$464$3$5              fb_lpc922
+     0C:   00001487  A$fb_lpc922$2081                   fb_lpc922
+     0C:   00001489  A$fb_lpc922$2082                   fb_lpc922
+     0C:   0000148B  A$fb_lpc922$2085                   fb_lpc922
+     0C:   0000148B  C$fb_lpc922.c$465$3$5              fb_lpc922
+     0C:   0000148E  A$fb_lpc922$2088                   fb_lpc922
+     0C:   0000148E  C$fb_lpc922.c$466$3$5              fb_lpc922
+     0C:   00001491  A$fb_lpc922$2091                   fb_lpc922
+     0C:   00001491  C$fb_lpc922.c$467$3$5              fb_lpc922
+     0C:   00001494  A$fb_lpc922$2094                   fb_lpc922
+     0C:   00001494  C$fb_lpc922.c$468$3$5              fb_lpc922
+     0C:   00001496  A$fb_lpc922$2097                   fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 41.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    0000180E =        6158. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   00001496  C$fb_lpc922.c$469$3$5              fb_lpc922
+     0C:   00001499  A$fb_lpc922$2103                   fb_lpc922
+     0C:   00001499  C$fb_lpc922.c$470$3$5              fb_lpc922
+     0C:   00001499  C$fb_lpc922.c$471$3$5              fb_lpc922
+     0C:   0000149C  A$fb_lpc922$2106                   fb_lpc922
+     0C:   0000149C  C$fb_lpc922.c$472$3$5              fb_lpc922
+     0C:   0000149F  A$fb_lpc922$2109                   fb_lpc922
+     0C:   0000149F  C$fb_lpc922.c$473$3$5              fb_lpc922
+     0C:   000014A2  A$fb_lpc922$2112                   fb_lpc922
+     0C:   000014A2  C$fb_lpc922.c$474$3$5              fb_lpc922
+     0C:   000014A5  A$fb_lpc922$2115                   fb_lpc922
+     0C:   000014A5  C$fb_lpc922.c$475$3$5              fb_lpc922
+     0C:   000014A8  A$fb_lpc922$2120                   fb_lpc922
+     0C:   000014A8  C$fb_lpc922.c$476$3$5              fb_lpc922
+     0C:   000014A8  C$fb_lpc922.c$477$3$5              fb_lpc922
+     0C:   000014AA  A$fb_lpc922$2124                   fb_lpc922
+     0C:   000014AA  C$fb_lpc922.c$478$1$1              fb_lpc922
+     0C:   000014AC  A$fb_lpc922$2126                   fb_lpc922
+     0C:   000014AD  A$fb_lpc922$2127                   fb_lpc922
+     0C:   000014AE  A$fb_lpc922$2128                   fb_lpc922
+     0C:   000014B0  A$fb_lpc922$2129                   fb_lpc922
+     0C:   000014B2  A$fb_lpc922$2132                   fb_lpc922
+     0C:   000014B2  C$fb_lpc922.c$479$4$6              fb_lpc922
+     0C:   000014B4  A$fb_lpc922$2133                   fb_lpc922
+     0C:   000014B6  A$fb_lpc922$2136                   fb_lpc922
+     0C:   000014B6  C$fb_lpc922.c$480$5$7              fb_lpc922
+     0C:   000014B8  A$fb_lpc922$2137                   fb_lpc922
+     0C:   000014B9  A$fb_lpc922$2138                   fb_lpc922
+     0C:   000014BB  A$fb_lpc922$2139                   fb_lpc922
+     0C:   000014BC  A$fb_lpc922$2140                   fb_lpc922
+     0C:   000014BD  A$fb_lpc922$2141                   fb_lpc922
+     0C:   000014BF  A$fb_lpc922$2142                   fb_lpc922
+     0C:   000014C2  A$fb_lpc922$2143                   fb_lpc922
+     0C:   000014C3  A$fb_lpc922$2144                   fb_lpc922
+     0C:   000014C4  A$fb_lpc922$2147                   fb_lpc922
+     0C:   000014C4  C$fb_lpc922.c$481$5$7              fb_lpc922
+     0C:   000014C6  A$fb_lpc922$2148                   fb_lpc922
+     0C:   000014C8  A$fb_lpc922$2149                   fb_lpc922
+     0C:   000014CA  A$fb_lpc922$2150                   fb_lpc922
+     0C:   000014CC  A$fb_lpc922$2151                   fb_lpc922
+     0C:   000014CD  A$fb_lpc922$2152                   fb_lpc922
+     0C:   000014CE  A$fb_lpc922$2153                   fb_lpc922
+     0C:   000014CF  A$fb_lpc922$2154                   fb_lpc922
+     0C:   000014D0  A$fb_lpc922$2155                   fb_lpc922
+     0C:   000014D1  A$fb_lpc922$2156                   fb_lpc922
+     0C:   000014D2  A$fb_lpc922$2157                   fb_lpc922
+     0C:   000014D5  A$fb_lpc922$2158                   fb_lpc922
+     0C:   000014D8  A$fb_lpc922$2159                   fb_lpc922
+     0C:   000014DA  A$fb_lpc922$2160                   fb_lpc922
+     0C:   000014DB  A$fb_lpc922$2161                   fb_lpc922
+     0C:   000014DD  A$fb_lpc922$2162                   fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 42.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    0000180E =        6158. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   000014DE  A$fb_lpc922$2163                   fb_lpc922
+     0C:   000014E0  A$fb_lpc922$2164                   fb_lpc922
+     0C:   000014E2  A$fb_lpc922$2168                   fb_lpc922
+     0C:   000014E2  C$fb_lpc922.c$483$4$6              fb_lpc922
+     0C:   000014E4  A$fb_lpc922$2169                   fb_lpc922
+     0C:   000014E5  A$fb_lpc922$2170                   fb_lpc922
+     0C:   000014E7  A$fb_lpc922$2171                   fb_lpc922
+     0C:   000014E8  A$fb_lpc922$2172                   fb_lpc922
+     0C:   000014E9  A$fb_lpc922$2173                   fb_lpc922
+     0C:   000014EB  A$fb_lpc922$2174                   fb_lpc922
+     0C:   000014EE  A$fb_lpc922$2175                   fb_lpc922
+     0C:   000014EF  A$fb_lpc922$2176                   fb_lpc922
+     0C:   000014F0  A$fb_lpc922$2177                   fb_lpc922
+     0C:   000014F1  A$fb_lpc922$2181                   fb_lpc922
+     0C:   000014F1  C$fb_lpc922.c$478$3$5              fb_lpc922
+     0C:   000014F2  A$fb_lpc922$2182                   fb_lpc922
+     0C:   000014F4  A$fb_lpc922$2186                   fb_lpc922
+     0C:   000014F4  C$fb_lpc922.c$485$3$5              fb_lpc922
+     0C:   000014F6  A$fb_lpc922$2187                   fb_lpc922
+     0C:   000014F8  A$fb_lpc922$2188                   fb_lpc922
+     0C:   000014FA  A$fb_lpc922$2191                   fb_lpc922
+     0C:   000014FA  C$fb_lpc922.c$486$3$5              fb_lpc922
+     0C:   000014FC  A$fb_lpc922$2192                   fb_lpc922
+     0C:   000014FE  A$fb_lpc922$2193                   fb_lpc922
+     0C:   00001500  A$fb_lpc922$2196                   fb_lpc922
+     0C:   00001500  C$fb_lpc922.c$487$3$5              fb_lpc922
+     0C:   00001502  A$fb_lpc922$2197                   fb_lpc922
+     0C:   00001504  A$fb_lpc922$2198                   fb_lpc922
+     0C:   00001506  A$fb_lpc922$2201                   fb_lpc922
+     0C:   00001506  C$fb_lpc922.c$488$3$5              fb_lpc922
+     0C:   00001509  A$fb_lpc922$2204                   fb_lpc922
+     0C:   00001509  C$fb_lpc922.c$489$3$5              fb_lpc922
+     0C:   0000150C  A$fb_lpc922$2207                   fb_lpc922
+     0C:   0000150C  C$fb_lpc922.c$490$3$5              fb_lpc922
+     0C:   0000150E  A$fb_lpc922$2212                   fb_lpc922
+     0C:   0000150E  C$fb_lpc922.c$491$3$5              fb_lpc922
+     0C:   0000150E  C$fb_lpc922.c$492$3$5              fb_lpc922
+     0C:   00001510  A$fb_lpc922$2216                   fb_lpc922
+     0C:   00001510  C$fb_lpc922.c$493$3$5              fb_lpc922
+     0C:   00001513  A$fb_lpc922$2219                   fb_lpc922
+     0C:   00001513  C$fb_lpc922.c$494$3$5              fb_lpc922
+     0C:   00001516  A$fb_lpc922$2225                   fb_lpc922
+     0C:   00001516  C$fb_lpc922.c$496$2$4              fb_lpc922
+     0C:   00001516  C$fb_lpc922.c$497$2$4              fb_lpc922
+     0C:   00001518  A$fb_lpc922$2229                   fb_lpc922
+     0C:   00001518  C$fb_lpc922.c$499$1$1              fb_lpc922
+     0C:   0000151B  A$fb_lpc922$2230                   fb_lpc922
+     0C:   0000151D  A$fb_lpc922$2231                   fb_lpc922
+     0C:   0000151F  A$fb_lpc922$2232                   fb_lpc922
+     0C:   00001521  A$fb_lpc922$2236                   fb_lpc922
+     0C:   00001521  C$fb_lpc922.c$500$1$1              fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 43.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    0000180E =        6158. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   00001523  A$fb_lpc922$2237                   fb_lpc922
+     0C:   00001526  A$fb_lpc922$2238                   fb_lpc922
+     0C:   00001528  A$fb_lpc922$2241                   fb_lpc922
+     0C:   00001528  C$fb_lpc922.c$501$1$1              fb_lpc922
+     0C:   00001528  XG$build_tel$0$0                   fb_lpc922
+     0C:   00001529  A$fb_lpc922$2255                   fb_lpc922
+     0C:   00001529  C$fb_lpc922.c$504$1$1              fb_lpc922
+     0C:   00001529  G$send_obj_value$0$0               fb_lpc922
+     0C:   00001529  _send_obj_value                    fb_lpc922
+     0C:   0000152B  A$fb_lpc922$2258                   fb_lpc922
+     0C:   0000152B  C$fb_lpc922.c$506$1$1              fb_lpc922
+     0C:   0000152D  A$fb_lpc922$2261                   fb_lpc922
+     0C:   0000152D  C$fb_lpc922.c$508$1$1              fb_lpc922
+     0C:   0000152F  A$fb_lpc922$2262                   fb_lpc922
+     0C:   00001531  A$fb_lpc922$2263                   fb_lpc922
+     0C:   00001532  A$fb_lpc922$2264                   fb_lpc922
+     0C:   00001535  A$fb_lpc922$2265                   fb_lpc922
+     0C:   00001536  A$fb_lpc922$2267                   fb_lpc922
+     0C:   00001539  A$fb_lpc922$2268                   fb_lpc922
+     0C:   0000153B  A$fb_lpc922$2269                   fb_lpc922
+     0C:   0000153D  A$fb_lpc922$2270                   fb_lpc922
+     0C:   0000153F  A$fb_lpc922$2271                   fb_lpc922
+     0C:   00001540  A$fb_lpc922$2272                   fb_lpc922
+     0C:   00001543  A$fb_lpc922$2273                   fb_lpc922
+     0C:   00001544  A$fb_lpc922$2274                   fb_lpc922
+     0C:   00001547  A$fb_lpc922$2275                   fb_lpc922
+     0C:   00001549  A$fb_lpc922$2279                   fb_lpc922
+     0C:   00001549  C$fb_lpc922.c$509$2$2              fb_lpc922
+     0C:   0000154B  A$fb_lpc922$2280                   fb_lpc922
+     0C:   0000154D  A$fb_lpc922$2281                   fb_lpc922
+     0C:   0000154E  A$fb_lpc922$2282                   fb_lpc922
+     0C:   00001550  A$fb_lpc922$2285                   fb_lpc922
+     0C:   00001550  C$fb_lpc922.c$510$2$2              fb_lpc922
+     0C:   00001552  A$fb_lpc922$2288                   fb_lpc922
+     0C:   00001552  C$fb_lpc922.c$511$2$2              fb_lpc922
+     0C:   00001555  A$fb_lpc922$2291                   fb_lpc922
+     0C:   00001555  C$fb_lpc922.c$512$2$2              fb_lpc922
+     0C:   00001557  A$fb_lpc922$2295                   fb_lpc922
+     0C:   00001557  C$fb_lpc922.c$514$1$1              fb_lpc922
+     0C:   00001559  A$fb_lpc922$2298                   fb_lpc922
+     0C:   00001559  C$fb_lpc922.c$515$1$1              fb_lpc922
+     0C:   0000155B  A$fb_lpc922$2301                   fb_lpc922
+     0C:   0000155B  C$fb_lpc922.c$516$1$1              fb_lpc922
+     0C:   0000155B  XG$send_obj_value$0$0              fb_lpc922
+     0C:   0000155C  A$fb_lpc922$2317                   fb_lpc922
+     0C:   0000155C  C$fb_lpc922.c$521$1$1              fb_lpc922
+     0C:   0000155C  C$fb_lpc922.c$525$1$1              fb_lpc922
+     0C:   0000155C  G$process_tel$0$0                  fb_lpc922
+     0C:   0000155C  _process_tel                       fb_lpc922
+     0C:   0000155E  A$fb_lpc922$2320                   fb_lpc922
+     0C:   0000155E  C$fb_lpc922.c$526$1$1              fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 44.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    0000180E =        6158. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   00001560  A$fb_lpc922$2321                   fb_lpc922
+     0C:   00001562  A$fb_lpc922$2322                   fb_lpc922
+     0C:   00001563  A$fb_lpc922$2323                   fb_lpc922
+     0C:   00001564  A$fb_lpc922$2326                   fb_lpc922
+     0C:   00001564  C$fb_lpc922.c$527$1$1              fb_lpc922
+     0C:   00001566  A$fb_lpc922$2329                   fb_lpc922
+     0C:   00001566  C$fb_lpc922.c$530$1$1              fb_lpc922
+     0C:   00001568  A$fb_lpc922$2330                   fb_lpc922
+     0C:   00001569  A$fb_lpc922$2331                   fb_lpc922
+     0C:   0000156B  A$fb_lpc922$2332                   fb_lpc922
+     0C:   0000156D  A$fb_lpc922$2333                   fb_lpc922
+     0C:   0000156F  A$fb_lpc922$2336                   fb_lpc922
+     0C:   0000156F  C$fb_lpc922.c$531$2$2              fb_lpc922
+     0C:   00001571  A$fb_lpc922$2337                   fb_lpc922
+     0C:   00001574  A$fb_lpc922$2338                   fb_lpc922
+     0C:   00001577  A$fb_lpc922$2342                   fb_lpc922
+     0C:   00001577  C$fb_lpc922.c$532$3$3              fb_lpc922
+     0C:   00001578  A$fb_lpc922$2343                   fb_lpc922
+     0C:   0000157A  A$fb_lpc922$2344                   fb_lpc922
+     0C:   0000157D  A$fb_lpc922$2345                   fb_lpc922
+     0C:   0000157F  A$fb_lpc922$2346                   fb_lpc922
+     0C:   00001581  A$fb_lpc922$2347                   fb_lpc922
+     0C:   00001584  A$fb_lpc922$2348                   fb_lpc922
+     0C:   00001586  A$fb_lpc922$2349                   fb_lpc922
+     0C:   00001588  A$fb_lpc922$2353                   fb_lpc922
+     0C:   00001588  C$fb_lpc922.c$533$3$3              fb_lpc922
+     0C:   0000158B  A$fb_lpc922$2354                   fb_lpc922
+     0C:   0000158D  A$fb_lpc922$2356                   fb_lpc922
+     0C:   00001590  A$fb_lpc922$2358                   fb_lpc922
+     0C:   00001591  A$fb_lpc922$2359                   fb_lpc922
+     0C:   00001593  A$fb_lpc922$2360                   fb_lpc922
+     0C:   00001596  A$fb_lpc922$2362                   fb_lpc922
+     0C:   00001599  A$fb_lpc922$2363                   fb_lpc922
+     0C:   0000159C  A$fb_lpc922$2364                   fb_lpc922
+     0C:   0000159F  A$fb_lpc922$2368                   fb_lpc922
+     0C:   0000159F  C$fb_lpc922.c$538$2$4              fb_lpc922
+     0C:   000015A1  A$fb_lpc922$2369                   fb_lpc922
+     0C:   000015A4  A$fb_lpc922$2370                   fb_lpc922
+     0C:   000015A7  A$fb_lpc922$2374                   fb_lpc922
+     0C:   000015A7  C$fb_lpc922.c$539$3$5              fb_lpc922
+     0C:   000015AA  A$fb_lpc922$2375                   fb_lpc922
+     0C:   000015AB  A$fb_lpc922$2376                   fb_lpc922
+     0C:   000015AC  A$fb_lpc922$2377                   fb_lpc922
+     0C:   000015AD  A$fb_lpc922$2378                   fb_lpc922
+     0C:   000015AE  A$fb_lpc922$2379                   fb_lpc922
+     0C:   000015B1  A$fb_lpc922$2380                   fb_lpc922
+     0C:   000015B3  A$fb_lpc922$2382                   fb_lpc922
+     0C:   000015B6  A$fb_lpc922$2384                   fb_lpc922
+     0C:   000015B9  A$fb_lpc922$2385                   fb_lpc922
+     0C:   000015BA  A$fb_lpc922$2386                   fb_lpc922
+     0C:   000015BB  A$fb_lpc922$2387                   fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 45.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    0000180E =        6158. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   000015BC  A$fb_lpc922$2388                   fb_lpc922
+     0C:   000015BF  A$fb_lpc922$2389                   fb_lpc922
+     0C:   000015C1  A$fb_lpc922$2391                   fb_lpc922
+     0C:   000015C4  A$fb_lpc922$2395                   fb_lpc922
+     0C:   000015C4  C$fb_lpc922.c$543$4$6              fb_lpc922
+     0C:   000015C7  A$fb_lpc922$2396                   fb_lpc922
+     0C:   000015C9  A$fb_lpc922$2398                   fb_lpc922
+     0C:   000015CC  A$fb_lpc922$2399                   fb_lpc922
+     0C:   000015CE  A$fb_lpc922$2401                   fb_lpc922
+     0C:   000015D1  A$fb_lpc922$2402                   fb_lpc922
+     0C:   000015D3  A$fb_lpc922$2404                   fb_lpc922
+     0C:   000015D6  A$fb_lpc922$2405                   fb_lpc922
+     0C:   000015D8  A$fb_lpc922$2407                   fb_lpc922
+     0C:   000015DB  A$fb_lpc922$2408                   fb_lpc922
+     0C:   000015DD  A$fb_lpc922$2410                   fb_lpc922
+     0C:   000015E0  A$fb_lpc922$2416                   fb_lpc922
+     0C:   000015E0  C$fb_lpc922.c$545$5$7              fb_lpc922
+     0C:   000015E0  C$fb_lpc922.c$546$5$7              fb_lpc922
+     0C:   000015E2  A$fb_lpc922$2417                   fb_lpc922
+     0C:   000015E3  A$fb_lpc922$2418                   fb_lpc922
+     0C:   000015E5  A$fb_lpc922$2421                   fb_lpc922
+     0C:   000015E5  C$fb_lpc922.c$547$5$7              fb_lpc922
+     0C:   000015E8  A$fb_lpc922$2424                   fb_lpc922
+     0C:   000015E8  C$fb_lpc922.c$548$5$7              fb_lpc922
+     0C:   000015EB  A$fb_lpc922$2427                   fb_lpc922
+     0C:   000015EB  C$fb_lpc922.c$549$6$8              fb_lpc922
+     0C:   000015EE  A$fb_lpc922$2428                   fb_lpc922
+     0C:   000015F0  A$fb_lpc922$2429                   fb_lpc922
+     0C:   000015F3  A$fb_lpc922$2432                   fb_lpc922
+     0C:   000015F3  C$fb_lpc922.c$550$6$8              fb_lpc922
+     0C:   000015F6  A$fb_lpc922$2433                   fb_lpc922
+     0C:   000015F8  A$fb_lpc922$2437                   fb_lpc922
+     0C:   000015F8  C$fb_lpc922.c$552$5$7              fb_lpc922
+     0C:   000015F9  A$fb_lpc922$2438                   fb_lpc922
+     0C:   000015FB  A$fb_lpc922$2441                   fb_lpc922
+     0C:   000015FB  C$fb_lpc922.c$553$6$9              fb_lpc922
+     0C:   000015FE  A$fb_lpc922$2444                   fb_lpc922
+     0C:   000015FE  C$fb_lpc922.c$554$6$9              fb_lpc922
+     0C:   00001601  A$fb_lpc922$2447                   fb_lpc922
+     0C:   00001601  C$fb_lpc922.c$555$6$9              fb_lpc922
+     0C:   00001604  A$fb_lpc922$2450                   fb_lpc922
+     0C:   00001604  C$fb_lpc922.c$556$6$9              fb_lpc922
+     0C:   00001607  A$fb_lpc922$2451                   fb_lpc922
+     0C:   0000160A  A$fb_lpc922$2454                   fb_lpc922
+     0C:   0000160A  C$fb_lpc922.c$557$6$9              fb_lpc922
+     0C:   0000160D  A$fb_lpc922$2455                   fb_lpc922
+     0C:   00001610  A$fb_lpc922$2460                   fb_lpc922
+     0C:   00001610  C$fb_lpc922.c$559$5$7              fb_lpc922
+     0C:   00001610  C$fb_lpc922.c$561$5$7              fb_lpc922
+     0C:   00001612  A$fb_lpc922$2464                   fb_lpc922
+     0C:   00001612  C$fb_lpc922.c$562$5$7              fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 46.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    0000180E =        6158. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   00001614  A$fb_lpc922$2465                   fb_lpc922
+     0C:   00001615  A$fb_lpc922$2466                   fb_lpc922
+     0C:   00001617  A$fb_lpc922$2469                   fb_lpc922
+     0C:   00001617  C$fb_lpc922.c$563$5$7              fb_lpc922
+     0C:   0000161A  A$fb_lpc922$2472                   fb_lpc922
+     0C:   0000161A  C$fb_lpc922.c$564$6$10             fb_lpc922
+     0C:   0000161D  A$fb_lpc922$2476                   fb_lpc922
+     0C:   0000161D  C$fb_lpc922.c$566$5$7              fb_lpc922
+     0C:   0000161E  A$fb_lpc922$2477                   fb_lpc922
+     0C:   00001620  A$fb_lpc922$2480                   fb_lpc922
+     0C:   00001620  C$fb_lpc922.c$567$6$11             fb_lpc922
+     0C:   00001623  A$fb_lpc922$2481                   fb_lpc922
+     0C:   00001626  A$fb_lpc922$2484                   fb_lpc922
+     0C:   00001626  C$fb_lpc922.c$568$6$11             fb_lpc922
+     0C:   00001629  A$fb_lpc922$2485                   fb_lpc922
+     0C:   0000162C  A$fb_lpc922$2490                   fb_lpc922
+     0C:   0000162C  C$fb_lpc922.c$570$5$7              fb_lpc922
+     0C:   0000162C  C$fb_lpc922.c$572$5$7              fb_lpc922
+     0C:   0000162E  A$fb_lpc922$2494                   fb_lpc922
+     0C:   0000162E  C$fb_lpc922.c$573$5$7              fb_lpc922
+     0C:   00001631  A$fb_lpc922$2497                   fb_lpc922
+     0C:   00001631  C$fb_lpc922.c$574$6$12             fb_lpc922
+     0C:   00001633  A$fb_lpc922$2500                   fb_lpc922
+     0C:   00001633  C$fb_lpc922.c$575$6$12             fb_lpc922
+     0C:   00001636  A$fb_lpc922$2503                   fb_lpc922
+     0C:   00001636  C$fb_lpc922.c$576$6$12             fb_lpc922
+     0C:   00001639  A$fb_lpc922$2506                   fb_lpc922
+     0C:   00001639  C$fb_lpc922.c$577$6$12             fb_lpc922
+     0C:   0000163C  A$fb_lpc922$2509                   fb_lpc922
+     0C:   0000163C  C$fb_lpc922.c$578$6$12             fb_lpc922
+     0C:   0000163E  A$fb_lpc922$2514                   fb_lpc922
+     0C:   0000163E  C$fb_lpc922.c$580$5$7              fb_lpc922
+     0C:   0000163E  C$fb_lpc922.c$582$5$7              fb_lpc922
+     0C:   00001640  A$fb_lpc922$2518                   fb_lpc922
+     0C:   00001640  C$fb_lpc922.c$583$5$7              fb_lpc922
+     0C:   00001642  A$fb_lpc922$2519                   fb_lpc922
+     0C:   00001645  A$fb_lpc922$2520                   fb_lpc922
+     0C:   00001647  A$fb_lpc922$2521                   fb_lpc922
+     0C:   0000164A  A$fb_lpc922$2524                   fb_lpc922
+     0C:   0000164A  C$fb_lpc922.c$584$6$13             fb_lpc922
+     0C:   0000164D  A$fb_lpc922$2525                   fb_lpc922
+     0C:   0000164F  A$fb_lpc922$2531                   fb_lpc922
+     0C:   0000164F  C$fb_lpc922.c$588$5$7              fb_lpc922
+     0C:   0000164F  C$fb_lpc922.c$590$5$7              fb_lpc922
+     0C:   00001651  A$fb_lpc922$2535                   fb_lpc922
+     0C:   00001651  C$fb_lpc922.c$591$5$7              fb_lpc922
+     0C:   00001654  A$fb_lpc922$2536                   fb_lpc922
+     0C:   00001657  A$fb_lpc922$2539                   fb_lpc922
+     0C:   00001657  C$fb_lpc922.c$593$2$4              fb_lpc922
+     0C:   00001659  A$fb_lpc922$2543                   fb_lpc922
+     0C:   00001659  C$fb_lpc922.c$599$3$14             fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 47.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    0000180E =        6158. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   0000165A  A$fb_lpc922$2544                   fb_lpc922
+     0C:   0000165C  A$fb_lpc922$2547                   fb_lpc922
+     0C:   0000165C  C$fb_lpc922.c$600$4$15             fb_lpc922
+     0C:   0000165E  A$fb_lpc922$2548                   fb_lpc922
+     0C:   0000165F  A$fb_lpc922$2549                   fb_lpc922
+     0C:   00001660  A$fb_lpc922$2550                   fb_lpc922
+     0C:   00001663  A$fb_lpc922$2551                   fb_lpc922
+     0C:   00001665  A$fb_lpc922$2552                   fb_lpc922
+     0C:   00001668  A$fb_lpc922$2553                   fb_lpc922
+     0C:   0000166A  A$fb_lpc922$2557                   fb_lpc922
+     0C:   0000166A  C$fb_lpc922.c$601$4$15             fb_lpc922
+     0C:   0000166B  A$fb_lpc922$2558                   fb_lpc922
+     0C:   0000166D  A$fb_lpc922$2559                   fb_lpc922
+     0C:   00001670  A$fb_lpc922$2563                   fb_lpc922
+     0C:   00001670  C$fb_lpc922.c$605$1$1              fb_lpc922
+     0C:   00001670  XG$process_tel$0$0                 fb_lpc922
+     0C:   00001671  A$fb_lpc922$2578                   fb_lpc922
+     0C:   00001671  C$fb_lpc922.c$612$1$1              fb_lpc922
+     0C:   00001671  G$write_memory$0$0                 fb_lpc922
+     0C:   00001671  _write_memory                      fb_lpc922
+     0C:   00001673  A$fb_lpc922$2579                   fb_lpc922
+     0C:   00001675  A$fb_lpc922$2580                   fb_lpc922
+     0C:   00001677  A$fb_lpc922$2581                   fb_lpc922
+     0C:   00001679  A$fb_lpc922$2582                   fb_lpc922
+     0C:   0000167B  A$fb_lpc922$2585                   fb_lpc922
+     0C:   0000167B  C$fb_lpc922.c$616$1$1              fb_lpc922
+     0C:   0000167D  A$fb_lpc922$2586                   fb_lpc922
+     0C:   0000167E  A$fb_lpc922$2587                   fb_lpc922
+     0C:   00001680  A$fb_lpc922$2588                   fb_lpc922
+     0C:   00001682  A$fb_lpc922$2589                   fb_lpc922
+     0C:   00001683  A$fb_lpc922$2593                   fb_lpc922
+     0C:   00001683  C$fb_lpc922.c$618$1$1              fb_lpc922
+     0C:   00001685  A$fb_lpc922$2594                   fb_lpc922
+     0C:   00001687  A$fb_lpc922$2597                   fb_lpc922
+     0C:   00001687  C$fb_lpc922.c$620$1$1              fb_lpc922
+     0C:   00001689  A$fb_lpc922$2600                   fb_lpc922
+     0C:   00001689  C$fb_lpc922.c$621$1$1              fb_lpc922
+     0C:   0000168C  A$fb_lpc922$2603                   fb_lpc922
+     0C:   0000168C  C$fb_lpc922.c$622$2$2              fb_lpc922
+     0C:   0000168E  A$fb_lpc922$2604                   fb_lpc922
+     0C:   00001690  A$fb_lpc922$2605                   fb_lpc922
+     0C:   00001692  A$fb_lpc922$2606                   fb_lpc922
+     0C:   00001693  A$fb_lpc922$2607                   fb_lpc922
+     0C:   00001695  A$fb_lpc922$2608                   fb_lpc922
+     0C:   00001696  A$fb_lpc922$2609                   fb_lpc922
+     0C:   00001698  A$fb_lpc922$2610                   fb_lpc922
+     0C:   00001699  A$fb_lpc922$2611                   fb_lpc922
+     0C:   0000169A  A$fb_lpc922$2612                   fb_lpc922
+     0C:   0000169C  A$fb_lpc922$2614                   fb_lpc922
+     0C:   0000169E  A$fb_lpc922$2615                   fb_lpc922
+     0C:   0000169F  A$fb_lpc922$2616                   fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 48.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    0000180E =        6158. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   000016A0  A$fb_lpc922$2617                   fb_lpc922
+     0C:   000016A2  A$fb_lpc922$2618                   fb_lpc922
+     0C:   000016A3  A$fb_lpc922$2619                   fb_lpc922
+     0C:   000016A4  A$fb_lpc922$2620                   fb_lpc922
+     0C:   000016A5  A$fb_lpc922$2621                   fb_lpc922
+     0C:   000016A6  A$fb_lpc922$2622                   fb_lpc922
+     0C:   000016A8  A$fb_lpc922$2623                   fb_lpc922
+     0C:   000016AB  A$fb_lpc922$2627                   fb_lpc922
+     0C:   000016AB  C$fb_lpc922.c$623$2$2              fb_lpc922
+     0C:   000016AC  A$fb_lpc922$2628                   fb_lpc922
+     0C:   000016AE  A$fb_lpc922$2629                   fb_lpc922
+     0C:   000016B0  A$fb_lpc922$2630                   fb_lpc922
+     0C:   000016B2  A$fb_lpc922$2631                   fb_lpc922
+     0C:   000016B4  A$fb_lpc922$2632                   fb_lpc922
+     0C:   000016B6  A$fb_lpc922$2633                   fb_lpc922
+     0C:   000016B7  A$fb_lpc922$2634                   fb_lpc922
+     0C:   000016B8  A$fb_lpc922$2635                   fb_lpc922
+     0C:   000016BA  A$fb_lpc922$2636                   fb_lpc922
+     0C:   000016BC  A$fb_lpc922$2637                   fb_lpc922
+     0C:   000016BD  A$fb_lpc922$2638                   fb_lpc922
+     0C:   000016BE  A$fb_lpc922$2639                   fb_lpc922
+     0C:   000016BF  A$fb_lpc922$2640                   fb_lpc922
+     0C:   000016C0  A$fb_lpc922$2641                   fb_lpc922
+     0C:   000016C1  A$fb_lpc922$2642                   fb_lpc922
+     0C:   000016C2  A$fb_lpc922$2643                   fb_lpc922
+     0C:   000016C5  A$fb_lpc922$2644                   fb_lpc922
+     0C:   000016C8  A$fb_lpc922$2645                   fb_lpc922
+     0C:   000016CA  A$fb_lpc922$2647                   fb_lpc922
+     0C:   000016CC  A$fb_lpc922$2648                   fb_lpc922
+     0C:   000016CE  A$fb_lpc922$2650                   fb_lpc922
+     0C:   000016D0  A$fb_lpc922$2651                   fb_lpc922
+     0C:   000016D2  A$fb_lpc922$2652                   fb_lpc922
+     0C:   000016D3  A$fb_lpc922$2653                   fb_lpc922
+     0C:   000016D4  A$fb_lpc922$2654                   fb_lpc922
+     0C:   000016D6  A$fb_lpc922$2655                   fb_lpc922
+     0C:   000016D7  A$fb_lpc922$2656                   fb_lpc922
+     0C:   000016D9  A$fb_lpc922$2657                   fb_lpc922
+     0C:   000016DA  A$fb_lpc922$2658                   fb_lpc922
+     0C:   000016DC  A$fb_lpc922$2659                   fb_lpc922
+     0C:   000016DE  A$fb_lpc922$2663                   fb_lpc922
+     0C:   000016DE  C$fb_lpc922.c$624$2$2              fb_lpc922
+     0C:   000016E0  A$fb_lpc922$2665                   fb_lpc922
+     0C:   000016E2  A$fb_lpc922$2666                   fb_lpc922
+     0C:   000016E3  A$fb_lpc922$2667                   fb_lpc922
+     0C:   000016E4  A$fb_lpc922$2668                   fb_lpc922
+     0C:   000016E5  A$fb_lpc922$2669                   fb_lpc922
+     0C:   000016E6  A$fb_lpc922$2670                   fb_lpc922
+     0C:   000016E8  A$fb_lpc922$2671                   fb_lpc922
+     0C:   000016EA  A$fb_lpc922$2672                   fb_lpc922
+     0C:   000016EB  A$fb_lpc922$2673                   fb_lpc922
+     0C:   000016EC  A$fb_lpc922$2674                   fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 49.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    0000180E =        6158. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   000016EE  A$fb_lpc922$2675                   fb_lpc922
+     0C:   000016EF  A$fb_lpc922$2676                   fb_lpc922
+     0C:   000016F1  A$fb_lpc922$2677                   fb_lpc922
+     0C:   000016F2  A$fb_lpc922$2678                   fb_lpc922
+     0C:   000016F4  A$fb_lpc922$2681                   fb_lpc922
+     0C:   000016F4  C$fb_lpc922.c$626$2$2              fb_lpc922
+     0C:   000016F6  A$fb_lpc922$2682                   fb_lpc922
+     0C:   000016F8  A$fb_lpc922$2683                   fb_lpc922
+     0C:   000016FA  A$fb_lpc922$2684                   fb_lpc922
+     0C:   000016FB  A$fb_lpc922$2685                   fb_lpc922
+     0C:   000016FC  A$fb_lpc922$2686                   fb_lpc922
+     0C:   000016FE  A$fb_lpc922$2687                   fb_lpc922
+     0C:   00001700  A$fb_lpc922$2688                   fb_lpc922
+     0C:   00001701  A$fb_lpc922$2689                   fb_lpc922
+     0C:   00001702  A$fb_lpc922$2690                   fb_lpc922
+     0C:   00001703  A$fb_lpc922$2691                   fb_lpc922
+     0C:   00001704  A$fb_lpc922$2692                   fb_lpc922
+     0C:   00001706  A$fb_lpc922$2693                   fb_lpc922
+     0C:   00001708  A$fb_lpc922$2694                   fb_lpc922
+     0C:   0000170A  A$fb_lpc922$2695                   fb_lpc922
+     0C:   0000170B  A$fb_lpc922$2696                   fb_lpc922
+     0C:   0000170C  A$fb_lpc922$2697                   fb_lpc922
+     0C:   0000170D  A$fb_lpc922$2698                   fb_lpc922
+     0C:   0000170E  A$fb_lpc922$2699                   fb_lpc922
+     0C:   0000170F  A$fb_lpc922$2700                   fb_lpc922
+     0C:   00001710  A$fb_lpc922$2701                   fb_lpc922
+     0C:   00001711  A$fb_lpc922$2702                   fb_lpc922
+     0C:   00001714  A$fb_lpc922$2703                   fb_lpc922
+     0C:   00001716  A$fb_lpc922$2704                   fb_lpc922
+     0C:   00001719  A$fb_lpc922$2705                   fb_lpc922
+     0C:   0000171C  A$fb_lpc922$2706                   fb_lpc922
+     0C:   0000171E  A$fb_lpc922$2707                   fb_lpc922
+     0C:   0000171F  A$fb_lpc922$2708                   fb_lpc922
+     0C:   00001721  A$fb_lpc922$2709                   fb_lpc922
+     0C:   00001723  A$fb_lpc922$2710                   fb_lpc922
+     0C:   00001724  A$fb_lpc922$2711                   fb_lpc922
+     0C:   00001727  A$fb_lpc922$2712                   fb_lpc922
+     0C:   00001728  A$fb_lpc922$2714                   fb_lpc922
+     0C:   0000172A  A$fb_lpc922$2715                   fb_lpc922
+     0C:   0000172C  A$fb_lpc922$2716                   fb_lpc922
+     0C:   0000172D  A$fb_lpc922$2717                   fb_lpc922
+     0C:   0000172E  A$fb_lpc922$2718                   fb_lpc922
+     0C:   00001731  A$fb_lpc922$2719                   fb_lpc922
+     0C:   00001732  A$fb_lpc922$2720                   fb_lpc922
+     0C:   00001733  A$fb_lpc922$2721                   fb_lpc922
+     0C:   00001736  A$fb_lpc922$2722                   fb_lpc922
+     0C:   00001738  A$fb_lpc922$2726                   fb_lpc922
+     0C:   00001738  C$fb_lpc922.c$627$3$3              fb_lpc922
+     0C:   0000173B  A$fb_lpc922$2729                   fb_lpc922
+     0C:   0000173B  C$fb_lpc922.c$628$3$3              fb_lpc922
+     0C:   0000173E  A$fb_lpc922$2733                   fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 50.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    0000180E =        6158. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   0000173E  C$fb_lpc922.c$622$1$1              fb_lpc922
+     0C:   00001740  A$fb_lpc922$2734                   fb_lpc922
+     0C:   00001741  A$fb_lpc922$2735                   fb_lpc922
+     0C:   00001742  A$fb_lpc922$2736                   fb_lpc922
+     0C:   00001743  A$fb_lpc922$2737                   fb_lpc922
+     0C:   00001746  A$fb_lpc922$2741                   fb_lpc922
+     0C:   00001746  C$fb_lpc922.c$631$1$1              fb_lpc922
+     0C:   00001749  A$fb_lpc922$2744                   fb_lpc922
+     0C:   00001749  C$fb_lpc922.c$632$1$1              fb_lpc922
+     0C:   0000174B  A$fb_lpc922$2745                   fb_lpc922
+     0C:   0000174E  A$fb_lpc922$2746                   fb_lpc922
+     0C:   00001750  A$fb_lpc922$2749                   fb_lpc922
+     0C:   00001750  C$fb_lpc922.c$633$1$1              fb_lpc922
+     0C:   00001750  XG$write_memory$0$0                fb_lpc922
+     0C:   00001751  A$fb_lpc922$2763                   fb_lpc922
+     0C:   00001751  C$fb_lpc922.c$637$1$1              fb_lpc922
+     0C:   00001751  C$fb_lpc922.c$639$1$1              fb_lpc922
+     0C:   00001751  G$set_pa$0$0                       fb_lpc922
+     0C:   00001751  _set_pa                            fb_lpc922
+     0C:   00001753  A$fb_lpc922$2764                   fb_lpc922
+     0C:   00001755  A$fb_lpc922$2767                   fb_lpc922
+     0C:   00001755  C$fb_lpc922.c$640$1$1              fb_lpc922
+     0C:   00001757  A$fb_lpc922$2770                   fb_lpc922
+     0C:   00001757  C$fb_lpc922.c$641$1$1              fb_lpc922
+     0C:   0000175A  A$fb_lpc922$2773                   fb_lpc922
+     0C:   0000175A  C$fb_lpc922.c$642$1$1              fb_lpc922
+     0C:   0000175D  A$fb_lpc922$2776                   fb_lpc922
+     0C:   0000175D  C$fb_lpc922.c$643$1$1              fb_lpc922
+     0C:   00001760  A$fb_lpc922$2779                   fb_lpc922
+     0C:   00001760  C$fb_lpc922.c$644$1$1              fb_lpc922
+     0C:   00001763  A$fb_lpc922$2782                   fb_lpc922
+     0C:   00001763  C$fb_lpc922.c$645$1$1              fb_lpc922
+     0C:   00001766  A$fb_lpc922$2785                   fb_lpc922
+     0C:   00001766  C$fb_lpc922.c$646$1$1              fb_lpc922
+     0C:   00001769  A$fb_lpc922$2788                   fb_lpc922
+     0C:   00001769  C$fb_lpc922.c$647$1$1              fb_lpc922
+     0C:   0000176B  A$fb_lpc922$2791                   fb_lpc922
+     0C:   0000176B  C$fb_lpc922.c$648$1$1              fb_lpc922
+     0C:   0000176B  XG$set_pa$0$0                      fb_lpc922
+     0C:   0000176C  A$fb_lpc922$2804                   fb_lpc922
+     0C:   0000176C  C$fb_lpc922.c$653$1$1              fb_lpc922
+     0C:   0000176C  G$read_objflags$0$0                fb_lpc922
+     0C:   0000176C  _read_objflags                     fb_lpc922
+     0C:   0000176E  A$fb_lpc922$2807                   fb_lpc922
+     0C:   0000176E  C$fb_lpc922.c$655$1$1              fb_lpc922
+     0C:   00001771  A$fb_lpc922$2808                   fb_lpc922
+     0C:   00001772  A$fb_lpc922$2809                   fb_lpc922
+     0C:   00001773  A$fb_lpc922$2810                   fb_lpc922
+     0C:   00001774  A$fb_lpc922$2811                   fb_lpc922
+     0C:   00001775  A$fb_lpc922$2812                   fb_lpc922
+     0C:   00001776  A$fb_lpc922$2813                   fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 51.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    0000180E =        6158. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   00001777  A$fb_lpc922$2814                   fb_lpc922
+     0C:   00001778  A$fb_lpc922$2815                   fb_lpc922
+     0C:   0000177B  A$fb_lpc922$2816                   fb_lpc922
+     0C:   0000177C  A$fb_lpc922$2817                   fb_lpc922
+     0C:   0000177D  A$fb_lpc922$2818                   fb_lpc922
+     0C:   00001780  A$fb_lpc922$2819                   fb_lpc922
+     0C:   00001781  A$fb_lpc922$2822                   fb_lpc922
+     0C:   00001781  C$fb_lpc922.c$656$1$1              fb_lpc922
+     0C:   00001781  XG$read_objflags$0$0               fb_lpc922
+     0C:   00001783  A$fb_lpc922$2823                   fb_lpc922
+     0C:   00001784  A$fb_lpc922$2844                   fb_lpc922
+     0C:   00001784  C$fb_lpc922.c$660$1$1              fb_lpc922
+     0C:   00001784  G$find_first_objno$0$0             fb_lpc922
+     0C:   00001784  _find_first_objno                  fb_lpc922
+     0C:   00001786  A$fb_lpc922$2845                   fb_lpc922
+     0C:   00001789  A$fb_lpc922$2846                   fb_lpc922
+     0C:   0000178B  A$fb_lpc922$2849                   fb_lpc922
+     0C:   0000178B  C$fb_lpc922.c$664$1$1              fb_lpc922
+     0C:   0000178D  A$fb_lpc922$2852                   fb_lpc922
+     0C:   0000178D  C$fb_lpc922.c$665$1$1              fb_lpc922
+     0C:   0000178F  A$fb_lpc922$2853                   fb_lpc922
+     0C:   00001791  A$fb_lpc922$2854                   fb_lpc922
+     0C:   00001793  A$fb_lpc922$2855                   fb_lpc922
+     0C:   00001794  A$fb_lpc922$2856                   fb_lpc922
+     0C:   00001795  A$fb_lpc922$2857                   fb_lpc922
+     0C:   00001797  A$fb_lpc922$2858                   fb_lpc922
+     0C:   00001799  A$fb_lpc922$2859                   fb_lpc922
+     0C:   0000179C  A$fb_lpc922$2860                   fb_lpc922
+     0C:   0000179E  A$fb_lpc922$2861                   fb_lpc922
+     0C:   000017A0  A$fb_lpc922$2862                   fb_lpc922
+     0C:   000017A2  A$fb_lpc922$2865                   fb_lpc922
+     0C:   000017A2  C$fb_lpc922.c$667$1$1              fb_lpc922
+     0C:   000017A5  A$fb_lpc922$2866                   fb_lpc922
+     0C:   000017A6  A$fb_lpc922$2867                   fb_lpc922
+     0C:   000017A7  A$fb_lpc922$2870                   fb_lpc922
+     0C:   000017A7  C$fb_lpc922.c$668$1$1              fb_lpc922
+     0C:   000017A8  A$fb_lpc922$2871                   fb_lpc922
+     0C:   000017AA  A$fb_lpc922$2872                   fb_lpc922
+     0C:   000017AD  A$fb_lpc922$2873                   fb_lpc922
+     0C:   000017AE  A$fb_lpc922$2874                   fb_lpc922
+     0C:   000017AF  A$fb_lpc922$2875                   fb_lpc922
+     0C:   000017B0  A$fb_lpc922$2878                   fb_lpc922
+     0C:   000017B0  C$fb_lpc922.c$669$1$1              fb_lpc922
+     0C:   000017B3  A$fb_lpc922$2879                   fb_lpc922
+     0C:   000017B5  A$fb_lpc922$2883                   fb_lpc922
+     0C:   000017B5  C$fb_lpc922.c$670$2$2              fb_lpc922
+     0C:   000017B7  A$fb_lpc922$2886                   fb_lpc922
+     0C:   000017B7  C$fb_lpc922.c$671$2$2              fb_lpc922
+     0C:   000017B8  A$fb_lpc922$2890                   fb_lpc922
+     0C:   000017B8  C$fb_lpc922.c$672$1$1              fb_lpc922
+     0C:   000017B9  A$fb_lpc922$2891                   fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 52.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    0000180E =        6158. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   000017BA  A$fb_lpc922$2892                   fb_lpc922
+     0C:   000017BB  A$fb_lpc922$2893                   fb_lpc922
+     0C:   000017BD  A$fb_lpc922$2896                   fb_lpc922
+     0C:   000017BD  C$fb_lpc922.c$673$3$3              fb_lpc922
+     0C:   000017BF  A$fb_lpc922$2897                   fb_lpc922
+     0C:   000017C2  A$fb_lpc922$2898                   fb_lpc922
+     0C:   000017C3  A$fb_lpc922$2899                   fb_lpc922
+     0C:   000017C4  A$fb_lpc922$2900                   fb_lpc922
+     0C:   000017C5  A$fb_lpc922$2903                   fb_lpc922
+     0C:   000017C5  C$fb_lpc922.c$674$3$3              fb_lpc922
+     0C:   000017C6  A$fb_lpc922$2904                   fb_lpc922
+     0C:   000017C9  A$fb_lpc922$2907                   fb_lpc922
+     0C:   000017C9  C$fb_lpc922.c$675$4$4              fb_lpc922
+     0C:   000017CA  A$fb_lpc922$2908                   fb_lpc922
+     0C:   000017CB  A$fb_lpc922$2909                   fb_lpc922
+     0C:   000017CE  A$fb_lpc922$2910                   fb_lpc922
+     0C:   000017CF  A$fb_lpc922$2911                   fb_lpc922
+     0C:   000017D0  A$fb_lpc922$2912                   fb_lpc922
+     0C:   000017D1  A$fb_lpc922$2915                   fb_lpc922
+     0C:   000017D1  C$fb_lpc922.c$676$4$4              fb_lpc922
+     0C:   000017D3  A$fb_lpc922$2919                   fb_lpc922
+     0C:   000017D3  C$fb_lpc922.c$678$3$3              fb_lpc922
+     0C:   000017D4  A$fb_lpc922$2922                   fb_lpc922
+     0C:   000017D4  C$fb_lpc922.c$679$3$3              fb_lpc922
+     0C:   000017D5  A$fb_lpc922$2923                   fb_lpc922
+     0C:   000017D6  A$fb_lpc922$2924                   fb_lpc922
+     0C:   000017D8  A$fb_lpc922$2928                   fb_lpc922
+     0C:   000017D8  C$fb_lpc922.c$682$1$1              fb_lpc922
+     0C:   000017DA  A$fb_lpc922$2929                   fb_lpc922
+     0C:   000017DC  A$fb_lpc922$2932                   fb_lpc922
+     0C:   000017DC  C$fb_lpc922.c$683$1$1              fb_lpc922
+     0C:   000017DC  XG$find_first_objno$0$0            fb_lpc922
+     0C:   000017DD  A$fb_lpc922$2949                   fb_lpc922
+     0C:   000017DD  C$fb_lpc922.c$687$1$1              fb_lpc922
+     0C:   000017DD  G$find_ga$0$0                      fb_lpc922
+     0C:   000017DD  _find_ga                           fb_lpc922
+     0C:   000017DF  A$fb_lpc922$2952                   fb_lpc922
+     0C:   000017DF  C$fb_lpc922.c$692$1$1              fb_lpc922
+     0C:   000017E1  A$fb_lpc922$2955                   fb_lpc922
+     0C:   000017E1  C$fb_lpc922.c$693$1$1              fb_lpc922
+     0C:   000017E4  A$fb_lpc922$2956                   fb_lpc922
+     0C:   000017E5  A$fb_lpc922$2957                   fb_lpc922
+     0C:   000017E6  A$fb_lpc922$2958                   fb_lpc922
+     0C:   000017E7  A$fb_lpc922$2961                   fb_lpc922
+     0C:   000017E7  C$fb_lpc922.c$694$1$1              fb_lpc922
+     0C:   000017E8  A$fb_lpc922$2962                   fb_lpc922
+     0C:   000017E9  A$fb_lpc922$2963                   fb_lpc922
+     0C:   000017EA  A$fb_lpc922$2964                   fb_lpc922
+     0C:   000017EB  A$fb_lpc922$2967                   fb_lpc922
+     0C:   000017EB  C$fb_lpc922.c$696$1$1              fb_lpc922
+     0C:   000017EC  A$fb_lpc922$2968                   fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 53.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    0000180E =        6158. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   000017ED  A$fb_lpc922$2969                   fb_lpc922
+     0C:   000017F0  A$fb_lpc922$2970                   fb_lpc922
+     0C:   000017F1  A$fb_lpc922$2971                   fb_lpc922
+     0C:   000017F2  A$fb_lpc922$2972                   fb_lpc922
+     0C:   000017F5  A$fb_lpc922$2973                   fb_lpc922
+     0C:   000017F7  A$fb_lpc922$2974                   fb_lpc922
+     0C:   000017FA  A$fb_lpc922$2975                   fb_lpc922
+     0C:   000017FB  A$fb_lpc922$2976                   fb_lpc922
+     0C:   000017FC  A$fb_lpc922$2977                   fb_lpc922
+     0C:   000017FD  A$fb_lpc922$2978                   fb_lpc922
+     0C:   000017FE  A$fb_lpc922$2982                   fb_lpc922
+     0C:   000017FE  C$fb_lpc922.c$698$1$1              fb_lpc922
+     0C:   00001801  A$fb_lpc922$2983                   fb_lpc922
+     0C:   00001803  A$fb_lpc922$2987                   fb_lpc922
+     0C:   00001803  C$fb_lpc922.c$700$2$2              fb_lpc922
+     0C:   00001804  A$fb_lpc922$2988                   fb_lpc922
+     0C:   00001805  A$fb_lpc922$2989                   fb_lpc922
+     0C:   00001806  A$fb_lpc922$2990                   fb_lpc922
+     0C:   00001808  A$fb_lpc922$2991                   fb_lpc922
+     0C:   0000180B  A$fb_lpc922$2992                   fb_lpc922
+     0C:   0000180C  A$fb_lpc922$2993                   fb_lpc922
+     0C:   0000180D  A$fb_lpc922$2994                   fb_lpc922
+     0C:   0000180F  A$fb_lpc922$2997                   fb_lpc922
+     0C:   0000180F  C$fb_lpc922.c$701$2$2              fb_lpc922
+     0C:   00001811  A$fb_lpc922$2998                   fb_lpc922
+     0C:   00001812  A$fb_lpc922$2999                   fb_lpc922
+     0C:   00001815  A$fb_lpc922$3000                   fb_lpc922
+     0C:   00001816  A$fb_lpc922$3001                   fb_lpc922
+     0C:   00001817  A$fb_lpc922$3002                   fb_lpc922
+     0C:   00001819  A$fb_lpc922$3003                   fb_lpc922
+     0C:   0000181A  A$fb_lpc922$3004                   fb_lpc922
+     0C:   0000181B  A$fb_lpc922$3005                   fb_lpc922
+     0C:   0000181C  A$fb_lpc922$3006                   fb_lpc922
+     0C:   0000181D  A$fb_lpc922$3007                   fb_lpc922
+     0C:   0000181E  A$fb_lpc922$3008                   fb_lpc922
+     0C:   00001820  A$fb_lpc922$3012                   fb_lpc922
+     0C:   00001820  C$fb_lpc922.c$703$1$1              fb_lpc922
+     0C:   00001822  A$fb_lpc922$3013                   fb_lpc922
+     0C:   00001824  A$fb_lpc922$3017                   fb_lpc922
+     0C:   00001824  C$fb_lpc922.c$705$1$1              fb_lpc922
+     0C:   00001826  A$fb_lpc922$3018                   fb_lpc922
+     0C:   00001828  A$fb_lpc922$3021                   fb_lpc922
+     0C:   00001828  C$fb_lpc922.c$706$1$1              fb_lpc922
+     0C:   00001828  XG$find_ga$0$0                     fb_lpc922
+     0C:   00001829  A$fb_lpc922$3034                   fb_lpc922
+     0C:   00001829  C$fb_lpc922.c$711$1$1              fb_lpc922
+     0C:   00001829  C$fb_lpc922.c$713$1$1              fb_lpc922
+     0C:   00001829  G$restart_hw$0$0                   fb_lpc922
+     0C:   00001829  _restart_hw                        fb_lpc922
+     0C:   0000182C  A$fb_lpc922$3037                   fb_lpc922
+     0C:   0000182C  C$fb_lpc922.c$715$1$1              fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 54.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    0000180E =        6158. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   0000182F  A$fb_lpc922$3040                   fb_lpc922
+     0C:   0000182F  C$fb_lpc922.c$716$1$1              fb_lpc922
+     0C:   00001832  A$fb_lpc922$3043                   fb_lpc922
+     0C:   00001832  C$fb_lpc922.c$720$1$1              fb_lpc922
+     0C:   00001834  A$fb_lpc922$3046                   fb_lpc922
+     0C:   00001834  C$fb_lpc922.c$722$1$1              fb_lpc922
+     0C:   00001837  A$fb_lpc922$3049                   fb_lpc922
+     0C:   00001837  C$fb_lpc922.c$723$1$1              fb_lpc922
+     0C:   0000183A  A$fb_lpc922$3052                   fb_lpc922
+     0C:   0000183A  C$fb_lpc922.c$724$1$1              fb_lpc922
+     0C:   0000183C  A$fb_lpc922$3055                   fb_lpc922
+     0C:   0000183C  C$fb_lpc922.c$725$1$1              fb_lpc922
+     0C:   0000183E  A$fb_lpc922$3058                   fb_lpc922
+     0C:   0000183E  C$fb_lpc922.c$726$1$1              fb_lpc922
+     0C:   00001841  A$fb_lpc922$3061                   fb_lpc922
+     0C:   00001841  C$fb_lpc922.c$727$1$1              fb_lpc922
+     0C:   00001844  A$fb_lpc922$3064                   fb_lpc922
+     0C:   00001844  C$fb_lpc922.c$728$1$1              fb_lpc922
+     0C:   00001846  A$fb_lpc922$3067                   fb_lpc922
+     0C:   00001846  C$fb_lpc922.c$730$1$1              fb_lpc922
+     0C:   00001849  A$fb_lpc922$3070                   fb_lpc922
+     0C:   00001849  C$fb_lpc922.c$731$1$1              fb_lpc922
+     0C:   0000184C  A$fb_lpc922$3073                   fb_lpc922
+     0C:   0000184C  C$fb_lpc922.c$732$1$1              fb_lpc922
+     0C:   0000184F  A$fb_lpc922$3076                   fb_lpc922
+     0C:   0000184F  C$fb_lpc922.c$734$1$1              fb_lpc922
+     0C:   00001851  A$fb_lpc922$3079                   fb_lpc922
+     0C:   00001851  C$fb_lpc922.c$735$1$1              fb_lpc922
+     0C:   00001854  A$fb_lpc922$3082                   fb_lpc922
+     0C:   00001854  C$fb_lpc922.c$736$1$1              fb_lpc922
+     0C:   00001857  A$fb_lpc922$3085                   fb_lpc922
+     0C:   00001857  C$fb_lpc922.c$738$1$1              fb_lpc922
+     0C:   00001859  A$fb_lpc922$3088                   fb_lpc922
+     0C:   00001859  C$fb_lpc922.c$739$1$1              fb_lpc922
+     0C:   0000185B  A$fb_lpc922$3091                   fb_lpc922
+     0C:   0000185B  C$fb_lpc922.c$740$1$1              fb_lpc922
+     0C:   0000185D  A$fb_lpc922$3094                   fb_lpc922
+     0C:   0000185D  C$fb_lpc922.c$741$1$1              fb_lpc922
+     0C:   0000185F  A$fb_lpc922$3097                   fb_lpc922
+     0C:   0000185F  C$fb_lpc922.c$743$1$1              fb_lpc922
+     0C:   00001862  A$fb_lpc922$3100                   fb_lpc922
+     0C:   00001862  C$fb_lpc922.c$744$1$1              fb_lpc922
+     0C:   00001865  A$fb_lpc922$3103                   fb_lpc922
+     0C:   00001865  C$fb_lpc922.c$745$1$1              fb_lpc922
+     0C:   00001867  A$fb_lpc922$3106                   fb_lpc922
+     0C:   00001867  C$fb_lpc922.c$747$1$1              fb_lpc922
+     0C:   0000186A  A$fb_lpc922$3109                   fb_lpc922
+     0C:   0000186A  C$fb_lpc922.c$749$1$1              fb_lpc922
+     0C:   0000186C  A$fb_lpc922$3112                   fb_lpc922
+     0C:   0000186C  C$fb_lpc922.c$750$1$1              fb_lpc922
+     0C:   0000186E  A$fb_lpc922$3115                   fb_lpc922
+ASxxxx Linker V02.00 + NoICE + sdld,  page 55.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                0000007F    0000180E =        6158. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   0000186E  C$fb_lpc922.c$751$1$1              fb_lpc922
+     0C:   00001870  A$fb_lpc922$3118                   fb_lpc922
+     0C:   00001870  C$fb_lpc922.c$752$1$1              fb_lpc922
+     0C:   00001872  A$fb_lpc922$3121                   fb_lpc922
+     0C:   00001872  C$fb_lpc922.c$753$1$1              fb_lpc922
+     0C:   00001874  A$fb_lpc922$3124                   fb_lpc922
+     0C:   00001874  C$fb_lpc922.c$754$1$1              fb_lpc922
+     0C:   00001876  A$fb_lpc922$3127                   fb_lpc922
+     0C:   00001876  C$fb_lpc922.c$755$1$1              fb_lpc922
+     0C:   00001879  A$fb_lpc922$3130                   fb_lpc922
+     0C:   00001879  C$fb_lpc922.c$756$1$1              fb_lpc922
+     0C:   0000187C  A$fb_lpc922$3133                   fb_lpc922
+     0C:   0000187C  C$fb_lpc922.c$757$1$1              fb_lpc922
+     0C:   0000187F  A$fb_lpc922$3136                   fb_lpc922
+     0C:   0000187F  C$fb_lpc922.c$758$1$1              fb_lpc922
+     0C:   00001881  A$fb_lpc922$3139                   fb_lpc922
+     0C:   00001881  C$fb_lpc922.c$759$1$1              fb_lpc922
+     0C:   00001883  A$fb_lpc922$3142                   fb_lpc922
+     0C:   00001883  C$fb_lpc922.c$760$1$1              fb_lpc922
+     0C:   00001885  A$fb_lpc922$3145                   fb_lpc922
+     0C:   00001885  C$fb_lpc922.c$761$1$1              fb_lpc922
+     0C:   00001888  A$fb_lpc922$3148                   fb_lpc922
+     0C:   00001888  C$fb_lpc922.c$762$1$1              fb_lpc922
+     0C:   00001888  XG$restart_hw$0$0                  fb_lpc922
+     0C:   00001889  __sdcc_external_startup            _startup
+ASxxxx Linker V02.00 + NoICE + sdld,  page 56.
+
+Files Linked                              [ module(s) ]
+
+./fb_app_out.rel                          [  ]
+./fb_out.rel                              [  ]
+./watchdog.rel                            [  ]
+
+
+Libraries Linked                          [ object file ]
+
+C:\Freebus\C_Programme\oldisprogramm\lib_lpc922\Release/fb_lpc922.lib
+                                          [ fb_lpc922 ]
+C:\Programme\SDCC\bin\..\lib\small-stack-auto/mcs51.lib
+                                          [ crtclear.rel ]
+C:\Programme\SDCC\bin\..\lib\small-stack-auto/mcs51.lib
+                                          [ crtxinit.rel ]
+C:\Programme\SDCC\bin\..\lib\small-stack-auto/mcs51.lib
+                                          [ crtxclear.rel ]
+C:\Programme\SDCC\bin\..\lib\small-stack-auto/libsdcc.lib
+                                          [ _bp.rel ]
+C:\Programme\SDCC\bin\..\lib\small-stack-auto/mcs51.lib
+                                          [ crtpagesfr.rel ]
+C:\Programme\SDCC\bin\..\lib\small-stack-auto/mcs51.lib
+                                          [ crtstart.rel ]
+C:\Programme\SDCC\bin\..\lib\small-stack-auto/libsdcc.lib
+                                          [ _startup.rel ]
+
+ASxxxx Linker V02.00 + NoICE + sdld,  page 57.
+
+User Base Address Definitions
+
+HOME = 0x0000
+ISEG = 0x0000
+BSEG = 0x0000
+
+

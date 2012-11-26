@@ -1,0 +1,3150 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 3.1.4 #7479 (Mar 23 2012) (MINGW32)
+                              4 ; This file was generated Tue Nov 06 16:08:30 2012
+                              5 ;--------------------------------------------------------
+                              6 	.module fb_app_in8
+                              7 	.optsdcc -mmcs51 --model-small
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _find_first_objno
+                             13 	.globl _read_objflags
+                             14 	.globl _send_obj_value
+                             15 	.globl _gapos_in_gat
+                             16 	.globl _P3_1
+                             17 	.globl _P3_0
+                             18 	.globl _P1_7
+                             19 	.globl _P1_6
+                             20 	.globl _P1_5
+                             21 	.globl _P1_4
+                             22 	.globl _P1_3
+                             23 	.globl _P1_2
+                             24 	.globl _P1_1
+                             25 	.globl _P1_0
+                             26 	.globl _P0_7
+                             27 	.globl _P0_6
+                             28 	.globl _P0_5
+                             29 	.globl _P0_4
+                             30 	.globl _P0_3
+                             31 	.globl _P0_2
+                             32 	.globl _P0_1
+                             33 	.globl _P0_0
+                             34 	.globl _I2CON_0
+                             35 	.globl _I2CON_2
+                             36 	.globl _I2CON_3
+                             37 	.globl _I2CON_4
+                             38 	.globl _I2CON_5
+                             39 	.globl _I2CON_6
+                             40 	.globl _SCON_7
+                             41 	.globl _SCON_6
+                             42 	.globl _SCON_5
+                             43 	.globl _SCON_4
+                             44 	.globl _SCON_3
+                             45 	.globl _SCON_2
+                             46 	.globl _SCON_1
+                             47 	.globl _SCON_0
+                             48 	.globl _IP0_0
+                             49 	.globl _IP0_1
+                             50 	.globl _IP0_2
+                             51 	.globl _IP0_3
+                             52 	.globl _IP0_4
+                             53 	.globl _IP0_5
+                             54 	.globl _IP0_6
+                             55 	.globl _IP1_0
+                             56 	.globl _IP1_1
+                             57 	.globl _IP1_2
+                             58 	.globl _IP1_6
+                             59 	.globl _IEN1_0
+                             60 	.globl _IEN1_1
+                             61 	.globl _IEN1_2
+                             62 	.globl _IEN0_0
+                             63 	.globl _IEN0_1
+                             64 	.globl _IEN0_2
+                             65 	.globl _IEN0_3
+                             66 	.globl _IEN0_4
+                             67 	.globl _IEN0_5
+                             68 	.globl _IEN0_6
+                             69 	.globl _IEN0_7
+                             70 	.globl _TCON_0
+                             71 	.globl _TCON_1
+                             72 	.globl _TCON_2
+                             73 	.globl _TCON_3
+                             74 	.globl _TCON_4
+                             75 	.globl _TCON_5
+                             76 	.globl _TCON_6
+                             77 	.globl _TCON_7
+                             78 	.globl _PSW_7
+                             79 	.globl _PSW_6
+                             80 	.globl _PSW_5
+                             81 	.globl _PSW_4
+                             82 	.globl _PSW_3
+                             83 	.globl _PSW_2
+                             84 	.globl _PSW_1
+                             85 	.globl _PSW_0
+                             86 	.globl _IEN1
+                             87 	.globl _IP0H
+                             88 	.globl _WFEED2
+                             89 	.globl _WFEED1
+                             90 	.globl _WDL
+                             91 	.globl _WDCON
+                             92 	.globl _TRIM
+                             93 	.globl _TAMOD
+                             94 	.globl _SSTAT
+                             95 	.globl _RTCL
+                             96 	.globl _RTCH
+                             97 	.globl _RTCCON
+                             98 	.globl _RSTSRC
+                             99 	.globl _PT0AD
+                            100 	.globl _PCONA
+                            101 	.globl _P3M2
+                            102 	.globl _P3M1
+                            103 	.globl _P1M2
+                            104 	.globl _P1M1
+                            105 	.globl _P0M2
+                            106 	.globl _P0M1
+                            107 	.globl _KBPATN
+                            108 	.globl _KBMASK
+                            109 	.globl _KBCON
+                            110 	.globl _IP1H
+                            111 	.globl _IP1
+                            112 	.globl _I2STAT
+                            113 	.globl _I2SCLL
+                            114 	.globl _I2SCLH
+                            115 	.globl _I2DAT
+                            116 	.globl _I2CON
+                            117 	.globl _I2ADR
+                            118 	.globl _FMDATA
+                            119 	.globl _FMCON
+                            120 	.globl _FMADRL
+                            121 	.globl _FMADRH
+                            122 	.globl _DIVM
+                            123 	.globl _CMP2
+                            124 	.globl _CMP1
+                            125 	.globl _BRGCON
+                            126 	.globl _BRGR1
+                            127 	.globl _BRGR0
+                            128 	.globl _SADEN
+                            129 	.globl _SADDR
+                            130 	.globl _AUXR1
+                            131 	.globl _SBUF
+                            132 	.globl _SCON
+                            133 	.globl _IP0
+                            134 	.globl _IEN0
+                            135 	.globl _TH1
+                            136 	.globl _TH0
+                            137 	.globl _TL1
+                            138 	.globl _TL0
+                            139 	.globl _TMOD
+                            140 	.globl _TCON
+                            141 	.globl _PCON
+                            142 	.globl _DPH
+                            143 	.globl _DPL
+                            144 	.globl _SP
+                            145 	.globl _B
+                            146 	.globl _ACC
+                            147 	.globl _PSW
+                            148 	.globl _P3
+                            149 	.globl _P1
+                            150 	.globl _P0
+                            151 	.globl _st_Flanke
+                            152 	.globl _jobj
+                            153 	.globl _objval
+                            154 	.globl _schrittzaehler
+                            155 	.globl _zaehlervalue
+                            156 	.globl _Sperre
+                            157 	.globl _objectvalue_h
+                            158 	.globl _objectvalue_l
+                            159 	.globl _para_value
+                            160 	.globl _pinno
+                            161 	.globl _para_adr
+                            162 	.globl _pinnoX4
+                            163 	.globl _timerstate
+                            164 	.globl _timercnt
+                            165 	.globl _timerbase
+                            166 	.globl _timer
+                            167 	.globl _timer_state
+                            168 	.globl _timer_base
+                            169 	.globl _blocked
+                            170 	.globl _objstate
+                            171 	.globl _p0h
+                            172 	.globl _portbuffer
+                            173 	.globl _pin_changed
+                            174 	.globl _eis5conversion
+                            175 	.globl _delay_timer
+                            176 	.globl _schalten
+                            177 	.globl _debounce
+                            178 	.globl _write_value_req
+                            179 	.globl _sperren
+                            180 	.globl _read_value_req
+                            181 	.globl _write_send
+                            182 	.globl _bus_return
+                            183 	.globl _read_obj_value
+                            184 	.globl _write_obj_value
+                            185 	.globl _restart_app
+                            186 ;--------------------------------------------------------
+                            187 ; special function registers
+                            188 ;--------------------------------------------------------
+                            189 	.area RSEG    (ABS,DATA)
+   0000                     190 	.org 0x0000
+                    0080    191 _P0	=	0x0080
+                    0090    192 _P1	=	0x0090
+                    00B0    193 _P3	=	0x00b0
+                    00D0    194 _PSW	=	0x00d0
+                    00E0    195 _ACC	=	0x00e0
+                    00F0    196 _B	=	0x00f0
+                    0081    197 _SP	=	0x0081
+                    0082    198 _DPL	=	0x0082
+                    0083    199 _DPH	=	0x0083
+                    0087    200 _PCON	=	0x0087
+                    0088    201 _TCON	=	0x0088
+                    0089    202 _TMOD	=	0x0089
+                    008A    203 _TL0	=	0x008a
+                    008B    204 _TL1	=	0x008b
+                    008C    205 _TH0	=	0x008c
+                    008D    206 _TH1	=	0x008d
+                    00A8    207 _IEN0	=	0x00a8
+                    00B8    208 _IP0	=	0x00b8
+                    0098    209 _SCON	=	0x0098
+                    0099    210 _SBUF	=	0x0099
+                    00A2    211 _AUXR1	=	0x00a2
+                    00A9    212 _SADDR	=	0x00a9
+                    00B9    213 _SADEN	=	0x00b9
+                    00BE    214 _BRGR0	=	0x00be
+                    00BF    215 _BRGR1	=	0x00bf
+                    00BD    216 _BRGCON	=	0x00bd
+                    00AC    217 _CMP1	=	0x00ac
+                    00AD    218 _CMP2	=	0x00ad
+                    0095    219 _DIVM	=	0x0095
+                    00E7    220 _FMADRH	=	0x00e7
+                    00E6    221 _FMADRL	=	0x00e6
+                    00E4    222 _FMCON	=	0x00e4
+                    00E5    223 _FMDATA	=	0x00e5
+                    00DB    224 _I2ADR	=	0x00db
+                    00D8    225 _I2CON	=	0x00d8
+                    00DA    226 _I2DAT	=	0x00da
+                    00DD    227 _I2SCLH	=	0x00dd
+                    00DC    228 _I2SCLL	=	0x00dc
+                    00D9    229 _I2STAT	=	0x00d9
+                    00F8    230 _IP1	=	0x00f8
+                    00F7    231 _IP1H	=	0x00f7
+                    0094    232 _KBCON	=	0x0094
+                    0086    233 _KBMASK	=	0x0086
+                    0093    234 _KBPATN	=	0x0093
+                    0084    235 _P0M1	=	0x0084
+                    0085    236 _P0M2	=	0x0085
+                    0091    237 _P1M1	=	0x0091
+                    0092    238 _P1M2	=	0x0092
+                    00B1    239 _P3M1	=	0x00b1
+                    00B2    240 _P3M2	=	0x00b2
+                    00B5    241 _PCONA	=	0x00b5
+                    00F6    242 _PT0AD	=	0x00f6
+                    00DF    243 _RSTSRC	=	0x00df
+                    00D1    244 _RTCCON	=	0x00d1
+                    00D2    245 _RTCH	=	0x00d2
+                    00D3    246 _RTCL	=	0x00d3
+                    00BA    247 _SSTAT	=	0x00ba
+                    008F    248 _TAMOD	=	0x008f
+                    0096    249 _TRIM	=	0x0096
+                    00A7    250 _WDCON	=	0x00a7
+                    00C1    251 _WDL	=	0x00c1
+                    00C2    252 _WFEED1	=	0x00c2
+                    00C3    253 _WFEED2	=	0x00c3
+                    00B7    254 _IP0H	=	0x00b7
+                    00E8    255 _IEN1	=	0x00e8
+                            256 ;--------------------------------------------------------
+                            257 ; special function bits
+                            258 ;--------------------------------------------------------
+                            259 	.area RSEG    (ABS,DATA)
+   0000                     260 	.org 0x0000
+                    00D0    261 _PSW_0	=	0x00d0
+                    00D1    262 _PSW_1	=	0x00d1
+                    00D2    263 _PSW_2	=	0x00d2
+                    00D3    264 _PSW_3	=	0x00d3
+                    00D4    265 _PSW_4	=	0x00d4
+                    00D5    266 _PSW_5	=	0x00d5
+                    00D6    267 _PSW_6	=	0x00d6
+                    00D7    268 _PSW_7	=	0x00d7
+                    008F    269 _TCON_7	=	0x008f
+                    008E    270 _TCON_6	=	0x008e
+                    008D    271 _TCON_5	=	0x008d
+                    008C    272 _TCON_4	=	0x008c
+                    008B    273 _TCON_3	=	0x008b
+                    008A    274 _TCON_2	=	0x008a
+                    0089    275 _TCON_1	=	0x0089
+                    0088    276 _TCON_0	=	0x0088
+                    00AF    277 _IEN0_7	=	0x00af
+                    00AE    278 _IEN0_6	=	0x00ae
+                    00AD    279 _IEN0_5	=	0x00ad
+                    00AC    280 _IEN0_4	=	0x00ac
+                    00AB    281 _IEN0_3	=	0x00ab
+                    00AA    282 _IEN0_2	=	0x00aa
+                    00A9    283 _IEN0_1	=	0x00a9
+                    00A8    284 _IEN0_0	=	0x00a8
+                    00EA    285 _IEN1_2	=	0x00ea
+                    00E9    286 _IEN1_1	=	0x00e9
+                    00E8    287 _IEN1_0	=	0x00e8
+                    00FE    288 _IP1_6	=	0x00fe
+                    00FA    289 _IP1_2	=	0x00fa
+                    00F9    290 _IP1_1	=	0x00f9
+                    00F8    291 _IP1_0	=	0x00f8
+                    00BE    292 _IP0_6	=	0x00be
+                    00BD    293 _IP0_5	=	0x00bd
+                    00BC    294 _IP0_4	=	0x00bc
+                    00BB    295 _IP0_3	=	0x00bb
+                    00BA    296 _IP0_2	=	0x00ba
+                    00B9    297 _IP0_1	=	0x00b9
+                    00B8    298 _IP0_0	=	0x00b8
+                    0098    299 _SCON_0	=	0x0098
+                    0099    300 _SCON_1	=	0x0099
+                    009A    301 _SCON_2	=	0x009a
+                    009B    302 _SCON_3	=	0x009b
+                    009C    303 _SCON_4	=	0x009c
+                    009D    304 _SCON_5	=	0x009d
+                    009E    305 _SCON_6	=	0x009e
+                    009F    306 _SCON_7	=	0x009f
+                    00DE    307 _I2CON_6	=	0x00de
+                    00DD    308 _I2CON_5	=	0x00dd
+                    00DC    309 _I2CON_4	=	0x00dc
+                    00DB    310 _I2CON_3	=	0x00db
+                    00DA    311 _I2CON_2	=	0x00da
+                    00D8    312 _I2CON_0	=	0x00d8
+                    0080    313 _P0_0	=	0x0080
+                    0081    314 _P0_1	=	0x0081
+                    0082    315 _P0_2	=	0x0082
+                    0083    316 _P0_3	=	0x0083
+                    0084    317 _P0_4	=	0x0084
+                    0085    318 _P0_5	=	0x0085
+                    0086    319 _P0_6	=	0x0086
+                    0087    320 _P0_7	=	0x0087
+                    0090    321 _P1_0	=	0x0090
+                    0091    322 _P1_1	=	0x0091
+                    0092    323 _P1_2	=	0x0092
+                    0093    324 _P1_3	=	0x0093
+                    0094    325 _P1_4	=	0x0094
+                    0095    326 _P1_5	=	0x0095
+                    0096    327 _P1_6	=	0x0096
+                    0097    328 _P1_7	=	0x0097
+                    00B0    329 _P3_0	=	0x00b0
+                    00B1    330 _P3_1	=	0x00b1
+                            331 ;--------------------------------------------------------
+                            332 ; overlayable register banks
+                            333 ;--------------------------------------------------------
+                            334 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                     335 	.ds 8
+                            336 ;--------------------------------------------------------
+                            337 ; overlayable bit register bank
+                            338 ;--------------------------------------------------------
+                            339 	.area BIT_BANK	(REL,OVR,DATA)
+   0000                     340 bits:
+   0000                     341 	.ds 1
+                    8000    342 	b0 = bits[0]
+                    8100    343 	b1 = bits[1]
+                    8200    344 	b2 = bits[2]
+                    8300    345 	b3 = bits[3]
+                    8400    346 	b4 = bits[4]
+                    8500    347 	b5 = bits[5]
+                    8600    348 	b6 = bits[6]
+                    8700    349 	b7 = bits[7]
+                            350 ;--------------------------------------------------------
+                            351 ; internal ram data
+                            352 ;--------------------------------------------------------
+                            353 	.area DSEG    (DATA)
+   0000                     354 _portbuffer::
+   0000                     355 	.ds 1
+   0001                     356 _p0h::
+   0001                     357 	.ds 1
+   0002                     358 _objstate::
+   0002                     359 	.ds 2
+   0004                     360 _blocked::
+   0004                     361 	.ds 1
+   0005                     362 _timer_base::
+   0005                     363 	.ds 1
+   0006                     364 _timer_state::
+   0006                     365 	.ds 1
+   0007                     366 _timer::
+   0007                     367 	.ds 2
+   0009                     368 _timerbase::
+   0009                     369 	.ds 9
+   0012                     370 _timercnt::
+   0012                     371 	.ds 9
+   001B                     372 _timerstate::
+   001B                     373 	.ds 9
+   0024                     374 _pinnoX4::
+   0024                     375 	.ds 1
+   0025                     376 _para_adr::
+   0025                     377 	.ds 1
+   0026                     378 _pinno::
+   0026                     379 	.ds 1
+   0027                     380 _para_value::
+   0027                     381 	.ds 1
+                    0008    382 _objectvalue_l	=	0x0008
+                    0010    383 _objectvalue_h	=	0x0010
+                    0018    384 _Sperre	=	0x0018
+                    0019    385 _zaehlervalue	=	0x0019
+                    001E    386 _schrittzaehler	=	0x001e
+                            387 ;--------------------------------------------------------
+                            388 ; overlayable items in internal ram 
+                            389 ;--------------------------------------------------------
+                            390 ;--------------------------------------------------------
+                            391 ; indirectly addressable internal ram data
+                            392 ;--------------------------------------------------------
+                            393 	.area ISEG    (DATA)
+                            394 ;--------------------------------------------------------
+                            395 ; absolute internal ram data
+                            396 ;--------------------------------------------------------
+                            397 	.area IABS    (ABS,DATA)
+                            398 	.area IABS    (ABS,DATA)
+                            399 ;--------------------------------------------------------
+                            400 ; bit data
+                            401 ;--------------------------------------------------------
+                            402 	.area BSEG    (BIT)
+   0000                     403 _objval::
+   0000                     404 	.ds 1
+   0001                     405 _jobj::
+   0001                     406 	.ds 1
+   0002                     407 _st_Flanke::
+   0002                     408 	.ds 1
+                            409 ;--------------------------------------------------------
+                            410 ; paged external ram data
+                            411 ;--------------------------------------------------------
+                            412 	.area PSEG    (PAG,XDATA)
+                            413 ;--------------------------------------------------------
+                            414 ; external ram data
+                            415 ;--------------------------------------------------------
+                            416 	.area XSEG    (XDATA)
+                            417 ;--------------------------------------------------------
+                            418 ; absolute external ram data
+                            419 ;--------------------------------------------------------
+                            420 	.area XABS    (ABS,XDATA)
+                            421 ;--------------------------------------------------------
+                            422 ; external initialized ram data
+                            423 ;--------------------------------------------------------
+                            424 	.area XISEG   (XDATA)
+                            425 	.area HOME    (CODE)
+                            426 	.area GSINIT0 (CODE)
+                            427 	.area GSINIT1 (CODE)
+                            428 	.area GSINIT2 (CODE)
+                            429 	.area GSINIT3 (CODE)
+                            430 	.area GSINIT4 (CODE)
+                            431 	.area GSINIT5 (CODE)
+                            432 	.area GSINIT  (CODE)
+                            433 	.area GSFINAL (CODE)
+                            434 	.area CSEG    (CODE)
+                            435 ;--------------------------------------------------------
+                            436 ; global & static initialisations
+                            437 ;--------------------------------------------------------
+                            438 	.area HOME    (CODE)
+                            439 	.area GSINIT  (CODE)
+                            440 	.area GSFINAL (CODE)
+                            441 	.area GSINIT  (CODE)
+                            442 ;	../fb_app_in8.c:45: __bit objval=0,jobj=0;
+   0000 C2*00               443 	clr	_objval
+                            444 ;	../fb_app_in8.c:45: 
+   0002 C2*01               445 	clr	_jobj
+                            446 ;	../fb_app_in8.c:47: __bit st_Flanke=0;
+   0004 C2*02               447 	clr	_st_Flanke
+                            448 ;--------------------------------------------------------
+                            449 ; Home
+                            450 ;--------------------------------------------------------
+                            451 	.area HOME    (CODE)
+                            452 	.area HOME    (CODE)
+                            453 ;--------------------------------------------------------
+                            454 ; code
+                            455 ;--------------------------------------------------------
+                            456 	.area CSEG    (CODE)
+                            457 ;------------------------------------------------------------
+                            458 ;Allocation info for local variables in function 'pin_changed'
+                            459 ;------------------------------------------------------------
+                            460 ;pin_no                    Allocated to registers 
+                            461 ;tmp                       Allocated to registers r2 
+                            462 ;objoffset                 Allocated to stack - _bp +1
+                            463 ;typ                       Allocated to registers r6 
+                            464 ;n                         Allocated to registers r5 
+                            465 ;sloc0                     Allocated to stack - _bp +6
+                            466 ;------------------------------------------------------------
+                            467 ;	../fb_app_in8.c:52: void pin_changed(unsigned char pin_no)
+                            468 ;	-----------------------------------------
+                            469 ;	 function pin_changed
+                            470 ;	-----------------------------------------
+   0000                     471 _pin_changed:
+                    0007    472 	ar7 = 0x07
+                    0006    473 	ar6 = 0x06
+                    0005    474 	ar5 = 0x05
+                    0004    475 	ar4 = 0x04
+                    0003    476 	ar3 = 0x03
+                    0002    477 	ar2 = 0x02
+                    0001    478 	ar1 = 0x01
+                    0000    479 	ar0 = 0x00
+   0000 C0*00               480 	push	_bp
+   0002 85 81*00            481 	mov	_bp,sp
+   0005 05 81               482 	inc	sp
+   0007 85 82*26            483 	mov	_pinno,dpl
+                            484 ;	../fb_app_in8.c:59: unsigned char objoffset=8;
+   000A A8*00               485 	mov	r0,_bp
+   000C 08                  486 	inc	r0
+   000D 76 08               487 	mov	@r0,#0x08
+                            488 ;	../fb_app_in8.c:60: unsigned char typ=0;
+                            489 ;	../fb_app_in8.c:62: timer_base=0;
+                            490 ;	../fb_app_in8.c:63: para_value=0;
+                            491 ;	../fb_app_in8.c:67: pinnoX4=pinno*4;
+   000F E4                  492 	clr	a
+   0010 FE                  493 	mov	r6,a
+   0011 F5*05               494 	mov	_timer_base,a
+   0013 F5*27               495 	mov	_para_value,a
+   0015 E5*26               496 	mov	a,_pinno
+   0017 25*26               497 	add	a,_pinno
+   0019 25 E0               498 	add	a,acc
+                            499 ;	../fb_app_in8.c:68: para_adr=0xD5+(pinnoX4);
+   001B F5*24               500 	mov	_pinnoX4,a
+   001D 24 D5               501 	add	a,#0xD5
+   001F F5*25               502 	mov	_para_adr,a
+                            503 ;	../fb_app_in8.c:70: if (debounce(pinno))			// Entprellzeit abwarten und prüfen
+   0021 85*26 82            504 	mov	dpl,_pinno
+   0024 C0 06               505 	push	ar6
+   0026 12s06rEF            506 	lcall	_debounce
+   0029 E5 82               507 	mov	a,dpl
+   002B D0 06               508 	pop	ar6
+   002D 70 03               509 	jnz	00212$
+   002F 02s04r40            510 	ljmp	00159$
+   0032                     511 00212$:
+                            512 ;	../fb_app_in8.c:72: timer_base=(eeprom[0xF6+((pinno+1)>>1)]>>(4*((pinno&0x01)^0x01)))&0x07  ;
+   0032 AC*26               513 	mov	r4,_pinno
+   0034 7D 00               514 	mov	r5,#0x00
+   0036 0C                  515 	inc	r4
+   0037 BC 00 01            516 	cjne	r4,#0x00,00213$
+   003A 0D                  517 	inc	r5
+   003B                     518 00213$:
+   003B ED                  519 	mov	a,r5
+   003C A2 E7               520 	mov	c,acc.7
+   003E 13                  521 	rrc	a
+   003F CC                  522 	xch	a,r4
+   0040 13                  523 	rrc	a
+   0041 CC                  524 	xch	a,r4
+   0042 74 F6               525 	mov	a,#0xF6
+   0044 2C                  526 	add	a,r4
+   0045 90s00r00            527 	mov	dptr,#_eeprom
+   0048 93                  528 	movc	a,@a+dptr
+   0049 FD                  529 	mov	r5,a
+   004A 74 01               530 	mov	a,#0x01
+   004C 55*26               531 	anl	a,_pinno
+   004E 64 01               532 	xrl	a,#0x01
+   0050 75 F0 04            533 	mov	b,#0x04
+   0053 A4                  534 	mul	ab
+   0054 F5 F0               535 	mov	b,a
+   0056 05 F0               536 	inc	b
+   0058 ED                  537 	mov	a,r5
+   0059 80 02               538 	sjmp	00215$
+   005B                     539 00214$:
+   005B C3                  540 	clr	c
+   005C 13                  541 	rrc	a
+   005D                     542 00215$:
+   005D D5 F0 FB            543 	djnz	b,00214$
+   0060 54 07               544 	anl	a,#0x07
+   0062 F5*05               545 	mov	_timer_base,a
+                            546 ;	../fb_app_in8.c:73: st_Flanke=(((portbuffer>>pinno)&0x01)==0) && (((p0h>>pinno)&0x01)==1);
+   0064 85*26 F0            547 	mov	b,_pinno
+   0067 05 F0               548 	inc	b
+   0069 E5*00               549 	mov	a,_portbuffer
+   006B 80 02               550 	sjmp	00217$
+   006D                     551 00216$:
+   006D C3                  552 	clr	c
+   006E 13                  553 	rrc	a
+   006F                     554 00217$:
+   006F D5 F0 FB            555 	djnz	b,00216$
+   0072 54 01               556 	anl	a,#0x01
+   0074 FD                  557 	mov	r5,a
+   0075 B4 01 00            558 	cjne	a,#0x01,00218$
+   0078                     559 00218$:
+   0078 E4                  560 	clr	a
+   0079 33                  561 	rlc	a
+   007A FD                  562 	mov	r5,a
+   007B 60 16               563 	jz	00161$
+   007D 85*26 F0            564 	mov	b,_pinno
+   0080 05 F0               565 	inc	b
+   0082 E5*01               566 	mov	a,_p0h
+   0084 80 02               567 	sjmp	00221$
+   0086                     568 00220$:
+   0086 C3                  569 	clr	c
+   0087 13                  570 	rrc	a
+   0088                     571 00221$:
+   0088 D5 F0 FB            572 	djnz	b,00220$
+   008B 54 01               573 	anl	a,#0x01
+   008D FD                  574 	mov	r5,a
+   008E BD 01 02            575 	cjne	r5,#0x01,00222$
+   0091 80 04               576 	sjmp	00162$
+   0093                     577 00222$:
+   0093                     578 00161$:
+   0093 C2*00               579 	clr	b0
+   0095 80 02               580 	sjmp	00163$
+   0097                     581 00162$:
+   0097 D2*00               582 	setb	b0
+   0099                     583 00163$:
+   0099 A2*00               584 	mov	c,b0
+   009B 92*02               585 	mov	_st_Flanke,c
+                            586 ;	../fb_app_in8.c:74: timer_state=timerstate[pinno];
+   009D E5*26               587 	mov	a,_pinno
+   009F 24r1B               588 	add	a,#_timerstate
+   00A1 F9                  589 	mov	r1,a
+   00A2 87*06               590 	mov	_timer_state,@r1
+                            591 ;	../fb_app_in8.c:76: switch ((eeprom[0xCE+(pinno>>1)] >> ((pinno & 0x01)*4)) & 0x0F)	// Funktion des Eingangs
+   00A4 E5*26               592 	mov	a,_pinno
+   00A6 C3                  593 	clr	c
+   00A7 13                  594 	rrc	a
+   00A8 24 CE               595 	add	a,#0xCE
+   00AA 90s00r00            596 	mov	dptr,#_eeprom
+   00AD 93                  597 	movc	a,@a+dptr
+   00AE FD                  598 	mov	r5,a
+   00AF 74 01               599 	mov	a,#0x01
+   00B1 55*26               600 	anl	a,_pinno
+   00B3 75 F0 04            601 	mov	b,#0x04
+   00B6 A4                  602 	mul	ab
+   00B7 F5 F0               603 	mov	b,a
+   00B9 05 F0               604 	inc	b
+   00BB ED                  605 	mov	a,r5
+   00BC 80 02               606 	sjmp	00224$
+   00BE                     607 00223$:
+   00BE C3                  608 	clr	c
+   00BF 13                  609 	rrc	a
+   00C0                     610 00224$:
+   00C0 D5 F0 FB            611 	djnz	b,00223$
+   00C3 54 0F               612 	anl	a,#0x0F
+   00C5 FD                  613 	mov  r5,a
+   00C6 24 F7               614 	add	a,#0xff - 0x08
+   00C8 50 03               615 	jnc	00225$
+   00CA 02s04r39            616 	ljmp	00156$
+   00CD                     617 00225$:
+   00CD ED                  618 	mov	a,r5
+   00CE 2D                  619 	add	a,r5
+   00CF 2D                  620 	add	a,r5
+   00D0 90s00rD4            621 	mov	dptr,#00226$
+   00D3 73                  622 	jmp	@a+dptr
+   00D4                     623 00226$:
+   00D4 02s04r39            624 	ljmp	00156$
+   00D7 02s00rEF            625 	ljmp	00101$
+   00DA 02s01r0F            626 	ljmp	00102$
+   00DD 02s02r54            627 	ljmp	00124$
+   00E0 02s03r30            628 	ljmp	00138$
+   00E3 02s03rDB            629 	ljmp	00148$
+   00E6 02s04r39            630 	ljmp	00156$
+   00E9 02s03r3A            631 	ljmp	00139$
+   00EC 02s03r3D            632 	ljmp	00140$
+                            633 ;	../fb_app_in8.c:78: case 0x01:				// Funktion Schalten
+   00EF                     634 00101$:
+                            635 ;	../fb_app_in8.c:79: schalten(st_Flanke,pinno);			// Flanke Eingang x.1
+   00EF A2*02               636 	mov	c,_st_Flanke
+   00F1 92 F0               637 	mov	b[0],c
+   00F3 85 F0*00            638 	mov	bits,b
+   00F6 85*26 82            639 	mov	dpl,_pinno
+   00F9 12s06r9A            640 	lcall	_schalten
+                            641 ;	../fb_app_in8.c:82: schalten(st_Flanke,pinno+8);		// Flanke Eingang x.2
+   00FC 74 08               642 	mov	a,#0x08
+   00FE 25*26               643 	add	a,_pinno
+   0100 F5 82               644 	mov	dpl,a
+   0102 A2*02               645 	mov	c,_st_Flanke
+   0104 92 F0               646 	mov	b[0],c
+   0106 85 F0*00            647 	mov	bits,b
+   0109 12s06r9A            648 	lcall	_schalten
+                            649 ;	../fb_app_in8.c:96: break;  
+   010C 02s04r39            650 	ljmp	00156$
+                            651 ;	../fb_app_in8.c:97: case 0x02:				// Funktion Dimmen
+   010F                     652 00102$:
+                            653 ;	../fb_app_in8.c:102: if (st_Flanke){// Taster gedrueckt -> schauen wie lange gehalten
+   010F 20*02 03            654 	jb	_st_Flanke,00227$
+   0112 02s01r98            655 	ljmp	00122$
+   0115                     656 00227$:
+                            657 ;	../fb_app_in8.c:103: timercnt[pinno]=0x80+(eeprom[0xD7+(pinnoX4)]&0x7F);	// Faktor/Dauer			
+   0115 E5*26               658 	mov	a,_pinno
+   0117 24r12               659 	add	a,#_timercnt
+   0119 F9                  660 	mov	r1,a
+   011A 74 D7               661 	mov	a,#0xD7
+   011C 25*24               662 	add	a,_pinnoX4
+   011E 90s00r00            663 	mov	dptr,#_eeprom
+   0121 93                  664 	movc	a,@a+dptr
+   0122 FD                  665 	mov	r5,a
+   0123 74 7F               666 	mov	a,#0x7F
+   0125 5D                  667 	anl	a,r5
+   0126 24 80               668 	add	a,#0x80
+   0128 F7                  669 	mov	@r1,a
+                            670 ;	../fb_app_in8.c:104: timerbase[pinno]=timer_base;
+   0129 E5*26               671 	mov	a,_pinno
+   012B 24r09               672 	add	a,#_timerbase
+   012D F8                  673 	mov	r0,a
+   012E A6*05               674 	mov	@r0,_timer_base
+                            675 ;	../fb_app_in8.c:106: objval=(read_obj_value(pinno+8)>>3)&0x01;
+   0130 74 08               676 	mov	a,#0x08
+   0132 25*26               677 	add	a,_pinno
+   0134 F5 82               678 	mov	dpl,a
+   0136 12s0Cr5B            679 	lcall	_read_obj_value
+   0139 AA 82               680 	mov	r2,dpl
+   013B AB 83               681 	mov	r3,dph
+   013D AC F0               682 	mov	r4,b
+   013F EA                  683 	mov	a,r2
+   0140 A2 E3               684 	mov	c,acc[3]
+   0142 E4                  685 	clr	a
+   0143 33                  686 	rlc	a
+   0144 FA                  687 	mov	r2,a
+   0145 24 FF               688 	add	a,#0xff
+   0147 92*00               689 	mov	_objval,c
+                            690 ;	../fb_app_in8.c:107: switch (eeprom[para_adr]&0x70) {
+   0149 85*25 82            691 	mov	dpl,_para_adr
+   014C 75 83s00            692 	mov	dph,#(_eeprom >> 8)
+   014F E4                  693 	clr	a
+   0150 93                  694 	movc	a,@a+dptr
+   0151 FD                  695 	mov	r5,a
+   0152 53 05 70            696 	anl	ar5,#0x70
+   0155 BD 00 02            697 	cjne	r5,#0x00,00228$
+   0158 80 0A               698 	sjmp	00103$
+   015A                     699 00228$:
+   015A BD 10 02            700 	cjne	r5,#0x10,00229$
+   015D 80 09               701 	sjmp	00105$
+   015F                     702 00229$:
+                            703 ;	../fb_app_in8.c:108: case 0x00:	// UM Dimmen
+   015F BD 30 0A            704 	cjne	r5,#0x30,00106$
+   0162 80 04               705 	sjmp	00105$
+   0164                     706 00103$:
+                            707 ;	../fb_app_in8.c:109: objval = !objval;	// Dimmrichtung ändern
+   0164 B2*00               708 	cpl	_objval
+                            709 ;	../fb_app_in8.c:110: break;
+                            710 ;	../fb_app_in8.c:112: case 0x30:
+   0166 80 06               711 	sjmp	00107$
+   0168                     712 00105$:
+                            713 ;	../fb_app_in8.c:113: objval=1;
+   0168 D2*00               714 	setb	_objval
+                            715 ;	../fb_app_in8.c:114: break;
+                            716 ;	../fb_app_in8.c:115: default:	
+   016A 80 02               717 	sjmp	00107$
+   016C                     718 00106$:
+                            719 ;	../fb_app_in8.c:118: objval=0;
+   016C C2*00               720 	clr	_objval
+                            721 ;	../fb_app_in8.c:119: }
+   016E                     722 00107$:
+                            723 ;	../fb_app_in8.c:120: if(objval){	// wenn heller dimmen soll
+   016E 30*00 15            724 	jnb	_objval,00109$
+                            725 ;	../fb_app_in8.c:121: timer_state = ((eeprom[para_adr+0x01]&0x38)>>3)+ 0x48;	// dimmen
+   0171 E5*25               726 	mov	a,_para_adr
+   0173 04                  727 	inc	a
+   0174 90s00r00            728 	mov	dptr,#_eeprom
+   0177 93                  729 	movc	a,@a+dptr
+   0178 54 38               730 	anl	a,#0x38
+   017A C4                  731 	swap	a
+   017B 23                  732 	rl	a
+   017C 54 1F               733 	anl	a,#0x1F
+   017E FD                  734 	mov	r5,a
+   017F 24 48               735 	add	a,#0x48
+   0181 F5*06               736 	mov	_timer_state,a
+   0183 02s04r39            737 	ljmp	00156$
+   0186                     738 00109$:
+                            739 ;	../fb_app_in8.c:124: timer_state = (eeprom[para_adr+0x01]&0x07)+ 0x40;	// dimmen
+   0186 E5*25               740 	mov	a,_para_adr
+   0188 04                  741 	inc	a
+   0189 90s00r00            742 	mov	dptr,#_eeprom
+   018C 93                  743 	movc	a,@a+dptr
+   018D FD                  744 	mov	r5,a
+   018E 74 07               745 	mov	a,#0x07
+   0190 5D                  746 	anl	a,r5
+   0191 24 40               747 	add	a,#0x40
+   0193 F5*06               748 	mov	_timer_state,a
+   0195 02s04r39            749 	ljmp	00156$
+   0198                     750 00122$:
+                            751 ;	../fb_app_in8.c:128: if ((timer_state & 0x50)== 0x40) {		// wenn delaytimer noch laeuft, dann Schalten, also EIS1 telegramm senden
+   0198 74 50               752 	mov	a,#0x50
+   019A 55*06               753 	anl	a,_timer_state
+   019C FD                  754 	mov	r5,a
+   019D BD 40 54            755 	cjne	r5,#0x40,00119$
+                            756 ;	../fb_app_in8.c:130: objval = read_obj_value(pinno);
+   01A0 85*26 82            757 	mov	dpl,_pinno
+   01A3 12s0Cr5B            758 	lcall	_read_obj_value
+   01A6 AA 82               759 	mov	r2,dpl
+   01A8 AB 83               760 	mov	r3,dph
+   01AA AC F0               761 	mov	r4,b
+   01AC FD                  762 	mov	r5,a
+   01AD EA                  763 	mov	a,r2
+   01AE 4B                  764 	orl	a,r3
+   01AF 4C                  765 	orl	a,r4
+   01B0 4D                  766 	orl	a,r5
+   01B1 24 FF               767 	add	a,#0xff
+   01B3 92*00               768 	mov	_objval,c
+                            769 ;	../fb_app_in8.c:131: switch (eeprom[para_adr]&0x70) {//Bedienkonzept angucken
+   01B5 85*25 82            770 	mov	dpl,_para_adr
+   01B8 75 83s00            771 	mov	dph,#(_eeprom >> 8)
+   01BB E4                  772 	clr	a
+   01BC 93                  773 	movc	a,@a+dptr
+   01BD FD                  774 	mov	r5,a
+   01BE 53 05 70            775 	anl	ar5,#0x70
+   01C1 BD 10 02            776 	cjne	r5,#0x10,00234$
+   01C4 80 05               777 	sjmp	00111$
+   01C6                     778 00234$:
+                            779 ;	../fb_app_in8.c:132: case 0x10:	// zweiflaechen ein
+   01C6 BD 20 0A            780 	cjne	r5,#0x20,00113$
+   01C9 80 04               781 	sjmp	00112$
+   01CB                     782 00111$:
+                            783 ;	../fb_app_in8.c:133: objval=1;
+   01CB D2*00               784 	setb	_objval
+                            785 ;	../fb_app_in8.c:134: break;
+                            786 ;	../fb_app_in8.c:135: case 0x20:	// zweiflaechen aus
+   01CD 80 06               787 	sjmp	00114$
+   01CF                     788 00112$:
+                            789 ;	../fb_app_in8.c:136: objval=0;
+   01CF C2*00               790 	clr	_objval
+                            791 ;	../fb_app_in8.c:137: break;
+                            792 ;	../fb_app_in8.c:138: default:	
+   01D1 80 02               793 	sjmp	00114$
+   01D3                     794 00113$:
+                            795 ;	../fb_app_in8.c:142: objval = !objval;
+   01D3 B2*00               796 	cpl	_objval
+                            797 ;	../fb_app_in8.c:143: }
+   01D5                     798 00114$:
+                            799 ;	../fb_app_in8.c:144: write_send(pinno,objval);
+   01D5 A2*00               800 	mov	c,_objval
+   01D7 E4                  801 	clr	a
+   01D8 33                  802 	rlc	a
+   01D9 FC                  803 	mov	r4,a
+   01DA 7D 00               804 	mov	r5,#0x00
+   01DC C0 04               805 	push	ar4
+   01DE C0 05               806 	push	ar5
+   01E0 85*26 82            807 	mov	dpl,_pinno
+   01E3 12s0ArEB            808 	lcall	_write_send
+   01E6 15 81               809 	dec	sp
+   01E8 15 81               810 	dec	sp
+                            811 ;	../fb_app_in8.c:145: timercnt[pinno]=0;
+   01EA E5*26               812 	mov	a,_pinno
+   01EC 24r12               813 	add	a,#_timercnt
+   01EE F8                  814 	mov	r0,a
+   01EF 76 00               815 	mov	@r0,#0x00
+   01F1 02s04r39            816 	ljmp	00156$
+   01F4                     817 00119$:
+                            818 ;	../fb_app_in8.c:148: tmp=read_obj_value(pinno+8);
+   01F4 74 08               819 	mov	a,#0x08
+   01F6 25*26               820 	add	a,_pinno
+   01F8 F5 82               821 	mov	dpl,a
+   01FA 12s0Cr5B            822 	lcall	_read_obj_value
+   01FD AA 82               823 	mov	r2,dpl
+   01FF AB 83               824 	mov	r3,dph
+   0201 AC F0               825 	mov	r4,b
+                            826 ;	../fb_app_in8.c:149: if (eeprom[0xD5+(pinnoX4)] & 0x08) {	// ... natuerlich nur wenn parameter dementsprechend 
+   0203 74 D5               827 	mov	a,#0xD5
+   0205 25*24               828 	add	a,_pinnoX4
+   0207 90s00r00            829 	mov	dptr,#_eeprom
+   020A 93                  830 	movc	a,@a+dptr
+   020B FD                  831 	mov	r5,a
+   020C 30 E3 19            832 	jnb	acc.3,00116$
+                            833 ;	../fb_app_in8.c:150: write_send(pinno+8, tmp & 0x08);		// Stop Telegramm
+   020F 74 08               834 	mov	a,#0x08
+   0211 5A                  835 	anl	a,r2
+   0212 FD                  836 	mov	r5,a
+   0213 7C 00               837 	mov	r4,#0x00
+   0215 74 08               838 	mov	a,#0x08
+   0217 25*26               839 	add	a,_pinno
+   0219 F5 82               840 	mov	dpl,a
+   021B C0 05               841 	push	ar5
+   021D C0 04               842 	push	ar4
+   021F 12s0ArEB            843 	lcall	_write_send
+   0222 15 81               844 	dec	sp
+   0224 15 81               845 	dec	sp
+   0226 80 1F               846 	sjmp	00117$
+   0228                     847 00116$:
+                            848 ;	../fb_app_in8.c:152: else write_obj_value(pinno+8,tmp & 0x08);	// auch wenn Stopp Telegramm nicht gesendet wird, Objektwert auf 0 setzen
+   0228 74 08               849 	mov	a,#0x08
+   022A 5A                  850 	anl	a,r2
+   022B FD                  851 	mov	r5,a
+   022C E4                  852 	clr	a
+   022D FF                  853 	mov	r7,a
+   022E FE                  854 	mov	r6,a
+   022F FC                  855 	mov	r4,a
+   0230 74 08               856 	mov	a,#0x08
+   0232 25*26               857 	add	a,_pinno
+   0234 F5 82               858 	mov	dpl,a
+   0236 C0 05               859 	push	ar5
+   0238 C0 07               860 	push	ar7
+   023A C0 06               861 	push	ar6
+   023C C0 04               862 	push	ar4
+   023E 12s0Dr2C            863 	lcall	_write_obj_value
+   0241 E5 81               864 	mov	a,sp
+   0243 24 FC               865 	add	a,#0xfc
+   0245 F5 81               866 	mov	sp,a
+   0247                     867 00117$:
+                            868 ;	../fb_app_in8.c:153: timer_state=0;
+   0247 75*06 00            869 	mov	_timer_state,#0x00
+                            870 ;	../fb_app_in8.c:154: timercnt[pinno]=0;
+   024A E5*26               871 	mov	a,_pinno
+   024C 24r12               872 	add	a,#_timercnt
+   024E F8                  873 	mov	r0,a
+   024F 76 00               874 	mov	@r0,#0x00
+                            875 ;	../fb_app_in8.c:159: break;
+   0251 02s04r39            876 	ljmp	00156$
+                            877 ;	../fb_app_in8.c:161: case 0x03:				//Funktion Jalousie
+   0254                     878 00124$:
+                            879 ;	../fb_app_in8.c:165: n=0xD8+(pinno*4);
+   0254 E5*26               880 	mov	a,_pinno
+   0256 25*26               881 	add	a,_pinno
+   0258 25 E0               882 	add	a,acc
+   025A 24 D8               883 	add	a,#0xD8
+                            884 ;	../fb_app_in8.c:166: para_value=(eeprom[n]&0x30)>>4;//Jalofunktion holen
+   025C FD                  885 	mov	r5,a
+   025D F5 82               886 	mov	dpl,a
+   025F 75 83s00            887 	mov	dph,#(_eeprom >> 8)
+   0262 E4                  888 	clr	a
+   0263 93                  889 	movc	a,@a+dptr
+   0264 54 30               890 	anl	a,#0x30
+   0266 FC                  891 	mov	r4,a
+   0267 C4                  892 	swap	a
+   0268 54 0F               893 	anl	a,#0x0F
+   026A F5*27               894 	mov	_para_value,a
+                            895 ;	../fb_app_in8.c:167: switch (para_value){
+   026C 74 01               896 	mov	a,#0x01
+   026E B5*27 02            897 	cjne	a,_para_value,00237$
+   0271 80 0E               898 	sjmp	00125$
+   0273                     899 00237$:
+   0273 74 02               900 	mov	a,#0x02
+   0275 B5*27 02            901 	cjne	a,_para_value,00238$
+   0278 80 0B               902 	sjmp	00126$
+   027A                     903 00238$:
+   027A 74 03               904 	mov	a,#0x03
+                            905 ;	../fb_app_in8.c:168: case 1:		//auf
+   027C B5*27 2D            906 	cjne	a,_para_value,00128$
+   027F 80 08               907 	sjmp	00127$
+   0281                     908 00125$:
+                            909 ;	../fb_app_in8.c:169: jobj=0;
+   0281 C2*01               910 	clr	_jobj
+                            911 ;	../fb_app_in8.c:170: break;
+                            912 ;	../fb_app_in8.c:171: case 2:		//ab
+   0283 80 27               913 	sjmp	00128$
+   0285                     914 00126$:
+                            915 ;	../fb_app_in8.c:172: jobj=1;
+   0285 D2*01               916 	setb	_jobj
+                            917 ;	../fb_app_in8.c:173: break;
+                            918 ;	../fb_app_in8.c:174: case 3:		//UM
+   0287 80 23               919 	sjmp	00128$
+   0289                     920 00127$:
+                            921 ;	../fb_app_in8.c:175: jobj=read_obj_value(pinno+8)^0x01;//neues Jaloobj invers zum langzeit
+   0289 C0 05               922 	push	ar5
+   028B 74 08               923 	mov	a,#0x08
+   028D 25*26               924 	add	a,_pinno
+   028F F5 82               925 	mov	dpl,a
+   0291 C0 05               926 	push	ar5
+   0293 12s0Cr5B            927 	lcall	_read_obj_value
+   0296 AF 82               928 	mov	r7,dpl
+   0298 AE 83               929 	mov	r6,dph
+   029A AC F0               930 	mov	r4,b
+   029C FB                  931 	mov	r3,a
+   029D D0 05               932 	pop	ar5
+   029F 63 07 01            933 	xrl	ar7,#0x01
+   02A2 EF                  934 	mov	a,r7
+   02A3 4E                  935 	orl	a,r6
+   02A4 4C                  936 	orl	a,r4
+   02A5 4B                  937 	orl	a,r3
+   02A6 24 FF               938 	add	a,#0xff
+   02A8 92*01               939 	mov	_jobj,c
+                            940 ;	../fb_app_in8.c:311: timerstate[pinno]=timer_state;
+   02AA D0 05               941 	pop	ar5
+                            942 ;	../fb_app_in8.c:177: }
+   02AC                     943 00128$:
+                            944 ;	../fb_app_in8.c:178: if (st_Flanke){// Taster gedrueckt -> schauen wie lange gehalten
+   02AC 30*02 5A            945 	jnb	_st_Flanke,00136$
+                            946 ;	../fb_app_in8.c:179: if(eeprom[n]& 0x08){	//wenn Bedienkonzept lang-kurz ()
+   02AF 8D 82               947 	mov	dpl,r5
+   02B1 75 83s00            948 	mov	dph,#(_eeprom >> 8)
+   02B4 E4                  949 	clr	a
+   02B5 93                  950 	movc	a,@a+dptr
+   02B6 FC                  951 	mov	r4,a
+   02B7 30 E3 13            952 	jnb	acc.3,00130$
+                            953 ;	../fb_app_in8.c:181: timer_state = jobj+0x80;
+   02BA A2*01               954 	mov	c,_jobj
+   02BC E4                  955 	clr	a
+   02BD 33                  956 	rlc	a
+   02BE FC                  957 	mov	r4,a
+   02BF 24 80               958 	add	a,#0x80
+   02C1 F5*06               959 	mov	_timer_state,a
+                            960 ;	../fb_app_in8.c:182: timercnt[pinno]=0x80;//langzeit in delay_timer SOFORT ausführen
+   02C3 E5*26               961 	mov	a,_pinno
+   02C5 24r12               962 	add	a,#_timercnt
+   02C7 F8                  963 	mov	r0,a
+   02C8 76 80               964 	mov	@r0,#0x80
+   02CA 02s04r39            965 	ljmp	00156$
+   02CD                     966 00130$:
+                            967 ;	../fb_app_in8.c:185: write_send( pinno, jobj);	// Kurzzeit telegramm immer bei Drücken senden
+   02CD A2*01               968 	mov	c,_jobj
+   02CF E4                  969 	clr	a
+   02D0 33                  970 	rlc	a
+   02D1 FB                  971 	mov	r3,a
+   02D2 7C 00               972 	mov	r4,#0x00
+   02D4 C0 03               973 	push	ar3
+   02D6 C0 04               974 	push	ar4
+   02D8 85*26 82            975 	mov	dpl,_pinno
+   02DB 12s0ArEB            976 	lcall	_write_send
+   02DE 15 81               977 	dec	sp
+   02E0 15 81               978 	dec	sp
+                            979 ;	../fb_app_in8.c:186: timercnt[pinno]=0x80+eeprom[0xD6+(pinno*4)];//Faktor Dauer )
+   02E2 E5*26               980 	mov	a,_pinno
+   02E4 24r12               981 	add	a,#_timercnt
+   02E6 F9                  982 	mov	r1,a
+   02E7 E5*26               983 	mov	a,_pinno
+   02E9 25*26               984 	add	a,_pinno
+   02EB 25 E0               985 	add	a,acc
+   02ED 24 D6               986 	add	a,#0xD6
+   02EF 90s00r00            987 	mov	dptr,#_eeprom
+   02F2 93                  988 	movc	a,@a+dptr
+   02F3 24 80               989 	add	a,#0x80
+   02F5 F7                  990 	mov	@r1,a
+                            991 ;	../fb_app_in8.c:187: timerbase[pinno]=timer_base;
+   02F6 E5*26               992 	mov	a,_pinno
+   02F8 24r09               993 	add	a,#_timerbase
+   02FA F8                  994 	mov	r0,a
+   02FB A6*05               995 	mov	@r0,_timer_base
+                            996 ;	../fb_app_in8.c:190: timer_state = jobj+0x80;
+   02FD A2*01               997 	mov	c,_jobj
+   02FF E4                  998 	clr	a
+   0300 33                  999 	rlc	a
+   0301 FC                 1000 	mov	r4,a
+   0302 24 80              1001 	add	a,#0x80
+   0304 F5*06              1002 	mov	_timer_state,a
+   0306 02s04r39           1003 	ljmp	00156$
+   0309                    1004 00136$:
+                           1005 ;	../fb_app_in8.c:194: if (timer_state & 0x10) write_send( pinno, jobj);	// wenn delaytimer noch laueft und in T2 ist, dann kurzzeit telegramm senden
+   0309 E5*06              1006 	mov	a,_timer_state
+   030B 30 E4 18           1007 	jnb	acc.4,00133$
+   030E A2*01              1008 	mov	c,_jobj
+   0310 E4                 1009 	clr	a
+   0311 33                 1010 	rlc	a
+   0312 FB                 1011 	mov	r3,a
+   0313 7C 00              1012 	mov	r4,#0x00
+   0315 C0 03              1013 	push	ar3
+   0317 C0 04              1014 	push	ar4
+   0319 85*26 82           1015 	mov	dpl,_pinno
+   031C 12s0ArEB           1016 	lcall	_write_send
+   031F 15 81              1017 	dec	sp
+   0321 15 81              1018 	dec	sp
+   0323 02s04r39           1019 	ljmp	00156$
+   0326                    1020 00133$:
+                           1021 ;	../fb_app_in8.c:195: else timercnt[pinno]=0;	// T2 bereits abgelaufen
+   0326 E5*26              1022 	mov	a,_pinno
+   0328 24r12              1023 	add	a,#_timercnt
+   032A F8                 1024 	mov	r0,a
+   032B 76 00              1025 	mov	@r0,#0x00
+                           1026 ;	../fb_app_in8.c:197: break;
+   032D 02s04r39           1027 	ljmp	00156$
+                           1028 ;	../fb_app_in8.c:204: case 0x04:// Dimmwertgeber
+   0330                    1029 00138$:
+                           1030 ;	../fb_app_in8.c:205: para_value=0xFF;
+   0330 75*27 FF           1031 	mov	_para_value,#0xFF
+                           1032 ;	../fb_app_in8.c:206: typ=0x01;
+   0333 7E 01              1033 	mov	r6,#0x01
+                           1034 ;	../fb_app_in8.c:207: objoffset=0;//läuft absichtlich in den nächsten case
+   0335 A8*00              1035 	mov	r0,_bp
+   0337 08                 1036 	inc	r0
+   0338 76 00              1037 	mov	@r0,#0x00
+                           1038 ;	../fb_app_in8.c:208: case 0x07:// Temperaturwertgeber
+   033A                    1039 00139$:
+                           1040 ;	../fb_app_in8.c:210: typ=typ|0x02;//kein objoffset zugewiesen,d.h. 8,da mit 8 initialisiert
+   033A 43 06 02           1041 	orl	ar6,#0x02
+                           1042 ;	../fb_app_in8.c:211: case 0x08:// Helligkeitswertgeber,
+   033D                    1043 00140$:
+                           1044 ;	../fb_app_in8.c:212: para_value=para_value |0x1F;
+   033D 43*27 1F           1045 	orl	_para_value,#0x1F
+                           1046 ;	../fb_app_in8.c:213: typ=typ|0x04;//kein objoffset zugewiesen,d.h. 8,da mit 8 initialisiert
+   0340 43 06 04           1047 	orl	ar6,#0x04
+                           1048 ;	../fb_app_in8.c:214: n=0xD5+(pinno*4);
+   0343 E5*26              1049 	mov	a,_pinno
+   0345 25*26              1050 	add	a,_pinno
+   0347 25 E0              1051 	add	a,acc
+   0349 24 D5              1052 	add	a,#0xD5
+                           1053 ;	../fb_app_in8.c:215: tmp=(((eeprom[n]&0x04)>>2)|(eeprom[n+1]&0x80)>>6);//in tmp steigend fallend reaktion
+   034B FD                 1054 	mov	r5,a
+   034C F5 82              1055 	mov	dpl,a
+   034E 75 83s00           1056 	mov	dph,#(_eeprom >> 8)
+   0351 E4                 1057 	clr	a
+   0352 93                 1058 	movc	a,@a+dptr
+   0353 54 04              1059 	anl	a,#0x04
+   0355 03                 1060 	rr	a
+   0356 03                 1061 	rr	a
+   0357 54 3F              1062 	anl	a,#0x3F
+   0359 FC                 1063 	mov	r4,a
+   035A ED                 1064 	mov	a,r5
+   035B 04                 1065 	inc	a
+   035C 90s00r00           1066 	mov	dptr,#_eeprom
+   035F 93                 1067 	movc	a,@a+dptr
+   0360 54 80              1068 	anl	a,#0x80
+   0362 23                 1069 	rl	a
+   0363 23                 1070 	rl	a
+   0364 54 03              1071 	anl	a,#0x03
+   0366 FB                 1072 	mov	r3,a
+   0367 42 04              1073 	orl	ar4,a
+   0369 8C 02              1074 	mov	ar2,r4
+                           1075 ;	../fb_app_in8.c:216: if (st_Flanke){// Taster gedrueckt       in tmp bit0 steigend, bit1 fallend
+   036B 30*02 37           1076 	jnb	_st_Flanke,00146$
+                           1077 ;	../fb_app_in8.c:218: if(tmp&0x01) write_send( pinno+objoffset, eis5conversion((eeprom[n+2]& para_value),typ));	//wert senden
+   036E EA                 1078 	mov	a,r2
+   036F 20 E0 03           1079 	jb	acc.0,00244$
+   0372 02s04r39           1080 	ljmp	00156$
+   0375                    1081 00244$:
+   0375 74 02              1082 	mov	a,#0x02
+   0377 2D                 1083 	add	a,r5
+   0378 90s00r00           1084 	mov	dptr,#_eeprom
+   037B 93                 1085 	movc	a,@a+dptr
+   037C FC                 1086 	mov	r4,a
+   037D E5*27              1087 	mov	a,_para_value
+   037F 52 04              1088 	anl	ar4,a
+   0381 C0 06              1089 	push	ar6
+   0383 8C 82              1090 	mov	dpl,r4
+   0385 12s04r45           1091 	lcall	_eis5conversion
+   0388 AB 82              1092 	mov	r3,dpl
+   038A AC 83              1093 	mov	r4,dph
+   038C 15 81              1094 	dec	sp
+   038E A8*00              1095 	mov	r0,_bp
+   0390 08                 1096 	inc	r0
+   0391 E6                 1097 	mov	a,@r0
+   0392 25*26              1098 	add	a,_pinno
+   0394 FF                 1099 	mov	r7,a
+   0395 C0 03              1100 	push	ar3
+   0397 C0 04              1101 	push	ar4
+   0399 8F 82              1102 	mov	dpl,r7
+   039B 12s0ArEB           1103 	lcall	_write_send
+   039E 15 81              1104 	dec	sp
+   03A0 15 81              1105 	dec	sp
+   03A2 02s04r39           1106 	ljmp	00156$
+   03A5                    1107 00146$:
+                           1108 ;	../fb_app_in8.c:221: if (tmp>=0x02) write_send( pinno+objoffset, eis5conversion(eeprom[n+tmp]& para_value,typ));
+   03A5 BA 02 00           1109 	cjne	r2,#0x02,00245$
+   03A8                    1110 00245$:
+   03A8 50 03              1111 	jnc	00246$
+   03AA 02s04r39           1112 	ljmp	00156$
+   03AD                    1113 00246$:
+   03AD EA                 1114 	mov	a,r2
+   03AE 2D                 1115 	add	a,r5
+   03AF 90s00r00           1116 	mov	dptr,#_eeprom
+   03B2 93                 1117 	movc	a,@a+dptr
+   03B3 FF                 1118 	mov	r7,a
+   03B4 E5*27              1119 	mov	a,_para_value
+   03B6 52 07              1120 	anl	ar7,a
+   03B8 C0 06              1121 	push	ar6
+   03BA 8F 82              1122 	mov	dpl,r7
+   03BC 12s04r45           1123 	lcall	_eis5conversion
+   03BF AE 82              1124 	mov	r6,dpl
+   03C1 AF 83              1125 	mov	r7,dph
+   03C3 15 81              1126 	dec	sp
+   03C5 A8*00              1127 	mov	r0,_bp
+   03C7 08                 1128 	inc	r0
+   03C8 E6                 1129 	mov	a,@r0
+   03C9 25*26              1130 	add	a,_pinno
+   03CB FC                 1131 	mov	r4,a
+   03CC C0 06              1132 	push	ar6
+   03CE C0 07              1133 	push	ar7
+   03D0 8C 82              1134 	mov	dpl,r4
+   03D2 12s0ArEB           1135 	lcall	_write_send
+   03D5 15 81              1136 	dec	sp
+   03D7 15 81              1137 	dec	sp
+                           1138 ;	../fb_app_in8.c:223: break;
+                           1139 ;	../fb_app_in8.c:225: case 0x05:
+   03D9 80 5E              1140 	sjmp	00156$
+   03DB                    1141 00148$:
+                           1142 ;	../fb_app_in8.c:229: n=0xD5+(pinno*4);
+   03DB E5*26              1143 	mov	a,_pinno
+   03DD 25*26              1144 	add	a,_pinno
+   03DF 25 E0              1145 	add	a,acc
+   03E1 24 D5              1146 	add	a,#0xD5
+                           1147 ;	../fb_app_in8.c:230: para_value=eeprom[n] & 0x0C;
+   03E3 FD                 1148 	mov	r5,a
+   03E4 F5 82              1149 	mov	dpl,a
+   03E6 75 83s00           1150 	mov	dph,#(_eeprom >> 8)
+   03E9 E4                 1151 	clr	a
+   03EA 93                 1152 	movc	a,@a+dptr
+   03EB FF                 1153 	mov	r7,a
+   03EC 74 0C              1154 	mov	a,#0x0C
+   03EE 5F                 1155 	anl	a,r7
+   03EF F5*27              1156 	mov	_para_value,a
+                           1157 ;	../fb_app_in8.c:232: if (st_Flanke){// Taster gedrueckt 
+   03F1 30*02 24           1158 	jnb	_st_Flanke,00154$
+                           1159 ;	../fb_app_in8.c:233: if(para_value!=0x04) write_send( pinno,eeprom[n+2]&0x7F );	// Lichtszenennummer senden
+   03F4 74 04              1160 	mov	a,#0x04
+   03F6 B5*27 02           1161 	cjne	a,_para_value,00248$
+   03F9 80 3E              1162 	sjmp	00156$
+   03FB                    1163 00248$:
+   03FB 74 02              1164 	mov	a,#0x02
+   03FD 2D                 1165 	add	a,r5
+   03FE 90s00r00           1166 	mov	dptr,#_eeprom
+   0401 93                 1167 	movc	a,@a+dptr
+   0402 FF                 1168 	mov	r7,a
+   0403 53 07 7F           1169 	anl	ar7,#0x7F
+   0406 7E 00              1170 	mov	r6,#0x00
+   0408 C0 07              1171 	push	ar7
+   040A C0 06              1172 	push	ar6
+   040C 85*26 82           1173 	mov	dpl,_pinno
+   040F 12s0ArEB           1174 	lcall	_write_send
+   0412 15 81              1175 	dec	sp
+   0414 15 81              1176 	dec	sp
+   0416 80 21              1177 	sjmp	00156$
+   0418                    1178 00154$:
+                           1179 ;	../fb_app_in8.c:236: if(para_value>=0x04) write_send( pinno,eeprom[n+3]&0x7F );	// Lichtszenennummer senden
+   0418 74 FC              1180 	mov	a,#0x100 - 0x04
+   041A 25*27              1181 	add	a,_para_value
+   041C 50 1B              1182 	jnc	00156$
+   041E 74 03              1183 	mov	a,#0x03
+   0420 2D                 1184 	add	a,r5
+   0421 90s00r00           1185 	mov	dptr,#_eeprom
+   0424 93                 1186 	movc	a,@a+dptr
+   0425 FF                 1187 	mov	r7,a
+   0426 53 07 7F           1188 	anl	ar7,#0x7F
+   0429 7E 00              1189 	mov	r6,#0x00
+   042B C0 07              1190 	push	ar7
+   042D C0 06              1191 	push	ar6
+   042F 85*26 82           1192 	mov	dpl,_pinno
+   0432 12s0ArEB           1193 	lcall	_write_send
+   0435 15 81              1194 	dec	sp
+   0437 15 81              1195 	dec	sp
+                           1196 ;	../fb_app_in8.c:310: }
+   0439                    1197 00156$:
+                           1198 ;	../fb_app_in8.c:311: timerstate[pinno]=timer_state;
+   0439 E5*26              1199 	mov	a,_pinno
+   043B 24r1B              1200 	add	a,#_timerstate
+   043D F8                 1201 	mov	r0,a
+   043E A6*06              1202 	mov	@r0,_timer_state
+   0440                    1203 00159$:
+   0440 15 81              1204 	dec	sp
+   0442 D0*00              1205 	pop	_bp
+   0444 22                 1206 	ret
+                           1207 ;------------------------------------------------------------
+                           1208 ;Allocation info for local variables in function 'eis5conversion'
+                           1209 ;------------------------------------------------------------
+                           1210 ;Typ                       Allocated to stack - _bp -3
+                           1211 ;zahl                      Allocated to registers r7 
+                           1212 ;exp                       Allocated to registers r6 
+                           1213 ;wert                      Allocated to registers r4 r5 
+                           1214 ;------------------------------------------------------------
+                           1215 ;	../fb_app_in8.c:323: int eis5conversion(unsigned char zahl,unsigned char Typ)
+                           1216 ;	-----------------------------------------
+                           1217 ;	 function eis5conversion
+                           1218 ;	-----------------------------------------
+   0445                    1219 _eis5conversion:
+   0445 C0*00              1220 	push	_bp
+   0447 85 81*00           1221 	mov	_bp,sp
+   044A AF 82              1222 	mov	r7,dpl
+                           1223 ;	../fb_app_in8.c:325: unsigned char exp=0;
+                           1224 ;	../fb_app_in8.c:326: unsigned int wert=0;
+                           1225 ;	../fb_app_in8.c:327: if (Typ==4){// Helligkeitwert
+   044C E4                 1226 	clr	a
+   044D FE                 1227 	mov	r6,a
+   044E FC                 1228 	mov	r4,a
+   044F FD                 1229 	mov	r5,a
+   0450 E5*00              1230 	mov	a,_bp
+   0452 24 FD              1231 	add	a,#0xfd
+   0454 F8                 1232 	mov	r0,a
+   0455 B6 04 24           1233 	cjne	@r0,#0x04,00102$
+                           1234 ;	../fb_app_in8.c:328: exp=3;// Da kleinster wert 50 lux*100=5000 ==> 5000/8 (exp=3) 
+   0458 7E 03              1235 	mov	r6,#0x03
+                           1236 ;	../fb_app_in8.c:329: wert=zahl*625;//= 625
+   045A 8F 02              1237 	mov	ar2,r7
+   045C 7B 00              1238 	mov	r3,#0x00
+   045E C0 07              1239 	push	ar7
+   0460 C0 06              1240 	push	ar6
+   0462 C0 02              1241 	push	ar2
+   0464 C0 03              1242 	push	ar3
+   0466 90 02 71           1243 	mov	dptr,#0x0271
+   0469 12s00r00           1244 	lcall	__mulint
+   046C AA 82              1245 	mov	r2,dpl
+   046E AB 83              1246 	mov	r3,dph
+   0470 15 81              1247 	dec	sp
+   0472 15 81              1248 	dec	sp
+   0474 D0 06              1249 	pop	ar6
+   0476 D0 07              1250 	pop	ar7
+   0478 8A 04              1251 	mov	ar4,r2
+   047A 8B 05              1252 	mov	ar5,r3
+   047C                    1253 00102$:
+                           1254 ;	../fb_app_in8.c:331: if (Typ==6){// Temperaturwert kleinster wert =1 größter 31
+   047C E5*00              1255 	mov	a,_bp
+   047E 24 FD              1256 	add	a,#0xfd
+   0480 F8                 1257 	mov	r0,a
+   0481 B6 06 0C           1258 	cjne	@r0,#0x06,00104$
+                           1259 ;	../fb_app_in8.c:333: wert=zahl*100;// Hier reicht uns eine 16bit int var
+   0484 EF                 1260 	mov	a,r7
+   0485 75 F0 64           1261 	mov	b,#0x64
+   0488 A4                 1262 	mul	ab
+   0489 FA                 1263 	mov	r2,a
+   048A AB F0              1264 	mov	r3,b
+   048C 8A 04              1265 	mov	ar4,r2
+   048E 8B 05              1266 	mov	ar5,r3
+   0490                    1267 00104$:
+                           1268 ;	../fb_app_in8.c:335: if (Typ==7){// wenn Dimmwert ( EIS2, also keine Fließkomma)
+   0490 E5*00              1269 	mov	a,_bp
+   0492 24 FD              1270 	add	a,#0xfd
+   0494 F8                 1271 	mov	r0,a
+   0495 B6 07 06           1272 	cjne	@r0,#0x07,00117$
+                           1273 ;	../fb_app_in8.c:336: wert=zahl;
+   0498 8F 04              1274 	mov	ar4,r7
+   049A 7D 00              1275 	mov	r5,#0x00
+                           1276 ;	../fb_app_in8.c:339: while (wert > 2047){//solange Mantisse größer 11 Bit
+   049C 80 13              1277 	sjmp	00110$
+   049E                    1278 00117$:
+   049E 8E 07              1279 	mov	ar7,r6
+   04A0                    1280 00105$:
+   04A0 ED                 1281 	mov	a,r5
+   04A1 54 F8              1282 	anl	a,#0xF8
+   04A3 60 0A              1283 	jz	00118$
+                           1284 ;	../fb_app_in8.c:340: wert=wert>>1;// Mantisse /2
+   04A5 ED                 1285 	mov	a,r5
+   04A6 C3                 1286 	clr	c
+   04A7 13                 1287 	rrc	a
+   04A8 CC                 1288 	xch	a,r4
+   04A9 13                 1289 	rrc	a
+   04AA CC                 1290 	xch	a,r4
+   04AB FD                 1291 	mov	r5,a
+                           1292 ;	../fb_app_in8.c:341: exp++;// und exponent um 1 erhöhen (ist ein 2^exp)
+   04AC 0F                 1293 	inc	r7
+   04AD 80 F1              1294 	sjmp	00105$
+   04AF                    1295 00118$:
+   04AF 8F 06              1296 	mov	ar6,r7
+   04B1                    1297 00110$:
+                           1298 ;	../fb_app_in8.c:344: return (wert+(exp<<11));// exponent dazu, geht auch bei EIS2 da EXP hier 0 ist.
+   04B1 EE                 1299 	mov	a,r6
+   04B2 C4                 1300 	swap	a
+   04B3 03                 1301 	rr	a
+   04B4 54 F8              1302 	anl	a,#0xF8
+   04B6 FF                 1303 	mov	r7,a
+   04B7 E4                 1304 	clr	a
+   04B8 2C                 1305 	add	a,r4
+   04B9 FC                 1306 	mov	r4,a
+   04BA EF                 1307 	mov	a,r7
+   04BB 3D                 1308 	addc	a,r5
+   04BC FD                 1309 	mov	r5,a
+   04BD 8C 82              1310 	mov	dpl,r4
+   04BF 8D 83              1311 	mov	dph,r5
+   04C1 D0*00              1312 	pop	_bp
+   04C3 22                 1313 	ret
+                           1314 ;------------------------------------------------------------
+                           1315 ;Allocation info for local variables in function 'delay_timer'
+                           1316 ;------------------------------------------------------------
+                           1317 ;m                         Allocated to registers r6 
+                           1318 ;objno                     Allocated to registers r7 
+                           1319 ;n                         Allocated to registers r5 
+                           1320 ;timerflags                Allocated to registers r6 r7 
+                           1321 ;jobj                      Allocated to registers b0 
+                           1322 ;------------------------------------------------------------
+                           1323 ;	../fb_app_in8.c:354: void delay_timer(void)
+                           1324 ;	-----------------------------------------
+                           1325 ;	 function delay_timer
+                           1326 ;	-----------------------------------------
+   04C4                    1327 _delay_timer:
+                           1328 ;	../fb_app_in8.c:364: RTCCON=0x60;		// RTC anhalten und Flag löschen
+   04C4 75 D1 60           1329 	mov	_RTCCON,#0x60
+                           1330 ;	../fb_app_in8.c:365: RTCH=0x0E;			// reload Real Time Clock
+   04C7 75 D2 0E           1331 	mov	_RTCH,#0x0E
+                           1332 ;	../fb_app_in8.c:366: RTCL=0xA0;			// auf 65ms
+   04CA 75 D3 A0           1333 	mov	_RTCL,#0xA0
+                           1334 ;	../fb_app_in8.c:367: RTCCON=0x61;//	START_RTC	// RTC starten
+   04CD 75 D1 61           1335 	mov	_RTCCON,#0x61
+                           1336 ;	../fb_app_in8.c:368: timer++;
+   04D0 05*07              1337 	inc	_timer
+   04D2 E4                 1338 	clr	a
+   04D3 B5*07 02           1339 	cjne	a,_timer,00166$
+   04D6 05*08              1340 	inc	(_timer + 1)
+   04D8                    1341 00166$:
+                           1342 ;	../fb_app_in8.c:369: timerflags = timer&(~(timer-1));// flanke generieren
+   04D8 E5*07              1343 	mov	a,_timer
+   04DA 24 FF              1344 	add	a,#0xFF
+   04DC FE                 1345 	mov	r6,a
+   04DD E5*08              1346 	mov	a,(_timer + 1)
+   04DF 34 FF              1347 	addc	a,#0xFF
+   04E1 FF                 1348 	mov	r7,a
+   04E2 EE                 1349 	mov	a,r6
+   04E3 F4                 1350 	cpl	a
+   04E4 FE                 1351 	mov	r6,a
+   04E5 EF                 1352 	mov	a,r7
+   04E6 F4                 1353 	cpl	a
+   04E7 FF                 1354 	mov	r7,a
+   04E8 E5*07              1355 	mov	a,_timer
+   04EA 52 06              1356 	anl	ar6,a
+   04EC E5*08              1357 	mov	a,(_timer + 1)
+   04EE 52 07              1358 	anl	ar7,a
+                           1359 ;	../fb_app_in8.c:370: for(n=0;n<16;n++){
+   04F0 7D 00              1360 	mov	r5,#0x00
+   04F2                    1361 00123$:
+   04F2 BD 10 00           1362 	cjne	r5,#0x10,00167$
+   04F5                    1363 00167$:
+   04F5 50 32              1364 	jnc	00126$
+                           1365 ;	../fb_app_in8.c:371: if(timerflags & 0x0001){// positive flags erzeugen und schieben
+   04F7 EE                 1366 	mov	a,r6
+   04F8 30 E0 24           1367 	jnb	acc.0,00106$
+                           1368 ;	../fb_app_in8.c:372: for(m=0;m<TIMERANZ;m++){// die timer der reihe nach checken und dec wenn laufen
+   04FB 7C 00              1369 	mov	r4,#0x00
+   04FD                    1370 00119$:
+   04FD BC 09 00           1371 	cjne	r4,#0x09,00170$
+   0500                    1372 00170$:
+   0500 50 1D              1373 	jnc	00106$
+                           1374 ;	../fb_app_in8.c:373: if ((timerbase[m]& 0x0F)==n){// wenn die base mit der gespeicherten base übereinstimmt
+   0502 EC                 1375 	mov	a,r4
+   0503 24r09              1376 	add	a,#_timerbase
+   0505 F9                 1377 	mov	r1,a
+   0506 87 03              1378 	mov	ar3,@r1
+   0508 53 03 0F           1379 	anl	ar3,#0x0F
+   050B EB                 1380 	mov	a,r3
+   050C B5 05 0D           1381 	cjne	a,ar5,00121$
+                           1382 ;	../fb_app_in8.c:374: if (timercnt[m]>0x80){// wenn der counter läuft...
+   050F EC                 1383 	mov	a,r4
+   0510 24r12              1384 	add	a,#_timercnt
+   0512 F9                 1385 	mov	r1,a
+   0513 E7                 1386 	mov	a,@r1
+   0514 FB                 1387 	mov	r3,a
+   0515 24 7F              1388 	add	a,#0xff - 0x80
+   0517 50 03              1389 	jnc	00121$
+                           1390 ;	../fb_app_in8.c:375: timercnt[m]=timercnt[m]-1;// den timer[m]decrementieren
+   0519 EB                 1391 	mov	a,r3
+   051A 14                 1392 	dec	a
+   051B F7                 1393 	mov	@r1,a
+   051C                    1394 00121$:
+                           1395 ;	../fb_app_in8.c:372: for(m=0;m<TIMERANZ;m++){// die timer der reihe nach checken und dec wenn laufen
+   051C 0C                 1396 	inc	r4
+   051D 80 DE              1397 	sjmp	00119$
+   051F                    1398 00106$:
+                           1399 ;	../fb_app_in8.c:380: timerflags = timerflags>>1;
+   051F EF                 1400 	mov	a,r7
+   0520 C3                 1401 	clr	c
+   0521 13                 1402 	rrc	a
+   0522 CE                 1403 	xch	a,r6
+   0523 13                 1404 	rrc	a
+   0524 CE                 1405 	xch	a,r6
+   0525 FF                 1406 	mov	r7,a
+                           1407 ;	../fb_app_in8.c:370: for(n=0;n<16;n++){
+   0526 0D                 1408 	inc	r5
+   0527 80 C9              1409 	sjmp	00123$
+   0529                    1410 00126$:
+                           1411 ;	../fb_app_in8.c:398: for(objno=0;objno<8;objno++) {
+   0529 7F 00              1412 	mov	r7,#0x00
+   052B                    1413 00127$:
+   052B BF 08 00           1414 	cjne	r7,#0x08,00175$
+   052E                    1415 00175$:
+   052E 40 01              1416 	jc	00176$
+   0530 22                 1417 	ret
+   0531                    1418 00176$:
+                           1419 ;	../fb_app_in8.c:399: timer_state=timerstate[objno];
+   0531 EF                 1420 	mov	a,r7
+   0532 24r1B              1421 	add	a,#_timerstate
+   0534 F9                 1422 	mov	r1,a
+   0535 87*06              1423 	mov	_timer_state,@r1
+                           1424 ;	../fb_app_in8.c:400: if(timercnt[objno]==0x80) {
+   0537 EF                 1425 	mov	a,r7
+   0538 24r12              1426 	add	a,#_timercnt
+   053A F9                 1427 	mov	r1,a
+   053B 87 06              1428 	mov	ar6,@r1
+   053D BE 80 02           1429 	cjne	r6,#0x80,00177$
+   0540 80 03              1430 	sjmp	00178$
+   0542                    1431 00177$:
+   0542 02s06r96           1432 	ljmp	00129$
+   0545                    1433 00178$:
+                           1434 ;	../fb_app_in8.c:417: if (timer_state & 0x80) { // 0x80, 0x81 für langzeit telegramm senden
+   0545 E5*06              1435 	mov	a,_timer_state
+   0547 20 E7 03           1436 	jb	acc.7,00179$
+   054A 02s05rEB           1437 	ljmp	00111$
+   054D                    1438 00179$:
+                           1439 ;	../fb_app_in8.c:418: write_send( objno+8, timer_state & 0x01);	// Langzeit Telegramm senden
+   054D 74 01              1440 	mov	a,#0x01
+   054F 55*06              1441 	anl	a,_timer_state
+   0551 FE                 1442 	mov	r6,a
+   0552 7D 00              1443 	mov	r5,#0x00
+   0554 74 08              1444 	mov	a,#0x08
+   0556 2F                 1445 	add	a,r7
+   0557 F5 82              1446 	mov	dpl,a
+   0559 C0 07              1447 	push	ar7
+   055B C0 06              1448 	push	ar6
+   055D C0 05              1449 	push	ar5
+   055F 12s0ArEB           1450 	lcall	_write_send
+   0562 15 81              1451 	dec	sp
+   0564 15 81              1452 	dec	sp
+   0566 D0 07              1453 	pop	ar7
+                           1454 ;	../fb_app_in8.c:421: m = eeprom[0xD7+(objno*4)];	// Faktor Dauer	Lamelle	T2	
+   0568 EF                 1455 	mov	a,r7
+   0569 2F                 1456 	add	a,r7
+   056A 25 E0              1457 	add	a,acc
+   056C FE                 1458 	mov	r6,a
+   056D 24 D7              1459 	add	a,#0xD7
+   056F 90s00r00           1460 	mov	dptr,#_eeprom
+   0572 93                 1461 	movc	a,@a+dptr
+                           1462 ;	../fb_app_in8.c:422: if (m > 3){// wenn lamellenverstellzeit >3 dann zeit sichern und kurztele zwecks stop
+   0573 FE                 1463 	mov  r6,a
+   0574 24 FC              1464 	add	a,#0xff - 0x03
+   0576 50 6D              1465 	jnc	00108$
+                           1466 ;	../fb_app_in8.c:426: timerbase[objno]= ((eeprom[0xFA+((objno+1)>>1)]>>(4*((objno&0x01)^0x01)))&0x07);
+   0578 EF                 1467 	mov	a,r7
+   0579 24r09              1468 	add	a,#_timerbase
+   057B F9                 1469 	mov	r1,a
+   057C 8F 04              1470 	mov	ar4,r7
+   057E 7D 00              1471 	mov	r5,#0x00
+   0580 0C                 1472 	inc	r4
+   0581 BC 00 01           1473 	cjne	r4,#0x00,00181$
+   0584 0D                 1474 	inc	r5
+   0585                    1475 00181$:
+   0585 ED                 1476 	mov	a,r5
+   0586 A2 E7              1477 	mov	c,acc.7
+   0588 13                 1478 	rrc	a
+   0589 CC                 1479 	xch	a,r4
+   058A 13                 1480 	rrc	a
+   058B CC                 1481 	xch	a,r4
+   058C 74 FA              1482 	mov	a,#0xFA
+   058E 2C                 1483 	add	a,r4
+   058F 90s00r00           1484 	mov	dptr,#_eeprom
+   0592 93                 1485 	movc	a,@a+dptr
+   0593 FD                 1486 	mov	r5,a
+   0594 74 01              1487 	mov	a,#0x01
+   0596 5F                 1488 	anl	a,r7
+   0597 64 01              1489 	xrl	a,#0x01
+   0599 75 F0 04           1490 	mov	b,#0x04
+   059C A4                 1491 	mul	ab
+   059D F5 F0              1492 	mov	b,a
+   059F 05 F0              1493 	inc	b
+   05A1 ED                 1494 	mov	a,r5
+   05A2 80 02              1495 	sjmp	00183$
+   05A4                    1496 00182$:
+   05A4 C3                 1497 	clr	c
+   05A5 13                 1498 	rrc	a
+   05A6                    1499 00183$:
+   05A6 D5 F0 FB           1500 	djnz	b,00182$
+   05A9 54 07              1501 	anl	a,#0x07
+   05AB F7                 1502 	mov	@r1,a
+                           1503 ;	../fb_app_in8.c:427: jobj=read_obj_value((objno&0x07)+8);
+   05AC 74 07              1504 	mov	a,#0x07
+   05AE 5F                 1505 	anl	a,r7
+   05AF 24 08              1506 	add	a,#0x08
+   05B1 F5 82              1507 	mov	dpl,a
+   05B3 C0 07              1508 	push	ar7
+   05B5 C0 06              1509 	push	ar6
+   05B7 12s0Cr5B           1510 	lcall	_read_obj_value
+   05BA AA 82              1511 	mov	r2,dpl
+   05BC AB 83              1512 	mov	r3,dph
+   05BE AC F0              1513 	mov	r4,b
+   05C0 FD                 1514 	mov	r5,a
+   05C1 D0 06              1515 	pop	ar6
+   05C3 D0 07              1516 	pop	ar7
+   05C5 EA                 1517 	mov	a,r2
+   05C6 4B                 1518 	orl	a,r3
+   05C7 4C                 1519 	orl	a,r4
+   05C8 4D                 1520 	orl	a,r5
+   05C9 24 FF              1521 	add	a,#0xff
+   05CB 92*00              1522 	mov	b0,c
+                           1523 ;	../fb_app_in8.c:428: timerstate[objno]= jobj|0x10; // 0x10,0x11 fuer ende T2 (lamellenvestellzeit)
+   05CD EF                 1524 	mov	a,r7
+   05CE 24r1B              1525 	add	a,#_timerstate
+   05D0 F9                 1526 	mov	r1,a
+   05D1 A2*00              1527 	mov	c,b0
+   05D3 E4                 1528 	clr	a
+   05D4 33                 1529 	rlc	a
+   05D5 FD                 1530 	mov	r5,a
+   05D6 43 05 10           1531 	orl	ar5,#0x10
+   05D9 A7 05              1532 	mov	@r1,ar5
+                           1533 ;	../fb_app_in8.c:429: timercnt[objno]= m + 0x80;
+   05DB EF                 1534 	mov	a,r7
+   05DC 24r12              1535 	add	a,#_timercnt
+   05DE F9                 1536 	mov	r1,a
+   05DF 74 80              1537 	mov	a,#0x80
+   05E1 2E                 1538 	add	a,r6
+   05E2 F7                 1539 	mov	@r1,a
+   05E3 80 06              1540 	sjmp	00111$
+   05E5                    1541 00108$:
+                           1542 ;	../fb_app_in8.c:431: else timercnt[objno]=0;
+   05E5 EF                 1543 	mov	a,r7
+   05E6 24r12              1544 	add	a,#_timercnt
+   05E8 F8                 1545 	mov	r0,a
+   05E9 76 00              1546 	mov	@r0,#0x00
+   05EB                    1547 00111$:
+                           1548 ;	../fb_app_in8.c:434: switch (timer_state & 0x50){		
+   05EB 74 50              1549 	mov	a,#0x50
+   05ED 55*06              1550 	anl	a,_timer_state
+   05EF FE                 1551 	mov	r6,a
+   05F0 BE 10 02           1552 	cjne	r6,#0x10,00184$
+   05F3 80 0E              1553 	sjmp	00112$
+   05F5                    1554 00184$:
+   05F5 BE 40 02           1555 	cjne	r6,#0x40,00185$
+   05F8 80 12              1556 	sjmp	00113$
+   05FA                    1557 00185$:
+   05FA BE 50 03           1558 	cjne	r6,#0x50,00186$
+   05FD 02s06r77           1559 	ljmp	00114$
+   0600                    1560 00186$:
+   0600 02s06r96           1561 	ljmp	00129$
+                           1562 ;	../fb_app_in8.c:435: case 0x10:
+   0603                    1563 00112$:
+                           1564 ;	../fb_app_in8.c:436: timerstate[objno]=0; // wenn T2 abgelaufen dann nichts mehr machen
+   0603 EF                 1565 	mov	a,r7
+   0604 24r1B              1566 	add	a,#_timerstate
+   0606 F8                 1567 	mov	r0,a
+   0607 76 00              1568 	mov	@r0,#0x00
+                           1569 ;	../fb_app_in8.c:437: break;		
+   0609 02s06r96           1570 	ljmp	00129$
+                           1571 ;	../fb_app_in8.c:439: case 0x40:
+   060C                    1572 00113$:
+                           1573 ;	../fb_app_in8.c:441: write_send( objno+8, timer_state );	// Langzeit Telegramm senden
+   060C AD*06              1574 	mov	r5,_timer_state
+   060E 7E 00              1575 	mov	r6,#0x00
+   0610 74 08              1576 	mov	a,#0x08
+   0612 2F                 1577 	add	a,r7
+   0613 F5 82              1578 	mov	dpl,a
+   0615 C0 07              1579 	push	ar7
+   0617 C0 05              1580 	push	ar5
+   0619 C0 06              1581 	push	ar6
+   061B 12s0ArEB           1582 	lcall	_write_send
+   061E 15 81              1583 	dec	sp
+   0620 15 81              1584 	dec	sp
+   0622 D0 07              1585 	pop	ar7
+                           1586 ;	../fb_app_in8.c:442: timerstate[objno]|=0x10;
+   0624 EF                 1587 	mov	a,r7
+   0625 24r1B              1588 	add	a,#_timerstate
+   0627 F9                 1589 	mov	r1,a
+   0628 87 06              1590 	mov	ar6,@r1
+   062A 74 10              1591 	mov	a,#0x10
+   062C 4E                 1592 	orl	a,r6
+   062D F7                 1593 	mov	@r1,a
+                           1594 ;	../fb_app_in8.c:443: timercnt[objno] = eeprom[0xD8+(objno*4)]| 0x80 ;//0xD6 Faktor Telegrammwiederholung
+   062E EF                 1595 	mov	a,r7
+   062F 24r12              1596 	add	a,#_timercnt
+   0631 F9                 1597 	mov	r1,a
+   0632 EF                 1598 	mov	a,r7
+   0633 2F                 1599 	add	a,r7
+   0634 25 E0              1600 	add	a,acc
+   0636 24 D8              1601 	add	a,#0xD8
+   0638 90s00r00           1602 	mov	dptr,#_eeprom
+   063B 93                 1603 	movc	a,@a+dptr
+   063C FE                 1604 	mov	r6,a
+   063D 74 80              1605 	mov	a,#0x80
+   063F 4E                 1606 	orl	a,r6
+   0640 F7                 1607 	mov	@r1,a
+                           1608 ;	../fb_app_in8.c:444: timerbase[objno]=(eeprom[0xFA+((objno+1)>>1)]>>(4*((objno&0x01)^0x01)))&0x0F;	//Basis Tele wdg
+   0641 EF                 1609 	mov	a,r7
+   0642 24r09              1610 	add	a,#_timerbase
+   0644 F9                 1611 	mov	r1,a
+   0645 8F 05              1612 	mov	ar5,r7
+   0647 7E 00              1613 	mov	r6,#0x00
+   0649 0D                 1614 	inc	r5
+   064A BD 00 01           1615 	cjne	r5,#0x00,00187$
+   064D 0E                 1616 	inc	r6
+   064E                    1617 00187$:
+   064E EE                 1618 	mov	a,r6
+   064F A2 E7              1619 	mov	c,acc.7
+   0651 13                 1620 	rrc	a
+   0652 CD                 1621 	xch	a,r5
+   0653 13                 1622 	rrc	a
+   0654 CD                 1623 	xch	a,r5
+   0655 74 FA              1624 	mov	a,#0xFA
+   0657 2D                 1625 	add	a,r5
+   0658 90s00r00           1626 	mov	dptr,#_eeprom
+   065B 93                 1627 	movc	a,@a+dptr
+   065C FE                 1628 	mov	r6,a
+   065D 74 01              1629 	mov	a,#0x01
+   065F 5F                 1630 	anl	a,r7
+   0660 64 01              1631 	xrl	a,#0x01
+   0662 75 F0 04           1632 	mov	b,#0x04
+   0665 A4                 1633 	mul	ab
+   0666 F5 F0              1634 	mov	b,a
+   0668 05 F0              1635 	inc	b
+   066A EE                 1636 	mov	a,r6
+   066B 80 02              1637 	sjmp	00189$
+   066D                    1638 00188$:
+   066D C3                 1639 	clr	c
+   066E 13                 1640 	rrc	a
+   066F                    1641 00189$:
+   066F D5 F0 FB           1642 	djnz	b,00188$
+   0672 54 0F              1643 	anl	a,#0x0F
+   0674 F7                 1644 	mov	@r1,a
+                           1645 ;	../fb_app_in8.c:445: break;
+                           1646 ;	../fb_app_in8.c:446: case 0x50: // 0x50 Dimmer telegramm wiederholung
+   0675 80 1F              1647 	sjmp	00129$
+   0677                    1648 00114$:
+                           1649 ;	../fb_app_in8.c:447: timercnt[objno] = eeprom[0xD8+(objno*4)]| 0x80 ;//0xD6 Faktor Telegrammwiederholung
+   0677 EF                 1650 	mov	a,r7
+   0678 24r12              1651 	add	a,#_timercnt
+   067A F9                 1652 	mov	r1,a
+   067B EF                 1653 	mov	a,r7
+   067C 2F                 1654 	add	a,r7
+   067D 25 E0              1655 	add	a,acc
+   067F 24 D8              1656 	add	a,#0xD8
+   0681 90s00r00           1657 	mov	dptr,#_eeprom
+   0684 93                 1658 	movc	a,@a+dptr
+   0685 FE                 1659 	mov	r6,a
+   0686 74 80              1660 	mov	a,#0x80
+   0688 4E                 1661 	orl	a,r6
+   0689 F7                 1662 	mov	@r1,a
+                           1663 ;	../fb_app_in8.c:448: send_obj_value(objno+8);
+   068A 74 08              1664 	mov	a,#0x08
+   068C 2F                 1665 	add	a,r7
+   068D F5 82              1666 	mov	dpl,a
+   068F C0 07              1667 	push	ar7
+   0691 12s00r00           1668 	lcall	_send_obj_value
+   0694 D0 07              1669 	pop	ar7
+                           1670 ;	../fb_app_in8.c:452: }
+   0696                    1671 00129$:
+                           1672 ;	../fb_app_in8.c:398: for(objno=0;objno<8;objno++) {
+   0696 0F                 1673 	inc	r7
+   0697 02s05r2B           1674 	ljmp	00127$
+                           1675 ;------------------------------------------------------------
+                           1676 ;Allocation info for local variables in function 'schalten'
+                           1677 ;------------------------------------------------------------
+                           1678 ;pinno                     Allocated to registers r7 
+                           1679 ;risefall                  Allocated to registers b0 
+                           1680 ;func                      Allocated to registers r6 
+                           1681 ;sendval                   Allocated to registers r2 
+                           1682 ;------------------------------------------------------------
+                           1683 ;	../fb_app_in8.c:466: void schalten(__bit risefall, unsigned char pinno)	// Schaltbefehl senden
+                           1684 ;	-----------------------------------------
+                           1685 ;	 function schalten
+                           1686 ;	-----------------------------------------
+   069A                    1687 _schalten:
+   069A AF 82              1688 	mov	r7,dpl
+                           1689 ;	../fb_app_in8.c:470: func=eeprom[0xD7+(pinno & 0x07)*4]; //0xD7
+   069C 74 07              1690 	mov	a,#0x07
+   069E 5F                 1691 	anl	a,r7
+   069F 25 E0              1692 	add	a,acc
+   06A1 25 E0              1693 	add	a,acc
+   06A3 24 D7              1694 	add	a,#0xD7
+   06A5 90s00r00           1695 	mov	dptr,#_eeprom
+   06A8 93                 1696 	movc	a,@a+dptr
+   06A9 FE                 1697 	mov	r6,a
+                           1698 ;	../fb_app_in8.c:471: if (pinno>=8)func=func>>4;			// wenn 2. Schaltobjekt dann obere 4 bit
+   06AA BF 08 00           1699 	cjne	r7,#0x08,00120$
+   06AD                    1700 00120$:
+   06AD 40 05              1701 	jc	00102$
+   06AF EE                 1702 	mov	a,r6
+   06B0 C4                 1703 	swap	a
+   06B1 54 0F              1704 	anl	a,#0x0F
+   06B3 FE                 1705 	mov	r6,a
+   06B4                    1706 00102$:
+                           1707 ;	../fb_app_in8.c:472: if (risefall) func=(func>>2);		// Funktion bei steigender Flanke obere 2 bit
+   06B4 30*00 06           1708 	jnb	b0,00104$
+   06B7 EE                 1709 	mov	a,r6
+   06B8 03                 1710 	rr	a
+   06B9 03                 1711 	rr	a
+   06BA 54 3F              1712 	anl	a,#0x3F
+   06BC FE                 1713 	mov	r6,a
+   06BD                    1714 00104$:
+                           1715 ;	../fb_app_in8.c:473: func=func&0x03;					// Funktion maskieren
+   06BD 53 06 03           1716 	anl	ar6,#0x03
+                           1717 ;	../fb_app_in8.c:474: if (func!=0)
+   06C0 EE                 1718 	mov	a,r6
+   06C1 60 2B              1719 	jz	00110$
+                           1720 ;	../fb_app_in8.c:476: if (func==0x03) sendval=read_obj_value(pinno) ^0x01;  //UM
+   06C3 BE 03 15           1721 	cjne	r6,#0x03,00106$
+   06C6 8F 82              1722 	mov	dpl,r7
+   06C8 C0 07              1723 	push	ar7
+   06CA 12s0Cr5B           1724 	lcall	_read_obj_value
+   06CD AA 82              1725 	mov	r2,dpl
+   06CF AB 83              1726 	mov	r3,dph
+   06D1 AC F0              1727 	mov	r4,b
+   06D3 FD                 1728 	mov	r5,a
+   06D4 D0 07              1729 	pop	ar7
+   06D6 63 02 01           1730 	xrl	ar2,#0x01
+   06D9 80 04              1731 	sjmp	00107$
+   06DB                    1732 00106$:
+                           1733 ;	../fb_app_in8.c:477: else sendval = func & 0x01;	// EIN   AUS
+   06DB 74 01              1734 	mov	a,#0x01
+   06DD 5E                 1735 	anl	a,r6
+   06DE FA                 1736 	mov	r2,a
+   06DF                    1737 00107$:
+                           1738 ;	../fb_app_in8.c:478: write_send(pinno,sendval);
+   06DF 7E 00              1739 	mov	r6,#0x00
+   06E1 C0 02              1740 	push	ar2
+   06E3 C0 06              1741 	push	ar6
+   06E5 8F 82              1742 	mov	dpl,r7
+   06E7 12s0ArEB           1743 	lcall	_write_send
+   06EA 15 81              1744 	dec	sp
+   06EC 15 81              1745 	dec	sp
+   06EE                    1746 00110$:
+   06EE 22                 1747 	ret
+                           1748 ;------------------------------------------------------------
+                           1749 ;Allocation info for local variables in function 'debounce'
+                           1750 ;------------------------------------------------------------
+                           1751 ;pinno                     Allocated to registers r7 
+                           1752 ;debtime                   Allocated to registers r6 
+                           1753 ;n                         Allocated to registers r5 
+                           1754 ;w                         Allocated to registers r4 
+                           1755 ;------------------------------------------------------------
+                           1756 ;	../fb_app_in8.c:487: unsigned char debounce(unsigned char pinno)	// Entprellzeit abwarten und prüfen !!
+                           1757 ;	-----------------------------------------
+                           1758 ;	 function debounce
+                           1759 ;	-----------------------------------------
+   06EF                    1760 _debounce:
+   06EF AF 82              1761 	mov	r7,dpl
+                           1762 ;	../fb_app_in8.c:490: debtime=eeprom[DEBTIME];			// Entprellzeit in 0,5ms Schritten
+   06F1 90s00rD2           1763 	mov	dptr,#(_eeprom + 0x00d2)
+   06F4 E4                 1764 	clr	a
+   06F5 93                 1765 	movc	a,@a+dptr
+                           1766 ;	../fb_app_in8.c:491: if (debtime>0) {
+   06F6 FE                 1767 	mov	r6,a
+   06F7 60 12              1768 	jz	00102$
+                           1769 ;	../fb_app_in8.c:492: for(n=0;n<debtime;n++){
+   06F9 7D 00              1770 	mov	r5,#0x00
+   06FB                    1771 00107$:
+   06FB C3                 1772 	clr	c
+   06FC ED                 1773 	mov	a,r5
+   06FD 9E                 1774 	subb	a,r6
+   06FE 50 0B              1775 	jnc	00102$
+                           1776 ;	../fb_app_in8.c:493: for(w=112;w>0;w--); 
+   0700 7C 70              1777 	mov	r4,#0x70
+   0702                    1778 00103$:
+   0702 EC                 1779 	mov	a,r4
+   0703 60 03              1780 	jz	00109$
+   0705 1C                 1781 	dec	r4
+   0706 80 FA              1782 	sjmp	00103$
+   0708                    1783 00109$:
+                           1784 ;	../fb_app_in8.c:492: for(n=0;n<debtime;n++){
+   0708 0D                 1785 	inc	r5
+   0709 80 F0              1786 	sjmp	00107$
+   070B                    1787 00102$:
+                           1788 ;	../fb_app_in8.c:500: return ((~(P0^p0h))& bitmask_1[pinno]);//ret=1;
+   070B E5*01              1789 	mov	a,_p0h
+   070D 65 80              1790 	xrl	a,_P0
+   070F F4                 1791 	cpl	a
+   0710 FE                 1792 	mov	r6,a
+   0711 EF                 1793 	mov	a,r7
+   0712 90s00r00           1794 	mov	dptr,#_bitmask_1
+   0715 93                 1795 	movc	a,@a+dptr
+   0716 5E                 1796 	anl	a,r6
+   0717 F5 82              1797 	mov	dpl,a
+   0719 22                 1798 	ret
+                           1799 ;------------------------------------------------------------
+                           1800 ;Allocation info for local variables in function 'write_value_req'
+                           1801 ;------------------------------------------------------------
+                           1802 ;objno                     Allocated to stack - _bp +1
+                           1803 ;objflags                  Allocated to registers r7 
+                           1804 ;gapos                     Allocated to stack - _bp +2
+                           1805 ;atp                       Allocated to registers r6 
+                           1806 ;assno                     Allocated to stack - _bp +3
+                           1807 ;n                         Allocated to stack - _bp +4
+                           1808 ;gaposh                    Allocated to registers r4 
+                           1809 ;para_value                Allocated to registers r7 
+                           1810 ;tmp                       Allocated to stack - _bp +5
+                           1811 ;objtype                   Allocated to registers 
+                           1812 ;sloc0                     Allocated to stack - _bp +6
+                           1813 ;sloc1                     Allocated to stack - _bp +7
+                           1814 ;------------------------------------------------------------
+                           1815 ;	../fb_app_in8.c:514: void write_value_req(void)		// Objekt-Wert setzen gemäß empfangenem EIS Telegramms
+                           1816 ;	-----------------------------------------
+                           1817 ;	 function write_value_req
+                           1818 ;	-----------------------------------------
+   071A                    1819 _write_value_req:
+   071A C0*00              1820 	push	_bp
+   071C E5 81              1821 	mov	a,sp
+   071E F5*00              1822 	mov	_bp,a
+   0720 24 0A              1823 	add	a,#0x0A
+   0722 F5 81              1824 	mov	sp,a
+                           1825 ;	../fb_app_in8.c:520: gapos=gapos_in_gat(telegramm[3],telegramm[4]);
+   0724 85*03 82           1826 	mov	dpl,(_telegramm + 0x0003)
+   0727 C0*04              1827 	push	(_telegramm + 0x0004)
+   0729 12s00r00           1828 	lcall	_gapos_in_gat
+   072C AF 82              1829 	mov	r7,dpl
+   072E 15 81              1830 	dec	sp
+   0730 A8*00              1831 	mov	r0,_bp
+   0732 08                 1832 	inc	r0
+   0733 08                 1833 	inc	r0
+   0734 A6 07              1834 	mov	@r0,ar7
+                           1835 ;	../fb_app_in8.c:521: if (gapos!=0xFF)	
+   0736 A8*00              1836 	mov	r0,_bp
+   0738 08                 1837 	inc	r0
+   0739 08                 1838 	inc	r0
+   073A B6 FF 03           1839 	cjne	@r0,#0xFF,00142$
+   073D 02s08rFA           1840 	ljmp	00121$
+   0740                    1841 00142$:
+                           1842 ;	../fb_app_in8.c:523: atp=eeprom[ASSOCTABPTR];		// Association Table Pointer
+   0740 90s00r11           1843 	mov	dptr,#(_eeprom + 0x0011)
+   0743 E4                 1844 	clr	a
+   0744 93                 1845 	movc	a,@a+dptr
+                           1846 ;	../fb_app_in8.c:524: assno=eeprom[atp];				// Erster Eintrag = Anzahl Einträge
+   0745 FE                 1847 	mov	r6,a
+   0746 F5 82              1848 	mov	dpl,a
+   0748 75 83s00           1849 	mov	dph,#(_eeprom >> 8)
+   074B E4                 1850 	clr	a
+   074C 93                 1851 	movc	a,@a+dptr
+   074D FD                 1852 	mov	r5,a
+   074E E5*00              1853 	mov	a,_bp
+   0750 24 03              1854 	add	a,#0x03
+   0752 F8                 1855 	mov	r0,a
+   0753 A6 05              1856 	mov	@r0,ar5
+                           1857 ;	../fb_app_in8.c:526: for(n=0;n<assno;n++) {				// Schleife über alle Einträge in der Ass-Table, denn es könnten mehrere Objekte (Pins) der gleichen Gruppenadresse zugeordnet sein
+   0755 74 02              1858 	mov	a,#0x02
+   0757 2E                 1859 	add	a,r6
+   0758 FC                 1860 	mov	r4,a
+   0759 E5*00              1861 	mov	a,_bp
+   075B 24 06              1862 	add	a,#0x06
+   075D F8                 1863 	mov	r0,a
+   075E EE                 1864 	mov	a,r6
+   075F 04                 1865 	inc	a
+   0760 F6                 1866 	mov	@r0,a
+   0761 E5*00              1867 	mov	a,_bp
+   0763 24 04              1868 	add	a,#0x04
+   0765 F8                 1869 	mov	r0,a
+   0766 76 00              1870 	mov	@r0,#0x00
+   0768                    1871 00117$:
+   0768 E5*00              1872 	mov	a,_bp
+   076A 24 04              1873 	add	a,#0x04
+   076C F8                 1874 	mov	r0,a
+   076D E5*00              1875 	mov	a,_bp
+   076F 24 03              1876 	add	a,#0x03
+   0771 F9                 1877 	mov	r1,a
+   0772 C3                 1878 	clr	c
+   0773 E6                 1879 	mov	a,@r0
+   0774 97                 1880 	subb	a,@r1
+   0775 40 03              1881 	jc	00143$
+   0777 02s08rFA           1882 	ljmp	00121$
+   077A                    1883 00143$:
+                           1884 ;	../fb_app_in8.c:527: gaposh=eeprom[atp+1+(n*2)];
+   077A C0 04              1885 	push	ar4
+   077C E5*00              1886 	mov	a,_bp
+   077E 24 04              1887 	add	a,#0x04
+   0780 F8                 1888 	mov	r0,a
+   0781 E6                 1889 	mov	a,@r0
+   0782 25 E0              1890 	add	a,acc
+   0784 FA                 1891 	mov	r2,a
+   0785 E5*00              1892 	mov	a,_bp
+   0787 24 06              1893 	add	a,#0x06
+   0789 F8                 1894 	mov	r0,a
+   078A EA                 1895 	mov	a,r2
+   078B 26                 1896 	add	a,@r0
+   078C 90s00r00           1897 	mov	dptr,#_eeprom
+   078F 93                 1898 	movc	a,@a+dptr
+   0790 FC                 1899 	mov	r4,a
+                           1900 ;	../fb_app_in8.c:528: if(gapos==gaposh) {					// Wenn Positionsnummer übereinstimmt
+   0791 A8*00              1901 	mov	r0,_bp
+   0793 08                 1902 	inc	r0
+   0794 08                 1903 	inc	r0
+   0795 E6                 1904 	mov	a,@r0
+   0796 B5 04 02           1905 	cjne	a,ar4,00144$
+   0799 80 05              1906 	sjmp	00145$
+   079B                    1907 00144$:
+   079B D0 04              1908 	pop	ar4
+   079D 02s08rF1           1909 	ljmp	00119$
+   07A0                    1910 00145$:
+   07A0 D0 04              1911 	pop	ar4
+                           1912 ;	../fb_app_in8.c:529: objno=eeprom[atp+2+(n*2)];			// Objektnummer
+   07A2 EA                 1913 	mov	a,r2
+   07A3 2C                 1914 	add	a,r4
+   07A4 90s00r00           1915 	mov	dptr,#_eeprom
+   07A7 93                 1916 	movc	a,@a+dptr
+   07A8 FA                 1917 	mov	r2,a
+   07A9 A8*00              1918 	mov	r0,_bp
+   07AB 08                 1919 	inc	r0
+   07AC A6 02              1920 	mov	@r0,ar2
+                           1921 ;	../fb_app_in8.c:530: objflags=read_objflags(objno);		// Objekt Flags lesen
+   07AE A8*00              1922 	mov	r0,_bp
+   07B0 08                 1923 	inc	r0
+   07B1 86 82              1924 	mov	dpl,@r0
+   07B3 C0 04              1925 	push	ar4
+   07B5 12s00r00           1926 	lcall	_read_objflags
+   07B8 AE 82              1927 	mov	r6,dpl
+   07BA D0 04              1928 	pop	ar4
+   07BC 8E 07              1929 	mov	ar7,r6
+                           1930 ;	../fb_app_in8.c:532: objtype=eeprom[eeprom[COMMSTABPTR]+objno*3+4];
+   07BE 90s00r12           1931 	mov	dptr,#(_eeprom + 0x0012)
+   07C1 E4                 1932 	clr	a
+   07C2 93                 1933 	movc	a,@a+dptr
+   07C3 FE                 1934 	mov	r6,a
+   07C4 A8*00              1935 	mov	r0,_bp
+   07C6 08                 1936 	inc	r0
+   07C7 E6                 1937 	mov	a,@r0
+   07C8 75 F0 03           1938 	mov	b,#0x03
+   07CB A4                 1939 	mul	ab
+   07CC 2E                 1940 	add	a,r6
+   07CD 24 04              1941 	add	a,#0x04
+   07CF 90s00r00           1942 	mov	dptr,#_eeprom
+   07D2 93                 1943 	movc	a,@a+dptr
+                           1944 ;	../fb_app_in8.c:534: if((objflags&0x14)==0x14) {			// Kommunikation zulässig (Bit 2 = communication enable) + Schreiben zulässig (Bit 4 = write enable)
+   07D3 74 14              1945 	mov	a,#0x14
+   07D5 5F                 1946 	anl	a,r7
+   07D6 FE                 1947 	mov	r6,a
+   07D7 BE 14 02           1948 	cjne	r6,#0x14,00146$
+   07DA 80 03              1949 	sjmp	00147$
+   07DC                    1950 00146$:
+   07DC 02s08rF1           1951 	ljmp	00119$
+   07DF                    1952 00147$:
+                           1953 ;	../fb_app_in8.c:535: if (objno<16) {					// Status der Eingangsobjekte 0-15
+   07DF A8*00              1954 	mov	r0,_bp
+   07E1 08                 1955 	inc	r0
+   07E2 B6 10 00           1956 	cjne	@r0,#0x10,00148$
+   07E5                    1957 00148$:
+   07E5 50 2C              1958 	jnc	00109$
+                           1959 ;	../fb_app_in8.c:543: write_obj_value(objno,telegramm[7]& 0x3F); //bit 6+7 löschen (0x40,0x80)
+   07E7 C0 04              1960 	push	ar4
+   07E9 74 3F              1961 	mov	a,#0x3F
+   07EB 55*07              1962 	anl	a,(_telegramm + 0x0007)
+   07ED FB                 1963 	mov	r3,a
+   07EE 7C 00              1964 	mov	r4,#0x00
+   07F0 7D 00              1965 	mov	r5,#0x00
+   07F2 7F 00              1966 	mov	r7,#0x00
+   07F4 C0 04              1967 	push	ar4
+   07F6 C0 03              1968 	push	ar3
+   07F8 C0 04              1969 	push	ar4
+   07FA C0 05              1970 	push	ar5
+   07FC C0 07              1971 	push	ar7
+   07FE A8*00              1972 	mov	r0,_bp
+   0800 08                 1973 	inc	r0
+   0801 86 82              1974 	mov	dpl,@r0
+   0803 12s0Dr2C           1975 	lcall	_write_obj_value
+   0806 E5 81              1976 	mov	a,sp
+   0808 24 FC              1977 	add	a,#0xfc
+   080A F5 81              1978 	mov	sp,a
+   080C D0 04              1979 	pop	ar4
+   080E D0 04              1980 	pop	ar4
+   0810 02s08rF1           1981 	ljmp	00119$
+   0813                    1982 00109$:
+                           1983 ;	../fb_app_in8.c:547: tmp=telegramm[7]& 0x01;
+   0813 C0 04              1984 	push	ar4
+   0815 E5*00              1985 	mov	a,_bp
+   0817 24 05              1986 	add	a,#0x05
+   0819 F8                 1987 	mov	r0,a
+   081A 74 01              1988 	mov	a,#0x01
+   081C 55*07              1989 	anl	a,(_telegramm + 0x0007)
+   081E F6                 1990 	mov	@r0,a
+                           1991 ;	../fb_app_in8.c:548: if (read_obj_value(objno)^tmp) {// nur wenn sich Objekt geändert hat
+   081F A8*00              1992 	mov	r0,_bp
+   0821 08                 1993 	inc	r0
+   0822 86 82              1994 	mov	dpl,@r0
+   0824 C0 04              1995 	push	ar4
+   0826 12s0Cr5B           1996 	lcall	_read_obj_value
+   0829 C8                 1997 	xch	a,r0
+   082A E5*00              1998 	mov	a,_bp
+   082C 24 07              1999 	add	a,#0x07
+   082E C8                 2000 	xch	a,r0
+   082F A6 82              2001 	mov	@r0,dpl
+   0831 08                 2002 	inc	r0
+   0832 A6 83              2003 	mov	@r0,dph
+   0834 08                 2004 	inc	r0
+   0835 A6 F0              2005 	mov	@r0,b
+   0837 08                 2006 	inc	r0
+   0838 F6                 2007 	mov	@r0,a
+   0839 D0 04              2008 	pop	ar4
+   083B E5*00              2009 	mov	a,_bp
+   083D 24 05              2010 	add	a,#0x05
+   083F F8                 2011 	mov	r0,a
+   0840 86 02              2012 	mov	ar2,@r0
+   0842 E4                 2013 	clr	a
+   0843 FD                 2014 	mov	r5,a
+   0844 FE                 2015 	mov	r6,a
+   0845 FF                 2016 	mov	r7,a
+   0846 E5*00              2017 	mov	a,_bp
+   0848 24 07              2018 	add	a,#0x07
+   084A F8                 2019 	mov	r0,a
+   084B E6                 2020 	mov	a,@r0
+   084C 62 02              2021 	xrl	ar2,a
+   084E 08                 2022 	inc	r0
+   084F E6                 2023 	mov	a,@r0
+   0850 62 05              2024 	xrl	ar5,a
+   0852 08                 2025 	inc	r0
+   0853 E6                 2026 	mov	a,@r0
+   0854 62 06              2027 	xrl	ar6,a
+   0856 08                 2028 	inc	r0
+   0857 E6                 2029 	mov	a,@r0
+   0858 62 07              2030 	xrl	ar7,a
+   085A D0 04              2031 	pop	ar4
+   085C EA                 2032 	mov	a,r2
+   085D 4D                 2033 	orl	a,r5
+   085E 4E                 2034 	orl	a,r6
+   085F 4F                 2035 	orl	a,r7
+   0860 70 03              2036 	jnz	00150$
+   0862 02s08rF1           2037 	ljmp	00119$
+   0865                    2038 00150$:
+                           2039 ;	../fb_app_in8.c:549: write_obj_value(objno,tmp);// objekt sichern
+   0865 E5*00              2040 	mov	a,_bp
+   0867 24 05              2041 	add	a,#0x05
+   0869 F8                 2042 	mov	r0,a
+   086A 86 03              2043 	mov	ar3,@r0
+   086C 7D 00              2044 	mov	r5,#0x00
+   086E 7E 00              2045 	mov	r6,#0x00
+   0870 7F 00              2046 	mov	r7,#0x00
+   0872 C0 04              2047 	push	ar4
+   0874 C0 03              2048 	push	ar3
+   0876 C0 05              2049 	push	ar5
+   0878 C0 06              2050 	push	ar6
+   087A C0 07              2051 	push	ar7
+   087C A8*00              2052 	mov	r0,_bp
+   087E 08                 2053 	inc	r0
+   087F 86 82              2054 	mov	dpl,@r0
+   0881 12s0Dr2C           2055 	lcall	_write_obj_value
+   0884 E5 81              2056 	mov	a,sp
+   0886 24 FC              2057 	add	a,#0xfc
+   0888 F5 81              2058 	mov	sp,a
+   088A D0 04              2059 	pop	ar4
+                           2060 ;	../fb_app_in8.c:550: para_value= (eeprom[0xD5+((objno & 0x07)*4)]&0x03);
+   088C A8*00              2061 	mov	r0,_bp
+   088E 08                 2062 	inc	r0
+   088F 74 07              2063 	mov	a,#0x07
+   0891 56                 2064 	anl	a,@r0
+   0892 25 E0              2065 	add	a,acc
+   0894 25 E0              2066 	add	a,acc
+   0896 24 D5              2067 	add	a,#0xD5
+   0898 90s00r00           2068 	mov	dptr,#_eeprom
+   089B 93                 2069 	movc	a,@a+dptr
+   089C FF                 2070 	mov	r7,a
+   089D 53 07 03           2071 	anl	ar7,#0x03
+                           2072 ;	../fb_app_in8.c:551: tmp = tmp ^ ((para_value) & 0x01);//bei 'nicht invertieren' invertieren,weil wir invertiert abfragen :-(
+   08A0 74 01              2073 	mov	a,#0x01
+   08A2 5F                 2074 	anl	a,r7
+   08A3 FE                 2075 	mov	r6,a
+   08A4 E5*00              2076 	mov	a,_bp
+   08A6 24 05              2077 	add	a,#0x05
+   08A8 F8                 2078 	mov	r0,a
+   08A9 EE                 2079 	mov	a,r6
+   08AA 66                 2080 	xrl	a,@r0
+   08AB F6                 2081 	mov	@r0,a
+                           2082 ;	../fb_app_in8.c:552: if (para_value){			// wenn eine sperre aktiviert parametriert ist
+   08AC EF                 2083 	mov	a,r7
+   08AD 60 42              2084 	jz	00119$
+                           2085 ;	../fb_app_in8.c:553: if(tmp){		//nicht gesperrt(invertierte Abfrage)
+   08AF E5*00              2086 	mov	a,_bp
+   08B1 24 05              2087 	add	a,#0x05
+   08B3 F8                 2088 	mov	r0,a
+   08B4 E6                 2089 	mov	a,@r0
+   08B5 60 13              2090 	jz	00102$
+                           2091 ;	../fb_app_in8.c:554: blocked=blocked & (0xff-(bitmask_1[objno&0x07]));
+   08B7 A8*00              2092 	mov	r0,_bp
+   08B9 08                 2093 	inc	r0
+   08BA 74 07              2094 	mov	a,#0x07
+   08BC 56                 2095 	anl	a,@r0
+   08BD 90s00r00           2096 	mov	dptr,#_bitmask_1
+   08C0 93                 2097 	movc	a,@a+dptr
+   08C1 FF                 2098 	mov	r7,a
+   08C2 74 FF              2099 	mov	a,#0xFF
+   08C4 C3                 2100 	clr	c
+   08C5 9F                 2101 	subb	a,r7
+   08C6 52*04              2102 	anl	_blocked,a
+   08C8 80 0D              2103 	sjmp	00103$
+   08CA                    2104 00102$:
+                           2105 ;	../fb_app_in8.c:557: blocked=blocked |bitmask_1[objno&0x07];
+   08CA A8*00              2106 	mov	r0,_bp
+   08CC 08                 2107 	inc	r0
+   08CD 74 07              2108 	mov	a,#0x07
+   08CF 56                 2109 	anl	a,@r0
+   08D0 90s00r00           2110 	mov	dptr,#_bitmask_1
+   08D3 93                 2111 	movc	a,@a+dptr
+   08D4 FF                 2112 	mov	r7,a
+   08D5 42*04              2113 	orl	_blocked,a
+   08D7                    2114 00103$:
+                           2115 ;	../fb_app_in8.c:559: sperren(objno&0x07,tmp);//temp=1 bedeutet Freigabe
+   08D7 A8*00              2116 	mov	r0,_bp
+   08D9 08                 2117 	inc	r0
+   08DA 74 07              2118 	mov	a,#0x07
+   08DC 56                 2119 	anl	a,@r0
+   08DD FF                 2120 	mov	r7,a
+   08DE C0 04              2121 	push	ar4
+   08E0 E5*00              2122 	mov	a,_bp
+   08E2 24 05              2123 	add	a,#0x05
+   08E4 F8                 2124 	mov	r0,a
+   08E5 E6                 2125 	mov	a,@r0
+   08E6 C0 E0              2126 	push	acc
+   08E8 8F 82              2127 	mov	dpl,r7
+   08EA 12s09r00           2128 	lcall	_sperren
+   08ED 15 81              2129 	dec	sp
+   08EF D0 04              2130 	pop	ar4
+   08F1                    2131 00119$:
+                           2132 ;	../fb_app_in8.c:526: for(n=0;n<assno;n++) {				// Schleife über alle Einträge in der Ass-Table, denn es könnten mehrere Objekte (Pins) der gleichen Gruppenadresse zugeordnet sein
+   08F1 E5*00              2133 	mov	a,_bp
+   08F3 24 04              2134 	add	a,#0x04
+   08F5 F8                 2135 	mov	r0,a
+   08F6 06                 2136 	inc	@r0
+   08F7 02s07r68           2137 	ljmp	00117$
+   08FA                    2138 00121$:
+   08FA 85*00 81           2139 	mov	sp,_bp
+   08FD D0*00              2140 	pop	_bp
+   08FF 22                 2141 	ret
+                           2142 ;------------------------------------------------------------
+                           2143 ;Allocation info for local variables in function 'sperren'
+                           2144 ;------------------------------------------------------------
+                           2145 ;freigabe                  Allocated to stack - _bp -3
+                           2146 ;obj                       Allocated to registers r7 
+                           2147 ;objval                    Allocated to registers b0 
+                           2148 ;sendobj                   Allocated to registers r6 
+                           2149 ;------------------------------------------------------------
+                           2150 ;	../fb_app_in8.c:570: void sperren (unsigned char obj,unsigned char freigabe)
+                           2151 ;	-----------------------------------------
+                           2152 ;	 function sperren
+                           2153 ;	-----------------------------------------
+   0900                    2154 _sperren:
+   0900 C0*00              2155 	push	_bp
+   0902 85 81*00           2156 	mov	_bp,sp
+   0905 AF 82              2157 	mov	r7,dpl
+                           2158 ;	../fb_app_in8.c:572: __bit objval=0;
+   0907 C2*00              2159 	clr	b0
+                           2160 ;	../fb_app_in8.c:575: unsigned char sendobj=255;//obj=obj & 0x07;
+   0909 7E FF              2161 	mov	r6,#0xFF
+                           2162 ;	../fb_app_in8.c:576: switch ((eeprom[0xCE+(obj>>1)] >> ((obj & 0x01)*4)) & 0x0F){// Funtion des zugehörigen Eingangs
+   090B EF                 2163 	mov	a,r7
+   090C C3                 2164 	clr	c
+   090D 13                 2165 	rrc	a
+   090E 24 CE              2166 	add	a,#0xCE
+   0910 90s00r00           2167 	mov	dptr,#_eeprom
+   0913 93                 2168 	movc	a,@a+dptr
+   0914 FD                 2169 	mov	r5,a
+   0915 74 01              2170 	mov	a,#0x01
+   0917 5F                 2171 	anl	a,r7
+   0918 75 F0 04           2172 	mov	b,#0x04
+   091B A4                 2173 	mul	ab
+   091C F5 F0              2174 	mov	b,a
+   091E 05 F0              2175 	inc	b
+   0920 ED                 2176 	mov	a,r5
+   0921 80 02              2177 	sjmp	00171$
+   0923                    2178 00170$:
+   0923 C3                 2179 	clr	c
+   0924 13                 2180 	rrc	a
+   0925                    2181 00171$:
+   0925 D5 F0 FB           2182 	djnz	b,00170$
+   0928 54 0F              2183 	anl	a,#0x0F
+   092A FD                 2184 	mov	r5,a
+   092B BD 01 02           2185 	cjne	r5,#0x01,00172$
+   092E 80 0F              2186 	sjmp	00101$
+   0930                    2187 00172$:
+   0930 BD 02 03           2188 	cjne	r5,#0x02,00173$
+   0933 02s09rC2           2189 	ljmp	00110$
+   0936                    2190 00173$:
+   0936 BD 03 03           2191 	cjne	r5,#0x03,00174$
+   0939 02s0Ar29           2192 	ljmp	00122$
+   093C                    2193 00174$:
+   093C 02s0Ar8C           2194 	ljmp	00128$
+                           2195 ;	../fb_app_in8.c:577: case 0x01:// funktion Schalten sperren
+   093F                    2196 00101$:
+                           2197 ;	../fb_app_in8.c:578: sendobj=obj;
+                           2198 ;	../fb_app_in8.c:579: switch ((eeprom[0xD5+(obj*4)]>>((freigabe^0x01)*2))&0x0C){
+   093F EF                 2199 	mov	a,r7
+   0940 FE                 2200 	mov	r6,a
+   0941 25 E0              2201 	add	a,acc
+   0943 25 E0              2202 	add	a,acc
+   0945 24 D5              2203 	add	a,#0xD5
+   0947 90s00r00           2204 	mov	dptr,#_eeprom
+   094A 93                 2205 	movc	a,@a+dptr
+   094B FD                 2206 	mov	r5,a
+   094C E5*00              2207 	mov	a,_bp
+   094E 24 FD              2208 	add	a,#0xfd
+   0950 F8                 2209 	mov	r0,a
+   0951 74 01              2210 	mov	a,#0x01
+   0953 66                 2211 	xrl	a,@r0
+   0954 75 F0 02           2212 	mov	b,#0x02
+   0957 A4                 2213 	mul	ab
+   0958 F5 F0              2214 	mov	b,a
+   095A 05 F0              2215 	inc	b
+   095C ED                 2216 	mov	a,r5
+   095D 80 02              2217 	sjmp	00176$
+   095F                    2218 00175$:
+   095F C3                 2219 	clr	c
+   0960 13                 2220 	rrc	a
+   0961                    2221 00176$:
+   0961 D5 F0 FB           2222 	djnz	b,00175$
+   0964 54 0C              2223 	anl	a,#0x0C
+   0966 FD                 2224 	mov	r5,a
+   0967 BD 04 02           2225 	cjne	r5,#0x04,00177$
+   096A 80 0A              2226 	sjmp	00102$
+   096C                    2227 00177$:
+   096C BD 08 02           2228 	cjne	r5,#0x08,00178$
+   096F 80 0A              2229 	sjmp	00103$
+   0971                    2230 00178$:
+                           2231 ;	../fb_app_in8.c:581: case 0x04:		//EIN
+   0971 BD 0C 49           2232 	cjne	r5,#0x0C,00108$
+   0974 80 0A              2233 	sjmp	00104$
+   0976                    2234 00102$:
+                           2235 ;	../fb_app_in8.c:582: objval=1;
+   0976 D2*00              2236 	setb	b0
+                           2237 ;	../fb_app_in8.c:583: break;
+   0978 02s0Ar8C           2238 	ljmp	00128$
+                           2239 ;	../fb_app_in8.c:584: case 0x08:		//AUS
+   097B                    2240 00103$:
+                           2241 ;	../fb_app_in8.c:585: objval=0;
+   097B C2*00              2242 	clr	b0
+                           2243 ;	../fb_app_in8.c:586: break;
+   097D 02s0Ar8C           2244 	ljmp	00128$
+                           2245 ;	../fb_app_in8.c:587: case 0x0C:	//UM
+   0980                    2246 00104$:
+                           2247 ;	../fb_app_in8.c:588: if (freigabe){ //ende sperre-> aktueller Zustand
+   0980 E5*00              2248 	mov	a,_bp
+   0982 24 FD              2249 	add	a,#0xfd
+   0984 F8                 2250 	mov	r0,a
+   0985 E6                 2251 	mov	a,@r0
+   0986 60 17              2252 	jz	00106$
+                           2253 ;	../fb_app_in8.c:589: objval= (portbuffer>>obj)& 0x01;
+   0988 8F F0              2254 	mov	b,r7
+   098A 05 F0              2255 	inc	b
+   098C E5*00              2256 	mov	a,_portbuffer
+   098E 80 02              2257 	sjmp	00182$
+   0990                    2258 00181$:
+   0990 C3                 2259 	clr	c
+   0991 13                 2260 	rrc	a
+   0992                    2261 00182$:
+   0992 D5 F0 FB           2262 	djnz	b,00181$
+   0995 54 01              2263 	anl	a,#0x01
+   0997 FD                 2264 	mov	r5,a
+   0998 24 FF              2265 	add	a,#0xff
+   099A 92*00              2266 	mov	b0,c
+   099C 02s0Ar8C           2267 	ljmp	00128$
+   099F                    2268 00106$:
+                           2269 ;	../fb_app_in8.c:592: objval=read_obj_value(obj)^0x01;//Tele invers senden
+   099F 8F 82              2270 	mov	dpl,r7
+   09A1 C0 06              2271 	push	ar6
+   09A3 12s0Cr5B           2272 	lcall	_read_obj_value
+   09A6 AA 82              2273 	mov	r2,dpl
+   09A8 AB 83              2274 	mov	r3,dph
+   09AA AC F0              2275 	mov	r4,b
+   09AC FD                 2276 	mov	r5,a
+   09AD D0 06              2277 	pop	ar6
+   09AF 63 02 01           2278 	xrl	ar2,#0x01
+   09B2 EA                 2279 	mov	a,r2
+   09B3 4B                 2280 	orl	a,r3
+   09B4 4C                 2281 	orl	a,r4
+   09B5 4D                 2282 	orl	a,r5
+   09B6 24 FF              2283 	add	a,#0xff
+   09B8 92*00              2284 	mov	b0,c
+                           2285 ;	../fb_app_in8.c:594: break;
+   09BA 02s0Ar8C           2286 	ljmp	00128$
+                           2287 ;	../fb_app_in8.c:595: default:
+   09BD                    2288 00108$:
+                           2289 ;	../fb_app_in8.c:596: sendobj=255;
+   09BD 7E FF              2290 	mov	r6,#0xFF
+                           2291 ;	../fb_app_in8.c:600: break;	
+   09BF 02s0Ar8C           2292 	ljmp	00128$
+                           2293 ;	../fb_app_in8.c:601: case 0x02:// funktion Dimmer-sperren
+   09C2                    2294 00110$:
+                           2295 ;	../fb_app_in8.c:603: objval = read_obj_value(obj);
+   09C2 8F 82              2296 	mov	dpl,r7
+   09C4 C0 07              2297 	push	ar7
+   09C6 12s0Cr5B           2298 	lcall	_read_obj_value
+   09C9 AA 82              2299 	mov	r2,dpl
+   09CB AB 83              2300 	mov	r3,dph
+   09CD AC F0              2301 	mov	r4,b
+   09CF FD                 2302 	mov	r5,a
+   09D0 D0 07              2303 	pop	ar7
+   09D2 EA                 2304 	mov	a,r2
+   09D3 4B                 2305 	orl	a,r3
+   09D4 4C                 2306 	orl	a,r4
+   09D5 4D                 2307 	orl	a,r5
+   09D6 24 FF              2308 	add	a,#0xff
+   09D8 92*00              2309 	mov	b0,c
+                           2310 ;	../fb_app_in8.c:604: sendobj=obj;
+   09DA 8F 06              2311 	mov	ar6,r7
+                           2312 ;	../fb_app_in8.c:605: if (freigabe){		// Ende Sperre  
+   09DC E5*00              2313 	mov	a,_bp
+   09DE 24 FD              2314 	add	a,#0xfd
+   09E0 F8                 2315 	mov	r0,a
+   09E1 E6                 2316 	mov	a,@r0
+   09E2 60 18              2317 	jz	00120$
+                           2318 ;	../fb_app_in8.c:606: if (eeprom[0xD5+(obj*4)]&0x80) objval=0;
+   09E4 EF                 2319 	mov	a,r7
+   09E5 2F                 2320 	add	a,r7
+   09E6 25 E0              2321 	add	a,acc
+   09E8 24 D5              2322 	add	a,#0xD5
+   09EA 90s00r00           2323 	mov	dptr,#_eeprom
+   09ED 93                 2324 	movc	a,@a+dptr
+   09EE FD                 2325 	mov	r5,a
+   09EF 30 E7 05           2326 	jnb	acc.7,00112$
+   09F2 C2*00              2327 	clr	b0
+   09F4 02s0Ar8C           2328 	ljmp	00128$
+   09F7                    2329 00112$:
+                           2330 ;	../fb_app_in8.c:607: else sendobj=255;
+   09F7 7E FF              2331 	mov	r6,#0xFF
+   09F9 02s0Ar8C           2332 	ljmp	00128$
+   09FC                    2333 00120$:
+                           2334 ;	../fb_app_in8.c:610: switch (eeprom[0xD5+(obj*4)+1]& 0xC0) {//Bedienkonzept angucken
+   09FC EF                 2335 	mov	a,r7
+   09FD 2F                 2336 	add	a,r7
+   09FE 25 E0              2337 	add	a,acc
+   0A00 24 D6              2338 	add	a,#0xD6
+   0A02 90s00r00           2339 	mov	dptr,#_eeprom
+   0A05 93                 2340 	movc	a,@a+dptr
+   0A06 FD                 2341 	mov	r5,a
+   0A07 53 05 C0           2342 	anl	ar5,#0xC0
+   0A0A BD 40 02           2343 	cjne	r5,#0x40,00185$
+   0A0D 80 0A              2344 	sjmp	00114$
+   0A0F                    2345 00185$:
+   0A0F BD 80 02           2346 	cjne	r5,#0x80,00186$
+   0A12 80 09              2347 	sjmp	00115$
+   0A14                    2348 00186$:
+                           2349 ;	../fb_app_in8.c:611: case 0x40:	// zweiflaechen ein
+   0A14 BD C0 0E           2350 	cjne	r5,#0xC0,00117$
+   0A17 80 08              2351 	sjmp	00116$
+   0A19                    2352 00114$:
+                           2353 ;	../fb_app_in8.c:612: objval=1;
+   0A19 D2*00              2354 	setb	b0
+                           2355 ;	../fb_app_in8.c:613: break;
+                           2356 ;	../fb_app_in8.c:614: case 0x80:	// zweiflaechen aus
+   0A1B 80 6F              2357 	sjmp	00128$
+   0A1D                    2358 00115$:
+                           2359 ;	../fb_app_in8.c:615: objval=0;
+   0A1D C2*00              2360 	clr	b0
+                           2361 ;	../fb_app_in8.c:616: break;
+                           2362 ;	../fb_app_in8.c:617: case 0xC0:	// UM-heller
+   0A1F 80 6B              2363 	sjmp	00128$
+   0A21                    2364 00116$:
+                           2365 ;	../fb_app_in8.c:618: objval = !objval;
+   0A21 B2*00              2366 	cpl	b0
+                           2367 ;	../fb_app_in8.c:619: break;
+                           2368 ;	../fb_app_in8.c:620: default:
+   0A23 80 67              2369 	sjmp	00128$
+   0A25                    2370 00117$:
+                           2371 ;	../fb_app_in8.c:621: sendobj=255;
+   0A25 7E FF              2372 	mov	r6,#0xFF
+                           2373 ;	../fb_app_in8.c:626: break;
+                           2374 ;	../fb_app_in8.c:627: case 0x03:// Funktion Jalousie - Sperren
+   0A27 80 63              2375 	sjmp	00128$
+   0A29                    2376 00122$:
+                           2377 ;	../fb_app_in8.c:628: sendobj=obj+8;
+   0A29 74 08              2378 	mov	a,#0x08
+   0A2B 2F                 2379 	add	a,r7
+   0A2C FE                 2380 	mov	r6,a
+                           2381 ;	../fb_app_in8.c:629: switch ((eeprom[0xD5+(obj*4)]>>((freigabe^0x01)*2))&0x0C){
+   0A2D EF                 2382 	mov	a,r7
+   0A2E 2F                 2383 	add	a,r7
+   0A2F 25 E0              2384 	add	a,acc
+   0A31 24 D5              2385 	add	a,#0xD5
+   0A33 90s00r00           2386 	mov	dptr,#_eeprom
+   0A36 93                 2387 	movc	a,@a+dptr
+   0A37 FD                 2388 	mov	r5,a
+   0A38 E5*00              2389 	mov	a,_bp
+   0A3A 24 FD              2390 	add	a,#0xfd
+   0A3C F8                 2391 	mov	r0,a
+   0A3D 74 01              2392 	mov	a,#0x01
+   0A3F 66                 2393 	xrl	a,@r0
+   0A40 75 F0 02           2394 	mov	b,#0x02
+   0A43 A4                 2395 	mul	ab
+   0A44 F5 F0              2396 	mov	b,a
+   0A46 05 F0              2397 	inc	b
+   0A48 ED                 2398 	mov	a,r5
+   0A49 80 02              2399 	sjmp	00189$
+   0A4B                    2400 00188$:
+   0A4B C3                 2401 	clr	c
+   0A4C 13                 2402 	rrc	a
+   0A4D                    2403 00189$:
+   0A4D D5 F0 FB           2404 	djnz	b,00188$
+   0A50 54 0C              2405 	anl	a,#0x0C
+   0A52 FD                 2406 	mov	r5,a
+   0A53 BD 04 02           2407 	cjne	r5,#0x04,00190$
+   0A56 80 0A              2408 	sjmp	00123$
+   0A58                    2409 00190$:
+   0A58 BD 08 02           2410 	cjne	r5,#0x08,00191$
+   0A5B 80 09              2411 	sjmp	00124$
+   0A5D                    2412 00191$:
+                           2413 ;	../fb_app_in8.c:630: case 0x04:		//ab
+   0A5D BD 0C 2A           2414 	cjne	r5,#0x0C,00126$
+   0A60 80 08              2415 	sjmp	00125$
+   0A62                    2416 00123$:
+                           2417 ;	../fb_app_in8.c:631: objval=0;
+   0A62 C2*00              2418 	clr	b0
+                           2419 ;	../fb_app_in8.c:632: break;
+                           2420 ;	../fb_app_in8.c:633: case 0x08:		//auf
+   0A64 80 26              2421 	sjmp	00128$
+   0A66                    2422 00124$:
+                           2423 ;	../fb_app_in8.c:634: objval=1;
+   0A66 D2*00              2424 	setb	b0
+                           2425 ;	../fb_app_in8.c:635: break;
+                           2426 ;	../fb_app_in8.c:636: case 0x0c:	//UM
+   0A68 80 22              2427 	sjmp	00128$
+   0A6A                    2428 00125$:
+                           2429 ;	../fb_app_in8.c:637: objval=read_obj_value(obj+8)^0x01;//neues Jaloobj invers zum langzeit
+   0A6A 74 08              2430 	mov	a,#0x08
+   0A6C 2F                 2431 	add	a,r7
+   0A6D F5 82              2432 	mov	dpl,a
+   0A6F C0 06              2433 	push	ar6
+   0A71 12s0Cr5B           2434 	lcall	_read_obj_value
+   0A74 AB 82              2435 	mov	r3,dpl
+   0A76 AC 83              2436 	mov	r4,dph
+   0A78 AD F0              2437 	mov	r5,b
+   0A7A FF                 2438 	mov	r7,a
+   0A7B D0 06              2439 	pop	ar6
+   0A7D 63 03 01           2440 	xrl	ar3,#0x01
+   0A80 EB                 2441 	mov	a,r3
+   0A81 4C                 2442 	orl	a,r4
+   0A82 4D                 2443 	orl	a,r5
+   0A83 4F                 2444 	orl	a,r7
+   0A84 24 FF              2445 	add	a,#0xff
+   0A86 92*00              2446 	mov	b0,c
+                           2447 ;	../fb_app_in8.c:638: break;
+                           2448 ;	../fb_app_in8.c:639: default:
+   0A88 80 02              2449 	sjmp	00128$
+   0A8A                    2450 00126$:
+                           2451 ;	../fb_app_in8.c:640: sendobj=255;	
+   0A8A 7E FF              2452 	mov	r6,#0xFF
+                           2453 ;	../fb_app_in8.c:644: }// Ende switch funktion
+   0A8C                    2454 00128$:
+                           2455 ;	../fb_app_in8.c:645: if(sendobj<=16){
+   0A8C EE                 2456 	mov	a,r6
+   0A8D 24 EF              2457 	add	a,#0xff - 0x10
+   0A8F 40 2D              2458 	jc	00134$
+                           2459 ;	../fb_app_in8.c:646: write_obj_value(sendobj,objval);
+   0A91 A2*00              2460 	mov	c,b0
+   0A93 E4                 2461 	clr	a
+   0A94 33                 2462 	rlc	a
+   0A95 FB                 2463 	mov	r3,a
+   0A96 7C 00              2464 	mov	r4,#0x00
+   0A98 7D 00              2465 	mov	r5,#0x00
+   0A9A 7F 00              2466 	mov	r7,#0x00
+   0A9C C0 06              2467 	push	ar6
+   0A9E C0 03              2468 	push	ar3
+   0AA0 C0 04              2469 	push	ar4
+   0AA2 C0 05              2470 	push	ar5
+   0AA4 C0 07              2471 	push	ar7
+   0AA6 8E 82              2472 	mov	dpl,r6
+   0AA8 12s0Dr2C           2473 	lcall	_write_obj_value
+   0AAB E5 81              2474 	mov	a,sp
+   0AAD 24 FC              2475 	add	a,#0xfc
+   0AAF F5 81              2476 	mov	sp,a
+   0AB1 D0 06              2477 	pop	ar6
+                           2478 ;	../fb_app_in8.c:647: while(!send_obj_value(sendobj));
+   0AB3                    2479 00129$:
+   0AB3 8E 82              2480 	mov	dpl,r6
+   0AB5 C0 06              2481 	push	ar6
+   0AB7 12s00r00           2482 	lcall	_send_obj_value
+   0ABA D0 06              2483 	pop	ar6
+   0ABC 50 F5              2484 	jnc	00129$
+   0ABE                    2485 00134$:
+   0ABE D0*00              2486 	pop	_bp
+   0AC0 22                 2487 	ret
+                           2488 ;------------------------------------------------------------
+                           2489 ;Allocation info for local variables in function 'read_value_req'
+                           2490 ;------------------------------------------------------------
+                           2491 ;objno                     Allocated to registers r7 
+                           2492 ;objflags                  Allocated to registers r6 
+                           2493 ;------------------------------------------------------------
+                           2494 ;	../fb_app_in8.c:661: void read_value_req(void)
+                           2495 ;	-----------------------------------------
+                           2496 ;	 function read_value_req
+                           2497 ;	-----------------------------------------
+   0AC1                    2498 _read_value_req:
+                           2499 ;	../fb_app_in8.c:665: objno=find_first_objno(telegramm[3],telegramm[4]);	// erste Objektnummer zu empfangener GA finden
+   0AC1 85*03 82           2500 	mov	dpl,(_telegramm + 0x0003)
+   0AC4 C0*04              2501 	push	(_telegramm + 0x0004)
+   0AC6 12s00r00           2502 	lcall	_find_first_objno
+   0AC9 AF 82              2503 	mov	r7,dpl
+   0ACB 15 81              2504 	dec	sp
+                           2505 ;	../fb_app_in8.c:666: if(objno!=0xFF) {	// falls Gruppenadresse nicht gefunden
+   0ACD BF FF 01           2506 	cjne	r7,#0xFF,00111$
+   0AD0 22                 2507 	ret
+   0AD1                    2508 00111$:
+                           2509 ;	../fb_app_in8.c:672: objflags=read_objflags(objno);		// Objekt Flags lesen
+   0AD1 8F 82              2510 	mov	dpl,r7
+   0AD3 C0 07              2511 	push	ar7
+   0AD5 12s00r00           2512 	lcall	_read_objflags
+   0AD8 AE 82              2513 	mov	r6,dpl
+   0ADA D0 07              2514 	pop	ar7
+                           2515 ;	../fb_app_in8.c:674: if((objflags&0x0C)==0x0C) send_obj_value(objno+0x40);// 0x40 ist bit für response Telegramm
+   0ADC 53 06 0C           2516 	anl	ar6,#0x0C
+   0ADF BE 0C 08           2517 	cjne	r6,#0x0C,00105$
+   0AE2 74 40              2518 	mov	a,#0x40
+   0AE4 2F                 2519 	add	a,r7
+   0AE5 F5 82              2520 	mov	dpl,a
+   0AE7 02s00r00           2521 	ljmp	_send_obj_value
+   0AEA                    2522 00105$:
+   0AEA 22                 2523 	ret
+                           2524 ;------------------------------------------------------------
+                           2525 ;Allocation info for local variables in function 'write_send'
+                           2526 ;------------------------------------------------------------
+                           2527 ;value                     Allocated to stack - _bp -4
+                           2528 ;objno                     Allocated to registers r7 
+                           2529 ;------------------------------------------------------------
+                           2530 ;	../fb_app_in8.c:679: void (write_send)(unsigned char objno,unsigned int value){
+                           2531 ;	-----------------------------------------
+                           2532 ;	 function write_send
+                           2533 ;	-----------------------------------------
+   0AEB                    2534 _write_send:
+   0AEB C0*00              2535 	push	_bp
+   0AED 85 81*00           2536 	mov	_bp,sp
+   0AF0 AF 82              2537 	mov	r7,dpl
+                           2538 ;	../fb_app_in8.c:681: write_obj_value(objno,value);
+   0AF2 E5*00              2539 	mov	a,_bp
+   0AF4 24 FC              2540 	add	a,#0xfc
+   0AF6 F8                 2541 	mov	r0,a
+   0AF7 86 03              2542 	mov	ar3,@r0
+   0AF9 08                 2543 	inc	r0
+   0AFA 86 04              2544 	mov	ar4,@r0
+   0AFC 7D 00              2545 	mov	r5,#0x00
+   0AFE 7E 00              2546 	mov	r6,#0x00
+   0B00 C0 07              2547 	push	ar7
+   0B02 C0 03              2548 	push	ar3
+   0B04 C0 04              2549 	push	ar4
+   0B06 C0 05              2550 	push	ar5
+   0B08 C0 06              2551 	push	ar6
+   0B0A 8F 82              2552 	mov	dpl,r7
+   0B0C 12s0Dr2C           2553 	lcall	_write_obj_value
+   0B0F E5 81              2554 	mov	a,sp
+   0B11 24 FC              2555 	add	a,#0xfc
+   0B13 F5 81              2556 	mov	sp,a
+   0B15 D0 07              2557 	pop	ar7
+                           2558 ;	../fb_app_in8.c:682: send_obj_value(objno);
+   0B17 8F 82              2559 	mov	dpl,r7
+   0B19 12s00r00           2560 	lcall	_send_obj_value
+   0B1C D0*00              2561 	pop	_bp
+   0B1E 22                 2562 	ret
+                           2563 ;------------------------------------------------------------
+                           2564 ;Allocation info for local variables in function 'bus_return'
+                           2565 ;------------------------------------------------------------
+                           2566 ;n                         Allocated to registers r7 
+                           2567 ;senden                    Allocated to registers r6 
+                           2568 ;objval                    Allocated to registers b0 
+                           2569 ;------------------------------------------------------------
+                           2570 ;	../fb_app_in8.c:686: void bus_return(void){
+                           2571 ;	-----------------------------------------
+                           2572 ;	 function bus_return
+                           2573 ;	-----------------------------------------
+   0B1F                    2574 _bus_return:
+                           2575 ;	../fb_app_in8.c:689: __bit objval=0;
+   0B1F C2*00              2576 	clr	b0
+                           2577 ;	../fb_app_in8.c:690: Sperre=0;
+   0B21 75 18 00           2578 	mov	_Sperre,#0x00
+                           2579 ;	../fb_app_in8.c:692: for (n=0;n<8;n++){
+   0B24 7F 00              2580 	mov	r7,#0x00
+   0B26                    2581 00124$:
+   0B26 BF 08 00           2582 	cjne	r7,#0x08,00161$
+   0B29                    2583 00161$:
+   0B29 40 01              2584 	jc	00162$
+   0B2B 22                 2585 	ret
+   0B2C                    2586 00162$:
+                           2587 ;	../fb_app_in8.c:693: senden=0;
+   0B2C 7E 00              2588 	mov	r6,#0x00
+                           2589 ;	../fb_app_in8.c:694: timercnt[n]=0;// alle timer ausschalten
+   0B2E EF                 2590 	mov	a,r7
+   0B2F 24r12              2591 	add	a,#_timercnt
+   0B31 F9                 2592 	mov	r1,a
+   0B32 77 00              2593 	mov	@r1,#0x00
+                           2594 ;	../fb_app_in8.c:695: objectvalue_l[n]=0;
+   0B34 EF                 2595 	mov	a,r7
+   0B35 24 08              2596 	add	a,#_objectvalue_l
+   0B37 F8                 2597 	mov	r0,a
+   0B38 76 00              2598 	mov	@r0,#0x00
+                           2599 ;	../fb_app_in8.c:696: objectvalue_h[n]=0;
+   0B3A EF                 2600 	mov	a,r7
+   0B3B 24 10              2601 	add	a,#_objectvalue_h
+   0B3D F8                 2602 	mov	r0,a
+   0B3E 76 00              2603 	mov	@r0,#0x00
+                           2604 ;	../fb_app_in8.c:697: switch ((eeprom[0xCE+(n>>1)] >> ((n & 0x01)*4)) & 0x0F)	// Funktion des objektes
+   0B40 EF                 2605 	mov	a,r7
+   0B41 C3                 2606 	clr	c
+   0B42 13                 2607 	rrc	a
+   0B43 24 CE              2608 	add	a,#0xCE
+   0B45 90s00r00           2609 	mov	dptr,#_eeprom
+   0B48 93                 2610 	movc	a,@a+dptr
+   0B49 FD                 2611 	mov	r5,a
+   0B4A 74 01              2612 	mov	a,#0x01
+   0B4C 5F                 2613 	anl	a,r7
+   0B4D 75 F0 04           2614 	mov	b,#0x04
+   0B50 A4                 2615 	mul	ab
+   0B51 F5 F0              2616 	mov	b,a
+   0B53 05 F0              2617 	inc	b
+   0B55 ED                 2618 	mov	a,r5
+   0B56 80 02              2619 	sjmp	00164$
+   0B58                    2620 00163$:
+   0B58 C3                 2621 	clr	c
+   0B59 13                 2622 	rrc	a
+   0B5A                    2623 00164$:
+   0B5A D5 F0 FB           2624 	djnz	b,00163$
+   0B5D 54 0F              2625 	anl	a,#0x0F
+   0B5F FD                 2626 	mov	r5,a
+   0B60 BD 01 02           2627 	cjne	r5,#0x01,00165$
+   0B63 80 13              2628 	sjmp	00101$
+   0B65                    2629 00165$:
+   0B65 BD 02 02           2630 	cjne	r5,#0x02,00166$
+   0B68 80 55              2631 	sjmp	00107$
+   0B6A                    2632 00166$:
+   0B6A BD 03 02           2633 	cjne	r5,#0x03,00167$
+   0B6D 80 0F              2634 	sjmp	00102$
+   0B6F                    2635 00167$:
+   0B6F BD 09 03           2636 	cjne	r5,#0x09,00168$
+   0B72 02s0BrE3           2637 	ljmp	00112$
+   0B75                    2638 00168$:
+   0B75 02s0BrFB           2639 	ljmp	00115$
+                           2640 ;	../fb_app_in8.c:699: case 0x01:// schalten
+   0B78                    2641 00101$:
+                           2642 ;	../fb_app_in8.c:700: timerstate[n]=0;
+   0B78 EF                 2643 	mov	a,r7
+   0B79 24r1B              2644 	add	a,#_timerstate
+   0B7B F8                 2645 	mov	r0,a
+   0B7C 76 00              2646 	mov	@r0,#0x00
+                           2647 ;	../fb_app_in8.c:701: case 0x03:// Jalousie
+   0B7E                    2648 00102$:
+                           2649 ;	../fb_app_in8.c:703: switch(eeprom[0xD5+(n*4)]&0xC0){
+   0B7E EF                 2650 	mov	a,r7
+   0B7F 2F                 2651 	add	a,r7
+   0B80 25 E0              2652 	add	a,acc
+   0B82 24 D5              2653 	add	a,#0xD5
+   0B84 90s00r00           2654 	mov	dptr,#_eeprom
+   0B87 93                 2655 	movc	a,@a+dptr
+   0B88 FD                 2656 	mov	r5,a
+   0B89 53 05 C0           2657 	anl	ar5,#0xC0
+   0B8C BD 40 02           2658 	cjne	r5,#0x40,00169$
+   0B8F 80 0A              2659 	sjmp	00103$
+   0B91                    2660 00169$:
+   0B91 BD 80 02           2661 	cjne	r5,#0x80,00170$
+   0B94 80 0B              2662 	sjmp	00104$
+   0B96                    2663 00170$:
+                           2664 ;	../fb_app_in8.c:704: case 0x40:
+   0B96 BD C0 62           2665 	cjne	r5,#0xC0,00115$
+   0B99 80 0C              2666 	sjmp	00105$
+   0B9B                    2667 00103$:
+                           2668 ;	../fb_app_in8.c:705: objval=1;
+   0B9B D2*00              2669 	setb	b0
+                           2670 ;	../fb_app_in8.c:706: senden=1;
+   0B9D 7E 01              2671 	mov	r6,#0x01
+                           2672 ;	../fb_app_in8.c:707: break;	
+                           2673 ;	../fb_app_in8.c:708: case 0x80:
+   0B9F 80 5A              2674 	sjmp	00115$
+   0BA1                    2675 00104$:
+                           2676 ;	../fb_app_in8.c:709: objval=0;
+   0BA1 C2*00              2677 	clr	b0
+                           2678 ;	../fb_app_in8.c:710: senden=1;
+   0BA3 7E 01              2679 	mov	r6,#0x01
+                           2680 ;	../fb_app_in8.c:711: break;
+                           2681 ;	../fb_app_in8.c:712: case 0xC0:
+   0BA5 80 54              2682 	sjmp	00115$
+   0BA7                    2683 00105$:
+                           2684 ;	../fb_app_in8.c:713: objval=(p0h>>n)& 0x01;
+   0BA7 8F F0              2685 	mov	b,r7
+   0BA9 05 F0              2686 	inc	b
+   0BAB E5*01              2687 	mov	a,_p0h
+   0BAD 80 02              2688 	sjmp	00173$
+   0BAF                    2689 00172$:
+   0BAF C3                 2690 	clr	c
+   0BB0 13                 2691 	rrc	a
+   0BB1                    2692 00173$:
+   0BB1 D5 F0 FB           2693 	djnz	b,00172$
+   0BB4 54 01              2694 	anl	a,#0x01
+   0BB6 FD                 2695 	mov	r5,a
+   0BB7 24 FF              2696 	add	a,#0xff
+   0BB9 92*00              2697 	mov	b0,c
+                           2698 ;	../fb_app_in8.c:714: senden=1;
+   0BBB 7E 01              2699 	mov	r6,#0x01
+                           2700 ;	../fb_app_in8.c:717: break;
+                           2701 ;	../fb_app_in8.c:718: case 0x02://dimmen austele
+   0BBD 80 3C              2702 	sjmp	00115$
+   0BBF                    2703 00107$:
+                           2704 ;	../fb_app_in8.c:719: if(eeprom[0xD7+(n*4)]&0x80){
+   0BBF EF                 2705 	mov	a,r7
+   0BC0 2F                 2706 	add	a,r7
+   0BC1 25 E0              2707 	add	a,acc
+   0BC3 FD                 2708 	mov	r5,a
+   0BC4 24 D7              2709 	add	a,#0xD7
+   0BC6 90s00r00           2710 	mov	dptr,#_eeprom
+   0BC9 93                 2711 	movc	a,@a+dptr
+   0BCA FC                 2712 	mov	r4,a
+   0BCB 30 E7 04           2713 	jnb	acc.7,00109$
+                           2714 ;	../fb_app_in8.c:720: objval=0;
+   0BCE C2*00              2715 	clr	b0
+                           2716 ;	../fb_app_in8.c:721: senden=1;
+   0BD0 7E 01              2717 	mov	r6,#0x01
+   0BD2                    2718 00109$:
+                           2719 ;	../fb_app_in8.c:723: if(eeprom[0xD8+(n*4)]&0x80){
+   0BD2 74 D8              2720 	mov	a,#0xD8
+   0BD4 2D                 2721 	add	a,r5
+   0BD5 90s00r00           2722 	mov	dptr,#_eeprom
+   0BD8 93                 2723 	movc	a,@a+dptr
+   0BD9 FD                 2724 	mov	r5,a
+   0BDA 30 E7 1E           2725 	jnb	acc.7,00115$
+                           2726 ;	../fb_app_in8.c:724: objval=1;
+   0BDD D2*00              2727 	setb	b0
+                           2728 ;	../fb_app_in8.c:725: senden=1;
+   0BDF 7E 01              2729 	mov	r6,#0x01
+                           2730 ;	../fb_app_in8.c:728: break;
+                           2731 ;	../fb_app_in8.c:729: case 0x09:	// timer für impulszähler starten falls kein sync angeschlossen 
+   0BE1 80 18              2732 	sjmp	00115$
+   0BE3                    2733 00112$:
+                           2734 ;	../fb_app_in8.c:730: if (n<=1){
+   0BE3 EF                 2735 	mov	a,r7
+   0BE4 24 FE              2736 	add	a,#0xff - 0x01
+   0BE6 40 13              2737 	jc	00115$
+                           2738 ;	../fb_app_in8.c:731: timercnt[n]=0x80;
+   0BE8 77 80              2739 	mov	@r1,#0x80
+                           2740 ;	../fb_app_in8.c:732: timerbase[n]=0x80;
+   0BEA EF                 2741 	mov	a,r7
+   0BEB 24r09              2742 	add	a,#_timerbase
+   0BED F8                 2743 	mov	r0,a
+   0BEE 76 80              2744 	mov	@r0,#0x80
+                           2745 ;	../fb_app_in8.c:733: zaehlervalue[n]=0;
+   0BF0 EF                 2746 	mov	a,r7
+   0BF1 2F                 2747 	add	a,r7
+   0BF2 FD                 2748 	mov	r5,a
+   0BF3 24 19              2749 	add	a,#_zaehlervalue
+   0BF5 F8                 2750 	mov	r0,a
+   0BF6 76 00              2751 	mov	@r0,#0x00
+   0BF8 08                 2752 	inc	r0
+   0BF9 76 00              2753 	mov	@r0,#0x00
+                           2754 ;	../fb_app_in8.c:736: }
+   0BFB                    2755 00115$:
+                           2756 ;	../fb_app_in8.c:737: if (senden){
+   0BFB EE                 2757 	mov	a,r6
+   0BFC 60 35              2758 	jz	00120$
+                           2759 ;	../fb_app_in8.c:738: write_obj_value(n,objval);// eis1, kein selftele, speichern ja
+   0BFE A2*00              2760 	mov	c,b0
+   0C00 E4                 2761 	clr	a
+   0C01 33                 2762 	rlc	a
+   0C02 FB                 2763 	mov	r3,a
+   0C03 7C 00              2764 	mov	r4,#0x00
+   0C05 7D 00              2765 	mov	r5,#0x00
+   0C07 7E 00              2766 	mov	r6,#0x00
+   0C09 C0 07              2767 	push	ar7
+   0C0B C0*00              2768 	push	bits
+   0C0D C0 03              2769 	push	ar3
+   0C0F C0 04              2770 	push	ar4
+   0C11 C0 05              2771 	push	ar5
+   0C13 C0 06              2772 	push	ar6
+   0C15 8F 82              2773 	mov	dpl,r7
+   0C17 12s0Dr2C           2774 	lcall	_write_obj_value
+   0C1A E5 81              2775 	mov	a,sp
+   0C1C 24 FC              2776 	add	a,#0xfc
+   0C1E F5 81              2777 	mov	sp,a
+   0C20 D0*00              2778 	pop	bits
+   0C22 D0 07              2779 	pop	ar7
+                           2780 ;	../fb_app_in8.c:739: while(!send_obj_value(n));
+   0C24                    2781 00116$:
+   0C24 8F 82              2782 	mov	dpl,r7
+   0C26 C0 07              2783 	push	ar7
+   0C28 C0*00              2784 	push	bits
+   0C2A 12s00r00           2785 	lcall	_send_obj_value
+   0C2D D0*00              2786 	pop	bits
+   0C2F D0 07              2787 	pop	ar7
+   0C31 50 F1              2788 	jnc	00116$
+   0C33                    2789 00120$:
+                           2790 ;	../fb_app_in8.c:741: if((eeprom[0xD5+(n*4)]& 0x03)==1){
+   0C33 EF                 2791 	mov	a,r7
+   0C34 2F                 2792 	add	a,r7
+   0C35 25 E0              2793 	add	a,acc
+   0C37 24 D5              2794 	add	a,#0xD5
+   0C39 90s00r00           2795 	mov	dptr,#_eeprom
+   0C3C 93                 2796 	movc	a,@a+dptr
+   0C3D FE                 2797 	mov	r6,a
+   0C3E 53 06 03           2798 	anl	ar6,#0x03
+   0C41 BE 01 0A           2799 	cjne	r6,#0x01,00122$
+                           2800 ;	../fb_app_in8.c:742: blocked |= bitmask_1[n];
+   0C44 EF                 2801 	mov	a,r7
+   0C45 90s00r00           2802 	mov	dptr,#_bitmask_1
+   0C48 93                 2803 	movc	a,@a+dptr
+   0C49 FE                 2804 	mov	r6,a
+   0C4A 42*04              2805 	orl	_blocked,a
+   0C4C 80 09              2806 	sjmp	00126$
+   0C4E                    2807 00122$:
+                           2808 ;	../fb_app_in8.c:745: blocked &= (~bitmask_1[n]);
+   0C4E EF                 2809 	mov	a,r7
+   0C4F 90s00r00           2810 	mov	dptr,#_bitmask_1
+   0C52 93                 2811 	movc	a,@a+dptr
+   0C53 F4                 2812 	cpl	a
+   0C54 FE                 2813 	mov	r6,a
+   0C55 52*04              2814 	anl	_blocked,a
+   0C57                    2815 00126$:
+                           2816 ;	../fb_app_in8.c:692: for (n=0;n<8;n++){
+   0C57 0F                 2817 	inc	r7
+   0C58 02s0Br26           2818 	ljmp	00124$
+                           2819 ;------------------------------------------------------------
+                           2820 ;Allocation info for local variables in function 'read_obj_value'
+                           2821 ;------------------------------------------------------------
+                           2822 ;objno                     Allocated to registers r7 
+                           2823 ;objvalue                  Allocated to stack - _bp +1
+                           2824 ;objtype                   Allocated to registers r6 
+                           2825 ;sloc0                     Allocated to stack - _bp +7
+                           2826 ;------------------------------------------------------------
+                           2827 ;	../fb_app_in8.c:800: unsigned long read_obj_value(unsigned char objno)
+                           2828 ;	-----------------------------------------
+                           2829 ;	 function read_obj_value
+                           2830 ;	-----------------------------------------
+   0C5B                    2831 _read_obj_value:
+   0C5B C0*00              2832 	push	_bp
+   0C5D E5 81              2833 	mov	a,sp
+   0C5F F5*00              2834 	mov	_bp,a
+   0C61 24 04              2835 	add	a,#0x04
+   0C63 F5 81              2836 	mov	sp,a
+   0C65 AF 82              2837 	mov	r7,dpl
+                           2838 ;	../fb_app_in8.c:804: objtype=eeprom[eeprom[COMMSTABPTR]+objno*3+4];
+   0C67 90s00r12           2839 	mov	dptr,#(_eeprom + 0x0012)
+   0C6A E4                 2840 	clr	a
+   0C6B 93                 2841 	movc	a,@a+dptr
+   0C6C FE                 2842 	mov	r6,a
+   0C6D EF                 2843 	mov	a,r7
+   0C6E 75 F0 03           2844 	mov	b,#0x03
+   0C71 A4                 2845 	mul	ab
+   0C72 2E                 2846 	add	a,r6
+   0C73 24 04              2847 	add	a,#0x04
+   0C75 90s00r00           2848 	mov	dptr,#_eeprom
+   0C78 93                 2849 	movc	a,@a+dptr
+   0C79 FE                 2850 	mov	r6,a
+                           2851 ;	../fb_app_in8.c:806: if (objno <= 15) {	// wenn objno <= anzahl objekte
+   0C7A EF                 2852 	mov	a,r7
+   0C7B 24 F0              2853 	add	a,#0xff - 0x0F
+   0C7D 40 72              2854 	jc	00105$
+                           2855 ;	../fb_app_in8.c:807: if (objtype>=8){// bei 16bit
+   0C7F BE 08 00           2856 	cjne	r6,#0x08,00114$
+   0C82                    2857 00114$:
+   0C82 40 3D              2858 	jc	00102$
+                           2859 ;	../fb_app_in8.c:808: objvalue=objectvalue_h[objno&0x07]<<8;
+   0C84 74 07              2860 	mov	a,#0x07
+   0C86 5F                 2861 	anl	a,r7
+   0C87 FE                 2862 	mov	r6,a
+   0C88 24 10              2863 	add	a,#_objectvalue_h
+   0C8A F9                 2864 	mov	r1,a
+   0C8B 87 04              2865 	mov	ar4,@r1
+   0C8D 8C 03              2866 	mov	ar3,r4
+   0C8F 7C 00              2867 	mov	r4,#0x00
+   0C91 A8*00              2868 	mov	r0,_bp
+   0C93 08                 2869 	inc	r0
+   0C94 A6 04              2870 	mov	@r0,ar4
+   0C96 08                 2871 	inc	r0
+   0C97 A6 03              2872 	mov	@r0,ar3
+   0C99 EB                 2873 	mov	a,r3
+   0C9A 33                 2874 	rlc	a
+   0C9B 95 E0              2875 	subb	a,acc
+   0C9D 08                 2876 	inc	r0
+   0C9E F6                 2877 	mov	@r0,a
+   0C9F 08                 2878 	inc	r0
+   0CA0 F6                 2879 	mov	@r0,a
+                           2880 ;	../fb_app_in8.c:809: objvalue+=(objectvalue_l[objno&0x07]);//objvalue=objvalue<<8;
+   0CA1 EE                 2881 	mov	a,r6
+   0CA2 24 08              2882 	add	a,#_objectvalue_l
+   0CA4 F9                 2883 	mov	r1,a
+   0CA5 87 05              2884 	mov	ar5,@r1
+   0CA7 7C 00              2885 	mov	r4,#0x00
+   0CA9 7B 00              2886 	mov	r3,#0x00
+   0CAB 7A 00              2887 	mov	r2,#0x00
+   0CAD A8*00              2888 	mov	r0,_bp
+   0CAF 08                 2889 	inc	r0
+   0CB0 ED                 2890 	mov	a,r5
+   0CB1 26                 2891 	add	a,@r0
+   0CB2 F6                 2892 	mov	@r0,a
+   0CB3 EC                 2893 	mov	a,r4
+   0CB4 08                 2894 	inc	r0
+   0CB5 36                 2895 	addc	a,@r0
+   0CB6 F6                 2896 	mov	@r0,a
+   0CB7 EB                 2897 	mov	a,r3
+   0CB8 08                 2898 	inc	r0
+   0CB9 36                 2899 	addc	a,@r0
+   0CBA F6                 2900 	mov	@r0,a
+   0CBB EA                 2901 	mov	a,r2
+   0CBC 08                 2902 	inc	r0
+   0CBD 36                 2903 	addc	a,@r0
+   0CBE F6                 2904 	mov	@r0,a
+   0CBF 80 58              2905 	sjmp	00106$
+   0CC1                    2906 00102$:
+                           2907 ;	../fb_app_in8.c:811: else objvalue = objectvalue_l[objno]&(0xFF>>(7-objtype));
+   0CC1 EF                 2908 	mov	a,r7
+   0CC2 24 08              2909 	add	a,#_objectvalue_l
+   0CC4 F9                 2910 	mov	r1,a
+   0CC5 87 05              2911 	mov	ar5,@r1
+   0CC7 7C 00              2912 	mov	r4,#0x00
+   0CC9 74 07              2913 	mov	a,#0x07
+   0CCB C3                 2914 	clr	c
+   0CCC 9E                 2915 	subb	a,r6
+   0CCD FE                 2916 	mov	r6,a
+   0CCE E4                 2917 	clr	a
+   0CCF 9C                 2918 	subb	a,r4
+   0CD0 FC                 2919 	mov	r4,a
+   0CD1 8E F0              2920 	mov	b,r6
+   0CD3 05 F0              2921 	inc	b
+   0CD5 74 FF              2922 	mov	a,#0xFF
+   0CD7 80 02              2923 	sjmp	00117$
+   0CD9                    2924 00116$:
+   0CD9 C3                 2925 	clr	c
+   0CDA 13                 2926 	rrc	a
+   0CDB                    2927 00117$:
+   0CDB D5 F0 FB           2928 	djnz	b,00116$
+   0CDE FE                 2929 	mov	r6,a
+   0CDF 52 05              2930 	anl	ar5,a
+   0CE1 A8*00              2931 	mov	r0,_bp
+   0CE3 08                 2932 	inc	r0
+   0CE4 A6 05              2933 	mov	@r0,ar5
+   0CE6 08                 2934 	inc	r0
+   0CE7 76 00              2935 	mov	@r0,#0x00
+   0CE9 08                 2936 	inc	r0
+   0CEA 76 00              2937 	mov	@r0,#0x00
+   0CEC 08                 2938 	inc	r0
+   0CED 76 00              2939 	mov	@r0,#0x00
+   0CEF 80 28              2940 	sjmp	00106$
+   0CF1                    2941 00105$:
+                           2942 ;	../fb_app_in8.c:814: objvalue=(Sperre>>(objno-16))&0x01;
+   0CF1 7E 00              2943 	mov	r6,#0x00
+   0CF3 EF                 2944 	mov	a,r7
+   0CF4 24 F0              2945 	add	a,#0xF0
+   0CF6 FF                 2946 	mov	r7,a
+   0CF7 EE                 2947 	mov	a,r6
+   0CF8 34 FF              2948 	addc	a,#0xFF
+   0CFA FE                 2949 	mov	r6,a
+   0CFB 8F F0              2950 	mov	b,r7
+   0CFD 05 F0              2951 	inc	b
+   0CFF E5 18              2952 	mov	a,_Sperre
+   0D01 80 02              2953 	sjmp	00119$
+   0D03                    2954 00118$:
+   0D03 C3                 2955 	clr	c
+   0D04 13                 2956 	rrc	a
+   0D05                    2957 00119$:
+   0D05 D5 F0 FB           2958 	djnz	b,00118$
+   0D08 54 01              2959 	anl	a,#0x01
+   0D0A FF                 2960 	mov	r7,a
+   0D0B A8*00              2961 	mov	r0,_bp
+   0D0D 08                 2962 	inc	r0
+   0D0E A6 07              2963 	mov	@r0,ar7
+   0D10 08                 2964 	inc	r0
+   0D11 76 00              2965 	mov	@r0,#0x00
+   0D13 08                 2966 	inc	r0
+   0D14 76 00              2967 	mov	@r0,#0x00
+   0D16 08                 2968 	inc	r0
+   0D17 76 00              2969 	mov	@r0,#0x00
+   0D19                    2970 00106$:
+                           2971 ;	../fb_app_in8.c:816: return(objvalue);
+   0D19 A8*00              2972 	mov	r0,_bp
+   0D1B 08                 2973 	inc	r0
+   0D1C 86 82              2974 	mov	dpl,@r0
+   0D1E 08                 2975 	inc	r0
+   0D1F 86 83              2976 	mov	dph,@r0
+   0D21 08                 2977 	inc	r0
+   0D22 86 F0              2978 	mov	b,@r0
+   0D24 08                 2979 	inc	r0
+   0D25 E6                 2980 	mov	a,@r0
+   0D26 85*00 81           2981 	mov	sp,_bp
+   0D29 D0*00              2982 	pop	_bp
+   0D2B 22                 2983 	ret
+                           2984 ;------------------------------------------------------------
+                           2985 ;Allocation info for local variables in function 'write_obj_value'
+                           2986 ;------------------------------------------------------------
+                           2987 ;objvalue                  Allocated to stack - _bp -6
+                           2988 ;objno                     Allocated to registers r7 
+                           2989 ;objtype                   Allocated to registers r6 
+                           2990 ;------------------------------------------------------------
+                           2991 ;	../fb_app_in8.c:821: void write_obj_value(unsigned char objno,long objvalue)
+                           2992 ;	-----------------------------------------
+                           2993 ;	 function write_obj_value
+                           2994 ;	-----------------------------------------
+   0D2C                    2995 _write_obj_value:
+   0D2C C0*00              2996 	push	_bp
+   0D2E 85 81*00           2997 	mov	_bp,sp
+   0D31 AF 82              2998 	mov	r7,dpl
+                           2999 ;	../fb_app_in8.c:825: objtype=eeprom[eeprom[COMMSTABPTR]+objno*3+4];
+   0D33 90s00r12           3000 	mov	dptr,#(_eeprom + 0x0012)
+   0D36 E4                 3001 	clr	a
+   0D37 93                 3002 	movc	a,@a+dptr
+   0D38 FE                 3003 	mov	r6,a
+   0D39 EF                 3004 	mov	a,r7
+   0D3A 75 F0 03           3005 	mov	b,#0x03
+   0D3D A4                 3006 	mul	ab
+   0D3E 2E                 3007 	add	a,r6
+   0D3F 24 04              3008 	add	a,#0x04
+   0D41 90s00r00           3009 	mov	dptr,#_eeprom
+   0D44 93                 3010 	movc	a,@a+dptr
+   0D45 FE                 3011 	mov	r6,a
+                           3012 ;	../fb_app_in8.c:827: if (objno <= 15) {	// wenn objno <= anzahl objekte
+   0D46 EF                 3013 	mov	a,r7
+   0D47 24 F0              3014 	add	a,#0xff - 0x0F
+   0D49 40 2D              3015 	jc	00104$
+                           3016 ;	../fb_app_in8.c:828: if (objtype>=8){
+   0D4B BE 08 00           3017 	cjne	r6,#0x08,00113$
+   0D4E                    3018 00113$:
+   0D4E 40 13              3019 	jc	00102$
+                           3020 ;	../fb_app_in8.c:829: objectvalue_h[objno&0x07]=objvalue>>8;
+   0D50 74 07              3021 	mov	a,#0x07
+   0D52 5F                 3022 	anl	a,r7
+   0D53 FE                 3023 	mov	r6,a
+   0D54 24 10              3024 	add	a,#_objectvalue_h
+   0D56 F9                 3025 	mov	r1,a
+   0D57 E5*00              3026 	mov	a,_bp
+   0D59 24 FA              3027 	add	a,#0xfa
+   0D5B F8                 3028 	mov	r0,a
+   0D5C 08                 3029 	inc	r0
+   0D5D 86 05              3030 	mov	ar5,@r0
+   0D5F A7 05              3031 	mov	@r1,ar5
+                           3032 ;	../fb_app_in8.c:830: objno &= 0x07;
+   0D61 8E 07              3033 	mov	ar7,r6
+   0D63                    3034 00102$:
+                           3035 ;	../fb_app_in8.c:832: objectvalue_l[objno]=objvalue & 0xFF;
+   0D63 EF                 3036 	mov	a,r7
+   0D64 24 08              3037 	add	a,#_objectvalue_l
+   0D66 F9                 3038 	mov	r1,a
+   0D67 E5*00              3039 	mov	a,_bp
+   0D69 24 FA              3040 	add	a,#0xfa
+   0D6B F8                 3041 	mov	r0,a
+   0D6C 86 03              3042 	mov	ar3,@r0
+   0D6E 7C 00              3043 	mov	r4,#0x00
+   0D70 7D 00              3044 	mov	r5,#0x00
+   0D72 7E 00              3045 	mov	r6,#0x00
+   0D74 A7 03              3046 	mov	@r1,ar3
+   0D76 80 32              3047 	sjmp	00106$
+   0D78                    3048 00104$:
+                           3049 ;	../fb_app_in8.c:836: Sperre &= (0xff-(bitmask_1[objno-16]));
+   0D78 EF                 3050 	mov	a,r7
+   0D79 24 F0              3051 	add	a,#0xF0
+   0D7B FF                 3052 	mov	r7,a
+   0D7C 90s00r00           3053 	mov	dptr,#_bitmask_1
+   0D7F 93                 3054 	movc	a,@a+dptr
+   0D80 FE                 3055 	mov	r6,a
+   0D81 74 FF              3056 	mov	a,#0xFF
+   0D83 C3                 3057 	clr	c
+   0D84 9E                 3058 	subb	a,r6
+   0D85 52 18              3059 	anl	_Sperre,a
+                           3060 ;	../fb_app_in8.c:837: Sperre |= ((objvalue&0x01)<<(objno-16));
+   0D87 E5*00              3061 	mov	a,_bp
+   0D89 24 FA              3062 	add	a,#0xfa
+   0D8B F8                 3063 	mov	r0,a
+   0D8C 74 01              3064 	mov	a,#0x01
+   0D8E 56                 3065 	anl	a,@r0
+   0D8F FB                 3066 	mov	r3,a
+   0D90 7C 00              3067 	mov	r4,#0x00
+   0D92 7D 00              3068 	mov	r5,#0x00
+   0D94 7E 00              3069 	mov	r6,#0x00
+   0D96 8F F0              3070 	mov	b,r7
+   0D98 05 F0              3071 	inc	b
+   0D9A EB                 3072 	mov	a,r3
+   0D9B 80 02              3073 	sjmp	00117$
+   0D9D                    3074 00115$:
+   0D9D 25 E0              3075 	add	a,acc
+   0D9F                    3076 00117$:
+   0D9F D5 F0 FB           3077 	djnz	b,00115$
+   0DA2 FF                 3078 	mov	r7,a
+   0DA3 E5 18              3079 	mov	a,_Sperre
+   0DA5 FE                 3080 	mov	r6,a
+   0DA6 42 07              3081 	orl	ar7,a
+   0DA8 8F 18              3082 	mov	_Sperre,r7
+   0DAA                    3083 00106$:
+   0DAA D0*00              3084 	pop	_bp
+   0DAC 22                 3085 	ret
+                           3086 ;------------------------------------------------------------
+                           3087 ;Allocation info for local variables in function 'restart_app'
+                           3088 ;------------------------------------------------------------
+                           3089 ;	../fb_app_in8.c:843: void restart_app(void)		// Alle Applikations-Parameter zurücksetzen
+                           3090 ;	-----------------------------------------
+                           3091 ;	 function restart_app
+                           3092 ;	-----------------------------------------
+   0DAD                    3093 _restart_app:
+                           3094 ;	../fb_app_in8.c:848: P0M1=0xFF;	//P0 auf input only (high impedance!)
+   0DAD 75 84 FF           3095 	mov	_P0M1,#0xFF
+                           3096 ;	../fb_app_in8.c:849: P0M2=0x00;
+   0DB0 75 85 00           3097 	mov	_P0M2,#0x00
+                           3098 ;	../fb_app_in8.c:850: P0=0xFF;
+   0DB3 75 80 FF           3099 	mov	_P0,#0xFF
+                           3100 ;	../fb_app_in8.c:857: transparency=0;
+   0DB6 C2*00              3101 	clr	_transparency
+                           3102 ;	../fb_app_in8.c:860: timer=0;			// Timer-Variable, wird alle 65ms inkrementiert
+   0DB8 E4                 3103 	clr	a
+   0DB9 F5*07              3104 	mov	_timer,a
+   0DBB F5*08              3105 	mov	(_timer + 1),a
+                           3106 ;	../fb_app_in8.c:862: EA=0; 
+   0DBD C2 AF              3107 	clr	_IEN0_7
+                           3108 ;	../fb_app_in8.c:863: START_WRITECYCLE
+   0DBF 75 E4 00           3109 	mov	_FMCON,#0x00
+                           3110 ;	../fb_app_in8.c:864: WRITE_BYTE(0x01,0x03,0x00)	// Herstellercode 0x0004 = Jung
+   0DC2 75 E7 1D           3111 	mov	_FMADRH,#0x1D
+   0DC5 75 E6 03           3112 	mov	_FMADRL,#0x03
+   0DC8 75 E5 00           3113 	mov	_FMDATA,#0x00
+                           3114 ;	../fb_app_in8.c:865: WRITE_BYTE(0x01,0x04,0x04)
+   0DCB 75 E7 1D           3115 	mov	_FMADRH,#0x1D
+   0DCE 75 E6 04           3116 	mov	_FMADRL,#0x04
+   0DD1 75 E5 04           3117 	mov	_FMDATA,#0x04
+                           3118 ;	../fb_app_in8.c:866: WRITE_BYTE(0x01,0x05,0x70)	// Geräte Typ (2118) 7054h
+   0DD4 75 E7 1D           3119 	mov	_FMADRH,#0x1D
+   0DD7 75 E6 05           3120 	mov	_FMADRL,#0x05
+   0DDA 75 E5 70           3121 	mov	_FMDATA,#0x70
+                           3122 ;	../fb_app_in8.c:867: WRITE_BYTE(0x01,0x06,0x54)  // 	"	"	"
+   0DDD 75 E7 1D           3123 	mov	_FMADRH,#0x1D
+   0DE0 75 E6 06           3124 	mov	_FMADRL,#0x06
+   0DE3 75 E5 54           3125 	mov	_FMDATA,#0x54
+                           3126 ;	../fb_app_in8.c:868: WRITE_BYTE(0x01,0x07,0x02)	// Versionsnummer
+   0DE6 75 E7 1D           3127 	mov	_FMADRH,#0x1D
+   0DE9 75 E6 07           3128 	mov	_FMADRL,#0x07
+   0DEC 75 E5 02           3129 	mov	_FMDATA,#0x02
+                           3130 ;	../fb_app_in8.c:869: WRITE_BYTE(0x01,0x0C,0x00)	// PORT A Direction Bit Setting
+   0DEF 75 E7 1D           3131 	mov	_FMADRH,#0x1D
+   0DF2 75 E6 0C           3132 	mov	_FMADRL,#0x0C
+   0DF5 75 E5 00           3133 	mov	_FMDATA,#0x00
+                           3134 ;	../fb_app_in8.c:870: WRITE_BYTE(0x01,0x0D,0xFF)	// Run-Status (00=stop FF=run)
+   0DF8 75 E7 1D           3135 	mov	_FMADRH,#0x1D
+   0DFB 75 E6 0D           3136 	mov	_FMADRL,#0x0D
+   0DFE 75 E5 FF           3137 	mov	_FMDATA,#0xFF
+                           3138 ;	../fb_app_in8.c:871: WRITE_BYTE(0x01,0x12,0x84)	// COMMSTAB Pointer
+   0E01 75 E7 1D           3139 	mov	_FMADRH,#0x1D
+   0E04 75 E6 12           3140 	mov	_FMADRL,#0x12
+   0E07 75 E5 84           3141 	mov	_FMDATA,#0x84
+                           3142 ;	../fb_app_in8.c:872: STOP_WRITECYCLE
+   0E0A 75 E4 68           3143 	mov	_FMCON,#0x68
+                           3144 ;	../fb_app_in8.c:875: EA=1;
+   0E0D D2 AF              3145 	setb	_IEN0_7
+   0E0F 22                 3146 	ret
+                           3147 	.area CSEG    (CODE)
+                           3148 	.area CONST   (CODE)
+                           3149 	.area XINIT   (CODE)
+                           3150 	.area CABS    (ABS,CODE)
