@@ -1,0 +1,1517 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 2.8.0 #5117 (Mar 23 2008) (MINGW32)
+                              4 ; This file was generated Sun Aug 14 13:56:16 2011
+                              5 ;--------------------------------------------------------
+                              6 	.module fb_dim2
+                              7 	.optsdcc -mmcs51 --model-small
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _schritttabelle
+                             13 	.globl _basis
+                             14 	.globl _hellikeit
+                             15 	.globl _main
+                             16 	.globl _tr0_int
+                             17 	.globl _tastenauswertung
+                             18 	.globl _P3_1
+                             19 	.globl _P3_0
+                             20 	.globl _P1_7
+                             21 	.globl _P1_6
+                             22 	.globl _P1_5
+                             23 	.globl _P1_4
+                             24 	.globl _P1_3
+                             25 	.globl _P1_2
+                             26 	.globl _P1_1
+                             27 	.globl _P1_0
+                             28 	.globl _P0_7
+                             29 	.globl _P0_6
+                             30 	.globl _P0_5
+                             31 	.globl _P0_4
+                             32 	.globl _P0_3
+                             33 	.globl _P0_2
+                             34 	.globl _P0_1
+                             35 	.globl _P0_0
+                             36 	.globl _I2CON_0
+                             37 	.globl _I2CON_2
+                             38 	.globl _I2CON_3
+                             39 	.globl _I2CON_4
+                             40 	.globl _I2CON_5
+                             41 	.globl _I2CON_6
+                             42 	.globl _SCON_7
+                             43 	.globl _SCON_6
+                             44 	.globl _SCON_5
+                             45 	.globl _SCON_4
+                             46 	.globl _SCON_3
+                             47 	.globl _SCON_2
+                             48 	.globl _SCON_1
+                             49 	.globl _SCON_0
+                             50 	.globl _IP0_0
+                             51 	.globl _IP0_1
+                             52 	.globl _IP0_2
+                             53 	.globl _IP0_3
+                             54 	.globl _IP0_4
+                             55 	.globl _IP0_5
+                             56 	.globl _IP0_6
+                             57 	.globl _IP1_0
+                             58 	.globl _IP1_1
+                             59 	.globl _IP1_2
+                             60 	.globl _IP1_6
+                             61 	.globl _IEN1_0
+                             62 	.globl _IEN1_1
+                             63 	.globl _IEN1_2
+                             64 	.globl _IEN0_0
+                             65 	.globl _IEN0_1
+                             66 	.globl _IEN0_2
+                             67 	.globl _IEN0_3
+                             68 	.globl _IEN0_4
+                             69 	.globl _IEN0_5
+                             70 	.globl _IEN0_6
+                             71 	.globl _IEN0_7
+                             72 	.globl _TCON_0
+                             73 	.globl _TCON_1
+                             74 	.globl _TCON_2
+                             75 	.globl _TCON_3
+                             76 	.globl _TCON_4
+                             77 	.globl _TCON_5
+                             78 	.globl _TCON_6
+                             79 	.globl _TCON_7
+                             80 	.globl _PSW_7
+                             81 	.globl _PSW_6
+                             82 	.globl _PSW_5
+                             83 	.globl _PSW_4
+                             84 	.globl _PSW_3
+                             85 	.globl _PSW_2
+                             86 	.globl _PSW_1
+                             87 	.globl _PSW_0
+                             88 	.globl _IEN1
+                             89 	.globl _IP0H
+                             90 	.globl _WFEED2
+                             91 	.globl _WFEED1
+                             92 	.globl _WDL
+                             93 	.globl _WDCON
+                             94 	.globl _TRIM
+                             95 	.globl _TAMOD
+                             96 	.globl _SSTAT
+                             97 	.globl _RTCL
+                             98 	.globl _RTCH
+                             99 	.globl _RTCCON
+                            100 	.globl _RSTSRC
+                            101 	.globl _PT0AD
+                            102 	.globl _PCONA
+                            103 	.globl _P3M2
+                            104 	.globl _P3M1
+                            105 	.globl _P1M2
+                            106 	.globl _P1M1
+                            107 	.globl _P0M2
+                            108 	.globl _P0M1
+                            109 	.globl _KBPATN
+                            110 	.globl _KBMASK
+                            111 	.globl _KBCON
+                            112 	.globl _IP1H
+                            113 	.globl _IP1
+                            114 	.globl _I2STAT
+                            115 	.globl _I2SCLL
+                            116 	.globl _I2SCLH
+                            117 	.globl _I2DAT
+                            118 	.globl _I2CON
+                            119 	.globl _I2ADR
+                            120 	.globl _FMDATA
+                            121 	.globl _FMCON
+                            122 	.globl _FMADRL
+                            123 	.globl _FMADRH
+                            124 	.globl _DIVM
+                            125 	.globl _CMP2
+                            126 	.globl _CMP1
+                            127 	.globl _BRGCON
+                            128 	.globl _BRGR1
+                            129 	.globl _BRGR0
+                            130 	.globl _SADEN
+                            131 	.globl _SADDR
+                            132 	.globl _AUXR1
+                            133 	.globl _SBUF
+                            134 	.globl _SCON
+                            135 	.globl _IP0
+                            136 	.globl _IEN0
+                            137 	.globl _TH1
+                            138 	.globl _TH0
+                            139 	.globl _TL1
+                            140 	.globl _TL0
+                            141 	.globl _TMOD
+                            142 	.globl _TCON
+                            143 	.globl _PCON
+                            144 	.globl _DPH
+                            145 	.globl _DPL
+                            146 	.globl _SP
+                            147 	.globl _B
+                            148 	.globl _ACC
+                            149 	.globl _PSW
+                            150 	.globl _P3
+                            151 	.globl _P1
+                            152 	.globl _P0
+                            153 	.globl _schritt_zl_dim
+                            154 	.globl _mtaste
+                            155 	.globl _ctaste
+                            156 	.globl _andimm_zl
+                            157 	.globl _kanal_zl
+                            158 	.globl _basis_zl
+                            159 	.globl _faktor_zl
+                            160 	.globl _ausschalthellikeit
+                            161 	.globl _basis_dimmgeschwindikeit
+                            162 	.globl _ie
+                            163 	.globl _sperren
+                            164 	.globl _mk
+                            165 	.globl _einschathellikeit
+                            166 	.globl _mindimmwert
+                            167 	.globl _dimmwert
+                            168 	.globl _dimm_I2C
+                            169 	.globl _dimm_helldunkel
+                            170 	.globl _anspringen
+                            171 	.globl _helligkeittsstufe
+                            172 	.globl _restart_app
+                            173 ;--------------------------------------------------------
+                            174 ; special function registers
+                            175 ;--------------------------------------------------------
+                            176 	.area RSEG    (DATA)
+                    0080    177 _P0	=	0x0080
+                    0090    178 _P1	=	0x0090
+                    00B0    179 _P3	=	0x00b0
+                    00D0    180 _PSW	=	0x00d0
+                    00E0    181 _ACC	=	0x00e0
+                    00F0    182 _B	=	0x00f0
+                    0081    183 _SP	=	0x0081
+                    0082    184 _DPL	=	0x0082
+                    0083    185 _DPH	=	0x0083
+                    0087    186 _PCON	=	0x0087
+                    0088    187 _TCON	=	0x0088
+                    0089    188 _TMOD	=	0x0089
+                    008A    189 _TL0	=	0x008a
+                    008B    190 _TL1	=	0x008b
+                    008C    191 _TH0	=	0x008c
+                    008D    192 _TH1	=	0x008d
+                    00A8    193 _IEN0	=	0x00a8
+                    00B8    194 _IP0	=	0x00b8
+                    0098    195 _SCON	=	0x0098
+                    0099    196 _SBUF	=	0x0099
+                    00A2    197 _AUXR1	=	0x00a2
+                    00A9    198 _SADDR	=	0x00a9
+                    00B9    199 _SADEN	=	0x00b9
+                    00BE    200 _BRGR0	=	0x00be
+                    00BF    201 _BRGR1	=	0x00bf
+                    00BD    202 _BRGCON	=	0x00bd
+                    00AC    203 _CMP1	=	0x00ac
+                    00AD    204 _CMP2	=	0x00ad
+                    0095    205 _DIVM	=	0x0095
+                    00E7    206 _FMADRH	=	0x00e7
+                    00E6    207 _FMADRL	=	0x00e6
+                    00E4    208 _FMCON	=	0x00e4
+                    00E5    209 _FMDATA	=	0x00e5
+                    00DB    210 _I2ADR	=	0x00db
+                    00D8    211 _I2CON	=	0x00d8
+                    00DA    212 _I2DAT	=	0x00da
+                    00DD    213 _I2SCLH	=	0x00dd
+                    00DC    214 _I2SCLL	=	0x00dc
+                    00D9    215 _I2STAT	=	0x00d9
+                    00F8    216 _IP1	=	0x00f8
+                    00F7    217 _IP1H	=	0x00f7
+                    0094    218 _KBCON	=	0x0094
+                    0086    219 _KBMASK	=	0x0086
+                    0093    220 _KBPATN	=	0x0093
+                    0084    221 _P0M1	=	0x0084
+                    0085    222 _P0M2	=	0x0085
+                    0091    223 _P1M1	=	0x0091
+                    0092    224 _P1M2	=	0x0092
+                    00B1    225 _P3M1	=	0x00b1
+                    00B2    226 _P3M2	=	0x00b2
+                    00B5    227 _PCONA	=	0x00b5
+                    00F6    228 _PT0AD	=	0x00f6
+                    00DF    229 _RSTSRC	=	0x00df
+                    00D1    230 _RTCCON	=	0x00d1
+                    00D2    231 _RTCH	=	0x00d2
+                    00D3    232 _RTCL	=	0x00d3
+                    00BA    233 _SSTAT	=	0x00ba
+                    008F    234 _TAMOD	=	0x008f
+                    0096    235 _TRIM	=	0x0096
+                    00A7    236 _WDCON	=	0x00a7
+                    00C1    237 _WDL	=	0x00c1
+                    00C2    238 _WFEED1	=	0x00c2
+                    00C3    239 _WFEED2	=	0x00c3
+                    00B7    240 _IP0H	=	0x00b7
+                    00E8    241 _IEN1	=	0x00e8
+                            242 ;--------------------------------------------------------
+                            243 ; special function bits
+                            244 ;--------------------------------------------------------
+                            245 	.area RSEG    (DATA)
+                    00D0    246 _PSW_0	=	0x00d0
+                    00D1    247 _PSW_1	=	0x00d1
+                    00D2    248 _PSW_2	=	0x00d2
+                    00D3    249 _PSW_3	=	0x00d3
+                    00D4    250 _PSW_4	=	0x00d4
+                    00D5    251 _PSW_5	=	0x00d5
+                    00D6    252 _PSW_6	=	0x00d6
+                    00D7    253 _PSW_7	=	0x00d7
+                    008F    254 _TCON_7	=	0x008f
+                    008E    255 _TCON_6	=	0x008e
+                    008D    256 _TCON_5	=	0x008d
+                    008C    257 _TCON_4	=	0x008c
+                    008B    258 _TCON_3	=	0x008b
+                    008A    259 _TCON_2	=	0x008a
+                    0089    260 _TCON_1	=	0x0089
+                    0088    261 _TCON_0	=	0x0088
+                    00AF    262 _IEN0_7	=	0x00af
+                    00AE    263 _IEN0_6	=	0x00ae
+                    00AD    264 _IEN0_5	=	0x00ad
+                    00AC    265 _IEN0_4	=	0x00ac
+                    00AB    266 _IEN0_3	=	0x00ab
+                    00AA    267 _IEN0_2	=	0x00aa
+                    00A9    268 _IEN0_1	=	0x00a9
+                    00A8    269 _IEN0_0	=	0x00a8
+                    00EA    270 _IEN1_2	=	0x00ea
+                    00E9    271 _IEN1_1	=	0x00e9
+                    00E8    272 _IEN1_0	=	0x00e8
+                    00FE    273 _IP1_6	=	0x00fe
+                    00FA    274 _IP1_2	=	0x00fa
+                    00F9    275 _IP1_1	=	0x00f9
+                    00F8    276 _IP1_0	=	0x00f8
+                    00BE    277 _IP0_6	=	0x00be
+                    00BD    278 _IP0_5	=	0x00bd
+                    00BC    279 _IP0_4	=	0x00bc
+                    00BB    280 _IP0_3	=	0x00bb
+                    00BA    281 _IP0_2	=	0x00ba
+                    00B9    282 _IP0_1	=	0x00b9
+                    00B8    283 _IP0_0	=	0x00b8
+                    0098    284 _SCON_0	=	0x0098
+                    0099    285 _SCON_1	=	0x0099
+                    009A    286 _SCON_2	=	0x009a
+                    009B    287 _SCON_3	=	0x009b
+                    009C    288 _SCON_4	=	0x009c
+                    009D    289 _SCON_5	=	0x009d
+                    009E    290 _SCON_6	=	0x009e
+                    009F    291 _SCON_7	=	0x009f
+                    00DE    292 _I2CON_6	=	0x00de
+                    00DD    293 _I2CON_5	=	0x00dd
+                    00DC    294 _I2CON_4	=	0x00dc
+                    00DB    295 _I2CON_3	=	0x00db
+                    00DA    296 _I2CON_2	=	0x00da
+                    00D8    297 _I2CON_0	=	0x00d8
+                    0080    298 _P0_0	=	0x0080
+                    0081    299 _P0_1	=	0x0081
+                    0082    300 _P0_2	=	0x0082
+                    0083    301 _P0_3	=	0x0083
+                    0084    302 _P0_4	=	0x0084
+                    0085    303 _P0_5	=	0x0085
+                    0086    304 _P0_6	=	0x0086
+                    0087    305 _P0_7	=	0x0087
+                    0090    306 _P1_0	=	0x0090
+                    0091    307 _P1_1	=	0x0091
+                    0092    308 _P1_2	=	0x0092
+                    0093    309 _P1_3	=	0x0093
+                    0094    310 _P1_4	=	0x0094
+                    0095    311 _P1_5	=	0x0095
+                    0096    312 _P1_6	=	0x0096
+                    0097    313 _P1_7	=	0x0097
+                    00B0    314 _P3_0	=	0x00b0
+                    00B1    315 _P3_1	=	0x00b1
+                            316 ;--------------------------------------------------------
+                            317 ; overlayable register banks
+                            318 ;--------------------------------------------------------
+                            319 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                     320 	.ds 8
+                            321 ;--------------------------------------------------------
+                            322 ; overlayable bit register bank
+                            323 ;--------------------------------------------------------
+                            324 	.area BIT_BANK	(REL,OVR,DATA)
+   0000                     325 bits:
+   0000                     326 	.ds 1
+                    8000    327 	b0 = bits[0]
+                    8100    328 	b1 = bits[1]
+                    8200    329 	b2 = bits[2]
+                    8300    330 	b3 = bits[3]
+                    8400    331 	b4 = bits[4]
+                    8500    332 	b5 = bits[5]
+                    8600    333 	b6 = bits[6]
+                    8700    334 	b7 = bits[7]
+                            335 ;--------------------------------------------------------
+                            336 ; internal ram data
+                            337 ;--------------------------------------------------------
+                            338 	.area DSEG    (DATA)
+   0000                     339 _anspringen::
+   0000                     340 	.ds 2
+   0002                     341 _dimm_helldunkel::
+   0002                     342 	.ds 2
+   0004                     343 _dimm_I2C::
+   0004                     344 	.ds 2
+   0006                     345 _dimmwert::
+   0006                     346 	.ds 2
+   0008                     347 _mindimmwert::
+   0008                     348 	.ds 2
+   000A                     349 _einschathellikeit::
+   000A                     350 	.ds 2
+   000C                     351 _mk::
+   000C                     352 	.ds 2
+   000E                     353 _sperren::
+   000E                     354 	.ds 2
+   0010                     355 _ie::
+   0010                     356 	.ds 2
+   0012                     357 _basis_dimmgeschwindikeit::
+   0012                     358 	.ds 4
+   0016                     359 _ausschalthellikeit::
+   0016                     360 	.ds 2
+   0018                     361 _faktor_zl::
+   0018                     362 	.ds 2
+   001A                     363 _basis_zl::
+   001A                     364 	.ds 4
+   001E                     365 _kanal_zl::
+   001E                     366 	.ds 1
+   001F                     367 _andimm_zl::
+   001F                     368 	.ds 1
+   0020                     369 _ctaste::
+   0020                     370 	.ds 1
+   0021                     371 _mtaste::
+   0021                     372 	.ds 8
+   0029                     373 _schritt_zl_dim::
+   0029                     374 	.ds 2
+                            375 ;--------------------------------------------------------
+                            376 ; overlayable items in internal ram 
+                            377 ;--------------------------------------------------------
+                            378 	.area OSEG    (OVR,DATA)
+                            379 ;--------------------------------------------------------
+                            380 ; Stack segment in internal ram 
+                            381 ;--------------------------------------------------------
+                            382 	.area	SSEG	(DATA)
+   0000                     383 __start__stack:
+   0000                     384 	.ds	1
+                            385 
+                            386 ;--------------------------------------------------------
+                            387 ; indirectly addressable internal ram data
+                            388 ;--------------------------------------------------------
+                            389 	.area ISEG    (DATA)
+                            390 ;--------------------------------------------------------
+                            391 ; absolute internal ram data
+                            392 ;--------------------------------------------------------
+                            393 	.area IABS    (ABS,DATA)
+                            394 	.area IABS    (ABS,DATA)
+                            395 ;--------------------------------------------------------
+                            396 ; bit data
+                            397 ;--------------------------------------------------------
+                            398 	.area BSEG    (BIT)
+                            399 ;--------------------------------------------------------
+                            400 ; paged external ram data
+                            401 ;--------------------------------------------------------
+                            402 	.area PSEG    (PAG,XDATA)
+                            403 ;--------------------------------------------------------
+                            404 ; external ram data
+                            405 ;--------------------------------------------------------
+                            406 	.area XSEG    (XDATA)
+                            407 ;--------------------------------------------------------
+                            408 ; absolute external ram data
+                            409 ;--------------------------------------------------------
+                            410 	.area XABS    (ABS,XDATA)
+                            411 ;--------------------------------------------------------
+                            412 ; external initialized ram data
+                            413 ;--------------------------------------------------------
+                            414 	.area XISEG   (XDATA)
+                            415 	.area HOME    (CODE)
+                            416 	.area GSINIT0 (CODE)
+                            417 	.area GSINIT1 (CODE)
+                            418 	.area GSINIT2 (CODE)
+                            419 	.area GSINIT3 (CODE)
+                            420 	.area GSINIT4 (CODE)
+                            421 	.area GSINIT5 (CODE)
+                            422 	.area GSINIT  (CODE)
+                            423 	.area GSFINAL (CODE)
+                            424 	.area CSEG    (CODE)
+                            425 ;--------------------------------------------------------
+                            426 ; interrupt vector 
+                            427 ;--------------------------------------------------------
+                            428 	.area HOME    (CODE)
+   0000                     429 __interrupt_vect:
+   0000 02s00r00            430 	ljmp	__sdcc_gsinit_startup
+   0003 32                  431 	reti
+   0004                     432 	.ds	7
+   000B 02s02r47            433 	ljmp	_tr0_int
+   000E                     434 	.ds	5
+   0013 02s00r00            435 	ljmp	_ext_int0
+   0016                     436 	.ds	5
+   001B 02s00r00            437 	ljmp	_timer1
+                            438 ;--------------------------------------------------------
+                            439 ; global & static initialisations
+                            440 ;--------------------------------------------------------
+                            441 	.area HOME    (CODE)
+                            442 	.area GSINIT  (CODE)
+                            443 	.area GSFINAL (CODE)
+                            444 	.area GSINIT  (CODE)
+                            445 	.globl __sdcc_gsinit_startup
+                            446 	.globl __sdcc_program_startup
+                            447 	.globl __start__stack
+                            448 	.globl __mcs51_genXINIT
+                            449 	.globl __mcs51_genXRAMCLEAR
+                            450 	.globl __mcs51_genRAMCLEAR
+                            451 ;	../fb_dim2.c:60: unsigned int ie=0;              // dimmer immer wieder aktualisieren
+   0000 E4                  452 	clr	a
+   0001 F5*10               453 	mov	_ie,a
+   0003 F5*11               454 	mov	(_ie + 1),a
+                            455 ;	../fb_dim2.c:69: unsigned char kanal_zl=0;
+   0005 75*1E 00            456 	mov	_kanal_zl,#0x00
+                            457 ;	../fb_dim2.c:70: unsigned char andimm_zl=0;
+   0008 75*1F 00            458 	mov	_andimm_zl,#0x00
+                            459 	.area GSFINAL (CODE)
+   0000 02s00r1E            460 	ljmp	__sdcc_program_startup
+                            461 ;--------------------------------------------------------
+                            462 ; Home
+                            463 ;--------------------------------------------------------
+                            464 	.area HOME    (CODE)
+                            465 	.area HOME    (CODE)
+   001E                     466 __sdcc_program_startup:
+   001E 12s04r70            467 	lcall	_main
+                            468 ;	return from main will lock up
+   0021 80 FE               469 	sjmp .
+                            470 ;--------------------------------------------------------
+                            471 ; code
+                            472 ;--------------------------------------------------------
+                            473 	.area CSEG    (CODE)
+                            474 ;------------------------------------------------------------
+                            475 ;Allocation info for local variables in function 'helligkeittsstufe'
+                            476 ;------------------------------------------------------------
+                            477 ;kanal                     Allocated to stack - offset -3
+                            478 ;stufe                     Allocated to registers r2 
+                            479 ;------------------------------------------------------------
+                            480 ;	../fb_dim2.c:74: unsigned char helligkeittsstufe(unsigned char stufe,unsigned char kanal)//Stufe 0-c
+                            481 ;	-----------------------------------------
+                            482 ;	 function helligkeittsstufe
+                            483 ;	-----------------------------------------
+   0000                     484 _helligkeittsstufe:
+                    0002    485 	ar2 = 0x02
+                    0003    486 	ar3 = 0x03
+                    0004    487 	ar4 = 0x04
+                    0005    488 	ar5 = 0x05
+                    0006    489 	ar6 = 0x06
+                    0007    490 	ar7 = 0x07
+                    0000    491 	ar0 = 0x00
+                    0001    492 	ar1 = 0x01
+   0000 C0*00               493 	push	_bp
+   0002 85 81*00            494 	mov	_bp,sp
+   0005 AA 82               495 	mov	r2,dpl
+                            496 ;	../fb_dim2.c:76: if(stufe == 1)
+   0007 BA 01 0D            497 	cjne	r2,#0x01,00102$
+                            498 ;	../fb_dim2.c:77: return mindimmwert[kanal];
+   000A A9*00               499 	mov	r1,_bp
+   000C 19                  500 	dec	r1
+   000D 19                  501 	dec	r1
+   000E 19                  502 	dec	r1
+   000F E7                  503 	mov	a,@r1
+   0010 24r08               504 	add	a,#_mindimmwert
+   0012 F8                  505 	mov	r0,a
+   0013 86 82               506 	mov	dpl,@r0
+   0015 80 20               507 	sjmp	00107$
+   0017                     508 00102$:
+                            509 ;	../fb_dim2.c:78: if(stufe == 0x0b)
+   0017 BA 0B 05            510 	cjne	r2,#0x0B,00104$
+                            511 ;	../fb_dim2.c:79: return MAXDIMMWERT;
+   001A 75 82 FF            512 	mov	dpl,#0xFF
+   001D 80 18               513 	sjmp	00107$
+   001F                     514 00104$:
+                            515 ;	../fb_dim2.c:80: if(stufe == 0x0c)
+   001F BA 0C 0D            516 	cjne	r2,#0x0C,00106$
+                            517 ;	../fb_dim2.c:81: return ausschalthellikeit[kanal];
+   0022 A9*00               518 	mov	r1,_bp
+   0024 19                  519 	dec	r1
+   0025 19                  520 	dec	r1
+   0026 19                  521 	dec	r1
+   0027 E7                  522 	mov	a,@r1
+   0028 24r16               523 	add	a,#_ausschalthellikeit
+   002A F8                  524 	mov	r0,a
+   002B 86 82               525 	mov	dpl,@r0
+   002D 80 08               526 	sjmp	00107$
+   002F                     527 00106$:
+                            528 ;	../fb_dim2.c:82: return hellikeit[stufe];
+   002F EA                  529 	mov	a,r2
+   0030 90s00r00            530 	mov	dptr,#_hellikeit
+   0033 93                  531 	movc	a,@a+dptr
+   0034 FA                  532 	mov	r2,a
+   0035 F5 82               533 	mov	dpl,a
+   0037                     534 00107$:
+   0037 D0*00               535 	pop	_bp
+   0039 22                  536 	ret
+                            537 ;------------------------------------------------------------
+                            538 ;Allocation info for local variables in function 'restart_app'
+                            539 ;------------------------------------------------------------
+                            540 ;------------------------------------------------------------
+                            541 ;	../fb_dim2.c:86: void restart_app(void)		// Alle Applikations-Parameter zurücksetzen
+                            542 ;	-----------------------------------------
+                            543 ;	 function restart_app
+                            544 ;	-----------------------------------------
+   003A                     545 _restart_app:
+                            546 ;	../fb_dim2.c:89: TMOD&=0xf0;   //register für Timer 0 löschen
+   003A 53 89 F0            547 	anl	_TMOD,#0xF0
+                            548 ;	../fb_dim2.c:90: TMOD|=0x01;   // Timer 0 als reload, Timer 1 nicht ändern !
+   003D 43 89 01            549 	orl	_TMOD,#0x01
+                            550 ;	../fb_dim2.c:91: TAMOD&=0xf0;
+   0040 53 8F F0            551 	anl	_TAMOD,#0xF0
+                            552 ;	../fb_dim2.c:92: TH0 = 0xff;
+   0043 75 8C FF            553 	mov	_TH0,#0xFF
+                            554 ;	../fb_dim2.c:93: AUXR1&=~0x10;      // toggled whenever Timer0 overflows ausschalten
+   0046 53 A2 EF            555 	anl	_AUXR1,#0xEF
+                            556 ;	../fb_dim2.c:94: ET0=1;             // Interrupt für Timer 0 freigeben
+   0049 D2 A9               557 	setb	_IEN0_1
+                            558 ;	../fb_dim2.c:95: TR0=1;             // Timer 0 starten
+   004B D2 8C               559 	setb	_TCON_4
+                            560 ;	../fb_dim2.c:96: EA=1;
+   004D D2 AF               561 	setb	_IEN0_7
+                            562 ;	../fb_dim2.c:98: Tval=0x00;
+   004F 75*00 00            563 	mov	_Tval,#0x00
+                            564 ;	../fb_dim2.c:100: P0M1=0xEE;            // Port 0 Modus push-pull für Ausgang nur PIN 0 und 4 Output
+   0052 75 84 EE            565 	mov	_P0M1,#0xEE
+                            566 ;	../fb_dim2.c:101: P0M2=0x11;            // nur PIN 0 und 4 Output
+   0055 75 85 11            567 	mov	_P0M2,#0x11
+                            568 ;	../fb_dim2.c:102: P0=0;
+   0058 75 80 00            569 	mov	_P0,#0x00
+                            570 ;	../fb_dim2.c:104: anspringen[0]=(eeprom[0xC6]&(1<<3))>>3;
+   005B 90s00rC6            571 	mov	dptr,#(_eeprom + 0x00c6)
+   005E E4                  572 	clr	a
+   005F 93                  573 	movc	a,@a+dptr
+   0060 54 08               574 	anl	a,#0x08
+   0062 C4                  575 	swap	a
+   0063 23                  576 	rl	a
+   0064 54 1F               577 	anl	a,#0x1f
+   0066 FA                  578 	mov	r2,a
+   0067 8A*00               579 	mov	_anspringen,r2
+                            580 ;	../fb_dim2.c:105: anspringen[1]=(eeprom[0xC6]&(1<<7))>>7;
+   0069 90s00rC6            581 	mov	dptr,#(_eeprom + 0x00c6)
+   006C E4                  582 	clr	a
+   006D 93                  583 	movc	a,@a+dptr
+   006E 54 80               584 	anl	a,#0x80
+   0070 23                  585 	rl	a
+   0071 54 01               586 	anl	a,#0x01
+   0073 FA                  587 	mov	r2,a
+   0074 8A*01               588 	mov	(_anspringen + 0x0001),r2
+                            589 ;	../fb_dim2.c:106: einschathellikeit[0]=eeprom[0xC4]&0x0f;       //wert 0 - 0x0c
+   0076 90s00rC4            590 	mov	dptr,#(_eeprom + 0x00c4)
+   0079 E4                  591 	clr	a
+   007A 93                  592 	movc	a,@a+dptr
+   007B FA                  593 	mov	r2,a
+   007C 74 0F               594 	mov	a,#0x0F
+   007E 5A                  595 	anl	a,r2
+   007F F5*0A               596 	mov	_einschathellikeit,a
+                            597 ;	../fb_dim2.c:107: einschathellikeit[1]=eeprom[0xC4]>>4;         //wert 0 - 0x0c
+   0081 90s00rC4            598 	mov	dptr,#(_eeprom + 0x00c4)
+   0084 E4                  599 	clr	a
+   0085 93                  600 	movc	a,@a+dptr
+   0086 C4                  601 	swap	a
+   0087 54 0F               602 	anl	a,#0x0f
+   0089 FA                  603 	mov	r2,a
+   008A 8A*0B               604 	mov	(_einschathellikeit + 0x0001),r2
+                            605 ;	../fb_dim2.c:108: dimmwert[0]=helligkeittsstufe(eeprom[0xe2]&0x0f,0);     //Verhalten bei Busspannungswiederkehr
+   008C 90s00rE2            606 	mov	dptr,#(_eeprom + 0x00e2)
+   008F E4                  607 	clr	a
+   0090 93                  608 	movc	a,@a+dptr
+   0091 FA                  609 	mov	r2,a
+   0092 74 0F               610 	mov	a,#0x0F
+   0094 5A                  611 	anl	a,r2
+   0095 F5 82               612 	mov	dpl,a
+   0097 E4                  613 	clr	a
+   0098 C0 E0               614 	push	acc
+   009A 12s00r00            615 	lcall	_helligkeittsstufe
+   009D AA 82               616 	mov	r2,dpl
+   009F 15 81               617 	dec	sp
+   00A1 8A*06               618 	mov	_dimmwert,r2
+                            619 ;	../fb_dim2.c:109: dimmwert[1]=helligkeittsstufe((eeprom[0xe2]>>4)&0x0f,1);//Verhalten bei Busspannungswiederkehr
+   00A3 90s00rE2            620 	mov	dptr,#(_eeprom + 0x00e2)
+   00A6 E4                  621 	clr	a
+   00A7 93                  622 	movc	a,@a+dptr
+   00A8 C4                  623 	swap	a
+   00A9 54 0F               624 	anl	a,#0x0f
+   00AB FA                  625 	mov	r2,a
+   00AC 74 0F               626 	mov	a,#0x0F
+   00AE 5A                  627 	anl	a,r2
+   00AF F5 82               628 	mov	dpl,a
+   00B1 74 01               629 	mov	a,#0x01
+   00B3 C0 E0               630 	push	acc
+   00B5 12s00r00            631 	lcall	_helligkeittsstufe
+   00B8 AA 82               632 	mov	r2,dpl
+   00BA 15 81               633 	dec	sp
+   00BC 8A*07               634 	mov	(_dimmwert + 0x0001),r2
+                            635 ;	../fb_dim2.c:110: mindimmwert[0]=(eeprom[0xc2]&0x0f)*15+30;
+   00BE 90s00rC2            636 	mov	dptr,#(_eeprom + 0x00c2)
+   00C1 E4                  637 	clr	a
+   00C2 93                  638 	movc	a,@a+dptr
+   00C3 FA                  639 	mov	r2,a
+   00C4 74 0F               640 	mov	a,#0x0F
+   00C6 5A                  641 	anl	a,r2
+   00C7 75 F0 0F            642 	mov	b,#0x0F
+   00CA A4                  643 	mul	ab
+   00CB 24 1E               644 	add	a,#0x1E
+   00CD F5*08               645 	mov	_mindimmwert,a
+                            646 ;	../fb_dim2.c:111: mindimmwert[1]=(eeprom[0xc2]>>4)*15+30;
+   00CF 90s00rC2            647 	mov	dptr,#(_eeprom + 0x00c2)
+   00D2 E4                  648 	clr	a
+   00D3 93                  649 	movc	a,@a+dptr
+   00D4 C4                  650 	swap	a
+   00D5 54 0F               651 	anl	a,#0x0f
+   00D7 75 F0 0F            652 	mov	b,#0x0F
+   00DA A4                  653 	mul	ab
+   00DB 24 1E               654 	add	a,#0x1E
+   00DD F5*09               655 	mov	(_mindimmwert + 0x0001),a
+                            656 ;	../fb_dim2.c:113: basis_dimmgeschwindikeit[0]=basis[(eeprom[0xC6]&0x07)];
+   00DF 90s00rC6            657 	mov	dptr,#(_eeprom + 0x00c6)
+   00E2 E4                  658 	clr	a
+   00E3 93                  659 	movc	a,@a+dptr
+   00E4 54 07               660 	anl	a,#0x07
+   00E6 25 E0               661 	add	a,acc
+   00E8 FA                  662 	mov	r2,a
+   00E9 90s00r0D            663 	mov	dptr,#_basis
+   00EC 93                  664 	movc	a,@a+dptr
+   00ED CA                  665 	xch	a,r2
+   00EE A3                  666 	inc	dptr
+   00EF 93                  667 	movc	a,@a+dptr
+   00F0 FB                  668 	mov	r3,a
+   00F1 8A*12               669 	mov	_basis_dimmgeschwindikeit,r2
+   00F3 8B*13               670 	mov	(_basis_dimmgeschwindikeit + 1),r3
+                            671 ;	../fb_dim2.c:114: basis_dimmgeschwindikeit[1]=basis[(eeprom[0xC6]>>4)&0x07];
+   00F5 90s00rC6            672 	mov	dptr,#(_eeprom + 0x00c6)
+   00F8 E4                  673 	clr	a
+   00F9 93                  674 	movc	a,@a+dptr
+   00FA C4                  675 	swap	a
+   00FB 54 07               676 	anl	a,#(0x0f&0x07)
+   00FD 25 E0               677 	add	a,acc
+   00FF FA                  678 	mov	r2,a
+   0100 90s00r0D            679 	mov	dptr,#_basis
+   0103 93                  680 	movc	a,@a+dptr
+   0104 CA                  681 	xch	a,r2
+   0105 A3                  682 	inc	dptr
+   0106 93                  683 	movc	a,@a+dptr
+   0107 FB                  684 	mov	r3,a
+   0108 8A*14               685 	mov	(_basis_dimmgeschwindikeit + 0x0002),r2
+   010A 8B*15               686 	mov	((_basis_dimmgeschwindikeit + 0x0002) + 1),r3
+                            687 ;	../fb_dim2.c:122: EA=0;
+   010C C2 AF               688 	clr	_IEN0_7
+                            689 ;	../fb_dim2.c:123: START_WRITECYCLE
+   010E 75 E4 00            690 	mov	_FMCON,#0x00
+                            691 ;	../fb_dim2.c:124: WRITE_BYTE(0x01,0x03,0x00);	// Herstellercode 0x0004 = Jung 0x0008 = Gira
+   0111 75 E7 1D            692 	mov	_FMADRH,#0x1D
+   0114 75 E6 03            693 	mov	_FMADRL,#0x03
+   0117 75 E5 00            694 	mov	_FMDATA,#0x00
+                            695 ;	../fb_dim2.c:125: WRITE_BYTE(0x01,0x04,0x08);
+   011A 75 E7 1D            696 	mov	_FMADRH,#0x1D
+   011D 75 E6 04            697 	mov	_FMADRL,#0x04
+   0120 75 E5 08            698 	mov	_FMDATA,#0x08
+                            699 ;	../fb_dim2.c:126: WRITE_BYTE(0x01,0x05,0x30);	// Device Type (2038.10) 2060h (0x3015 gira 1032)
+   0123 75 E7 1D            700 	mov	_FMADRH,#0x1D
+   0126 75 E6 05            701 	mov	_FMADRL,#0x05
+   0129 75 E5 30            702 	mov	_FMDATA,#0x30
+                            703 ;	../fb_dim2.c:127: WRITE_BYTE(0x01,0x06,0x15);	// 	"	"	"
+   012C 75 E7 1D            704 	mov	_FMADRH,#0x1D
+   012F 75 E6 06            705 	mov	_FMADRL,#0x06
+   0132 75 E5 15            706 	mov	_FMDATA,#0x15
+                            707 ;	../fb_dim2.c:128: WRITE_BYTE(0x01,0x07,0x01);	// Versionsnummer
+   0135 75 E7 1D            708 	mov	_FMADRH,#0x1D
+   0138 75 E6 07            709 	mov	_FMADRL,#0x07
+   013B 75 E5 01            710 	mov	_FMDATA,#0x01
+                            711 ;	../fb_dim2.c:129: WRITE_BYTE(0x01,0x0C,0x00);	// PORT A Direction Bit Setting
+   013E 75 E7 1D            712 	mov	_FMADRH,#0x1D
+   0141 75 E6 0C            713 	mov	_FMADRL,#0x0C
+   0144 75 E5 00            714 	mov	_FMDATA,#0x00
+                            715 ;	../fb_dim2.c:130: WRITE_BYTE(0x01,0x0D,0xFF);	// Run-Status (00=stop FF=run)
+   0147 75 E7 1D            716 	mov	_FMADRH,#0x1D
+   014A 75 E6 0D            717 	mov	_FMADRL,#0x0D
+   014D 75 E5 FF            718 	mov	_FMDATA,#0xFF
+                            719 ;	../fb_dim2.c:131: WRITE_BYTE(0x01,COMMSTABPTR,0x8a);	// COMMSTAB Pointer
+   0150 75 E7 1D            720 	mov	_FMADRH,#0x1D
+   0153 75 E6 12            721 	mov	_FMADRL,#0x12
+   0156 75 E5 8A            722 	mov	_FMDATA,#0x8A
+                            723 ;	../fb_dim2.c:132: STOP_WRITECYCLE
+   0159 75 E4 68            724 	mov	_FMCON,#0x68
+                            725 ;	../fb_dim2.c:133: START_WRITECYCLE;
+   015C 75 E4 00            726 	mov	_FMCON,#0x00
+                            727 ;	../fb_dim2.c:134: WRITE_BYTE(0x00,0x60,0x2E);     // system state: all layers active (run), not in prog mode
+   015F 75 E7 1C            728 	mov	_FMADRH,#0x1C
+   0162 75 E6 60            729 	mov	_FMADRL,#0x60
+   0165 75 E5 2E            730 	mov	_FMDATA,#0x2E
+                            731 ;	../fb_dim2.c:135: STOP_WRITECYCLE;
+   0168 75 E4 68            732 	mov	_FMCON,#0x68
+                            733 ;	../fb_dim2.c:136: EA=1;
+   016B D2 AF               734 	setb	_IEN0_7
+   016D 22                  735 	ret
+                            736 ;------------------------------------------------------------
+                            737 ;Allocation info for local variables in function 'tastenauswertung'
+                            738 ;------------------------------------------------------------
+                            739 ;retp0                     Allocated to registers r2 
+                            740 ;------------------------------------------------------------
+                            741 ;	../fb_dim2.c:142: void tastenauswertung(void)
+                            742 ;	-----------------------------------------
+                            743 ;	 function tastenauswertung
+                            744 ;	-----------------------------------------
+   016E                     745 _tastenauswertung:
+                            746 ;	../fb_dim2.c:144: unsigned char retp0=P0;//port 0 merken
+   016E AA 80               747 	mov	r2,_P0
+                            748 ;	../fb_dim2.c:145: P3_0=0;                //SCL damit i2c nicht meckert
+   0170 C2 B0               749 	clr	_P3_0
+                            750 ;	../fb_dim2.c:146: P0=0;
+   0172 75 80 00            751 	mov	_P0,#0x00
+                            752 ;	../fb_dim2.c:147: if(ctaste<6)           //0 bis 5
+   0175 74 FA               753 	mov	a,#0x100 - 0x06
+   0177 25*20               754 	add	a,_ctaste
+   0179 40 04               755 	jc	00102$
+                            756 ;	../fb_dim2.c:148: ctaste++;
+   017B 05*20               757 	inc	_ctaste
+   017D 80 03               758 	sjmp	00103$
+   017F                     759 00102$:
+                            760 ;	../fb_dim2.c:149: else ctaste=0;
+   017F 75*20 00            761 	mov	_ctaste,#0x00
+   0182                     762 00103$:
+                            763 ;	../fb_dim2.c:150: P0M1=~(1<<ctaste);    // Port 0  PIN Output
+   0182 85*20 F0            764 	mov	b,_ctaste
+   0185 05 F0               765 	inc	b
+   0187 74 01               766 	mov	a,#0x01
+   0189 80 02               767 	sjmp	00163$
+   018B                     768 00161$:
+   018B 25 E0               769 	add	a,acc
+   018D                     770 00163$:
+   018D D5 F0 FB            771 	djnz	b,00161$
+   0190 FB                  772 	mov	r3,a
+   0191 F4                  773 	cpl	a
+   0192 FC                  774 	mov	r4,a
+   0193 8C 84               775 	mov	_P0M1,r4
+                            776 ;	../fb_dim2.c:151: P0M2=(1<<ctaste);
+   0195 8B 85               777 	mov	_P0M2,r3
+                            778 ;	../fb_dim2.c:152: P0=~(1<<ctaste);      //nur eine Taste aktivieren
+   0197 8C 80               779 	mov	_P0,r4
+   0199 20 93 41            780 	jb	_P1_3,00138$
+                            781 ;	../fb_dim2.c:155: if(mtaste[ctaste]<254)  mtaste[ctaste]++;
+   019C E5*20               782 	mov	a,_ctaste
+   019E 24r21               783 	add	a,#_mtaste
+   01A0 F8                  784 	mov	r0,a
+   01A1 86 03               785 	mov	ar3,@r0
+   01A3 BB FE 00            786 	cjne	r3,#0xFE,00165$
+   01A6                     787 00165$:
+   01A6 50 03               788 	jnc	00105$
+   01A8 EB                  789 	mov	a,r3
+   01A9 04                  790 	inc	a
+   01AA F6                  791 	mov	@r0,a
+   01AB                     792 00105$:
+                            793 ;	../fb_dim2.c:156: if(mtaste[ctaste]==200) //langer tastendruck
+   01AB 86 03               794 	mov	ar3,@r0
+   01AD BB C8 02            795 	cjne	r3,#0xC8,00167$
+   01B0 80 03               796 	sjmp	00168$
+   01B2                     797 00167$:
+   01B2 02s02r3A            798 	ljmp	00139$
+   01B5                     799 00168$:
+                            800 ;	../fb_dim2.c:158: if(ctaste==1)
+   01B5 74 01               801 	mov	a,#0x01
+   01B7 B5*20 03            802 	cjne	a,_ctaste,00107$
+                            803 ;	../fb_dim2.c:159: dimm_helldunkel[0]=9;
+   01BA 75*02 09            804 	mov	_dimm_helldunkel,#0x09
+   01BD                     805 00107$:
+                            806 ;	../fb_dim2.c:160: if(ctaste==2)
+   01BD 74 02               807 	mov	a,#0x02
+   01BF B5*20 03            808 	cjne	a,_ctaste,00109$
+                            809 ;	../fb_dim2.c:161: dimm_helldunkel[0]=1;
+   01C2 75*02 01            810 	mov	_dimm_helldunkel,#0x01
+   01C5                     811 00109$:
+                            812 ;	../fb_dim2.c:162: if(ctaste==5)
+   01C5 74 05               813 	mov	a,#0x05
+   01C7 B5*20 03            814 	cjne	a,_ctaste,00111$
+                            815 ;	../fb_dim2.c:163: dimm_helldunkel[1]=9;
+   01CA 75*03 09            816 	mov	(_dimm_helldunkel + 0x0001),#0x09
+   01CD                     817 00111$:
+                            818 ;	../fb_dim2.c:164: if(ctaste==6)
+   01CD 74 06               819 	mov	a,#0x06
+   01CF B5*20 02            820 	cjne	a,_ctaste,00175$
+   01D2 80 03               821 	sjmp	00176$
+   01D4                     822 00175$:
+   01D4 02s02r3A            823 	ljmp	00139$
+   01D7                     824 00176$:
+                            825 ;	../fb_dim2.c:165: dimm_helldunkel[1]=1;
+   01D7 75*03 01            826 	mov	(_dimm_helldunkel + 0x0001),#0x01
+   01DA 02s02r3A            827 	ljmp	00139$
+   01DD                     828 00138$:
+                            829 ;	../fb_dim2.c:171: if(mtaste[ctaste]>20)
+   01DD E5*20               830 	mov	a,_ctaste
+   01DF 24r21               831 	add	a,#_mtaste
+   01E1 F8                  832 	mov	r0,a
+   01E2 86 03               833 	mov	ar3,@r0
+   01E4 C3                  834 	clr	c
+   01E5 74 14               835 	mov	a,#0x14
+   01E7 9B                  836 	subb	a,r3
+   01E8 E4                  837 	clr	a
+   01E9 33                  838 	rlc	a
+   01EA FC                  839 	mov	r4,a
+   01EB 60 4B               840 	jz	00136$
+                            841 ;	../fb_dim2.c:173: if(mtaste[ctaste]>20&&mtaste[ctaste]<200) //kurzer tastendruck mit Tastenprellung
+   01ED EC                  842 	mov	a,r4
+   01EE 60 25               843 	jz	00125$
+   01F0 BB C8 00            844 	cjne	r3,#0xC8,00179$
+   01F3                     845 00179$:
+   01F3 50 20               846 	jnc	00125$
+                            847 ;	../fb_dim2.c:175: if(ctaste==1) dimmwert[0]=0xff;
+   01F5 74 01               848 	mov	a,#0x01
+   01F7 B5*20 03            849 	cjne	a,_ctaste,00117$
+   01FA 75*06 FF            850 	mov	_dimmwert,#0xFF
+   01FD                     851 00117$:
+                            852 ;	../fb_dim2.c:176: if(ctaste==2) dimmwert[0]=0x0;
+   01FD 74 02               853 	mov	a,#0x02
+   01FF B5*20 03            854 	cjne	a,_ctaste,00119$
+   0202 75*06 00            855 	mov	_dimmwert,#0x00
+   0205                     856 00119$:
+                            857 ;	../fb_dim2.c:177: if(ctaste==5) dimmwert[1]=0xff;
+   0205 74 05               858 	mov	a,#0x05
+   0207 B5*20 03            859 	cjne	a,_ctaste,00121$
+   020A 75*07 FF            860 	mov	(_dimmwert + 0x0001),#0xFF
+   020D                     861 00121$:
+                            862 ;	../fb_dim2.c:178: if(ctaste==6) dimmwert[1]=0x0;
+   020D 74 06               863 	mov	a,#0x06
+   020F B5*20 03            864 	cjne	a,_ctaste,00125$
+   0212 75*07 00            865 	mov	(_dimmwert + 0x0001),#0x00
+   0215                     866 00125$:
+                            867 ;	../fb_dim2.c:180: if(mtaste[ctaste]>199) //langer tastendruck
+   0215 EB                  868 	mov	a,r3
+   0216 24 38               869 	add	a,#0xff - 0xC7
+   0218 50 0F               870 	jnc	00131$
+                            871 ;	../fb_dim2.c:181: if(ctaste==1||ctaste==2)
+   021A 74 01               872 	mov	a,#0x01
+   021C B5*20 02            873 	cjne	a,_ctaste,00190$
+   021F 80 05               874 	sjmp	00127$
+   0221                     875 00190$:
+   0221 74 02               876 	mov	a,#0x02
+   0223 B5*20 03            877 	cjne	a,_ctaste,00131$
+   0226                     878 00127$:
+                            879 ;	../fb_dim2.c:182: dimm_helldunkel[0]=0;
+   0226 75*02 00            880 	mov	_dimm_helldunkel,#0x00
+   0229                     881 00131$:
+                            882 ;	../fb_dim2.c:183: if(ctaste==5||ctaste==6)
+   0229 74 05               883 	mov	a,#0x05
+   022B B5*20 02            884 	cjne	a,_ctaste,00193$
+   022E 80 05               885 	sjmp	00132$
+   0230                     886 00193$:
+   0230 74 06               887 	mov	a,#0x06
+   0232 B5*20 03            888 	cjne	a,_ctaste,00136$
+   0235                     889 00132$:
+                            890 ;	../fb_dim2.c:184: dimm_helldunkel[1]=0;
+   0235 75*03 00            891 	mov	(_dimm_helldunkel + 0x0001),#0x00
+   0238                     892 00136$:
+                            893 ;	../fb_dim2.c:186: mtaste[ctaste]=0;
+   0238 76 00               894 	mov	@r0,#0x00
+   023A                     895 00139$:
+                            896 ;	../fb_dim2.c:188: P0=retp0;
+   023A 8A 80               897 	mov	_P0,r2
+                            898 ;	../fb_dim2.c:190: P0M1=0x00;    //ee   // Port 0  PIN 0 und 4 Output
+   023C 75 84 00            899 	mov	_P0M1,#0x00
+                            900 ;	../fb_dim2.c:191: P0M2=0xFF;    //11
+   023F 75 85 FF            901 	mov	_P0M2,#0xFF
+                            902 ;	../fb_dim2.c:192: P3_1=1;       //SDA damit i2c nicht meckert
+   0242 D2 B1               903 	setb	_P3_1
+                            904 ;	../fb_dim2.c:193: P3_0=1;       //SCL damit i2c nicht meckert
+   0244 D2 B0               905 	setb	_P3_0
+   0246 22                  906 	ret
+                            907 ;------------------------------------------------------------
+                            908 ;Allocation info for local variables in function 'tr0_int'
+                            909 ;------------------------------------------------------------
+                            910 ;------------------------------------------------------------
+                            911 ;	../fb_dim2.c:198: void tr0_int(void) interrupt 1         //n=nummer 0x03+8*n
+                            912 ;	-----------------------------------------
+                            913 ;	 function tr0_int
+                            914 ;	-----------------------------------------
+   0247                     915 _tr0_int:
+   0247 C0*00               916 	push	bits
+   0249 C0 E0               917 	push	acc
+   024B C0 F0               918 	push	b
+   024D C0 82               919 	push	dpl
+   024F C0 83               920 	push	dph
+   0251 C0 02               921 	push	(0+2)
+   0253 C0 03               922 	push	(0+3)
+   0255 C0 04               923 	push	(0+4)
+   0257 C0 05               924 	push	(0+5)
+   0259 C0 06               925 	push	(0+6)
+   025B C0 07               926 	push	(0+7)
+   025D C0 00               927 	push	(0+0)
+   025F C0 01               928 	push	(0+1)
+   0261 C0 D0               929 	push	psw
+   0263 75 D0 00            930 	mov	psw,#0x00
+                            931 ;	../fb_dim2.c:201: TL0=0x09;     // timer mit H=0xf9 L=0x09 2KHz = 0,5ms
+   0266 75 8A 09            932 	mov	_TL0,#0x09
+                            933 ;	../fb_dim2.c:202: TH0=0xf9;     // timer mit 0xb7 200HZ = 5ms
+   0269 75 8C F9            934 	mov	_TH0,#0xF9
+                            935 ;	../fb_dim2.c:204: tastenauswertung();
+   026C 12s01r6E            936 	lcall	_tastenauswertung
+                            937 ;	../fb_dim2.c:205: P0_3=(dimm_I2C[0])?1:0;     //LED_zeile K1
+   026F E5*04               938 	mov	a,_dimm_I2C
+   0271 FA                  939 	mov	r2,a
+   0272 24 FF               940 	add	a,#0xff
+   0274 92 83               941 	mov	_P0_3,c
+                            942 ;	../fb_dim2.c:206: if(dimm_I2C[0]>75) P0_2=1;
+   0276 EA                  943 	mov	a,r2
+   0277 24 B4               944 	add	a,#0xff - 0x4B
+                            945 ;	../fb_dim2.c:207: else P0_2=0;
+   0279 92 82               946 	mov	_P0_2,c
+                            947 ;	../fb_dim2.c:208: if(dimm_I2C[0]>125) P0_1=1;
+   027B EA                  948 	mov	a,r2
+   027C 24 82               949 	add	a,#0xff - 0x7D
+                            950 ;	../fb_dim2.c:209: else P0_1=0;
+   027E 92 81               951 	mov	_P0_1,c
+                            952 ;	../fb_dim2.c:210: if(dimm_I2C[0]>220) P0_0=1;
+   0280 EA                  953 	mov	a,r2
+   0281 24 23               954 	add	a,#0xff - 0xDC
+                            955 ;	../fb_dim2.c:211: else P0_0=0;
+   0283 92 80               956 	mov	_P0_0,c
+                            957 ;	../fb_dim2.c:213: P0_7=(dimm_I2C[1])?1:0;     //LED_zeile K2
+   0285 E5*05               958 	mov	a,(_dimm_I2C + 0x0001)
+   0287 FB                  959 	mov	r3,a
+   0288 24 FF               960 	add	a,#0xff
+   028A 92 87               961 	mov	_P0_7,c
+                            962 ;	../fb_dim2.c:214: if(dimm_I2C[1]>75) P0_6=1;
+   028C EB                  963 	mov	a,r3
+   028D 24 B4               964 	add	a,#0xff - 0x4B
+                            965 ;	../fb_dim2.c:215: else P0_6=0;
+   028F 92 86               966 	mov	_P0_6,c
+                            967 ;	../fb_dim2.c:216: if(dimm_I2C[1]>125) P0_5=1;
+   0291 EB                  968 	mov	a,r3
+   0292 24 82               969 	add	a,#0xff - 0x7D
+                            970 ;	../fb_dim2.c:217: else P0_5=0;
+   0294 92 85               971 	mov	_P0_5,c
+                            972 ;	../fb_dim2.c:218: if(dimm_I2C[1]>220) P0_4=1;
+   0296 EB                  973 	mov	a,r3
+   0297 24 23               974 	add	a,#0xff - 0xDC
+                            975 ;	../fb_dim2.c:219: else P0_4=0;
+   0299 92 84               976 	mov	_P0_4,c
+                            977 ;	../fb_dim2.c:221: if(ie<40000)                   //interwallmäsiges senden kann evetuel raus
+   029B AC*10               978 	mov	r4,_ie
+   029D AD*11               979 	mov	r5,(_ie + 1)
+   029F 7E 00               980 	mov	r6,#0x00
+   02A1 7F 00               981 	mov	r7,#0x00
+   02A3 C3                  982 	clr	c
+   02A4 EC                  983 	mov	a,r4
+   02A5 94 40               984 	subb	a,#0x40
+   02A7 ED                  985 	mov	a,r5
+   02A8 94 9C               986 	subb	a,#0x9C
+   02AA EE                  987 	mov	a,r6
+   02AB 94 00               988 	subb	a,#0x00
+   02AD EF                  989 	mov	a,r7
+   02AE 64 80               990 	xrl	a,#0x80
+   02B0 94 80               991 	subb	a,#0x80
+   02B2 50 0A               992 	jnc	00120$
+                            993 ;	../fb_dim2.c:222: ++ie;
+   02B4 05*10               994 	inc	_ie
+   02B6 E4                  995 	clr	a
+   02B7 B5*10 12            996 	cjne	a,_ie,00121$
+   02BA 05*11               997 	inc	(_ie + 1)
+   02BC 80 0E               998 	sjmp	00121$
+   02BE                     999 00120$:
+                           1000 ;	../fb_dim2.c:225: i2c_send_daten(dimm_I2C[0],dimm_I2C[1]);
+   02BE C0 03              1001 	push	ar3
+   02C0 8A 82              1002 	mov	dpl,r2
+   02C2 12s00r00           1003 	lcall	_i2c_send_daten
+   02C5 15 81              1004 	dec	sp
+                           1005 ;	../fb_dim2.c:226: ie=0;
+   02C7 E4                 1006 	clr	a
+   02C8 F5*10              1007 	mov	_ie,a
+   02CA F5*11              1008 	mov	(_ie + 1),a
+   02CC                    1009 00121$:
+                           1010 ;	../fb_dim2.c:229: if(dimm_I2C[0]!=mk[0]||dimm_I2C[1]!=mk[1])   //i2c übertragen
+   02CC E5*04              1011 	mov	a,_dimm_I2C
+   02CE FA                 1012 	mov	r2,a
+   02CF B5*0C 07           1013 	cjne	a,_mk,00122$
+   02D2 E5*0D              1014 	mov	a,(_mk + 0x0001)
+   02D4 B5*05 02           1015 	cjne	a,(_dimm_I2C + 0x0001),00202$
+   02D7 80 13              1016 	sjmp	00123$
+   02D9                    1017 00202$:
+   02D9                    1018 00122$:
+                           1019 ;	../fb_dim2.c:238: ie=0;
+   02D9 E4                 1020 	clr	a
+   02DA F5*10              1021 	mov	_ie,a
+   02DC F5*11              1022 	mov	(_ie + 1),a
+                           1023 ;	../fb_dim2.c:239: mk[0]=dimm_I2C[0];
+   02DE 8A*0C              1024 	mov	_mk,r2
+                           1025 ;	../fb_dim2.c:240: mk[1]=dimm_I2C[1];
+   02E0 85*05*0D           1026 	mov	(_mk + 0x0001),(_dimm_I2C + 0x0001)
+                           1027 ;	../fb_dim2.c:241: i2c_send_daten(dimm_I2C[0],dimm_I2C[1]);
+   02E3 C0*05              1028 	push	(_dimm_I2C + 0x0001)
+   02E5 8A 82              1029 	mov	dpl,r2
+   02E7 12s00r00           1030 	lcall	_i2c_send_daten
+   02EA 15 81              1031 	dec	sp
+   02EC                    1032 00123$:
+                           1033 ;	../fb_dim2.c:244: if(anspringen[0])
+   02EC E5*00              1034 	mov	a,_anspringen
+   02EE 60 03              1035 	jz	00126$
+                           1036 ;	../fb_dim2.c:245: dimm_I2C[0]=dimmwert[0];  //anspringen vom wert K1
+   02F0 85*06*04           1037 	mov	_dimm_I2C,_dimmwert
+   02F3                    1038 00126$:
+                           1039 ;	../fb_dim2.c:246: if(anspringen[1])
+   02F3 E5*01              1040 	mov	a,(_anspringen + 0x0001)
+   02F5 60 03              1041 	jz	00128$
+                           1042 ;	../fb_dim2.c:247: dimm_I2C[1]=dimmwert[1];  //anspringen vom wert K2
+   02F7 85*07*05           1043 	mov	(_dimm_I2C + 0x0001),(_dimmwert + 0x0001)
+   02FA                    1044 00128$:
+                           1045 ;	../fb_dim2.c:249: if(andimm_zl>8)                    //andimmern vom wert
+   02FA E5*1F              1046 	mov	a,_andimm_zl
+   02FC 24 F7              1047 	add	a,#0xff - 0x08
+   02FE 50 5B              1048 	jnc	00139$
+                           1049 ;	../fb_dim2.c:251: andimm_zl=0;
+   0300 75*1F 00           1050 	mov	_andimm_zl,#0x00
+                           1051 ;	../fb_dim2.c:252: for(kanal_zl=0;kanal_zl<DIMKREISE;++kanal_zl)
+   0303 75*1E 00           1052 	mov	_kanal_zl,#0x00
+   0306                    1053 00155$:
+   0306 74 FE              1054 	mov	a,#0x100 - 0x02
+   0308 25*1E              1055 	add	a,_kanal_zl
+   030A 40 51              1056 	jc	00140$
+                           1057 ;	../fb_dim2.c:254: if(dimmwert[kanal_zl]!=dimm_I2C[kanal_zl])        //andimmern von wert
+   030C E5*1E              1058 	mov	a,_kanal_zl
+   030E 24r06              1059 	add	a,#_dimmwert
+   0310 F8                 1060 	mov	r0,a
+   0311 86 02              1061 	mov	ar2,@r0
+   0313 E5*1E              1062 	mov	a,_kanal_zl
+   0315 24r04              1063 	add	a,#_dimm_I2C
+   0317 F8                 1064 	mov	r0,a
+   0318 86 03              1065 	mov	ar3,@r0
+   031A EA                 1066 	mov	a,r2
+   031B B5 03 02           1067 	cjne	a,ar3,00207$
+   031E 80 37              1068 	sjmp	00157$
+   0320                    1069 00207$:
+                           1070 ;	../fb_dim2.c:256: if(dimm_I2C[kanal_zl] > dimmwert[kanal_zl])    //dunkler andimmen
+   0320 C3                 1071 	clr	c
+   0321 EA                 1072 	mov	a,r2
+   0322 9B                 1073 	subb	a,r3
+   0323 50 03              1074 	jnc	00130$
+                           1075 ;	../fb_dim2.c:257: dimm_I2C[kanal_zl]--;
+   0325 EB                 1076 	mov	a,r3
+   0326 14                 1077 	dec	a
+   0327 F6                 1078 	mov	@r0,a
+   0328                    1079 00130$:
+                           1080 ;	../fb_dim2.c:258: if(dimm_I2C[kanal_zl] < dimmwert[kanal_zl])    //heller andimmen
+   0328 E5*1E              1081 	mov	a,_kanal_zl
+   032A 24r04              1082 	add	a,#_dimm_I2C
+   032C F8                 1083 	mov	r0,a
+   032D 86 02              1084 	mov	ar2,@r0
+   032F E5*1E              1085 	mov	a,_kanal_zl
+   0331 24r06              1086 	add	a,#_dimmwert
+   0333 F9                 1087 	mov	r1,a
+   0334 87 03              1088 	mov	ar3,@r1
+   0336 C3                 1089 	clr	c
+   0337 EA                 1090 	mov	a,r2
+   0338 9B                 1091 	subb	a,r3
+   0339 50 1C              1092 	jnc	00157$
+                           1093 ;	../fb_dim2.c:260: if(dimmwert[kanal_zl]<mindimmwert[kanal_zl])   // mit minimalwert Starten
+   033B E5*1E              1094 	mov	a,_kanal_zl
+   033D 24r08              1095 	add	a,#_mindimmwert
+   033F FA                 1096 	mov	r2,a
+   0340 C0 00              1097 	push	ar0
+   0342 A8 02              1098 	mov	r0,ar2
+   0344 86 02              1099 	mov	ar2,@r0
+   0346 D0 00              1100 	pop	ar0
+   0348 C3                 1101 	clr	c
+   0349 EB                 1102 	mov	a,r3
+   034A 9A                 1103 	subb	a,r2
+   034B 50 06              1104 	jnc	00132$
+                           1105 ;	../fb_dim2.c:262: dimm_I2C[kanal_zl]=mindimmwert[kanal_zl];
+   034D A6 02              1106 	mov	@r0,ar2
+                           1107 ;	../fb_dim2.c:263: dimmwert[kanal_zl]=dimm_I2C[kanal_zl];
+   034F A7 02              1108 	mov	@r1,ar2
+   0351 80 04              1109 	sjmp	00157$
+   0353                    1110 00132$:
+                           1111 ;	../fb_dim2.c:265: else dimm_I2C[kanal_zl]++;
+   0353 E6                 1112 	mov	a,@r0
+   0354 FA                 1113 	mov	r2,a
+   0355 04                 1114 	inc	a
+   0356 F6                 1115 	mov	@r0,a
+   0357                    1116 00157$:
+                           1117 ;	../fb_dim2.c:252: for(kanal_zl=0;kanal_zl<DIMKREISE;++kanal_zl)
+   0357 05*1E              1118 	inc	_kanal_zl
+   0359 80 AB              1119 	sjmp	00155$
+   035B                    1120 00139$:
+                           1121 ;	../fb_dim2.c:270: else andimm_zl++;
+   035B 05*1F              1122 	inc	_andimm_zl
+   035D                    1123 00140$:
+                           1124 ;	../fb_dim2.c:273: for(kanal_zl=0;kanal_zl<DIMKREISE;++kanal_zl)//basis und faktor für dimmstufen
+   035D 75*1E 00           1125 	mov	_kanal_zl,#0x00
+   0360                    1126 00159$:
+   0360 74 FE              1127 	mov	a,#0x100 - 0x02
+   0362 25*1E              1128 	add	a,_kanal_zl
+   0364 50 03              1129 	jnc	00211$
+   0366 02s04r53           1130 	ljmp	00163$
+   0369                    1131 00211$:
+                           1132 ;	../fb_dim2.c:275: basis_zl[kanal_zl]++;
+   0369 E5*1E              1133 	mov	a,_kanal_zl
+   036B 25*1E              1134 	add	a,_kanal_zl
+   036D FA                 1135 	mov	r2,a
+   036E 24r1A              1136 	add	a,#_basis_zl
+   0370 F8                 1137 	mov	r0,a
+   0371 86 03              1138 	mov	ar3,@r0
+   0373 08                 1139 	inc	r0
+   0374 86 04              1140 	mov	ar4,@r0
+   0376 18                 1141 	dec	r0
+   0377 0B                 1142 	inc	r3
+   0378 BB 00 01           1143 	cjne	r3,#0x00,00212$
+   037B 0C                 1144 	inc	r4
+   037C                    1145 00212$:
+   037C A6 03              1146 	mov	@r0,ar3
+   037E 08                 1147 	inc	r0
+   037F A6 04              1148 	mov	@r0,ar4
+   0381 18                 1149 	dec	r0
+                           1150 ;	../fb_dim2.c:276: if(basis_zl[kanal_zl] > basis_dimmgeschwindikeit[kanal_zl])//1-65000
+   0382 EA                 1151 	mov	a,r2
+   0383 24r12              1152 	add	a,#_basis_dimmgeschwindikeit
+   0385 F9                 1153 	mov	r1,a
+   0386 87 02              1154 	mov	ar2,@r1
+   0388 09                 1155 	inc	r1
+   0389 87 05              1156 	mov	ar5,@r1
+   038B 19                 1157 	dec	r1
+   038C C3                 1158 	clr	c
+   038D EA                 1159 	mov	a,r2
+   038E 9B                 1160 	subb	a,r3
+   038F ED                 1161 	mov	a,r5
+   0390 9C                 1162 	subb	a,r4
+   0391 40 03              1163 	jc	00213$
+   0393 02s04r4E           1164 	ljmp	00161$
+   0396                    1165 00213$:
+                           1166 ;	../fb_dim2.c:278: basis_zl[kanal_zl]=0;
+   0396 76 00              1167 	mov	@r0,#0x00
+   0398 08                 1168 	inc	r0
+   0399 76 00              1169 	mov	@r0,#0x00
+   039B 18                 1170 	dec	r0
+                           1171 ;	../fb_dim2.c:279: faktor_zl[kanal_zl]++;
+   039C E5*1E              1172 	mov	a,_kanal_zl
+   039E 24r18              1173 	add	a,#_faktor_zl
+   03A0 F8                 1174 	mov	r0,a
+   03A1 86 02              1175 	mov	ar2,@r0
+   03A3 0A                 1176 	inc	r2
+   03A4 A6 02              1177 	mov	@r0,ar2
+                           1178 ;	../fb_dim2.c:280: if(faktor_zl[kanal_zl] > eeprom[0xc8+(kanal_zl)])
+   03A6 74 C8              1179 	mov	a,#0xC8
+   03A8 25*1E              1180 	add	a,_kanal_zl
+   03AA 90s00r00           1181 	mov	dptr,#_eeprom
+   03AD 93                 1182 	movc	a,@a+dptr
+   03AE FB                 1183 	mov	r3,a
+   03AF C3                 1184 	clr	c
+   03B0 9A                 1185 	subb	a,r2
+   03B1 40 03              1186 	jc	00214$
+   03B3 02s04r4E           1187 	ljmp	00161$
+   03B6                    1188 00214$:
+                           1189 ;	../fb_dim2.c:282: faktor_zl[kanal_zl]=0;
+   03B6 76 00              1190 	mov	@r0,#0x00
+                           1191 ;	../fb_dim2.c:283: if(dimm_helldunkel[kanal_zl]>=9 && dimm_helldunkel[kanal_zl]<=0xf)//heller=9==100%
+   03B8 E5*1E              1192 	mov	a,_kanal_zl
+   03BA 24r02              1193 	add	a,#_dimm_helldunkel
+   03BC F8                 1194 	mov	r0,a
+   03BD 86 02              1195 	mov	ar2,@r0
+   03BF BA 09 00           1196 	cjne	r2,#0x09,00215$
+   03C2                    1197 00215$:
+   03C2 40 37              1198 	jc	00144$
+   03C4 EA                 1199 	mov	a,r2
+   03C5 24 F0              1200 	add	a,#0xff - 0x0F
+   03C7 40 32              1201 	jc	00144$
+                           1202 ;	../fb_dim2.c:285: if(dimmwert[kanal_zl]<MAXDIMMWERT-1)
+   03C9 E5*1E              1203 	mov	a,_kanal_zl
+   03CB 24r06              1204 	add	a,#_dimmwert
+   03CD F8                 1205 	mov	r0,a
+   03CE 86 03              1206 	mov	ar3,@r0
+   03D0 BB FE 00           1207 	cjne	r3,#0xFE,00218$
+   03D3                    1208 00218$:
+   03D3 50 26              1209 	jnc	00144$
+                           1210 ;	../fb_dim2.c:287: schritt_zl_dim[kanal_zl]+=schritttabelle[(dimm_helldunkel[kanal_zl]-8)];
+   03D5 E5*1E              1211 	mov	a,_kanal_zl
+   03D7 24r29              1212 	add	a,#_schritt_zl_dim
+   03D9 F9                 1213 	mov	r1,a
+   03DA 87 04              1214 	mov	ar4,@r1
+   03DC EA                 1215 	mov	a,r2
+   03DD 24r11              1216 	add	a,#0xf8+_schritttabelle
+   03DF F5 82              1217 	mov	dpl,a
+   03E1 E4                 1218 	clr	a
+   03E2 34s00              1219 	addc	a,#(_schritttabelle >> 8)
+   03E4 F5 83              1220 	mov	dph,a
+   03E6 E4                 1221 	clr	a
+   03E7 93                 1222 	movc	a,@a+dptr
+   03E8 2C                 1223 	add	a,r4
+   03E9 FC                 1224 	mov	r4,a
+   03EA F7                 1225 	mov	@r1,a
+                           1226 ;	../fb_dim2.c:288: dimmwert[kanal_zl]+=(schritt_zl_dim[kanal_zl]/100);
+   03EB 75 F0 64           1227 	mov	b,#0x64
+   03EE EC                 1228 	mov	a,r4
+   03EF 84                 1229 	div	ab
+   03F0 FD                 1230 	mov	r5,a
+   03F1 2B                 1231 	add	a,r3
+   03F2 F6                 1232 	mov	@r0,a
+                           1233 ;	../fb_dim2.c:289: schritt_zl_dim[kanal_zl]%=100;
+   03F3 75 F0 64           1234 	mov	b,#0x64
+   03F6 EC                 1235 	mov	a,r4
+   03F7 84                 1236 	div	ab
+   03F8 E5 F0              1237 	mov	a,b
+   03FA F7                 1238 	mov	@r1,a
+   03FB                    1239 00144$:
+                           1240 ;	../fb_dim2.c:292: if(dimm_helldunkel[kanal_zl]>=1 && dimm_helldunkel[kanal_zl]<8) //dunkler=1==100%
+   03FB BA 01 00           1241 	cjne	r2,#0x01,00220$
+   03FE                    1242 00220$:
+   03FE 40 4E              1243 	jc	00161$
+   0400 BA 08 00           1244 	cjne	r2,#0x08,00222$
+   0403                    1245 00222$:
+   0403 50 49              1246 	jnc	00161$
+                           1247 ;	../fb_dim2.c:294: if(dimmwert[kanal_zl]>mindimmwert[kanal_zl]+1)
+   0405 E5*1E              1248 	mov	a,_kanal_zl
+   0407 24r06              1249 	add	a,#_dimmwert
+   0409 F8                 1250 	mov	r0,a
+   040A 86 03              1251 	mov	ar3,@r0
+   040C E5*1E              1252 	mov	a,_kanal_zl
+   040E 24r08              1253 	add	a,#_mindimmwert
+   0410 F9                 1254 	mov	r1,a
+   0411 87 04              1255 	mov	ar4,@r1
+   0413 7D 00              1256 	mov	r5,#0x00
+   0415 0C                 1257 	inc	r4
+   0416 BC 00 01           1258 	cjne	r4,#0x00,00224$
+   0419 0D                 1259 	inc	r5
+   041A                    1260 00224$:
+   041A 8B 06              1261 	mov	ar6,r3
+   041C 7F 00              1262 	mov	r7,#0x00
+   041E C3                 1263 	clr	c
+   041F EC                 1264 	mov	a,r4
+   0420 9E                 1265 	subb	a,r6
+   0421 ED                 1266 	mov	a,r5
+   0422 64 80              1267 	xrl	a,#0x80
+   0424 8F F0              1268 	mov	b,r7
+   0426 63 F0 80           1269 	xrl	b,#0x80
+   0429 95 F0              1270 	subb	a,b
+   042B 50 21              1271 	jnc	00161$
+                           1272 ;	../fb_dim2.c:296: schritt_zl_dim[kanal_zl]+=schritttabelle[(dimm_helldunkel[kanal_zl])];
+   042D E5*1E              1273 	mov	a,_kanal_zl
+   042F 24r29              1274 	add	a,#_schritt_zl_dim
+   0431 F9                 1275 	mov	r1,a
+   0432 87 04              1276 	mov	ar4,@r1
+   0434 EA                 1277 	mov	a,r2
+   0435 90s00r19           1278 	mov	dptr,#_schritttabelle
+   0438 93                 1279 	movc	a,@a+dptr
+   0439 2C                 1280 	add	a,r4
+   043A FC                 1281 	mov	r4,a
+   043B F7                 1282 	mov	@r1,a
+                           1283 ;	../fb_dim2.c:297: dimmwert[kanal_zl]-=(schritt_zl_dim[kanal_zl]/100);
+   043C 75 F0 64           1284 	mov	b,#0x64
+   043F EC                 1285 	mov	a,r4
+   0440 84                 1286 	div	ab
+   0441 FA                 1287 	mov	r2,a
+   0442 EB                 1288 	mov	a,r3
+   0443 C3                 1289 	clr	c
+   0444 9A                 1290 	subb	a,r2
+   0445 F6                 1291 	mov	@r0,a
+                           1292 ;	../fb_dim2.c:298: schritt_zl_dim[kanal_zl]%=100;
+   0446 75 F0 64           1293 	mov	b,#0x64
+   0449 EC                 1294 	mov	a,r4
+   044A 84                 1295 	div	ab
+   044B E5 F0              1296 	mov	a,b
+   044D F7                 1297 	mov	@r1,a
+   044E                    1298 00161$:
+                           1299 ;	../fb_dim2.c:273: for(kanal_zl=0;kanal_zl<DIMKREISE;++kanal_zl)//basis und faktor für dimmstufen
+   044E 05*1E              1300 	inc	_kanal_zl
+   0450 02s03r60           1301 	ljmp	00159$
+   0453                    1302 00163$:
+   0453 D0 D0              1303 	pop	psw
+   0455 D0 01              1304 	pop	(0+1)
+   0457 D0 00              1305 	pop	(0+0)
+   0459 D0 07              1306 	pop	(0+7)
+   045B D0 06              1307 	pop	(0+6)
+   045D D0 05              1308 	pop	(0+5)
+   045F D0 04              1309 	pop	(0+4)
+   0461 D0 03              1310 	pop	(0+3)
+   0463 D0 02              1311 	pop	(0+2)
+   0465 D0 83              1312 	pop	dph
+   0467 D0 82              1313 	pop	dpl
+   0469 D0 F0              1314 	pop	b
+   046B D0 E0              1315 	pop	acc
+   046D D0*00              1316 	pop	bits
+   046F 32                 1317 	reti
+                           1318 ;------------------------------------------------------------
+                           1319 ;Allocation info for local variables in function 'main'
+                           1320 ;------------------------------------------------------------
+                           1321 ;i                         Allocated to registers 
+                           1322 ;n                         Allocated to registers r3 
+                           1323 ;cmd                       Allocated to registers r3 
+                           1324 ;cal                       Allocated to registers r2 
+                           1325 ;flag50hz                  Allocated to registers 
+                           1326 ;------------------------------------------------------------
+                           1327 ;	../fb_dim2.c:312: void main(void)
+                           1328 ;	-----------------------------------------
+                           1329 ;	 function main
+                           1330 ;	-----------------------------------------
+   0470                    1331 _main:
+                           1332 ;	../fb_dim2.c:321: restart_hw();				// Hardware zurücksetzen
+   0470 12s00r00           1333 	lcall	_restart_hw
+                           1334 ;	../fb_dim2.c:322: restart_prot();			// Protokoll-relevante Parameter zurücksetzen
+   0473 12s00r00           1335 	lcall	_restart_prot
+                           1336 ;	../fb_dim2.c:323: rs_init(6);
+   0476 90 00 06           1337 	mov	dptr,#0x0006
+   0479 12s00r00           1338 	lcall	_rs_init
+                           1339 ;	../fb_dim2.c:324: i2c_ma_init();
+   047C 12s00r00           1340 	lcall	_i2c_ma_init
+                           1341 ;	../fb_dim2.c:325: restart_app();                        // Anwendungsspezifische Einstellungen zurücksetzen
+   047F 12s00r3A           1342 	lcall	_restart_app
+                           1343 ;	../fb_dim2.c:327: TASTER=1;
+   0482 D2 97              1344 	setb	_P1_7
+                           1345 ;	../fb_dim2.c:328: if(!TASTER )cal=0;// && wduf
+   0484 20 97 04           1346 	jb	_P1_7,00102$
+   0487 7A 00              1347 	mov	r2,#0x00
+   0489 80 07              1348 	sjmp	00103$
+   048B                    1349 00102$:
+                           1350 ;	../fb_dim2.c:329: else cal=trimsave;
+   048B 90 1B FF           1351 	mov	dptr,#_main_trimsave_1_1
+   048E E4                 1352 	clr	a
+   048F 93                 1353 	movc	a,@a+dptr
+   0490 FB                 1354 	mov	r3,a
+   0491 FA                 1355 	mov	r2,a
+   0492                    1356 00103$:
+                           1357 ;	../fb_dim2.c:330: TRIM = (TRIM+trimsave);
+   0492 90 1B FF           1358 	mov	dptr,#_main_trimsave_1_1
+   0495 E4                 1359 	clr	a
+   0496 93                 1360 	movc	a,@a+dptr
+   0497 FB                 1361 	mov	r3,a
+   0498 AC 96              1362 	mov	r4,_TRIM
+   049A EB                 1363 	mov	a,r3
+   049B 2C                 1364 	add	a,r4
+   049C F5 96              1365 	mov	_TRIM,a
+                           1366 ;	../fb_dim2.c:331: TRIM &= 0x3F;//oberen 2 bits ausblenden
+   049E 53 96 3F           1367 	anl	_TRIM,#0x3F
+                           1368 ;	../fb_dim2.c:334: rs_send(0x55);
+   04A1 75 82 55           1369 	mov	dpl,#0x55
+   04A4 C0 02              1370 	push	ar2
+   04A6 12s00r00           1371 	lcall	_rs_send
+   04A9 D0 02              1372 	pop	ar2
+                           1373 ;	../fb_dim2.c:335: do
+   04AB                    1374 00123$:
+                           1375 ;	../fb_dim2.c:337: if (RI){
+                           1376 ;	../fb_dim2.c:338: RI=0;
+   04AB 10 98 02           1377 	jbc	_SCON_0,00153$
+   04AE 80 52              1378 	sjmp	00117$
+   04B0                    1379 00153$:
+                           1380 ;	../fb_dim2.c:339: cmd=SBUF;
+   04B0 AB 99              1381 	mov	r3,_SBUF
+                           1382 ;	../fb_dim2.c:340: if(cmd=='c')rs_send(0x55);
+   04B2 BB 63 0E           1383 	cjne	r3,#0x63,00105$
+   04B5 75 82 55           1384 	mov	dpl,#0x55
+   04B8 C0 02              1385 	push	ar2
+   04BA C0 03              1386 	push	ar3
+   04BC 12s00r00           1387 	lcall	_rs_send
+   04BF D0 03              1388 	pop	ar3
+   04C1 D0 02              1389 	pop	ar2
+   04C3                    1390 00105$:
+                           1391 ;	../fb_dim2.c:341: if(cmd=='+'){
+   04C3 BB 2B 03           1392 	cjne	r3,#0x2B,00107$
+                           1393 ;	../fb_dim2.c:342: TRIM--;
+   04C6 15 96              1394 	dec	_TRIM
+                           1395 ;	../fb_dim2.c:343: cal--;
+   04C8 1A                 1396 	dec	r2
+   04C9                    1397 00107$:
+                           1398 ;	../fb_dim2.c:345: if(cmd=='-'){
+   04C9 BB 2D 03           1399 	cjne	r3,#0x2D,00109$
+                           1400 ;	../fb_dim2.c:346: TRIM++;
+   04CC 05 96              1401 	inc	_TRIM
+                           1402 ;	../fb_dim2.c:347: cal++;
+   04CE 0A                 1403 	inc	r2
+   04CF                    1404 00109$:
+                           1405 ;	../fb_dim2.c:349: if(cmd=='w'){
+   04CF BB 77 12           1406 	cjne	r3,#0x77,00111$
+                           1407 ;	../fb_dim2.c:350: EA=0;
+   04D2 C2 AF              1408 	clr	_IEN0_7
+                           1409 ;	../fb_dim2.c:351: START_WRITECYCLE;	//cal an 0x1bff schreiben
+   04D4 75 E4 00           1410 	mov	_FMCON,#0x00
+                           1411 ;	../fb_dim2.c:352: FMADRH= 0x1B;		
+   04D7 75 E7 1B           1412 	mov	_FMADRH,#0x1B
+                           1413 ;	../fb_dim2.c:353: FMADRL= 0xFF; 
+   04DA 75 E6 FF           1414 	mov	_FMADRL,#0xFF
+                           1415 ;	../fb_dim2.c:354: FMDATA=	cal; 
+   04DD 8A E5              1416 	mov	_FMDATA,r2
+                           1417 ;	../fb_dim2.c:355: STOP_WRITECYCLE;
+   04DF 75 E4 68           1418 	mov	_FMCON,#0x68
+                           1419 ;	../fb_dim2.c:356: EA=1;				//int wieder freigeben
+   04E2 D2 AF              1420 	setb	_IEN0_7
+   04E4                    1421 00111$:
+                           1422 ;	../fb_dim2.c:358: if(cmd=='v')rs_send(VERSION);
+   04E4 BB 76 0E           1423 	cjne	r3,#0x76,00113$
+   04E7 75 82 01           1424 	mov	dpl,#0x01
+   04EA C0 02              1425 	push	ar2
+   04EC C0 03              1426 	push	ar3
+   04EE 12s00r00           1427 	lcall	_rs_send
+   04F1 D0 03              1428 	pop	ar3
+   04F3 D0 02              1429 	pop	ar2
+   04F5                    1430 00113$:
+                           1431 ;	../fb_dim2.c:359: if(cmd=='t')rs_send(TYPE);
+   04F5 BB 74 0A           1432 	cjne	r3,#0x74,00117$
+   04F8 75 82 01           1433 	mov	dpl,#0x01
+   04FB C0 02              1434 	push	ar2
+   04FD 12s00r00           1435 	lcall	_rs_send
+   0500 D0 02              1436 	pop	ar2
+   0502                    1437 00117$:
+                           1438 ;	../fb_dim2.c:370: TASTER=1;                       // Pin als Eingang schalten um Taster abzufragen
+   0502 D2 97              1439 	setb	_P1_7
+                           1440 ;	../fb_dim2.c:371: if(!TASTER) {                   // Taster gedrückt
+   0504 20 97 22           1441 	jb	_P1_7,00122$
+                           1442 ;	../fb_dim2.c:372: for(n=0;n<200;n++) {}   // Entprell-Zeit
+   0507 7B C8              1443 	mov	r3,#0xC8
+   0509                    1444 00128$:
+   0509 DB FE              1445 	djnz	r3,00128$
+                           1446 ;	../fb_dim2.c:373: while(!TASTER);         // warten bis Taster losgelassen
+   050B                    1447 00118$:
+   050B 30 97 FD           1448 	jnb	_P1_7,00118$
+                           1449 ;	../fb_dim2.c:374: EA=0;
+   050E C2 AF              1450 	clr	_IEN0_7
+                           1451 ;	../fb_dim2.c:375: START_WRITECYCLE;
+   0510 75 E4 00           1452 	mov	_FMCON,#0x00
+                           1453 ;	../fb_dim2.c:376: WRITE_BYTE(0x00,0x60,userram[0x60] ^ 0x81);     // Prog-Bit und Parity-Bit im system_state toggeln
+   0513 75 E7 1C           1454 	mov	_FMADRH,#0x1C
+   0516 75 E6 60           1455 	mov	_FMADRL,#0x60
+   0519 90s00r60           1456 	mov	dptr,#(_userram + 0x0060)
+   051C E4                 1457 	clr	a
+   051D 93                 1458 	movc	a,@a+dptr
+   051E FB                 1459 	mov	r3,a
+   051F 74 81              1460 	mov	a,#0x81
+   0521 6B                 1461 	xrl	a,r3
+   0522 F5 E5              1462 	mov	_FMDATA,a
+                           1463 ;	../fb_dim2.c:377: STOP_WRITECYCLE;
+   0524 75 E4 68           1464 	mov	_FMCON,#0x68
+                           1465 ;	../fb_dim2.c:378: EA=1;
+   0527 D2 AF              1466 	setb	_IEN0_7
+   0529                    1467 00122$:
+                           1468 ;	../fb_dim2.c:380: TASTER=!(userram[0x060] & 0x01);// LED entsprechend Prog-Bit schalten (low=LED an)
+   0529 90s00r60           1469 	mov	dptr,#(_userram + 0x0060)
+   052C E4                 1470 	clr	a
+   052D 93                 1471 	movc	a,@a+dptr
+   052E 54 01              1472 	anl	a,#0x01
+   0530 FB                 1473 	mov	r3,a
+   0531 B4 01 00           1474 	cjne	a,#0x01,00170$
+   0534                    1475 00170$:
+   0534 92 97              1476 	mov	_P1_7,c
+                           1477 ;	../fb_dim2.c:381: for(n=0;n<100;n++) {}           // falls Hauptroutine keine Zeit verbraucht, der LED etwas Zeit geben, damit sie auch leuchten kann
+   0536 7B 64              1478 	mov	r3,#0x64
+   0538                    1479 00131$:
+   0538 DB FE              1480 	djnz	r3,00131$
+                           1481 ;	../fb_dim2.c:383: while(1)
+   053A 02s04rAB           1482 	ljmp	00123$
+                           1483 	.area CSEG    (CODE)
+                           1484 	.area CONST   (CODE)
+   0000                    1485 _hellikeit:
+   0000 00                 1486 	.db #0x00
+   0001 19                 1487 	.db #0x19
+   0002 28                 1488 	.db #0x28
+   0003 33                 1489 	.db #0x33
+   0004 4C                 1490 	.db #0x4C
+   0005 66                 1491 	.db #0x66
+   0006 7F                 1492 	.db #0x7F
+   0007 99                 1493 	.db #0x99
+   0008 B2                 1494 	.db #0xB2
+   0009 CC                 1495 	.db #0xCC
+   000A E6                 1496 	.db #0xE6
+   000B FF                 1497 	.db #0xFF
+   000C FF                 1498 	.db #0xFF
+   000D                    1499 _basis:
+   000D 00 00              1500 	.byte #0x00,#0x00
+   000F 01 00              1501 	.byte #0x01,#0x00
+   0011 10 00              1502 	.byte #0x10,#0x00
+   0013 04 01              1503 	.byte #0x04,#0x01
+   0015 68 10              1504 	.byte #0x68,#0x10
+   0017 E8 FD              1505 	.byte #0xE8,#0xFD
+   0019                    1506 _schritttabelle:
+   0019 00                 1507 	.db #0x00
+   001A C8                 1508 	.db #0xC8
+   001B 64                 1509 	.db #0x64
+   001C 32                 1510 	.db #0x32
+   001D 19                 1511 	.db #0x19
+   001E 0C                 1512 	.db #0x0C
+   001F 06                 1513 	.db #0x06
+   0020 03                 1514 	.db #0x03
+                    1BFF   1515 _main_trimsave_1_1	=	0x1bff
+                           1516 	.area XINIT   (CODE)
+                           1517 	.area CABS    (ABS,CODE)

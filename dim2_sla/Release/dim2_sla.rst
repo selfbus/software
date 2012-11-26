@@ -1,0 +1,846 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 3.1.4 #7479 (Mar 23 2012) (MINGW32)
+                              4 ; This file was generated Sun Apr 22 12:04:50 2012
+                              5 ;--------------------------------------------------------
+                              6 	.module dim2_sla
+                              7 	.optsdcc -mmcs51 --model-small
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _main
+                             13 	.globl _send
+                             14 	.globl _in50hz_init
+                             15 	.globl _tim0_int
+                             16 	.globl _ex1_int
+                             17 	.globl _nulldurchgang
+                             18 	.globl _i2c_int
+                             19 	.globl _i2c_sla_init
+                             20 	.globl _P3_1
+                             21 	.globl _P3_0
+                             22 	.globl _P1_7
+                             23 	.globl _P1_6
+                             24 	.globl _P1_5
+                             25 	.globl _P1_4
+                             26 	.globl _P1_3
+                             27 	.globl _P1_2
+                             28 	.globl _P1_1
+                             29 	.globl _P1_0
+                             30 	.globl _P0_7
+                             31 	.globl _P0_6
+                             32 	.globl _P0_5
+                             33 	.globl _P0_4
+                             34 	.globl _P0_3
+                             35 	.globl _P0_2
+                             36 	.globl _P0_1
+                             37 	.globl _P0_0
+                             38 	.globl _I2CON_0
+                             39 	.globl _I2CON_2
+                             40 	.globl _I2CON_3
+                             41 	.globl _I2CON_4
+                             42 	.globl _I2CON_5
+                             43 	.globl _I2CON_6
+                             44 	.globl _SCON_7
+                             45 	.globl _SCON_6
+                             46 	.globl _SCON_5
+                             47 	.globl _SCON_4
+                             48 	.globl _SCON_3
+                             49 	.globl _SCON_2
+                             50 	.globl _SCON_1
+                             51 	.globl _SCON_0
+                             52 	.globl _IP0_0
+                             53 	.globl _IP0_1
+                             54 	.globl _IP0_2
+                             55 	.globl _IP0_3
+                             56 	.globl _IP0_4
+                             57 	.globl _IP0_5
+                             58 	.globl _IP0_6
+                             59 	.globl _IP1_0
+                             60 	.globl _IP1_1
+                             61 	.globl _IP1_2
+                             62 	.globl _IP1_6
+                             63 	.globl _IEN1_0
+                             64 	.globl _IEN1_1
+                             65 	.globl _IEN1_2
+                             66 	.globl _IEN0_0
+                             67 	.globl _IEN0_1
+                             68 	.globl _IEN0_2
+                             69 	.globl _IEN0_3
+                             70 	.globl _IEN0_4
+                             71 	.globl _IEN0_5
+                             72 	.globl _IEN0_6
+                             73 	.globl _IEN0_7
+                             74 	.globl _TCON_0
+                             75 	.globl _TCON_1
+                             76 	.globl _TCON_2
+                             77 	.globl _TCON_3
+                             78 	.globl _TCON_4
+                             79 	.globl _TCON_5
+                             80 	.globl _TCON_6
+                             81 	.globl _TCON_7
+                             82 	.globl _PSW_7
+                             83 	.globl _PSW_6
+                             84 	.globl _PSW_5
+                             85 	.globl _PSW_4
+                             86 	.globl _PSW_3
+                             87 	.globl _PSW_2
+                             88 	.globl _PSW_1
+                             89 	.globl _PSW_0
+                             90 	.globl _IEN1
+                             91 	.globl _IP0H
+                             92 	.globl _WFEED2
+                             93 	.globl _WFEED1
+                             94 	.globl _WDL
+                             95 	.globl _WDCON
+                             96 	.globl _TRIM
+                             97 	.globl _TAMOD
+                             98 	.globl _SSTAT
+                             99 	.globl _RTCL
+                            100 	.globl _RTCH
+                            101 	.globl _RTCCON
+                            102 	.globl _RSTSRC
+                            103 	.globl _PT0AD
+                            104 	.globl _PCONA
+                            105 	.globl _P3M2
+                            106 	.globl _P3M1
+                            107 	.globl _P1M2
+                            108 	.globl _P1M1
+                            109 	.globl _P0M2
+                            110 	.globl _P0M1
+                            111 	.globl _KBPATN
+                            112 	.globl _KBMASK
+                            113 	.globl _KBCON
+                            114 	.globl _IP1H
+                            115 	.globl _IP1
+                            116 	.globl _I2STAT
+                            117 	.globl _I2SCLL
+                            118 	.globl _I2SCLH
+                            119 	.globl _I2DAT
+                            120 	.globl _I2CON
+                            121 	.globl _I2ADR
+                            122 	.globl _FMDATA
+                            123 	.globl _FMCON
+                            124 	.globl _FMADRL
+                            125 	.globl _FMADRH
+                            126 	.globl _DIVM
+                            127 	.globl _CMP2
+                            128 	.globl _CMP1
+                            129 	.globl _BRGCON
+                            130 	.globl _BRGR1
+                            131 	.globl _BRGR0
+                            132 	.globl _SADEN
+                            133 	.globl _SADDR
+                            134 	.globl _AUXR1
+                            135 	.globl _SBUF
+                            136 	.globl _SCON
+                            137 	.globl _IP0
+                            138 	.globl _IEN0
+                            139 	.globl _TH1
+                            140 	.globl _TH0
+                            141 	.globl _TL1
+                            142 	.globl _TL0
+                            143 	.globl _TMOD
+                            144 	.globl _TCON
+                            145 	.globl _PCON
+                            146 	.globl _DPH
+                            147 	.globl _DPL
+                            148 	.globl _SP
+                            149 	.globl _B
+                            150 	.globl _ACC
+                            151 	.globl _PSW
+                            152 	.globl _P3
+                            153 	.globl _P1
+                            154 	.globl _P0
+                            155 	.globl _cmd
+                            156 	.globl _dimmcompare
+                            157 	.globl _mode
+                            158 	.globl _dimmzl
+                            159 	.globl _m
+                            160 	.globl _sp
+                            161 	.globl _zl_50hz
+                            162 	.globl _bytenummer
+                            163 	.globl _mk
+                            164 	.globl _dimm_I2C
+                            165 ;--------------------------------------------------------
+                            166 ; special function registers
+                            167 ;--------------------------------------------------------
+                            168 	.area RSEG    (ABS,DATA)
+   0000                     169 	.org 0x0000
+                    0080    170 _P0	=	0x0080
+                    0090    171 _P1	=	0x0090
+                    00B0    172 _P3	=	0x00b0
+                    00D0    173 _PSW	=	0x00d0
+                    00E0    174 _ACC	=	0x00e0
+                    00F0    175 _B	=	0x00f0
+                    0081    176 _SP	=	0x0081
+                    0082    177 _DPL	=	0x0082
+                    0083    178 _DPH	=	0x0083
+                    0087    179 _PCON	=	0x0087
+                    0088    180 _TCON	=	0x0088
+                    0089    181 _TMOD	=	0x0089
+                    008A    182 _TL0	=	0x008a
+                    008B    183 _TL1	=	0x008b
+                    008C    184 _TH0	=	0x008c
+                    008D    185 _TH1	=	0x008d
+                    00A8    186 _IEN0	=	0x00a8
+                    00B8    187 _IP0	=	0x00b8
+                    0098    188 _SCON	=	0x0098
+                    0099    189 _SBUF	=	0x0099
+                    00A2    190 _AUXR1	=	0x00a2
+                    00A9    191 _SADDR	=	0x00a9
+                    00B9    192 _SADEN	=	0x00b9
+                    00BE    193 _BRGR0	=	0x00be
+                    00BF    194 _BRGR1	=	0x00bf
+                    00BD    195 _BRGCON	=	0x00bd
+                    00AC    196 _CMP1	=	0x00ac
+                    00AD    197 _CMP2	=	0x00ad
+                    0095    198 _DIVM	=	0x0095
+                    00E7    199 _FMADRH	=	0x00e7
+                    00E6    200 _FMADRL	=	0x00e6
+                    00E4    201 _FMCON	=	0x00e4
+                    00E5    202 _FMDATA	=	0x00e5
+                    00DB    203 _I2ADR	=	0x00db
+                    00D8    204 _I2CON	=	0x00d8
+                    00DA    205 _I2DAT	=	0x00da
+                    00DD    206 _I2SCLH	=	0x00dd
+                    00DC    207 _I2SCLL	=	0x00dc
+                    00D9    208 _I2STAT	=	0x00d9
+                    00F8    209 _IP1	=	0x00f8
+                    00F7    210 _IP1H	=	0x00f7
+                    0094    211 _KBCON	=	0x0094
+                    0086    212 _KBMASK	=	0x0086
+                    0093    213 _KBPATN	=	0x0093
+                    0084    214 _P0M1	=	0x0084
+                    0085    215 _P0M2	=	0x0085
+                    0091    216 _P1M1	=	0x0091
+                    0092    217 _P1M2	=	0x0092
+                    00B1    218 _P3M1	=	0x00b1
+                    00B2    219 _P3M2	=	0x00b2
+                    00B5    220 _PCONA	=	0x00b5
+                    00F6    221 _PT0AD	=	0x00f6
+                    00DF    222 _RSTSRC	=	0x00df
+                    00D1    223 _RTCCON	=	0x00d1
+                    00D2    224 _RTCH	=	0x00d2
+                    00D3    225 _RTCL	=	0x00d3
+                    00BA    226 _SSTAT	=	0x00ba
+                    008F    227 _TAMOD	=	0x008f
+                    0096    228 _TRIM	=	0x0096
+                    00A7    229 _WDCON	=	0x00a7
+                    00C1    230 _WDL	=	0x00c1
+                    00C2    231 _WFEED1	=	0x00c2
+                    00C3    232 _WFEED2	=	0x00c3
+                    00B7    233 _IP0H	=	0x00b7
+                    00E8    234 _IEN1	=	0x00e8
+                            235 ;--------------------------------------------------------
+                            236 ; special function bits
+                            237 ;--------------------------------------------------------
+                            238 	.area RSEG    (ABS,DATA)
+   0000                     239 	.org 0x0000
+                    00D0    240 _PSW_0	=	0x00d0
+                    00D1    241 _PSW_1	=	0x00d1
+                    00D2    242 _PSW_2	=	0x00d2
+                    00D3    243 _PSW_3	=	0x00d3
+                    00D4    244 _PSW_4	=	0x00d4
+                    00D5    245 _PSW_5	=	0x00d5
+                    00D6    246 _PSW_6	=	0x00d6
+                    00D7    247 _PSW_7	=	0x00d7
+                    008F    248 _TCON_7	=	0x008f
+                    008E    249 _TCON_6	=	0x008e
+                    008D    250 _TCON_5	=	0x008d
+                    008C    251 _TCON_4	=	0x008c
+                    008B    252 _TCON_3	=	0x008b
+                    008A    253 _TCON_2	=	0x008a
+                    0089    254 _TCON_1	=	0x0089
+                    0088    255 _TCON_0	=	0x0088
+                    00AF    256 _IEN0_7	=	0x00af
+                    00AE    257 _IEN0_6	=	0x00ae
+                    00AD    258 _IEN0_5	=	0x00ad
+                    00AC    259 _IEN0_4	=	0x00ac
+                    00AB    260 _IEN0_3	=	0x00ab
+                    00AA    261 _IEN0_2	=	0x00aa
+                    00A9    262 _IEN0_1	=	0x00a9
+                    00A8    263 _IEN0_0	=	0x00a8
+                    00EA    264 _IEN1_2	=	0x00ea
+                    00E9    265 _IEN1_1	=	0x00e9
+                    00E8    266 _IEN1_0	=	0x00e8
+                    00FE    267 _IP1_6	=	0x00fe
+                    00FA    268 _IP1_2	=	0x00fa
+                    00F9    269 _IP1_1	=	0x00f9
+                    00F8    270 _IP1_0	=	0x00f8
+                    00BE    271 _IP0_6	=	0x00be
+                    00BD    272 _IP0_5	=	0x00bd
+                    00BC    273 _IP0_4	=	0x00bc
+                    00BB    274 _IP0_3	=	0x00bb
+                    00BA    275 _IP0_2	=	0x00ba
+                    00B9    276 _IP0_1	=	0x00b9
+                    00B8    277 _IP0_0	=	0x00b8
+                    0098    278 _SCON_0	=	0x0098
+                    0099    279 _SCON_1	=	0x0099
+                    009A    280 _SCON_2	=	0x009a
+                    009B    281 _SCON_3	=	0x009b
+                    009C    282 _SCON_4	=	0x009c
+                    009D    283 _SCON_5	=	0x009d
+                    009E    284 _SCON_6	=	0x009e
+                    009F    285 _SCON_7	=	0x009f
+                    00DE    286 _I2CON_6	=	0x00de
+                    00DD    287 _I2CON_5	=	0x00dd
+                    00DC    288 _I2CON_4	=	0x00dc
+                    00DB    289 _I2CON_3	=	0x00db
+                    00DA    290 _I2CON_2	=	0x00da
+                    00D8    291 _I2CON_0	=	0x00d8
+                    0080    292 _P0_0	=	0x0080
+                    0081    293 _P0_1	=	0x0081
+                    0082    294 _P0_2	=	0x0082
+                    0083    295 _P0_3	=	0x0083
+                    0084    296 _P0_4	=	0x0084
+                    0085    297 _P0_5	=	0x0085
+                    0086    298 _P0_6	=	0x0086
+                    0087    299 _P0_7	=	0x0087
+                    0090    300 _P1_0	=	0x0090
+                    0091    301 _P1_1	=	0x0091
+                    0092    302 _P1_2	=	0x0092
+                    0093    303 _P1_3	=	0x0093
+                    0094    304 _P1_4	=	0x0094
+                    0095    305 _P1_5	=	0x0095
+                    0096    306 _P1_6	=	0x0096
+                    0097    307 _P1_7	=	0x0097
+                    00B0    308 _P3_0	=	0x00b0
+                    00B1    309 _P3_1	=	0x00b1
+                            310 ;--------------------------------------------------------
+                            311 ; overlayable register banks
+                            312 ;--------------------------------------------------------
+                            313 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                     314 	.ds 8
+                            315 ;--------------------------------------------------------
+                            316 ; internal ram data
+                            317 ;--------------------------------------------------------
+                            318 	.area DSEG    (DATA)
+   0008                     319 _dimm_I2C::
+   0008                     320 	.ds 2
+   000A                     321 _mk::
+   000A                     322 	.ds 2
+   000C                     323 _bytenummer::
+   000C                     324 	.ds 1
+   000D                     325 _zl_50hz::
+   000D                     326 	.ds 2
+   000F                     327 _sp::
+   000F                     328 	.ds 2
+   0011                     329 _m::
+   0011                     330 	.ds 2
+   0013                     331 _dimmzl::
+   0013                     332 	.ds 1
+   0014                     333 _mode::
+   0014                     334 	.ds 1
+   0015                     335 _dimmcompare::
+   0015                     336 	.ds 1
+   0016                     337 _cmd::
+   0016                     338 	.ds 1
+                            339 ;--------------------------------------------------------
+                            340 ; overlayable items in internal ram 
+                            341 ;--------------------------------------------------------
+                            342 ;--------------------------------------------------------
+                            343 ; Stack segment in internal ram 
+                            344 ;--------------------------------------------------------
+                            345 	.area	SSEG	(DATA)
+   0018                     346 __start__stack:
+   0018                     347 	.ds	1
+                            348 
+                            349 ;--------------------------------------------------------
+                            350 ; indirectly addressable internal ram data
+                            351 ;--------------------------------------------------------
+                            352 	.area ISEG    (DATA)
+                            353 ;--------------------------------------------------------
+                            354 ; absolute internal ram data
+                            355 ;--------------------------------------------------------
+                            356 	.area IABS    (ABS,DATA)
+                            357 	.area IABS    (ABS,DATA)
+                            358 ;--------------------------------------------------------
+                            359 ; bit data
+                            360 ;--------------------------------------------------------
+                            361 	.area BSEG    (BIT)
+                            362 ;--------------------------------------------------------
+                            363 ; paged external ram data
+                            364 ;--------------------------------------------------------
+                            365 	.area PSEG    (PAG,XDATA)
+                            366 ;--------------------------------------------------------
+                            367 ; external ram data
+                            368 ;--------------------------------------------------------
+                            369 	.area XSEG    (XDATA)
+                            370 ;--------------------------------------------------------
+                            371 ; absolute external ram data
+                            372 ;--------------------------------------------------------
+                            373 	.area XABS    (ABS,XDATA)
+                            374 ;--------------------------------------------------------
+                            375 ; external initialized ram data
+                            376 ;--------------------------------------------------------
+                            377 	.area XISEG   (XDATA)
+                            378 	.area HOME    (CODE)
+                            379 	.area GSINIT0 (CODE)
+                            380 	.area GSINIT1 (CODE)
+                            381 	.area GSINIT2 (CODE)
+                            382 	.area GSINIT3 (CODE)
+                            383 	.area GSINIT4 (CODE)
+                            384 	.area GSINIT5 (CODE)
+                            385 	.area GSINIT  (CODE)
+                            386 	.area GSFINAL (CODE)
+                            387 	.area CSEG    (CODE)
+                            388 ;--------------------------------------------------------
+                            389 ; interrupt vector 
+                            390 ;--------------------------------------------------------
+                            391 	.area HOME    (CODE)
+   0000                     392 __interrupt_vect:
+   0000 02 00 3B            393 	ljmp	__sdcc_gsinit_startup
+   0003 32                  394 	reti
+   0004                     395 	.ds	7
+   000B 02 01 43            396 	ljmp	_tim0_int
+   000E                     397 	.ds	5
+   0013 02 01 11            398 	ljmp	_ex1_int
+   0016                     399 	.ds	5
+   001B 32                  400 	reti
+   001C                     401 	.ds	7
+   0023 32                  402 	reti
+   0024                     403 	.ds	7
+   002B 32                  404 	reti
+   002C                     405 	.ds	7
+   0033 02 00 AC            406 	ljmp	_i2c_int
+                            407 ;--------------------------------------------------------
+                            408 ; global & static initialisations
+                            409 ;--------------------------------------------------------
+                            410 	.area HOME    (CODE)
+                            411 	.area GSINIT  (CODE)
+                            412 	.area GSFINAL (CODE)
+                            413 	.area GSINIT  (CODE)
+                            414 	.globl __sdcc_gsinit_startup
+                            415 	.globl __sdcc_program_startup
+                            416 	.globl __start__stack
+                            417 	.globl __mcs51_genXINIT
+                            418 	.globl __mcs51_genXRAMCLEAR
+                            419 	.globl __mcs51_genRAMCLEAR
+                            420 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:35: unsigned int zl_50hz=0;
+   0094 E4                  421 	clr	a
+   0095 F5 0D               422 	mov	_zl_50hz,a
+   0097 F5 0E               423 	mov	(_zl_50hz + 1),a
+                            424 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:36: unsigned int sp=0;
+   0099 E4                  425 	clr	a
+   009A F5 0F               426 	mov	_sp,a
+   009C F5 10               427 	mov	(_sp + 1),a
+                            428 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:37: unsigned int m=0;
+   009E E4                  429 	clr	a
+   009F F5 11               430 	mov	_m,a
+   00A1 F5 12               431 	mov	(_m + 1),a
+                            432 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:38: unsigned char dimmzl=0; //beim nulldurchgang auf 0 setzen
+   00A3 75 13 00            433 	mov	_dimmzl,#0x00
+                            434 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:39: unsigned char mode=AN; //modus des dimmer Anschnitt Abschnitt oder PWM
+   00A6 75 14 01            435 	mov	_mode,#0x01
+                            436 	.area GSFINAL (CODE)
+   00A9 02 00 36            437 	ljmp	__sdcc_program_startup
+                            438 ;--------------------------------------------------------
+                            439 ; Home
+                            440 ;--------------------------------------------------------
+                            441 	.area HOME    (CODE)
+                            442 	.area HOME    (CODE)
+   0036                     443 __sdcc_program_startup:
+   0036 12 01 98            444 	lcall	_main
+                            445 ;	return from main will lock up
+   0039 80 FE               446 	sjmp .
+                            447 ;--------------------------------------------------------
+                            448 ; code
+                            449 ;--------------------------------------------------------
+                            450 	.area CSEG    (CODE)
+                            451 ;------------------------------------------------------------
+                            452 ;Allocation info for local variables in function 'i2c_int'
+                            453 ;------------------------------------------------------------
+                            454 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:45: void i2c_int(void)__interrupt (6)
+                            455 ;	-----------------------------------------
+                            456 ;	 function i2c_int
+                            457 ;	-----------------------------------------
+   00AC                     458 _i2c_int:
+                    0007    459 	ar7 = 0x07
+                    0006    460 	ar6 = 0x06
+                    0005    461 	ar5 = 0x05
+                    0004    462 	ar4 = 0x04
+                    0003    463 	ar3 = 0x03
+                    0002    464 	ar2 = 0x02
+                    0001    465 	ar1 = 0x01
+                    0000    466 	ar0 = 0x00
+   00AC C0 E0               467 	push	acc
+   00AE C0 07               468 	push	ar7
+   00B0 C0 01               469 	push	ar1
+   00B2 C0 D0               470 	push	psw
+   00B4 75 D0 00            471 	mov	psw,#0x00
+                            472 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:47: if(I2STAT==0x60)      //Slaveadresse
+   00B7 74 60               473 	mov	a,#0x60
+   00B9 B5 D9 03            474 	cjne	a,_I2STAT,00102$
+                            475 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:48: bytenummer=0;
+   00BC 75 0C 00            476 	mov	_bytenummer,#0x00
+   00BF                     477 00102$:
+                            478 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:49: if(I2STAT==0x80)      //Datenbyte emfangen
+   00BF 74 80               479 	mov	a,#0x80
+   00C1 B5 D9 02            480 	cjne	a,_I2STAT,00104$
+                            481 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:50: bytenummer++;
+   00C4 05 0C               482 	inc	_bytenummer
+   00C6                     483 00104$:
+                            484 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:51: if(I2STAT==0xA0)      //Stop emfangen
+   00C6 74 A0               485 	mov	a,#0xA0
+   00C8 B5 D9 03            486 	cjne	a,_I2STAT,00106$
+                            487 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:52: bytenummer=0;
+   00CB 75 0C 00            488 	mov	_bytenummer,#0x00
+   00CE                     489 00106$:
+                            490 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:53: if(bytenummer>1&&bytenummer<4)  //erstes byte verwerfen
+   00CE E5 0C               491 	mov	a,_bytenummer
+   00D0 24 FE               492 	add	a,#0xff - 0x01
+   00D2 50 13               493 	jnc	00108$
+   00D4 74 FC               494 	mov	a,#0x100 - 0x04
+   00D6 25 0C               495 	add	a,_bytenummer
+   00D8 40 0D               496 	jc	00108$
+                            497 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:54: dimm_I2C[bytenummer-2]= 0 - I2DAT; //zweites und drittes byte sind K1 + K2
+   00DA E5 0C               498 	mov	a,_bytenummer
+   00DC 24 FE               499 	add	a,#0xFE
+   00DE 24 08               500 	add	a,#_dimm_I2C
+   00E0 F9                  501 	mov	r1,a
+   00E1 C3                  502 	clr	c
+   00E2 E4                  503 	clr	a
+   00E3 95 DA               504 	subb	a,_I2DAT
+   00E5 FF                  505 	mov	r7,a
+   00E6 F7                  506 	mov	@r1,a
+   00E7                     507 00108$:
+                            508 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:56: SI=0;
+   00E7 C2 DB               509 	clr	_I2CON_3
+                            510 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:57: return;
+   00E9 D0 D0               511 	pop	psw
+   00EB D0 01               512 	pop	ar1
+   00ED D0 07               513 	pop	ar7
+   00EF D0 E0               514 	pop	acc
+   00F1 32                  515 	reti
+                            516 ;	eliminated unneeded push/pop ar0
+                            517 ;	eliminated unneeded push/pop dpl
+                            518 ;	eliminated unneeded push/pop dph
+                            519 ;	eliminated unneeded push/pop b
+                            520 ;------------------------------------------------------------
+                            521 ;Allocation info for local variables in function 'nulldurchgang'
+                            522 ;------------------------------------------------------------
+                            523 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:60: void nulldurchgang(void)
+                            524 ;	-----------------------------------------
+                            525 ;	 function nulldurchgang
+                            526 ;	-----------------------------------------
+   00F2                     527 _nulldurchgang:
+                            528 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:63: if(mode==AB)
+   00F2 E5 14               529 	mov	a,_mode
+                            530 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:65: dimmzl=0;
+   00F4 70 0E               531 	jnz	00106$
+   00F6 F5 13               532 	mov	_dimmzl,a
+                            533 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:66: if(dimm_I2C[0])  //dimmwert grösser 0 Dimmer  ein bei abschnitt
+   00F8 E5 08               534 	mov	a,_dimm_I2C
+   00FA 60 02               535 	jz	00102$
+                            536 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:67: K1OUT=0;       //EIN
+   00FC C2 87               537 	clr	_P0_7
+   00FE                     538 00102$:
+                            539 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:68: if(dimm_I2C[1])  //dimmwert grösser 0 Dimmer  ein
+   00FE E5 09               540 	mov	a,(_dimm_I2C + 0x0001)
+   0100 60 02               541 	jz	00106$
+                            542 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:69: K2OUT=0;       //EIN
+   0102 C2 86               543 	clr	_P0_6
+   0104                     544 00106$:
+                            545 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:71: if(mode==AN)
+   0104 74 01               546 	mov	a,#0x01
+   0106 B5 14 07            547 	cjne	a,_mode,00108$
+                            548 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:73: dimmzl=0xff;
+   0109 75 13 FF            549 	mov	_dimmzl,#0xFF
+                            550 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:74: K1OUT=1;     //AUS bei anschnitt
+   010C D2 87               551 	setb	_P0_7
+                            552 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:75: K2OUT=1;
+   010E D2 86               553 	setb	_P0_6
+   0110                     554 00108$:
+                            555 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:77: return;
+   0110 22                  556 	ret
+                            557 ;------------------------------------------------------------
+                            558 ;Allocation info for local variables in function 'ex1_int'
+                            559 ;------------------------------------------------------------
+                            560 ;dc_mess                   Allocated to registers r7 
+                            561 ;------------------------------------------------------------
+                            562 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:81: void ex1_int(void) __interrupt (2)// ERKENNUNG NULLDURCHGANG
+                            563 ;	-----------------------------------------
+                            564 ;	 function ex1_int
+                            565 ;	-----------------------------------------
+   0111                     566 _ex1_int:
+   0111 C0 E0               567 	push	acc
+   0113 C0 07               568 	push	ar7
+   0115 C0 D0               569 	push	psw
+   0117 75 D0 00            570 	mov	psw,#0x00
+                            571 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:87: dc_mess=dimmcompare-20;
+   011A E5 15               572 	mov	a,_dimmcompare
+   011C 24 EC               573 	add	a,#0xEC
+                            574 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:89: if(dc_mess){
+   011E FF                  575 	mov	r7,a
+   011F 60 18               576 	jz	00108$
+                            577 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:90: if (dc_mess>200 && dc_mess<253)TH0++;
+   0121 EF                  578 	mov	a,r7
+   0122 24 37               579 	add	a,#0xff - 0xC8
+   0124 50 07               580 	jnc	00102$
+   0126 BF FD 00            581 	cjne	r7,#0xFD,00123$
+   0129                     582 00123$:
+   0129 50 02               583 	jnc	00102$
+   012B 05 8C               584 	inc	_TH0
+   012D                     585 00102$:
+                            586 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:91: if(dc_mess>=3 && dc_mess<=50)TH0--;	
+   012D BF 03 00            587 	cjne	r7,#0x03,00125$
+   0130                     588 00125$:
+   0130 40 07               589 	jc	00108$
+   0132 EF                  590 	mov	a,r7
+   0133 24 CD               591 	add	a,#0xff - 0x32
+   0135 40 02               592 	jc	00108$
+   0137 15 8C               593 	dec	_TH0
+   0139                     594 00108$:
+                            595 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:93: dimmcompare=20;/*
+   0139 75 15 14            596 	mov	_dimmcompare,#0x14
+   013C D0 D0               597 	pop	psw
+   013E D0 07               598 	pop	ar7
+   0140 D0 E0               599 	pop	acc
+   0142 32                  600 	reti
+                            601 ;	eliminated unneeded push/pop ar1
+                            602 ;	eliminated unneeded push/pop ar0
+                            603 ;	eliminated unneeded push/pop dpl
+                            604 ;	eliminated unneeded push/pop dph
+                            605 ;	eliminated unneeded push/pop b
+                            606 ;------------------------------------------------------------
+                            607 ;Allocation info for local variables in function 'tim0_int'
+                            608 ;------------------------------------------------------------
+                            609 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:117: void tim0_int(void) __interrupt (1)
+                            610 ;	-----------------------------------------
+                            611 ;	 function tim0_int
+                            612 ;	-----------------------------------------
+   0143                     613 _tim0_int:
+   0143 C0 E0               614 	push	acc
+   0145 C0 07               615 	push	ar7
+   0147 C0 D0               616 	push	psw
+   0149 75 D0 00            617 	mov	psw,#0x00
+                            618 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:119: dimmcompare++;
+   014C 05 15               619 	inc	_dimmcompare
+                            620 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:150: if(dimmcompare<=dimm_I2C[0]|| dimm_I2C[0]==0)K1OUT=1;
+   014E AF 08               621 	mov	r7,_dimm_I2C
+   0150 C3                  622 	clr	c
+   0151 EF                  623 	mov	a,r7
+   0152 95 15               624 	subb	a,_dimmcompare
+   0154 50 03               625 	jnc	00101$
+   0156 EF                  626 	mov	a,r7
+   0157 70 04               627 	jnz	00102$
+   0159                     628 00101$:
+   0159 D2 87               629 	setb	_P0_7
+   015B 80 02               630 	sjmp	00103$
+   015D                     631 00102$:
+                            632 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:151: else K1OUT=0;
+   015D C2 87               633 	clr	_P0_7
+   015F                     634 00103$:
+                            635 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:152: if(dimmcompare<=dimm_I2C[1]|| dimm_I2C[1]==0)K2OUT=1;
+   015F AF 09               636 	mov	r7,(_dimm_I2C + 0x0001)
+   0161 C3                  637 	clr	c
+   0162 EF                  638 	mov	a,r7
+   0163 95 15               639 	subb	a,_dimmcompare
+   0165 50 03               640 	jnc	00105$
+   0167 EF                  641 	mov	a,r7
+   0168 70 04               642 	jnz	00106$
+   016A                     643 00105$:
+   016A D2 86               644 	setb	_P0_6
+   016C 80 02               645 	sjmp	00109$
+   016E                     646 00106$:
+                            647 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:153: else K2OUT=0;
+   016E C2 86               648 	clr	_P0_6
+   0170                     649 00109$:
+   0170 D0 D0               650 	pop	psw
+   0172 D0 07               651 	pop	ar7
+   0174 D0 E0               652 	pop	acc
+   0176 32                  653 	reti
+                            654 ;	eliminated unneeded push/pop ar1
+                            655 ;	eliminated unneeded push/pop ar0
+                            656 ;	eliminated unneeded push/pop dpl
+                            657 ;	eliminated unneeded push/pop dph
+                            658 ;	eliminated unneeded push/pop b
+                            659 ;------------------------------------------------------------
+                            660 ;Allocation info for local variables in function 'in50hz_init'
+                            661 ;------------------------------------------------------------
+                            662 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:162: void in50hz_init(void)
+                            663 ;	-----------------------------------------
+                            664 ;	 function in50hz_init
+                            665 ;	-----------------------------------------
+   0177                     666 _in50hz_init:
+                            667 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:164: P1M1 |= (1<<4); //Pin P1.4 input
+   0177 43 91 10            668 	orl	_P1M1,#0x10
+                            669 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:165: P1M2 &= ~(1<<4);
+   017A AF 92               670 	mov	r7,_P1M2
+   017C 53 07 EF            671 	anl	ar7,#0xEF
+   017F 8F 92               672 	mov	_P1M2,r7
+                            673 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:166: EX1=1; //Externer interrupt ein
+   0181 D2 AA               674 	setb	_IEN0_2
+                            675 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:167: IT1=1; //fallende flanke
+   0183 D2 8A               676 	setb	_TCON_2
+                            677 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:168: IP0 = 0x02;
+   0185 75 B8 02            678 	mov	_IP0,#0x02
+                            679 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:169: IP0H = 0x04;
+   0188 75 B7 04            680 	mov	_IP0H,#0x04
+                            681 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:170: EA=1;  //globale interruptfreigabe
+   018B D2 AF               682 	setb	_IEN0_7
+                            683 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:171: return;
+   018D 22                  684 	ret
+                            685 ;------------------------------------------------------------
+                            686 ;Allocation info for local variables in function 'send'
+                            687 ;------------------------------------------------------------
+                            688 ;buf                       Allocated to registers r7 
+                            689 ;------------------------------------------------------------
+                            690 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:174: void send(unsigned char buf)
+                            691 ;	-----------------------------------------
+                            692 ;	 function send
+                            693 ;	-----------------------------------------
+   018E                     694 _send:
+   018E AF 82               695 	mov	r7,dpl
+                            696 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:176: while(!TI);
+   0190                     697 00101$:
+                            698 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:177: TI=0;
+   0190 10 99 02            699 	jbc	_SCON_1,00110$
+   0193 80 FB               700 	sjmp	00101$
+   0195                     701 00110$:
+                            702 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:178: SBUF=buf;
+   0195 8F 99               703 	mov	_SBUF,r7
+   0197 22                  704 	ret
+                            705 ;------------------------------------------------------------
+                            706 ;Allocation info for local variables in function 'main'
+                            707 ;------------------------------------------------------------
+                            708 ;i                         Allocated to registers r6 r7 
+                            709 ;------------------------------------------------------------
+                            710 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:181: void main(void)
+                            711 ;	-----------------------------------------
+                            712 ;	 function main
+                            713 ;	-----------------------------------------
+   0198                     714 _main:
+                            715 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:187: i2c_sla_init();
+   0198 12 02 49            716 	lcall	_i2c_sla_init
+                            717 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:188: in50hz_init();
+   019B 12 01 77            718 	lcall	_in50hz_init
+                            719 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:192: BRGCON&=0xFE;	// Baudrate Generator stoppen
+   019E 53 BD FE            720 	anl	_BRGCON,#0xFE
+                            721 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:193: P1M1&=0xFC;		// RX und TX auf bidirectional setzen
+   01A1 53 91 FC            722 	anl	_P1M1,#0xFC
+                            723 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:194: P1M2&=0xFC;
+   01A4 53 92 FC            724 	anl	_P1M2,#0xFC
+                            725 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:195: SCON=0x50;		// Mode 1, receive enable
+   01A7 75 98 50            726 	mov	_SCON,#0x50
+                            727 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:196: SSTAT|=0xE0;	// TI wird am Ende des Stopbits gesetzt und Interrupt nur bei RX und double TX buffer an
+   01AA 43 BA E0            728 	orl	_SSTAT,#0xE0
+                            729 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:197: BRGCON|=0x02;	// Baudrate Generator verwenden aber noch gestoppt
+   01AD 43 BD 02            730 	orl	_BRGCON,#0x02
+                            731 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:198: BRGR1=0x00;	//05 Baudrate = cclk/((BRGR1,BRGR0)+16)
+   01B0 75 BF 00            732 	mov	_BRGR1,#0x00
+                            733 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:199: BRGR0=0x30;	//F0 für 115200 0030 nehmen, autocal: 600bd= 0x2FF0, 19200: 0x0170
+   01B3 75 BE 30            734 	mov	_BRGR0,#0x30
+                            735 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:200: BRGCON|=0x01;	// Baudrate Generator starten
+   01B6 43 BD 01            736 	orl	_BRGCON,#0x01
+                            737 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:201: SBUF=0x55; // hiernach ist TI==1
+   01B9 75 99 55            738 	mov	_SBUF,#0x55
+                            739 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:205: P0M1 &= ~0xc0; //pin 0.6 und 0.7 Ausgang
+   01BC AF 84               740 	mov	r7,_P0M1
+   01BE 53 07 3F            741 	anl	ar7,#0x3F
+   01C1 8F 84               742 	mov	_P0M1,r7
+                            743 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:206: P0M2 |= 0xc0;
+   01C3 43 85 C0            744 	orl	_P0M2,#0xC0
+                            745 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:207: K1OUT=0;
+   01C6 C2 87               746 	clr	_P0_7
+                            747 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:208: K2OUT=0;
+   01C8 C2 86               748 	clr	_P0_6
+                            749 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:210: TMOD=0x02;   // Timer 0 als reload
+   01CA 75 89 02            750 	mov	_TMOD,#0x02
+                            751 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:211: TH0=0x70; //für 10ms / 256
+   01CD 75 8C 70            752 	mov	_TH0,#0x70
+                            753 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:212: TL0=0x70; //für 10ms / 256  
+   01D0 75 8A 70            754 	mov	_TL0,#0x70
+                            755 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:215: ET0=1;                        // Interrupt für Timer 0 freigeben
+   01D3 D2 A9               756 	setb	_IEN0_1
+                            757 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:216: IP0 |= 0x02;
+   01D5 43 B8 02            758 	orl	_IP0,#0x02
+                            759 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:217: TR0=1;                        // Timer 0 starten
+   01D8 D2 8C               760 	setb	_TCON_4
+                            761 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:218: EA=1;
+   01DA D2 AF               762 	setb	_IEN0_7
+                            763 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:220: P0M1 &= ~(1<<1); // P0_1 = EINGANG zum test
+   01DC AF 84               764 	mov	r7,_P0M1
+   01DE 53 07 FD            765 	anl	ar7,#0xFD
+   01E1 8F 84               766 	mov	_P0M1,r7
+                            767 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:221: P0M2 &= ~(1<<1);
+   01E3 AF 85               768 	mov	r7,_P0M2
+   01E5 53 07 FD            769 	anl	ar7,#0xFD
+   01E8 8F 85               770 	mov	_P0M2,r7
+                            771 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:222: P0_1=1;
+   01EA D2 81               772 	setb	_P0_1
+                            773 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:224: P0M1 |= (1<<2); // P0_2 = EINGANG zum test
+   01EC 43 84 04            774 	orl	_P0M1,#0x04
+                            775 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:225: P0M2 &= ~(1<<2);
+   01EF AF 85               776 	mov	r7,_P0M2
+   01F1 53 07 FB            777 	anl	ar7,#0xFB
+   01F4 8F 85               778 	mov	_P0M2,r7
+                            779 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:226: P0_2=0;
+   01F6 C2 82               780 	clr	_P0_2
+                            781 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:228: if(P0_1==0)
+   01F8 20 81 03            782 	jb	_P0_1,00102$
+                            783 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:230: mode=AN;    //anschnittdimmer
+   01FB 75 14 01            784 	mov	_mode,#0x01
+   01FE                     785 00102$:
+                            786 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:233: dimm_I2C[0]=0;
+   01FE 75 08 00            787 	mov	_dimm_I2C,#0x00
+                            788 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:234: dimm_I2C[1]=0;
+   0201 75 09 00            789 	mov	(_dimm_I2C + 0x0001),#0x00
+                            790 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:236: while(1)
+   0204                     791 00114$:
+                            792 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:247: if(RI){
+                            793 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:248: RI=0;
+   0204 10 98 02            794 	jbc	_SCON_0,00139$
+   0207 80 1D               795 	sjmp	00108$
+   0209                     796 00139$:
+                            797 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:249: cmd=SBUF;
+   0209 85 99 16            798 	mov	_cmd,_SBUF
+                            799 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:250: if (cmd=='+')TRIM-=1;
+   020C 74 2B               800 	mov	a,#0x2B
+   020E B5 16 02            801 	cjne	a,_cmd,00104$
+   0211 15 96               802 	dec	_TRIM
+   0213                     803 00104$:
+                            804 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:251: if (cmd=='-')TRIM+=1;
+   0213 74 2D               805 	mov	a,#0x2D
+   0215 B5 16 02            806 	cjne	a,_cmd,00106$
+   0218 05 96               807 	inc	_TRIM
+   021A                     808 00106$:
+                            809 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:252: send(cmd);
+   021A 85 16 82            810 	mov	dpl,_cmd
+   021D 12 01 8E            811 	lcall	_send
+                            812 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:253: send(TH0);
+   0220 85 8C 82            813 	mov	dpl,_TH0
+   0223 12 01 8E            814 	lcall	_send
+   0226                     815 00108$:
+                            816 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:255: if(dimm_I2C[0]!=mk[0]||dimm_I2C[1]!=mk[1])
+   0226 E5 08               817 	mov	a,_dimm_I2C
+   0228 FF                  818 	mov	r7,a
+   0229 B5 0A 07            819 	cjne	a,_mk,00109$
+   022C E5 0B               820 	mov	a,(_mk + 0x0001)
+   022E B5 09 02            821 	cjne	a,(_dimm_I2C + 0x0001),00146$
+   0231 80 07               822 	sjmp	00127$
+   0233                     823 00146$:
+   0233                     824 00109$:
+                            825 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:262: mk[0]=dimm_I2C[0];
+   0233 8F 0A               826 	mov	_mk,r7
+                            827 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:263: mk[1]=dimm_I2C[1];
+   0235 85 09 0B            828 	mov	(_mk + 0x0001),(_dimm_I2C + 0x0001)
+                            829 ;	C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c:266: for (i=0;i<5000;++i);
+   0238 80 CA               830 	sjmp	00114$
+   023A                     831 00127$:
+   023A 7E 88               832 	mov	r6,#0x88
+   023C 7F 13               833 	mov	r7,#0x13
+   023E                     834 00118$:
+   023E 1E                  835 	dec	r6
+   023F BE FF 01            836 	cjne	r6,#0xFF,00147$
+   0242 1F                  837 	dec	r7
+   0243                     838 00147$:
+   0243 EE                  839 	mov	a,r6
+   0244 4F                  840 	orl	a,r7
+   0245 70 F7               841 	jnz	00118$
+   0247 80 BB               842 	sjmp	00114$
+                            843 	.area CSEG    (CODE)
+                            844 	.area CONST   (CODE)
+                            845 	.area XINIT   (CODE)
+                            846 	.area CABS    (ABS,CODE)

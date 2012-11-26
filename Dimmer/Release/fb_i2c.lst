@@ -1,0 +1,596 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 2.8.0 #5117 (Mar 23 2008) (MINGW32)
+                              4 ; This file was generated Sun Aug 14 13:44:18 2011
+                              5 ;--------------------------------------------------------
+                              6 	.module fb_i2c
+                              7 	.optsdcc -mmcs51 --model-small
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _P3_1
+                             13 	.globl _P3_0
+                             14 	.globl _P1_7
+                             15 	.globl _P1_6
+                             16 	.globl _P1_5
+                             17 	.globl _P1_4
+                             18 	.globl _P1_3
+                             19 	.globl _P1_2
+                             20 	.globl _P1_1
+                             21 	.globl _P1_0
+                             22 	.globl _P0_7
+                             23 	.globl _P0_6
+                             24 	.globl _P0_5
+                             25 	.globl _P0_4
+                             26 	.globl _P0_3
+                             27 	.globl _P0_2
+                             28 	.globl _P0_1
+                             29 	.globl _P0_0
+                             30 	.globl _I2CON_0
+                             31 	.globl _I2CON_2
+                             32 	.globl _I2CON_3
+                             33 	.globl _I2CON_4
+                             34 	.globl _I2CON_5
+                             35 	.globl _I2CON_6
+                             36 	.globl _SCON_7
+                             37 	.globl _SCON_6
+                             38 	.globl _SCON_5
+                             39 	.globl _SCON_4
+                             40 	.globl _SCON_3
+                             41 	.globl _SCON_2
+                             42 	.globl _SCON_1
+                             43 	.globl _SCON_0
+                             44 	.globl _IP0_0
+                             45 	.globl _IP0_1
+                             46 	.globl _IP0_2
+                             47 	.globl _IP0_3
+                             48 	.globl _IP0_4
+                             49 	.globl _IP0_5
+                             50 	.globl _IP0_6
+                             51 	.globl _IP1_0
+                             52 	.globl _IP1_1
+                             53 	.globl _IP1_2
+                             54 	.globl _IP1_6
+                             55 	.globl _IEN1_0
+                             56 	.globl _IEN1_1
+                             57 	.globl _IEN1_2
+                             58 	.globl _IEN0_0
+                             59 	.globl _IEN0_1
+                             60 	.globl _IEN0_2
+                             61 	.globl _IEN0_3
+                             62 	.globl _IEN0_4
+                             63 	.globl _IEN0_5
+                             64 	.globl _IEN0_6
+                             65 	.globl _IEN0_7
+                             66 	.globl _TCON_0
+                             67 	.globl _TCON_1
+                             68 	.globl _TCON_2
+                             69 	.globl _TCON_3
+                             70 	.globl _TCON_4
+                             71 	.globl _TCON_5
+                             72 	.globl _TCON_6
+                             73 	.globl _TCON_7
+                             74 	.globl _PSW_7
+                             75 	.globl _PSW_6
+                             76 	.globl _PSW_5
+                             77 	.globl _PSW_4
+                             78 	.globl _PSW_3
+                             79 	.globl _PSW_2
+                             80 	.globl _PSW_1
+                             81 	.globl _PSW_0
+                             82 	.globl _IEN1
+                             83 	.globl _IP0H
+                             84 	.globl _WFEED2
+                             85 	.globl _WFEED1
+                             86 	.globl _WDL
+                             87 	.globl _WDCON
+                             88 	.globl _TRIM
+                             89 	.globl _TAMOD
+                             90 	.globl _SSTAT
+                             91 	.globl _RTCL
+                             92 	.globl _RTCH
+                             93 	.globl _RTCCON
+                             94 	.globl _RSTSRC
+                             95 	.globl _PT0AD
+                             96 	.globl _PCONA
+                             97 	.globl _P3M2
+                             98 	.globl _P3M1
+                             99 	.globl _P1M2
+                            100 	.globl _P1M1
+                            101 	.globl _P0M2
+                            102 	.globl _P0M1
+                            103 	.globl _KBPATN
+                            104 	.globl _KBMASK
+                            105 	.globl _KBCON
+                            106 	.globl _IP1H
+                            107 	.globl _IP1
+                            108 	.globl _I2STAT
+                            109 	.globl _I2SCLL
+                            110 	.globl _I2SCLH
+                            111 	.globl _I2DAT
+                            112 	.globl _I2CON
+                            113 	.globl _I2ADR
+                            114 	.globl _FMDATA
+                            115 	.globl _FMCON
+                            116 	.globl _FMADRL
+                            117 	.globl _FMADRH
+                            118 	.globl _DIVM
+                            119 	.globl _CMP2
+                            120 	.globl _CMP1
+                            121 	.globl _BRGCON
+                            122 	.globl _BRGR1
+                            123 	.globl _BRGR0
+                            124 	.globl _SADEN
+                            125 	.globl _SADDR
+                            126 	.globl _AUXR1
+                            127 	.globl _SBUF
+                            128 	.globl _SCON
+                            129 	.globl _IP0
+                            130 	.globl _IEN0
+                            131 	.globl _TH1
+                            132 	.globl _TH0
+                            133 	.globl _TL1
+                            134 	.globl _TL0
+                            135 	.globl _TMOD
+                            136 	.globl _TCON
+                            137 	.globl _PCON
+                            138 	.globl _DPH
+                            139 	.globl _DPL
+                            140 	.globl _SP
+                            141 	.globl _B
+                            142 	.globl _ACC
+                            143 	.globl _PSW
+                            144 	.globl _P3
+                            145 	.globl _P1
+                            146 	.globl _P0
+                            147 	.globl _i2c_sla_init
+                            148 	.globl _i2c_ma_init
+                            149 	.globl _i2c_wait
+                            150 	.globl _i2c_send_daten
+                            151 ;--------------------------------------------------------
+                            152 ; special function registers
+                            153 ;--------------------------------------------------------
+                            154 	.area RSEG    (DATA)
+                    0080    155 _P0	=	0x0080
+                    0090    156 _P1	=	0x0090
+                    00B0    157 _P3	=	0x00b0
+                    00D0    158 _PSW	=	0x00d0
+                    00E0    159 _ACC	=	0x00e0
+                    00F0    160 _B	=	0x00f0
+                    0081    161 _SP	=	0x0081
+                    0082    162 _DPL	=	0x0082
+                    0083    163 _DPH	=	0x0083
+                    0087    164 _PCON	=	0x0087
+                    0088    165 _TCON	=	0x0088
+                    0089    166 _TMOD	=	0x0089
+                    008A    167 _TL0	=	0x008a
+                    008B    168 _TL1	=	0x008b
+                    008C    169 _TH0	=	0x008c
+                    008D    170 _TH1	=	0x008d
+                    00A8    171 _IEN0	=	0x00a8
+                    00B8    172 _IP0	=	0x00b8
+                    0098    173 _SCON	=	0x0098
+                    0099    174 _SBUF	=	0x0099
+                    00A2    175 _AUXR1	=	0x00a2
+                    00A9    176 _SADDR	=	0x00a9
+                    00B9    177 _SADEN	=	0x00b9
+                    00BE    178 _BRGR0	=	0x00be
+                    00BF    179 _BRGR1	=	0x00bf
+                    00BD    180 _BRGCON	=	0x00bd
+                    00AC    181 _CMP1	=	0x00ac
+                    00AD    182 _CMP2	=	0x00ad
+                    0095    183 _DIVM	=	0x0095
+                    00E7    184 _FMADRH	=	0x00e7
+                    00E6    185 _FMADRL	=	0x00e6
+                    00E4    186 _FMCON	=	0x00e4
+                    00E5    187 _FMDATA	=	0x00e5
+                    00DB    188 _I2ADR	=	0x00db
+                    00D8    189 _I2CON	=	0x00d8
+                    00DA    190 _I2DAT	=	0x00da
+                    00DD    191 _I2SCLH	=	0x00dd
+                    00DC    192 _I2SCLL	=	0x00dc
+                    00D9    193 _I2STAT	=	0x00d9
+                    00F8    194 _IP1	=	0x00f8
+                    00F7    195 _IP1H	=	0x00f7
+                    0094    196 _KBCON	=	0x0094
+                    0086    197 _KBMASK	=	0x0086
+                    0093    198 _KBPATN	=	0x0093
+                    0084    199 _P0M1	=	0x0084
+                    0085    200 _P0M2	=	0x0085
+                    0091    201 _P1M1	=	0x0091
+                    0092    202 _P1M2	=	0x0092
+                    00B1    203 _P3M1	=	0x00b1
+                    00B2    204 _P3M2	=	0x00b2
+                    00B5    205 _PCONA	=	0x00b5
+                    00F6    206 _PT0AD	=	0x00f6
+                    00DF    207 _RSTSRC	=	0x00df
+                    00D1    208 _RTCCON	=	0x00d1
+                    00D2    209 _RTCH	=	0x00d2
+                    00D3    210 _RTCL	=	0x00d3
+                    00BA    211 _SSTAT	=	0x00ba
+                    008F    212 _TAMOD	=	0x008f
+                    0096    213 _TRIM	=	0x0096
+                    00A7    214 _WDCON	=	0x00a7
+                    00C1    215 _WDL	=	0x00c1
+                    00C2    216 _WFEED1	=	0x00c2
+                    00C3    217 _WFEED2	=	0x00c3
+                    00B7    218 _IP0H	=	0x00b7
+                    00E8    219 _IEN1	=	0x00e8
+                            220 ;--------------------------------------------------------
+                            221 ; special function bits
+                            222 ;--------------------------------------------------------
+                            223 	.area RSEG    (DATA)
+                    00D0    224 _PSW_0	=	0x00d0
+                    00D1    225 _PSW_1	=	0x00d1
+                    00D2    226 _PSW_2	=	0x00d2
+                    00D3    227 _PSW_3	=	0x00d3
+                    00D4    228 _PSW_4	=	0x00d4
+                    00D5    229 _PSW_5	=	0x00d5
+                    00D6    230 _PSW_6	=	0x00d6
+                    00D7    231 _PSW_7	=	0x00d7
+                    008F    232 _TCON_7	=	0x008f
+                    008E    233 _TCON_6	=	0x008e
+                    008D    234 _TCON_5	=	0x008d
+                    008C    235 _TCON_4	=	0x008c
+                    008B    236 _TCON_3	=	0x008b
+                    008A    237 _TCON_2	=	0x008a
+                    0089    238 _TCON_1	=	0x0089
+                    0088    239 _TCON_0	=	0x0088
+                    00AF    240 _IEN0_7	=	0x00af
+                    00AE    241 _IEN0_6	=	0x00ae
+                    00AD    242 _IEN0_5	=	0x00ad
+                    00AC    243 _IEN0_4	=	0x00ac
+                    00AB    244 _IEN0_3	=	0x00ab
+                    00AA    245 _IEN0_2	=	0x00aa
+                    00A9    246 _IEN0_1	=	0x00a9
+                    00A8    247 _IEN0_0	=	0x00a8
+                    00EA    248 _IEN1_2	=	0x00ea
+                    00E9    249 _IEN1_1	=	0x00e9
+                    00E8    250 _IEN1_0	=	0x00e8
+                    00FE    251 _IP1_6	=	0x00fe
+                    00FA    252 _IP1_2	=	0x00fa
+                    00F9    253 _IP1_1	=	0x00f9
+                    00F8    254 _IP1_0	=	0x00f8
+                    00BE    255 _IP0_6	=	0x00be
+                    00BD    256 _IP0_5	=	0x00bd
+                    00BC    257 _IP0_4	=	0x00bc
+                    00BB    258 _IP0_3	=	0x00bb
+                    00BA    259 _IP0_2	=	0x00ba
+                    00B9    260 _IP0_1	=	0x00b9
+                    00B8    261 _IP0_0	=	0x00b8
+                    0098    262 _SCON_0	=	0x0098
+                    0099    263 _SCON_1	=	0x0099
+                    009A    264 _SCON_2	=	0x009a
+                    009B    265 _SCON_3	=	0x009b
+                    009C    266 _SCON_4	=	0x009c
+                    009D    267 _SCON_5	=	0x009d
+                    009E    268 _SCON_6	=	0x009e
+                    009F    269 _SCON_7	=	0x009f
+                    00DE    270 _I2CON_6	=	0x00de
+                    00DD    271 _I2CON_5	=	0x00dd
+                    00DC    272 _I2CON_4	=	0x00dc
+                    00DB    273 _I2CON_3	=	0x00db
+                    00DA    274 _I2CON_2	=	0x00da
+                    00D8    275 _I2CON_0	=	0x00d8
+                    0080    276 _P0_0	=	0x0080
+                    0081    277 _P0_1	=	0x0081
+                    0082    278 _P0_2	=	0x0082
+                    0083    279 _P0_3	=	0x0083
+                    0084    280 _P0_4	=	0x0084
+                    0085    281 _P0_5	=	0x0085
+                    0086    282 _P0_6	=	0x0086
+                    0087    283 _P0_7	=	0x0087
+                    0090    284 _P1_0	=	0x0090
+                    0091    285 _P1_1	=	0x0091
+                    0092    286 _P1_2	=	0x0092
+                    0093    287 _P1_3	=	0x0093
+                    0094    288 _P1_4	=	0x0094
+                    0095    289 _P1_5	=	0x0095
+                    0096    290 _P1_6	=	0x0096
+                    0097    291 _P1_7	=	0x0097
+                    00B0    292 _P3_0	=	0x00b0
+                    00B1    293 _P3_1	=	0x00b1
+                            294 ;--------------------------------------------------------
+                            295 ; overlayable register banks
+                            296 ;--------------------------------------------------------
+                            297 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                     298 	.ds 8
+                            299 ;--------------------------------------------------------
+                            300 ; internal ram data
+                            301 ;--------------------------------------------------------
+                            302 	.area DSEG    (DATA)
+                            303 ;--------------------------------------------------------
+                            304 ; overlayable items in internal ram 
+                            305 ;--------------------------------------------------------
+                            306 	.area OSEG    (OVR,DATA)
+                            307 ;--------------------------------------------------------
+                            308 ; indirectly addressable internal ram data
+                            309 ;--------------------------------------------------------
+                            310 	.area ISEG    (DATA)
+                            311 ;--------------------------------------------------------
+                            312 ; absolute internal ram data
+                            313 ;--------------------------------------------------------
+                            314 	.area IABS    (ABS,DATA)
+                            315 	.area IABS    (ABS,DATA)
+                            316 ;--------------------------------------------------------
+                            317 ; bit data
+                            318 ;--------------------------------------------------------
+                            319 	.area BSEG    (BIT)
+                            320 ;--------------------------------------------------------
+                            321 ; paged external ram data
+                            322 ;--------------------------------------------------------
+                            323 	.area PSEG    (PAG,XDATA)
+                            324 ;--------------------------------------------------------
+                            325 ; external ram data
+                            326 ;--------------------------------------------------------
+                            327 	.area XSEG    (XDATA)
+                            328 ;--------------------------------------------------------
+                            329 ; absolute external ram data
+                            330 ;--------------------------------------------------------
+                            331 	.area XABS    (ABS,XDATA)
+                            332 ;--------------------------------------------------------
+                            333 ; external initialized ram data
+                            334 ;--------------------------------------------------------
+                            335 	.area XISEG   (XDATA)
+                            336 	.area HOME    (CODE)
+                            337 	.area GSINIT0 (CODE)
+                            338 	.area GSINIT1 (CODE)
+                            339 	.area GSINIT2 (CODE)
+                            340 	.area GSINIT3 (CODE)
+                            341 	.area GSINIT4 (CODE)
+                            342 	.area GSINIT5 (CODE)
+                            343 	.area GSINIT  (CODE)
+                            344 	.area GSFINAL (CODE)
+                            345 	.area CSEG    (CODE)
+                            346 ;--------------------------------------------------------
+                            347 ; global & static initialisations
+                            348 ;--------------------------------------------------------
+                            349 	.area HOME    (CODE)
+                            350 	.area GSINIT  (CODE)
+                            351 	.area GSFINAL (CODE)
+                            352 	.area GSINIT  (CODE)
+                            353 ;--------------------------------------------------------
+                            354 ; Home
+                            355 ;--------------------------------------------------------
+                            356 	.area HOME    (CODE)
+                            357 	.area HOME    (CODE)
+                            358 ;--------------------------------------------------------
+                            359 ; code
+                            360 ;--------------------------------------------------------
+                            361 	.area CSEG    (CODE)
+                            362 ;------------------------------------------------------------
+                            363 ;Allocation info for local variables in function 'i2c_sla_init'
+                            364 ;------------------------------------------------------------
+                            365 ;------------------------------------------------------------
+                            366 ;	../fb_i2c.c:13: void i2c_sla_init(void)
+                            367 ;	-----------------------------------------
+                            368 ;	 function i2c_sla_init
+                            369 ;	-----------------------------------------
+   0000                     370 _i2c_sla_init:
+                    0002    371 	ar2 = 0x02
+                    0003    372 	ar3 = 0x03
+                    0004    373 	ar4 = 0x04
+                    0005    374 	ar5 = 0x05
+                    0006    375 	ar6 = 0x06
+                    0007    376 	ar7 = 0x07
+                    0000    377 	ar0 = 0x00
+                    0001    378 	ar1 = 0x01
+                            379 ;	../fb_i2c.c:15: P1M1 |= 0x0c;//(1<<2)+(1<<3);
+   0000 43 91 0C            380 	orl	_P1M1,#0x0C
+                            381 ;	../fb_i2c.c:16: P1M2 &= ~0x0c;
+   0003 53 92 F3            382 	anl	_P1M2,#0xF3
+                            383 ;	../fb_i2c.c:17: I2ADR = 0xa0; // default slave address
+   0006 75 DB A0            384 	mov	_I2ADR,#0xA0
+                            385 ;	../fb_i2c.c:18: I2CON = 0x44;
+   0009 75 D8 44            386 	mov	_I2CON,#0x44
+                            387 ;	../fb_i2c.c:19: I2SCLH=0; //I2C takt
+   000C 75 DD 00            388 	mov	_I2SCLH,#0x00
+                            389 ;	../fb_i2c.c:20: I2SCLL=0; //I2C takt
+   000F 75 DC 00            390 	mov	_I2SCLL,#0x00
+                            391 ;	../fb_i2c.c:21: SDA=1;
+   0012 D2 93               392 	setb	_P1_3
+                            393 ;	../fb_i2c.c:22: SCL=1;
+   0014 D2 92               394 	setb	_P1_2
+                            395 ;	../fb_i2c.c:23: EI2C=1;
+   0016 D2 E8               396 	setb	_IEN1_0
+                            397 ;	../fb_i2c.c:24: EA=1;
+   0018 D2 AF               398 	setb	_IEN0_7
+                            399 ;	../fb_i2c.c:25: return;
+   001A 22                  400 	ret
+                            401 ;------------------------------------------------------------
+                            402 ;Allocation info for local variables in function 'i2c_ma_init'
+                            403 ;------------------------------------------------------------
+                            404 ;------------------------------------------------------------
+                            405 ;	../fb_i2c.c:28: void i2c_ma_init(void)
+                            406 ;	-----------------------------------------
+                            407 ;	 function i2c_ma_init
+                            408 ;	-----------------------------------------
+   001B                     409 _i2c_ma_init:
+                            410 ;	../fb_i2c.c:30: P1M1 |= 0x0c;//(1<<2)+(1<<3);
+   001B 43 91 0C            411 	orl	_P1M1,#0x0C
+                            412 ;	../fb_i2c.c:31: P1M2 |= 0x0c;//((1<<2)+(1<<3));
+   001E 43 92 0C            413 	orl	_P1M2,#0x0C
+                            414 ;	../fb_i2c.c:32: I2ADR = 0xa0; // default slave address
+   0021 75 DB A0            415 	mov	_I2ADR,#0xA0
+                            416 ;	../fb_i2c.c:33: I2CON = 0x44;
+   0024 75 D8 44            417 	mov	_I2CON,#0x44
+                            418 ;	../fb_i2c.c:34: I2SCLH=17; //I2C takt
+   0027 75 DD 11            419 	mov	_I2SCLH,#0x11
+                            420 ;	../fb_i2c.c:35: I2SCLL=17; //I2C takt
+   002A 75 DC 11            421 	mov	_I2SCLL,#0x11
+                            422 ;	../fb_i2c.c:36: SDA=1;
+   002D D2 93               423 	setb	_P1_3
+                            424 ;	../fb_i2c.c:37: SCL=1;
+   002F D2 92               425 	setb	_P1_2
+                            426 ;	../fb_i2c.c:38: return;
+   0031 22                  427 	ret
+                            428 ;------------------------------------------------------------
+                            429 ;Allocation info for local variables in function 'i2c_wait'
+                            430 ;------------------------------------------------------------
+                            431 ;timeueberlauf             Allocated to registers r2 r3 
+                            432 ;------------------------------------------------------------
+                            433 ;	../fb_i2c.c:40: unsigned char i2c_wait(void)
+                            434 ;	-----------------------------------------
+                            435 ;	 function i2c_wait
+                            436 ;	-----------------------------------------
+   0032                     437 _i2c_wait:
+                            438 ;	../fb_i2c.c:44: while (SI==0)
+   0032 7A 00               439 	mov	r2,#0x00
+   0034 7B 00               440 	mov	r3,#0x00
+   0036                     441 00103$:
+   0036 20 DB 14            442 	jb	_I2CON_3,00105$
+                            443 ;	../fb_i2c.c:47: timeueberlauf++;
+   0039 0A                  444 	inc	r2
+   003A BA 00 01            445 	cjne	r2,#0x00,00112$
+   003D 0B                  446 	inc	r3
+   003E                     447 00112$:
+                            448 ;	../fb_i2c.c:48: if(timeueberlauf>MAX_I2C_ZEIT)
+   003E C3                  449 	clr	c
+   003F 74 B8               450 	mov	a,#0xB8
+   0041 9A                  451 	subb	a,r2
+   0042 74 0B               452 	mov	a,#0x0B
+   0044 9B                  453 	subb	a,r3
+   0045 50 EF               454 	jnc	00103$
+                            455 ;	../fb_i2c.c:51: SI=0;
+   0047 C2 DB               456 	clr	_I2CON_3
+                            457 ;	../fb_i2c.c:52: return 0xFF;
+   0049 75 82 FF            458 	mov	dpl,#0xFF
+   004C 22                  459 	ret
+   004D                     460 00105$:
+                            461 ;	../fb_i2c.c:57: SI=0;
+   004D C2 DB               462 	clr	_I2CON_3
+                            463 ;	../fb_i2c.c:58: return 0;
+   004F 75 82 00            464 	mov	dpl,#0x00
+   0052 22                  465 	ret
+                            466 ;------------------------------------------------------------
+                            467 ;Allocation info for local variables in function 'i2c_send_daten'
+                            468 ;------------------------------------------------------------
+                            469 ;K2                        Allocated to stack - offset -3
+                            470 ;K1                        Allocated to registers r2 
+                            471 ;m1                        Allocated to registers r3 
+                            472 ;m2                        Allocated to registers r4 
+                            473 ;------------------------------------------------------------
+                            474 ;	../fb_i2c.c:62: unsigned char i2c_send_daten(unsigned char K1,unsigned char K2)
+                            475 ;	-----------------------------------------
+                            476 ;	 function i2c_send_daten
+                            477 ;	-----------------------------------------
+   0053                     478 _i2c_send_daten:
+   0053 C0*00               479 	push	_bp
+   0055 85 81*00            480 	mov	_bp,sp
+   0058 AA 82               481 	mov	r2,dpl
+                            482 ;	../fb_i2c.c:64: unsigned char m1=P0M1;      //wert sichern
+   005A AB 84               483 	mov	r3,_P0M1
+                            484 ;	../fb_i2c.c:65: unsigned char m2=P0M2;      //wert sichern
+   005C AC 85               485 	mov	r4,_P0M2
+                            486 ;	../fb_i2c.c:66: P0M1=0xFF;  //eingänge umschalten wegen Tastererweiterung
+   005E 75 84 FF            487 	mov	_P0M1,#0xFF
+                            488 ;	../fb_i2c.c:67: P0M2=0x00;  //eingänge umschalten wegen Tastererweiterung
+   0061 75 85 00            489 	mov	_P0M2,#0x00
+                            490 ;	../fb_i2c.c:68: I2SCLH=17;
+   0064 75 DD 11            491 	mov	_I2SCLH,#0x11
+                            492 ;	../fb_i2c.c:69: I2SCLL=17;
+   0067 75 DC 11            493 	mov	_I2SCLL,#0x11
+                            494 ;	../fb_i2c.c:70: I2CON=0;
+   006A 75 D8 00            495 	mov	_I2CON,#0x00
+                            496 ;	../fb_i2c.c:71: I2EN=1;         //Master Transmit mode
+   006D D2 DE               497 	setb	_I2CON_6
+                            498 ;	../fb_i2c.c:72: CRSEL=0;        //CRSEL=0
+   006F C2 D8               499 	clr	_I2CON_0
+                            500 ;	../fb_i2c.c:73: STA=1;           //send Start MASTER
+   0071 D2 DD               501 	setb	_I2CON_5
+                            502 ;	../fb_i2c.c:74: if(i2c_wait()!=0)
+   0073 C0 02               503 	push	ar2
+   0075 C0 03               504 	push	ar3
+   0077 C0 04               505 	push	ar4
+   0079 12s00r32            506 	lcall	_i2c_wait
+   007C E5 82               507 	mov	a,dpl
+   007E D0 04               508 	pop	ar4
+   0080 D0 03               509 	pop	ar3
+   0082 D0 02               510 	pop	ar2
+   0084 60 05               511 	jz	00102$
+                            512 ;	../fb_i2c.c:75: return 0xff;
+   0086 75 82 FF            513 	mov	dpl,#0xFF
+   0089 80 72               514 	sjmp	00111$
+   008B                     515 00102$:
+                            516 ;	../fb_i2c.c:76: STA=0;
+   008B C2 DD               517 	clr	_I2CON_5
+                            518 ;	../fb_i2c.c:77: I2DAT = 0xa0+0;//a0= adresse i2c eeprom 0=schreiben SLA_W;       //Adresse senden MASTER
+   008D 75 DA A0            519 	mov	_I2DAT,#0xA0
+                            520 ;	../fb_i2c.c:78: if(i2c_wait()!=0)
+   0090 C0 02               521 	push	ar2
+   0092 C0 03               522 	push	ar3
+   0094 C0 04               523 	push	ar4
+   0096 12s00r32            524 	lcall	_i2c_wait
+   0099 E5 82               525 	mov	a,dpl
+   009B D0 04               526 	pop	ar4
+   009D D0 03               527 	pop	ar3
+   009F D0 02               528 	pop	ar2
+   00A1 60 05               529 	jz	00104$
+                            530 ;	../fb_i2c.c:79: return 0xff;
+   00A3 75 82 FF            531 	mov	dpl,#0xFF
+   00A6 80 55               532 	sjmp	00111$
+   00A8                     533 00104$:
+                            534 ;	../fb_i2c.c:80: I2DAT = 0x00;                           //Daten Senden MASTER
+   00A8 75 DA 00            535 	mov	_I2DAT,#0x00
+                            536 ;	../fb_i2c.c:81: if(i2c_wait()!=0)
+   00AB C0 02               537 	push	ar2
+   00AD C0 03               538 	push	ar3
+   00AF C0 04               539 	push	ar4
+   00B1 12s00r32            540 	lcall	_i2c_wait
+   00B4 E5 82               541 	mov	a,dpl
+   00B6 D0 04               542 	pop	ar4
+   00B8 D0 03               543 	pop	ar3
+   00BA D0 02               544 	pop	ar2
+   00BC 60 05               545 	jz	00106$
+                            546 ;	../fb_i2c.c:82: return 0xff;
+   00BE 75 82 FF            547 	mov	dpl,#0xFF
+   00C1 80 3A               548 	sjmp	00111$
+   00C3                     549 00106$:
+                            550 ;	../fb_i2c.c:83: I2DAT = K1;                             //Daten Senden MASTER
+   00C3 8A DA               551 	mov	_I2DAT,r2
+                            552 ;	../fb_i2c.c:84: if(i2c_wait()!=0)
+   00C5 C0 03               553 	push	ar3
+   00C7 C0 04               554 	push	ar4
+   00C9 12s00r32            555 	lcall	_i2c_wait
+   00CC E5 82               556 	mov	a,dpl
+   00CE D0 04               557 	pop	ar4
+   00D0 D0 03               558 	pop	ar3
+   00D2 60 05               559 	jz	00108$
+                            560 ;	../fb_i2c.c:85: return 0xff;
+   00D4 75 82 FF            561 	mov	dpl,#0xFF
+   00D7 80 24               562 	sjmp	00111$
+   00D9                     563 00108$:
+                            564 ;	../fb_i2c.c:86: I2DAT = K2;                             //Daten Senden MASTER
+   00D9 A8*00               565 	mov	r0,_bp
+   00DB 18                  566 	dec	r0
+   00DC 18                  567 	dec	r0
+   00DD 18                  568 	dec	r0
+   00DE 86 DA               569 	mov	_I2DAT,@r0
+                            570 ;	../fb_i2c.c:88: if(i2c_wait()!=0)
+   00E0 C0 03               571 	push	ar3
+   00E2 C0 04               572 	push	ar4
+   00E4 12s00r32            573 	lcall	_i2c_wait
+   00E7 E5 82               574 	mov	a,dpl
+   00E9 D0 04               575 	pop	ar4
+   00EB D0 03               576 	pop	ar3
+   00ED 60 05               577 	jz	00110$
+                            578 ;	../fb_i2c.c:89: return 0xff;
+   00EF 75 82 FF            579 	mov	dpl,#0xFF
+   00F2 80 09               580 	sjmp	00111$
+   00F4                     581 00110$:
+                            582 ;	../fb_i2c.c:90: STO=1;            //send Stop MASTER
+   00F4 D2 DC               583 	setb	_I2CON_4
+                            584 ;	../fb_i2c.c:91: P0M1=m1;  //eingänge umschalten wegen Tastererweiterung
+   00F6 8B 84               585 	mov	_P0M1,r3
+                            586 ;	../fb_i2c.c:92: P0M2=m2;  //eingänge umschalten wegen Tastererweiterung
+   00F8 8C 85               587 	mov	_P0M2,r4
+                            588 ;	../fb_i2c.c:93: return 0;
+   00FA 75 82 00            589 	mov	dpl,#0x00
+   00FD                     590 00111$:
+   00FD D0*00               591 	pop	_bp
+   00FF 22                  592 	ret
+                            593 	.area CSEG    (CODE)
+                            594 	.area CONST   (CODE)
+                            595 	.area XINIT   (CODE)
+                            596 	.area CABS    (ABS,CODE)
