@@ -1,4 +1,4 @@
-ASxxxx Linker V03.00 + NoICE + sdld,  page 1.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 1.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -7,57 +7,57 @@ CABS                                00000000    00000000 =           0. bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-C:   FFFFFF00  s_BSEG                          
-C:   00000000  l_BIT_BANK                      
-C:   00000000  l_BSEG                          
-C:   00000000  l_BSEG_BYTES                    
-C:   00000000  l_CABS                          
-C:   00000000  l_CONST                         
-C:   00000000  l_GSINIT1                       
-C:   00000000  l_GSINIT5                       
-C:   00000000  l_IABS                          
-C:   00000000  l_ISEG                          
-C:   00000000  l_OSEG                          
-C:   00000000  l_PSEG                          
-C:   00000000  l_REG_BANK_1                    
-C:   00000000  l_REG_BANK_2                    
-C:   00000000  l_REG_BANK_3                    
-C:   00000000  l_RSEG                          
-C:   00000000  l_RSEG0                         
-C:   00000000  l_RSEG1                         
-C:   00000000  l_XABS                          
-C:   00000000  l_XINIT                         
-C:   00000000  l_XISEG                         
-C:   00000000  l_XSEG                          
-C:   00000000  l__CODE                         
-C:   00000000  s_BSEG_BYTES                    
-C:   00000000  s_CABS                          
-C:   00000000  s_DSEG                          
-C:   00000000  s_HOME                          
-C:   00000000  s_IABS                          
-C:   00000000  s_ISEG                          
-C:   00000000  s_PSEG                          
-C:   00000000  s_REG_BANK_0                    
-C:   00000000  s_RSEG                          
-C:   00000000  s_RSEG0                         
-C:   00000000  s_RSEG1                         
-C:   00000000  s_XABS                          
-C:   00000000  s_XISEG                         
-C:   00000000  s_XSEG                          
-C:   00000003  l_GSFINAL                       
-C:   00000003  l_GSINIT0                       
-C:   00000008  l_REG_BANK_0                    
-C:   00000008  s_REG_BANK_1                    
-C:   0000000A  l_GSINIT2                       
-C:   00000010  s_REG_BANK_2                    
-C:   00000015  l_GSINIT                        
-C:   00000018  s_BIT_BANK                      
-C:   00000018  s_OSEG                          
-C:   00000018  s_REG_BANK_3                    
-C:   00000018  s_SSEG                          
-C:   00000020  s__CODE                         
-C:   00000022  l_GSINIT3                       
-ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
+     0C:   00000000  l_BIT_BANK                      
+     0C:   00000000  l_CABS                          
+     0C:   00000000  l_CONST                         
+     0C:   00000000  l_GSINIT1                       
+     0C:   00000000  l_GSINIT5                       
+     0C:   00000000  l_IABS                          
+     0C:   00000000  l_ISEG                          
+     0C:   00000000  l_OSEG                          
+     0C:   00000000  l_PSEG                          
+     0C:   00000000  l_REG_BANK_1                    
+     0C:   00000000  l_REG_BANK_2                    
+     0C:   00000000  l_REG_BANK_3                    
+     0C:   00000000  l_RSEG                          
+     0C:   00000000  l_RSEG0                         
+     0C:   00000000  l_RSEG1                         
+     0C:   00000000  l_XABS                          
+     0C:   00000000  l_XINIT                         
+     0C:   00000000  l_XISEG                         
+     0C:   00000000  l_XSEG                          
+     0C:   00000000  l__CODE                         
+     0C:   00000000  s_BSEG                          
+     0C:   00000000  s_CABS                          
+     0C:   00000000  s_DSEG                          
+     0C:   00000000  s_HOME                          
+     0C:   00000000  s_IABS                          
+     0C:   00000000  s_ISEG                          
+     0C:   00000000  s_PSEG                          
+     0C:   00000000  s_REG_BANK_0                    
+     0C:   00000000  s_RSEG                          
+     0C:   00000000  s_RSEG0                         
+     0C:   00000000  s_RSEG1                         
+     0C:   00000000  s_XABS                          
+     0C:   00000000  s_XISEG                         
+     0C:   00000000  s_XSEG                          
+     0C:   00000001  l_BSEG                          
+     0C:   00000001  l_BSEG_BYTES                    
+     0C:   00000003  l_GSFINAL                       
+     0C:   00000003  l_GSINIT0                       
+     0C:   00000008  l_REG_BANK_0                    
+     0C:   00000008  s_REG_BANK_1                    
+     0C:   0000000A  l_GSINIT2                       
+     0C:   00000010  s_REG_BANK_2                    
+     0C:   00000017  l_GSINIT                        
+     0C:   00000018  s_BIT_BANK                      
+     0C:   00000018  s_OSEG                          
+     0C:   00000018  s_REG_BANK_3                    
+     0C:   00000020  s_BSEG_BYTES                    
+     0C:   00000020  s__CODE                         
+     0C:   00000021  s_SSEG                          
+     0C:   00000022  l_GSINIT3                       
+ASxxxx Linker V02.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -66,190 +66,363 @@ CABS                                00000000    00000000 =           0. bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-C:   0000002A  l_GSINIT4                       
-C:   0000003B  l_HOME                          
-C:   0000003B  s_GSINIT0                       
-C:   0000003E  s_GSINIT1                       
-C:   0000003E  s_GSINIT2                       
-C:   00000048  s_GSINIT3                       
-C:   0000006A  s_GSINIT4                       
-C:   00000080  l_DSEG                          
-C:   00000094  s_GSINIT                        
-C:   00000094  s_GSINIT5                       
-C:   000000A9  s_GSFINAL                       
-C:   000000AC  s_CSEG                          
-C:   000000E8  l_SSEG                          
-C:   00000100  l_IRAM                          
-C:   000002A5  l_CSEG                          
-C:   00000351  s_CONST                         
-C:   00000351  s_XINIT                         
+     0C:   0000002A  l_GSINIT4                       
+     0C:   0000003B  l_HOME                          
+     0C:   0000003B  s_GSINIT0                       
+     0C:   0000003E  s_GSINIT1                       
+     0C:   0000003E  s_GSINIT2                       
+     0C:   00000048  s_GSINIT3                       
+     0C:   0000006A  s_GSINIT4                       
+     0C:   00000079  l_DSEG                          
+     0C:   00000094  s_GSINIT                        
+     0C:   00000094  s_GSINIT5                       
+     0C:   000000AB  s_GSFINAL                       
+     0C:   000000AE  s_CSEG                          
+     0C:   000000DF  l_SSEG                          
+     0C:   00000100  l_IRAM                          
+     0C:   000002AE  l_CSEG                          
+     0C:   0000035C  s_CONST                         
+     0C:   0000035C  s_XINIT                         
 
-ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 3.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+.	.ABS.                             00000000    00000000 =           0. bytes (ABS,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00000000  .__.ABS.                           _startup
-     00000080  _P0                                fb_i2c
-     00000080  _P0_0                              fb_i2c
-     00000081  _P0_1                              fb_i2c
-     00000081  _SP                                fb_i2c
-     00000082  _DPL                               fb_i2c
-     00000082  _P0_2                              fb_i2c
-     00000083  _DPH                               fb_i2c
-     00000083  _P0_3                              fb_i2c
-     00000084  _P0M1                              fb_i2c
-     00000084  _P0_4                              fb_i2c
-     00000085  _P0M2                              fb_i2c
-     00000085  _P0_5                              fb_i2c
-     00000086  _KBMASK                            fb_i2c
-     00000086  _P0_6                              fb_i2c
-     00000087  _P0_7                              fb_i2c
-     00000087  _PCON                              fb_i2c
-     00000088  _TCON                              fb_i2c
-     00000088  _TCON_0                            fb_i2c
-     00000089  _TCON_1                            fb_i2c
-     00000089  _TMOD                              fb_i2c
-     0000008A  _TCON_2                            fb_i2c
-     0000008A  _TL0                               fb_i2c
-     0000008B  _TCON_3                            fb_i2c
-     0000008B  _TL1                               fb_i2c
-     0000008C  _TCON_4                            fb_i2c
-     0000008C  _TH0                               fb_i2c
-     0000008D  _TCON_5                            fb_i2c
-     0000008D  _TH1                               fb_i2c
-     0000008E  _TCON_6                            fb_i2c
-     0000008F  _TAMOD                             fb_i2c
-     0000008F  _TCON_7                            fb_i2c
-     00000090  _P1                                fb_i2c
-     00000090  _P1_0                              fb_i2c
-     00000091  _P1M1                              fb_i2c
-     00000091  _P1_1                              fb_i2c
-     00000092  _P1M2                              fb_i2c
-     00000092  _P1_2                              fb_i2c
-     00000093  _KBPATN                            fb_i2c
-     00000093  _P1_3                              fb_i2c
-     00000094  _KBCON                             fb_i2c
-     00000094  _P1_4                              fb_i2c
-     00000095  _DIVM                              fb_i2c
-     00000095  _P1_5                              fb_i2c
-     00000096  _P1_6                              fb_i2c
-     00000096  _TRIM                              fb_i2c
-     00000097  _P1_7                              fb_i2c
-     00000098  _SCON                              fb_i2c
-     00000098  _SCON_0                            fb_i2c
-     00000099  _SBUF                              fb_i2c
-ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
+           00000000  .__.ABS.                           _startup
+           00000000  G$RAM$0$0                          dim2_sla
+           00000000  _RAM                               dim2_sla
+           00000080  G$P0$0$0                           dim2_sla
+           00000080  G$P0_0$0$0                         dim2_sla
+           00000080  _P0                                dim2_sla
+           00000080  _P0_0                              dim2_sla
+           00000081  G$P0_1$0$0                         dim2_sla
+           00000081  G$SP$0$0                           dim2_sla
+           00000081  _P0_1                              dim2_sla
+           00000081  _SP                                dim2_sla
+           00000082  G$DPL$0$0                          dim2_sla
+           00000082  G$P0_2$0$0                         dim2_sla
+           00000082  _DPL                               dim2_sla
+           00000082  _P0_2                              dim2_sla
+           00000083  G$DPH$0$0                          dim2_sla
+           00000083  G$P0_3$0$0                         dim2_sla
+           00000083  _DPH                               dim2_sla
+           00000083  _P0_3                              dim2_sla
+           00000084  G$P0M1$0$0                         dim2_sla
+           00000084  G$P0_4$0$0                         dim2_sla
+           00000084  _P0M1                              dim2_sla
+           00000084  _P0_4                              dim2_sla
+           00000085  G$P0M2$0$0                         dim2_sla
+           00000085  G$P0_5$0$0                         dim2_sla
+           00000085  _P0M2                              dim2_sla
+           00000085  _P0_5                              dim2_sla
+           00000086  G$KBMASK$0$0                       dim2_sla
+           00000086  G$P0_6$0$0                         dim2_sla
+           00000086  _KBMASK                            dim2_sla
+           00000086  _P0_6                              dim2_sla
+           00000087  G$P0_7$0$0                         dim2_sla
+           00000087  G$PCON$0$0                         dim2_sla
+           00000087  _P0_7                              dim2_sla
+           00000087  _PCON                              dim2_sla
+           00000088  G$TCON$0$0                         dim2_sla
+           00000088  G$TCON_0$0$0                       dim2_sla
+           00000088  _TCON                              dim2_sla
+           00000088  _TCON_0                            dim2_sla
+           00000089  G$TCON_1$0$0                       dim2_sla
+           00000089  G$TMOD$0$0                         dim2_sla
+           00000089  _TCON_1                            dim2_sla
+           00000089  _TMOD                              dim2_sla
+           0000008A  G$TCON_2$0$0                       dim2_sla
+           0000008A  G$TL0$0$0                          dim2_sla
+           0000008A  _TCON_2                            dim2_sla
+           0000008A  _TL0                               dim2_sla
+           0000008B  G$TCON_3$0$0                       dim2_sla
+           0000008B  G$TL1$0$0                          dim2_sla
+           0000008B  _TCON_3                            dim2_sla
+ASxxxx Linker V02.00 + NoICE + sdld,  page 4.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+.	.ABS.                             00000000    00000000 =           0. bytes (ABS,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00000099  _SCON_1                            fb_i2c
-     0000009A  _SCON_2                            fb_i2c
-     0000009B  _SCON_3                            fb_i2c
-     0000009C  _SCON_4                            fb_i2c
-     0000009D  _SCON_5                            fb_i2c
-     0000009E  _SCON_6                            fb_i2c
-     0000009F  _SCON_7                            fb_i2c
-     000000A0  __XPAGE                            
-     000000A2  _AUXR1                             fb_i2c
-     000000A7  _WDCON                             fb_i2c
-     000000A8  _IEN0                              fb_i2c
-     000000A8  _IEN0_0                            fb_i2c
-     000000A9  _IEN0_1                            fb_i2c
-     000000A9  _SADDR                             fb_i2c
-     000000AA  _IEN0_2                            fb_i2c
-     000000AB  _IEN0_3                            fb_i2c
-     000000AC  _CMP1                              fb_i2c
-     000000AC  _IEN0_4                            fb_i2c
-     000000AD  _CMP2                              fb_i2c
-     000000AD  _IEN0_5                            fb_i2c
-     000000AE  _IEN0_6                            fb_i2c
-     000000AF  _IEN0_7                            fb_i2c
-     000000B0  _P3                                fb_i2c
-     000000B0  _P3_0                              fb_i2c
-     000000B1  _P3M1                              fb_i2c
-     000000B1  _P3_1                              fb_i2c
-     000000B2  _P3M2                              fb_i2c
-     000000B5  _PCONA                             fb_i2c
-     000000B7  _IP0H                              fb_i2c
-     000000B8  _IP0                               fb_i2c
-     000000B8  _IP0_0                             fb_i2c
-     000000B9  _IP0_1                             fb_i2c
-     000000B9  _SADEN                             fb_i2c
-     000000BA  _IP0_2                             fb_i2c
-     000000BA  _SSTAT                             fb_i2c
-     000000BB  _IP0_3                             fb_i2c
-     000000BC  _IP0_4                             fb_i2c
-     000000BD  _BRGCON                            fb_i2c
-     000000BD  _IP0_5                             fb_i2c
-     000000BE  _BRGR0                             fb_i2c
-     000000BE  _IP0_6                             fb_i2c
-     000000BF  _BRGR1                             fb_i2c
-     000000C1  _WDL                               fb_i2c
-     000000C2  _WFEED1                            fb_i2c
-     000000C3  _WFEED2                            fb_i2c
-     000000D0  _PSW                               fb_i2c
-     000000D0  _PSW_0                             fb_i2c
-     000000D1  _PSW_1                             fb_i2c
-     000000D1  _RTCCON                            fb_i2c
-     000000D2  _PSW_2                             fb_i2c
-     000000D2  _RTCH                              fb_i2c
-ASxxxx Linker V03.00 + NoICE + sdld,  page 5.
+           0000008B  _TL1                               dim2_sla
+           0000008C  G$TCON_4$0$0                       dim2_sla
+           0000008C  G$TH0$0$0                          dim2_sla
+           0000008C  _TCON_4                            dim2_sla
+           0000008C  _TH0                               dim2_sla
+           0000008D  G$TCON_5$0$0                       dim2_sla
+           0000008D  G$TH1$0$0                          dim2_sla
+           0000008D  _TCON_5                            dim2_sla
+           0000008D  _TH1                               dim2_sla
+           0000008E  G$TCON_6$0$0                       dim2_sla
+           0000008E  _TCON_6                            dim2_sla
+           0000008F  G$TAMOD$0$0                        dim2_sla
+           0000008F  G$TCON_7$0$0                       dim2_sla
+           0000008F  _TAMOD                             dim2_sla
+           0000008F  _TCON_7                            dim2_sla
+           00000090  G$P1$0$0                           dim2_sla
+           00000090  G$P1_0$0$0                         dim2_sla
+           00000090  _P1                                dim2_sla
+           00000090  _P1_0                              dim2_sla
+           00000091  G$P1M1$0$0                         dim2_sla
+           00000091  G$P1_1$0$0                         dim2_sla
+           00000091  _P1M1                              dim2_sla
+           00000091  _P1_1                              dim2_sla
+           00000092  G$P1M2$0$0                         dim2_sla
+           00000092  G$P1_2$0$0                         dim2_sla
+           00000092  _P1M2                              dim2_sla
+           00000092  _P1_2                              dim2_sla
+           00000093  G$KBPATN$0$0                       dim2_sla
+           00000093  G$P1_3$0$0                         dim2_sla
+           00000093  _KBPATN                            dim2_sla
+           00000093  _P1_3                              dim2_sla
+           00000094  G$KBCON$0$0                        dim2_sla
+           00000094  G$P1_4$0$0                         dim2_sla
+           00000094  _KBCON                             dim2_sla
+           00000094  _P1_4                              dim2_sla
+           00000095  G$DIVM$0$0                         dim2_sla
+           00000095  G$P1_5$0$0                         dim2_sla
+           00000095  _DIVM                              dim2_sla
+           00000095  _P1_5                              dim2_sla
+           00000096  G$P1_6$0$0                         dim2_sla
+           00000096  G$TRIM$0$0                         dim2_sla
+           00000096  _P1_6                              dim2_sla
+           00000096  _TRIM                              dim2_sla
+           00000097  G$P1_7$0$0                         dim2_sla
+           00000097  _P1_7                              dim2_sla
+           00000098  G$SCON$0$0                         dim2_sla
+           00000098  G$SCON_0$0$0                       dim2_sla
+           00000098  _SCON                              dim2_sla
+           00000098  _SCON_0                            dim2_sla
+           00000099  G$SBUF$0$0                         dim2_sla
+           00000099  G$SCON_1$0$0                       dim2_sla
+ASxxxx Linker V02.00 + NoICE + sdld,  page 5.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-.  .ABS.                            00000000    00000000 =           0. bytes (ABS,CON)
+.	.ABS.                             00000000    00000000 =           0. bytes (ABS,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     000000D3  _PSW_3                             fb_i2c
-     000000D3  _RTCL                              fb_i2c
-     000000D4  _PSW_4                             fb_i2c
-     000000D5  _PSW_5                             fb_i2c
-     000000D6  _PSW_6                             fb_i2c
-     000000D7  _PSW_7                             fb_i2c
-     000000D8  _I2CON                             fb_i2c
-     000000D8  _I2CON_0                           fb_i2c
-     000000D9  _I2STAT                            fb_i2c
-     000000DA  _I2CON_2                           fb_i2c
-     000000DA  _I2DAT                             fb_i2c
-     000000DB  _I2ADR                             fb_i2c
-     000000DB  _I2CON_3                           fb_i2c
-     000000DC  _I2CON_4                           fb_i2c
-     000000DC  _I2SCLL                            fb_i2c
-     000000DD  _I2CON_5                           fb_i2c
-     000000DD  _I2SCLH                            fb_i2c
-     000000DE  _I2CON_6                           fb_i2c
-     000000DF  _RSTSRC                            fb_i2c
-     000000E0  _ACC                               fb_i2c
-     000000E4  _FMCON                             fb_i2c
-     000000E5  _FMDATA                            fb_i2c
-     000000E6  _FMADRL                            fb_i2c
-     000000E7  _FMADRH                            fb_i2c
-     000000E8  _IEN1                              fb_i2c
-     000000E8  _IEN1_0                            fb_i2c
-     000000E9  _IEN1_1                            fb_i2c
-     000000EA  _IEN1_2                            fb_i2c
-     000000F0  _B                                 fb_i2c
-     000000F6  _PT0AD                             fb_i2c
-     000000F7  _IP1H                              fb_i2c
-     000000F8  _IP1                               fb_i2c
-     000000F8  _IP1_0                             fb_i2c
-     000000F9  _IP1_1                             fb_i2c
-     000000FA  _IP1_2                             fb_i2c
-     000000FE  _IP1_6                             fb_i2c
+           00000099  _SBUF                              dim2_sla
+           00000099  _SCON_1                            dim2_sla
+           0000009A  G$SCON_2$0$0                       dim2_sla
+           0000009A  _SCON_2                            dim2_sla
+           0000009B  G$SCON_3$0$0                       dim2_sla
+           0000009B  _SCON_3                            dim2_sla
+           0000009C  G$SCON_4$0$0                       dim2_sla
+           0000009C  _SCON_4                            dim2_sla
+           0000009D  G$SCON_5$0$0                       dim2_sla
+           0000009D  _SCON_5                            dim2_sla
+           0000009E  G$SCON_6$0$0                       dim2_sla
+           0000009E  _SCON_6                            dim2_sla
+           0000009F  G$SCON_7$0$0                       dim2_sla
+           0000009F  _SCON_7                            dim2_sla
+           000000A0  __XPAGE                            
+           000000A2  G$AUXR1$0$0                        dim2_sla
+           000000A2  _AUXR1                             dim2_sla
+           000000A7  G$WDCON$0$0                        dim2_sla
+           000000A7  _WDCON                             dim2_sla
+           000000A8  G$IEN0$0$0                         dim2_sla
+           000000A8  G$IEN0_0$0$0                       dim2_sla
+           000000A8  _IEN0                              dim2_sla
+           000000A8  _IEN0_0                            dim2_sla
+           000000A9  G$IEN0_1$0$0                       dim2_sla
+           000000A9  G$SADDR$0$0                        dim2_sla
+           000000A9  _IEN0_1                            dim2_sla
+           000000A9  _SADDR                             dim2_sla
+           000000AA  G$IEN0_2$0$0                       dim2_sla
+           000000AA  _IEN0_2                            dim2_sla
+           000000AB  G$IEN0_3$0$0                       dim2_sla
+           000000AB  _IEN0_3                            dim2_sla
+           000000AC  G$CMP1$0$0                         dim2_sla
+           000000AC  G$IEN0_4$0$0                       dim2_sla
+           000000AC  _CMP1                              dim2_sla
+           000000AC  _IEN0_4                            dim2_sla
+           000000AD  G$CMP2$0$0                         dim2_sla
+           000000AD  G$IEN0_5$0$0                       dim2_sla
+           000000AD  _CMP2                              dim2_sla
+           000000AD  _IEN0_5                            dim2_sla
+           000000AE  G$IEN0_6$0$0                       dim2_sla
+           000000AE  _IEN0_6                            dim2_sla
+           000000AF  G$IEN0_7$0$0                       dim2_sla
+           000000AF  _IEN0_7                            dim2_sla
+           000000B0  G$P3$0$0                           dim2_sla
+           000000B0  G$P3_0$0$0                         dim2_sla
+           000000B0  _P3                                dim2_sla
+           000000B0  _P3_0                              dim2_sla
+           000000B1  G$P3M1$0$0                         dim2_sla
+           000000B1  G$P3_1$0$0                         dim2_sla
+           000000B1  _P3M1                              dim2_sla
+           000000B1  _P3_1                              dim2_sla
+ASxxxx Linker V02.00 + NoICE + sdld,  page 6.
+Hexadecimal  [32-Bits]
 
-ASxxxx Linker V03.00 + NoICE + sdld,  page 6.
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.	.ABS.                             00000000    00000000 =           0. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+           000000B2  G$P3M2$0$0                         dim2_sla
+           000000B2  _P3M2                              dim2_sla
+           000000B5  G$PCONA$0$0                        dim2_sla
+           000000B5  _PCONA                             dim2_sla
+           000000B7  G$IP0H$0$0                         dim2_sla
+           000000B7  _IP0H                              dim2_sla
+           000000B8  G$IP0$0$0                          dim2_sla
+           000000B8  G$IP0_0$0$0                        dim2_sla
+           000000B8  _IP0                               dim2_sla
+           000000B8  _IP0_0                             dim2_sla
+           000000B9  G$IP0_1$0$0                        dim2_sla
+           000000B9  G$SADEN$0$0                        dim2_sla
+           000000B9  _IP0_1                             dim2_sla
+           000000B9  _SADEN                             dim2_sla
+           000000BA  G$IP0_2$0$0                        dim2_sla
+           000000BA  G$SSTAT$0$0                        dim2_sla
+           000000BA  _IP0_2                             dim2_sla
+           000000BA  _SSTAT                             dim2_sla
+           000000BB  G$IP0_3$0$0                        dim2_sla
+           000000BB  _IP0_3                             dim2_sla
+           000000BC  G$IP0_4$0$0                        dim2_sla
+           000000BC  _IP0_4                             dim2_sla
+           000000BD  G$BRGCON$0$0                       dim2_sla
+           000000BD  G$IP0_5$0$0                        dim2_sla
+           000000BD  _BRGCON                            dim2_sla
+           000000BD  _IP0_5                             dim2_sla
+           000000BE  G$BRGR0$0$0                        dim2_sla
+           000000BE  G$IP0_6$0$0                        dim2_sla
+           000000BE  _BRGR0                             dim2_sla
+           000000BE  _IP0_6                             dim2_sla
+           000000BF  G$BRGR1$0$0                        dim2_sla
+           000000BF  _BRGR1                             dim2_sla
+           000000C1  G$WDL$0$0                          dim2_sla
+           000000C1  _WDL                               dim2_sla
+           000000C2  G$WFEED1$0$0                       dim2_sla
+           000000C2  _WFEED1                            dim2_sla
+           000000C3  G$WFEED2$0$0                       dim2_sla
+           000000C3  _WFEED2                            dim2_sla
+           000000D0  G$PSW$0$0                          dim2_sla
+           000000D0  G$PSW_0$0$0                        dim2_sla
+           000000D0  _PSW                               dim2_sla
+           000000D0  _PSW_0                             dim2_sla
+           000000D1  G$PSW_1$0$0                        dim2_sla
+           000000D1  G$RTCCON$0$0                       dim2_sla
+           000000D1  _PSW_1                             dim2_sla
+           000000D1  _RTCCON                            dim2_sla
+           000000D2  G$PSW_2$0$0                        dim2_sla
+           000000D2  G$RTCH$0$0                         dim2_sla
+           000000D2  _PSW_2                             dim2_sla
+           000000D2  _RTCH                              dim2_sla
+           000000D3  G$PSW_3$0$0                        dim2_sla
+ASxxxx Linker V02.00 + NoICE + sdld,  page 7.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.	.ABS.                             00000000    00000000 =           0. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+           000000D3  G$RTCL$0$0                         dim2_sla
+           000000D3  _PSW_3                             dim2_sla
+           000000D3  _RTCL                              dim2_sla
+           000000D4  G$PSW_4$0$0                        dim2_sla
+           000000D4  _PSW_4                             dim2_sla
+           000000D5  G$PSW_5$0$0                        dim2_sla
+           000000D5  _PSW_5                             dim2_sla
+           000000D6  G$PSW_6$0$0                        dim2_sla
+           000000D6  _PSW_6                             dim2_sla
+           000000D7  G$PSW_7$0$0                        dim2_sla
+           000000D7  _PSW_7                             dim2_sla
+           000000D8  G$I2CON$0$0                        dim2_sla
+           000000D8  G$I2CON_0$0$0                      dim2_sla
+           000000D8  _I2CON                             dim2_sla
+           000000D8  _I2CON_0                           dim2_sla
+           000000D9  G$I2STAT$0$0                       dim2_sla
+           000000D9  _I2STAT                            dim2_sla
+           000000DA  G$I2CON_2$0$0                      dim2_sla
+           000000DA  G$I2DAT$0$0                        dim2_sla
+           000000DA  _I2CON_2                           dim2_sla
+           000000DA  _I2DAT                             dim2_sla
+           000000DB  G$I2ADR$0$0                        dim2_sla
+           000000DB  G$I2CON_3$0$0                      dim2_sla
+           000000DB  _I2ADR                             dim2_sla
+           000000DB  _I2CON_3                           dim2_sla
+           000000DC  G$I2CON_4$0$0                      dim2_sla
+           000000DC  G$I2SCLL$0$0                       dim2_sla
+           000000DC  _I2CON_4                           dim2_sla
+           000000DC  _I2SCLL                            dim2_sla
+           000000DD  G$I2CON_5$0$0                      dim2_sla
+           000000DD  G$I2SCLH$0$0                       dim2_sla
+           000000DD  _I2CON_5                           dim2_sla
+           000000DD  _I2SCLH                            dim2_sla
+           000000DE  G$I2CON_6$0$0                      dim2_sla
+           000000DE  _I2CON_6                           dim2_sla
+           000000DF  G$RSTSRC$0$0                       dim2_sla
+           000000DF  _RSTSRC                            dim2_sla
+           000000E0  G$ACC$0$0                          dim2_sla
+           000000E0  _ACC                               dim2_sla
+           000000E4  G$FMCON$0$0                        dim2_sla
+           000000E4  _FMCON                             dim2_sla
+           000000E5  G$FMDATA$0$0                       dim2_sla
+           000000E5  _FMDATA                            dim2_sla
+           000000E6  G$FMADRL$0$0                       dim2_sla
+           000000E6  _FMADRL                            dim2_sla
+           000000E7  G$FMADRH$0$0                       dim2_sla
+           000000E7  _FMADRH                            dim2_sla
+           000000E8  G$IEN1$0$0                         dim2_sla
+           000000E8  G$IEN1_0$0$0                       dim2_sla
+           000000E8  _IEN1                              dim2_sla
+           000000E8  _IEN1_0                            dim2_sla
+ASxxxx Linker V02.00 + NoICE + sdld,  page 8.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+.	.ABS.                             00000000    00000000 =           0. bytes (ABS,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+           000000E9  G$IEN1_1$0$0                       dim2_sla
+           000000E9  _IEN1_1                            dim2_sla
+           000000EA  G$IEN1_2$0$0                       dim2_sla
+           000000EA  _IEN1_2                            dim2_sla
+           000000F0  G$B$0$0                            dim2_sla
+           000000F0  _B                                 dim2_sla
+           000000F6  G$PT0AD$0$0                        dim2_sla
+           000000F6  _PT0AD                             dim2_sla
+           000000F7  G$IP1H$0$0                         dim2_sla
+           000000F7  _IP1H                              dim2_sla
+           000000F8  G$IP1$0$0                          dim2_sla
+           000000F8  G$IP1_0$0$0                        dim2_sla
+           000000F8  _IP1                               dim2_sla
+           000000F8  _IP1_0                             dim2_sla
+           000000F9  G$IP1_1$0$0                        dim2_sla
+           000000F9  _IP1_1                             dim2_sla
+           000000FA  G$IP1_2$0$0                        dim2_sla
+           000000FA  _IP1_2                             dim2_sla
+           000000FE  G$IP1_6$0$0                        dim2_sla
+           000000FE  _IP1_6                             dim2_sla
+
+ASxxxx Linker V02.00 + NoICE + sdld,  page 9.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+BSEG_BYTES                          00000020    00000001 =           1. bytes (REL,CON)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+ASxxxx Linker V02.00 + NoICE + sdld,  page 10.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -258,39 +431,63 @@ REG_BANK_0                          00000000    00000008 =           8. bytes (R
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-ASxxxx Linker V03.00 + NoICE + sdld,  page 7.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 11.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-DSEG                                00000000    00000080 =         128. bytes (REL,CON)
+BSEG                                00000000    00000001 =           1. bytes (REL,CON,BIT)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00000008  _dimm_I2C                          dim2_sla
-     0000000A  _mk                                dim2_sla
-     0000000C  _bytenummer                        dim2_sla
-     0000000D  _zl_50hz                           dim2_sla
-     0000000F  _sp                                dim2_sla
-     00000011  _m                                 dim2_sla
-     00000013  _dimmzl                            dim2_sla
-     00000014  _mode                              dim2_sla
-     00000015  _dimmcompare                       dim2_sla
-     00000016  _cmd                               dim2_sla
-     00000017  _bp                                _bp
+     0B:   00000000  G$locked$0$0                       dim2_sla
+     0B:   00000000  _locked                            dim2_sla
 
-ASxxxx Linker V03.00 + NoICE + sdld,  page 8.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 12.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-SSEG                                00000018    000000E8 =         232. bytes (REL,OVR)
+DSEG                                00000000    00000079 =         121. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00000018  __start__stack                     dim2_sla
+           00000008  G$dimm_I2C$0$0                     dim2_sla
+           00000008  _dimm_I2C                          dim2_sla
+           0000000A  G$mk$0$0                           dim2_sla
+           0000000A  _mk                                dim2_sla
+           0000000C  G$bytenummer$0$0                   dim2_sla
+           0000000C  _bytenummer                        dim2_sla
+           0000000D  G$zl_50hz$0$0                      dim2_sla
+           0000000D  _zl_50hz                           dim2_sla
+           0000000F  G$sp$0$0                           dim2_sla
+           0000000F  _sp                                dim2_sla
+           00000011  G$m$0$0                            dim2_sla
+           00000011  _m                                 dim2_sla
+           00000013  G$dimmzl$0$0                       dim2_sla
+           00000013  _dimmzl                            dim2_sla
+           00000014  G$mode$0$0                         dim2_sla
+           00000014  _mode                              dim2_sla
+           00000015  G$dimmcompare$0$0                  dim2_sla
+           00000015  _dimmcompare                       dim2_sla
+           00000016  G$cmd$0$0                          dim2_sla
+           00000016  _cmd                               dim2_sla
+           00000017  G$phase$0$0                        dim2_sla
+           00000017  _phase                             dim2_sla
+           00000018  _bp                                _bp
 
-ASxxxx Linker V03.00 + NoICE + sdld,  page 9.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 13.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+SSEG                                00000021    000000DF =         223. bytes (REL,OVR)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+           00000021  __start__stack                     dim2_sla
+
+ASxxxx Linker V02.00 + NoICE + sdld,  page 14.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -299,9 +496,19 @@ HOME                                00000000    0000003B =          59. bytes (R
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-C:   00000036  __sdcc_program_startup             dim2_sla
+     0C:   00000000  A$dim2_sla$549                     dim2_sla
+     0C:   00000003  A$dim2_sla$550                     dim2_sla
+     0C:   0000000B  A$dim2_sla$552                     dim2_sla
+     0C:   00000013  A$dim2_sla$554                     dim2_sla
+     0C:   0000001B  A$dim2_sla$556                     dim2_sla
+     0C:   00000023  A$dim2_sla$558                     dim2_sla
+     0C:   0000002B  A$dim2_sla$560                     dim2_sla
+     0C:   00000033  A$dim2_sla$562                     dim2_sla
+     0C:   00000036  A$dim2_sla$614                     dim2_sla
+     0C:   00000036  __sdcc_program_startup             dim2_sla
+     0C:   00000039  A$dim2_sla$616                     dim2_sla
 
-ASxxxx Linker V03.00 + NoICE + sdld,  page 10.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 15.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -310,9 +517,9 @@ GSINIT0                             0000003B    00000003 =           3. bytes (R
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-C:   0000003B  __sdcc_gsinit_startup              
+     0C:   0000003B  __sdcc_gsinit_startup              
 
-ASxxxx Linker V03.00 + NoICE + sdld,  page 11.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 16.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -321,7 +528,7 @@ GSINIT2                             0000003E    0000000A =          10. bytes (R
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-ASxxxx Linker V03.00 + NoICE + sdld,  page 12.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 17.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -330,9 +537,9 @@ GSINIT3                             00000048    00000022 =          34. bytes (R
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-C:   00000048  __mcs51_genXINIT                   
+     0C:   00000048  __mcs51_genXINIT                   
 
-ASxxxx Linker V03.00 + NoICE + sdld,  page 13.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 18.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -341,54 +548,653 @@ GSINIT4                             0000006A    0000002A =          42. bytes (R
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-C:   0000006A  __mcs51_genRAMCLEAR                
-C:   00000070  __mcs51_genXRAMCLEAR               
+     0C:   0000006A  __mcs51_genRAMCLEAR                
+     0C:   00000070  __mcs51_genXRAMCLEAR               
 
-ASxxxx Linker V03.00 + NoICE + sdld,  page 14.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 19.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-GSINIT                              00000094    00000015 =          21. bytes (REL,CON,CODE)
+GSINIT                              00000094    00000017 =          23. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-ASxxxx Linker V03.00 + NoICE + sdld,  page 15.
+     0C:   00000094  A$dim2_sla$579                     dim2_sla
+     0C:   00000094  C$dim2_sla.c$37$1$1                dim2_sla
+     0C:   00000095  A$dim2_sla$580                     dim2_sla
+     0C:   00000097  A$dim2_sla$581                     dim2_sla
+     0C:   00000099  A$dim2_sla$585                     dim2_sla
+     0C:   00000099  C$dim2_sla.c$38$1$1                dim2_sla
+     0C:   0000009A  A$dim2_sla$586                     dim2_sla
+     0C:   0000009C  A$dim2_sla$587                     dim2_sla
+     0C:   0000009E  A$dim2_sla$591                     dim2_sla
+     0C:   0000009E  C$dim2_sla.c$39$1$1                dim2_sla
+     0C:   0000009F  A$dim2_sla$592                     dim2_sla
+     0C:   000000A1  A$dim2_sla$593                     dim2_sla
+     0C:   000000A3  A$dim2_sla$597                     dim2_sla
+     0C:   000000A3  C$dim2_sla.c$40$1$1                dim2_sla
+     0C:   000000A6  A$dim2_sla$601                     dim2_sla
+     0C:   000000A6  C$dim2_sla.c$41$1$1                dim2_sla
+     0C:   000000A9  A$dim2_sla$605                     dim2_sla
+     0C:   000000A9  C$dim2_sla.c$46$1$1                dim2_sla
+ASxxxx Linker V02.00 + NoICE + sdld,  page 20.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-GSFINAL                             000000A9    00000003 =           3. bytes (REL,CON,CODE)
+GSFINAL                             000000AB    00000003 =           3. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-ASxxxx Linker V03.00 + NoICE + sdld,  page 16.
+     0C:   000000AB  A$dim2_sla$607                     dim2_sla
+
+ASxxxx Linker V02.00 + NoICE + sdld,  page 21.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-CSEG                                000000AC    000002A5 =         677. bytes (REL,CON,CODE)
+CSEG                                000000AE    000002AE =         686. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-C:   000000AC  _i2c_int                           dim2_sla
-C:   000000F2  _nulldurchgang                     dim2_sla
-C:   00000111  _ex1_int                           dim2_sla
-C:   00000143  _tim0_int                          dim2_sla
-C:   00000177  _in50hz_init                       dim2_sla
-C:   0000018E  _send                              dim2_sla
-C:   00000198  _main                              dim2_sla
-C:   00000249  _i2c_sla_init                      fb_i2c
-C:   00000268  _i2c_ma_init                       fb_i2c
-C:   0000027F  _i2c_wait                          fb_i2c
-C:   000002A0  _i2c_send_daten                    fb_i2c
-C:   0000034D  __sdcc_external_startup            _startup
-ASxxxx Linker V03.00 + NoICE + sdld,  page 17.
+     0C:   000000AE  A$fb_i2c$519                       fb_i2c
+     0C:   000000AE  C$fb_i2c.c$13$0$0                  fb_i2c
+     0C:   000000AE  C$fb_i2c.c$15$1$1                  fb_i2c
+     0C:   000000AE  G$i2c_sla_init$0$0                 fb_i2c
+     0C:   000000AE  _i2c_sla_init                      fb_i2c
+     0C:   000000B1  A$fb_i2c$522                       fb_i2c
+     0C:   000000B1  C$fb_i2c.c$16$1$1                  fb_i2c
+     0C:   000000B3  A$fb_i2c$523                       fb_i2c
+     0C:   000000B6  A$fb_i2c$524                       fb_i2c
+     0C:   000000B8  A$fb_i2c$527                       fb_i2c
+     0C:   000000B8  C$fb_i2c.c$17$1$1                  fb_i2c
+     0C:   000000BB  A$fb_i2c$530                       fb_i2c
+     0C:   000000BB  C$fb_i2c.c$18$1$1                  fb_i2c
+     0C:   000000BE  A$fb_i2c$533                       fb_i2c
+     0C:   000000BE  C$fb_i2c.c$19$1$1                  fb_i2c
+     0C:   000000C1  A$fb_i2c$536                       fb_i2c
+     0C:   000000C1  C$fb_i2c.c$20$1$1                  fb_i2c
+     0C:   000000C4  A$fb_i2c$539                       fb_i2c
+     0C:   000000C4  C$fb_i2c.c$21$1$1                  fb_i2c
+     0C:   000000C6  A$fb_i2c$542                       fb_i2c
+     0C:   000000C6  C$fb_i2c.c$22$1$1                  fb_i2c
+     0C:   000000C8  A$fb_i2c$545                       fb_i2c
+     0C:   000000C8  C$fb_i2c.c$23$1$1                  fb_i2c
+     0C:   000000CA  A$fb_i2c$548                       fb_i2c
+     0C:   000000CA  C$fb_i2c.c$24$1$1                  fb_i2c
+     0C:   000000CC  A$fb_i2c$553                       fb_i2c
+     0C:   000000CC  C$fb_i2c.c$25$1$1                  fb_i2c
+     0C:   000000CC  C$fb_i2c.c$26$1$1                  fb_i2c
+     0C:   000000CC  XG$i2c_sla_init$0$0                fb_i2c
+     0C:   000000CD  A$fb_i2c$566                       fb_i2c
+     0C:   000000CD  C$fb_i2c.c$28$1$1                  fb_i2c
+     0C:   000000CD  C$fb_i2c.c$30$1$1                  fb_i2c
+     0C:   000000CD  G$i2c_ma_init$0$0                  fb_i2c
+     0C:   000000CD  _i2c_ma_init                       fb_i2c
+     0C:   000000D0  A$fb_i2c$569                       fb_i2c
+     0C:   000000D0  C$fb_i2c.c$31$1$1                  fb_i2c
+     0C:   000000D3  A$fb_i2c$572                       fb_i2c
+     0C:   000000D3  C$fb_i2c.c$32$1$1                  fb_i2c
+     0C:   000000D6  A$fb_i2c$575                       fb_i2c
+     0C:   000000D6  C$fb_i2c.c$33$1$1                  fb_i2c
+     0C:   000000D9  A$fb_i2c$578                       fb_i2c
+     0C:   000000D9  C$fb_i2c.c$34$1$1                  fb_i2c
+     0C:   000000DC  A$fb_i2c$581                       fb_i2c
+     0C:   000000DC  C$fb_i2c.c$35$1$1                  fb_i2c
+     0C:   000000DF  A$fb_i2c$584                       fb_i2c
+     0C:   000000DF  C$fb_i2c.c$36$1$1                  fb_i2c
+     0C:   000000E1  A$fb_i2c$587                       fb_i2c
+     0C:   000000E1  C$fb_i2c.c$37$1$1                  fb_i2c
+     0C:   000000E3  A$fb_i2c$592                       fb_i2c
+     0C:   000000E3  C$fb_i2c.c$38$1$1                  fb_i2c
+ASxxxx Linker V02.00 + NoICE + sdld,  page 22.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                000000AE    000002AE =         686. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   000000E3  C$fb_i2c.c$39$1$1                  fb_i2c
+     0C:   000000E3  XG$i2c_ma_init$0$0                 fb_i2c
+     0C:   000000E4  A$fb_i2c$607                       fb_i2c
+     0C:   000000E4  C$fb_i2c.c$40$1$1                  fb_i2c
+     0C:   000000E4  C$fb_i2c.c$44$1$1                  fb_i2c
+     0C:   000000E4  G$i2c_wait$0$0                     fb_i2c
+     0C:   000000E4  _i2c_wait                          fb_i2c
+     0C:   000000E6  A$fb_i2c$608                       fb_i2c
+     0C:   000000E8  A$fb_i2c$610                       fb_i2c
+     0C:   000000EB  A$fb_i2c$613                       fb_i2c
+     0C:   000000EB  C$fb_i2c.c$47$2$2                  fb_i2c
+     0C:   000000EC  A$fb_i2c$614                       fb_i2c
+     0C:   000000EF  A$fb_i2c$615                       fb_i2c
+     0C:   000000F0  A$fb_i2c$619                       fb_i2c
+     0C:   000000F0  C$fb_i2c.c$48$2$2                  fb_i2c
+     0C:   000000F1  A$fb_i2c$620                       fb_i2c
+     0C:   000000F3  A$fb_i2c$621                       fb_i2c
+     0C:   000000F4  A$fb_i2c$622                       fb_i2c
+     0C:   000000F6  A$fb_i2c$623                       fb_i2c
+     0C:   000000F7  A$fb_i2c$624                       fb_i2c
+     0C:   000000F9  A$fb_i2c$627                       fb_i2c
+     0C:   000000F9  C$fb_i2c.c$51$3$3                  fb_i2c
+     0C:   000000FB  A$fb_i2c$630                       fb_i2c
+     0C:   000000FB  C$fb_i2c.c$52$3$3                  fb_i2c
+     0C:   000000FE  A$fb_i2c$631                       fb_i2c
+     0C:   00000100  A$fb_i2c$635                       fb_i2c
+     0C:   00000100  C$fb_i2c.c$57$1$1                  fb_i2c
+     0C:   00000102  A$fb_i2c$638                       fb_i2c
+     0C:   00000102  C$fb_i2c.c$58$1$1                  fb_i2c
+     0C:   00000105  A$fb_i2c$642                       fb_i2c
+     0C:   00000105  C$fb_i2c.c$59$1$1                  fb_i2c
+     0C:   00000105  XG$i2c_wait$0$0                    fb_i2c
+     0C:   00000106  A$fb_i2c$658                       fb_i2c
+     0C:   00000106  C$fb_i2c.c$62$1$1                  fb_i2c
+     0C:   00000106  G$i2c_send_daten$0$0               fb_i2c
+     0C:   00000106  _i2c_send_daten                    fb_i2c
+     0C:   00000108  A$fb_i2c$659                       fb_i2c
+     0C:   0000010B  A$fb_i2c$660                       fb_i2c
+     0C:   0000010D  A$fb_i2c$663                       fb_i2c
+     0C:   0000010D  C$fb_i2c.c$64$1$1                  fb_i2c
+     0C:   0000010F  A$fb_i2c$666                       fb_i2c
+     0C:   0000010F  C$fb_i2c.c$65$1$1                  fb_i2c
+     0C:   00000111  A$fb_i2c$669                       fb_i2c
+     0C:   00000111  C$fb_i2c.c$66$1$1                  fb_i2c
+     0C:   00000114  A$fb_i2c$672                       fb_i2c
+     0C:   00000114  C$fb_i2c.c$67$1$1                  fb_i2c
+     0C:   00000117  A$fb_i2c$675                       fb_i2c
+     0C:   00000117  C$fb_i2c.c$68$1$1                  fb_i2c
+     0C:   0000011A  A$fb_i2c$678                       fb_i2c
+     0C:   0000011A  C$fb_i2c.c$69$1$1                  fb_i2c
+     0C:   0000011D  A$fb_i2c$681                       fb_i2c
+ASxxxx Linker V02.00 + NoICE + sdld,  page 23.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                000000AE    000002AE =         686. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   0000011D  C$fb_i2c.c$70$1$1                  fb_i2c
+     0C:   00000120  A$fb_i2c$684                       fb_i2c
+     0C:   00000120  C$fb_i2c.c$71$1$1                  fb_i2c
+     0C:   00000122  A$fb_i2c$687                       fb_i2c
+     0C:   00000122  C$fb_i2c.c$72$1$1                  fb_i2c
+     0C:   00000124  A$fb_i2c$690                       fb_i2c
+     0C:   00000124  C$fb_i2c.c$73$1$1                  fb_i2c
+     0C:   00000126  A$fb_i2c$693                       fb_i2c
+     0C:   00000126  C$fb_i2c.c$74$1$1                  fb_i2c
+     0C:   00000128  A$fb_i2c$694                       fb_i2c
+     0C:   0000012A  A$fb_i2c$695                       fb_i2c
+     0C:   0000012C  A$fb_i2c$696                       fb_i2c
+     0C:   0000012F  A$fb_i2c$697                       fb_i2c
+     0C:   00000131  A$fb_i2c$698                       fb_i2c
+     0C:   00000133  A$fb_i2c$699                       fb_i2c
+     0C:   00000135  A$fb_i2c$700                       fb_i2c
+     0C:   00000137  A$fb_i2c$701                       fb_i2c
+     0C:   00000139  A$fb_i2c$704                       fb_i2c
+     0C:   00000139  C$fb_i2c.c$75$1$1                  fb_i2c
+     0C:   0000013C  A$fb_i2c$705                       fb_i2c
+     0C:   0000013E  A$fb_i2c$709                       fb_i2c
+     0C:   0000013E  C$fb_i2c.c$76$1$1                  fb_i2c
+     0C:   00000140  A$fb_i2c$712                       fb_i2c
+     0C:   00000140  C$fb_i2c.c$77$1$1                  fb_i2c
+     0C:   00000143  A$fb_i2c$715                       fb_i2c
+     0C:   00000143  C$fb_i2c.c$78$1$1                  fb_i2c
+     0C:   00000145  A$fb_i2c$716                       fb_i2c
+     0C:   00000147  A$fb_i2c$717                       fb_i2c
+     0C:   00000149  A$fb_i2c$718                       fb_i2c
+     0C:   0000014C  A$fb_i2c$719                       fb_i2c
+     0C:   0000014E  A$fb_i2c$720                       fb_i2c
+     0C:   00000150  A$fb_i2c$721                       fb_i2c
+     0C:   00000152  A$fb_i2c$722                       fb_i2c
+     0C:   00000154  A$fb_i2c$723                       fb_i2c
+     0C:   00000156  A$fb_i2c$726                       fb_i2c
+     0C:   00000156  C$fb_i2c.c$79$1$1                  fb_i2c
+     0C:   00000159  A$fb_i2c$727                       fb_i2c
+     0C:   0000015B  A$fb_i2c$731                       fb_i2c
+     0C:   0000015B  C$fb_i2c.c$80$1$1                  fb_i2c
+     0C:   0000015E  A$fb_i2c$734                       fb_i2c
+     0C:   0000015E  C$fb_i2c.c$81$1$1                  fb_i2c
+     0C:   00000160  A$fb_i2c$735                       fb_i2c
+     0C:   00000162  A$fb_i2c$736                       fb_i2c
+     0C:   00000164  A$fb_i2c$737                       fb_i2c
+     0C:   00000167  A$fb_i2c$738                       fb_i2c
+     0C:   00000169  A$fb_i2c$739                       fb_i2c
+     0C:   0000016B  A$fb_i2c$740                       fb_i2c
+     0C:   0000016D  A$fb_i2c$741                       fb_i2c
+     0C:   0000016F  A$fb_i2c$742                       fb_i2c
+     0C:   00000171  A$fb_i2c$745                       fb_i2c
+     0C:   00000171  C$fb_i2c.c$82$1$1                  fb_i2c
+ASxxxx Linker V02.00 + NoICE + sdld,  page 24.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                000000AE    000002AE =         686. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   00000174  A$fb_i2c$746                       fb_i2c
+     0C:   00000176  A$fb_i2c$750                       fb_i2c
+     0C:   00000176  C$fb_i2c.c$83$1$1                  fb_i2c
+     0C:   00000178  A$fb_i2c$753                       fb_i2c
+     0C:   00000178  C$fb_i2c.c$84$1$1                  fb_i2c
+     0C:   0000017A  A$fb_i2c$754                       fb_i2c
+     0C:   0000017C  A$fb_i2c$755                       fb_i2c
+     0C:   0000017F  A$fb_i2c$756                       fb_i2c
+     0C:   00000181  A$fb_i2c$757                       fb_i2c
+     0C:   00000183  A$fb_i2c$758                       fb_i2c
+     0C:   00000185  A$fb_i2c$759                       fb_i2c
+     0C:   00000187  A$fb_i2c$762                       fb_i2c
+     0C:   00000187  C$fb_i2c.c$85$1$1                  fb_i2c
+     0C:   0000018A  A$fb_i2c$763                       fb_i2c
+     0C:   0000018C  A$fb_i2c$767                       fb_i2c
+     0C:   0000018C  C$fb_i2c.c$86$1$1                  fb_i2c
+     0C:   0000018E  A$fb_i2c$768                       fb_i2c
+     0C:   00000190  A$fb_i2c$769                       fb_i2c
+     0C:   00000191  A$fb_i2c$770                       fb_i2c
+     0C:   00000193  A$fb_i2c$773                       fb_i2c
+     0C:   00000193  C$fb_i2c.c$88$1$1                  fb_i2c
+     0C:   00000195  A$fb_i2c$774                       fb_i2c
+     0C:   00000197  A$fb_i2c$775                       fb_i2c
+     0C:   0000019A  A$fb_i2c$776                       fb_i2c
+     0C:   0000019C  A$fb_i2c$777                       fb_i2c
+     0C:   0000019E  A$fb_i2c$778                       fb_i2c
+     0C:   000001A0  A$fb_i2c$779                       fb_i2c
+     0C:   000001A2  A$fb_i2c$782                       fb_i2c
+     0C:   000001A2  C$fb_i2c.c$89$1$1                  fb_i2c
+     0C:   000001A5  A$fb_i2c$783                       fb_i2c
+     0C:   000001A7  A$fb_i2c$787                       fb_i2c
+     0C:   000001A7  C$fb_i2c.c$90$1$1                  fb_i2c
+     0C:   000001A9  A$fb_i2c$790                       fb_i2c
+     0C:   000001A9  C$fb_i2c.c$91$1$1                  fb_i2c
+     0C:   000001AB  A$fb_i2c$793                       fb_i2c
+     0C:   000001AB  C$fb_i2c.c$92$1$1                  fb_i2c
+     0C:   000001AD  A$fb_i2c$796                       fb_i2c
+     0C:   000001AD  C$fb_i2c.c$93$1$1                  fb_i2c
+     0C:   000001B0  A$fb_i2c$798                       fb_i2c
+     0C:   000001B2  A$fb_i2c$801                       fb_i2c
+     0C:   000001B2  C$fb_i2c.c$94$1$1                  fb_i2c
+     0C:   000001B2  XG$i2c_send_daten$0$0              fb_i2c
+     0C:   000001B3  A$dim2_sla$639                     dim2_sla
+     0C:   000001B3  C$dim2_sla.c$48$0$0                dim2_sla
+     0C:   000001B3  G$i2c_int$0$0                      dim2_sla
+     0C:   000001B3  _i2c_int                           dim2_sla
+     0C:   000001B5  A$dim2_sla$640                     dim2_sla
+     0C:   000001B7  A$dim2_sla$641                     dim2_sla
+     0C:   000001B9  A$dim2_sla$642                     dim2_sla
+     0C:   000001BB  A$dim2_sla$643                     dim2_sla
+     0C:   000001BD  A$dim2_sla$644                     dim2_sla
+ASxxxx Linker V02.00 + NoICE + sdld,  page 25.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                000000AE    000002AE =         686. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   000001C0  A$dim2_sla$647                     dim2_sla
+     0C:   000001C0  C$dim2_sla.c$50$1$1                dim2_sla
+     0C:   000001C2  A$dim2_sla$648                     dim2_sla
+     0C:   000001C5  A$dim2_sla$651                     dim2_sla
+     0C:   000001C5  C$dim2_sla.c$51$1$1                dim2_sla
+     0C:   000001C8  A$dim2_sla$655                     dim2_sla
+     0C:   000001C8  C$dim2_sla.c$52$1$1                dim2_sla
+     0C:   000001CA  A$dim2_sla$656                     dim2_sla
+     0C:   000001CD  A$dim2_sla$659                     dim2_sla
+     0C:   000001CD  C$dim2_sla.c$53$1$1                dim2_sla
+     0C:   000001CF  A$dim2_sla$663                     dim2_sla
+     0C:   000001CF  C$dim2_sla.c$54$1$1                dim2_sla
+     0C:   000001D1  A$dim2_sla$664                     dim2_sla
+     0C:   000001D4  A$dim2_sla$667                     dim2_sla
+     0C:   000001D4  C$dim2_sla.c$55$1$1                dim2_sla
+     0C:   000001D7  A$dim2_sla$671                     dim2_sla
+     0C:   000001D7  C$dim2_sla.c$56$1$1                dim2_sla
+     0C:   000001D9  A$dim2_sla$672                     dim2_sla
+     0C:   000001DB  A$dim2_sla$673                     dim2_sla
+     0C:   000001DD  A$dim2_sla$674                     dim2_sla
+     0C:   000001DF  A$dim2_sla$675                     dim2_sla
+     0C:   000001E1  A$dim2_sla$676                     dim2_sla
+     0C:   000001E3  A$dim2_sla$679                     dim2_sla
+     0C:   000001E3  C$dim2_sla.c$57$1$1                dim2_sla
+     0C:   000001E5  A$dim2_sla$680                     dim2_sla
+     0C:   000001E7  A$dim2_sla$681                     dim2_sla
+     0C:   000001E9  A$dim2_sla$682                     dim2_sla
+     0C:   000001EB  A$dim2_sla$683                     dim2_sla
+     0C:   000001ED  A$dim2_sla$684                     dim2_sla
+     0C:   000001EE  A$dim2_sla$685                     dim2_sla
+     0C:   000001F0  A$dim2_sla$686                     dim2_sla
+     0C:   000001F2  A$dim2_sla$690                     dim2_sla
+     0C:   000001F2  C$dim2_sla.c$58$1$1                dim2_sla
+     0C:   000001F4  A$dim2_sla$691                     dim2_sla
+     0C:   000001F6  A$dim2_sla$692                     dim2_sla
+     0C:   000001F8  A$dim2_sla$693                     dim2_sla
+     0C:   000001F9  A$dim2_sla$694                     dim2_sla
+     0C:   000001FA  A$dim2_sla$695                     dim2_sla
+     0C:   000001FB  A$dim2_sla$696                     dim2_sla
+     0C:   000001FD  A$dim2_sla$697                     dim2_sla
+     0C:   000001FE  A$dim2_sla$698                     dim2_sla
+     0C:   000001FF  A$dim2_sla$702                     dim2_sla
+     0C:   000001FF  C$dim2_sla.c$59$1$1                dim2_sla
+     0C:   00000201  A$dim2_sla$705                     dim2_sla
+     0C:   00000201  C$dim2_sla.c$60$1$1                dim2_sla
+     0C:   00000203  A$dim2_sla$706                     dim2_sla
+     0C:   00000205  A$dim2_sla$707                     dim2_sla
+     0C:   00000207  A$dim2_sla$708                     dim2_sla
+     0C:   00000209  A$dim2_sla$709                     dim2_sla
+     0C:   0000020B  A$dim2_sla$712                     dim2_sla
+     0C:   0000020B  C$dim2_sla.c$61$1$1                dim2_sla
+ASxxxx Linker V02.00 + NoICE + sdld,  page 26.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                000000AE    000002AE =         686. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   0000020B  XG$i2c_int$0$0                     dim2_sla
+     0C:   0000020C  A$dim2_sla$728                     dim2_sla
+     0C:   0000020C  C$dim2_sla.c$63$1$1                dim2_sla
+     0C:   0000020C  C$dim2_sla.c$66$1$1                dim2_sla
+     0C:   0000020C  G$nulldurchgang$0$0                dim2_sla
+     0C:   0000020C  _nulldurchgang                     dim2_sla
+     0C:   0000020E  A$dim2_sla$731                     dim2_sla
+     0C:   0000020E  C$dim2_sla.c$68$2$2                dim2_sla
+     0C:   00000210  A$dim2_sla$732                     dim2_sla
+     0C:   00000212  A$dim2_sla$735                     dim2_sla
+     0C:   00000212  C$dim2_sla.c$69$2$2                dim2_sla
+     0C:   00000214  A$dim2_sla$736                     dim2_sla
+     0C:   00000216  A$dim2_sla$739                     dim2_sla
+     0C:   00000216  C$dim2_sla.c$70$2$2                dim2_sla
+     0C:   00000218  A$dim2_sla$743                     dim2_sla
+     0C:   00000218  C$dim2_sla.c$71$2$2                dim2_sla
+     0C:   0000021A  A$dim2_sla$744                     dim2_sla
+     0C:   0000021C  A$dim2_sla$747                     dim2_sla
+     0C:   0000021C  C$dim2_sla.c$72$2$2                dim2_sla
+     0C:   0000021E  A$dim2_sla$751                     dim2_sla
+     0C:   0000021E  C$dim2_sla.c$74$1$1                dim2_sla
+     0C:   00000220  A$dim2_sla$752                     dim2_sla
+     0C:   00000223  A$dim2_sla$755                     dim2_sla
+     0C:   00000223  C$dim2_sla.c$76$2$3                dim2_sla
+     0C:   00000226  A$dim2_sla$758                     dim2_sla
+     0C:   00000226  C$dim2_sla.c$77$2$3                dim2_sla
+     0C:   00000228  A$dim2_sla$761                     dim2_sla
+     0C:   00000228  C$dim2_sla.c$78$2$3                dim2_sla
+     0C:   0000022A  A$dim2_sla$767                     dim2_sla
+     0C:   0000022A  C$dim2_sla.c$80$1$1                dim2_sla
+     0C:   0000022A  C$dim2_sla.c$81$1$1                dim2_sla
+     0C:   0000022A  XG$nulldurchgang$0$0               dim2_sla
+     0C:   0000022B  A$dim2_sla$780                     dim2_sla
+     0C:   0000022B  C$dim2_sla.c$84$1$1                dim2_sla
+     0C:   0000022B  G$ex1_int$0$0                      dim2_sla
+     0C:   0000022B  _ex1_int                           dim2_sla
+     0C:   0000022D  A$dim2_sla$781                     dim2_sla
+     0C:   0000022F  A$dim2_sla$782                     dim2_sla
+     0C:   00000231  A$dim2_sla$783                     dim2_sla
+     0C:   00000234  A$dim2_sla$786                     dim2_sla
+     0C:   00000234  C$dim2_sla.c$89$1$1                dim2_sla
+     0C:   00000236  A$dim2_sla$787                     dim2_sla
+     0C:   00000238  A$dim2_sla$792                     dim2_sla
+     0C:   00000238  C$dim2_sla.c$90$1$1                dim2_sla
+     0C:   00000238  C$dim2_sla.c$91$1$1                dim2_sla
+     0C:   00000239  A$dim2_sla$793                     dim2_sla
+     0C:   0000023B  A$dim2_sla$794                     dim2_sla
+     0C:   0000023D  A$dim2_sla$797                     dim2_sla
+     0C:   0000023D  C$dim2_sla.c$92$2$2                dim2_sla
+     0C:   0000023E  A$dim2_sla$798                     dim2_sla
+     0C:   00000240  A$dim2_sla$799                     dim2_sla
+ASxxxx Linker V02.00 + NoICE + sdld,  page 27.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                000000AE    000002AE =         686. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   00000242  A$dim2_sla$800                     dim2_sla
+     0C:   00000245  A$dim2_sla$802                     dim2_sla
+     0C:   00000247  A$dim2_sla$805                     dim2_sla
+     0C:   00000247  C$dim2_sla.c$93$3$3                dim2_sla
+     0C:   00000249  A$dim2_sla$806                     dim2_sla
+     0C:   0000024B  A$dim2_sla$810                     dim2_sla
+     0C:   0000024B  C$dim2_sla.c$96$2$2                dim2_sla
+     0C:   0000024E  A$dim2_sla$812                     dim2_sla
+     0C:   00000250  A$dim2_sla$813                     dim2_sla
+     0C:   00000251  A$dim2_sla$814                     dim2_sla
+     0C:   00000253  A$dim2_sla$815                     dim2_sla
+     0C:   00000255  A$dim2_sla$818                     dim2_sla
+     0C:   00000255  C$dim2_sla.c$98$3$4                dim2_sla
+     0C:   00000257  A$dim2_sla$822                     dim2_sla
+     0C:   00000257  C$dim2_sla.c$108$1$1               dim2_sla
+     0C:   0000025A  A$dim2_sla$825                     dim2_sla
+     0C:   0000025A  C$dim2_sla.c$142$1$1               dim2_sla
+     0C:   0000025C  A$dim2_sla$826                     dim2_sla
+     0C:   0000025E  A$dim2_sla$829                     dim2_sla
+     0C:   0000025E  C$dim2_sla.c$151$2$5               dim2_sla
+     0C:   00000260  A$dim2_sla$830                     dim2_sla
+     0C:   00000263  A$dim2_sla$832                     dim2_sla
+     0C:   00000265  A$dim2_sla$833                     dim2_sla
+     0C:   00000266  A$dim2_sla$834                     dim2_sla
+     0C:   00000268  A$dim2_sla$836                     dim2_sla
+     0C:   0000026A  A$dim2_sla$837                     dim2_sla
+     0C:   0000026C  A$dim2_sla$841                     dim2_sla
+     0C:   0000026C  C$dim2_sla.c$152$2$5               dim2_sla
+     0C:   0000026E  A$dim2_sla$845                     dim2_sla
+     0C:   0000026E  C$dim2_sla.c$153$2$5               dim2_sla
+     0C:   00000270  A$dim2_sla$846                     dim2_sla
+     0C:   00000273  A$dim2_sla$848                     dim2_sla
+     0C:   00000275  A$dim2_sla$849                     dim2_sla
+     0C:   00000276  A$dim2_sla$850                     dim2_sla
+     0C:   00000278  A$dim2_sla$852                     dim2_sla
+     0C:   0000027A  A$dim2_sla$853                     dim2_sla
+     0C:   0000027C  A$dim2_sla$857                     dim2_sla
+     0C:   0000027C  C$dim2_sla.c$154$2$5               dim2_sla
+     0C:   0000027E  A$dim2_sla$858                     dim2_sla
+     0C:   00000280  A$dim2_sla$862                     dim2_sla
+     0C:   00000280  C$dim2_sla.c$158$2$6               dim2_sla
+     0C:   00000282  A$dim2_sla$863                     dim2_sla
+     0C:   00000285  A$dim2_sla$865                     dim2_sla
+     0C:   00000287  A$dim2_sla$866                     dim2_sla
+     0C:   00000288  A$dim2_sla$867                     dim2_sla
+     0C:   0000028A  A$dim2_sla$869                     dim2_sla
+     0C:   0000028C  A$dim2_sla$870                     dim2_sla
+     0C:   0000028E  A$dim2_sla$874                     dim2_sla
+     0C:   0000028E  C$dim2_sla.c$159$2$6               dim2_sla
+     0C:   00000290  A$dim2_sla$878                     dim2_sla
+     0C:   00000290  C$dim2_sla.c$160$2$6               dim2_sla
+ASxxxx Linker V02.00 + NoICE + sdld,  page 28.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                000000AE    000002AE =         686. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   00000292  A$dim2_sla$879                     dim2_sla
+     0C:   00000295  A$dim2_sla$881                     dim2_sla
+     0C:   00000297  A$dim2_sla$882                     dim2_sla
+     0C:   00000298  A$dim2_sla$883                     dim2_sla
+     0C:   0000029A  A$dim2_sla$885                     dim2_sla
+     0C:   0000029C  A$dim2_sla$886                     dim2_sla
+     0C:   0000029E  A$dim2_sla$890                     dim2_sla
+     0C:   0000029E  C$dim2_sla.c$161$2$6               dim2_sla
+     0C:   000002A0  A$dim2_sla$892                     dim2_sla
+     0C:   000002A2  A$dim2_sla$893                     dim2_sla
+     0C:   000002A4  A$dim2_sla$894                     dim2_sla
+     0C:   000002A6  A$dim2_sla$897                     dim2_sla
+     0C:   000002A6  C$dim2_sla.c$166$1$1               dim2_sla
+     0C:   000002A6  XG$ex1_int$0$0                     dim2_sla
+     0C:   000002A7  A$dim2_sla$915                     dim2_sla
+     0C:   000002A7  C$dim2_sla.c$170$1$1               dim2_sla
+     0C:   000002A7  C$dim2_sla.c$172$1$1               dim2_sla
+     0C:   000002A7  G$in50hz_init$0$0                  dim2_sla
+     0C:   000002A7  _in50hz_init                       dim2_sla
+     0C:   000002AA  A$dim2_sla$918                     dim2_sla
+     0C:   000002AA  C$dim2_sla.c$173$1$1               dim2_sla
+     0C:   000002AC  A$dim2_sla$919                     dim2_sla
+     0C:   000002AF  A$dim2_sla$920                     dim2_sla
+     0C:   000002B1  A$dim2_sla$923                     dim2_sla
+     0C:   000002B1  C$dim2_sla.c$174$1$1               dim2_sla
+     0C:   000002B3  A$dim2_sla$926                     dim2_sla
+     0C:   000002B3  C$dim2_sla.c$175$1$1               dim2_sla
+     0C:   000002B5  A$dim2_sla$929                     dim2_sla
+     0C:   000002B5  C$dim2_sla.c$176$1$1               dim2_sla
+     0C:   000002B8  A$dim2_sla$932                     dim2_sla
+     0C:   000002B8  C$dim2_sla.c$177$1$1               dim2_sla
+     0C:   000002BB  A$dim2_sla$935                     dim2_sla
+     0C:   000002BB  C$dim2_sla.c$178$1$1               dim2_sla
+     0C:   000002BD  A$dim2_sla$940                     dim2_sla
+     0C:   000002BD  C$dim2_sla.c$179$1$1               dim2_sla
+     0C:   000002BD  C$dim2_sla.c$181$1$1               dim2_sla
+     0C:   000002BD  XG$in50hz_init$0$0                 dim2_sla
+     0C:   000002BE  A$dim2_sla$953                     dim2_sla
+     0C:   000002BE  C$dim2_sla.c$182$1$1               dim2_sla
+     0C:   000002BE  G$send$0$0                         dim2_sla
+     0C:   000002BE  _send                              dim2_sla
+     0C:   000002C0  A$dim2_sla$959                     dim2_sla
+     0C:   000002C0  C$dim2_sla.c$184$1$1               dim2_sla
+     0C:   000002C0  C$dim2_sla.c$185$1$1               dim2_sla
+     0C:   000002C3  A$dim2_sla$960                     dim2_sla
+     0C:   000002C5  A$dim2_sla$964                     dim2_sla
+     0C:   000002C5  C$dim2_sla.c$186$1$1               dim2_sla
+     0C:   000002C7  A$dim2_sla$967                     dim2_sla
+     0C:   000002C7  C$dim2_sla.c$187$1$1               dim2_sla
+     0C:   000002C7  XG$send$0$0                        dim2_sla
+     0C:   000002C8  A$dim2_sla$982                     dim2_sla
+ASxxxx Linker V02.00 + NoICE + sdld,  page 29.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                000000AE    000002AE =         686. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   000002C8  C$dim2_sla.c$189$1$1               dim2_sla
+     0C:   000002C8  C$dim2_sla.c$195$1$1               dim2_sla
+     0C:   000002C8  G$main$0$0                         dim2_sla
+     0C:   000002C8  _main                              dim2_sla
+     0C:   000002CB  A$dim2_sla$985                     dim2_sla
+     0C:   000002CB  C$dim2_sla.c$196$1$1               dim2_sla
+     0C:   000002CE  A$dim2_sla$988                     dim2_sla
+     0C:   000002CE  C$dim2_sla.c$200$1$1               dim2_sla
+     0C:   000002D1  A$dim2_sla$991                     dim2_sla
+     0C:   000002D1  C$dim2_sla.c$201$1$1               dim2_sla
+     0C:   000002D4  A$dim2_sla$994                     dim2_sla
+     0C:   000002D4  C$dim2_sla.c$202$1$1               dim2_sla
+     0C:   000002D7  A$dim2_sla$997                     dim2_sla
+     0C:   000002D7  C$dim2_sla.c$203$1$1               dim2_sla
+     0C:   000002DA  A$dim2_sla$1000                    dim2_sla
+     0C:   000002DA  C$dim2_sla.c$204$1$1               dim2_sla
+     0C:   000002DD  A$dim2_sla$1003                    dim2_sla
+     0C:   000002DD  C$dim2_sla.c$205$1$1               dim2_sla
+     0C:   000002E0  A$dim2_sla$1006                    dim2_sla
+     0C:   000002E0  C$dim2_sla.c$206$1$1               dim2_sla
+     0C:   000002E3  A$dim2_sla$1009                    dim2_sla
+     0C:   000002E3  C$dim2_sla.c$207$1$1               dim2_sla
+     0C:   000002E6  A$dim2_sla$1012                    dim2_sla
+     0C:   000002E6  C$dim2_sla.c$208$1$1               dim2_sla
+     0C:   000002E9  A$dim2_sla$1015                    dim2_sla
+     0C:   000002E9  C$dim2_sla.c$209$1$1               dim2_sla
+     0C:   000002EC  A$dim2_sla$1018                    dim2_sla
+     0C:   000002EC  C$dim2_sla.c$213$1$1               dim2_sla
+     0C:   000002EE  A$dim2_sla$1019                    dim2_sla
+     0C:   000002F1  A$dim2_sla$1020                    dim2_sla
+     0C:   000002F3  A$dim2_sla$1023                    dim2_sla
+     0C:   000002F3  C$dim2_sla.c$214$1$1               dim2_sla
+     0C:   000002F6  A$dim2_sla$1026                    dim2_sla
+     0C:   000002F6  C$dim2_sla.c$215$1$1               dim2_sla
+     0C:   000002F8  A$dim2_sla$1029                    dim2_sla
+     0C:   000002F8  C$dim2_sla.c$216$1$1               dim2_sla
+     0C:   000002FA  A$dim2_sla$1032                    dim2_sla
+     0C:   000002FA  C$dim2_sla.c$218$1$1               dim2_sla
+     0C:   000002FD  A$dim2_sla$1035                    dim2_sla
+     0C:   000002FD  C$dim2_sla.c$219$1$1               dim2_sla
+     0C:   00000300  A$dim2_sla$1038                    dim2_sla
+     0C:   00000300  C$dim2_sla.c$220$1$1               dim2_sla
+     0C:   00000303  A$dim2_sla$1041                    dim2_sla
+     0C:   00000303  C$dim2_sla.c$223$1$1               dim2_sla
+     0C:   00000305  A$dim2_sla$1044                    dim2_sla
+     0C:   00000305  C$dim2_sla.c$224$1$1               dim2_sla
+     0C:   00000308  A$dim2_sla$1047                    dim2_sla
+     0C:   00000308  C$dim2_sla.c$225$1$1               dim2_sla
+     0C:   0000030A  A$dim2_sla$1050                    dim2_sla
+     0C:   0000030A  C$dim2_sla.c$226$1$1               dim2_sla
+     0C:   0000030C  A$dim2_sla$1053                    dim2_sla
+ASxxxx Linker V02.00 + NoICE + sdld,  page 30.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CSEG                                000000AE    000002AE =         686. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   0000030C  C$dim2_sla.c$228$1$1               dim2_sla
+     0C:   0000030E  A$dim2_sla$1054                    dim2_sla
+     0C:   00000311  A$dim2_sla$1055                    dim2_sla
+     0C:   00000313  A$dim2_sla$1058                    dim2_sla
+     0C:   00000313  C$dim2_sla.c$229$1$1               dim2_sla
+     0C:   00000315  A$dim2_sla$1059                    dim2_sla
+     0C:   00000318  A$dim2_sla$1060                    dim2_sla
+     0C:   0000031A  A$dim2_sla$1063                    dim2_sla
+     0C:   0000031A  C$dim2_sla.c$230$1$1               dim2_sla
+     0C:   0000031C  A$dim2_sla$1066                    dim2_sla
+     0C:   0000031C  C$dim2_sla.c$232$1$1               dim2_sla
+     0C:   0000031F  A$dim2_sla$1069                    dim2_sla
+     0C:   0000031F  C$dim2_sla.c$233$1$1               dim2_sla
+     0C:   00000321  A$dim2_sla$1070                    dim2_sla
+     0C:   00000324  A$dim2_sla$1071                    dim2_sla
+     0C:   00000326  A$dim2_sla$1074                    dim2_sla
+     0C:   00000326  C$dim2_sla.c$234$1$1               dim2_sla
+     0C:   00000328  A$dim2_sla$1077                    dim2_sla
+     0C:   00000328  C$dim2_sla.c$236$1$1               dim2_sla
+     0C:   0000032B  A$dim2_sla$1080                    dim2_sla
+     0C:   0000032B  C$dim2_sla.c$238$2$2               dim2_sla
+     0C:   0000032E  A$dim2_sla$1084                    dim2_sla
+     0C:   0000032E  C$dim2_sla.c$241$1$1               dim2_sla
+     0C:   00000331  A$dim2_sla$1087                    dim2_sla
+     0C:   00000331  C$dim2_sla.c$242$1$1               dim2_sla
+     0C:   00000334  A$dim2_sla$1093                    dim2_sla
+     0C:   00000334  C$dim2_sla.c$244$1$1               dim2_sla
+     0C:   00000334  C$dim2_sla.c$269$2$3               dim2_sla
+     0C:   00000336  A$dim2_sla$1094                    dim2_sla
+     0C:   00000339  A$dim2_sla$1095                    dim2_sla
+     0C:   0000033B  A$dim2_sla$1096                    dim2_sla
+     0C:   0000033E  A$dim2_sla$1097                    dim2_sla
+     0C:   00000340  A$dim2_sla$1102                    dim2_sla
+     0C:   00000340  C$dim2_sla.c$276$3$4               dim2_sla
+     0C:   00000343  A$dim2_sla$1105                    dim2_sla
+     0C:   00000343  C$dim2_sla.c$277$3$4               dim2_sla
+     0C:   00000346  A$dim2_sla$1108                    dim2_sla
+     0C:   00000346  C$dim2_sla.c$280$1$1               dim2_sla
+     0C:   00000348  A$dim2_sla$1110                    dim2_sla
+     0C:   0000034A  A$dim2_sla$1111                    dim2_sla
+     0C:   0000034C  A$dim2_sla$1113                    dim2_sla
+     0C:   0000034D  A$dim2_sla$1114                    dim2_sla
+     0C:   00000350  A$dim2_sla$1115                    dim2_sla
+     0C:   00000351  A$dim2_sla$1117                    dim2_sla
+     0C:   00000352  A$dim2_sla$1118                    dim2_sla
+     0C:   00000353  A$dim2_sla$1119                    dim2_sla
+     0C:   00000355  A$dim2_sla$1120                    dim2_sla
+     0C:   00000357  A$dim2_sla$1123                    dim2_sla
+     0C:   00000357  C$dim2_sla.c$284$1$1               dim2_sla
+     0C:   00000357  XG$main$0$0                        dim2_sla
+     0C:   00000358  __sdcc_external_startup            _startup
+
+ASxxxx Linker V02.00 + NoICE + sdld,  page 31.
 
 Files Linked                              [ module(s) ]
 
-./dim2_sla.rel                            [  ]
-./fb_i2c.rel                              [  ]
+fb_i2c.rel                                [  ]
+dim2_sla.rel                              [  ]
 
 
 Libraries Linked                          [ object file ]
@@ -408,7 +1214,7 @@ C:\Programme\SDCC\bin\..\lib\small-stack-auto/mcs51.lib
 C:\Programme\SDCC\bin\..\lib\small-stack-auto/libsdcc.lib
                                           [ _startup.rel ]
 
-ASxxxx Linker V03.00 + NoICE + sdld,  page 18.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 32.
 
 User Base Address Definitions
 

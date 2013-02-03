@@ -2,6 +2,7 @@
 -i dim2_sla.hex
 -M
 -Y
+-y
 -b HOME = 0x0000
 -b ISEG = 0x0000
 -b BSEG = 0x0000
@@ -11,7 +12,7 @@
 -l libint
 -l liblong
 -l libfloat
-./dim2_sla.rel
-./fb_i2c.rel
+fb_i2c.rel
+dim2_sla.rel
 
 -e

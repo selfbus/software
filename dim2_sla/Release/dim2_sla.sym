@@ -4,6 +4,225 @@ Symbol Table
 
     .__.ABS.                                                    =  0000 G
     A                                                              00E0 
+ 18 A$dim2_sla$1000                                                0127 GR
+ 18 A$dim2_sla$1003                                                012A GR
+ 18 A$dim2_sla$1006                                                012D GR
+ 18 A$dim2_sla$1009                                                0130 GR
+ 18 A$dim2_sla$1012                                                0133 GR
+ 18 A$dim2_sla$1015                                                0136 GR
+ 18 A$dim2_sla$1018                                                0139 GR
+ 18 A$dim2_sla$1019                                                013B GR
+ 18 A$dim2_sla$1020                                                013E GR
+ 18 A$dim2_sla$1023                                                0140 GR
+ 18 A$dim2_sla$1026                                                0143 GR
+ 18 A$dim2_sla$1029                                                0145 GR
+ 18 A$dim2_sla$1032                                                0147 GR
+ 18 A$dim2_sla$1035                                                014A GR
+ 18 A$dim2_sla$1038                                                014D GR
+ 18 A$dim2_sla$1041                                                0150 GR
+ 18 A$dim2_sla$1044                                                0152 GR
+ 18 A$dim2_sla$1047                                                0155 GR
+ 18 A$dim2_sla$1050                                                0157 GR
+ 18 A$dim2_sla$1053                                                0159 GR
+ 18 A$dim2_sla$1054                                                015B GR
+ 18 A$dim2_sla$1055                                                015E GR
+ 18 A$dim2_sla$1058                                                0160 GR
+ 18 A$dim2_sla$1059                                                0162 GR
+ 18 A$dim2_sla$1060                                                0165 GR
+ 18 A$dim2_sla$1063                                                0167 GR
+ 18 A$dim2_sla$1066                                                0169 GR
+ 18 A$dim2_sla$1069                                                016C GR
+ 18 A$dim2_sla$1070                                                016E GR
+ 18 A$dim2_sla$1071                                                0171 GR
+ 18 A$dim2_sla$1074                                                0173 GR
+ 18 A$dim2_sla$1077                                                0175 GR
+ 18 A$dim2_sla$1080                                                0178 GR
+ 18 A$dim2_sla$1084                                                017B GR
+ 18 A$dim2_sla$1087                                                017E GR
+ 18 A$dim2_sla$1093                                                0181 GR
+ 18 A$dim2_sla$1094                                                0183 GR
+ 18 A$dim2_sla$1095                                                0186 GR
+ 18 A$dim2_sla$1096                                                0188 GR
+ 18 A$dim2_sla$1097                                                018B GR
+ 18 A$dim2_sla$1102                                                018D GR
+ 18 A$dim2_sla$1105                                                0190 GR
+ 18 A$dim2_sla$1108                                                0193 GR
+ 18 A$dim2_sla$1110                                                0195 GR
+ 18 A$dim2_sla$1111                                                0197 GR
+ 18 A$dim2_sla$1113                                                0199 GR
+ 18 A$dim2_sla$1114                                                019A GR
+ 18 A$dim2_sla$1115                                                019D GR
+ 18 A$dim2_sla$1117                                                019E GR
+ 18 A$dim2_sla$1118                                                019F GR
+ 18 A$dim2_sla$1119                                                01A0 GR
+ 18 A$dim2_sla$1120                                                01A2 GR
+ 18 A$dim2_sla$1123                                                01A4 GR
+  F A$dim2_sla$549                                                 0000 GR
+  F A$dim2_sla$550                                                 0003 GR
+  F A$dim2_sla$552                                                 000B GR
+  F A$dim2_sla$554                                                 0013 GR
+  F A$dim2_sla$556                                                 001B GR
+  F A$dim2_sla$558                                                 0023 GR
+  F A$dim2_sla$560                                                 002B GR
+  F A$dim2_sla$562                                                 0033 GR
+ 16 A$dim2_sla$579                                                 0000 GR
+ 16 A$dim2_sla$580                                                 0001 GR
+ 16 A$dim2_sla$581                                                 0003 GR
+ 16 A$dim2_sla$585                                                 0005 GR
+ 16 A$dim2_sla$586                                                 0006 GR
+ 16 A$dim2_sla$587                                                 0008 GR
+ 16 A$dim2_sla$591                                                 000A GR
+ 16 A$dim2_sla$592                                                 000B GR
+ 16 A$dim2_sla$593                                                 000D GR
+ 16 A$dim2_sla$597                                                 000F GR
+ 16 A$dim2_sla$601                                                 0012 GR
+ 16 A$dim2_sla$605                                                 0015 GR
+ 17 A$dim2_sla$607                                                 0000 GR
+  F A$dim2_sla$614                                                 0036 GR
+  F A$dim2_sla$616                                                 0039 GR
+ 18 A$dim2_sla$639                                                 0000 GR
+ 18 A$dim2_sla$640                                                 0002 GR
+ 18 A$dim2_sla$641                                                 0004 GR
+ 18 A$dim2_sla$642                                                 0006 GR
+ 18 A$dim2_sla$643                                                 0008 GR
+ 18 A$dim2_sla$644                                                 000A GR
+ 18 A$dim2_sla$647                                                 000D GR
+ 18 A$dim2_sla$648                                                 000F GR
+ 18 A$dim2_sla$651                                                 0012 GR
+ 18 A$dim2_sla$655                                                 0015 GR
+ 18 A$dim2_sla$656                                                 0017 GR
+ 18 A$dim2_sla$659                                                 001A GR
+ 18 A$dim2_sla$663                                                 001C GR
+ 18 A$dim2_sla$664                                                 001E GR
+ 18 A$dim2_sla$667                                                 0021 GR
+ 18 A$dim2_sla$671                                                 0024 GR
+ 18 A$dim2_sla$672                                                 0026 GR
+ 18 A$dim2_sla$673                                                 0028 GR
+ 18 A$dim2_sla$674                                                 002A GR
+ 18 A$dim2_sla$675                                                 002C GR
+ 18 A$dim2_sla$676                                                 002E GR
+ 18 A$dim2_sla$679                                                 0030 GR
+ 18 A$dim2_sla$680                                                 0032 GR
+ 18 A$dim2_sla$681                                                 0034 GR
+ 18 A$dim2_sla$682                                                 0036 GR
+ 18 A$dim2_sla$683                                                 0038 GR
+ 18 A$dim2_sla$684                                                 003A GR
+ 18 A$dim2_sla$685                                                 003B GR
+ 18 A$dim2_sla$686                                                 003D GR
+ 18 A$dim2_sla$690                                                 003F GR
+ 18 A$dim2_sla$691                                                 0041 GR
+ 18 A$dim2_sla$692                                                 0043 GR
+ 18 A$dim2_sla$693                                                 0045 GR
+ 18 A$dim2_sla$694                                                 0046 GR
+ 18 A$dim2_sla$695                                                 0047 GR
+ 18 A$dim2_sla$696                                                 0048 GR
+ 18 A$dim2_sla$697                                                 004A GR
+ 18 A$dim2_sla$698                                                 004B GR
+ 18 A$dim2_sla$702                                                 004C GR
+ 18 A$dim2_sla$705                                                 004E GR
+ 18 A$dim2_sla$706                                                 0050 GR
+ 18 A$dim2_sla$707                                                 0052 GR
+ 18 A$dim2_sla$708                                                 0054 GR
+ 18 A$dim2_sla$709                                                 0056 GR
+ 18 A$dim2_sla$712                                                 0058 GR
+ 18 A$dim2_sla$728                                                 0059 GR
+ 18 A$dim2_sla$731                                                 005B GR
+ 18 A$dim2_sla$732                                                 005D GR
+ 18 A$dim2_sla$735                                                 005F GR
+ 18 A$dim2_sla$736                                                 0061 GR
+ 18 A$dim2_sla$739                                                 0063 GR
+ 18 A$dim2_sla$743                                                 0065 GR
+ 18 A$dim2_sla$744                                                 0067 GR
+ 18 A$dim2_sla$747                                                 0069 GR
+ 18 A$dim2_sla$751                                                 006B GR
+ 18 A$dim2_sla$752                                                 006D GR
+ 18 A$dim2_sla$755                                                 0070 GR
+ 18 A$dim2_sla$758                                                 0073 GR
+ 18 A$dim2_sla$761                                                 0075 GR
+ 18 A$dim2_sla$767                                                 0077 GR
+ 18 A$dim2_sla$780                                                 0078 GR
+ 18 A$dim2_sla$781                                                 007A GR
+ 18 A$dim2_sla$782                                                 007C GR
+ 18 A$dim2_sla$783                                                 007E GR
+ 18 A$dim2_sla$786                                                 0081 GR
+ 18 A$dim2_sla$787                                                 0083 GR
+ 18 A$dim2_sla$792                                                 0085 GR
+ 18 A$dim2_sla$793                                                 0086 GR
+ 18 A$dim2_sla$794                                                 0088 GR
+ 18 A$dim2_sla$797                                                 008A GR
+ 18 A$dim2_sla$798                                                 008B GR
+ 18 A$dim2_sla$799                                                 008D GR
+ 18 A$dim2_sla$800                                                 008F GR
+ 18 A$dim2_sla$802                                                 0092 GR
+ 18 A$dim2_sla$805                                                 0094 GR
+ 18 A$dim2_sla$806                                                 0096 GR
+ 18 A$dim2_sla$810                                                 0098 GR
+ 18 A$dim2_sla$812                                                 009B GR
+ 18 A$dim2_sla$813                                                 009D GR
+ 18 A$dim2_sla$814                                                 009E GR
+ 18 A$dim2_sla$815                                                 00A0 GR
+ 18 A$dim2_sla$818                                                 00A2 GR
+ 18 A$dim2_sla$822                                                 00A4 GR
+ 18 A$dim2_sla$825                                                 00A7 GR
+ 18 A$dim2_sla$826                                                 00A9 GR
+ 18 A$dim2_sla$829                                                 00AB GR
+ 18 A$dim2_sla$830                                                 00AD GR
+ 18 A$dim2_sla$832                                                 00B0 GR
+ 18 A$dim2_sla$833                                                 00B2 GR
+ 18 A$dim2_sla$834                                                 00B3 GR
+ 18 A$dim2_sla$836                                                 00B5 GR
+ 18 A$dim2_sla$837                                                 00B7 GR
+ 18 A$dim2_sla$841                                                 00B9 GR
+ 18 A$dim2_sla$845                                                 00BB GR
+ 18 A$dim2_sla$846                                                 00BD GR
+ 18 A$dim2_sla$848                                                 00C0 GR
+ 18 A$dim2_sla$849                                                 00C2 GR
+ 18 A$dim2_sla$850                                                 00C3 GR
+ 18 A$dim2_sla$852                                                 00C5 GR
+ 18 A$dim2_sla$853                                                 00C7 GR
+ 18 A$dim2_sla$857                                                 00C9 GR
+ 18 A$dim2_sla$858                                                 00CB GR
+ 18 A$dim2_sla$862                                                 00CD GR
+ 18 A$dim2_sla$863                                                 00CF GR
+ 18 A$dim2_sla$865                                                 00D2 GR
+ 18 A$dim2_sla$866                                                 00D4 GR
+ 18 A$dim2_sla$867                                                 00D5 GR
+ 18 A$dim2_sla$869                                                 00D7 GR
+ 18 A$dim2_sla$870                                                 00D9 GR
+ 18 A$dim2_sla$874                                                 00DB GR
+ 18 A$dim2_sla$878                                                 00DD GR
+ 18 A$dim2_sla$879                                                 00DF GR
+ 18 A$dim2_sla$881                                                 00E2 GR
+ 18 A$dim2_sla$882                                                 00E4 GR
+ 18 A$dim2_sla$883                                                 00E5 GR
+ 18 A$dim2_sla$885                                                 00E7 GR
+ 18 A$dim2_sla$886                                                 00E9 GR
+ 18 A$dim2_sla$890                                                 00EB GR
+ 18 A$dim2_sla$892                                                 00ED GR
+ 18 A$dim2_sla$893                                                 00EF GR
+ 18 A$dim2_sla$894                                                 00F1 GR
+ 18 A$dim2_sla$897                                                 00F3 GR
+ 18 A$dim2_sla$915                                                 00F4 GR
+ 18 A$dim2_sla$918                                                 00F7 GR
+ 18 A$dim2_sla$919                                                 00F9 GR
+ 18 A$dim2_sla$920                                                 00FC GR
+ 18 A$dim2_sla$923                                                 00FE GR
+ 18 A$dim2_sla$926                                                 0100 GR
+ 18 A$dim2_sla$929                                                 0102 GR
+ 18 A$dim2_sla$932                                                 0105 GR
+ 18 A$dim2_sla$935                                                 0108 GR
+ 18 A$dim2_sla$940                                                 010A GR
+ 18 A$dim2_sla$953                                                 010B GR
+ 18 A$dim2_sla$959                                                 010D GR
+ 18 A$dim2_sla$960                                                 0110 GR
+ 18 A$dim2_sla$964                                                 0112 GR
+ 18 A$dim2_sla$967                                                 0114 GR
+ 18 A$dim2_sla$982                                                 0115 GR
+ 18 A$dim2_sla$985                                                 0118 GR
+ 18 A$dim2_sla$988                                                 011B GR
+ 18 A$dim2_sla$991                                                 011E GR
+ 18 A$dim2_sla$994                                                 0121 GR
+ 18 A$dim2_sla$997                                                 0124 GR
     A.0                                                            00E0 
     A.1                                                            00E1 
     A.2                                                            00E2 
@@ -31,6 +250,112 @@ Symbol Table
     B.5                                                            00F5 
     B.6                                                            00F6 
     B.7                                                            00F7 
+ 18 C$dim2_sla.c$108$1$1                                        =  00A4 GR
+ 18 C$dim2_sla.c$142$1$1                                        =  00A7 GR
+ 18 C$dim2_sla.c$151$2$5                                        =  00AB GR
+ 18 C$dim2_sla.c$152$2$5                                        =  00B9 GR
+ 18 C$dim2_sla.c$153$2$5                                        =  00BB GR
+ 18 C$dim2_sla.c$154$2$5                                        =  00C9 GR
+ 18 C$dim2_sla.c$158$2$6                                        =  00CD GR
+ 18 C$dim2_sla.c$159$2$6                                        =  00DB GR
+ 18 C$dim2_sla.c$160$2$6                                        =  00DD GR
+ 18 C$dim2_sla.c$161$2$6                                        =  00EB GR
+ 18 C$dim2_sla.c$166$1$1                                        =  00F3 GR
+ 18 C$dim2_sla.c$170$1$1                                        =  00F4 GR
+ 18 C$dim2_sla.c$172$1$1                                        =  00F4 GR
+ 18 C$dim2_sla.c$173$1$1                                        =  00F7 GR
+ 18 C$dim2_sla.c$174$1$1                                        =  00FE GR
+ 18 C$dim2_sla.c$175$1$1                                        =  0100 GR
+ 18 C$dim2_sla.c$176$1$1                                        =  0102 GR
+ 18 C$dim2_sla.c$177$1$1                                        =  0105 GR
+ 18 C$dim2_sla.c$178$1$1                                        =  0108 GR
+ 18 C$dim2_sla.c$179$1$1                                        =  010A GR
+ 18 C$dim2_sla.c$181$1$1                                        =  010A GR
+ 18 C$dim2_sla.c$182$1$1                                        =  010B GR
+ 18 C$dim2_sla.c$184$1$1                                        =  010D GR
+ 18 C$dim2_sla.c$185$1$1                                        =  010D GR
+ 18 C$dim2_sla.c$186$1$1                                        =  0112 GR
+ 18 C$dim2_sla.c$187$1$1                                        =  0114 GR
+ 18 C$dim2_sla.c$189$1$1                                        =  0115 GR
+ 18 C$dim2_sla.c$195$1$1                                        =  0115 GR
+ 18 C$dim2_sla.c$196$1$1                                        =  0118 GR
+ 18 C$dim2_sla.c$200$1$1                                        =  011B GR
+ 18 C$dim2_sla.c$201$1$1                                        =  011E GR
+ 18 C$dim2_sla.c$202$1$1                                        =  0121 GR
+ 18 C$dim2_sla.c$203$1$1                                        =  0124 GR
+ 18 C$dim2_sla.c$204$1$1                                        =  0127 GR
+ 18 C$dim2_sla.c$205$1$1                                        =  012A GR
+ 18 C$dim2_sla.c$206$1$1                                        =  012D GR
+ 18 C$dim2_sla.c$207$1$1                                        =  0130 GR
+ 18 C$dim2_sla.c$208$1$1                                        =  0133 GR
+ 18 C$dim2_sla.c$209$1$1                                        =  0136 GR
+ 18 C$dim2_sla.c$213$1$1                                        =  0139 GR
+ 18 C$dim2_sla.c$214$1$1                                        =  0140 GR
+ 18 C$dim2_sla.c$215$1$1                                        =  0143 GR
+ 18 C$dim2_sla.c$216$1$1                                        =  0145 GR
+ 18 C$dim2_sla.c$218$1$1                                        =  0147 GR
+ 18 C$dim2_sla.c$219$1$1                                        =  014A GR
+ 18 C$dim2_sla.c$220$1$1                                        =  014D GR
+ 18 C$dim2_sla.c$223$1$1                                        =  0150 GR
+ 18 C$dim2_sla.c$224$1$1                                        =  0152 GR
+ 18 C$dim2_sla.c$225$1$1                                        =  0155 GR
+ 18 C$dim2_sla.c$226$1$1                                        =  0157 GR
+ 18 C$dim2_sla.c$228$1$1                                        =  0159 GR
+ 18 C$dim2_sla.c$229$1$1                                        =  0160 GR
+ 18 C$dim2_sla.c$230$1$1                                        =  0167 GR
+ 18 C$dim2_sla.c$232$1$1                                        =  0169 GR
+ 18 C$dim2_sla.c$233$1$1                                        =  016C GR
+ 18 C$dim2_sla.c$234$1$1                                        =  0173 GR
+ 18 C$dim2_sla.c$236$1$1                                        =  0175 GR
+ 18 C$dim2_sla.c$238$2$2                                        =  0178 GR
+ 18 C$dim2_sla.c$241$1$1                                        =  017B GR
+ 18 C$dim2_sla.c$242$1$1                                        =  017E GR
+ 18 C$dim2_sla.c$244$1$1                                        =  0181 GR
+ 18 C$dim2_sla.c$269$2$3                                        =  0181 GR
+ 18 C$dim2_sla.c$276$3$4                                        =  018D GR
+ 18 C$dim2_sla.c$277$3$4                                        =  0190 GR
+ 18 C$dim2_sla.c$280$1$1                                        =  0193 GR
+ 18 C$dim2_sla.c$284$1$1                                        =  01A4 GR
+ 16 C$dim2_sla.c$37$1$1                                         =  0000 GR
+ 16 C$dim2_sla.c$38$1$1                                         =  0005 GR
+ 16 C$dim2_sla.c$39$1$1                                         =  000A GR
+ 16 C$dim2_sla.c$40$1$1                                         =  000F GR
+ 16 C$dim2_sla.c$41$1$1                                         =  0012 GR
+ 16 C$dim2_sla.c$46$1$1                                         =  0015 GR
+ 18 C$dim2_sla.c$48$0$0                                         =  0000 GR
+ 18 C$dim2_sla.c$50$1$1                                         =  000D GR
+ 18 C$dim2_sla.c$51$1$1                                         =  0012 GR
+ 18 C$dim2_sla.c$52$1$1                                         =  0015 GR
+ 18 C$dim2_sla.c$53$1$1                                         =  001A GR
+ 18 C$dim2_sla.c$54$1$1                                         =  001C GR
+ 18 C$dim2_sla.c$55$1$1                                         =  0021 GR
+ 18 C$dim2_sla.c$56$1$1                                         =  0024 GR
+ 18 C$dim2_sla.c$57$1$1                                         =  0030 GR
+ 18 C$dim2_sla.c$58$1$1                                         =  003F GR
+ 18 C$dim2_sla.c$59$1$1                                         =  004C GR
+ 18 C$dim2_sla.c$60$1$1                                         =  004E GR
+ 18 C$dim2_sla.c$61$1$1                                         =  0058 GR
+ 18 C$dim2_sla.c$63$1$1                                         =  0059 GR
+ 18 C$dim2_sla.c$66$1$1                                         =  0059 GR
+ 18 C$dim2_sla.c$68$2$2                                         =  005B GR
+ 18 C$dim2_sla.c$69$2$2                                         =  005F GR
+ 18 C$dim2_sla.c$70$2$2                                         =  0063 GR
+ 18 C$dim2_sla.c$71$2$2                                         =  0065 GR
+ 18 C$dim2_sla.c$72$2$2                                         =  0069 GR
+ 18 C$dim2_sla.c$74$1$1                                         =  006B GR
+ 18 C$dim2_sla.c$76$2$3                                         =  0070 GR
+ 18 C$dim2_sla.c$77$2$3                                         =  0073 GR
+ 18 C$dim2_sla.c$78$2$3                                         =  0075 GR
+ 18 C$dim2_sla.c$80$1$1                                         =  0077 GR
+ 18 C$dim2_sla.c$81$1$1                                         =  0077 GR
+ 18 C$dim2_sla.c$84$1$1                                         =  0078 GR
+ 18 C$dim2_sla.c$89$1$1                                         =  0081 GR
+ 18 C$dim2_sla.c$90$1$1                                         =  0085 GR
+ 18 C$dim2_sla.c$91$1$1                                         =  0085 GR
+ 18 C$dim2_sla.c$92$2$2                                         =  008A GR
+ 18 C$dim2_sla.c$93$3$3                                         =  0094 GR
+ 18 C$dim2_sla.c$96$2$2                                         =  0098 GR
+ 18 C$dim2_sla.c$98$3$4                                         =  00A2 GR
     CPRL2                                                          00C8 
     CT2                                                            00C9 
     CY                                                             00D7 
@@ -46,6 +371,160 @@ Symbol Table
     EXEN2                                                          00CB 
     EXF2                                                           00CE 
     F0                                                             00D5 
+    G$ACC$0$0                                                   =  00E0 G
+    G$AUXR1$0$0                                                 =  00A2 G
+    G$B$0$0                                                     =  00F0 G
+    G$BRGCON$0$0                                                =  00BD G
+    G$BRGR0$0$0                                                 =  00BE G
+    G$BRGR1$0$0                                                 =  00BF G
+    G$CMP1$0$0                                                  =  00AC G
+    G$CMP2$0$0                                                  =  00AD G
+    G$DIVM$0$0                                                  =  0095 G
+    G$DPH$0$0                                                   =  0083 G
+    G$DPL$0$0                                                   =  0082 G
+    G$FMADRH$0$0                                                =  00E7 G
+    G$FMADRL$0$0                                                =  00E6 G
+    G$FMCON$0$0                                                 =  00E4 G
+    G$FMDATA$0$0                                                =  00E5 G
+    G$I2ADR$0$0                                                 =  00DB G
+    G$I2CON$0$0                                                 =  00D8 G
+    G$I2CON_0$0$0                                               =  00D8 G
+    G$I2CON_2$0$0                                               =  00DA G
+    G$I2CON_3$0$0                                               =  00DB G
+    G$I2CON_4$0$0                                               =  00DC G
+    G$I2CON_5$0$0                                               =  00DD G
+    G$I2CON_6$0$0                                               =  00DE G
+    G$I2DAT$0$0                                                 =  00DA G
+    G$I2SCLH$0$0                                                =  00DD G
+    G$I2SCLL$0$0                                                =  00DC G
+    G$I2STAT$0$0                                                =  00D9 G
+    G$IEN0$0$0                                                  =  00A8 G
+    G$IEN0_0$0$0                                                =  00A8 G
+    G$IEN0_1$0$0                                                =  00A9 G
+    G$IEN0_2$0$0                                                =  00AA G
+    G$IEN0_3$0$0                                                =  00AB G
+    G$IEN0_4$0$0                                                =  00AC G
+    G$IEN0_5$0$0                                                =  00AD G
+    G$IEN0_6$0$0                                                =  00AE G
+    G$IEN0_7$0$0                                                =  00AF G
+    G$IEN1$0$0                                                  =  00E8 G
+    G$IEN1_0$0$0                                                =  00E8 G
+    G$IEN1_1$0$0                                                =  00E9 G
+    G$IEN1_2$0$0                                                =  00EA G
+    G$IP0$0$0                                                   =  00B8 G
+    G$IP0H$0$0                                                  =  00B7 G
+    G$IP0_0$0$0                                                 =  00B8 G
+    G$IP0_1$0$0                                                 =  00B9 G
+    G$IP0_2$0$0                                                 =  00BA G
+    G$IP0_3$0$0                                                 =  00BB G
+    G$IP0_4$0$0                                                 =  00BC G
+    G$IP0_5$0$0                                                 =  00BD G
+    G$IP0_6$0$0                                                 =  00BE G
+    G$IP1$0$0                                                   =  00F8 G
+    G$IP1H$0$0                                                  =  00F7 G
+    G$IP1_0$0$0                                                 =  00F8 G
+    G$IP1_1$0$0                                                 =  00F9 G
+    G$IP1_2$0$0                                                 =  00FA G
+    G$IP1_6$0$0                                                 =  00FE G
+    G$KBCON$0$0                                                 =  0094 G
+    G$KBMASK$0$0                                                =  0086 G
+    G$KBPATN$0$0                                                =  0093 G
+    G$P0$0$0                                                    =  0080 G
+    G$P0M1$0$0                                                  =  0084 G
+    G$P0M2$0$0                                                  =  0085 G
+    G$P0_0$0$0                                                  =  0080 G
+    G$P0_1$0$0                                                  =  0081 G
+    G$P0_2$0$0                                                  =  0082 G
+    G$P0_3$0$0                                                  =  0083 G
+    G$P0_4$0$0                                                  =  0084 G
+    G$P0_5$0$0                                                  =  0085 G
+    G$P0_6$0$0                                                  =  0086 G
+    G$P0_7$0$0                                                  =  0087 G
+    G$P1$0$0                                                    =  0090 G
+    G$P1M1$0$0                                                  =  0091 G
+    G$P1M2$0$0                                                  =  0092 G
+    G$P1_0$0$0                                                  =  0090 G
+    G$P1_1$0$0                                                  =  0091 G
+    G$P1_2$0$0                                                  =  0092 G
+    G$P1_3$0$0                                                  =  0093 G
+    G$P1_4$0$0                                                  =  0094 G
+    G$P1_5$0$0                                                  =  0095 G
+    G$P1_6$0$0                                                  =  0096 G
+    G$P1_7$0$0                                                  =  0097 G
+    G$P3$0$0                                                    =  00B0 G
+    G$P3M1$0$0                                                  =  00B1 G
+    G$P3M2$0$0                                                  =  00B2 G
+    G$P3_0$0$0                                                  =  00B0 G
+    G$P3_1$0$0                                                  =  00B1 G
+    G$PCON$0$0                                                  =  0087 G
+    G$PCONA$0$0                                                 =  00B5 G
+    G$PSW$0$0                                                   =  00D0 G
+    G$PSW_0$0$0                                                 =  00D0 G
+    G$PSW_1$0$0                                                 =  00D1 G
+    G$PSW_2$0$0                                                 =  00D2 G
+    G$PSW_3$0$0                                                 =  00D3 G
+    G$PSW_4$0$0                                                 =  00D4 G
+    G$PSW_5$0$0                                                 =  00D5 G
+    G$PSW_6$0$0                                                 =  00D6 G
+    G$PSW_7$0$0                                                 =  00D7 G
+    G$PT0AD$0$0                                                 =  00F6 G
+    G$RAM$0$0                                                   =  0000 G
+    G$RSTSRC$0$0                                                =  00DF G
+    G$RTCCON$0$0                                                =  00D1 G
+    G$RTCH$0$0                                                  =  00D2 G
+    G$RTCL$0$0                                                  =  00D3 G
+    G$SADDR$0$0                                                 =  00A9 G
+    G$SADEN$0$0                                                 =  00B9 G
+    G$SBUF$0$0                                                  =  0099 G
+    G$SCON$0$0                                                  =  0098 G
+    G$SCON_0$0$0                                                =  0098 G
+    G$SCON_1$0$0                                                =  0099 G
+    G$SCON_2$0$0                                                =  009A G
+    G$SCON_3$0$0                                                =  009B G
+    G$SCON_4$0$0                                                =  009C G
+    G$SCON_5$0$0                                                =  009D G
+    G$SCON_6$0$0                                                =  009E G
+    G$SCON_7$0$0                                                =  009F G
+    G$SP$0$0                                                    =  0081 G
+    G$SSTAT$0$0                                                 =  00BA G
+    G$TAMOD$0$0                                                 =  008F G
+    G$TCON$0$0                                                  =  0088 G
+    G$TCON_0$0$0                                                =  0088 G
+    G$TCON_1$0$0                                                =  0089 G
+    G$TCON_2$0$0                                                =  008A G
+    G$TCON_3$0$0                                                =  008B G
+    G$TCON_4$0$0                                                =  008C G
+    G$TCON_5$0$0                                                =  008D G
+    G$TCON_6$0$0                                                =  008E G
+    G$TCON_7$0$0                                                =  008F G
+    G$TH0$0$0                                                   =  008C G
+    G$TH1$0$0                                                   =  008D G
+    G$TL0$0$0                                                   =  008A G
+    G$TL1$0$0                                                   =  008B G
+    G$TMOD$0$0                                                  =  0089 G
+    G$TRIM$0$0                                                  =  0096 G
+    G$WDCON$0$0                                                 =  00A7 G
+    G$WDL$0$0                                                   =  00C1 G
+    G$WFEED1$0$0                                                =  00C2 G
+    G$WFEED2$0$0                                                =  00C3 G
+  5 G$bytenummer$0$0                                            =  0004 GR
+  5 G$cmd$0$0                                                   =  000E GR
+  5 G$dimm_I2C$0$0                                              =  0000 GR
+  5 G$dimmcompare$0$0                                           =  000D GR
+  5 G$dimmzl$0$0                                                =  000B GR
+ 18 G$ex1_int$0$0                                               =  0078 GR
+ 18 G$i2c_int$0$0                                               =  0000 GR
+ 18 G$in50hz_init$0$0                                           =  00F4 GR
+  A G$locked$0$0                                                =  0000 GR
+  5 G$m$0$0                                                     =  0009 GR
+ 18 G$main$0$0                                                  =  0115 GR
+  5 G$mk$0$0                                                    =  0002 GR
+  5 G$mode$0$0                                                  =  000C GR
+ 18 G$nulldurchgang$0$0                                         =  0059 GR
+  5 G$phase$0$0                                                 =  000F GR
+ 18 G$send$0$0                                                  =  010B GR
+  5 G$sp$0$0                                                    =  0007 GR
+  5 G$zl_50hz$0$0                                               =  0005 GR
     IE                                                             00A8 
     IE.0                                                           00A8 
     IE.1                                                           00A9 
@@ -179,6 +658,12 @@ Symbol Table
     TR1                                                            008E 
     TR2                                                            00CA 
     TXD                                                            00B1 
+ 18 XG$ex1_int$0$0                                              =  00F3 GR
+ 18 XG$i2c_int$0$0                                              =  0058 GR
+ 18 XG$in50hz_init$0$0                                          =  010A GR
+ 18 XG$main$0$0                                                 =  01A4 GR
+ 18 XG$nulldurchgang$0$0                                        =  0077 GR
+ 18 XG$send$0$0                                                 =  0114 GR
     _ACC                                                        =  00E0 G
     _AUXR1                                                      =  00A2 G
     _B                                                          =  00F0 G
@@ -276,6 +761,7 @@ Symbol Table
     _PSW_6                                                      =  00D6 G
     _PSW_7                                                      =  00D7 G
     _PT0AD                                                      =  00F6 G
+    _RAM                                                        =  0000 G
     _RSTSRC                                                     =  00DF G
     _RTCCON                                                     =  00D1 G
     _RTCH                                                       =  00D2 G
@@ -314,30 +800,31 @@ Symbol Table
     _WDL                                                        =  00C1 G
     _WFEED1                                                     =  00C2 G
     _WFEED2                                                     =  00C3 G
-  E __interrupt_vect                                               0000 R
+  F __interrupt_vect                                               0000 R
     __mcs51_genRAMCLEAR                                            **** GX
     __mcs51_genXINIT                                               **** GX
     __mcs51_genXRAMCLEAR                                           **** GX
     __sdcc_gsinit_startup                                          **** GX
-  E __sdcc_program_startup                                         0036 GR
-  6 __start__stack                                                 0000 GR
+  F __sdcc_program_startup                                         0036 GR
+  7 __start__stack                                                 0000 GR
   5 _bytenummer                                                    0004 GR
   5 _cmd                                                           000E GR
   5 _dimm_I2C                                                      0000 GR
   5 _dimmcompare                                                   000D GR
   5 _dimmzl                                                        000B GR
- 17 _ex1_int                                                       0065 GR
- 17 _i2c_int                                                       0000 GR
+ 18 _ex1_int                                                       0078 GR
+ 18 _i2c_int                                                       0000 GR
     _i2c_sla_init                                                  **** GX
- 17 _in50hz_init                                                   00CB GR
+ 18 _in50hz_init                                                   00F4 GR
+  A _locked                                                        0000 GR
   5 _m                                                             0009 GR
- 17 _main                                                          00EC GR
+ 18 _main                                                          0115 GR
   5 _mk                                                            0002 GR
   5 _mode                                                          000C GR
- 17 _nulldurchgang                                                 0046 GR
- 17 _send                                                          00E2 GR
+ 18 _nulldurchgang                                                 0059 GR
+  5 _phase                                                         000F GR
+ 18 _send                                                          010B GR
   5 _sp                                                            0007 GR
- 17 _tim0_int                                                      0097 GR
   5 _zl_50hz                                                       0005 GR
     a                                                              00E0 
     a.0                                                            00E0 
@@ -533,25 +1020,26 @@ Area Table
    2 RSEG0                                      size    0   flags 8
    3 RSEG1                                      size    0   flags 8
    4 REG_BANK_0                                 size    8   flags 4
-   5 DSEG                                       size    F   flags 0
-   6 SSEG                                       size    1   flags 0
-   7 ISEG                                       size    0   flags 0
-   8 IABS                                       size    0   flags 8
-   9 BSEG                                       size    0   flags 80
-   A PSEG                                       size    0   flags 50
-   B XSEG                                       size    0   flags 40
-   C XABS                                       size    0   flags 48
-   D XISEG                                      size    0   flags 40
-   E HOME                                       size   3B   flags 20
-   F GSINIT0                                    size    0   flags 20
-  10 GSINIT1                                    size    0   flags 20
-  11 GSINIT2                                    size    0   flags 20
-  12 GSINIT3                                    size    0   flags 20
-  13 GSINIT4                                    size    0   flags 20
-  14 GSINIT5                                    size    0   flags 20
-  15 GSINIT                                     size   15   flags 20
-  16 GSFINAL                                    size    3   flags 20
-  17 CSEG                                       size  19D   flags 20
-  18 CONST                                      size    0   flags 20
-  19 XINIT                                      size    0   flags 20
-  1A CABS                                       size    0   flags 28
+   5 DSEG                                       size   10   flags 0
+   6 OSEG                                       size    0   flags 4
+   7 SSEG                                       size    1   flags 0
+   8 ISEG                                       size    0   flags 0
+   9 IABS                                       size    0   flags 8
+   A BSEG                                       size    1   flags 80
+   B PSEG                                       size    0   flags 50
+   C XSEG                                       size    0   flags 40
+   D XABS                                       size    0   flags 48
+   E XISEG                                      size    0   flags 40
+   F HOME                                       size   3B   flags 20
+  10 GSINIT0                                    size    0   flags 20
+  11 GSINIT1                                    size    0   flags 20
+  12 GSINIT2                                    size    0   flags 20
+  13 GSINIT3                                    size    0   flags 20
+  14 GSINIT4                                    size    0   flags 20
+  15 GSINIT5                                    size    0   flags 20
+  16 GSINIT                                     size   17   flags 20
+  17 GSFINAL                                    size    3   flags 20
+  18 CSEG                                       size  1A5   flags 20
+  19 CONST                                      size    0   flags 20
+  1A XINIT                                      size    0   flags 20
+  1B CABS                                       size    0   flags 28

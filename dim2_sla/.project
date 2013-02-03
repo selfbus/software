@@ -3,6 +3,7 @@
 	<name>dim2_sla</name>
 	<comment></comment>
 	<projects>
+		<project>counter</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
@@ -47,7 +48,7 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.buildArguments</key>
-					<value>-k</value>
+					<value></value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.buildCommand</key>
@@ -70,12 +71,7 @@
 		<link>
 			<name>fb_i2c.c</name>
 			<type>1</type>
-			<location>C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/dim2/fb_i2c.c</location>
-		</link>
-		<link>
-			<name>dim2_sla.c</name>
-			<type>1</type>
-			<location>C:/Dokumente und Einstellungen/Andreas/Eigene Dateien/freebus/trunk/software/c51/89LPC922/app_dim2/dim2_sla.c</location>
+			<location>C:/Freebus/C_Programme/oldisprogramm/Dimmer/fb_i2c.c</location>
 		</link>
 	</linkedResources>
 </projectDescription>

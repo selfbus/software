@@ -28,7 +28,7 @@ all: dim2_sla.hex
 dim2_sla.hex: $(RELS) $(USER_RELS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: SDCC Linker'
-	sdcc --stack-auto --vc  -o"dim2_sla.hex" $(RELS) $(USER_RELS) $(LIBS)
+	sdcc --stack-auto --vc --debug  -o"dim2_sla.hex" $(RELS) $(USER_RELS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 

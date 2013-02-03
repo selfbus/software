@@ -4,6 +4,124 @@ Symbol Table
 
     .__.ABS.                                                    =  0000 G
     A                                                              00E0 
+ 17 A$fb_i2c$519                                                   0000 GR
+ 17 A$fb_i2c$522                                                   0003 GR
+ 17 A$fb_i2c$523                                                   0005 GR
+ 17 A$fb_i2c$524                                                   0008 GR
+ 17 A$fb_i2c$527                                                   000A GR
+ 17 A$fb_i2c$530                                                   000D GR
+ 17 A$fb_i2c$533                                                   0010 GR
+ 17 A$fb_i2c$536                                                   0013 GR
+ 17 A$fb_i2c$539                                                   0016 GR
+ 17 A$fb_i2c$542                                                   0018 GR
+ 17 A$fb_i2c$545                                                   001A GR
+ 17 A$fb_i2c$548                                                   001C GR
+ 17 A$fb_i2c$553                                                   001E GR
+ 17 A$fb_i2c$566                                                   001F GR
+ 17 A$fb_i2c$569                                                   0022 GR
+ 17 A$fb_i2c$572                                                   0025 GR
+ 17 A$fb_i2c$575                                                   0028 GR
+ 17 A$fb_i2c$578                                                   002B GR
+ 17 A$fb_i2c$581                                                   002E GR
+ 17 A$fb_i2c$584                                                   0031 GR
+ 17 A$fb_i2c$587                                                   0033 GR
+ 17 A$fb_i2c$592                                                   0035 GR
+ 17 A$fb_i2c$607                                                   0036 GR
+ 17 A$fb_i2c$608                                                   0038 GR
+ 17 A$fb_i2c$610                                                   003A GR
+ 17 A$fb_i2c$613                                                   003D GR
+ 17 A$fb_i2c$614                                                   003E GR
+ 17 A$fb_i2c$615                                                   0041 GR
+ 17 A$fb_i2c$619                                                   0042 GR
+ 17 A$fb_i2c$620                                                   0043 GR
+ 17 A$fb_i2c$621                                                   0045 GR
+ 17 A$fb_i2c$622                                                   0046 GR
+ 17 A$fb_i2c$623                                                   0048 GR
+ 17 A$fb_i2c$624                                                   0049 GR
+ 17 A$fb_i2c$627                                                   004B GR
+ 17 A$fb_i2c$630                                                   004D GR
+ 17 A$fb_i2c$631                                                   0050 GR
+ 17 A$fb_i2c$635                                                   0052 GR
+ 17 A$fb_i2c$638                                                   0054 GR
+ 17 A$fb_i2c$642                                                   0057 GR
+ 17 A$fb_i2c$658                                                   0058 GR
+ 17 A$fb_i2c$659                                                   005A GR
+ 17 A$fb_i2c$660                                                   005D GR
+ 17 A$fb_i2c$663                                                   005F GR
+ 17 A$fb_i2c$666                                                   0061 GR
+ 17 A$fb_i2c$669                                                   0063 GR
+ 17 A$fb_i2c$672                                                   0066 GR
+ 17 A$fb_i2c$675                                                   0069 GR
+ 17 A$fb_i2c$678                                                   006C GR
+ 17 A$fb_i2c$681                                                   006F GR
+ 17 A$fb_i2c$684                                                   0072 GR
+ 17 A$fb_i2c$687                                                   0074 GR
+ 17 A$fb_i2c$690                                                   0076 GR
+ 17 A$fb_i2c$693                                                   0078 GR
+ 17 A$fb_i2c$694                                                   007A GR
+ 17 A$fb_i2c$695                                                   007C GR
+ 17 A$fb_i2c$696                                                   007E GR
+ 17 A$fb_i2c$697                                                   0081 GR
+ 17 A$fb_i2c$698                                                   0083 GR
+ 17 A$fb_i2c$699                                                   0085 GR
+ 17 A$fb_i2c$700                                                   0087 GR
+ 17 A$fb_i2c$701                                                   0089 GR
+ 17 A$fb_i2c$704                                                   008B GR
+ 17 A$fb_i2c$705                                                   008E GR
+ 17 A$fb_i2c$709                                                   0090 GR
+ 17 A$fb_i2c$712                                                   0092 GR
+ 17 A$fb_i2c$715                                                   0095 GR
+ 17 A$fb_i2c$716                                                   0097 GR
+ 17 A$fb_i2c$717                                                   0099 GR
+ 17 A$fb_i2c$718                                                   009B GR
+ 17 A$fb_i2c$719                                                   009E GR
+ 17 A$fb_i2c$720                                                   00A0 GR
+ 17 A$fb_i2c$721                                                   00A2 GR
+ 17 A$fb_i2c$722                                                   00A4 GR
+ 17 A$fb_i2c$723                                                   00A6 GR
+ 17 A$fb_i2c$726                                                   00A8 GR
+ 17 A$fb_i2c$727                                                   00AB GR
+ 17 A$fb_i2c$731                                                   00AD GR
+ 17 A$fb_i2c$734                                                   00B0 GR
+ 17 A$fb_i2c$735                                                   00B2 GR
+ 17 A$fb_i2c$736                                                   00B4 GR
+ 17 A$fb_i2c$737                                                   00B6 GR
+ 17 A$fb_i2c$738                                                   00B9 GR
+ 17 A$fb_i2c$739                                                   00BB GR
+ 17 A$fb_i2c$740                                                   00BD GR
+ 17 A$fb_i2c$741                                                   00BF GR
+ 17 A$fb_i2c$742                                                   00C1 GR
+ 17 A$fb_i2c$745                                                   00C3 GR
+ 17 A$fb_i2c$746                                                   00C6 GR
+ 17 A$fb_i2c$750                                                   00C8 GR
+ 17 A$fb_i2c$753                                                   00CA GR
+ 17 A$fb_i2c$754                                                   00CC GR
+ 17 A$fb_i2c$755                                                   00CE GR
+ 17 A$fb_i2c$756                                                   00D1 GR
+ 17 A$fb_i2c$757                                                   00D3 GR
+ 17 A$fb_i2c$758                                                   00D5 GR
+ 17 A$fb_i2c$759                                                   00D7 GR
+ 17 A$fb_i2c$762                                                   00D9 GR
+ 17 A$fb_i2c$763                                                   00DC GR
+ 17 A$fb_i2c$767                                                   00DE GR
+ 17 A$fb_i2c$768                                                   00E0 GR
+ 17 A$fb_i2c$769                                                   00E2 GR
+ 17 A$fb_i2c$770                                                   00E3 GR
+ 17 A$fb_i2c$773                                                   00E5 GR
+ 17 A$fb_i2c$774                                                   00E7 GR
+ 17 A$fb_i2c$775                                                   00E9 GR
+ 17 A$fb_i2c$776                                                   00EC GR
+ 17 A$fb_i2c$777                                                   00EE GR
+ 17 A$fb_i2c$778                                                   00F0 GR
+ 17 A$fb_i2c$779                                                   00F2 GR
+ 17 A$fb_i2c$782                                                   00F4 GR
+ 17 A$fb_i2c$783                                                   00F7 GR
+ 17 A$fb_i2c$787                                                   00F9 GR
+ 17 A$fb_i2c$790                                                   00FB GR
+ 17 A$fb_i2c$793                                                   00FD GR
+ 17 A$fb_i2c$796                                                   00FF GR
+ 17 A$fb_i2c$798                                                   0102 GR
+ 17 A$fb_i2c$801                                                   0104 GR
     A.0                                                            00E0 
     A.1                                                            00E1 
     A.2                                                            00E2 
@@ -31,6 +149,70 @@ Symbol Table
     B.5                                                            00F5 
     B.6                                                            00F6 
     B.7                                                            00F7 
+ 17 C$fb_i2c.c$13$0$0                                           =  0000 GR
+ 17 C$fb_i2c.c$15$1$1                                           =  0000 GR
+ 17 C$fb_i2c.c$16$1$1                                           =  0003 GR
+ 17 C$fb_i2c.c$17$1$1                                           =  000A GR
+ 17 C$fb_i2c.c$18$1$1                                           =  000D GR
+ 17 C$fb_i2c.c$19$1$1                                           =  0010 GR
+ 17 C$fb_i2c.c$20$1$1                                           =  0013 GR
+ 17 C$fb_i2c.c$21$1$1                                           =  0016 GR
+ 17 C$fb_i2c.c$22$1$1                                           =  0018 GR
+ 17 C$fb_i2c.c$23$1$1                                           =  001A GR
+ 17 C$fb_i2c.c$24$1$1                                           =  001C GR
+ 17 C$fb_i2c.c$25$1$1                                           =  001E GR
+ 17 C$fb_i2c.c$26$1$1                                           =  001E GR
+ 17 C$fb_i2c.c$28$1$1                                           =  001F GR
+ 17 C$fb_i2c.c$30$1$1                                           =  001F GR
+ 17 C$fb_i2c.c$31$1$1                                           =  0022 GR
+ 17 C$fb_i2c.c$32$1$1                                           =  0025 GR
+ 17 C$fb_i2c.c$33$1$1                                           =  0028 GR
+ 17 C$fb_i2c.c$34$1$1                                           =  002B GR
+ 17 C$fb_i2c.c$35$1$1                                           =  002E GR
+ 17 C$fb_i2c.c$36$1$1                                           =  0031 GR
+ 17 C$fb_i2c.c$37$1$1                                           =  0033 GR
+ 17 C$fb_i2c.c$38$1$1                                           =  0035 GR
+ 17 C$fb_i2c.c$39$1$1                                           =  0035 GR
+ 17 C$fb_i2c.c$40$1$1                                           =  0036 GR
+ 17 C$fb_i2c.c$44$1$1                                           =  0036 GR
+ 17 C$fb_i2c.c$47$2$2                                           =  003D GR
+ 17 C$fb_i2c.c$48$2$2                                           =  0042 GR
+ 17 C$fb_i2c.c$51$3$3                                           =  004B GR
+ 17 C$fb_i2c.c$52$3$3                                           =  004D GR
+ 17 C$fb_i2c.c$57$1$1                                           =  0052 GR
+ 17 C$fb_i2c.c$58$1$1                                           =  0054 GR
+ 17 C$fb_i2c.c$59$1$1                                           =  0057 GR
+ 17 C$fb_i2c.c$62$1$1                                           =  0058 GR
+ 17 C$fb_i2c.c$64$1$1                                           =  005F GR
+ 17 C$fb_i2c.c$65$1$1                                           =  0061 GR
+ 17 C$fb_i2c.c$66$1$1                                           =  0063 GR
+ 17 C$fb_i2c.c$67$1$1                                           =  0066 GR
+ 17 C$fb_i2c.c$68$1$1                                           =  0069 GR
+ 17 C$fb_i2c.c$69$1$1                                           =  006C GR
+ 17 C$fb_i2c.c$70$1$1                                           =  006F GR
+ 17 C$fb_i2c.c$71$1$1                                           =  0072 GR
+ 17 C$fb_i2c.c$72$1$1                                           =  0074 GR
+ 17 C$fb_i2c.c$73$1$1                                           =  0076 GR
+ 17 C$fb_i2c.c$74$1$1                                           =  0078 GR
+ 17 C$fb_i2c.c$75$1$1                                           =  008B GR
+ 17 C$fb_i2c.c$76$1$1                                           =  0090 GR
+ 17 C$fb_i2c.c$77$1$1                                           =  0092 GR
+ 17 C$fb_i2c.c$78$1$1                                           =  0095 GR
+ 17 C$fb_i2c.c$79$1$1                                           =  00A8 GR
+ 17 C$fb_i2c.c$80$1$1                                           =  00AD GR
+ 17 C$fb_i2c.c$81$1$1                                           =  00B0 GR
+ 17 C$fb_i2c.c$82$1$1                                           =  00C3 GR
+ 17 C$fb_i2c.c$83$1$1                                           =  00C8 GR
+ 17 C$fb_i2c.c$84$1$1                                           =  00CA GR
+ 17 C$fb_i2c.c$85$1$1                                           =  00D9 GR
+ 17 C$fb_i2c.c$86$1$1                                           =  00DE GR
+ 17 C$fb_i2c.c$88$1$1                                           =  00E5 GR
+ 17 C$fb_i2c.c$89$1$1                                           =  00F4 GR
+ 17 C$fb_i2c.c$90$1$1                                           =  00F9 GR
+ 17 C$fb_i2c.c$91$1$1                                           =  00FB GR
+ 17 C$fb_i2c.c$92$1$1                                           =  00FD GR
+ 17 C$fb_i2c.c$93$1$1                                           =  00FF GR
+ 17 C$fb_i2c.c$94$1$1                                           =  0104 GR
     CPRL2                                                          00C8 
     CT2                                                            00C9 
     CY                                                             00D7 
@@ -46,6 +228,145 @@ Symbol Table
     EXEN2                                                          00CB 
     EXF2                                                           00CE 
     F0                                                             00D5 
+    G$ACC$0$0                                                   =  00E0 G
+    G$AUXR1$0$0                                                 =  00A2 G
+    G$B$0$0                                                     =  00F0 G
+    G$BRGCON$0$0                                                =  00BD G
+    G$BRGR0$0$0                                                 =  00BE G
+    G$BRGR1$0$0                                                 =  00BF G
+    G$CMP1$0$0                                                  =  00AC G
+    G$CMP2$0$0                                                  =  00AD G
+    G$DIVM$0$0                                                  =  0095 G
+    G$DPH$0$0                                                   =  0083 G
+    G$DPL$0$0                                                   =  0082 G
+    G$FMADRH$0$0                                                =  00E7 G
+    G$FMADRL$0$0                                                =  00E6 G
+    G$FMCON$0$0                                                 =  00E4 G
+    G$FMDATA$0$0                                                =  00E5 G
+    G$I2ADR$0$0                                                 =  00DB G
+    G$I2CON$0$0                                                 =  00D8 G
+    G$I2CON_0$0$0                                               =  00D8 G
+    G$I2CON_2$0$0                                               =  00DA G
+    G$I2CON_3$0$0                                               =  00DB G
+    G$I2CON_4$0$0                                               =  00DC G
+    G$I2CON_5$0$0                                               =  00DD G
+    G$I2CON_6$0$0                                               =  00DE G
+    G$I2DAT$0$0                                                 =  00DA G
+    G$I2SCLH$0$0                                                =  00DD G
+    G$I2SCLL$0$0                                                =  00DC G
+    G$I2STAT$0$0                                                =  00D9 G
+    G$IEN0$0$0                                                  =  00A8 G
+    G$IEN0_0$0$0                                                =  00A8 G
+    G$IEN0_1$0$0                                                =  00A9 G
+    G$IEN0_2$0$0                                                =  00AA G
+    G$IEN0_3$0$0                                                =  00AB G
+    G$IEN0_4$0$0                                                =  00AC G
+    G$IEN0_5$0$0                                                =  00AD G
+    G$IEN0_6$0$0                                                =  00AE G
+    G$IEN0_7$0$0                                                =  00AF G
+    G$IEN1$0$0                                                  =  00E8 G
+    G$IEN1_0$0$0                                                =  00E8 G
+    G$IEN1_1$0$0                                                =  00E9 G
+    G$IEN1_2$0$0                                                =  00EA G
+    G$IP0$0$0                                                   =  00B8 G
+    G$IP0H$0$0                                                  =  00B7 G
+    G$IP0_0$0$0                                                 =  00B8 G
+    G$IP0_1$0$0                                                 =  00B9 G
+    G$IP0_2$0$0                                                 =  00BA G
+    G$IP0_3$0$0                                                 =  00BB G
+    G$IP0_4$0$0                                                 =  00BC G
+    G$IP0_5$0$0                                                 =  00BD G
+    G$IP0_6$0$0                                                 =  00BE G
+    G$IP1$0$0                                                   =  00F8 G
+    G$IP1H$0$0                                                  =  00F7 G
+    G$IP1_0$0$0                                                 =  00F8 G
+    G$IP1_1$0$0                                                 =  00F9 G
+    G$IP1_2$0$0                                                 =  00FA G
+    G$IP1_6$0$0                                                 =  00FE G
+    G$KBCON$0$0                                                 =  0094 G
+    G$KBMASK$0$0                                                =  0086 G
+    G$KBPATN$0$0                                                =  0093 G
+    G$P0$0$0                                                    =  0080 G
+    G$P0M1$0$0                                                  =  0084 G
+    G$P0M2$0$0                                                  =  0085 G
+    G$P0_0$0$0                                                  =  0080 G
+    G$P0_1$0$0                                                  =  0081 G
+    G$P0_2$0$0                                                  =  0082 G
+    G$P0_3$0$0                                                  =  0083 G
+    G$P0_4$0$0                                                  =  0084 G
+    G$P0_5$0$0                                                  =  0085 G
+    G$P0_6$0$0                                                  =  0086 G
+    G$P0_7$0$0                                                  =  0087 G
+    G$P1$0$0                                                    =  0090 G
+    G$P1M1$0$0                                                  =  0091 G
+    G$P1M2$0$0                                                  =  0092 G
+    G$P1_0$0$0                                                  =  0090 G
+    G$P1_1$0$0                                                  =  0091 G
+    G$P1_2$0$0                                                  =  0092 G
+    G$P1_3$0$0                                                  =  0093 G
+    G$P1_4$0$0                                                  =  0094 G
+    G$P1_5$0$0                                                  =  0095 G
+    G$P1_6$0$0                                                  =  0096 G
+    G$P1_7$0$0                                                  =  0097 G
+    G$P3$0$0                                                    =  00B0 G
+    G$P3M1$0$0                                                  =  00B1 G
+    G$P3M2$0$0                                                  =  00B2 G
+    G$P3_0$0$0                                                  =  00B0 G
+    G$P3_1$0$0                                                  =  00B1 G
+    G$PCON$0$0                                                  =  0087 G
+    G$PCONA$0$0                                                 =  00B5 G
+    G$PSW$0$0                                                   =  00D0 G
+    G$PSW_0$0$0                                                 =  00D0 G
+    G$PSW_1$0$0                                                 =  00D1 G
+    G$PSW_2$0$0                                                 =  00D2 G
+    G$PSW_3$0$0                                                 =  00D3 G
+    G$PSW_4$0$0                                                 =  00D4 G
+    G$PSW_5$0$0                                                 =  00D5 G
+    G$PSW_6$0$0                                                 =  00D6 G
+    G$PSW_7$0$0                                                 =  00D7 G
+    G$PT0AD$0$0                                                 =  00F6 G
+    G$RSTSRC$0$0                                                =  00DF G
+    G$RTCCON$0$0                                                =  00D1 G
+    G$RTCH$0$0                                                  =  00D2 G
+    G$RTCL$0$0                                                  =  00D3 G
+    G$SADDR$0$0                                                 =  00A9 G
+    G$SADEN$0$0                                                 =  00B9 G
+    G$SBUF$0$0                                                  =  0099 G
+    G$SCON$0$0                                                  =  0098 G
+    G$SCON_0$0$0                                                =  0098 G
+    G$SCON_1$0$0                                                =  0099 G
+    G$SCON_2$0$0                                                =  009A G
+    G$SCON_3$0$0                                                =  009B G
+    G$SCON_4$0$0                                                =  009C G
+    G$SCON_5$0$0                                                =  009D G
+    G$SCON_6$0$0                                                =  009E G
+    G$SCON_7$0$0                                                =  009F G
+    G$SP$0$0                                                    =  0081 G
+    G$SSTAT$0$0                                                 =  00BA G
+    G$TAMOD$0$0                                                 =  008F G
+    G$TCON$0$0                                                  =  0088 G
+    G$TCON_0$0$0                                                =  0088 G
+    G$TCON_1$0$0                                                =  0089 G
+    G$TCON_2$0$0                                                =  008A G
+    G$TCON_3$0$0                                                =  008B G
+    G$TCON_4$0$0                                                =  008C G
+    G$TCON_5$0$0                                                =  008D G
+    G$TCON_6$0$0                                                =  008E G
+    G$TCON_7$0$0                                                =  008F G
+    G$TH0$0$0                                                   =  008C G
+    G$TH1$0$0                                                   =  008D G
+    G$TL0$0$0                                                   =  008A G
+    G$TL1$0$0                                                   =  008B G
+    G$TMOD$0$0                                                  =  0089 G
+    G$TRIM$0$0                                                  =  0096 G
+    G$WDCON$0$0                                                 =  00A7 G
+    G$WDL$0$0                                                   =  00C1 G
+    G$WFEED1$0$0                                                =  00C2 G
+    G$WFEED2$0$0                                                =  00C3 G
+ 17 G$i2c_ma_init$0$0                                           =  001F GR
+ 17 G$i2c_send_daten$0$0                                        =  0058 GR
+ 17 G$i2c_sla_init$0$0                                          =  0000 GR
+ 17 G$i2c_wait$0$0                                              =  0036 GR
     IE                                                             00A8 
     IE.0                                                           00A8 
     IE.1                                                           00A9 
@@ -179,6 +500,10 @@ Symbol Table
     TR1                                                            008E 
     TR2                                                            00CA 
     TXD                                                            00B1 
+ 17 XG$i2c_ma_init$0$0                                          =  0035 GR
+ 17 XG$i2c_send_daten$0$0                                       =  0104 GR
+ 17 XG$i2c_sla_init$0$0                                         =  001E GR
+ 17 XG$i2c_wait$0$0                                             =  0057 GR
     _ACC                                                        =  00E0 G
     _AUXR1                                                      =  00A2 G
     _B                                                          =  00F0 G
@@ -315,10 +640,10 @@ Symbol Table
     _WFEED1                                                     =  00C2 G
     _WFEED2                                                     =  00C3 G
     _bp                                                            **** GX
- 16 _i2c_ma_init                                                   001F GR
- 16 _i2c_send_daten                                                0057 GR
- 16 _i2c_sla_init                                                  0000 GR
- 16 _i2c_wait                                                      0036 GR
+ 17 _i2c_ma_init                                                   001F GR
+ 17 _i2c_send_daten                                                0058 GR
+ 17 _i2c_sla_init                                                  0000 GR
+ 17 _i2c_wait                                                      0036 GR
     a                                                              00E0 
     a.0                                                            00E0 
     a.1                                                            00E1 
@@ -514,23 +839,24 @@ Area Table
    3 RSEG1                                      size    0   flags 8
    4 REG_BANK_0                                 size    8   flags 4
    5 DSEG                                       size    0   flags 0
-   6 ISEG                                       size    0   flags 0
-   7 IABS                                       size    0   flags 8
-   8 BSEG                                       size    0   flags 80
-   9 PSEG                                       size    0   flags 50
-   A XSEG                                       size    0   flags 40
-   B XABS                                       size    0   flags 48
-   C XISEG                                      size    0   flags 40
-   D HOME                                       size    0   flags 20
-   E GSINIT0                                    size    0   flags 20
-   F GSINIT1                                    size    0   flags 20
-  10 GSINIT2                                    size    0   flags 20
-  11 GSINIT3                                    size    0   flags 20
-  12 GSINIT4                                    size    0   flags 20
-  13 GSINIT5                                    size    0   flags 20
-  14 GSINIT                                     size    0   flags 20
-  15 GSFINAL                                    size    0   flags 20
-  16 CSEG                                       size  104   flags 20
-  17 CONST                                      size    0   flags 20
-  18 XINIT                                      size    0   flags 20
-  19 CABS                                       size    0   flags 28
+   6 OSEG                                       size    0   flags 4
+   7 ISEG                                       size    0   flags 0
+   8 IABS                                       size    0   flags 8
+   9 BSEG                                       size    0   flags 80
+   A PSEG                                       size    0   flags 50
+   B XSEG                                       size    0   flags 40
+   C XABS                                       size    0   flags 48
+   D XISEG                                      size    0   flags 40
+   E HOME                                       size    0   flags 20
+   F GSINIT0                                    size    0   flags 20
+  10 GSINIT1                                    size    0   flags 20
+  11 GSINIT2                                    size    0   flags 20
+  12 GSINIT3                                    size    0   flags 20
+  13 GSINIT4                                    size    0   flags 20
+  14 GSINIT5                                    size    0   flags 20
+  15 GSINIT                                     size    0   flags 20
+  16 GSFINAL                                    size    0   flags 20
+  17 CSEG                                       size  105   flags 20
+  18 CONST                                      size    0   flags 20
+  19 XINIT                                      size    0   flags 20
+  1A CABS                                       size    0   flags 28
