@@ -136,7 +136,6 @@ void init_tx(void) ;
 
 unsigned char gapos_in_gat(unsigned char gah, unsigned char gal) ;
 __bit build_tel(unsigned char objno) ;
-unsigned int find_ga(unsigned char objno) ;	// Gruppenadresse ueber Assoziationstabelle finden (erster Eintrag, falls mehrere)
 __bit send_obj_value(unsigned char objno);
 void restart_hw(void);
 void process_tel(void);		// Interrupt von Timer 1, 370us keine Busaktivitaet seit letztem Byte,										//	 d.h. Telegramm wurde komplett uebertragen

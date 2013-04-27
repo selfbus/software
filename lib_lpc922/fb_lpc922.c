@@ -26,6 +26,7 @@
  * 	V1.33	Abfrage auf connected eingebaut,interrupt enable mit einem Byte eingestellt,
  * 			RTC clock raus, Berechnung der objectflags speicheroptimiert. 
  *  V1.34	Bug in gapos_in_gat() entfernt.
+ *  V1.35   find_ga zur Optimierung entfernt.
  */
 
 
