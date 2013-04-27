@@ -5,7 +5,7 @@
  *   / __/ / _, _/ /___/ /___/ /_/ / /_/ /___/ / 
  *  /_/   /_/ |_/_____/_____/_____/\____//____/  
  *                                      
- *  Copyright (c) 2009-2012 Andreas Krebs <kubi@krebsworld.de>
+ *  Copyright (c) 2009-2013 Andreas Krebs <kubi@krebsworld.de>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 2 as
@@ -23,6 +23,9 @@
  *	V1.30	komplett umgebaut bei senden und wiederhol senden, state 80 raus, repeat_tx raus, kollision gefixt
  *	V1.31	wiederholtes (verspätetes) ack senden raus
  * 	V1.32	autoreload Werte für einzelne states individuell angepasst
+ * 	V1.33	Abfrage auf connected eingebaut,interrupt enable mit einem Byte eingestellt,
+ * 			RTC clock raus, Berechnung der objectflags speicheroptimiert. 
+ *  V1.34	Bug in gapos_in_gat() entfernt.
  */
 
 
@@ -394,8 +397,9 @@ unsigned char gapos_in_gat(unsigned char gah, unsigned char gal)
 	ga_position=0xFF; 			// default return Wert 0xFF = nicht gefunden
 	if (eeprom[ADDRTAB]<0xFF && !transparency){
 		if (eeprom[ADDRTAB]) {
-			for (n=1;n<=eeprom[ADDRTAB];n++) {
-				if (gah==eeprom[ADDRTAB+n*2+1] && gal==eeprom[ADDRTAB+n*2+2]) ga_position=n;	// Berechnung in [] nicht in lokale var !!!
+			for (n=1;n < eeprom[ADDRTAB];n++) {
+				if (gah==eeprom[ADDRTAB+n*2+1] && gal==eeprom[ADDRTAB+n*2+2])
+					ga_position=n;
 			}
 		}
 	}
@@ -543,18 +547,20 @@ void process_tel(void)
 				switch (tpdu) {	// transport layer control field
 
 				case DATA_PDU_MEMORY_OPERATIONS:
-					senders_pcount=telegramm[6]&0x3C;
-					apdu &= 0xF0;						// da bei memory operations nur obere 4 Bits aktiv
-					if(apdu==WRITE_MEMORY_REQUEST) {	// 01pppp10 1000xxxx
-						send_obj_value(NCD_ACK);
-						write_memory();
-					}
-					if(apdu==READ_MEMORY_REQUEST) {		// 01pppp10 0000xxxx
-						mem_length=telegramm[7];		// Anzahl Bytes für späteres(!) memory Auslesen
-						mem_adrh = telegramm[8];		// Adresse
-						mem_adrl = telegramm[9];
-						send_obj_value(NCD_ACK);
-						send_obj_value(READ_MEMORY_RESPONSE);
+					if(connected){ 
+						senders_pcount=telegramm[6]&0x3C;
+						apdu &= 0xF0;						// da bei memory operations nur obere 4 Bits aktiv
+						if(apdu==WRITE_MEMORY_REQUEST) {	// 01pppp10 1000xxxx
+							send_obj_value(NCD_ACK);
+							write_memory();
+						}
+						if(apdu==READ_MEMORY_REQUEST) {		// 01pppp10 0000xxxx
+							mem_length=telegramm[7];		// Anzahl Bytes für späteres(!) memory Auslesen
+							mem_adrh = telegramm[8];		// Adresse
+							mem_adrl = telegramm[9];
+							send_obj_value(NCD_ACK);
+							send_obj_value(READ_MEMORY_RESPONSE);
+						}
 					}
 					break;
 
@@ -652,7 +658,8 @@ void set_pa(void)
 
 unsigned char read_objflags(unsigned char objno)
 {
-	return(eeprom[eeprom[COMMSTABPTR]+3+3*objno]);
+//	return(eeprom[eeprom[COMMSTABPTR]+3+3*objno]);
+	return(eeprom[eeprom[COMMSTABPTR]+3+objno+objno+objno]);
 }
 
 
@@ -681,6 +688,7 @@ unsigned char find_first_objno(unsigned char gah, unsigned char gal)
 	}
 	return (objno);
 }
+
 
 
 
@@ -726,19 +734,20 @@ void restart_hw(void)
 	TH1=128;		// Timer 1 auf 104us/3
 	TL1=128;
 	TF1=0;
- 
-	RTCH=0x0E;		// Real Time Clock auf 65ms laden
-	RTCL=0xA0;		// (RTC ist ein down-counter mit 128 bit prescaler und osc-clock)
-	RTCCON=0x61;	// ... und starten
+
+//  RTC gehört in die restart_app !! 
+//	RTCH=0x0E;		// Real Time Clock auf 65ms laden
+//	RTCL=0xA0;		// (RTC ist ein down-counter mit 128 bit prescaler und osc-clock)
+//	RTCCON=0x61;	// ... und starten
 
 	interrupted=0;	// wird durch die interrupt-routine auf 1 gesetzt
-	IEN0=0x00;
+	IEN0=0x80;// mit 0x80 sind die unten auskommentierten erschlagen.
 	IEN1=0x00;
 
-	ET1=0;			// Interrupt von Timer 1 sperren
-	EX0=0;			// Externen Interrupt 0 sperren
-	EX1=0;			// Externen Interrupt 1 sperren
-	EA=1;			// Interrupts prinzipiell freigeben
+//	ET1=0;			// Interrupt von Timer 1 sperren
+//	EX0=0;			// Externen Interrupt 0 sperren
+//	EX1=0;			// Externen Interrupt 1 sperren
+//	EA=1;			// Interrupts prinzipiell freigeben
 	
 	IP0=0x04;		// höchste Priorität fuer ext1
 	IP0H=0x0C;
