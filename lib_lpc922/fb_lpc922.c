@@ -303,7 +303,7 @@ void T1_int(void) __interrupt (3) 	// Timer 1 Interrupt
 		FBOUTC=0;
 		TR1=0;
 		TMOD=(TMOD & 0x0F) +0x10;	// Timer 1 als 16-Bit Timer
-		TH1=0xFB;					// Timer 1 auf Interbyte Abstand setzen (3 Bit Pause = 312µs 
+		TH1=0xFB;					// Timer 1 auf Interbyte Abstand setzen (3 Bit Pause = 312µs
 		TL1=0x90;
 		TR1=1;
 		if (send_ack || send_nack) {	// ACK/NACK senden
@@ -397,7 +397,7 @@ unsigned char gapos_in_gat(unsigned char gah, unsigned char gal)
 	ga_position=0xFF; 			// default return Wert 0xFF = nicht gefunden
 	if (eeprom[ADDRTAB]<0xFF && !transparency){
 		if (eeprom[ADDRTAB]) {
-			for (n=1;n < eeprom[ADDRTAB];n++) {
+			for (n=eeprom[ADDRTAB]-1;n;n--) {
 				if (gah==eeprom[ADDRTAB+n*2+1] && gal==eeprom[ADDRTAB+n*2+2])
 					ga_position=n;
 			}
@@ -413,9 +413,9 @@ __bit build_tel(unsigned char objno)
 {
 	__bit build_ok=0;
 	unsigned long objvalue;
-	unsigned int ga=0;
+	unsigned int gapos=0xFE;
 	unsigned char objtype=0;
-	unsigned char n, length;
+	unsigned char n, length, asspos;
 	__bit type, repeatflag;
 
 	repeatflag=objno&0x20;
@@ -426,19 +426,22 @@ __bit build_tel(unsigned char objno)
 
 		objvalue=read_obj_value(objno);		// Objektwert lesen
 
-		ga=find_ga(objno);					// wenn keine Gruppenadresse hinterlegt nix tun
-		if (ga!=0)
+		// Adresse in der Assoziationstabelle suchen
+		asspos=eeprom[ASSOCTABPTR]+1+2*objno;
+		if(eeprom[asspos+1]==objno) gapos=eeprom[asspos];
+
+		if (gapos!=0xFE) // wenn keine Gruppenadresse hinterlegt nix tun
 		{
 			telegramm[0]=0xBC;
 			telegramm[1]=eeprom[ADDRTAB+1];
 			telegramm[2]=eeprom[ADDRTAB+2];
-			telegramm[3]=ga>>8;
-			telegramm[4]=ga;
+			telegramm[3]=eeprom[ADDRTAB+1+gapos*2];
+			telegramm[4]=eeprom[ADDRTAB+2+gapos*2];
 			telegramm[6]=0x00;
 			if (type) telegramm[7]=0x40;		// read_value_response Telegramm (angefordert)
 			else telegramm[7]=0x80;				// write_value_request Telegramm (nicht angefordert)
 
-			objtype=eeprom[eeprom[COMMSTABPTR]+objno*3+4];
+			objtype=eeprom[eeprom[COMMSTABPTR]+objno+objno+objno+4];
 
 			if(objtype>6) length=objtype-5; else length=1;
 			telegramm[5]=0xE0+length;
@@ -692,26 +695,6 @@ unsigned char find_first_objno(unsigned char gah, unsigned char gal)
 
 
 
-unsigned int find_ga(unsigned char objno)
-{
-	unsigned char asstab,gapos,asspos;
-	unsigned int ga;
-
-	gapos=0xFE;
-	asstab=eeprom[ASSOCTABPTR];		// Adresse der Assoziationstabelle
-	asspos=asstab+1+2*objno;
-
-	if(eeprom[asspos+1]==objno) gapos=eeprom[asspos];
-
-    if(gapos!=0xFE) {
-
-    	ga=eeprom[ADDRTAB+1+gapos*2]*256;
-    	ga+=eeprom[ADDRTAB+2+gapos*2];
-    }
-    else ga=0;
-
-    return(ga);
-}
 
 
 
@@ -735,7 +718,7 @@ void restart_hw(void)
 	TL1=128;
 	TF1=0;
 
-//  RTC gehört in die restart_app !! 
+//  RTC gehört in die restart_app !!
 //	RTCH=0x0E;		// Real Time Clock auf 65ms laden
 //	RTCL=0xA0;		// (RTC ist ein down-counter mit 128 bit prescaler und osc-clock)
 //	RTCCON=0x61;	// ... und starten
