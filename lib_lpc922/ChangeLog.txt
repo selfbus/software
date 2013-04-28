@@ -1,0 +1,36 @@
+2013-04-28  Version 1.40
+        Korrekte Behandlung von Objekt Flags eingebaut.
+        Com Objekte werden jetzt nur gesendet wenn das Übertragen Flag in der ETS gesetzt ist
+        Die Ermittlung der Objektnummer für Read-Request und Write-Request Telegramme erfolgt
+        jetzt in der Lib, die Objektnummer wird jetzt der App übergeben: 
+        read_value_req(objno)
+        write_value_req(objno)
+        Die Behandlung der zugehörigen Objekt Flags erfolgt auch in der Lib.
+
+V1.35   find_ga zur Optimierung entfernt.
+
+V1.34   Bug in gapos_in_gat() entfernt.
+
+V1.33   Abfrage auf connected eingebaut,interrupt enable mit einem Byte eingestellt,
+        RTC clock raus, Berechnung der objectflags speicheroptimiert. 
+
+V1.32   autoreload Werte für einzelne states individuell angepasst
+
+V1.31   Wiederholtes (verspätetes) ACK senden raus
+
+V1.30   Komplett Umgebaut bei senden und wiederhol senden, state 80 raus, repeat_tx raus, kollision gefixt
+
+V1.24   EX1 vorm Schlafengehen der statemachine hart eingeschaltet, die lib war manchmal "taub" geworden
+
+V1.23   ack-Position leicht korrigiert (state 4)
+
+V1.22   Statt tel_arrived wird tel_sent in state13 gesetzt (Senden eines Telegramms)
+
+V1.21   Rekursives Abarbeiten gesendeter Telegramme korrigiert: tel_arrived widr jetzt
+        in state 13 gesetzt
+
+V1.20   Senden um 3- und 4-Byte Objekte erweitert, read_obj_value ist jetzt unsigned long
+
+V1.10   Senden komplett über Interrupt und Ringspeicher realisiert
+
+V1.00   Erste Version mit Statemachine

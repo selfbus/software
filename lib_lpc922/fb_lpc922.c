@@ -10,28 +10,19 @@
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 2 as
  *  published by the Free Software Foundation.
- *
- *
- *	V1.00	erste Version statemachine
- *	V1.10	Senden komplett über Interrupt und Ringspeicher realisiert
- *	V1.20	Senden um 3- und 4-Byte Objekte erweitert, read_obj_value ist jetzt unsigned long
- *	V1.21	rekursives Abarbeiten gesendeter Telegramme korrigiert: tel_arrived widr jetzt
- *			in state 13 gesetzt
- *	V1.22	statt tel_arrived wird tel_sent in state13 gesetzt (Senden eines Telegramms)
- *	V1.23	ack-Position leicht korrigiert (state 4)
- *	V1.24	EX1 vorm Schlafengehen der statemachine hart eingeschaltet, die lib war manchmal "taub" geworden
- *	V1.30	komplett umgebaut bei senden und wiederhol senden, state 80 raus, repeat_tx raus, kollision gefixt
- *	V1.31	wiederholtes (verspätetes) ack senden raus
- * 	V1.32	autoreload Werte für einzelne states individuell angepasst
- * 	V1.33	Abfrage auf connected eingebaut,interrupt enable mit einem Byte eingestellt,
- * 			RTC clock raus, Berechnung der objectflags speicheroptimiert. 
- *  V1.34	Bug in gapos_in_gat() entfernt.
- *  V1.35   find_ga zur Optimierung entfernt.
  */
 
 
 #include <P89LPC922.h>
 #include "fb_lpc922.h"
+
+
+// Damit die Eclipse Code Analyse nicht so viele Warnungen anzeigt:
+#ifndef SDCC
+# define __interrupt(x)
+# define __idata
+# define __code
+#endif
 
 unsigned char conh, conl;	// bei bestehender Verbindung phys. Adresse des Kommunikationspartners
 unsigned char pcount;		// Paketzaehler, Gruppenadresszaehler
@@ -513,12 +504,17 @@ __bit send_obj_value(unsigned char objno)
 {
 	__bit success=0;
 
-	if(tx_nextsend!=((tx_nextwrite+1)&0x07)) {
+	if (objno < 0x40 && (read_objflags(objno) & 0x44) != 0x44)
+	{
+		success=1;
+	}
+	else if(tx_nextsend!=((tx_nextwrite+1)&0x07)) {
 		tx_buffer[tx_nextwrite]=objno;
 		tx_nextwrite++;
 		tx_nextwrite&=0x07;
 		success=1;
 	}
+
 	TR1=1;	// statemachine starten falls vorher in state 0 gestoppt
 	return(success);
 }
@@ -605,10 +601,46 @@ void process_tel(void)
 		}
 
 		// Multicast, wenn Zieladresse Gruppenadresse ist
-		else {
-			if(tpdu==GROUP_PDU){
-				if((apdu&0xC0)==WRITE_GROUP) write_value_req();	// Objektwerte schreiben (zB. EISx)		00000000 10xxxxxx
-				if(apdu==READ_GROUP_REQUEST) read_value_req();	// Objektwert lesen und read_value_response senden	00000000 00000000
+		else if(tpdu==GROUP_PDU){
+
+			unsigned char objno, objflags, gapos, atp, assmax, asspos;
+
+			// Gruppenadressposition aus Gruppenadresse bestimmen
+			gapos = gapos_in_gat(telegramm[3], telegramm[4]);
+
+			if (gapos != 0xFF)
+			{
+				atp = eeprom[ASSOCTABPTR];  // Association Table Pointer
+				assmax = atp + eeprom[atp] * 2;	// Erster Eintrag = Anzahl Einträge
+
+				// Schleife über alle Eintraege in der Ass-Table, denn es könnten mehrere Objekte
+				// der gleichen Gruppenadresse zugeordnet sein.
+				for (asspos = atp + 1; asspos < assmax; asspos+=2)
+				{
+					// Erste GA-Position aus ASS Tabelle lesen
+					// Wenn Positionsnummer übereinstimmt dann behandeln
+					if (gapos == eeprom[asspos])
+					{
+						objno = eeprom[asspos + 1];	     // Objektnummer
+						objflags = read_objflags(objno); // Objekt Flags lesen
+
+						// Objektwerte schreiben (zB. EISx)		00000000 10xxxxxx
+						if((apdu&0xC0)==WRITE_GROUP)
+						{
+							// Wenn Kommunikation zulässig (Bit 2 = communication enable) und
+							// Schreiben zulaessig (Bit 4 = write enable) dann behandeln wir
+							// das Telegramm
+							if ((objflags & 0x14) == 0x14)
+								write_value_req(objno);
+						}
+						if(apdu==READ_GROUP_REQUEST)
+						{
+							if ((objflags & 0x0C) == 0x0C)
+								read_value_req(objno);	// Objektwert lesen und read_value_response senden	00000000 00000000
+							break;
+						}
+					}
+				}
 			}
 		}
 	}
@@ -668,6 +700,7 @@ unsigned char read_objflags(unsigned char objno)
 
 
 
+#if OBSOLETE_CODE
 unsigned char find_first_objno(unsigned char gah, unsigned char gal)
 {
 	unsigned char gaposgat, gaposass, atp, assmax, n, objno, asspos;
@@ -692,6 +725,7 @@ unsigned char find_first_objno(unsigned char gah, unsigned char gal)
 	}
 	return (objno);
 }
+#endif
 
 
 
