@@ -1,0 +1,45 @@
+Funktionen Kombi 2in/2out v1.0
+
+basiert auf Jung 2132.6 2-fach UP Schaltaktor mit Nebeneingängen
+
+
+Allgemein
+
+Telegrammratenbegrenzung				nein
+Auslesen aller Objektzustände				ja
+
+
+Ausgänge
+
+Schalten der 2 Kanäle					ja
+Ausgänge als Schliesser oder Öffner parametrierbar	ja
+Verhalten bei Busspannungswiederkehr einstellbar	ja
+Verhalten bei Busspannungsausfall einstellbar		nein
+Rückmeldeobjekte für jeden Ausgang			ja
+Rückmeldeobjekte invertierbar				ja
+Zusatzfunktionen für die Ausgänge			ja
+- logische Verknüpung UND /ODER / UND mit Rückführung	ja
+- Sperrfunktion, Verhalten parametrierbar		ja
+- Zwangsstellungsfunktion				nein
+Ein- und/oder Ausschaltverzögerung			ja
+Zeitschaltfunktion					ja
+Handbetätigung						nein
+
+
+Eingänge
+
+Wirkung direkt auf die Ausgänge oder Bus		ja
+
+Schaltfunktion der Eingänge				ja 
+Verhalten bei st./f. Flanken getrennt einstellbar	ja
+Entprellzeit einstellbar				ja
+2 unabhängige Objekte je Eingang parametrierbar		ja
+Verhalten bei Busspannungswiederkehr einstellbar	ja
+zyklisches Senden					ja
+Sperren der Eingänge					ja
+
+Dimmer-Funktion						nein
+Jalousie-Funktion					nein
+Wertgeber-Funktion					nein
+Impulszähler-Funktion					nein
+

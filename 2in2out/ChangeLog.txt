@@ -1,0 +1,5 @@
+2013-05-19 Version 1.0
+        Sourcen übernommen, Version als 1.0 bezeichnet
+        Eclipse Projekt angelegt
+        Eclipse Warnungen behoben
+        TODO auf neue Lib portieren
