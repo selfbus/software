@@ -114,6 +114,7 @@ dimmcompare=61;//20
 //zl_50hz=48;
 //P0_1 =! P0_1;
 //return;
+*/
 }
 
 void tim0_int(void) __interrupt (1)
@@ -121,7 +122,7 @@ void tim0_int(void) __interrupt (1)
 
 	dimmcompare++;
 //TF0=0;
-	
+/*	
 	TL0=0x95;	//107 bis überlauf 29µs
 	TH0=0xff;
   if(zl_50hz<5000)
@@ -148,9 +149,9 @@ void tim0_int(void) __interrupt (1)
       if(dimmzl>=dimm_I2C[1])
         K2OUT=1;
 */
-      if(dimmcompare<=dimm_I2C[0]|| dimm_I2C[0]==0)K1OUT=0;
+      if(dimmcompare<=dimm_I2C[0]&& dimm_I2C[0]!=0)K1OUT=0;
       else K1OUT=1;
-      if(dimmcompare<=dimm_I2C[1]|| dimm_I2C[1]==0)K2OUT=0;
+      if(dimmcompare<=dimm_I2C[1]&& dimm_I2C[1]!=0)K2OUT=0;
       else K2OUT=1;
     }
   else
@@ -264,7 +265,7 @@ void main(void)
 		  send(TH0);
 	  }
 */
-//	  DEBUGPOINT;
+	  DEBUGPOINT;
 
       if(dimm_I2C[0]!=mk[0]||dimm_I2C[1]!=mk[1])
          {
