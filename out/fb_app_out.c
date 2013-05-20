@@ -5,7 +5,7 @@
  *   / __/ / _, _/ /___/ /___/ /_/ / /_/ /___/ / 
  *  /_/   /_/ |_/_____/_____/_____/\____//____/  
  *                                      
- *  Copyright (c) 2008-2012 Andreas Krebs <kubi@krebsworld.de>
+ *  Copyright (c) 2008-2013 Andreas Krebs <kubi@krebsworld.de>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 2 as
@@ -42,9 +42,9 @@
 
 
 #include <P89LPC922.h>
-#include "../lib_lpc922/fb_lpc922.h"
+#include "../lib_lpc922/Releases/fb_lpc922_1.4x.h"
 #include  "fb_app_out.h"
-
+//#include  "../com/debug.h"
 //#include "../com/fb_rs232.h"
 
 unsigned char timerbase[TIMERANZ];// Speicherplatz für die Zeitbasis und 4 status bits
@@ -63,7 +63,6 @@ unsigned char logicstate;	// Zustand der Verknüpfungen pro Ausgang
 __bit delay_toggle;			// um nur jedes 2. Mal die delay routine auszuführen
 __bit portchanged;
 unsigned char rm_send;		// die von der main zu sendenden Rückmeldungen
-
 #ifdef zeroswitch
 unsigned char portausgabe_on;
 unsigned char portausgabe_off;
@@ -72,16 +71,18 @@ unsigned char phival;
 #endif
 
 
-void write_value_req(void) 				// Ausgänge schalten gemäß EIS 1 Protokoll (an/aus)
+void write_value_req(unsigned char objno) 				// Ausgänge schalten gemäß EIS 1 Protokoll (an/aus)
 {
-  unsigned char objno,objflags,assno,n,gaposh,zfout,zftyp, gapos;
+  unsigned char zfout,zftyp;
   unsigned char blockstart, blockend, block_polarity;
   unsigned char obj_bitpattern, zf_bitpattern;
- 
+/*	BREAKSTART
     gaposh=0;
 
     gapos=gapos_in_gat(telegramm[3],telegramm[4]);	// Position der Gruppenadresse in der Adresstabelle
-    if (gapos!=0xFF)					// =0xFF falls nicht vorhanden
+//	BREAKEND
+
+	if (gapos!=0xFF)					// =0xFF falls nicht vorhanden
     {
 	  //atp=eeprom[ASSOCTABPTR];			// Start Association Table
       assno=eeprom[eeprom[ASSOCTABPTR]];				// Erster Eintrag = Anzahl Einträge
@@ -93,7 +94,7 @@ void write_value_req(void) 				// Ausgänge schalten gemäß EIS 1 Protokoll (an/au
         {
           objno=eeprom[eeprom[ASSOCTABPTR]+2+(n*2)];				// Objektnummer
           objflags=read_objflags(objno);			// Objekt Flags lesen
-//obj_bitpattern prüfen !!!
+*/
           obj_bitpattern=0x01<<(objno-8);
           
           if (objno<8) object_schalten(objno,telegramm[7]&0x01);	// Objektnummer 0-7 entspricht den Ausgängen 1-8
@@ -105,7 +106,7 @@ void write_value_req(void) 				// Ausgänge schalten gemäß EIS 1 Protokoll (an/au
             blockstart=0;
             blockend=0;
             switch (objno-8)			// Zugeordneten Ausgang zu Zusatzfunktionsnr. in zfout speichern (1-8)
-            {
+             {
               case 0x00:		
                 zfout=eeprom[FUNCASS]&0x0F;
                 blockstart=eeprom[BLOCKACT]&0x03;		// Verhalten bei Beginn der Sperrung
@@ -169,11 +170,11 @@ void write_value_req(void) 				// Ausgänge schalten gemäß EIS 1 Protokoll (an/au
               //case 0x02:			// Zwangsstellung
             }
           }
-        }
-      }
+//        }
+//      }
       if (portbuffer != oldportbuffer) portchanged=1;//post für port_schalten hinterlegen
       //port_schalten(portbuffer);	//Port schalten wenn sich ein Pin geändert hat
-    }
+//    }
     //owntele=0;
     //respondpattern=0;
 }
@@ -186,9 +187,9 @@ void write_value_req(void) 				// Ausgänge schalten gemäß EIS 1 Protokoll (an/au
 * @return
 * 
 */
-void read_value_req(void)
+void read_value_req(unsigned char objno)
 {
-	unsigned char objno, objflags;
+/*	unsigned char  objflags;
 	unsigned int objvalue;
 	
 	objno=find_first_objno(telegramm[3],telegramm[4]);	// erste Objektnummer zu empfangener GA finden
@@ -200,6 +201,8 @@ void read_value_req(void)
 		// Objekt lesen, nur wenn read enable gesetzt (Bit3) und Kommunikation zulaessig (Bit2)
 		if((objflags&0x0C)==0x0C) send_obj_value(objno+64); //send_value(0,objno,objvalue);
     }
+*/    
+ send_obj_value(objno+64);    
 }
 
 
@@ -326,9 +329,9 @@ void delay_timer(void)	// zählt alle 65ms die Variable Timer hoch und prüft Queu
 	unsigned char Tasten=0;
 #endif
 	
-	RTCCON=0x60;		// RTC anhalten und Flag löschen
-	RTCH=0x0E;			// reload Real Time Clock
-	RTCL=0xA0;
+	RTCCON=0x61;		// RTC anhalten und Flag löschen
+//	RTCH=0x0E;			// reload Real Time Clock
+//	RTCL=0xA0;
 	objno=0;
 
 		timer++;
@@ -457,10 +460,9 @@ void delay_timer(void)	// zählt alle 65ms die Variable Timer hoch und prüft Queu
 	}
 #endif
 //	if (portchanged) port_schalten(portbuffer);				// Ausgänge schalten
-	RTCCON=0x61;		// RTC starten
+//	RTCCON=0x61;		// RTC starten
 //	delay_toggle=!delay_toggle;
 }
-
 
 #ifdef zeroswitch
 void EX0_int (void) __interrupt (0)
@@ -540,7 +542,7 @@ void port_schalten(void)		// Schaltet die Ports mit PWM, DUTY ist Pulsverhältnis
 	rm_state=portbuffer ^ eeprom[RMINV];	// Rückmeldeobjekte setzen
 	for (n=0;n<8;n++) {	// Rückmeldung wenn ein Ausgag sich geändert hat
 		pattern=1<<n;
-		if((portbuffer&pattern)!=(oldportbuffer&pattern)) send_obj_value(n+12);
+		if((portbuffer&pattern)!=(oldportbuffer&pattern)) rm_send|=pattern;//send_obj_value(n+12);
 	}
 
 	oldportbuffer=portbuffer;
@@ -566,7 +568,7 @@ void port_schalten(void)		// Schaltet die Ports mit PWM, DUTY ist Pulsverhältnis
 	}
  #endif
 #else // sonst normaler sporatisch schaltender out
-#ifdef SPIBISTAB	//serielle schiebeausgang für bistabile Relaise
+ #ifdef SPIBISTAB	//serielle schiebeausgang für bistabile Relaise
 		spi_2_out(sort_output(portbuffer));		// Ports schalten
 		PWM=0;
 		TF0=0;			// Timer 0 für Haltezeit Vollstrom verwenden
@@ -579,14 +581,34 @@ void port_schalten(void)		// Schaltet die Ports mit PWM, DUTY ist Pulsverhältnis
 	rm_state=portbuffer ^ eeprom[RMINV];	// Rückmeldeobjekte setzen
 	for (n=0;n<8;n++) {	// Rückmeldung wenn ein Ausgag sich geändert hat
 		pattern=1<<n;
-		if((portbuffer&pattern)!=(oldportbuffer&pattern)) send_obj_value(n+12);
+		if((portbuffer&pattern)!=(oldportbuffer&pattern)) rm_send|=pattern;//send_obj_value(n+12);
 	}
 
 	oldportbuffer=portbuffer;
 	portchanged=0;
 
-#else	// also normaler out8 oder out4
+ #else	// also normaler out8 oder out4
+   #ifdef IO_BISTAB
+	P0=sort_output(portbuffer)&0xFF;	// Ports schalten
+	TF0=0;			// Timer 0 für Haltezeit Vollstrom verwenden
+	TH0=0x6f;		// 16ms (10ms=6fff)
+	TL0=0xff;
+	TMOD=(TMOD & 0xF0) +1;		// Timer 0 als 16-Bit Timer
+	TAMOD=0x00;
+	TR0=1;
+	rm_state=portbuffer ^ eeprom[RMINV];	// Rückmeldeobjekte setzen
+	for (n=0;n<8;n++) {	// Rückmeldung wenn ein Ausgag sich geändert hat
+		pattern=1<<n;
+		if((portbuffer&pattern)!=(oldportbuffer&pattern)) rm_send|=pattern;//send_obj_value(n+12);
+	}
 
+oldportbuffer=portbuffer;
+portchanged=0;
+	
+	
+	
+	
+   #else	
 	if(portbuffer & ~oldportbuffer) {	// Vollstrom nur wenn ein relais eingeschaltet wird
 		TR0=0;
 		AUXR1&=0xE9;	// PWM von Timer 0 nicht mehr auf Pin ausgeben
@@ -605,21 +627,21 @@ void port_schalten(void)		// Schaltet die Ports mit PWM, DUTY ist Pulsverhältnis
 	else P0=portbuffer;
 
 	rm_state=portbuffer ^ eeprom[RMINV];	// Rückmeldeobjekte setzen
-#ifdef MAX_PORTS_8
+	#ifdef MAX_PORTS_8
 	for (n=0;n<8;n++) {	// Rückmeldung wenn ein Ausgag sich geändert hat
 		pattern=1<<n;
 		if((portbuffer&pattern)!=(oldportbuffer&pattern)) rm_send|=pattern;		//send_obj_value(n+12);
 	}
-#else
+	#else
 	for (n=0;n<4;n++) {	// Rückmeldung wenn ein Ausgag sich geändert hat
 		pattern=1<<n;
 		if((portbuffer&pattern)!=(oldportbuffer&pattern)) rm_send|=pattern;		//send_obj_value(n+12);
 	}
-#endif	
+	#endif	
 	oldportbuffer=portbuffer;
 	portchanged=0;
-	
-#endif	
+	#endif	
+  #endif	
 #endif
 }
 
@@ -629,17 +651,93 @@ unsigned int sort_output(unsigned char portbuffer){
    diff=portbuffer ^ oldportbuffer;
    result=0;
    // A1 
-#ifdef MAX_PORT_8
+#ifdef MAX_PORTS_8
    if (diff & 0x01){
 	   if(portbuffer & 0x01){
-		   result|=0x1000;
+		   result|=0x2000;
 	   }
 	   else{
-		   result|=0x2000;
+		   result|=0x1000;
 	   }
    }
 
    // A2
+   if (diff & 0x02){
+	   if(portbuffer & 0x02){
+	      result|=0x0008;
+	   }
+	   else{
+	      result|=0x0004;
+	   }
+   }
+   // A3
+   if (diff & 0x04){
+	   if(portbuffer & 0x04){
+	      result|=0x8000;
+	   }
+	   else{
+	      result|=0x4000;
+	   }
+   }
+   // A4
+   if (diff & 0x08){
+	   if(portbuffer & 0x08){
+	      result|=0x0002;
+	   }
+	   else{
+	      result|=0x0001;
+	   }
+   }
+   
+   // A5
+   if (diff & 0x10){
+	   if(portbuffer & 0x10){
+	      result|=0x0080;
+	   }
+	   else{
+	      result|=0x0040;
+	   }
+   }
+   // A6
+   if (diff & 0x20){
+   	   if(portbuffer & 0x20){
+	      result|=0x0200;
+	   }
+	   else{
+	      result|=0x0100;
+	   }
+   }
+   
+   // A7
+   if (diff & 0x40){
+	   if(portbuffer & 0x40){
+	      result|=0x0020;
+	   }
+	   else{
+	      result|=0x0010;
+	   }
+   }
+   // A8
+   if (diff & 0x80){
+	   if(portbuffer & 0x80){
+	      result|=0x0800;
+	   }
+	   else{
+	      result|=0x0400;
+	   }
+   }
+#else
+ #ifdef IO_BISTAB
+   // A1
+   if (diff & 0x01){
+	   if(portbuffer & 0x01){
+	      result|=0x0001;
+	   }
+	   else{
+	      result|=0x0002;
+	   }
+   }
+  // A2
    if (diff & 0x02){
 	   if(portbuffer & 0x02){
 	      result|=0x0004;
@@ -648,63 +746,27 @@ unsigned int sort_output(unsigned char portbuffer){
 	      result|=0x0008;
 	   }
    }
+   
    // A3
    if (diff & 0x04){
 	   if(portbuffer & 0x04){
-	      result|=0x4000;
-	   }
-	   else{
-	      result|=0x8000;
-	   }
-   }
-   // A4
-   if (diff & 0x08){
-	   if(portbuffer & 0x08){
-	      result|=0x0001;
-	   }
-	   else{
-	      result|=0x0002;
-	   }
-   }
-   
-   // A5
-   if (diff & 0x10){
-	   if(portbuffer & 0x10){
-	      result|=0x0040;
-	   }
-	   else{
-	      result|=0x0080;
-	   }
-   }
-   // A6
-   if (diff & 0x20){
-   	   if(portbuffer & 0x20){
-	      result|=0x0100;
-	   }
-	   else{
-	      result|=0x0200;
-	   }
-   }
-   
-   // A7
-   if (diff & 0x40){
-	   if(portbuffer & 0x40){
 	      result|=0x0010;
 	   }
 	   else{
 	      result|=0x0020;
 	   }
    }
-   // A8
-   if (diff & 0x80){
-	   if(portbuffer & 0x80){
-	      result|=0x0400;
+   
+   // A4
+   if (diff & 0x08){
+	   if(portbuffer & 0x08){
+	      result|=0x0040;
 	   }
 	   else{
-	      result|=0x0800;
-	   }
+	      result|=0x0080;
+	   }   
    }
-#else
+ #else
    // A2
    if (diff & 0x01){
 	   if(portbuffer & 0x02){
@@ -743,7 +805,7 @@ unsigned int sort_output(unsigned char portbuffer){
 	      result|=0x0020;
 	   }
    }
-
+ #endif
 #endif   
    return result;
 
@@ -752,35 +814,39 @@ unsigned int sort_output(unsigned char portbuffer){
 
 void spi_2_out(unsigned int daten){
 
-   unsigned char n, unten, mitte;
+   unsigned char n, unten, mitte,LED_pattern;
 
    unten=daten & 0xFF;
    mitte=daten>>8;
-
+   LED_pattern=portbuffer;
    WRITE=0;
    CLK=0;
    for(n=0;n<=7;n++){
-      
-
       BOT_OUT=(unten & 0x080)>>7;
       unten<<=1;
-
-#ifdef MAX_PORTS_8     
-      MID_OUT=(mitte & 0x080)>>7;
-      mitte<<=1;
-#endif
       CLK=1;
       CLK=0;
-
+// LEDs aktualisieren
+      LED_SER=(LED_pattern & 0x080)>>7;
+      LED_pattern<<=1;
+      LED_SCK=1;
+      LED_SCK=0;
    }
+   LED_RCK=1;
+   LED_RCK=0;
+#ifdef MAX_PORTS_8     
+   for(n=0;n<=7;n++){
+
+      BOT_OUT=(mitte & 0x080)>>7;
+      mitte<<=1;
+      CLK=1;
+      CLK=0;
+   }
+#endif
 
    WRITE=1;
-
    WRITE=0;
-
 }
-
-
 
 
 
@@ -818,7 +884,15 @@ void bus_return(void)		// Aktionen bei Busspannungswiederkehr
 	rm_send|=~portbuffer;// Rückmeldung nur für Objekte mit Wert 0, da Wert 1 in normalem port_schalten eh gesendet wird
 
 }
-
+#ifdef SPIBISTAB
+void bus_down (void)
+{
+	portbuffer=0;
+	port_schalten();
+	while(!TF0);
+	while(1);
+}
+#endif
 
 void restart_app(void) 		// Alle Applikations-Parameter zurücksetzen
 {
@@ -831,7 +905,11 @@ void restart_app(void) 		// Alle Applikations-Parameter zurücksetzen
 	P0M2=0xFF;
 #endif
 #ifdef MAX_PORTS_4
+  #ifdef IO_BISTAB
+	P0M2=0xFF;
+  #else
 	P0M2= 0x0F;
+  #endif
 #endif	
  
 
@@ -848,7 +926,7 @@ void restart_app(void) 		// Alle Applikations-Parameter zurücksetzen
 	schalten_state=0;
 #endif	
 	ET0=0;			// Interrupt für Timer 0 sperren
-	IT0=1;
+	IT0=1;			// Int type flag0, 1=flankengetriggert
 	zf_state=0x00;		// Zustand der Zusatzfunktionen 1-4
 	blocked=0x00;		// Ausgänge nicht gesperrt
 	timer=0;			// Timer-Variable, wird alle 130ms inkrementiert
@@ -874,4 +952,11 @@ void restart_app(void) 		// Alle Applikations-Parameter zurücksetzen
 	WRITE_BYTE(0x01,0x12,0x9A)	// COMMSTAB Pointer
 	STOP_WRITECYCLE
 	EA=1;						// Interrupts freigeben
+	IT0=0;
+
+	RTCCON=0x60;		// RTC Flag löschen
+	RTCH=0x01;			// reload Real Time Clock
+	RTCL=0xCD;			// 8ms
+	RTCCON=0x61;
+
 }
