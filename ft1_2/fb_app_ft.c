@@ -13,6 +13,7 @@
  *
  */
 
+
 #define FB_APP_FT_C
 #include <P89LPC922.h>
 #include "../lib_lpc922_mini/fb_lpc922_mini.h"
@@ -68,15 +69,14 @@ global variables now defined only once in fb_app_ft.h unsing switch FB_APP_FT_C.
 
 #endif
 
-
-
-
+unsigned char timer_data;
 
 void ft_process_var_frame(void)
 {
 	unsigned char n;
 	__bit write_ok=0;
 	if (rsin[0]==0x68 && rsin[3]==0x68 && rsin[1]==rsin[2]) {	// Multi Byte
+		timer_data=2;// timer starting data LED
 		if ((rsin[4]&0xDF)==0x53) {		// send_Udat
 			switch (rsin[5])		// PEI10 message code
 			{
@@ -320,7 +320,6 @@ void ft_send_frame(void)	// send a frame with variable length that is stored in 
 {
 	unsigned char b,n,repeat, frame_length, send_char;
 	unsigned int timeout;
-	
 	repeat=4;
 	while (repeat--) {		// repeat sending frame up to 3 times if not achnowleged
 		rsin[rsin[1]+4]=0;
@@ -347,10 +346,12 @@ void ft_send_frame(void)	// send a frame with variable length that is stored in 
 			if (ft_ack) {			
 				repeat=0;
 				ft_ack=0;
-                break;
+                LED_run=0;
+                return;
 			}
 		}
 	}
+	LED_run=1;
 }
 
 
@@ -395,7 +396,6 @@ void PEI_identify_req(void)
 	rsin[13]=0x5A;
 	rsin[14]=0;
 	ft_send_frame();
-
 }
 
 
@@ -611,11 +611,10 @@ unsigned long read_obj_value(unsigned char objno)
 	return(0);
 }
 
-
 void restart_app(void)		// Alle Applikations-Parameter zurücksetzen
 {
-	P0M1=0;
-	P0M2=0;
+	P0M1=0x00;
+	P0M2=0x00;
 	
 	if(eeprom[ADDRTAB+1]==0 && eeprom[ADDRTAB+2]==0) {
 		telegramm[8]=0x11;
@@ -635,6 +634,11 @@ void restart_app(void)		// Alle Applikations-Parameter zurücksetzen
 	  transparency=1;	// auch fremde Gruppentelegramme werden verarbeitet
 	  
 	 //auto_ack=0;		// telegramme nicht per ACK bestätigen
-	  
+	 	RTCH=0x0E;		// Real Time Clock auf 65ms laden
+	 	RTCL=0xA0;		// (RTC ist ein down-counter mit 128 bit prescaler und osc-clock)
+	 	RTCCON=0x61;	// ... und starten
+	 	
+	 	LED_run =1;
+	 	LED_data =1;
 	  
 }

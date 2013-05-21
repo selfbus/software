@@ -39,6 +39,8 @@
 #define FB_APP_EXTERN extern
 #endif
 
+#define LED_run 	P0_1
+#define LED_data	P0_0
 
 FB_APP_EXTERN unsigned char rsin[32];
 FB_APP_EXTERN unsigned char rsinpos, switch_mode, rsin_stat;
@@ -46,6 +48,7 @@ FB_APP_EXTERN __bit fcb, tel_was_acked;
 FB_APP_EXTERN unsigned char property_5;
 FB_APP_EXTERN __bit ft_ack;
 
+extern unsigned char timer_data;
 
 void ft_process_var_frame();
 void ft_process_fix_frame();

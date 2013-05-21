@@ -5,7 +5,7 @@
  *   / __/ / _, _/ /___/ /___/ /_/ / /_/ /___/ / 
  *  /_/   /_/ |_/_____/_____/_____/\____//____/  
  *                                      
- *  Copyright (c) 2008-2011 Andreas Krebs <kubi@krebsworld.de>
+ *  Copyright (c) 2008-2013 Andreas Krebs <kubi@krebsworld.de>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 2 as
@@ -13,12 +13,15 @@
  *
  */
 
+
 #ifndef FB_APP_OUT
 #define FB_APP_OUT
-
-#define MAX_PORTS_8			// Anzahl Ausgänge (nur 4 oder 8 erlaubt)
+#define IO_BISTAB
+//#define BUS_DOWN
+#define MAX_PORTS_4			// Anzahl Ausgänge (nur 4 oder 8 erlaubt)
 //#define HAND				// Handsteuerung aktiv (auskommentieren wenn nicht gewünscht)
-#define SPIBISTAB			// Serielle Ausgabe für bistabile relaise aktivieren
+//#define SPIBISTAB			// Serielle Ausgabe für bistabile relaise aktivieren
+
 //#define zeroswitch			// für Platine mit Nullspannungserkennung
 // Parameter-Adressen im EEPROM
 
@@ -51,8 +54,10 @@
 #define MID_OUT		P0_1
 #define WRITE		P0_2
 
-extern unsigned char __at 00 RAM[127];
-                                 
+#define LED_SER		P0_4
+#define	LED_SCK		P0_5
+#define LED_RCK		P0_6
+
 extern 	__bit portchanged;// globale variable, sie ist 1 wenn sich portbuffer geändert hat
 extern unsigned char portbuffer;
 extern unsigned char rm_send;		// die von der main zu sendenden Rückmeldungen
@@ -63,34 +68,26 @@ extern volatile unsigned char schalten_state; // status T0 int
 extern unsigned char phival;
 #endif
 
-void write_delay_record(unsigned char objno, unsigned char delay_status, long delay_target);	// Schreibt die Schalt-Verzoegerungswerte ins Flash
-void clear_delay_record(unsigned char objno); // Loescht den Delay Eintrag
-void write_value_req(void) ;		// Hauptroutine für Ausgänge schalten gemäß EIS 1 Protokoll (an/aus)
-void read_value_req(void) ;
+//void write_delay_record(unsigned char objno, unsigned char delay_status, long delay_target);	// Schreibt die Schalt-Verzoegerungswerte ins Flash
+//void clear_delay_record(unsigned char objno); // Loescht den Delay Eintrag
+//void write_value_req(void) ;		// Hauptroutine für Ausgänge schalten gemäß EIS 1 Protokoll (an/aus)
+//void read_value_req(void) ;
 void delay_timer(void);		// zählt alle 130ms die Variable Timer hoch und prüft Queue
 void port_schalten(void);	// Ausgänge schalten
 void object_schalten(unsigned char objno, __bit objstate);	// Objekt schalten
 void spi_2_out(unsigned int daten);
 unsigned int sort_output(unsigned char portbuffer);
 void bus_return(void);		// Aktionen bei Busspannungswiederkehr
+void bus_down (void);
 void restart_app(void) ;		// Alle Applikations-Parameter zurücksetzen
 
 unsigned long read_obj_value(unsigned char objno) ;	// gibt den Wert eines Objektes zurueck
 void write_obj_value(unsigned char objno,unsigned int objvalue);	// schreibt den aktuellen Wert eines Objektes ins 'USERRAM'
+//void EX0_int (void) __interrupt (0);
 #ifdef zeroswitch
 void EX0_int(void) __interrupt (0);
 void timer0_int(void) __interrupt (1) ;
 #endif
 
-#define DEBUG \
-	while(!TI);\
-	TI=0;\
-	SBUF =
-
-#define BREAKPOINT\
-	if(RI){ \
-DEBUG RAM[SBUF];\
-	RI=0;\
-}
 
 #endif

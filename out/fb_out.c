@@ -69,7 +69,8 @@
 *	3.34	Trimfunktion via RS 600bd.(c + - w) version (v) und Type (t) abrufbar. 
 			progmode(p) relaise toggeln(ziffer 1-8)
 *   3.35	Fehler bei Rückmeldung und bei eeprom flashen behoben, neue LIB
-
+* 	3.36	Umstellung auf lib1.4x.
+ TODO 
 * @todo:
 	- Prio beim Senden implementieren \n
 	- Zwangsstellungsobjekte implementieren \n
@@ -77,12 +78,14 @@
 
 
 #include <P89LPC922.h>
-#include "../lib_lpc922/fb_lpc922.h"
+#include "../lib_lpc922/Releases/fb_lpc922_1.4x.h"
 #include "fb_app_out.h"
 
 //#include "../com/fb_rs232.h"
 #include"../com/watchdog.h"
-
+#include"../com/watchdog.c"
+//#include"../com/debug.c"
+//#include"../com/debug.h"
 /** 
 * The start point of the program, init all libraries, start the bus interface, the application
 * and check the status of the program button.
@@ -118,18 +121,22 @@
 		#endif
 	#endif
 #endif
-#define VERSION 35
+#define VERSION 36
+
+unsigned char __at 0x00 RAM[00]; 
 
 void main(void)
 { 
 	unsigned char n,cmd,tasterpegel=0;
 	signed char cal;
+//	unsigned int m;
 	static __code signed char __at 0x1BFF trimsave;
 #ifdef zeroswitch
 	static __code unsigned char __at 0x1BFE phisave;
 #endif
 	unsigned char rm_count=0;
 	__bit wduf,tastergetoggelt=0;
+
 	wduf=WDCON&0x02;
 	restart_hw();							// Hardware zuruecksetzen
 // im folgendem wird der watchdof underflow abgefragt und mit gedrücktem Progtaster
@@ -137,12 +144,14 @@ void main(void)
 	TASTER=1;
 	if(!TASTER && wduf)cal=0;
 	else cal=trimsave;
+	TASTER=0;
 	TRIM = (TRIM+trimsave);
 	TRIM &= 0x3F;//oberen 2 bits ausblenden
 #ifdef zeroswitch
 	if(phisave<=36)	phival=phisave;
 	else phival=0;
 #endif
+	TR0=1;
 	if (!wduf){// BUS return verzögerung nur wenn nicht watchdog underflow
 		for (n=0;n<50;n++) {		// Warten bis Bus stabil
 			TR0=0;					// Timer 0 anhalten
@@ -159,13 +168,13 @@ void main(void)
 	if(!wduf)bus_return();							// Aktionen bei Busspannungswiederkehr
 	//...rs_init...(6);im folgenden direkt:
 	BRGCON&=0xFE;	// Baudrate Generator stoppen
-	P1M1&=0xFC;		// RX und TX auf bidirectional setzen
-	P1M2&=0xFC;
+//	P1M1&=0xFC;		// RX und TX auf bidirectional setzen
+//	P1M2&=0xFC;
 	SCON=0x50;		// Mode 1, receive enable
 	SSTAT|=0xE0;	// TI wird am Ende des Stopbits gesetzt und Interrupt nur bei RX und double TX buffer an
 	BRGCON|=0x02;	// Baudrate Generator verwenden aber noch gestoppt
-	BRGR1=0x2F;	// Baudrate = cclk/((BRGR1,BRGR0)+16)
-	BRGR0=0xF0;	// für 115200 0030 nehmen, autocal: 600bd= 0x2FF0
+	BRGR1=0x2f;	// Baudrate = cclk/((BRGR1,BRGR0)+16)
+	BRGR0=0xf0;	// für 115200 0030 nehmen, autocal: 600bd= 0x2FF0
 	BRGCON|=0x01;	// Baudrate Generator starten
 	SBUF=0x55;
 	do  {
@@ -188,12 +197,18 @@ void main(void)
 				PWM=1;			// PWM Pin muss auf 1 gesetzt werden, damit PWM geht !!!
 	#ifndef SPIBISTAB
 				TR0=1;
-	#else
-				P0=portbuffer;
+	#endif
+	
+	#ifdef IO_BISTAB
+				P0=0;// wenn Bistabile über IO diese ausschalten
 	#endif
 			}
 #endif
-			
+#ifdef BUS_DOWN
+			if(TxD){
+				bus_down();
+			}
+#endif			
 			if (portchanged)port_schalten();	// Ausgänge schalten
 
 			// Rückmeldungen senden
@@ -241,12 +256,11 @@ void main(void)
 		else {
 			for(n=0;n<100;n++);	// falls Hauptroutine keine Zeit verbraucht, der PROG LED etwas Zeit geben, damit sie auch leuchten kann
 		}
-//BREAKPOINT
-
 cmd;		// Eingehendes Terminal Kommando verarbeiten...
 		if (RI){
 			RI=0;
 			cmd=SBUF;
+
 			if(cmd=='c'){
 				while(!TI);
 				TI=0;
@@ -315,7 +329,6 @@ cmd;		// Eingehendes Terminal Kommando verarbeiten...
 #endif						
 
 		}//end if(RI...
-		
 		TASTER=1;				// Pin als Eingang schalten um Taster abzufragen
 		if(!TASTER){ // Taster gedrückt
 			if(tasterpegel<255)	tasterpegel++;
@@ -330,7 +343,7 @@ cmd;		// Eingehendes Terminal Kommando verarbeiten...
 		}
 		TASTER=!(status60 & 0x01);	// LED entsprechend Prog-Bit schalten (low=LED an)
 
-  } while(1);
+	} while(1);
 }
 
 
