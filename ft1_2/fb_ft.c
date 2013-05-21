@@ -59,6 +59,14 @@ void main(void)
 		if ( n == RSIN_VARFRAME ) ft_process_var_frame();
 		if ( n == RSIN_FIXFRAME ) ft_process_fix_frame();
 		if (tel_arrived) ft_process_telegram();
+		if(RTCCON>=0x80){// clock für die data LED
+			RTCCON=0x61;
+			if (timer_data){
+				timer_data--;
+				LED_data=0;
+			}
+			else LED_data=1;
+		}
   	} while(1);
 }
 
