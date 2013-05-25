@@ -16,6 +16,17 @@
 #ifndef FB_APP_FT
 #define FB_APP_FT
 
+
+// Damit die Eclipse Code Analyse nicht so viele Warnungen anzeigt:
+#ifndef SDCC
+# define __idata
+# define __code
+# define __at(x)
+# define __using(x)
+# define __interrupt(x)
+#endif
+
+
 #define ASSOCTABPTR 	0x11	// Adresse des Pointers auf die Assoziations-Tabelle
 #define COMMSTABPTR 	0x12	// Adresse des Pointers auf die Kommunikationsobjekt-Tabelle
 #define ADDRTAB		0x16	// Startadresse der Adresstabelle
@@ -68,4 +79,5 @@ void restart_app(void);		// Alle Applikations-Parameter zurücksetzen
 void write_value_req(void);
 void read_value_req(void);
 unsigned long read_obj_value(unsigned char objno);
+
 #endif
