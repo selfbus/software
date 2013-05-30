@@ -14,8 +14,6 @@
  */
 
 #define FB_APP_FT_C
-#include <P89LPC922.h>
-#include <fb_lpc922_mini.h>
 #include "fb_app_ft.h"
 
 //#define ROUTERMODE		// 115200,n,8,1 (auskommentieren für 19200,e,8,1)
@@ -62,10 +60,15 @@
 	while(!TI); \
 	TI=0;
 //for(n=0;n<10;n++) TI=0;
-
 #endif
 
+// FT Acknowledge an PC senden
+#define FT_SEND_ACK FT_SEND_CHAR(0xE5)
+
+
 unsigned char timer_data;
+unsigned char send_confirm;
+
 
 void ft_process_var_frame(void)
 {
@@ -80,52 +83,34 @@ void ft_process_var_frame(void)
 			// PEI10 message code
 			{
 			case 0x11:		// send a telegram on the bus
-				FT_SEND_CHAR(0xE5)
-				//EX1=0;
-				while (fb_state != 0)
-					;
+				FT_SEND_ACK
+				//while (fb_state != 0);
 				send_obj_value(0);
-//				for (n=3;n<(rsin[1]-2);n++) telegramm[n]=rsin[n+6];
-//				telegramm[0]=0xB0 + (rsin[6] & 0x0F);
-//				telegramm[1]=eeprom[ADDRTAB+1];	// PA high
-//				telegramm[2]=eeprom[ADDRTAB+2];	// PA low	
-				FT_SEND_L_DATA_CONF
-				// send confirmation frame
-
-				//	while(TR1);         // wait till bus free
-				//	init_tx();
-
 				break;
 
 			case 0xA9:		// PEI_switch_request	
-				FT_SEND_CHAR(0xE5)
+				FT_SEND_ACK
 				if (rsin[6] == 0x00 && rsin[8] == 0x34)
 				{
 					if (rsin[7] == 0x12)
 					{
-						if (rsin[9] == 0x56 && rsin[10] == 0x78
-								&& rsin[11] == 0x9A)
+						if (rsin[9] == 0x56 && rsin[10] == 0x78 && rsin[11] == 0x9A)
 							switch_mode = 0x00; // normal mode
-						if (rsin[9] == 0x56 && rsin[10] == 0x78
-								&& rsin[11] == 0x8A)
+						if (rsin[9] == 0x56 && rsin[10] == 0x78 && rsin[11] == 0x8A)
 							switch_mode = 0x01; // application layer
-						if (rsin[9] == 0x48 && rsin[10] == 0x88
-								&& rsin[11] == 0x0A)
+						if (rsin[9] == 0x48 && rsin[10] == 0x88 && rsin[11] == 0x0A)
 							switch_mode = 0x02; // transport layer remote
-						if (rsin[9] == 0x56 && rsin[10] == 0x78
-								&& rsin[11] == 0x0A)
+						if (rsin[9] == 0x56 && rsin[10] == 0x78 && rsin[11] == 0x0A)
 							switch_mode = 0x03; // transport layer local
 					}
 					if (rsin[7] == 0x18)
 					{
-						if (rsin[9] == 0x56 && rsin[10] == 0x78
-								&& rsin[11] == 0x0A)
+						if (rsin[9] == 0x56 && rsin[10] == 0x78 && rsin[11] == 0x0A)
 							switch_mode = 0x04; // link layer
 					}
 				}
 				if (rsin[6] == 0x90 && rsin[7] == 0x18 && rsin[8] == 0x34
-						&& rsin[9] == 0x56 && rsin[10] == 0x78
-						&& rsin[11] == 0x0A)
+						&& rsin[9] == 0x56 && rsin[10] == 0x78 && rsin[11] == 0x0A)
 				{
 					switch_mode = 0x05; // busmonitor mode
 					auto_ack = 0;
@@ -135,7 +120,7 @@ void ft_process_var_frame(void)
 				break;
 
 			case 0x43:		// T_connect_request
-				FT_SEND_CHAR(0xE5)
+				FT_SEND_ACK
 				if (switch_mode == 0x03)
 				{
 					FT_SET_HEADER(0x07, 0x86)
@@ -149,7 +134,7 @@ void ft_process_var_frame(void)
 				break;
 
 			case 0x44:	// T_Disconcect.req
-				FT_SEND_CHAR(0xE5)
+				FT_SEND_ACK
 				if (switch_mode == 0x03)
 				{
 					FT_SET_HEADER(rsin[1], 0x88)
@@ -158,7 +143,7 @@ void ft_process_var_frame(void)
 				break;
 
 			case 0x41:		// T_dataConnected.request
-				FT_SEND_CHAR(0xE5)
+				FT_SEND_ACK
 				if (switch_mode == TLlocal)
 				{ // Transport Layer local
 					switch (rsin[12])
@@ -280,7 +265,7 @@ void ft_process_fix_frame(void)		// frame with fixed length received
 	{	// Single Byte
 		if ((rsin[1] & 0x0F) == 0x00)
 		{	//send_reset received
-			FT_SEND_CHAR(0xE5)
+			FT_SEND_ACK
 			// send an ack
 			restart_app();
 		}
@@ -430,10 +415,9 @@ void PEI_identify_req(void)
 {
 	unsigned char n;
 
-	FT_SEND_CHAR(0xE5)
+	FT_SEND_ACK
 
 	FT_SET_HEADER(0x0A, 0xA8)
-
 	rsin[6] = eeprom[ADDRTAB + 1];
 	rsin[7] = eeprom[ADDRTAB + 2];
 	rsin[8] = 0x00;
@@ -533,89 +517,7 @@ __bit build_tel(unsigned char objno)
 	telegramm[1] = eeprom[ADDRTAB + 1];	// PA high
 	telegramm[2] = eeprom[ADDRTAB + 2];	// PA low
 
-	/*
-	 if(objno<128) {		// Multicast
-	 type=(objno&0x40);	// bei Multicast ist type0 normal und type1 response telegramm
-	 objno&=0x1F;
-
-	 objvalue=read_obj_value(objno);		// Objektwert lesen
-
-	 ga=find_ga(objno);					// wenn keine Gruppenadresse hinterlegt nix tun
-	 if (ga!=0)
-	 {
-	 telegramm[0]=0xBC;
-	 telegramm[1]=eeprom[ADDRTAB+1];
-	 telegramm[2]=eeprom[ADDRTAB+2];
-	 telegramm[3]=ga>>8;
-	 telegramm[4]=ga;
-	 telegramm[6]=0x00;
-	 if (type) telegramm[7]=0x40;		// read_value_response Telegramm (angefordert)
-	 else telegramm[7]=0x80;				// write_value_request Telegramm (nicht angefordert)
-
-	 objtype=eeprom[eeprom[COMMSTABPTR]+objno*3+4];
-
-	 if(objtype>6) length=objtype-5; else length=1;
-	 telegramm[5]=0xE0+length;
-	 if (length>1) telegramm[length+6]=objvalue; else telegramm[7]+=(objvalue&0x3F);
-	 if (length>2) telegramm[length+5]=objvalue>>8;
-	 if (length>3) telegramm[length+4]=objvalue>>16;
-	 if (length>4) telegramm[length+3]=objvalue>>24;
-
-	 build_ok=1;
-	 }
-	 }
-	 else {		// Unicast
-	 telegramm[0]=0xB0;				// Control Byte
-	 telegramm[1]=eeprom[ADDRTAB+1];	// Quelladresse ist phys. Adresse
-	 telegramm[2]=eeprom[ADDRTAB+2];
-	 telegramm[3]=conh;
-	 telegramm[4]=conl;
-
-	 switch(objno&0x1F) {
-	 case 1:	// NCD ACK Quittierung (129)
-	 telegramm[5]=0x60;					// DRL
-	 telegramm[6]=senders_pcount + 0xC2;	// Bit 6,7(TCPI = 11 NCD Quittierung) und Bit 0,1 (10=ACK)
-	 // geackt wird immer die Paketnummer vom Sender, nicht die eigene!!!
-	 break;
-	 case 2:	// read mask response (130)
-	 telegramm[5]=0x63;					// DRL
-	 telegramm[6]=pcount + 0x43;			// bei response immer eigene Paketnummer senden
-	 telegramm[7]=0x40;
-	 telegramm[8]=0x00;
-	 telegramm[9]=0x12;					// Maskenversion 1 = BCU1
-	 inc_pcount=1;
-	 break;
-	 case 3:	// read PA response (131)
-	 telegramm[3]=0x00;			// Zieladresse auf 0000, da Broadcast
-	 telegramm[4]=0x00;
-	 telegramm[5]=0xE1;			// DRL
-	 telegramm[6]=0x01;
-	 telegramm[7]=0x40;
-	 break;
-	 case 4:	// memory_read_response (132)
-	 for(n=0;n<mem_length;n++) {
-	 if (mem_adrh==0) {
-	 telegramm[n+10]=userram[mem_adrl+n];
-	 if(mem_adrl+n==0x60) telegramm[n+10]=status60;	// ausser bei 0x60
-	 }
-	 else telegramm[n+10]=eeprom[mem_adrl+n];
-	 }
-	 telegramm[5]=mem_length+0x63;		// DRL (Anzahl Bytes + 3)
-	 telegramm[6]=pcount|0x42;			// eigener Paketzaehler, TCPI und ersten beiden Befehlsbits
-	 telegramm[7]=mem_length|0x40;		// letzten 2 Befehlsbits
-	 telegramm[8]=mem_adrh;
-	 telegramm[9]=mem_adrl;
-	 inc_pcount=1;
-	 break;
-	 case 5:	// T-disconnect (133)
-	 telegramm[5]=0x60;
-	 telegramm[6]=0x81;
-	 break;
-	 }
-	 build_ok=1;
-	 }
-	 if(repeatflag) telegramm[0]&=0xDF;		// Wiederholungsbit löschen für Wiederholtelegramm
-	 */return (build_ok);
+	return build_ok;  // TODO gehört da nicht immer 1 ?
 }
 
 // ermittelt die Position einer GA in der GA-Tabelle, 0xFF falls nicht gefunden
@@ -624,7 +526,7 @@ unsigned char gapos_in_gat(unsigned char gah, unsigned char gal)
 {
 	gah;
 	gal;
-	return (1);						//GA wird immer wird geackt
+	return 1;						//GA wird immer wird geackt
 }
 
 void set_pa(void)
@@ -657,6 +559,35 @@ unsigned long read_obj_value(unsigned char objno)
 	return 0;
 }
 
+/**
+ *  Der Versand des Objekts objno wurde abgeschlossen.
+ *  Der Versand war erfolgreich bei success==1, erfolglos bei success==0.
+ */
+void send_obj_done(unsigned char objno, __bit success)
+{
+	objno;
+
+	send_confirm = 2 | success;
+//	// TODO
+//	FT_SET_HEADER(rsin[1],0x2E);
+//	rsin[6]=0xB0 + (rsin[6] & 0x0F);
+//	rsin[7]=eeprom[ADDRTAB+1];
+//	rsin[8]=eeprom[ADDRTAB+2];
+//
+//	ft_send_frame();
+}
+
+void ft_send_L_Data_conf()
+{
+	FT_SET_HEADER(rsin[1],0x2E | (send_confirm & 1));
+	rsin[6]=0xB0 + (rsin[6] & 0x0F);
+	rsin[7]=eeprom[ADDRTAB+1];
+	rsin[8]=eeprom[ADDRTAB+2];
+
+	send_confirm = 0;
+	ft_send_frame();
+}
+
 void restart_app(void)		// Alle Applikations-Parameter zurücksetzen
 {
 	P0M1 = 0x00;
@@ -671,6 +602,7 @@ void restart_app(void)		// Alle Applikations-Parameter zurücksetzen
 
 	ft_rs_init();			// serielle Schnittstelle initialisieren für FT1.2
 	rsinpos = 0;
+	send_confirm = 0;
 	ES = 1;					// enable serial interrupt
 
 	switch_mode = 0x00;		// normal mode

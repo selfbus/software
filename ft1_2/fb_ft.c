@@ -20,9 +20,6 @@
  *
  */
 
-#include <P89LPC922.h>
-#include <fb_lpc922_mini.h>
-
 #include "fb_app_ft.h"
 
 #include "watchdog.c"
@@ -61,6 +58,8 @@ void main(void)
 			ft_process_fix_frame();
 		if (tel_arrived)
 			ft_process_telegram();
+		if (send_confirm)
+			ft_send_L_Data_conf();
 		if (RTCCON >= 0x80)
 		{			// clock für die data LED
 			RTCCON = 0x61;

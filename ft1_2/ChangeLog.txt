@@ -1,0 +1,17 @@
+2013-05-26
+        Code Cleanup
+
+Version 1.11
+        Umgestellt auf lib 1.31
+
+Version 1.10
+        Umgestellt auf Library, thx to tuxbow :-)
+
+Version 1.02
+        Makros in Schleifen korrigiert
+
+Version 1.01
+        int freigabe bei empfangenen telegrammen war zu früh
+
+Version 1.00
+        Erste Version
