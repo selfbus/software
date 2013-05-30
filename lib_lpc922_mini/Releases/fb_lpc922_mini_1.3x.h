@@ -157,11 +157,5 @@ extern void read_value_req(void) ;		// Objektwerte lesen angefordert
 extern void restart_app(void) ;			// Alle Applikations-Parameter zuruecksetzen
 extern __bit build_tel(unsigned char objno) ;
 
-/**
- *  Der Versand des Objekts objno wurde abgeschlossen.
- *  Der Versand war erfolgreich bei success==1, erfolglos bei success==0.
- */
-extern void send_obj_done(unsigned char objno, __bit success);
-
 
 #endif
