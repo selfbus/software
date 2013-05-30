@@ -21,6 +21,7 @@
 */
 
 #include <P89LPC922.h>
+
 #include "../com/fb_rs232.h"
 #include"../com/watchdog.h"
 #include "../DIMMER/fb_i2c.h"
@@ -41,6 +42,8 @@ unsigned char dimmzl=0; //beim nulldurchgang auf 0 setzen
 unsigned char mode=AB; //modus des dimmer Anschnitt Abschnitt oder PWM
 //__bit strom0_fl=0;
 unsigned char dimmcompare,cmd,phase;
+unsigned char zero;
+static __code unsigned char __at 0x1CBC zeropoint={61};
 
 unsigned char __at 0x00 RAM[0] ;
 __bit locked=0;
@@ -105,7 +108,7 @@ void ex1_int(void) __interrupt (2)// ERKENNUNG NULLDURCHGANG
 		
 	
 	
-dimmcompare=61;//20
+dimmcompare=zero;//61;//20
 /*
  
 
@@ -191,6 +194,7 @@ void main(void)
 {
 
 	int i=1;
+	zero=zeropoint;
 //TRIM-=9;
 //  rs_init(9600);
   i2c_sla_init();
@@ -204,8 +208,8 @@ void main(void)
 	SCON=0x50;		// Mode 1, receive enable
 	SSTAT|=0xE0;	// TI wird am Ende des Stopbits gesetzt und Interrupt nur bei RX und double TX buffer an
 	BRGCON|=0x02;	// Baudrate Generator verwenden aber noch gestoppt
-	BRGR1=0x00;	//05 Baudrate = cclk/((BRGR1,BRGR0)+16)
-	BRGR0=0x30;	//F0 für 115200 0030 nehmen, autocal: 600bd= 0x2FF0, 19200: 0x0170
+	BRGR1=0x2F;	//05 Baudrate = cclk/((BRGR1,BRGR0)+16)
+	BRGR0=0xF0;	//F0 für 115200 0030 nehmen, autocal: 600bd= 0x2FF0, 19200: 0x0170
 	BRGCON|=0x01;	// Baudrate Generator starten
 	SBUF=0x55; // hiernach ist TI==1
 
@@ -253,19 +257,34 @@ void main(void)
         }*/
 
 	
-/*	  if(RI){
+	  if(RI){
 		  RI=0;
 		  cmd=SBUF;
 		  if (cmd=='+')TRIM-=1;
 		  if (cmd=='-')TRIM+=1;
+		  if (cmd=='>')zero-=1;
+		  if (cmd=='<')zero+=1;
+			if(cmd=='w'){
+				EA=0;
+//				START_WRITECYCLE;	//cal an 0x1bff schreiben
+				FMCON=0x00;
+
+				FMADRH= 0x1C;		
+				FMADRL= 0xBC; 
+				FMDATA=	zero; 
+//				STOP_WRITECYCLE;
+				FMCON=0x68;
+
+				EA=1;				//int wieder freigeben
+			}
+
 		  if(cmd>=0x030&&cmd<=0x39){
 			  dimm_I2C[1]=(cmd-0x30)*20;
 		  }
-		  send(cmd);
-		  send(TH0);
+		  send(zero);
 	  }
-*/
-	  DEBUGPOINT;
+
+//	  DEBUGPOINT;
 
       if(dimm_I2C[0]!=mk[0]||dimm_I2C[1]!=mk[1])
          {
