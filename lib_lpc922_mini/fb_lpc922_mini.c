@@ -105,6 +105,7 @@ void T1_int(void) __interrupt (3) 	// Timer 1 Interrupt
 					}
 					if (repeat_count<4) init_tx();		// Senden starten
 					else {		// wenn bereits 4 x wiederholt oder erfolgreich gesendet(geackt) -> nächstes Objekt
+						send_obj_done(tx_buffer[tx_nextsend]&0x1f, repeat_count&0x10);
 						tx_nextsend++;
 						tx_nextsend&=0x07;
 						wait_for_ack=0;
@@ -119,6 +120,7 @@ void T1_int(void) __interrupt (3) 	// Timer 1 Interrupt
 				EX1=1;	// ext1 int einschalten falls Empfang...
 			}
 			else {
+				send_obj_done(tx_buffer[tx_nextsend]&0x1f, 0);
 				tx_nextsend++; //hier Zeiger erhöhen wenn Telegramm nicht gebildet werden konnte
 				tx_nextsend&=0x07;
 			}
@@ -299,7 +301,7 @@ void T1_int(void) __interrupt (3) 	// Timer 1 Interrupt
 		FBOUTC=0;
 		TR1=0;
 		TMOD=(TMOD & 0x0F) +0x10;	// Timer 1 als 16-Bit Timer
-		TH1=0xFB;					// Timer 1 auf Interbyte Abstand setzen (3 Bit Pause = 312µs 
+		TH1=0xFB;					// Timer 1 auf Interbyte Abstand setzen (3 Bit Pause = 312µs
 		TL1=0x90;
 		TR1=1;
 		if (send_ack || send_nack) {	// ACK/NACK senden

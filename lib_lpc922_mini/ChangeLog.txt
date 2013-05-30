@@ -1,0 +1,35 @@
+Version 1.40   2013-05-30
+        Neue Funktion: send_obj_done(unsigned char objno, __bit success),
+        Wird aufgerufen wenn ein Telegramm versendet wurde.
+        Releases Verzeichnis angelegt, offizielle Lib Versionen sind jetzt dort zu finden.
+        Release Verzeichnis entfernt und mit git-ignore ausgenommen.
+
+Version 1.31
+        Wiederholtes (verspätetes) ack senden raus
+
+Version 1.30
+        Komplett umgebaut bei Senden und wiederholt Senden, State 80 raus, repeat_tx raus, 
+        Kollision gefixt
+
+Version 1.24
+        EX1 vorm Schlafengehen der Statemachine hart eingeschaltet,
+        die lib war manchmal "taub" geworden
+
+Version 1.23
+        ACK-Position leicht korrigiert (state 4)
+
+Version 1.22
+        Statt tel_arrived wird tel_sent in state13 gesetzt (Senden eines Telegramms)
+
+Version 1.21
+        Rekursives Abarbeiten gesendeter Telegramme korrigiert: tel_arrived wird jetzt
+        in state 13 gesetzt.
+
+Version 1.20
+        Senden um 3- und 4-Byte Objekte erweitert, read_obj_value ist jetzt unsigned long
+
+Version 1.10
+        Senden komplett über Interrupt und Ringspeicher realisiert
+
+Version 1.00
+        Erste Version
