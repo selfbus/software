@@ -170,7 +170,7 @@ void T1_int(void) __interrupt (3) 	// Timer 1 Interrupt
 				if (wait_for_ack) {						// es wird ein ACK erwartet
 					wait_for_ack=0;							// Flag zurücksetzen, da wir es ja gerade abarbeiten
 					if (ack && parity_ok) {					// ACK empfangen und auch erwartet
-						repeat_count=4;						// keine Wiederholtelegramme mehr senden
+						repeat_count=0x14;						// keine Wiederholtelegramme mehr senden
 						if(inc_pcount) {
 							inc_pcount=0;
 							pcount+=4;
