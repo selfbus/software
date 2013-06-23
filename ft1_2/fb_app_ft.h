@@ -16,6 +16,9 @@
 #ifndef FB_APP_FT
 #define FB_APP_FT
 
+#include <P89LPC922.h>
+#include <fb_lpc922_mini_1.4x.h>
+
 
 // Damit die Eclipse Code Analyse nicht so viele Warnungen anzeigt:
 #ifndef SDCC
@@ -60,6 +63,7 @@ FB_APP_EXTERN unsigned char property_5;
 FB_APP_EXTERN __bit ft_ack;
 
 extern unsigned char timer_data;
+extern unsigned char send_confirm;
 
 void ft_process_var_frame();
 void ft_process_fix_frame();

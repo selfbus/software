@@ -1,0 +1,22 @@
+2013-05-03
+        Das Temperatur Objekt liefert jetzt den Mittelwert der beiden Temperatur Sensoren.
+
+2013-04-28 Version 2.01beta4
+        Neue fb_lib verwendet. Com Flags müssen jetzt in ETS korrekt eingestellt werden.
+        Initialisierung optimiert.
+        VD Update: Standard Com-Flags korrigiert.
+
+2013-04-26 Version 2.01beta3
+        Bugfix: Bei angelegter Stützspannung (über grüne Klemme) wird kein Alarm mehr gemeldet.
+        Beim Bearbeiten von Com Objekten werden jetzt Read-Requests bevorzugt.
+
+2013-04-01 Version 2.01beta2
+        VD umfassend überarbeitet und die Firmware daran angepasst.
+
+2013-03-26 Version 2.01beta1
+        Komplett neu geschrieben, erste Release der neuen Version.
+        Die Kommunikation mit dem Rauchmelder erfolgt ausschliesslich über die
+        14-polige Steckverbindung. Die grüne Klemme dient nur der Stützspannung.
+        Die Signal Leitung der grünen Klemme soll nicht mit JP2 verbunden sein.
+        JP2 kann als zusätzlicher Alarm Eingang verwendet werden. Z.B. für
+        andere Brandmelder.

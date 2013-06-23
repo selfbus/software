@@ -26,7 +26,7 @@
 								<option id="sdcc.c.compiler.option.include.paths.92384567" name="Include paths (-I)" superClass="sdcc.c.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="/usr/share/sdcc/include/mcs51"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/com}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lib_lpc922_mini}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lib_lpc922_mini}/Releases&quot;"/>
 								</option>
 								<option id="sdcc.c.compiler.option.warnings.syntax.523004342" name="Check syntax only (-fsyntax-only)" superClass="sdcc.c.compiler.option.warnings.syntax"/>
 								<option id="sdcc.c.compiler.option.warnings.pedantic.1737441731" name="Pedantic (-pedantic)" superClass="sdcc.c.compiler.option.warnings.pedantic"/>
@@ -49,10 +49,10 @@
 							</tool>
 							<tool command="sdcc --stack-auto --vc" id="cdt.managedbuild.tool.sdcc.c.linker.exe.release.536790760" name="SDCC Linker" superClass="cdt.managedbuild.tool.sdcc.c.linker.exe.release">
 								<option id="sdcc.c.link.option.libs.1805121033" name="Libraries (-l)" superClass="sdcc.c.link.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" value="fb_lpc922_mini.lib"/>
+									<listOptionValue builtIn="false" value="fb_lpc922_mini_1.4x.lib"/>
 								</option>
 								<option id="sdcc.c.link.option.paths.212902889" name="Library search path (-L)" superClass="sdcc.c.link.option.paths" valueType="stringList">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lib_lpc922_mini/Release}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lib_lpc922_mini/Releases}&quot;"/>
 								</option>
 								<option id="sdcc.c.link.option.nostart.1754090084" name="Do not use standard start files (-nostartfiles)" superClass="sdcc.c.link.option.nostart"/>
 								<option id="sdcc.c.link.option.nodeflibs.630575970" name="Do not use default libraries (-nodefaultlibs)" superClass="sdcc.c.link.option.nodeflibs"/>
