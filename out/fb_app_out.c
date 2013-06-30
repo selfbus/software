@@ -40,12 +40,11 @@
  */
 
 
-
 #include <P89LPC922.h>
 #include "../lib_lpc922/Releases/fb_lpc922_1.4x.h"
 #include  "fb_app_out.h"
-//#include  "../com/debug.h"
-//#include "../com/fb_rs232.h"
+#include  "../com/debug.h"
+#include "../com/fb_rs232.h"
 
 unsigned char timerbase[TIMERANZ];// Speicherplatz für die Zeitbasis und 4 status bits
 unsigned char timercnt[TIMERANZ];// speicherplatz für den timercounter und 1 status bit
@@ -463,7 +462,7 @@ void delay_timer(void)	// zählt alle 65ms die Variable Timer hoch und prüft Queu
 //	RTCCON=0x61;		// RTC starten
 //	delay_toggle=!delay_toggle;
 }
-
+ 
 #ifdef zeroswitch
 void EX0_int (void) __interrupt (0)
 {	
@@ -472,8 +471,8 @@ void EX0_int (void) __interrupt (0)
 	AUXR1&=0xE9;	// PWM von Timer 0 nicht mehr auf Pin ausgeben
 	PWM=0;			// Vollstrom an
 	TF0=0;			// Timer 0 für Haltezeit Vollstrom verwenden
-	TH0=0xF2;		// 1.8ms (10ms=6fff)
-	TL0=0x80;		
+	TH0=einverzH;		// 1.8ms (10ms=6fff)
+	TL0=einverzL;		
 	TMOD=(TMOD & 0xF0) +1;		// Timer 0 als 16-Bit Timer
 	TAMOD=0x00;
 	TR0=1;
@@ -493,7 +492,7 @@ void timer0_int(void) __interrupt(1)
 			schalten_state=2;
 			P0=portausgabe_on;
 			TF0=0;			// Timer 0 für Ausschaltzeitpunkt
-			TH0=0xFF-phival;		// phival= 0 bis 35 einstellbar(main)
+			TH0=ausverzH-phival;		// phival= 0 bis 51 einstellbar(main) default=16
 			TL0=0xFF;		
 			TR0=1;
 			
@@ -590,6 +589,7 @@ void port_schalten(void)		// Schaltet die Ports mit PWM, DUTY ist Pulsverhältnis
  #else	// also normaler out8 oder out4
    #ifdef IO_BISTAB
 	P0=sort_output(portbuffer)&0xFF;	// Ports schalten
+	TR0=0;
 	TF0=0;			// Timer 0 für Haltezeit Vollstrom verwenden
 	TH0=0x6f;		// 16ms (10ms=6fff)
 	TL0=0xff;

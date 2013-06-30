@@ -80,8 +80,8 @@
 #include <P89LPC922.h>
 #include "../lib_lpc922/Releases/fb_lpc922_1.4x.h"
 #include "fb_app_out.h"
-
-//#include "../com/fb_rs232.h"
+#include  "../com/debug.h"
+#include "../com/fb_rs232.h"
 #include"../com/watchdog.h"
 #include"../com/watchdog.c"
 //#include"../com/debug.c"
@@ -125,6 +125,7 @@
 
 unsigned char __at 0x00 RAM[00]; 
 
+
 void main(void)
 { 
 	unsigned char n,cmd,tasterpegel=0;
@@ -132,7 +133,7 @@ void main(void)
 //	unsigned int m;
 	static __code signed char __at 0x1BFF trimsave;
 #ifdef zeroswitch
-	static __code unsigned char __at 0x1BFE phisave;
+	static __code unsigned char __at 0x1BFE phisave={16};
 #endif
 	unsigned char rm_count=0;
 	__bit wduf,tastergetoggelt=0;
@@ -148,8 +149,8 @@ void main(void)
 	TRIM = (TRIM+trimsave);
 	TRIM &= 0x3F;//oberen 2 bits ausblenden
 #ifdef zeroswitch
-	if(phisave<=36)	phival=phisave;
-	else phival=0;
+	if(phisave<=52)	phival=phisave;
+	else phival=16;
 #endif
 	TR0=1;
 	if (!wduf){// BUS return verzögerung nur wenn nicht watchdog underflow
@@ -167,7 +168,7 @@ void main(void)
 	restart_app();							// Anwendungsspezifische Einstellungen zuruecksetzen
 	if(!wduf)bus_return();							// Aktionen bei Busspannungswiederkehr
 	//...rs_init...(6);im folgenden direkt:
-	BRGCON&=0xFE;	// Baudrate Generator stoppen
+/*	BRGCON&=0xFE;	// Baudrate Generator stoppen
 //	P1M1&=0xFC;		// RX und TX auf bidirectional setzen
 //	P1M2&=0xFC;
 	SCON=0x50;		// Mode 1, receive enable
@@ -176,6 +177,12 @@ void main(void)
 	BRGR1=0x2f;	// Baudrate = cclk/((BRGR1,BRGR0)+16)
 	BRGR0=0xf0;	// für 115200 0030 nehmen, autocal: 600bd= 0x2FF0
 	BRGCON|=0x01;	// Baudrate Generator starten
+*/
+#ifndef debugmode
+	RS_INIT_600
+#else
+	RS_INIT_115200
+#endif
 	SBUF=0x55;
 	do  {
 		watchdog_feed();
@@ -196,7 +203,9 @@ void main(void)
 	#endif
 				PWM=1;			// PWM Pin muss auf 1 gesetzt werden, damit PWM geht !!!
 	#ifndef SPIBISTAB
+		#ifndef IO_BISTAB		
 				TR0=1;
+		#endif
 	#endif
 	
 	#ifdef IO_BISTAB
@@ -256,7 +265,9 @@ void main(void)
 		else {
 			for(n=0;n<100;n++);	// falls Hauptroutine keine Zeit verbraucht, der PROG LED etwas Zeit geben, damit sie auch leuchten kann
 		}
-cmd;		// Eingehendes Terminal Kommando verarbeiten...
+		cmd;
+#ifndef debugmode		
+		// Eingehendes Terminal Kommando verarbeiten...
 		if (RI){
 			RI=0;
 			cmd=SBUF;
@@ -299,7 +310,7 @@ cmd;		// Eingehendes Terminal Kommando verarbeiten...
 				}
 			}	
 			if(cmd=='>'){
-				if(phival<35){
+				if(phival<51){
 					phival++;	// 
 					TI=0;
 					SBUF=phival;
@@ -327,8 +338,10 @@ cmd;		// Eingehendes Terminal Kommando verarbeiten...
 				port_schalten();
 			}
 #endif						
-
 		}//end if(RI...
+#else //ifndef debugmode
+DEBUGPOINT;
+#endif
 		TASTER=1;				// Pin als Eingang schalten um Taster abzufragen
 		if(!TASTER){ // Taster gedrückt
 			if(tasterpegel<255)	tasterpegel++;

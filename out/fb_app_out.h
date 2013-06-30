@@ -16,15 +16,30 @@
 
 #ifndef FB_APP_OUT
 #define FB_APP_OUT
+
+//#define debugmode
+
 #define IO_BISTAB
 //#define BUS_DOWN
 #define MAX_PORTS_4			// Anzahl Ausgänge (nur 4 oder 8 erlaubt)
 //#define HAND				// Handsteuerung aktiv (auskommentieren wenn nicht gewünscht)
 //#define SPIBISTAB			// Serielle Ausgabe für bistabile relaise aktivieren
-
+//#define panasonic
 //#define zeroswitch			// für Platine mit Nullspannungserkennung
-// Parameter-Adressen im EEPROM
 
+#ifdef zeroswitch
+	#ifndef panasonic		//OMRON
+		#define einverzH 0xC7
+		#define einverzL 0xF1
+		#define ausverzH 0xB6
+	#else					// PANASONIC
+		#define einverzH 0xB0
+		#define einverzL 0xF1
+		#define ausverzH 0xC0
+	#endif
+#endif
+// Parameter-Adressen im EEPROM
+  
 #define FUNCASS		0xD8	// Startadresse der Zuordnung der Zusatzfunktionen (2 Byte)
 #define OFFDISABLE	0xEB	// Aus-Telegramm ignorieren
 #define FUNCTYP		0xED	// Typ der Zusatzfunktion
@@ -68,8 +83,6 @@ extern volatile unsigned char schalten_state; // status T0 int
 extern unsigned char phival;
 #endif
 
-//void write_delay_record(unsigned char objno, unsigned char delay_status, long delay_target);	// Schreibt die Schalt-Verzoegerungswerte ins Flash
-//void clear_delay_record(unsigned char objno); // Loescht den Delay Eintrag
 //void write_value_req(void) ;		// Hauptroutine für Ausgänge schalten gemäß EIS 1 Protokoll (an/aus)
 //void read_value_req(void) ;
 void delay_timer(void);		// zählt alle 130ms die Variable Timer hoch und prüft Queue
@@ -85,8 +98,8 @@ unsigned long read_obj_value(unsigned char objno) ;	// gibt den Wert eines Objek
 void write_obj_value(unsigned char objno,unsigned int objvalue);	// schreibt den aktuellen Wert eines Objektes ins 'USERRAM'
 //void EX0_int (void) __interrupt (0);
 #ifdef zeroswitch
-void EX0_int(void) __interrupt (0);
-void timer0_int(void) __interrupt (1) ;
+//void EX0_int(void) __interrupt (0);
+//void timer0_int(void) __interrupt (1) ;
 #endif
 
 
