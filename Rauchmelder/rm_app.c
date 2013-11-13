@@ -146,7 +146,7 @@ unsigned char infoCounter;
 unsigned char infoSendObjno;
 
 // Halbsekunden Zähler 0..119
-unsigned char tenthSeconds;
+unsigned char eventTime;
 
 
 // Tabelle für 1<<x, d.h. pow2[3] == 1<<3
@@ -640,7 +640,7 @@ void timer_event()
 	RTCL = 0x80;
 	RTCCON = 0x61;  // RTC starten
 
-	--tenthSeconds;
+	--eventTime;
 
 	// Wir warten auf eine Antwort vom Rauchmelder
 	if (answerWait)
@@ -661,7 +661,7 @@ void timer_event()
 	}
 
 	// Alles danach wird nur jede Sekunde gemacht
-	if (tenthSeconds & 1)
+	if (eventTime & 1)
 		return;
 
 	// Alarm: verzögert und zyklisch senden
@@ -705,9 +705,9 @@ void timer_event()
 		}
 	}
 
-	// Jede zweite Sekunde ein Status Com-Objekt senden.
+	// Jede vierte Sekunde ein Status Com-Objekt senden.
 	// Aber nur senden wenn kein Alarm anliegt.
-	if ((tenthSeconds & 3) == 0 && infoSendObjno &&
+	if ((eventTime & 7) == 0 && infoSendObjno &&
 	    !(alarmLocal | alarmBus | testAlarmLocal | testAlarmBus))
 	{
 		// Info Objekt zum Senden vormerken wenn es dafür konfiguriert ist.
@@ -721,9 +721,9 @@ void timer_event()
 		--infoSendObjno;
 	}
 
-	if (!tenthSeconds) // einmal pro Minute
+	if (!eventTime) // einmal pro Minute
 	{
-		tenthSeconds = 120;
+		eventTime = 120;
 
 		// Bus Alarm ignorieren Flag rücksetzen wenn kein Alarm mehr anliegt
 		if (ignoreBusAlarm & !(alarmBus | testAlarmBus))
@@ -776,7 +776,7 @@ void restart_app()
 	noAnswerCount = 0;
 	cmdCurrent = RM_CMD_NONE;
 	recvCount = -1;
-	tenthSeconds = eeprom[ADDRTAB + 2] & 127;
+	eventTime = eeprom[ADDRTAB + 2] & 127;
 
 	alarmBus = 0;
 	alarmLocal = 0;
