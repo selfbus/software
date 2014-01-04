@@ -19,11 +19,12 @@
 
 //#define debugmode
 
-#define IO_BISTAB
-//#define BUS_DOWN
-#define MAX_PORTS_4			// Anzahl Ausgänge (nur 4 oder 8 erlaubt)
+
+//#define IO_BISTAB
+#define BUS_DOWN
+#define MAX_PORTS_8 		// Anzahl Ausgänge (nur 4 oder 8 erlaubt)
 //#define HAND				// Handsteuerung aktiv (auskommentieren wenn nicht gewünscht)
-//#define SPIBISTAB			// Serielle Ausgabe für bistabile relaise aktivieren
+#define SPIBISTAB			// Serielle Ausgabe für bistabile relaise aktivieren
 //#define panasonic
 //#define zeroswitch			// für Platine mit Nullspannungserkennung
 
@@ -82,7 +83,9 @@ extern unsigned char portausgabe_off; // auszuschaltende IO, die dann im t 0 int
 extern volatile unsigned char schalten_state; // status T0 int
 extern unsigned char phival;
 #endif
-
+#ifdef BUS_DOWN
+	void bus_down (void);
+#endif
 //void write_value_req(void) ;		// Hauptroutine für Ausgänge schalten gemäß EIS 1 Protokoll (an/aus)
 //void read_value_req(void) ;
 void delay_timer(void);		// zählt alle 130ms die Variable Timer hoch und prüft Queue
@@ -91,7 +94,6 @@ void object_schalten(unsigned char objno, __bit objstate);	// Objekt schalten
 void spi_2_out(unsigned int daten);
 unsigned int sort_output(unsigned char portbuffer);
 void bus_return(void);		// Aktionen bei Busspannungswiederkehr
-void bus_down (void);
 void restart_app(void) ;		// Alle Applikations-Parameter zurücksetzen
 
 unsigned long read_obj_value(unsigned char objno) ;	// gibt den Wert eines Objektes zurueck
