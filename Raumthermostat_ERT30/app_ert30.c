@@ -13,9 +13,11 @@
  *
  */
 
-#include <P89LPC935_6.h>
+#include <mcs51/p89lpc935_6.h>
 
-#include "../lib_lpc936/fb_lpc936.h"
+#include "const.h"
+#include <fb_hal_lpc936.h>
+
 #include "app_ert30.h"
 
 
@@ -36,8 +38,8 @@ __xdata int temp;
 __xdata unsigned int lux;
 __xdata unsigned char overrun, dimmwert, underrun, sequence, lockatt, resend;
 volatile __xdata unsigned char solltemplpc, solltemplcd;
-bit lastrly;
-volatile bit editmode;
+__bit lastrly;
+volatile __bit editmode;
 
 
 struct delayrecord {
@@ -58,8 +60,8 @@ void schwelle(unsigned char objno)		// Luxschwelle prüfen und reagieren
 	
 	unsigned char ctrl, cycle, bitmask, temp_compare, lux_compare;
 	unsigned char lastdimm, step, wertl, werth, offset;
-	bit sendval=0, over=0, under=0;
-	bit luxlevel=0;
+	__bit sendval=0, over=0, under=0;
+	__bit luxlevel=0;
 	unsigned char sendcyclicl=0, sendcyclich=0, active;
 
 	unsigned int schwellwert=0;
@@ -307,26 +309,15 @@ void write_obj_value(unsigned char objno,int objvalue)
 
 
 // Objektwert lesen wurde angefordert, read_value_response Telegramm zurücksenden
-void read_value_req(void)
+void read_value_req(unsigned char objno)
 {
-	unsigned char objno, objflags;
-	
-	objno=find_first_objno(telegramm[3],telegramm[4]);	// erste Objektnummer zu empfangener GA finden
-	if(objno!=0xFF) {									// falls Gruppenadresse nicht gefunden
-		objflags=read_objflags(objno);					// Objekt Flags lesen
-		// Objekt lesen, nur wenn read enable gesetzt (Bit3) und Kommunikation zulaessig (Bit2)
-		if((objflags&0x0C)==0x0C) send_obj_value(objno+0x40);
-	}
+	send_obj_value(objno + 0x40);
 }
 
 
 
-void write_value_req(void)
+void write_value_req(unsigned char objno)
 {
-	unsigned char objno;
-	
-	objno=find_first_objno(telegramm[3],telegramm[4]); 
-	
 	if (objno==10) {	// nur Sperrobjekt darf beschrieben werden
 		write_obj_value(objno,telegramm[7]&0x01);
 		
@@ -356,7 +347,6 @@ void write_value_req(void)
 		if (solltemplpc<20) solltemplpc=20;	// minimal 10°
 		if (solltemplpc>70) solltemplpc=70;	// maximal 35°
 	}
-
 }
 
 
@@ -364,7 +354,7 @@ void write_value_req(void)
 void delay_timer(void)	// zählt alle 130ms die Variable Timer hoch und prüft Einträge
 {
 	unsigned char delrecno, objno, delay_state, cycle_param=0, ctrl, sperre;
-	bit send, cyclic, over;
+	__bit send, cyclic, over;
 	int sw5;
 
 	RTCCON=0x60;	// Real Time Clock stoppen

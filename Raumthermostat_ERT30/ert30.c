@@ -39,12 +39,12 @@
 
 
 
-#include <P89LPC935_6.h>
+#include <mcs51/p89lpc935_6.h>
 
-#include "../lib_lpc936/fb_lpc936.h"
+#include <fb_hal_lpc936.h>
 #include "app_ert30.h"
-#include "../../89LPC922/com/onewire.h"
-#include "../../89LPC922/com/adc_922.h"
+#include <onewire.h>
+#include <adc_922.h>
 
 
 

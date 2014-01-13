@@ -90,8 +90,8 @@ __xdata extern int temp;
 __xdata extern unsigned int lux;
 __xdata extern unsigned char overrun, dimmwert, underrun, sequence, lockatt, resend;
 extern volatile __xdata unsigned char solltemplcd, solltemplpc;
-extern bit lastrly;
-extern volatile bit editmode;
+extern __bit lastrly;
+extern volatile __bit editmode;
 
 
 extern struct delayrecord {
@@ -111,13 +111,11 @@ extern struct delayrecord delrec[10];
 void restart_app(void);					// Alle Applikations-Parameter zurücksetzen
 void schwelle(unsigned char objno);
 void delay_timer(void);					// zählt alle 130ms die Variable Timer hoch und prüft Queue
-void write_value_req(void);
-void read_value_req(void);
 unsigned long read_obj_value(unsigned char objno);
 void write_obj_value(unsigned char objno,int objvalue);
 int eis5_to_int100(int eis5);
 char eis5_to_char2(int eis5);
 unsigned int int100_to_eis5(int int100);
 void sync(void);
-void key(void) interrupt 7;
+void key(void) __interrupt(7);
 #endif
