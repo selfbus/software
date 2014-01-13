@@ -38,13 +38,14 @@
  * 02.01.11 - Ausgabe auf serielle Schieberegister für bistabile Relaise via Compilerschalter
  * 
  */
-
+ 
 
 #include <P89LPC922.h>
 #include "../lib_lpc922/Releases/fb_lpc922_1.4x.h"
 #include  "fb_app_out.h"
 #include  "../com/debug.h"
 #include "../com/fb_rs232.h"
+#include"../com/watchdog.h"
 
 unsigned char timerbase[TIMERANZ];// Speicherplatz für die Zeitbasis und 4 status bits
 unsigned char timercnt[TIMERANZ];// speicherplatz für den timercounter und 1 status bit
@@ -731,39 +732,39 @@ unsigned int sort_output(unsigned char portbuffer){
    // A1
    if (diff & 0x01){
 	   if(portbuffer & 0x01){
-	      result|=0x0001;
+	      result|=0x0002;
 	   }
 	   else{
-	      result|=0x0002;
+	      result|=0x0001;
 	   }
    }
   // A2
    if (diff & 0x02){
 	   if(portbuffer & 0x02){
-	      result|=0x0004;
+	      result|=0x0008;
 	   }
 	   else{
-	      result|=0x0008;
+	      result|=0x0004;
 	   }
    }
    
    // A3
    if (diff & 0x04){
 	   if(portbuffer & 0x04){
-	      result|=0x0010;
+	      result|=0x0020;
 	   }
 	   else{
-	      result|=0x0020;
+	      result|=0x0010;
 	   }
    }
    
    // A4
    if (diff & 0x08){
 	   if(portbuffer & 0x08){
-	      result|=0x0040;
+	      result|=0x0080;
 	   }
 	   else{
-	      result|=0x0080;
+	      result|=0x0040;
 	   }   
    }
  #else
@@ -873,7 +874,7 @@ void bus_return(void)		// Aktionen bei Busspannungswiederkehr
 	}
 #endif
 
-	oldportbuffer=0; 	// auf 0 setzen, da sonst kein Vollstrom aktiviert wird
+	oldportbuffer=~portbuffer; 	// auf 0 setzen, da sonst kein Vollstrom aktiviert wird
 	portchanged=1;		// Post hinterlegen damit in delaytimer nach portschalten springt
 
 
@@ -884,13 +885,32 @@ void bus_return(void)		// Aktionen bei Busspannungswiederkehr
 	rm_send|=~portbuffer;// Rückmeldung nur für Objekte mit Wert 0, da Wert 1 in normalem port_schalten eh gesendet wird
 
 }
-#ifdef SPIBISTAB
+
+#ifdef BUS_DOWN
 void bus_down (void)
 {
-	portbuffer=0;
+	unsigned char or_mask=0;
+	unsigned char and_mask=0;
+	unsigned char n,mask_pattern;
+	for(n=0;n<=3;n++)
+	{
+		mask_pattern=0x01<<n;
+		or_mask=(((eeprom[0xF4]>>(n+1) )& (mask_pattern))|
+		(((eeprom[0xF5]>>(n+1))& (mask_pattern))<<4));
+		and_mask=~(((eeprom[0xF4]>>(n))& (mask_pattern))|
+		((((eeprom[0xF5]>>(n))&(mask_pattern))<<4)));
+	portbuffer&=and_mask;
+	portbuffer|= or_mask;
+	}
+	//portbuffer=0;
 	port_schalten();
 	while(!TF0);
-	while(1);
+	for(n=0;n<250;n++)//ca 4 sekunden warten
+	{	
+		WATCHDOG_FEED
+		TF0=0;
+		while(!TF0);
+	}
 }
 #endif
 

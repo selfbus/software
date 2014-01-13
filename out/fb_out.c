@@ -75,15 +75,13 @@
 	- Prio beim Senden implementieren \n
 	- Zwangsstellungsobjekte implementieren \n
 */
-
-
 #include <P89LPC922.h>
 #include "../lib_lpc922/Releases/fb_lpc922_1.4x.h"
 #include "fb_app_out.h"
 #include  "../com/debug.h"
 #include "../com/fb_rs232.h"
 #include"../com/watchdog.h"
-#include"../com/watchdog.c"
+
 //#include"../com/debug.c"
 //#include"../com/debug.h"
 /** 
@@ -136,7 +134,9 @@ void main(void)
 	static __code unsigned char __at 0x1BFE phisave={16};
 #endif
 	unsigned char rm_count=0;
-	__bit wduf,tastergetoggelt=0;
+	__bit wduf;
+	__bit tastergetoggelt=0;
+	__bit bus_activ=0;
 
 	wduf=WDCON&0x02;
 	restart_hw();							// Hardware zuruecksetzen
@@ -163,8 +163,8 @@ void main(void)
 			while(!TF0);
 		}
 	}
-	watchdog_init();
-	watchdog_start();
+	WATCHDOG_INIT
+	WATCHDOG_START
 	restart_app();							// Anwendungsspezifische Einstellungen zuruecksetzen
 	if(!wduf)bus_return();							// Aktionen bei Busspannungswiederkehr
 	//...rs_init...(6);im folgenden direkt:
@@ -183,9 +183,11 @@ void main(void)
 #else
 	RS_INIT_115200
 #endif
+#ifndef BUS_DOWN
 	SBUF=0x55;
+#endif
 	do  {
-		watchdog_feed();
+		WATCHDOG_FEED
 
 		if(APPLICATION_RUN) {	// nur wenn run-mode gesetzt
 
@@ -213,10 +215,12 @@ void main(void)
 	#endif
 			}
 #endif
+			
 #ifdef BUS_DOWN
 			if(TxD){
-				bus_down();
+				if(bus_activ)bus_down();
 			}
+			else bus_activ=1;
 #endif			
 			if (portchanged)port_schalten();	// Ausgänge schalten
 
@@ -266,6 +270,7 @@ void main(void)
 			for(n=0;n<100;n++);	// falls Hauptroutine keine Zeit verbraucht, der PROG LED etwas Zeit geben, damit sie auch leuchten kann
 		}
 		cmd;
+#ifndef BUS_DOWN
 #ifndef debugmode		
 		// Eingehendes Terminal Kommando verarbeiten...
 		if (RI){
@@ -342,6 +347,7 @@ void main(void)
 #else //ifndef debugmode
 DEBUGPOINT;
 #endif
+#endif // ifndef BUS_DOWN
 		TASTER=1;				// Pin als Eingang schalten um Taster abzufragen
 		if(!TASTER){ // Taster gedrückt
 			if(tasterpegel<255)	tasterpegel++;
