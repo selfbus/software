@@ -1,3 +1,6 @@
+2014-01-16  Version 1.12
+        Unterstützung für Status LEDs
+
 2013-05-26
         Code Cleanup
 
