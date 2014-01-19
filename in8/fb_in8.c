@@ -21,11 +21,13 @@
 //				3.05	Bug: Empfing nach Senden eines Schaltbefehls keine Telegramme mehr 
 //				3.06	Bug: aktuellen Eingangswert senden entfernt
 //				3.07	BUG: dto	
+//				3.08	auf LIB 1.4x umgebaut
 
 #include <P89LPC922.h>
 #include "../lib_lpc922/fb_lpc922.h"
 #include "fb_app_in8.h"
 #include"../com/watchdog.h"
+#include "../com/fb_rs232.h"
 
 #ifdef IN8_2TE
 #include "../com/spi.h"
@@ -33,7 +35,10 @@
 #endif
 
 const unsigned char bitmask_1[8] ={0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80};
-const unsigned char __at 0x01CE space[18];// Hier schreibt und liest die ETS !!
+const unsigned char __at 0x01CCE space[18];// Hier schreibt und liest die ETS !!
+static __code unsigned char __at 0x1D03 manufacturer[2]={0,4};	// Herstellercode 0x0004 = Jung
+static __code unsigned char __at 0x1D0C port_A_direction={0};	// PORT A Direction Bit Setting
+static __code unsigned char __at 0x1D0D run_state={255};		// Run-Status (00=stop FF=run)
 
 
 void main(void)
@@ -41,6 +46,7 @@ void main(void)
 	unsigned char n,cmd,tasterpegel=0;
 	signed char cal;
 	static __code signed char __at 0x1CFF trimsave;  unsigned int base;
+
 	unsigned char pin=0;
 #ifdef zykls
 	unsigned char tmp,objno,objstate;
@@ -49,41 +55,23 @@ void main(void)
 	unsigned char objno;
 	#endif
 #endif
-	__bit wduf,tastergetoggelt=0;
+	__bit wduf;
+	__bit tastergetoggelt=0;
+	__bit bus_return_ready=0; 
 	wduf=WDCON&0x02;
 	TASTER=1;
 	if(!TASTER && wduf)cal=0;
 	else cal=trimsave;
 	TRIM = (TRIM+trimsave);
 	TRIM &= 0x3F;//oberen 2 bits ausblenden
-
+	TASTER=0;
 	restart_hw();				// Hardware zurücksetzen
-
- //   rs_init(6);				// serielle Schnittstelle initialisieren
-	BRGCON&=0xFE;	// Baudrate Generator stoppen
-	P1M1&=0xFC;		// RX und TX auf bidirectional setzen
-	P1M2&=0xFC;
-	SCON=0x50;		// Mode 1, receive enable
-	SSTAT|=0xE0;	// TI wird am Ende des Stopbits gesetzt und Interrupt nur bei RX und double TX buffer an
-	BRGCON|=0x02;	// Baudrate Generator verwenden aber noch gestoppt
-	BRGR1=0x2F;	// Baudrate = cclk/((BRGR1,BRGR0)+16)
-	BRGR0=0xF0;	// für 115200 0030 nehmen, autocal: 600bd= 0x2FF0
-	BRGCON|=0x01;	// Baudrate Generator starten
-	SBUF=0x55;
-
-
-  
-
+		// serielle Schnittstelle initialisieren
+	RS_INIT_600
+	SBUF=0x55;// 'U' senden
 
   restart_app();			// Anwendungsspezifische Einstellungen zurücksetzen
 
-#ifndef IN8_2TE
-  portbuffer=P0;			// zunächst keine Änderungen bei Busspannungswiederkehr
-  p0h=portbuffer;
-#else
-  portbuffer=spi_in_out();
-  p0h=portbuffer;
-#endif
   if(!wduf){
   // Verzögerung Busspannungswiederkehr	
 	  for(base=0;base<=(eeprom[0xD4]<<(eeprom[0xFE]>>4)) ;base++){//faktor startverz hohlen und um basis nach links schieben
@@ -102,39 +90,46 @@ void main(void)
 		    //	  stop_rtc;
 	  }
   }
-  watchdog_init();
-  watchdog_start();
+  WATCHDOG_INIT
+  WATCHDOG_START
 
-  if(!wduf)bus_return();			// Anwendungsspezifische Einstellungen zurücksetzen
-
-  TASTER=1;
   do  {
-//		watchdog_feed();
-	    // feed the watchdog
+		WATCHDOG_FEED 	    // feed the watchdog
+
 	    EA = 0;
 	    WFEED1 = 0xA5;
 	    WFEED2 = 0x5A;
 	    EA=1;
 
 
-if(APPLICATION_RUN){	  
+	 if(APPLICATION_RUN){	  
 #ifndef IN8_2TE
 	  p0h=P0;				// prüfen ob ein Eingang sich geändert hat
 #else
 	  p0h=spi_in_out();
 #endif
-	    if (p0h!=portbuffer) 
-	    {
-	      for(n=0;n<8;n++)					// jeden Eingangspin einzel prüfen
-	      {
-	        //if ((((p0h>>n)&0x01) != ((portbuffer>>n)&0x01))&& !(blocked>>n)&0x01)
-	    	  //if ((p0h & bitmask_1[n])!= (portbuffer & bitmask_1[n])&& !(blocked & bitmask_1[n]) )
-	    	if (((p0h^portbuffer) & bitmask_1[n])&& !(blocked & bitmask_1[n]) )//kürzeste Version
+	  if(!bus_return_ready)
+	  {
+		  portbuffer=p0h;
+	  	  if(!wduf)bus_return();			// Anwendungsspezifische Einstellungen zurücksetzen
+	  	  bus_return_ready=1;
+	  }
+	  
+	  if (p0h!=portbuffer) 
+	    {	
+//	      for(n=0;n<8;n++)					// jeden Eingangspin einzel prüfen
+//	      {
+	    	if (((p0h^portbuffer) & bitmask_1[pin])&& !(blocked & bitmask_1[pin]) )//kürzeste Version
 	        {
-	          pin_changed(n);				// Änderung verarbeiten
+	          pin_changed(pin);				// Änderung verarbeiten
 	        }
-	      }
-	      portbuffer=p0h;					// neuen Portzustand in buffer speichern
+//	      }
+//	    	portbuffer|=p0h;
+	      portbuffer|=(p0h& bitmask_1[pin]);					// neuen Portzustand in buffer speichern
+	      portbuffer&=(p0h| ~bitmask_1[pin]);					// neuen Portzustand in buffer speichern
+
+	      pin++;	// nächsten pin prüfen..
+	      pin&=0x07;// maximal 0-7
 	    }
 	      
 	      

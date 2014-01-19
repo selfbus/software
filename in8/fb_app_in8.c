@@ -43,11 +43,7 @@ unsigned char __at 0x18 Sperre;
 unsigned int  __at 0x19 zaehlervalue[2];
 unsigned char __at 0x1E schrittzaehler[2];//
 __bit objval=0,jobj=0;
-
 __bit st_Flanke=0;
-
-//unsigned char value[16];		
-//__code unsigned char __at 0x1C00 userram[]={......
 
 void pin_changed(unsigned char pin_no)
 {
@@ -353,17 +349,12 @@ int eis5conversion(unsigned char zahl,unsigned char Typ)
 */
 void delay_timer(void)
 {
-//unsigned char para_adr=0;
-//unsigned char para_value=0;
 	unsigned char  m,objno,n;
 	unsigned int timerflags;
 	__bit jobj=0;
 
 	
 //	SET_RTC(65)// timer auf die hälfte der kleinsten basis setzen
-	RTCCON=0x60;		// RTC anhalten und Flag löschen
-	RTCH=0x0E;			// reload Real Time Clock
-	RTCL=0xA0;			// auf 65ms
 	RTCCON=0x61;//	START_RTC	// RTC starten
 	timer++;
 	timerflags = timer&(~(timer-1));// flanke generieren
@@ -379,21 +370,6 @@ void delay_timer(void)
 		}// end if timer...
 		timerflags = timerflags>>1;
 	}//end for (n=...
-//	if (connected ){		//timer für timer-overflow connect 
-//		if(con_timer_refresh){
-//			timercnt[PROTTIMER]=0xAE;// wenn connected und refresh timeout timer neu setzen
-//			con_timer_refresh=0;
-//		}
-		//else timercnt[PROTTIMER]--;
-//	}
-//	else timercnt[PROTTIMER]=0x00;// wenn nicht connected timeout timer ausschalten
-	
-//	if (timercnt[PROTTIMER]==0x80)T_Disconnect();//Verbindungsabbau wegen timeout
-
-// Im folgenden die Aktionen bei abgelaufenen Timern
-
-
-
 	
 	for(objno=0;objno<8;objno++) {
 		timer_state=timerstate[objno];
@@ -495,43 +471,22 @@ unsigned char debounce(unsigned char pinno)	// Entprellzeit abwarten und prüfen 
   }
 
 #ifndef IN8_2TE
-  //if(((P0>>pinno)&0x01) == ((p0h>>pinno)&0x01)) ret=1;
-  //else ret=0;
   return ((~(P0^p0h))& bitmask_1[pinno]);//ret=1;
   
 #else
-  //if (((spi_in_out()>>pinno)&0x01) == ((p0h>>pinno)&0x01)) ret=1;
-  //else ret=0;
   return ((~(spi_in_out()^p0h))& bitmask_1[pinno]);//ret=1;
   
 #endif
 
-  //return(ret);
 }
 
 
 
-void write_value_req(void)		// Objekt-Wert setzen gemäß empfangenem EIS Telegramms
+void write_value_req(unsigned char objno)		// Objekt-Wert setzen gemäß empfangenem EIS Telegramms
 {
-	unsigned char objno,objflags,gapos,atp,assno,n,gaposh,para_value,tmp;
-//#ifdef zaehler
+	unsigned char para_value,tmp;
 	unsigned char objtype;
-//#endif	
-    gapos=gapos_in_gat(telegramm[3],telegramm[4]);
-    if (gapos!=0xFF)	
-    {
-    	atp=eeprom[ASSOCTABPTR];		// Association Table Pointer
-    	assno=eeprom[atp];				// Erster Eintrag = Anzahl Einträge
- 
-    	for(n=0;n<assno;n++) {				// Schleife über alle Einträge in der Ass-Table, denn es könnten mehrere Objekte (Pins) der gleichen Gruppenadresse zugeordnet sein
-    		gaposh=eeprom[atp+1+(n*2)];
-    		if(gapos==gaposh) {					// Wenn Positionsnummer übereinstimmt
-    			objno=eeprom[atp+2+(n*2)];			// Objektnummer
-    			objflags=read_objflags(objno);		// Objekt Flags lesen
-//#ifdef zaehler
-    			objtype=eeprom[eeprom[COMMSTABPTR]+objno*3+4];
-//#endif    			
-    			if((objflags&0x14)==0x14) {			// Kommunikation zulässig (Bit 2 = communication enable) + Schreiben zulässig (Bit 4 = write enable)
+    objtype=eeprom[eeprom[COMMSTABPTR]+objno+objno+objno+4];
     				if (objno<16) {					// Status der Eingangsobjekte 0-15
 #ifdef zaehler
     					if (objtype<=6){
@@ -559,11 +514,8 @@ void write_value_req(void)		// Objekt-Wert setzen gemäß empfangenem EIS Telegram
     							sperren(objno&0x07,tmp);//temp=1 bedeutet Freigabe
 	    					}//ende if para_value
     					}//ende if read...
-    				}//ende if objno>15
-    			}//ende if objflags...
-    		}//ende if gapos...
-    	}// ende for n=....
-    }// ende if gapos !=0
+    				}//ende if (objno<16)..
+
 }// end function
     
 
@@ -658,21 +610,10 @@ void sperren (unsigned char obj,unsigned char freigabe)
 * @return
 * 
 */
-void read_value_req(void)
+void read_value_req(unsigned char objno)
 {
-	unsigned char objno, objflags;
-	
-	objno=find_first_objno(telegramm[3],telegramm[4]);	// erste Objektnummer zu empfangener GA finden
-	if(objno!=0xFF) {	// falls Gruppenadresse nicht gefunden
-		
-		//objvalue=read_obj_value(objno);		// Objektwert aus USER-RAM lesen (Standard Einstellung)
 
-
-		
-		objflags=read_objflags(objno);		// Objekt Flags lesen
-		// Objekt lesen, nur wenn read enable gesetzt (Bit3) und Kommunikation zulaessig (Bit2)
-		if((objflags&0x0C)==0x0C) send_obj_value(objno+0x40);// 0x40 ist bit für response Telegramm
-    }
+	send_obj_value(objno+0x40);
 }
 
 
@@ -710,9 +651,7 @@ void bus_return(void){
 					senden=1;
 				break;
 				case 0xC0:
-					objval=(p0h>>n)& 0x01;
-					senden=1;
-				// ansonsten nichst tun !	
+					portbuffer ^= (0x01<<n);//Bit im portbuffer invertieren, löst eine Flanke aus
 				}
 			break;
 			case 0x02://dimmen austele
@@ -751,7 +690,7 @@ unsigned long read_obj_value(unsigned char objno)
 {
 	unsigned long objvalue=0;
 	unsigned char objtype;
-	objtype=eeprom[eeprom[COMMSTABPTR]+objno*3+4];
+	objtype=eeprom[eeprom[COMMSTABPTR]+objno+objno+objno+4];
 
 	if (objno <= 15) {	// wenn objno <= anzahl objekte
 		if (objtype>=8){// bei 16bit
@@ -776,7 +715,7 @@ void write_obj_value(unsigned char objno,long objvalue)
 {
 	unsigned char objtype;
 	
-	objtype=eeprom[eeprom[COMMSTABPTR]+objno*3+4];
+	objtype=eeprom[eeprom[COMMSTABPTR]+objno+objno+objno+4];
 	
 	if (objno <= 15) {	// wenn objno <= anzahl objekte
 		if (objtype>=8){
@@ -801,7 +740,7 @@ unsigned long read_obj_value(unsigned char objno)
 {
 	unsigned long objvalue=0;
 	unsigned char objtype;
-	objtype=eeprom[eeprom[COMMSTABPTR]+objno*3+4];
+	objtype=eeprom[eeprom[COMMSTABPTR]+objno+objno+objno+4];
 	
 	if (objno <= 15) {	// wenn objno <= anzahl objekte
 		if (objtype>=8){// bei 16bit
@@ -822,7 +761,7 @@ void write_obj_value(unsigned char objno,long objvalue)
 {
 	unsigned char objtype;
 	
-	objtype=eeprom[eeprom[COMMSTABPTR]+objno*3+4];
+	objtype=eeprom[eeprom[COMMSTABPTR]+objno+objno+objno+4];
 	
 	if (objno <= 15) {	// wenn objno <= anzahl objekte
 		if (objtype>=8){
@@ -842,8 +781,12 @@ void write_obj_value(unsigned char objno,long objvalue)
 
 void restart_app(void)		// Alle Applikations-Parameter zurücksetzen
 {
+#ifdef in4
+	P0M1=0x0F;	//P0_0-0_3 auf input only (high impedance!)
+	P0M2=0x00;	// 0_4-0_7 auf  push-pull
+	P0=0xFF;
 
-
+#else	
 #ifndef IN8_2TE
 	P0M1=0xFF;	//P0 auf input only (high impedance!)
 	P0M2=0x00;
@@ -853,26 +796,27 @@ void restart_app(void)		// Alle Applikations-Parameter zurücksetzen
 	P0M2=0xFD;
 	P0=0x22;	// WRITE=1 SER_IN=1
 #endif
-
-  transparency=0;
-//	stop_rtc();
-//	start_rtc(130);		// RTC neu mit 8ms starten
+#endif
+	RTCCON=0x60;		// RTC anhalten und Flag löschen
+	RTCH=0x0E;			// reload Real Time Clock
+	RTCL=0xA0;			// auf 65ms
+	RTCCON=0x61;		// RTC starten
+	
 	timer=0;			// Timer-Variable, wird alle 65ms inkrementiert
-
+/*
   EA=0; 
   START_WRITECYCLE
   WRITE_BYTE(0x01,0x03,0x00)	// Herstellercode 0x0004 = Jung
   WRITE_BYTE(0x01,0x04,0x04)
-  WRITE_BYTE(0x01,0x05,0x70)	// Geräte Typ (2118) 7054h
-  WRITE_BYTE(0x01,0x06,0x54)  // 	"	"	"
-  WRITE_BYTE(0x01,0x07,0x02)	// Versionsnummer
+//  WRITE_BYTE(0x01,0x05,0x70)	// Geräte Typ (2118) 7054h
+//  WRITE_BYTE(0x01,0x06,0x54)  // 	"	"	"
+//  WRITE_BYTE(0x01,0x07,0x02)	// Versionsnummer
   WRITE_BYTE(0x01,0x0C,0x00)	// PORT A Direction Bit Setting
   WRITE_BYTE(0x01,0x0D,0xFF)	// Run-Status (00=stop FF=run)
-  WRITE_BYTE(0x01,0x12,0x84)	// COMMSTAB Pointer
+//  WRITE_BYTE(0x01,0x12,0x84)	// COMMSTAB Pointer
   STOP_WRITECYCLE
 
-
   EA=1;
-  
+*/  
  
 }

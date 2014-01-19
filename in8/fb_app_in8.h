@@ -26,14 +26,15 @@
 #define TIMERANZ		0x09	// timeranzahl (17)
 #define PROTTIMER		TIMERANZ-1// PROTTIMER ist stets der letzte timer(0-7user,8prot,Gesmatzahl=9)
 
-//#define IN8_2TE					// nur für shifter version des in8
+//#define in4					// schaltet P0_4 - P0_7 auf pullup
+#define IN8_2TE					// nur für shifter version des in8 /typebit 3
 #define wertgeber				// mit Wertgeber
-//#define zaehler					// mit Zähler
-#define dimmer				// mit Dimmfunktionen
+//#define zaehler				// mit Zähler
+#define dimmer					// mit Dimmfunktionen
 #define zykls					// mit zyklisches senden
 
-#define VERSION 07
-#define TYPE    0x02
+#define VERSION 8
+#define TYPE    0x08
 
 extern unsigned char portbuffer,p0h;	// Zwischenspeicherung der Portzustände
 extern unsigned char blocked;	// Sperrobjekte
@@ -50,11 +51,11 @@ unsigned char operation(unsigned char pinno);
 unsigned char switch_dim(unsigned char pinno);
 int eis5conversion(unsigned char zahl,unsigned char typ);
 void delay_timer(void);
-void write_value_req(void);	
+//void write_value_req(void);	
 void sperren(unsigned char objno,unsigned char freigabe);
 unsigned long read_obj_value(unsigned char objno);
 void write_obj_value(unsigned char objno,long objvalue);
-void read_value_req(void);
+//void read_value_req(void);
 void write_send(unsigned char objno,unsigned int objval);
 
 void send_value(unsigned char type, unsigned char objno, int sval);
