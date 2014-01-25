@@ -5,7 +5,7 @@
  *   / __/ / _, _/ /___/ /___/ /_/ / /_/ /___/ / 
  *  /_/   /_/ |_/_____/_____/_____/\____//____/  
  *                                      
- *  Copyright (c) 2008,2009,2010 Andreas Krebs <kubi@krebsworld.de>
+ *  Copyright (c) 2008,2009,2013 Andreas Krebs <kubi@krebsworld.de>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 2 as
@@ -26,8 +26,7 @@
 */
 
 #include <P89LPC922.h>
-#include "../lib_lpc922/fb_lpc922.h"
-#include "../com/fb_delay.h"
+#include "../lib_lpc922/Releases/fb_lpc922_1.4x.h"
 #include "fb_app_taster.h"
 
 
@@ -213,7 +212,6 @@ void button_changed(unsigned char buttonno, __bit buttonval)
 			timerstate[buttonno+4]=((eeprom[0xD3+(buttonno*4)]&0x10)>>4)+0x30;
 		}
 		else {	// Taster losgelassen
-			//if (delrec[(buttonno+4)*4] & 0x10) send_eis(1, buttonno, ((eeprom[0xD3+(buttonno*4)]&0x10)>>4));	// wenn delaytimer noch laueft und in T2 ist, dann kurzzeit telegramm senden
 			if (timerstate[buttonno+4] == 0x40) {//innerhalb T2
 				write_obj_value(buttonno,((eeprom[0xD3+(buttonno*4)]&0x10)>>4));
 				send_obj_value(buttonno);
@@ -353,7 +351,7 @@ int eis5conversion(int zahl,unsigned char Typ)
 }
 */
 unsigned long read_obj_value(unsigned char objno)
-{objno;
+{
 //	unsigned int retvalue;
 	if(objno<4)	return(object_value[objno]);
 	else return((object_value[objno-4]<<8)+object_value[objno]);
@@ -377,34 +375,17 @@ void write_obj_value(unsigned char objno, unsigned int objval)
 * \param void
 * @return void
 */
-void write_value_req(void)
+void write_value_req(unsigned char objno)
 {
-	unsigned char objno,objflags,objtype,gapos,atp,assno,n,gaposh;
-
-	gapos=gapos_in_gat(telegramm[3],telegramm[4]);
-	if (gapos!=0xFF)	
-	{
-		atp=eeprom[ASSOCTABPTR];			// Association Table Pointer
-	    assno=eeprom[atp];					// Erster Eintrag = Anzahl Eintraege
-	 
-	    for(n=0;n<assno;n++) {				// Schleife über alle Eintraege in der Ass-Table, denn es koennten mehrere Objekte (Pins) der gleichen Gruppenadresse zugeordnet sein
-	    	gaposh=eeprom[atp+1+(n*2)];
-	    	if(gapos==gaposh) {					// Wenn Positionsnummer uebereinstimmt
-	    		objno=eeprom[atp+2+(n*2)];			// Objektnummer
-	    		objflags=read_objflags(objno);		// Objekt Flags lesen
-	    		if((objflags&0x14)==0x14) {			// Kommunikation zulaessig (Bit 2 = communication enable) + Schreiben zulaessig (Bit 4 = write enable)
-	    			if (objno<12) {					// max 12 objekte (0-11)
-	    				objtype=eeprom[eeprom[COMMSTABPTR]+objno*3+4];
-	    				if (objtype<=6){
-	    					write_obj_value(objno,telegramm[7]& 0x3F); //bit 6+7 löschen (0x40,0x80)
-	    				}
-	    				if (objtype==7)write_obj_value(objno,telegramm[8]);
-	    				if (objtype==8)write_obj_value(objno,telegramm[9]+(telegramm[8]<<8));
-	    				if ((objno<4) && ((eeprom[COMMAND+(objno*4)]) & 0x07) <4) switch_led(objno,telegramm[7]&0x01);	// LED nur schalten, wenn nicht auf Betï¿½tigungsanzeige parametriert
-	    			}
-	    		}
-	    	}
-	    }
+	unsigned char objtype;
+	if (objno<12) {					// max 12 objekte (0-11)
+		objtype=eeprom[eeprom[COMMSTABPTR]+objno*3+4];
+		if (objtype<=6){
+			write_obj_value(objno,telegramm[7]& 0x3F); //bit 6+7 löschen (0x40,0x80)
+		}
+		if (objtype==7)write_obj_value(objno,telegramm[8]);
+		if (objtype==8)write_obj_value(objno,telegramm[9]+(telegramm[8]<<8));
+		if ((objno<4) && ((eeprom[COMMAND+(objno*4)]) & 0x07) <4) switch_led(objno,telegramm[7]&0x01);	// LED nur schalten, wenn nicht auf Betï¿½tigungsanzeige parametriert
 	}
 }
 
@@ -416,25 +397,9 @@ void write_value_req(void)
 * @return
 * 
 */
-void read_value_req(void)
+void read_value_req(unsigned char objno)
 {
-	unsigned char objno, objflags;
-	int objvalue;
-	
-	objno=find_first_objno(telegramm[3],telegramm[4]);	// erste Objektnummer zu empfangener GA finden
-	if(objno!=0xFF) {	// falls Gruppenadresse nicht gefunden
-		//send_ack();
-		
-		objvalue=read_obj_value(objno);		// Objektwert aus USER-RAM lesen (Standard Einstellung)
-
-		objflags=read_objflags(objno);		// Objekt Flags lesen
-		// Objekt lesen, nur wenn read enable gesetzt (Bit3) und Kommunikation zulaessig (Bit2)
-		//if((objflags&0x0C)==0x0C) send_eis(0,objno,objvalue);
-		if((objflags&0x0C)==0x0C) {
-			write_obj_value(objno,objvalue);
 			send_obj_value(objno+0x40);
-		}
-    }
 }
 
 
@@ -719,7 +684,7 @@ void restart_app(void)
 		SET_PORT_MODE_PUSHPULL(n)
 	}
 	
-	PORT=0x0F;							// Taster auf high, LEDs zunächst aus
+	PORT=0x0F;			// Taster auf high, LEDs zunächst aus
 
 	button_buffer=0x0F;	// Variable für letzten abgearbeiteten Taster Status
 	
@@ -735,12 +700,12 @@ void restart_app(void)
 	START_WRITECYCLE			
 	WRITE_BYTE(0x01,0x03,0x00)	// Herstellercode 0x0004 = Jung
 	WRITE_BYTE(0x01,0x04,0x04)
-	WRITE_BYTE(0x01,0x05,0x10)	// Devicetype 0x1052 = Jung Tastsensor 2092
-	WRITE_BYTE(0x01,0x06,0x52)	
-	WRITE_BYTE(0x01,0x07,0x01)	// Versionsnummer
+//	WRITE_BYTE(0x01,0x05,0x10)	// Devicetype 0x1052 = Jung Tastsensor 2092
+//	WRITE_BYTE(0x01,0x06,0x52)	
+//	WRITE_BYTE(0x01,0x07,0x01)	// Versionsnummer
 	WRITE_BYTE(0x01,0x0C,0x00)	// PORT A Direction Bit Setting
 	WRITE_BYTE(0x01,0x0D,0xFF)	// Run-Status (00=stop FF=run)
-	WRITE_BYTE(0x01,0x12,0x9A)	// COMMSTAB Pointer
+//	WRITE_BYTE(0x01,0x12,0x9A)	// COMMSTAB Pointer
 	STOP_WRITECYCLE
 //	START_WRITECYCLE;
 //	WRITE_BYTE(0x00,0x60,0x2E);	// system state: all layers active (run), not in prog mode
@@ -765,9 +730,9 @@ void restart_app(void)
 	IP0H &= 0xF4;// 
 	IP0H |= 0x04;// 		Timer 1 auf Level 2
 
-	
-	TF0=0; //timer0 flag löschen
 	ET0=1;// timer 0 interupt freigeben	
+
+	TF0=0; //timer0 flag löschen
 	EA=1;// Interrupts freigeben	
 
 }

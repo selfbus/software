@@ -39,11 +39,15 @@
 	#include <P89LPC935_6.h>
 #endif	
 
-#include "../lib_lpc922/fb_lpc922.h"
+#include "../lib_lpc922/Releases/fb_lpc922_1.4x.h"
 #include "fb_app_taster.h"
 #include"../com/watchdog.h"
-#define NOPROGLED //typ 0,2 Die Progled blinkt im Progmodus da sie auch Betriebs LED ist
-#define NOPROGBUTTON	//typ 1,3 es ist kein prog Taster vorhanden sondern progmode wird durch druecken von taste 1&3 oder 2&4 aktiviert
+#include  "../com/debug.h"
+#include "../com/fb_rs232.h"
+
+#define debugmode
+//#define NOPROGLED //typ 0,2 Die Progled blinkt im Progmodus da sie auch Betriebs LED ist
+//#define NOPROGBUTTON	//typ 1,3 es ist kein prog Taster vorhanden sondern progmode wird durch druecken von taste 1&3 oder 2&4 aktiviert
 
 #ifdef NOPROGBUTTON
 	#ifdef NOPROGLED	
@@ -61,6 +65,7 @@
 
 #define VERSION		105
 
+unsigned char __at 0x00 RAM[00]; 
 
 unsigned char object_value[12];	// wird hier deklariert um den Speicher besser auszunutzen!!!
 
@@ -95,8 +100,9 @@ void main(void)
 #endif
 	TRIM = (TRIM+trimsave);
 	TRIM &= 0x3F;//oberen 2 bits ausblenden
-	watchdog_init();
-	watchdog_start();
+	WATCHDOG_INIT
+	WATCHDOG_START
+	TASTER=0;
 	for (n=0;n<50;n++) {
 		TR0=0;					// Timer 0 anhalten
 		TH0=eeprom[ADDRTAB+1];	// Timer 0 setzen mit phys. Adr. damit Geräte unterschiedlich beginnen zu senden
@@ -107,15 +113,11 @@ void main(void)
 	}
 	restart_app();							// Anwendungsspezifische Einstellungen zuruecksetzen
 	//...rs_init...(6);im folgenden direkt:
-	BRGCON&=0xFE;	// Baudrate Generator stoppen
-	P1M1&=0xFC;		// RX und TX auf bidirectional setzen
-	P1M2&=0xFC;
-	SCON=0x50;		// Mode 1, receive enable
-	SSTAT|=0xE0;	// TI wird am Ende des Stopbits gesetzt und Interrupt nur bei RX und double TX buffer an
-	BRGCON|=0x02;	// Baudrate Generator verwenden aber noch gestoppt
-	BRGR1=0x2F;	// Baudrate = cclk/((BRGR1,BRGR0)+16)
-	BRGR0=0xF0;	// für 115200 0030 nehmen, autocal: 600bd= 0x2FF0
-	BRGCON|=0x01;	// Baudrate Generator starten
+#ifndef debugmode
+	RS_INIT_600
+#else
+	RS_INIT_115200
+#endif
 	SBUF=0x55; // hiernach ist TI==1
 
 	for (n=0;n<4;n++) switch_led(n,0);	// Alle LEDs gemaess ihren Parametern setzen
@@ -125,7 +127,7 @@ void main(void)
 	dimmwert = LED_hell;
 
 	do  {
-		watchdog_feed();
+		WATCHDOG_FEED
 		if (RTCCON>=0x80) delay_timer();	// Realtime clock ueberlauf
 
 		n=timer;
@@ -156,7 +158,7 @@ void main(void)
 			
 			if(APPLICATION_RUN)	{// nur wenn im Run modus und nicht connected
 				if ((PORT & 0x0F) != button_buffer) port_changed(PORT & 0x0F);	// ein Taster wurde gedrueckt
-			}
+			}	
 		}
 
 		if (tel_arrived || tel_sent) {//
@@ -167,9 +169,7 @@ void main(void)
 			for(n=0;n<100;n++);
 		}
 
-		
-		
-		
+#ifndef debugmode		
 		if (RI){
 			RI=0;
 			cmd=SBUF;
@@ -211,7 +211,10 @@ void main(void)
 			//	port_schalten();
 			//}
 		}
-			
+#else
+		cmd;
+		DEBUGPOINT
+#endif		
 #ifndef NOPROGBUTTON
 		TASTER=1;				        	// Pin als Eingang schalten um Programmiertaster abzufragen
 		if(!TASTER){ // Taster gedrückt

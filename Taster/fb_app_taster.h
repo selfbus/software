@@ -48,7 +48,7 @@ void timer0_int(void) __interrupt (1);
 void port_changed(unsigned char portval);		// ein Taster wurde gedrueckt oder losgelassen
 void button_changed(unsigned char buttonno, __bit buttonval);	// Taster Aktion abarbeiten
 void switch_led(unsigned char ledno, __bit onoff);	// LED schalten
-void write_value_req(void);		// Hauptroutine fuer Ausgaenge schalten gemaess EIS 1 Protokoll (an/aus)
+//void write_value_req(void);		// Hauptroutine fuer Ausgaenge schalten gemaess EIS 1 Protokoll (an/aus)
 void delay_timer(void);			// zaehlt alle 130ms die Variable Timer hoch und prueft Queue
 //void send_eis(unsigned char eistyp, unsigned char objno, int sval);	// sendet ein EIS Telegramm
 unsigned long read_obj_value(unsigned char objno);

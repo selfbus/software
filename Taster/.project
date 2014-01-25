@@ -47,7 +47,7 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.buildArguments</key>
-					<value>-k</value>
+					<value></value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.buildCommand</key>
@@ -66,16 +66,4 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.core.cnature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>fb_lpc922.c</name>
-			<type>1</type>
-			<location>C:/Freebus/C_Programme/oldisprogramm/lib_lpc922/fb_lpc922.c</location>
-		</link>
-		<link>
-			<name>watchdog.c</name>
-			<type>1</type>
-			<location>C:/Freebus/C_Programme/oldisprogramm/com/watchdog.c</location>
-		</link>
-	</linkedResources>
 </projectDescription>
