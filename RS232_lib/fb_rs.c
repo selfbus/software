@@ -1,51 +1,32 @@
 /*
- *      __________  ________________  __  _______
- *     / ____/ __ \/ ____/ ____/ __ )/ / / / ___/
- *    / /_  / /_/ / __/ / __/ / __  / / / /\__ \
- *   / __/ / _, _/ /___/ /___/ /_/ / /_/ /___/ /
- *  /_/   /_/ |_/_____/_____/_____/\____//____/
- *
  *  Copyright (c) 2008-2010 Andreas Krebs <kubi@krebsworld.de>
+ *                2011-2014 Andreas Krieger <service@krieger-elektro.de>
+ *                2014 Stefan Taferner <stefan.taferner@gmx.at>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 2 as
  *  published by the Free Software Foundation.
  *
- *
  *  Dies ist ein EIB-RS232 Interface auf Basis des LPC-Controllerboards.
- *
  *	Die Schnittstelle ist default auf 115.200 Baud,n,8,1 eingestellt.
  *
- *  Versionen:	1.00	erste Version
- * 				1.01	erweitert um 1-Byte Empfang (zB. EIS6)
- * 				1.02	empfangege Telegramme werdwen gespeichert,
- * 						gespeicherte Werte einer GA können mit fbrgaxx/x/xxx ausgelesen werden
- *						mit fbdump wird die interne Tabelle ausgegeben
- *				1.03	EIS5 und EIS15 eingebaut (thx daywalker)
- *						echo eingebaut
- *				1.04	Baudrate einstellbar mit fbsbrXXXXX (XXXXX=9600, 19200, 38400, 57600, 115200)
- *						echo status wird gespeichert
- *						kein Auffüllen mit Nullen mehr bei GA und PA
- *						Status-LEDs für RX und EIB
- *						serielles Empfangen auf Int umgestellt
- *						fbrva für lesen eines GA-Wertes über bus
- * 				2.00	Umbau auf die minilib.
- * 						EIS2 zugefügt
- * 				2.01	bug in minilib bezüglich fbrva behoben. 
- * 						EIS3/EIS4  TIME bzw DATE zugefügt.
+ *  Änderungen siehe ChangeLog.txt
  */
 
-
 #include <P89LPC922.h>
-#include "../com/fb_rs232.h"
-#include "../lib_LPC922_mini/fb_lpc922_mini.h"
 
 #include "fb_app_rs.h"
-#include"../com/watchdog.h"
-// kubi-----
+
+#include <fb_lpc922_mini_1.4x.h>
+#include <fb_rs232.h>
+#include <watchdog.h>
+
+#include <fb_rs232.c>
+
 
 __bit filtermode,write_ok;
 __bit rsin_busy;
+
 void main(void)
 {
 	unsigned char n;//, value_pos;
