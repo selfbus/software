@@ -12,7 +12,7 @@
  *  published by the Free Software Foundation.
  *
  */
-
+#define ASCII_MODE
 
 #ifndef FB_APP_RS
 #define FB_APP_RS
@@ -33,7 +33,11 @@ extern 	unsigned int groupadr,pa_tmp;
 extern unsigned char ledcount;
 extern unsigned char eibledcount;
 extern unsigned char rxledcount;
-extern __code struct ga_record __at 0x1D00 ga_db[62];
+#ifndef ASCII_MODE
+	extern __code struct ga_record __at 0x1D00 ga_db[62];
+#else
+	extern __code struct ga_record __at 0x1D00 ga_db[61];
+#endif
 extern __code unsigned char __at 0x1CFD echo;
 extern __code unsigned int __at 0x1CFE baud;
 extern __code unsigned char __at 0x1CFA fm;

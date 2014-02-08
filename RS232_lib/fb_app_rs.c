@@ -30,10 +30,16 @@ unsigned char rxledcount;
 __code unsigned char __at 0x1CFA fm;
 __code unsigned char __at 0x1CFB pa_h;
 __code unsigned char __at 0x1CFC pa_l;
+#ifdef ASCII_MODE
+__code unsigned char __at 0x1CF8 sga_h;
+__code unsigned char __at 0x1CF9 sga_l;
+__code struct ga_record __at 0x1D00 ga_db[61];
+#else
+__code struct ga_record __at 0x1D00 ga_db[62];
+#endif
 
 __code unsigned char __at 0x1CFD echo;
 __code unsigned int __at 0x1CFE baud=192;
-__code struct ga_record __at 0x1D00 ga_db[62];
 //const unsigned char __at 1D0 [62*4]={0xFF}; 
 
 /* Flash Belegung:
@@ -147,6 +153,16 @@ __bit build_tel(unsigned char objno)
 		//telegramm[8]=((rsin[15]-48)*100) + ((rsin[16]-48)*10) + (rsin[17]-48);
 		telegramm[8]=value;
 		break;
+#ifdef ASCII_MODE		
+	case 14: // EIS 15 auf voreingestellter GA
+		tel_header(((unsigned int)sga_h<<8)+sga_l,15); //15
+		telegramm[7]=0x80;
+		for(d=8;d<22;d++){
+			if((d-8)>=(rsinpos-1)) telegramm[d]=0x00;
+			else telegramm[d]=rsin[(d-8)];
+		}
+		break;
+#endif
 	case 15: // EIS 15
 		tel_header(groupadr,15); //15
 		telegramm[7]=0x80;
@@ -276,11 +292,19 @@ void save_ga(unsigned int ga, unsigned int val)
 				FMDATA=val>>8;					// High Byte schreiben
 				STOP_WRITECYCLE
 				if(!(FMCON & 0x01)) write_ok=1;	// pruefen, ob erfolgreich geflasht
+#ifndef ASCII_MODE
 			}				
 			n=62;	// Schleife abbrechen
 		}
 		n++;
 	}while (n<62);
+#else	
+			}				
+			n=61;	// Schleife abbrechen
+		}
+		n++;
+	}while (n<61);
+#endif
 }
 
 

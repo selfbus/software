@@ -71,8 +71,8 @@ void main(void)
 	if (baud==96 || baud==192 || baud==384 || baud==576) rs_send_dec(baud);
 	else rs_send_s("1152");
 	rs_send_s("00 Baud.\n");
-	watchdog_init();
-	watchdog_start();
+	WATCHDOG_INIT 
+	WATCHDOG_START
 
 	if(fm){
 		filtermode=1;
@@ -81,7 +81,7 @@ void main(void)
 	else filtermode=0;
 
 	do  {
-		watchdog_feed();
+		WATCHDOG_FEED
 		ledcount--;
 		if(!ledcount){
 			if(!eibledcount)EIBLED=1;
@@ -100,8 +100,11 @@ void main(void)
 		{
 			rxledcount=0xff;// * RXLED lang einschalten
 			if(echo) rs_send(0x0A);
-			
-			if (rsin[0]=='f' && rsin[1]=='b') {	// Magic-word 'fb' empfangen
+#ifndef ASCII_MODE			
+			//if (rsin[0]=='f' && rsin[1]=='b') {	// Magic-word 'fb' empfangen
+#else
+			if (rsin[0]==27 && rsin[1]=='b') {	// Magic-word 'esc b' empfangen
+#endif
 				if(rsin[2]=='s') {		// s=senden oder setzen
 					// EIS 1
 					if(rsin[3]=='0' && rsin[4]=='1' && rsin[rsinpos-3]=='=' && (rsin[rsinpos-2]=='0' || rsin[rsinpos-2]=='1')) {
@@ -146,7 +149,7 @@ void main(void)
 					if(rsin[3]=='f' && rsin[4]=='a'){
 						set_filtermode('1');
 						save_ga(convert_adr(6),0);
-						send_ok;//rs_send_s("OK\n");
+						send_ok();//rs_send_s("OK\n");
 					}
 
 					// phys. Adresse des Adapters setzen (fbspaX.X.X)
@@ -165,7 +168,23 @@ void main(void)
 						}
 						send_ok();//rs_send_s("OK\n");
 					}
-
+#ifdef ASCII_MODE
+					if(rsin[3]=='g' && rsin[4]=='a')
+					{	// setzen und speichern einer GA zum voreinstellen
+						pa_tmp=convert_adr(5);
+						write_ok=0;
+						while (!write_ok) {
+							START_WRITECYCLE
+							FMADRH = 0x1C;
+							FMADRL = 0xF8;
+							FMDATA = pa_tmp>>8;
+							FMDATA = pa_tmp;
+							STOP_WRITECYCLE
+							if(!(FMCON & 0x01)) write_ok=1;	// pruefen, ob erfolgreich geflasht
+						}
+						send_ok();//rs_send_s("OK\n");
+					}
+#endif					
 					// Baudrate setzen mit fbsbrXXXXX
 					if(rsin[3]=='b' && rsin[4]=='r') {
 						baud_tmp=0;
@@ -253,12 +272,20 @@ void main(void)
 							if(!(FMCON & 0x01)) write_ok=1;	// pruefen, ob erfolgreich geflasht
 						}
 						n++;
+#ifndef ASCII_MODE
 					}while(n<=62);
+#else
+					}while(n<=61);
+#endif					
 					send_ok();//rs_send_s("OK\n");
 				}
 				if(rsin[2]=='d' && rsin[3]=='u'  && rsinpos==7) {
 					n=0;
+#ifndef ASCII_MODE
 					while(n<=61) {
+#else
+					while(n<=60) {
+#endif						
 						rs_send_hex(n);
 						rs_send(':');
 						rs_send(' ');
@@ -274,7 +301,11 @@ void main(void)
 				// GA-Tabelle ausgeben
 				if(rsin[2]=='l' && rsin[3]=='i'  && rsinpos==7) {
 					n=0;
+#ifndef ASCII_MODE
 					while(n<=61&& ga_db[n].ga<0xFFFF) {
+#else
+					while(n<=60&& ga_db[n].ga<0xFFFF) {
+#endif						
 						rs_send_dec(((ga_db[n].ga)>>11)&0x0F);
 						rs_send('/');
 						rs_send_dec(((ga_db[n].ga)>>8)&0x07);
@@ -308,12 +339,28 @@ void main(void)
 					send_ok();
 				}
 
-			} // von if(fb...)
+			} // von if(fb...) oder ESC b
+#ifdef ASCII_MODE
+			else // also kein ESC --> normaler Text mit CR am Ende
+			{	//wenn kein ESC, dann ist es als eis15 zu senden
+				send_obj_value(14);
+				busy=1;
+			}
+#endif		
 			if(!busy){// wenn nichts zu senden ist den Empfangspuffer löschen
 				for(n=0;n<30;n++) rsin[n]=0x00;
 				rsinpos=0;
-			}	
+			}
 		} // von if(crlf_received)
+#ifdef ASCII_MODE
+
+					if(rsin[0]!=27 && rsinpos>=14 && !busy)	// CR empfangen
+					{	//wenn kein ESC und kein CR dann ist es als eis15 zu senden wenn mehr als 14 Zeichen da sind
+						send_obj_value(14);
+						busy=1;
+					}
+#endif
+	
 
 		if(tel_sent && fb_state==0 && (TH1<0XC0) && (!wait_for_ack))//wenn tele gesendet ist
 		{
