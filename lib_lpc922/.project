@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>lib_lpc922</name>
+	<name>RS232_lib</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -15,7 +15,7 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.buildLocation</key>
-					<value>${workspace_loc:/lib_lpc922/Release}</value>
+					<value>${workspace_loc:/RS232_lib/Release}</value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.useDefaultBuildCmd</key>
@@ -47,7 +47,7 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.buildArguments</key>
-					<value></value>
+					<value>-k</value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.buildCommand</key>
@@ -66,4 +66,16 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.core.cnature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>fb_rs232.c</name>
+			<type>1</type>
+			<location>C:/Freebus/C_Programme/oldisprogramm/com/fb_rs232.c</location>
+		</link>
+		<link>
+			<name>watchdog.c</name>
+			<type>1</type>
+			<location>C:/Freebus/C_Programme/oldisprogramm/com/watchdog.c</location>
+		</link>
+	</linkedResources>
 </projectDescription>
