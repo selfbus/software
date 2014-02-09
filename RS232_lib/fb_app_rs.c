@@ -6,7 +6,7 @@
  *   / __/ / _, _/ /___/ /___/ /_/ / /_/ /___/ /
  *  /_/   /_/ |_/_____/_____/_____/\____//____/
  *
- *  Copyright (c) 2008-2010 Andreas Krebs <kubi@krebsworld.de>
+ *  Copyright (c) 2008-2014 Andreas Krebs <kubi@krebsworld.de>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 2 as
@@ -27,16 +27,15 @@ unsigned int groupadr=0,pa_tmp;
 unsigned char ledcount;
 unsigned char eibledcount;
 unsigned char rxledcount;
+__code unsigned char __at 0x1CF7 esc_char={'f'};
 __code unsigned char __at 0x1CFA fm;
 __code unsigned char __at 0x1CFB pa_h;
 __code unsigned char __at 0x1CFC pa_l;
 #ifdef ASCII_MODE
 __code unsigned char __at 0x1CF8 sga_h;
 __code unsigned char __at 0x1CF9 sga_l;
-__code struct ga_record __at 0x1D00 ga_db[61];
-#else
-__code struct ga_record __at 0x1D00 ga_db[62];
 #endif
+__code struct ga_record __at 0x1D00 ga_db[62];
 
 __code unsigned char __at 0x1CFD echo;
 __code unsigned int __at 0x1CFE baud=192;
@@ -56,10 +55,10 @@ __code unsigned int __at 0x1CFE baud=192;
 __bit build_tel(unsigned char objno)
 {
 	__bit build_ok=1;
-	unsigned int value, value_pos;
-	int eis5temp, d, exp;
+	unsigned int value;
+	int eis5temp,  exp;
 	unsigned long temp;
-
+	unsigned char d, value_pos;
 //	unsigned int ga=0;
 //	unsigned char objtype=0;
 	unsigned char day=0;//, length;
@@ -155,13 +154,9 @@ __bit build_tel(unsigned char objno)
 		break;
 #ifdef ASCII_MODE		
 	case 14: // EIS 15 auf voreingestellter GA
-		tel_header(((unsigned int)sga_h<<8)+sga_l,15); //15
-		telegramm[7]=0x80;
-		for(d=8;d<22;d++){
-			if((d-8)>=(rsinpos-1)) telegramm[d]=0x00;
-			else telegramm[d]=rsin[(d-8)];
-		}
-		break;
+		groupadr=((unsigned int)sga_h<<8)+sga_l; //
+		value_pos=0;
+		//absichtlich kein break !!
 #endif
 	case 15: // EIS 15
 		tel_header(groupadr,15); //15
@@ -232,7 +227,7 @@ void write_value_req(void)
 				if(length==4){
 					n='.';  
 					if(telegramm[8]>31){// time
-						rs_send((telegramm[8]>>5)+48);
+						rs_send((telegramm[8]>>5)+'0');
 						rs_send(',');
 						n=':';
 					}
@@ -247,8 +242,8 @@ void write_value_req(void)
 						rs_send(telegramm[n]);
 					}
 				}
-				rs_send(13);							// CR LF
-				rs_send(10);
+				rs_send_s("\n");							// CR LF
+				//rs_send(10);
 			}
 			 save_ga(ga,val);						// GA mit Wert speichern
 		}//ende if(!tel_sent ..
@@ -292,19 +287,12 @@ void save_ga(unsigned int ga, unsigned int val)
 				FMDATA=val>>8;					// High Byte schreiben
 				STOP_WRITECYCLE
 				if(!(FMCON & 0x01)) write_ok=1;	// pruefen, ob erfolgreich geflasht
-#ifndef ASCII_MODE
 			}				
 			n=62;	// Schleife abbrechen
 		}
 		n++;
 	}while (n<62);
-#else	
-			}				
-			n=61;	// Schleife abbrechen
-		}
-		n++;
-	}while (n<61);
-#endif
+
 }
 
 
@@ -362,15 +350,16 @@ unsigned int convert_adr(unsigned char pos)
 // gibt die Position des = Zeichens im empfangenen string zurück
 unsigned char equal_pos(void)
 {
-	unsigned char n, pos;
+	unsigned char n;
 
 	n=0;
-	pos=0xFF;
-	while(n<(rsinpos-1)) {
-		if(rsin[n]=='=') pos=n;
+
+	while(n<(rsinpos-1))
+	{
+		if(rsin[n]=='=')return(n);
 		n++;
 	}
-	return(pos);
+	return(0xFF);
 }
 
 

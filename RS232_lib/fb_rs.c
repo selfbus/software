@@ -5,7 +5,7 @@
  *   / __/ / _, _/ /___/ /___/ /_/ / /_/ /___/ /
  *  /_/   /_/ |_/_____/_____/_____/\____//____/
  *
- *  Copyright (c) 2008-2010 Andreas Krebs <kubi@krebsworld.de>
+ *  Copyright (c) 2008-2014 Andreas Krebs <kubi@krebsworld.de>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 2 as
@@ -52,7 +52,7 @@ void main(void)
 	__bit busy=0;
 	unsigned int value=0;
 	unsigned int baud_tmp;
-
+	unsigned char esc=esc_char;
 
 	restart_hw();			// Hardware zurücksetzen
 	rs_init(baud);			// serielle Schnittstelle initialisieren, muss hier sein
@@ -67,10 +67,13 @@ void main(void)
 	rxledcount=0;
 	rsinpos=0;
 
-	rs_send_s("Kubi's RS-interface V2.01 ");
+	rs_send_s("Kubi's RS-interface V3.00 ");
 	if (baud==96 || baud==192 || baud==384 || baud==576) rs_send_dec(baud);
 	else rs_send_s("1152");
-	rs_send_s("00 Baud.\n");
+	rs_send_s("00 Baud. ");
+	rs_send_s("Esc=");
+	rs_send(esc);
+	rs_send_s("\n");
 	WATCHDOG_INIT 
 	WATCHDOG_START
 
@@ -101,45 +104,50 @@ void main(void)
 			rxledcount=0xff;// * RXLED lang einschalten
 			if(echo) rs_send(0x0A);
 #ifndef ASCII_MODE			
-			//if (rsin[0]=='f' && rsin[1]=='b') {	// Magic-word 'fb' empfangen
+			if (rsin[0]=='f' && rsin[1]=='b') {	// Magic-word 'fb' empfangen
 #else
-			if (rsin[0]==27 && rsin[1]=='b') {	// Magic-word 'esc b' empfangen
+			if (rsin[0]==esc && rsin[1]=='b') {	// Magic-word 'esc b' empfangen
 #endif
 				if(rsin[2]=='s') {		// s=senden oder setzen
 					// EIS 1
-					if(rsin[3]=='0' && rsin[4]=='1' && rsin[rsinpos-3]=='=' && (rsin[rsinpos-2]=='0' || rsin[rsinpos-2]=='1')) {
-						send_obj_value(1);
-						busy=1;
-					}
-					
-					// EIS 2 Dimmer, motion control
-					if(rsin[3]=='0' && rsin[4]=='2' && rsin[rsinpos-4]=='=') {
-						send_obj_value(2);
-						busy=1;
-					}
-
-					// EIS 3 senden Zeit
-					if(rsin[3]=='0' && rsin[4]=='3') {
-						send_obj_value(3);
-						busy=1;
-					}
-					// EIS 4 senden Datum
-					if(rsin[3]=='0' && rsin[4]=='4') {
-						send_obj_value(4);
-						busy=1;
-					}
-					// EIS 5 senden Mantisse+exponent 
-					if(rsin[3]=='0' && rsin[4]=='5') {
-						send_obj_value(5);
-						busy=1;
-					}
-
-					// EIS 6 senden 8 Bit Wert
-						if(rsin[3]=='0' && rsin[4]=='6') {
-						send_obj_value(6);
-						busy=1;
-					}
-
+					if(rsin[3]=='0')
+					{
+							if( rsin[4]=='1' && rsin[rsinpos-3]=='=' && (rsin[rsinpos-2]=='0' || rsin[rsinpos-2]=='1')) {
+								send_obj_value(1);
+								busy=1;
+							}
+							// EIS 2 Dimmer, motion control
+							else if(  rsin[4]=='2' && rsin[rsinpos-4]=='=') {
+								send_obj_value(2);
+								busy=1;
+							}
+		
+							// EIS 3 senden Zeit
+							// EIS 4 senden Datum
+							// EIS 5 senden Mantisse+exponent 
+							// EIS 6 senden 8 Bit Wert
+							else if( rsin[4]>='3'&& rsin[4]<='6') {
+								send_obj_value(rsin[4]-'0');
+								busy=1;
+							}
+				/*
+						// EIS 4 senden Datum
+							if( rsin[4]=='4') {
+								send_obj_value(4);
+								busy=1;
+							}
+							// EIS 5 senden Mantisse+exponent 
+							if( rsin[4]=='5') {
+								send_obj_value(5);
+								busy=1;
+							}
+		
+							// EIS 6 senden 8 Bit Wert
+								if( rsin[4]=='6') {
+								send_obj_value(6);
+								busy=1;
+							}
+				*/	}
 					// EIS 15 senden, wird nicht im Speicher abgelegt
 					if(rsin[3]=='1' && rsin[4]=='5') {
 						send_obj_value(15);
@@ -184,6 +192,21 @@ void main(void)
 						}
 						send_ok();//rs_send_s("OK\n");
 					}
+					if(rsin[3]=='e' && rsin[4]=='c')
+					{
+						write_ok=0;
+						esc=rsin[5];
+						while (!write_ok) {
+							START_WRITECYCLE
+							FMADRH = 0x1C;
+							FMADRL = 0xF7;
+							FMDATA = esc;
+							STOP_WRITECYCLE
+							if(!(FMCON & 0x01)) write_ok=1;	// pruefen, ob erfolgreich geflasht
+						}
+						send_ok();//rs_send_s("OK\n");
+					}
+
 #endif					
 					// Baudrate setzen mit fbsbrXXXXX
 					if(rsin[3]=='b' && rsin[4]=='r') {
@@ -228,8 +251,8 @@ void main(void)
 						rs_send_dec(pa_h&0x0F);
 						rs_send('.');
 						rs_send_dec(pa_l);
-						rs_send(0x0D);
-						rs_send(0x0A);
+						rs_send_s("\n");
+						//rs_send(0x0A);
 					}
 
 					// gespeicherten Wert einer Gruppen-Adresse lesen (fbrgax/x/x)
@@ -245,8 +268,8 @@ void main(void)
 							n++;
 						}while (n>0);
 						rs_send_dec(value);
-						rs_send(13);
-						rs_send(10);
+						rs_send_s("\n");// cr schiebt die funktion dazwischen
+						//rs_send(10);
 					}
 
 					// Wert einer Gruppen-Adresse über Bus lesen (fbrva/x/x/x)
@@ -272,28 +295,20 @@ void main(void)
 							if(!(FMCON & 0x01)) write_ok=1;	// pruefen, ob erfolgreich geflasht
 						}
 						n++;
-#ifndef ASCII_MODE
 					}while(n<=62);
-#else
-					}while(n<=61);
-#endif					
 					send_ok();//rs_send_s("OK\n");
 				}
 				if(rsin[2]=='d' && rsin[3]=='u'  && rsinpos==7) {
 					n=0;
-#ifndef ASCII_MODE
 					while(n<=61) {
-#else
-					while(n<=60) {
-#endif						
 						rs_send_hex(n);
-						rs_send(':');
-						rs_send(' ');
+						rs_send_s(": ");
+						//rs_send(' ');
 						rs_send_hex_i(ga_db[n].ga);
 						rs_send(' ');
 						rs_send_hex_i(ga_db[n].val);
-						rs_send(13);
-						rs_send(10);
+						rs_send_s("\n");
+						//rs_send(10);
 						n++;
 					}
 				}
@@ -301,11 +316,7 @@ void main(void)
 				// GA-Tabelle ausgeben
 				if(rsin[2]=='l' && rsin[3]=='i'  && rsinpos==7) {
 					n=0;
-#ifndef ASCII_MODE
 					while(n<=61&& ga_db[n].ga<0xFFFF) {
-#else
-					while(n<=60&& ga_db[n].ga<0xFFFF) {
-#endif						
 						rs_send_dec(((ga_db[n].ga)>>11)&0x0F);
 						rs_send('/');
 						rs_send_dec(((ga_db[n].ga)>>8)&0x07);
@@ -315,8 +326,9 @@ void main(void)
 						rs_send_hex_i(ga_db[n].val);
 						rs_send_s(" dec ");
 						rs_send_dec(ga_db[n].val);
-						rs_send(13);
-						rs_send(10);
+					//	rs_send(13);
+					//	rs_send(10);
+						rs_send_s("\n");
 						n++;
 					}
 					send_ok();//rs_send_s("OK\n");
@@ -341,7 +353,7 @@ void main(void)
 
 			} // von if(fb...) oder ESC b
 #ifdef ASCII_MODE
-			else // also kein ESC --> normaler Text mit CR am Ende
+			else if(esc!='f')// also kein ESC und esc nicht 'f'--> normaler Text mit CR am Ende
 			{	//wenn kein ESC, dann ist es als eis15 zu senden
 				send_obj_value(14);
 				busy=1;
@@ -354,11 +366,11 @@ void main(void)
 		} // von if(crlf_received)
 #ifdef ASCII_MODE
 
-					if(rsin[0]!=27 && rsinpos>=14 && !busy)	// CR empfangen
-					{	//wenn kein ESC und kein CR dann ist es als eis15 zu senden wenn mehr als 14 Zeichen da sind
-						send_obj_value(14);
-						busy=1;
-					}
+		if(rsin[0]!=esc && esc!='f' && rsinpos>=14 && !busy)	// 
+		{	//wenn kein ESC und kein CR dann ist es als eis15 zu senden wenn min. 14 Zeichen da sind
+			send_obj_value(14);
+			busy=1;
+		}
 #endif
 	
 

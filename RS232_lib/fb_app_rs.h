@@ -33,18 +33,14 @@ extern 	unsigned int groupadr,pa_tmp;
 extern unsigned char ledcount;
 extern unsigned char eibledcount;
 extern unsigned char rxledcount;
-#ifndef ASCII_MODE
-	extern __code struct ga_record __at 0x1D00 ga_db[62];
-#else
-	extern __code struct ga_record __at 0x1D00 ga_db[61];
-#endif
+extern __code struct ga_record __at 0x1D00 ga_db[62];
 extern __code unsigned char __at 0x1CFD echo;
 extern __code unsigned int __at 0x1CFE baud;
 extern __code unsigned char __at 0x1CFA fm;
 extern __code unsigned char __at 0x1CFB pa_h;
 extern __code unsigned char __at 0x1CFC pa_l;
 extern __bit filtermode,write_ok,rsin_busy;
-
+extern __code unsigned char __at 0x1CF7 esc_char;
 extern void send_ok(void);
 void set_filtermode(unsigned char mode);
 void restart_app(void);		// Alle Applikations-Parameter zurücksetzen
@@ -55,3 +51,6 @@ unsigned char equal_pos(void);
 void write_value_req(void);
 void serial_int(void) __interrupt (4) __using (1);
 #endif
+
+// Makros:
+#define SEND_OK rs_send_s("OK\n");
