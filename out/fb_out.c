@@ -12,7 +12,6 @@
  *  published by the Free Software Foundation.
  *
  */
-
 /**
 * @file   fb_out.c
 * @author Andreas Krebs <kubi@krebsworld.de>
@@ -70,7 +69,9 @@
 			progmode(p) relaise toggeln(ziffer 1-8)
 *   3.35	Fehler bei Rückmeldung und bei eeprom flashen behoben, neue LIB
 * 	3.36	Umstellung auf lib1.4x.
+*   3.37	Handbedienung mit zerodetection integrieren. bug RTC 8ms- 65ms gefixt
  TODO 
+ 
 * @todo:
 	- Prio beim Senden implementieren \n
 	- Zwangsstellungsobjekte implementieren \n
@@ -119,13 +120,15 @@
 		#endif
 	#endif
 #endif
-#define VERSION 36
+#define VERSION 37
 
 unsigned char __at 0x00 RAM[00]; 
 
 
 void main(void)
 { 
+	unsigned char timer_precounter=0;
+
 	unsigned char n,cmd,tasterpegel=0;
 	signed char cal;
 //	unsigned int m;
@@ -167,17 +170,7 @@ void main(void)
 	WATCHDOG_START
 	restart_app();							// Anwendungsspezifische Einstellungen zuruecksetzen
 	if(!wduf)bus_return();							// Aktionen bei Busspannungswiederkehr
-	//...rs_init...(6);im folgenden direkt:
-/*	BRGCON&=0xFE;	// Baudrate Generator stoppen
-//	P1M1&=0xFC;		// RX und TX auf bidirectional setzen
-//	P1M2&=0xFC;
-	SCON=0x50;		// Mode 1, receive enable
-	SSTAT|=0xE0;	// TI wird am Ende des Stopbits gesetzt und Interrupt nur bei RX und double TX buffer an
-	BRGCON|=0x02;	// Baudrate Generator verwenden aber noch gestoppt
-	BRGR1=0x2f;	// Baudrate = cclk/((BRGR1,BRGR0)+16)
-	BRGR0=0xf0;	// für 115200 0030 nehmen, autocal: 600bd= 0x2FF0
-	BRGCON|=0x01;	// Baudrate Generator starten
-*/
+
 #ifndef debugmode
 	RS_INIT_600
 #else
@@ -186,12 +179,23 @@ void main(void)
 #ifndef BUS_DOWN
 	SBUF=0x55;
 #endif
+// ################## main loop #########################	
+
 	do  {
 		WATCHDOG_FEED
 
 		if(APPLICATION_RUN) {	// nur wenn run-mode gesetzt
 
-			if(RTCCON>=0x80) delay_timer();	// Realtime clock Ueberlauf
+			if(RTCCON>=0x80){
+#ifdef HAND				
+				handbedienung();// alle 16ms
+#endif				
+				timer_precounter++;
+				if(timer_precounter&0x02)
+				{
+				delay_timer();	// timer handler jedes 4. mal--> 64ms
+				}
+			}
 #ifndef zeroswitch
 			if(TF0 && (TMOD & 0x0F)==0x01) {	// Vollstrom für Relais ausschalten und wieder PWM ein
 	#ifndef SPIBISTAB
@@ -215,6 +219,7 @@ void main(void)
 	#endif
 			}
 #endif
+		
 			
 #ifdef BUS_DOWN
 			if(TxD){
@@ -345,7 +350,7 @@ void main(void)
 #endif						
 		}//end if(RI...
 #else //ifndef debugmode
-DEBUGPOINT;
+//DEBUGPOINT;
 #endif
 #endif // ifndef BUS_DOWN
 		TASTER=1;				// Pin als Eingang schalten um Taster abzufragen

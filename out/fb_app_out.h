@@ -21,12 +21,12 @@
 
 
 //#define IO_BISTAB
-#define BUS_DOWN
+//#define BUS_DOWN
 #define MAX_PORTS_8 		// Anzahl Ausgänge (nur 4 oder 8 erlaubt)
-//#define HAND				// Handsteuerung aktiv (auskommentieren wenn nicht gewünscht)
-#define SPIBISTAB			// Serielle Ausgabe für bistabile relaise aktivieren
+#define HAND				// Handsteuerung aktiv (auskommentieren wenn nicht gewünscht)
+//#define SPIBISTAB			// Serielle Ausgabe für bistabile relaise aktivieren
 //#define panasonic
-//#define zeroswitch			// für Platine mit Nullspannungserkennung
+#define zeroswitch			// für Platine mit Nullspannungserkennung
 
 #ifdef zeroswitch
 	#ifndef panasonic		//OMRON
@@ -82,6 +82,7 @@ extern unsigned char portausgabe_on; // einzuschaltende IO, die dann im ext 0 in
 extern unsigned char portausgabe_off; // auszuschaltende IO, die dann im t 0 int übernommen werden
 extern volatile unsigned char schalten_state; // status T0 int
 extern unsigned char phival;
+extern __bit zeropulse;
 #endif
 #ifdef BUS_DOWN
 	void bus_down (void);
@@ -95,13 +96,13 @@ void spi_2_out(unsigned int daten);
 unsigned int sort_output(unsigned char portbuffer);
 void bus_return(void);		// Aktionen bei Busspannungswiederkehr
 void restart_app(void) ;		// Alle Applikations-Parameter zurücksetzen
-
+void handbedienung(void);
 unsigned long read_obj_value(unsigned char objno) ;	// gibt den Wert eines Objektes zurueck
 void write_obj_value(unsigned char objno,unsigned int objvalue);	// schreibt den aktuellen Wert eines Objektes ins 'USERRAM'
-//void EX0_int (void) __interrupt (0);
+
 #ifdef zeroswitch
-//void EX0_int(void) __interrupt (0);
-//void timer0_int(void) __interrupt (1) ;
+void EX0_int(void) __interrupt (0);
+void timer0_int(void) __interrupt (1) ;
 #endif
 
 
