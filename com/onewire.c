@@ -1,23 +1,22 @@
-
-
-
-
-
+// onewire.c
 
 #ifdef LPC936
-#include <P89LPC935_6.h>
+# include <P89LPC935_6.h>
 #else
-#include <P89LPC922.h>
+# include <P89LPC922.h>
 #endif
 
 #include "../com/onewire.h"
 
+// Fallback für OWDATA
+#ifndef OWDATA
+#  define OWDATA  P0_7
+#endif
 
 
-
-bit ow_init(void)		// one-wire Gerät initialisieren
+__bit ow_init(void)		// one-wire Gerät initialisieren
 {
-  bit presence;
+  __bit presence;
   unsigned char n;
   
   presence=1;
@@ -74,10 +73,10 @@ unsigned char ow_read(void)			// Byte von one-wire Gerät lesen
 
 
 
-bit ow_read_bit(void)				// Bit von one-wire Datenleitung einlesen
+__bit ow_read_bit(void)				// Bit von one-wire Datenleitung einlesen
 {
 	unsigned char m;
-	bit b;
+	__bit b;
 	
 	for (m=0;m<2;m++) OWDATA=0;
 	OWDATA=1;
