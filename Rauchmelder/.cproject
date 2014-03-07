@@ -5,12 +5,12 @@
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.sdcc.exe.release.93422360" moduleId="org.eclipse.cdt.core.settings" name="Release">
 				<externalSettings/>
 				<extensions>
-					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
 					<extension id="org.eclipse.cdt.core.MakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.ui.SDCC Error Parser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
@@ -21,17 +21,16 @@
 							<builder buildPath="${workspace_loc:/rmgira-incubation/Release}" id="cdt.managedbuild.target.sdcc.builder.exe.release.1806581327" keepEnvironmentInBuildfile="false" name="Sdcc Make" superClass="cdt.managedbuild.target.sdcc.builder.exe.release"/>
 							<tool command="sdcc --stack-auto -c" errorParsers="" id="cdt.managedbuild.tool.sdcc.c.compiler.exe.release.146817974" name="SDCC Compiler" superClass="cdt.managedbuild.tool.sdcc.c.compiler.exe.release">
 								<option id="sdcc.c.compiler.option.include.paths.311082523" name="Include paths (-I)" superClass="sdcc.c.compiler.option.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value="/usr/share/sdcc/include"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lib_lpc922/Releases}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.sdcc.c.compiler.input.164525614" superClass="cdt.managedbuild.tool.sdcc.c.compiler.input"/>
 							</tool>
 							<tool command="sdcc --stack-auto" errorParsers="" id="cdt.managedbuild.tool.sdcc.c.linker.exe.release.1077287885" name="SDCC Linker" superClass="cdt.managedbuild.tool.sdcc.c.linker.exe.release">
 								<option id="sdcc.c.link.option.paths.1516744144" name="Library search path (-L)" superClass="sdcc.c.link.option.paths" valueType="stringList">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lib_lpc922/Release}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lib_lpc922/Releases}&quot;"/>
 								</option>
 								<option id="sdcc.c.link.option.libs.1386877298" name="Libraries (-l)" superClass="sdcc.c.link.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" srcPrefixMapping="" srcRootPath="" value="&quot;${workspace_loc:/lib_lpc922/Releases/fb_lpc922_1.4x.lib}&quot;"/>
+									<listOptionValue builtIn="false" value="fb_lpc922_1.4x.lib"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.sdcc.c.linker.input.1322102384" superClass="cdt.managedbuild.tool.sdcc.c.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_RELS)"/>
@@ -51,11 +50,11 @@
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.sdcc.exe.debug.528902433" moduleId="org.eclipse.cdt.core.settings" name="Debug">
 				<externalSettings/>
 				<extensions>
-					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
 					<extension id="org.eclipse.cdt.core.MakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
