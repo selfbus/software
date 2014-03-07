@@ -66,16 +66,4 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.core.cnature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>fb_rs232.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/com/fb_rs232.c</locationURI>
-		</link>
-		<link>
-			<name>watchdog.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/com/watchdog.c</locationURI>
-		</link>
-	</linkedResources>
 </projectDescription>
