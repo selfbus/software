@@ -137,7 +137,8 @@ void main(void)
 		if (RTCCON>=0x80){
 			delay_timer();	// Realtime clock ueberlauf
 		}
-	        	 
+
+		
 #ifdef zykls
 		for(objno=0;objno<=7;objno++){	
 	    	tmp=(eeprom[0xD5+(objno*4)]&0x0C);//0xD5/ bit 2-3 zykl senden aktiv 
@@ -149,7 +150,7 @@ void main(void)
 						timercnt[objno] = (eeprom[0xD6+(objno*4)]& 0x3F)+ 0x80 ;//0xD6 Faktor Zyklisch senden x.1 + x.2 )+ einschalten
 						timerbase[objno]=(eeprom[0xF6+((objno+1)>>1)]>>(4*((objno&0x01)^0x01)))&0x07;	//Basis zyklisch senden
 						if (n & 0x80){// wenn timer ein war
-							send_obj_value(objno);		// Eingang x.1 zyklisch senden
+							while(!send_obj_value(objno));//send_obj_value(objno);		// Eingang x.1 zyklisch senden
 						}
 					}
 				}
