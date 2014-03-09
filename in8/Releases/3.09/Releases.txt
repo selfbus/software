@@ -1,0 +1,10 @@
+ Erläuterung der typen:
+ 
+ Bsp in8_2wzdy6-3.09
+ 
+ in8_ 2TE oder 4 TE| w=Wertgeber|z=Zähler| d=dimmen| y= zyclisch senden| Type - release nummer
+ in8_ 2TE or 4 TE| w=value-send|z=counter| d=dimming| y= zyclic send| Type - release nomber
+ 
+ 
+ Es sind nicht immer alle Optionen gesetzt weil nicht alles in den flash passt.
+ Note that not all of options can be set, because the programm is to large.
