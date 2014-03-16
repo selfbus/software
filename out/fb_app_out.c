@@ -282,8 +282,6 @@ void delay_timer(void)	// zählt alle 65ms die Variable Timer hoch und prüft Queu
 	unsigned char objno,port_pattern,delay_zeit,delay_onoff,delay_base,n,m;
 	unsigned int timerflags;
 	
-	
-	RTCCON=0x61;		// RTC  Flag löschen
 	objno=0;
 
 		timer++;
@@ -396,8 +394,9 @@ ledport;
 		  	Tasten=bitmask_1[n];
 		  	}
 //		  	ledport=ledport<<1;
-//		} 
-			P0=oldportbuffer|0x20;// port zurückschreiben
+//		}
+//TODO
+			P0=oldportbuffer|0x20;//|20 ist neu--> TESTEN  port zurückschreiben
 	#endif
 		//if (interrupted==1) Tasten=Tval;  // wenn unterbrochen wurde verwerfen wir die Taste
 			//Tasten = Tval; // ##############  <----- Hier wird Handbetätigung quasi mit ausgeschaltet !! #########################

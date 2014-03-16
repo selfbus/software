@@ -177,8 +177,15 @@ void main(void)
 	RS_INIT_115200
 #endif
 #ifndef BUS_DOWN
+# ifdef HAND
+#  ifndef zeroswitch
 	SBUF=0x55;
+#  endif
+# else
+	SBUF=0x55;
+# endif
 #endif
+
 // ################## main loop #########################	
 
 	do  {
@@ -187,13 +194,14 @@ void main(void)
 		if(APPLICATION_RUN) {	// nur wenn run-mode gesetzt
 
 			if(RTCCON>=0x80){
+				RTCCON=0x61;		// RTC  Flag löschen
 #ifdef HAND				
 				handbedienung();// alle 16ms
 #endif				
 				timer_precounter++;
-				if(timer_precounter&0x02)
+				if((timer_precounter&0x03)==3)
 				{
-				delay_timer();	// timer handler jedes 4. mal--> 64ms
+					delay_timer();	// timer handler jedes 4. mal--> 64ms
 				}
 			}
 #ifndef zeroswitch
