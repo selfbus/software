@@ -35,6 +35,8 @@ unsigned char cs;				// checksum
 unsigned char fbrx_byte, fb_pattern;
 volatile unsigned char fb_state, repeat_count;
 
+static unsigned char __at 0x00 RAM[00]; //nur für die debug ausgabe
+
 __code unsigned char __at 0x1C00 userram[255];	/// Bereich im Flash fuer User-RAM
 __code unsigned char __at 0x1D00 eeprom[255];	/// Bereich im Flash fuer EEPROM
 
@@ -479,7 +481,8 @@ __bit build_tel(unsigned char objno)
 					telegramm[n+10]=userram[mem_adrl+n];
 					if(mem_adrl+n==0x60) telegramm[n+10]=status60;	// ausser bei 0x60
 				}
-				else telegramm[n+10]=eeprom[mem_adrl+n];
+				else if (mem_adrh==1)telegramm[n+10]=eeprom[mem_adrl+n];
+				else telegramm[n+10]=RAM[mem_adrl+n];
 			}
 			telegramm[5]=mem_length+0x63;		// DRL (Anzahl Bytes + 3)
 			telegramm[6]=pcount|0x42;			// eigener Paketzaehler, TCPI und ersten beiden Befehlsbits
