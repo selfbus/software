@@ -123,8 +123,15 @@ extern __bit ack, nack, tel_arrived, tel_sent, auto_ack, wait_for_ack;
 extern __bit send_ack, send_nack, transparency;
 extern unsigned char tx_nextwrite, tx_nextsend, status60;
 
-extern __code unsigned char __at 0x1C00 userram[255];	// Bereich im Flash fuer User-RAM
-extern __code unsigned char __at 0x1D00 eeprom[255];	// Bereich im Flash fuer EEPROM
+#ifdef LPC936
+# define USERRAM_ADDR 0x3800
+#else
+# define USERRAM_ADDR 0x1C00
+#endif
+#define EEPROM_ADDR (USERRAM_ADDR + 0x100)
+
+extern __code unsigned char __at(USERRAM_ADDR) userram[255]; // Bereich im Flash fuer User-RAM
+extern __code unsigned char __at(EEPROM_ADDR)  eeprom[255];	 // Bereich im Flash fuer EEPROM
 
 
 

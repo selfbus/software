@@ -13,13 +13,19 @@
  */
 
 
-#include <P89LPC922.h>
+#ifndef LPC936
+# include <p89lpc935_6.h>
+#else
+# include <P89LPC922.h>
+#endif
+
 #include "fb_lpc922.h"
 
 
 // Damit die Eclipse Code Analyse nicht so viele Warnungen anzeigt:
 #ifndef SDCC
 # define __interrupt(x)
+# define __at(x)
 # define __idata
 # define __code
 #endif
@@ -35,10 +41,10 @@ unsigned char cs;				// checksum
 unsigned char fbrx_byte, fb_pattern;
 volatile unsigned char fb_state, repeat_count;
 
-static unsigned char __at 0x00 RAM[00]; //nur für die debug ausgabe
+static unsigned char __at(0x00) RAM[00]; //nur für die Debug Ausgabe
 
-__code unsigned char __at 0x1C00 userram[255];	/// Bereich im Flash fuer User-RAM
-__code unsigned char __at 0x1D00 eeprom[255];	/// Bereich im Flash fuer EEPROM
+__code unsigned char __at(USERRAM_ADDR) userram[255];/// Bereich im Flash fuer User-RAM
+__code unsigned char __at(EEPROM_ADDR) eeprom[255];	 /// Bereich im Flash fuer EEPROM
 
 __bit parity_ok;			// Parity Bit des letzten empfangenen Bytes OK
 volatile __bit interrupted;	// Wird durch interrupt-routine gesetzt. So kann eine andere Routine pruefen, ob sie unterbrochen wurde
