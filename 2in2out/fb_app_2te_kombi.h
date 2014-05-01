@@ -22,6 +22,8 @@
 #define FUNCTION		0xCF	// Funktion der Taster angepasst
 #define COMMAND			0xDF	// Befehle der Taster angepasst
 
+#define DUTY	0x50	// 0xFF=immer low 0x00=immer high
+
 extern long timer;				// Timer fuer Schaltverzoegerungen, wird alle 130us hochgezaehlt
 extern __bit delay_toggle;		// um nur jedes 2. Mal die delay routine auszufuehren
 //extern long buttontimer[4];

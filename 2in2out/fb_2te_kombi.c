@@ -76,7 +76,16 @@ void main(void)
 
 		if(RTCCON>=0x80) delay_timer();	// Realtime clock Ueberlauf
 
-
+		if(TF0 && (TMOD & 0x0F)==0x01)  // Vollstrom für Relais ausschalten und wieder PWM ein
+		{
+			TMOD=(TMOD & 0xF0) + 2;			// Timer 0 als PWM
+			TAMOD=0x01;
+			TH0=DUTY;
+			TF0=0;
+			AUXR1|=0x10;	// PWM von Timer 0 auf Pin ausgeben
+			PWM=1;			// PWM Pin muss auf 1 gesetzt werden, damit PWM geht !!!
+			TR0=1;
+		}
 
 		// Abfrage Programmier-Taster
 		TASTER=1;					// Pin als Eingang schalten um Taster abzufragen
