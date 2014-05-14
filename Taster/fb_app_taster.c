@@ -84,7 +84,7 @@ void port_changed(unsigned char portval)
 *
 * @return void
 */
-void button_changed(unsigned char buttonno, __bit buttonval)
+void button_changed( unsigned char buttonno, __bit buttonval)
 {
 	unsigned char command,bedienung;
 	__bit objval=0;
@@ -512,6 +512,8 @@ void delay_timer(void)
 					timerstate[objno]=0;
 			break;
 			case 0x20:	// Dimmen
+				timerstate[objno]|=0xD0;// d0 or 20 = F0
+			case 0xF0:
 				write_obj_value(objno+4,delay_value);
 				send_obj_value(objno+4);		// dimmkommando senden
 

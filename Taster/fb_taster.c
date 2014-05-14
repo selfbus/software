@@ -45,8 +45,8 @@
 #include  "../com/debug.h"
 #include "../com/fb_rs232.h"
 
-#define debugmode
-//#define NOPROGLED //typ 0,2 Die Progled blinkt im Progmodus da sie auch Betriebs LED ist
+//#define debugmode
+#define NOPROGLED //typ 0,2 Die Progled blinkt im Progmodus da sie auch Betriebs LED ist
 //#define NOPROGBUTTON	//typ 1,3 es ist kein prog Taster vorhanden sondern progmode wird durch druecken von taste 1&3 oder 2&4 aktiviert
 
 #ifdef NOPROGBUTTON
@@ -63,7 +63,7 @@
 	#endif
 #endif
 
-#define VERSION		105
+#define VERSION		106
 
 unsigned char __at 0x00 RAM[00]; 
 
