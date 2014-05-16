@@ -13,7 +13,7 @@
  */
 
 
-#ifndef LPC936
+#ifdef LPC936
 # include <p89lpc935_6.h>
 #else
 # include <P89LPC922.h>
