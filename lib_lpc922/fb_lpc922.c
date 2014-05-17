@@ -1,10 +1,19 @@
 /*
+ *    _____ ______ __   __________  __  _______ *
+ *   / ___// ____// /  / ____/ __ )/ / / / ___/ *
+ *   \__ \/ __/  / /  / /__ / __  / / / /\__ \  * 
+ *  ___/ / /__  / /__/ /__// /_/ / /_/ /___/ /  * 
+ * /____/_____//____/_/   /_____/\____//____/   *  
+ *                                      
+ *  Copyright (c) 2013-2014 Andreas Krieger
  *  Copyright (c) 2009-2013 Andreas Krebs <kubi@krebsworld.de>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 2 as
  *  published by the Free Software Foundation.
  */
+
+
 
 #include "fb_lpc922.h"
 
@@ -22,7 +31,8 @@ volatile unsigned char fb_state, repeat_count;
 
 static unsigned char __at(0x00) RAM[00]; //nur für die Debug Ausgabe
 
-__code unsigned char __at(USERRAM_ADDR) userram[255];/// Bereich im Flash fuer User-RAM
+
+//__code unsigned char __at(USERRAM_ADDR) userram[255];/// Bereich im Flash fuer User-RAM
 __code unsigned char __at(EEPROM_ADDR) eeprom[255];	 /// Bereich im Flash fuer EEPROM
 
 __bit parity_ok;			// Parity Bit des letzten empfangenen Bytes OK
@@ -463,11 +473,11 @@ __bit build_tel(unsigned char objno)
 		case 4:	// memory_read_response (132)
 			for(n=0;n<mem_length;n++) {
 				if (mem_adrh==0) {
-					telegramm[n+10]=userram[mem_adrl+n];
+					telegramm[n+10]=0;//userram[mem_adrl+n];
 					if(mem_adrl+n==0x60) telegramm[n+10]=status60;	// ausser bei 0x60
 				}
-				else if (mem_adrh==1)telegramm[n+10]=eeprom[mem_adrl+n];
-				else telegramm[n+10]=RAM[mem_adrl+n];
+				else telegramm[n+10]=eeprom[mem_adrl+n];//else if (mem_adrh==1)
+				//else telegramm[n+10]=RAM[mem_adrl+n];
 			}
 			telegramm[5]=mem_length+0x63;		// DRL (Anzahl Bytes + 3)
 			telegramm[6]=pcount|0x42;			// eigener Paketzaehler, TCPI und ersten beiden Befehlsbits
@@ -540,7 +550,30 @@ void process_tel(void)
 						apdu &= 0xF0;						// da bei memory operations nur obere 4 Bits aktiv
 						if(apdu==WRITE_MEMORY_REQUEST) {	// 01pppp10 1000xxxx
 							send_obj_value(NCD_ACK);
-							write_memory();
+							
+							//write_memory();
+							{
+								unsigned char ab,n;
+							  if(telegramm[8]){
+								ab=telegramm[7]&0x0F;		// Anzahl Bytes
+
+								while(fb_state!=0);					// warten falls noch gesendet wird
+
+								EA=0;
+								START_WRITECYCLE;					// load command, leert das pageregister
+								for(n=0;n<ab;n++) {
+									if(telegramm[8]==0 && (telegramm[9]+n)==0x60) status60=telegramm[10+n];
+									else WRITE_BYTE(telegramm[8],telegramm[9]+n,telegramm[n+10]);
+
+									if ((((telegramm[9]+n)&0x3F)==0x3F) && n!=(ab-1)) {		// Ende des 64-Byte Pageregisters, also zwischendurch flashen
+										STOP_WRITECYCLE;			// write command, schreibt pageregister ins flash und versetzt CPU in idle fuer 4ms
+										START_WRITECYCLE;		// load command, leert das pageregister
+									}
+								}
+								STOP_WRITECYCLE;					// write command, schreibt pageregister ins flash und versetzt CPU in idle fuer 4ms
+								EA=1;
+							  }
+							}
 						}
 						if(apdu==READ_MEMORY_REQUEST) {		// 01pppp10 0000xxxx
 							mem_length=telegramm[7];		// Anzahl Bytes für späteres(!) memory Auslesen
@@ -638,11 +671,11 @@ void process_tel(void)
 
 
 
-
+/*
 void write_memory(void)
 {
 	unsigned char ab,n;
-
+  if(telegramm[8]){
 	ab=telegramm[7]&0x0F;		// Anzahl Bytes
 
 	while(fb_state!=0);					// warten falls noch gesendet wird
@@ -660,8 +693,9 @@ void write_memory(void)
 	}
 	STOP_WRITECYCLE;					// write command, schreibt pageregister ins flash und versetzt CPU in idle fuer 4ms
 	EA=1;
+  }
 }
-
+*/
 
 
 void set_pa(void)

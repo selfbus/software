@@ -1,10 +1,21 @@
 /*
- *  Copyright (c) 2009-2011 Andreas Krebs <kubi@krebsworld.de>
+ *    _____ ______ __   __________  __  _______ *
+ *   / ___// ____// /  / ____/ __ )/ / / / ___/ *
+ *   \__ \/ __/  / /  / /__ / __  / / / /\__ \  * 
+ *  ___/ / /__  / /__/ /__// /_/ / /_/ /___/ /  * 
+ * /____/_____//____/_/   /_____/\____//____/   *  
+ *                                      
+ *  Copyright (c) 2013-2014 Andreas Krieger
+ *  Copyright (c) 2009-2013 Andreas Krebs <kubi@krebsworld.de>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 2 as
  *  published by the Free Software Foundation.
  */
+
+
+
+
 #ifndef FB_LIB
 #define FB_LIB
 
@@ -14,14 +25,15 @@
 # include <P89LPC922.h>
 #endif
 
-// Damit die Eclipse Code Analyse nicht so viele Warnungen anzeigt
+
+
+// Damit die Eclipse Code Analyse nicht so viele Warnungen anzeigt:
 #ifndef SDCC
 # define __interrupt(x)
 # define __at(x)
 # define __idata
 # define __code
 #endif
-
 
 // Hardware
 #define FBOUTC	P1_6	// Sendepin
@@ -112,9 +124,9 @@
 	FMCON=0x68;
 
 #define WRITE_BYTE(addrh, addrl, zdata) \
-		FMADRH=(addrh&0x01)+0x1C; \
+		{FMADRH=(addrh&0x01)+0x1C; \
 		FMADRL=addrl; \
-		FMDATA=zdata; 
+		FMDATA=zdata;} 
 
 
 // Globale Variablen
@@ -130,13 +142,13 @@ extern unsigned char tx_nextwrite, tx_nextsend, status60;
 
 #ifdef LPC936
 # define USERRAM_ADDR 0x3800
-# define restart_hw  restart_hw_936
+# define restart_hw  restart_hw_lpc936
 #else
 # define USERRAM_ADDR 0x1C00
 #endif
 #define EEPROM_ADDR (USERRAM_ADDR + 0x100)
 
-extern __code unsigned char __at(USERRAM_ADDR) userram[255]; // Bereich im Flash fuer User-RAM
+//extern __code unsigned char __at(USERRAM_ADDR) userram[255]; // Bereich im Flash fuer User-RAM
 extern __code unsigned char __at(EEPROM_ADDR)  eeprom[255];	 // Bereich im Flash fuer EEPROM
 
 
@@ -152,7 +164,7 @@ __bit build_tel(unsigned char objno) ;
 __bit send_obj_value(unsigned char objno);
 void restart_hw(void);
 void process_tel(void);		// Interrupt von Timer 1, 370us keine Busaktivitaet seit letztem Byte,										//	 d.h. Telegramm wurde komplett uebertragen
-void write_memory(void);		// write_memory_request - empfangene Daten in Speicher schreiben
+//void write_memory(void);		// write_memory_request - empfangene Daten in Speicher schreiben
 void set_pa(void);				// neue phys. Adresse programmieren
 unsigned char read_objflags(unsigned char objno);	// Objektflags lesen
 //OBSOLETE: unsigned char find_first_objno(unsigned char gah, unsigned char gal);
