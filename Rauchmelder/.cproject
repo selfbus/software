@@ -62,11 +62,20 @@
 					<folderInfo id="cdt.managedbuild.config.sdcc.exe.debug.528902433." name="/" resourcePath="">
 						<toolChain id="cdt.managedbuild.toolchain.sdcc.exe.debug.851883582" name="SDCC Tool Chain" superClass="cdt.managedbuild.toolchain.sdcc.exe.debug">
 							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="cdt.managedbuild.target.sdcc.platform.exe.release.478338325" name="Release Platform" osList="solaris,linux,hpux,aix,qnx,win32" superClass="cdt.managedbuild.target.sdcc.platform.exe.release"/>
-							<builder buildPath="${workspace_loc:/rmgira-incubation/Debug}" id="cdt.managedbuild.target.sdcc.builder.exe.release.1974578326" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Sdcc Make" superClass="cdt.managedbuild.target.sdcc.builder.exe.release"/>
+							<builder buildPath="${workspace_loc:/Rauchmelder}/Debug" id="org.eclipse.cdt.build.core.internal.builder.1964916619" keepEnvironmentInBuildfile="false" name="CDT Internal Builder" superClass="org.eclipse.cdt.build.core.internal.builder"/>
 							<tool command="sdcc --stack-auto --debug -c" id="cdt.managedbuild.tool.sdcc.c.compiler.exe.debug.389691273" name="SDCC Compiler" superClass="cdt.managedbuild.tool.sdcc.c.compiler.exe.debug">
+								<option id="sdcc.c.compiler.option.include.paths.2081626950" name="Include paths (-I)" superClass="sdcc.c.compiler.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lib_lpc922/Releases}&quot;"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.sdcc.c.compiler.input.1573597607" superClass="cdt.managedbuild.tool.sdcc.c.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.sdcc.c.linker.exe.debug.603230533" name="SDCC Linker" superClass="cdt.managedbuild.tool.sdcc.c.linker.exe.debug">
+								<option id="sdcc.c.link.option.paths.1200901517" name="Library search path (-L)" superClass="sdcc.c.link.option.paths" valueType="stringList">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lib_lpc922/Releases}&quot;"/>
+								</option>
+								<option id="sdcc.c.link.option.libs.1359860358" name="Libraries (-l)" superClass="sdcc.c.link.option.libs" valueType="libs">
+									<listOptionValue builtIn="false" value="fb_lpc922_1.4x.lib"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.sdcc.c.linker.input.954669262" superClass="cdt.managedbuild.tool.sdcc.c.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_RELS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
