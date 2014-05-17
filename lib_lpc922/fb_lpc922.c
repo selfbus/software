@@ -1,10 +1,4 @@
 /*
- *      __________  ________________  __  _______
- *     / ____/ __ \/ ____/ ____/ __ )/ / / / ___/
- *    / /_  / /_/ / __/ / __/ / __  / / / /\__ \ 
- *   / __/ / _, _/ /___/ /___/ /_/ / /_/ /___/ / 
- *  /_/   /_/ |_/_____/_____/_____/\____//____/  
- *                                      
  *  Copyright (c) 2009-2013 Andreas Krebs <kubi@krebsworld.de>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -12,23 +6,8 @@
  *  published by the Free Software Foundation.
  */
 
-
-#ifdef LPC936
-# include <p89lpc935_6.h>
-#else
-# include <P89LPC922.h>
-#endif
-
 #include "fb_lpc922.h"
 
-
-// Damit die Eclipse Code Analyse nicht so viele Warnungen anzeigt:
-#ifndef SDCC
-# define __interrupt(x)
-# define __at(x)
-# define __idata
-# define __code
-#endif
 
 unsigned char conh, conl;	// bei bestehender Verbindung phys. Adresse des Kommunikationspartners
 unsigned char pcount;		// Paketzaehler, Gruppenadresszaehler

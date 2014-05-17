@@ -1,22 +1,27 @@
 /*
- *      __________  ________________  __  _______
- *     / ____/ __ \/ ____/ ____/ __ )/ / / / ___/
- *    / /_  / /_/ / __/ / __/ / __  / / / /\__ \ 
- *   / __/ / _, _/ /___/ /___/ /_/ / /_/ /___/ / 
- *  /_/   /_/ |_/_____/_____/_____/\____//____/  
- *                                      
  *  Copyright (c) 2009-2011 Andreas Krebs <kubi@krebsworld.de>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 2 as
  *  published by the Free Software Foundation.
- *
  */
-
-
-
 #ifndef FB_LIB
 #define FB_LIB
+
+#ifdef LPC936
+# include <p89lpc935_6.h>
+#else
+# include <P89LPC922.h>
+#endif
+
+// Damit die Eclipse Code Analyse nicht so viele Warnungen anzeigt
+#ifndef SDCC
+# define __interrupt(x)
+# define __at(x)
+# define __idata
+# define __code
+#endif
+
 
 // Hardware
 #define FBOUTC	P1_6	// Sendepin
@@ -125,6 +130,7 @@ extern unsigned char tx_nextwrite, tx_nextsend, status60;
 
 #ifdef LPC936
 # define USERRAM_ADDR 0x3800
+# define restart_hw  restart_hw_936
 #else
 # define USERRAM_ADDR 0x1C00
 #endif
