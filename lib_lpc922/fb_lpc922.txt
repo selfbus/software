@@ -1,35 +1,43 @@
-Freebus Library für LPC922
-==========================
+    _____ ______ __   __________  __  _______
+   / ___// ____// /  / ____/ __ )/ / / / ___/
+   \__ \/ __/  / /  / /__ / __  / / / /\__ \
+  ___/ / /__  / /__/ /__// /_/ / /_/ /___/ /
+ /____/_____//____/_/   /_____/\____//____/
+
+Selfbus Library fÃ¼r LPC922/LPC936
+=================================
+Version 1.51
 
 
-Globale Variablen, die in der Applikation abgefragt oder geändert werden können:
+
+Globale Variablen, die in der Applikation abgefragt oder geÃ¤ndert werden kÃ¶nnen:
 
 Bitvariablen:
 -------------
 
 ack			wird gesetzt, wenn ein ACK vom Bus empfangen wurde, muss durch die app
-			zurückgesetzt werden, wird auch bei Sendebeginn eines Telegramms zurückgesetzt,
+			zurÃ¼ckgesetzt werden, wird auch bei Sendebeginn eines Telegramms zurÃ¼ckgesetzt,
 			Wert nach hw_restart: 0
 			
-nack		für NACK, ansonsten s. ack
+nack		fÃ¼r NACK, ansonsten s. ack
 
-tel_arrived	wird gesetzt, wenn ein Telegramm empfangen wurde und das Gerät adressiert ist,
+tel_arrived	wird gesetzt, wenn ein Telegramm empfangen wurde und das GerÃ¤t adressiert ist,
 			das ist dann der Fall, wenn die Gruppenadresse bekannt ist oder die eigene
 			physikalische Adresse das Ziel war oder wenn es ein Broadcast-Telegramm war,
-			muss durch die app zurückgesetzt werden, in der Regel ruft die app bei gesetztem
-			Bit die Funktion process_tel() auf, die das Bit dann zurücksetzt, Wert nach
+			muss durch die app zurÃ¼ckgesetzt werden, in der Regel ruft die app bei gesetztem
+			Bit die Funktion process_tel() auf, die das Bit dann zurÃ¼cksetzt, Wert nach
 			hw_restart: 0
 			siehe auch "transparency"
 			
-auto_ack	wenn gesetzt, werden empfangene Telegramme geprüft, ob sie für das Gerät
+auto_ack	wenn gesetzt, werden empfangene Telegramme geprÃ¼ft, ob sie fÃ¼r das GerÃ¤t
 			gemeint waren, daraufhin wird ein ACK oder NACK automatisch gesendet, Wert
 			nach hw_restart: 1
 
 interrupted	wird gesetzt wenn entweder der externe interrupt oder timer1 interrupt aufgerufen wird,
-			muss in der app zurückgesetzt werden
+			muss in der app zurÃ¼ckgesetzt werden
 		
-transparency	0: nur Gruppentelegramme mit einer eigenen GA werden per tel_arrived angekündigt (default)
-				1: alle Gruppentelegramme werden angekündigt
+transparency	0: nur Gruppentelegramme mit einer eigenen GA werden per tel_arrived angekÃ¼ndigt (default)
+				1: alle Gruppentelegramme werden angekÃ¼ndigt
 				Diese Variable kann bei Bedarf in der restart_app() gesetzt werden
 
 			
@@ -37,25 +45,25 @@ unsigned char Variablen:
 ------------------------
 
 telegramm[23]	Array in dem ein empfangenes oder zu sendendes Telegramm abgelegt wird, 
-				sollte in der app nur gelesen werden, hier ist das Telegramm Byte für
+				sollte in der app nur gelesen werden, hier ist das Telegramm Byte fÃ¼r
 				Byte transparent abgelegt, empfangene ACK oder NACK werden hier nicht
 				abgelegt
 				
-telpos			Zeiger auf die nächste freie Position im Array telegramm[], sollte durch
-				die app nicht verändert werden
+telpos			Zeiger auf die nÃ¤chste freie Position im Array telegramm[], sollte durch
+				die app nicht verÃ¤ndert werden
 
-tx_buffer[8]	Ringspeicher für zu sendende Telegramme, hier werden die Objektnummern
+tx_buffer[8]	Ringspeicher fÃ¼r zu sendende Telegramme, hier werden die Objektnummern
 				oder Pseudo-Objektnummernn abgelegt und nach FIFO gesendet, sollte durch
 				die app nicht direkt beschrieben werden, s. Beschreibung zum Senden weiter
 				unten
 			
-tx_nextwrite	Position der nächsten freien Position in tx_buffer[]
+tx_nextwrite	Position der nÃ¤chsten freien Position in tx_buffer[]
 
-tx_nextsend		Position der nächsten zu sendenden Position in tx_buffer[]
+tx_nextsend		Position der nÃ¤chsten zu sendenden Position in tx_buffer[]
 
 fb_state		Status der Statemachine, sollte in der app nur gelesen werden, Beschreibung
 				s. unten, in der Regel wird durch die app nur der Zustand abgefragt um
-				festzustellen ob das System beschäftigt oder idle(=0) ist
+				festzustellen ob das System beschÃ¤ftigt oder idle(=0) ist
 				
 timeout_count	ist >0 wenn nach dem Empfangen oder Senden die obligatorische Pause eingehalten
 				wird, wenn 0 dann ist der Bus frei
@@ -66,8 +74,8 @@ status60		hierhin werden read_memory und write_memory Operationen auf die Speich
 				
 eeprom[255]		ist ein Bereich im Flash, der nur gelesen werden kann, entspricht dem sog.
 				EEPROM Bereich von 0x0100 bis 0x01FF (s. bcu1_help.pdf), zum Schreiben
-				muß der Flashbereich 0x1D00 bis 0x1DFF geflasht werden, dazu stehen Makros
-				zur Verfügung (s.u.)
+				muÃŸ der Flashbereich 0x1D00 bis 0x1DFF geflasht werden, dazu stehen Makros
+				zur VerfÃ¼gung (s.u.)
 				
 userram[255]	wird vermutlich nicht mehr verwendet in Zukunft
 
@@ -86,12 +94,12 @@ void init_rx(void)		setzt die statemachine in den Anfangszustand, d.h. der Empfa
 void init_tx(void)		startet unmittelbar das Senden, nicht in app verwenden!
 
 void init_repeat_tx(void)	
-						wird nach dem Senden für das eventuelle Wiederholte Senden
+						wird nach dem Senden fÃ¼r das eventuelle Wiederholte Senden
 						gestartet, nicht in app verwenden!
 							
 unsigned char gapos_in_gat(unsigned char gah, unsigned char gal)
 						sucht zu einer Gruppenadresse (gah=MSB, gal=LSB) den Eintrag in
-						der group_adress_table und gibt die Position des Eintrages zurück
+						der group_adress_table und gibt die Position des Eintrages zurÃ¼ck
 						
 bit build_mctel(unsigned char objno)
 						erzeugt ein Telegramm im Array telegramm[], nicht in APP verwenden!
@@ -99,28 +107,29 @@ bit build_mctel(unsigned char objno)
 unsigned int find_ga(unsigned char objno)
 						findet in der Assoziationstabelle die erste Gruppenadresse, die der
 						Objektnummer(objno) zugeordnet ist, dient zum Senden eines
-						Objektzustandes, gibt die Gruppenadresse zurück bzw. 0x0000 falls
+						Objektzustandes, gibt die Gruppenadresse zurÃ¼ck bzw. 0x0000 falls
 						keine gefunden wurde
 						
 unsigned char read_obj_type(unsigned char objno)
-						gibt den Objekttyp aus der Kommunikationsobjekttabelle zurück
+						gibt den Objekttyp aus der Kommunikationsobjekttabelle zurÃ¼ck
 						
-void send_obj_value(unsigned char objno)
+bit send_obj_value(unsigned char objno)
 						mit diesem Funktionsaufruf wird ein Telegramm gesendet, objno ist
 						entweder die Objektnummer, dann wird der Objektwert des Objektes als 
 						EIS Telegramm gesendet, addiert man 0x40 zur Objektnummer wird
 						der Objektwert als read_request_response Telegramm gesendet, 
-						Objektnummern größer 128 sind Systemtelegramme und brauchen von der
+						Objektnummern grÃ¶ÃŸer 128 sind Systemtelegramme und brauchen von der
 						app nicht verwendet werden
+						RÃ¼ckgabewert =1 wenn erfolgreich, sonst =0
 					
 void set_timer0(unsigned int deltime)
-						startet Timer 0 mit dem übergebenen Wert, die Zeit bis zum Überlauf
-						sind 0,27127µs x deltime plus 12µs für den Aufruf an sich, der Timer 0 
-						ist ausschliesslich für die app reserviert
+						startet Timer 0 mit dem Ã¼bergebenen Wert, die Zeit bis zum Ãœberlauf
+						sind 0,27127Âµs x deltime plus 12Âµs fÃ¼r den Aufruf an sich, der Timer 0 
+						ist ausschliesslich fÃ¼r die app reserviert
 
 *** die RTC Funktionen sind entfallen, s.u. "Verwendung der Timer" ***
 
-void restart_hw(void)	setzt das gesamte system in den Ausgangszustand zurück und initiiert
+void restart_hw(void)	setzt das gesamte system in den Ausgangszustand zurÃ¼ck und initiiert
 						das Empfangen
 						
 void process_tel(void)	wenn die app die Bitvariable tel_arrived ausgewertet hat, sollte
@@ -130,10 +139,10 @@ void process_tel(void)	wenn die app die Bitvariable tel_arrived ausgewertet hat,
 						entweder die Funktion read_value_req() oder write_value_req()
 						in der app aufgerufen
 						
-void write_memory(void)	Funktion zum Speicher schreiben bei Unicast, wird für app nicht
+void write_memory(void)	Funktion zum Speicher schreiben bei Unicast, wird fÃ¼r app nicht
 						gebraucht
 						
-void set_pa(void)		Funktion zum Schreiben der phys. Adr. bei Unicast, wird für app nicht
+void set_pa(void)		Funktion zum Schreiben der phys. Adr. bei Unicast, wird fÃ¼r app nicht
 						gebraucht
 						
 unsigned char read_objflags(unsigned char objno)
@@ -144,25 +153,25 @@ unsigned char find_first_objno(unsigned char gah, unsigned char gal)
 						findet die erste vorkommende Objektnummer zu einer Gruppenadresse
 						
 
-Folgende Funktionen müssen in der app vorhanden sein, da sie von der Library aufgerufen werden:
+Folgende Funktionen mÃ¼ssen in der app vorhanden sein, da sie von der Library aufgerufen werden:
 -----------------------------------------------------------------------------------------------
 
 void write_value_req(void)
 						wird beim eintreffen eines Multicast Telegrammes vom Typ 
 						write_value_request aufgerufen, die app muss hier die entsprechende
-						Aktion veranlassen, die dazu nötigen Daten lassen sich aus
+						Aktion veranlassen, die dazu nÃ¶tigen Daten lassen sich aus
 						telegramm[] entnehmen 
 
 void read_value_req(void)
 						wird beim eintreffen eines Multicast Telegrammes vom Typ 
 						read_value_request aufgerufen, die app muss hier die entsprechende
-						Aktion veranlassen, die dazu nötigen Daten lassen sich aus
+						Aktion veranlassen, die dazu nÃ¶tigen Daten lassen sich aus
 						telegramm[] entnehmen
 						
 unsigned long read_obj_value(unsigned char objno)
-						muss den Wert eines Objektes zurückgeben
+						muss den Wert eines Objektes zurÃ¼ckgeben
 						
-void restart_app(void)	muß die Applikations Variablen zurücksetzen, wird zB. durch
+void restart_app(void)	muÃŸ die Applikations Variablen zurÃ¼cksetzen, wird zB. durch
 						ein restar_request Telegramm aufgerufen, was am Ende der Programmierung
 						von der ETS gesendet wird
 						
@@ -170,22 +179,22 @@ void restart_app(void)	muß die Applikations Variablen zurücksetzen, wird zB. dur
 Senden eines Telegrammes aus der app:
 -------------------------------------
 
-Man ermittelt die Objektnummer dessen Wert gesendet werden soll. Es ist sicherzustellen, daß
-man den Wert des Objektes vorher so gespeichert hat, daß read_obj_value() ihn ausgeben kann. Dann wird einfach
+Man ermittelt die Objektnummer dessen Wert gesendet werden soll. Es ist sicherzustellen, daÃŸ
+man den Wert des Objektes vorher so gespeichert hat, daÃŸ read_obj_value() ihn ausgeben kann. Dann wird einfach
 die Funktion send_obj_value(objno) aufgerufen. Das Senden erfolgt komplett im 
 Hintergrund. Man kann also ruhig mehrere Telegramme direkt hintereinander senden. Der
-Ringspeicher reicht für 8 Telegramme, was im Normalfall völlig ausreicht. Sollten doch
-einmal mehr als 8 Telegramme gesendet werden, kan man über tx_nextwrite und tx_nextsend das
-Sendeverhalten überwachen.
+Ringspeicher reicht fÃ¼r 8 Telegramme, was im Normalfall vÃ¶llig ausreicht. Sollten doch
+einmal mehr als 8 Telegramme gesendet werden, kan man Ã¼ber tx_nextwrite und tx_nextsend das
+Sendeverhalten Ã¼berwachen.
 
 
 Zeitverhalten der Library:
 --------------------------
 
-Alle Funktionen werden per Interrupt aufgerufen. Die App muß also damit umgehen können, daß
-zeitweise alle 35µs eine kurze Unterbrechung erfolgt, die im Bereich einiger µs liegt. Wenn keine 
-Busaktivität ist, also nach timeout, werden diese Unterbrechungen gestoppt. 
-In zwei Fällen wird ins Flash geschrieben und der Controller wird für 4ms in den Idle-Zustand
+Alle Funktionen werden per Interrupt aufgerufen. Die App muÃŸ also damit umgehen kÃ¶nnen, daÃŸ
+zeitweise alle 35Âµs eine kurze Unterbrechung erfolgt, die im Bereich einiger Âµs liegt. Wenn keine 
+BusaktivitÃ¤t ist, also nach timeout, werden diese Unterbrechungen gestoppt. 
+In zwei FÃ¤llen wird ins Flash geschrieben und der Controller wird fÃ¼r 4ms in den Idle-Zustand
 vesetzt: 
 - bei memory_write Operationen, z.B. beim Programmieren der Parameter und Gruppenadressen
   durch ETS
@@ -198,12 +207,12 @@ Verwendung der Timer:
 ---------------------
 
 Timer 0	wird als 16-bit timer parametriert, wird von der lib nicht benutzt und steht
-		somit exclusiv der app zur Verfügung, kann dort auch anders parametriert werden
+		somit exclusiv der app zur VerfÃ¼gung, kann dort auch anders parametriert werden
 
-Timer 1	ist ausschliesslich für die lib, nicht in app verwenden
+Timer 1	ist ausschliesslich fÃ¼r die lib, nicht in app verwenden
 
 RTC		wird mit 65ms gestartet, wird in der lib nicht verwendet, kann also in der
-		app beliebig verändert werden
+		app beliebig verÃ¤ndert werden
 		Starten der RTC:		RTCH=0x1D;		// Real Time Clock auf 130ms laden (0,13s x 7372800 / 128)
 								RTCL=0x40;		// (RTC ist ein down-counter mit 128 bit prescaler und osc-clock)
 								RTCCON=0x61;	// ... und starten
@@ -214,9 +223,9 @@ Interrupts:
 -----------
 
 Der externe Int1 und der Timer1-Int. werden bei Bedarf aktiviert und sollten nicht in der app 
-verändert werden. Alle anderen Int's sind inaktiv, EA ist aber gesetzt. Der externe Int1 hat die
-höchste Priorität (3), alle anderen die niedrigste (0). Kann in de app geändert werden, aber
-ext. Int1 muss die höchste haben! Danach sollte dann Timer1 folgen.
+verÃ¤ndert werden. Alle anderen Int's sind inaktiv, EA ist aber gesetzt. Der externe Int1 hat die
+hÃ¶chste PrioritÃ¤t (3), alle anderen die niedrigste (0). Kann in de app geÃ¤ndert werden, aber
+ext. Int1 muss die hÃ¶chste haben! Danach sollte dann Timer1 folgen.
 
 
 ==> comments to kubi, thx!

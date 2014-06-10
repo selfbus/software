@@ -1,15 +1,34 @@
+    _____ ______ __   __________  __  _______
+   / ___// ____// /  / ____/ __ )/ / / / ___/
+   \__ \/ __/  / /  / /__ / __  / / / /\__ \
+  ___/ / /__  / /__/ /__// /_/ / /_/ /___/ /
+ /____/_____//____/_/   /_____/\____//____/
+
+Selfbus Library fÃ¼r LPC922/LPC936
+=================================
+
+2014-06-01  Version 1.51
+        - Bug in LPC936 support behoben
+
+2014-05-18	Version 1.50
+		- RS232 Init Makros hinzugefÃ¼gt
+		- Compile/Link Schutz eingebaut damit nicht lpc936 und lpc922 Lib/App gemischt werden kÃ¶nnen
+		- Prozessor Include in fb_lpc922.h verschoben
+		- Userram entfernt
+		- Busdebug entfernt
+
 2014-04-03  Version 1.41-SNAPSHOT
-        Support für P89LPC936
+        Support fÃ¼r P89LPC936
         Abfragen vom LPC RAM via Memory-Read Telegramme auf Adresse 0x1yy (yy = RAM Adresse) 
 
 2013-04-28  Version 1.40
         Korrekte Behandlung von Objekt Flags eingebaut.
-        Com Objekte werden jetzt nur gesendet wenn das Übertragen Flag in der ETS gesetzt ist
-        Die Ermittlung der Objektnummer für Read-Request und Write-Request Telegramme erfolgt
-        jetzt in der Lib, die Objektnummer wird jetzt der App übergeben: 
+        Com Objekte werden jetzt nur gesendet wenn das Ãœbertragen Flag in der ETS gesetzt ist
+        Die Ermittlung der Objektnummer fÃ¼r Read-Request und Write-Request Telegramme erfolgt
+        jetzt in der Lib, die Objektnummer wird jetzt der App Ã¼bergeben: 
         read_value_req(objno)
         write_value_req(objno)
-        Die Behandlung der zugehörigen Objekt Flags erfolgt auch in der Lib.
+        Die Behandlung der zugehÃ¶rigen Objekt Flags erfolgt auch in der Lib.
 
 V1.35   find_ga zur Optimierung entfernt.
 
@@ -18,9 +37,9 @@ V1.34   Bug in gapos_in_gat() entfernt.
 V1.33   Abfrage auf connected eingebaut,interrupt enable mit einem Byte eingestellt,
         RTC clock raus, Berechnung der objectflags speicheroptimiert. 
 
-V1.32   autoreload Werte für einzelne states individuell angepasst
+V1.32   autoreload Werte fÃ¼r einzelne states individuell angepasst
 
-V1.31   Wiederholtes (verspätetes) ACK senden raus
+V1.31   Wiederholtes (verspÃ¤tetes) ACK senden raus
 
 V1.30   Komplett Umgebaut bei senden und wiederhol senden, state 80 raus, repeat_tx raus, kollision gefixt
 
@@ -35,6 +54,6 @@ V1.21   Rekursives Abarbeiten gesendeter Telegramme korrigiert: tel_arrived widr
 
 V1.20   Senden um 3- und 4-Byte Objekte erweitert, read_obj_value ist jetzt unsigned long
 
-V1.10   Senden komplett über Interrupt und Ringspeicher realisiert
+V1.10   Senden komplett Ã¼ber Interrupt und Ringspeicher realisiert
 
 V1.00   Erste Version mit Statemachine
