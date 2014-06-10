@@ -126,7 +126,7 @@
 	FMCON=0x68;
 
 #define WRITE_BYTE(addrh, addrl, zdata) { \
-		FMADRH=(addrh&0x01)+WRITE_ADDR; \
+		FMADRH=(addrh&0x01) + (EEPROM_ADDR_H - 1); \
 		FMADRL=addrl; \
 		FMDATA=zdata; \
 	}
@@ -149,8 +149,8 @@ extern unsigned char tx_nextwrite, tx_nextsend, status60;
 #else
 	#define USERRAM_ADDR 0x1C00
 #endif
-#define WRITE_ADDR (USERRAM_ADDR/256)
 #define EEPROM_ADDR (USERRAM_ADDR + 0x100)
+#define EEPROM_ADDR_H (EEPROM_ADDR / 256)
 
 //extern __code unsigned char __at(USERRAM_ADDR) userram[255]; // Bereich im Flash fuer User-RAM
 extern __code unsigned char __at(EEPROM_ADDR)  eeprom[255];	 // Bereich im Flash fuer EEPROM

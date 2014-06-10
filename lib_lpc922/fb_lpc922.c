@@ -709,7 +709,7 @@ void set_pa(void)
 	while(fb_state!=0);		// warten falls noch gesendet wird
 	EA=0;
 	FMCON=0x00;				// load command, leert das pageregister
-    FMADRH=WRITE_ADDR+1;	// 0x1D;
+    FMADRH=EEPROM_ADDR_H;	// 0x1D;
     FMADRL=ADDRTAB+1;
     FMDATA=telegramm[8];
     FMDATA=telegramm[9];	// nächstes Byte, da autoinkrement
