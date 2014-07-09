@@ -46,7 +46,7 @@
 #include "../com/fb_rs232.h"
 
 //#define debugmode
-#define NOPROGLED //typ 0,2 Die Progled blinkt im Progmodus da sie auch Betriebs LED ist
+//#define NOPROGLED //typ 0,2 Die Progled blinkt im Progmodus da sie auch Betriebs LED ist
 //#define NOPROGBUTTON	//typ 1,3 es ist kein prog Taster vorhanden sondern progmode wird durch druecken von taste 1&3 oder 2&4 aktiviert
 
 #ifdef NOPROGBUTTON
@@ -225,8 +225,8 @@ void main(void)
 					if((status60 & 0x01)==0){	//wenn ausgemacht, Dimmwert speichern
 						EA=0;
 						START_WRITECYCLE;
-						FMADRH= 0x1B;		
-						FMADRL= 0xFE; 
+						FMADRH= 0x1C;		//1B
+						FMADRL= 0xBE; 		//FE
 						FMDATA=	dimmwert; 
 						STOP_WRITECYCLE;
 						EA=1;
