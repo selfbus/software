@@ -70,6 +70,8 @@
 *   3.35	Fehler bei Rückmeldung und bei eeprom flashen behoben, neue LIB
 * 	3.36	Umstellung auf lib1.4x.
 *   3.37	Handbedienung mit zerodetection integrieren. bug RTC 8ms- 65ms gefixt
+* 	3.37fb	Betrifft spi version(feedback). Pulse verlängert, Rücklesen eingebaut(kein zerodetect mehr möglich, Brücke nötig!
+* 			auf PCB Bot von INT0 an C5 und Pin 9 shiftreg)
  TODO 
  
 * @todo:
@@ -284,6 +286,7 @@ void main(void)
 		}
 		cmd;
 #ifndef BUS_DOWN
+		
 #ifndef debugmode		
 		// Eingehendes Terminal Kommando verarbeiten...
 		if (RI){
@@ -357,6 +360,7 @@ void main(void)
 			}
 #endif						
 		}//end if(RI...
+		
 #else //ifndef debugmode
 //DEBUGPOINT;
 #endif

@@ -21,12 +21,12 @@
 
 
 //#define IO_BISTAB
-//#define BUS_DOWN
+#define BUS_DOWN
 #define MAX_PORTS_8 		// Anzahl Ausgänge (nur 4 oder 8 erlaubt)
-#define HAND				// Handsteuerung aktiv (auskommentieren wenn nicht gewünscht)
-//#define SPIBISTAB			// Serielle Ausgabe für bistabile relaise aktivieren
+//#define HAND				// Handsteuerung aktiv (auskommentieren wenn nicht gewünscht)
+#define SPIBISTAB			// Serielle Ausgabe für bistabile relaise aktivieren
 //#define panasonic
-#define zeroswitch			// für Platine mit Nullspannungserkennung
+//#define zeroswitch			// für Platine mit Nullspannungserkennung
 
 #ifdef zeroswitch
 	#ifndef panasonic		//OMRON

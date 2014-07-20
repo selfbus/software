@@ -39,6 +39,7 @@
  * 
  */
  
+
 #include <P89LPC922.h>
 #include "../lib_lpc922/Releases/fb_lpc922_1.4x.h"
 #include  "fb_app_out.h"
@@ -49,7 +50,6 @@
 unsigned char timerbase[TIMERANZ];// Speicherplatz für die Zeitbasis und 4 status bits
 unsigned char timercnt[TIMERANZ];// speicherplatz für den timercounter und 1 status bit
 unsigned int timer;		// Timer für Schaltverzögerungen, wird alle 130us hochgezählt
-
 
 unsigned char Tval,Taster_ctr;
 unsigned char out_state;	// Werte der Objekte 0-7 (Ausgängsobjekte)
@@ -274,7 +274,6 @@ void object_schalten(unsigned char objno, __bit objstate)	// Schaltet einen Ausg
 		}
 	}
 }
-
 
 
 void delay_timer(void)	// zählt alle 65ms die Variable Timer hoch und prüft Queue
@@ -611,53 +610,34 @@ unsigned int sort_output(unsigned char portbuffer){
 #ifdef MAX_PORTS_8
    if (diff & 0x01){
 	   if(portbuffer & 0x01){
-		   result|=0x2000;
+		   result|=0x0020;
 	   }
 	   else{
-		   result|=0x1000;
+		   result|=0x0010;
 	   }
    }
 
    // A2
    if (diff & 0x02){
 	   if(portbuffer & 0x02){
-	      result|=0x0008;
+	      result|=0x0800;
 	   }
 	   else{
-	      result|=0x0004;
+	      result|=0x0400;
 	   }
    }
    // A3
    if (diff & 0x04){
 	   if(portbuffer & 0x04){
-	      result|=0x8000;
-	   }
-	   else{
-	      result|=0x4000;
-	   }
-   }
-   // A4
-   if (diff & 0x08){
-	   if(portbuffer & 0x08){
-	      result|=0x0002;
-	   }
-	   else{
-	      result|=0x0001;
-	   }
-   }
-   
-   // A5
-   if (diff & 0x10){
-	   if(portbuffer & 0x10){
 	      result|=0x0080;
 	   }
 	   else{
 	      result|=0x0040;
 	   }
    }
-   // A6
-   if (diff & 0x20){
-   	   if(portbuffer & 0x20){
+   // A4
+   if (diff & 0x08){
+	   if(portbuffer & 0x08){
 	      result|=0x0200;
 	   }
 	   else{
@@ -665,22 +645,41 @@ unsigned int sort_output(unsigned char portbuffer){
 	   }
    }
    
+   // A5
+   if (diff & 0x10){
+	   if(portbuffer & 0x10){
+	      result|=0x8000;
+	   }
+	   else{
+	      result|=0x4000;
+	   }
+   }
+   // A6
+   if (diff & 0x20){
+   	   if(portbuffer & 0x20){
+	      result|=0x0002;
+	   }
+	   else{
+	      result|=0x0001;
+	   }
+   }
+   
    // A7
    if (diff & 0x40){
 	   if(portbuffer & 0x40){
-	      result|=0x0020;
+	      result|=0x2000;
 	   }
 	   else{
-	      result|=0x0010;
+	      result|=0x1000;
 	   }
    }
    // A8
    if (diff & 0x80){
 	   if(portbuffer & 0x80){
-	      result|=0x0800;
+	      result|=0x0008;
 	   }
 	   else{
-	      result|=0x0400;
+	      result|=0x0004;
 	   }
    }
 #else
@@ -770,39 +769,50 @@ unsigned int sort_output(unsigned char portbuffer){
 
 
 void spi_2_out(unsigned int daten){
-
    unsigned char n, unten, mitte,LED_pattern;
+   unsigned int spi_valid;
 
-   unten=daten & 0xFF;
-   mitte=daten>>8;
-   LED_pattern=portbuffer;
-   WRITE=0;
-   CLK=0;
-   for(n=0;n<=7;n++){
-      BOT_OUT=(unten & 0x080)>>7;
-      unten<<=1;
-      CLK=1;
-      CLK=0;
-// LEDs aktualisieren
-      LED_SER=(LED_pattern & 0x080)>>7;
-      LED_pattern<<=1;
-      LED_SCK=1;
-      LED_SCK=0;
-   }
-   LED_RCK=1;
-   LED_RCK=0;
-#ifdef MAX_PORTS_8     
-   for(n=0;n<=7;n++){
-
-      BOT_OUT=(mitte & 0x080)>>7;
-      mitte<<=1;
-      CLK=1;
-      CLK=0;
-   }
-#endif
-
-   WRITE=1;
-   WRITE=0;
+	do{   
+	   unten=daten>>8;
+	   mitte=daten & 0xFF;
+	   LED_pattern=portbuffer;
+	   WRITE=0;
+	   CLK=0;
+	   for(n=0;n<=7;n++){
+	      BOT_OUT=(unten & 0x080)>>7;
+	      unten<<=1;
+	      CLK=1;
+	      CLK=1;
+	      CLK=0;
+	// LEDs aktualisieren
+	      LED_SER=(LED_pattern & 0x080)>>7;
+	      LED_pattern<<=1;
+	      LED_SCK=1;
+	      LED_SCK=1;
+	      LED_SCK=0;
+	   }
+	   LED_RCK=1;
+	   LED_RCK=0;
+	#ifdef MAX_PORTS_8     
+	   for(n=0;n<=7;n++){
+	
+	      BOT_OUT=(mitte & 0x080)>>7;
+	      mitte<<=1;
+	      CLK=1;
+	      CLK=1;
+	      CLK=0;
+	   }
+	#endif
+	   WRITE=1;	// Daten werden im latch gesichert...
+	   spi_valid=0;
+	   WRITE=0;
+	   for(n=0;n<=15;n++){// und zurückgelesen
+		 if (P1_3)spi_valid |=1;
+		 CLK=1;
+		 if(n<15)spi_valid<<=1;
+		 CLK=0;
+	   }   
+	} while(spi_valid!=daten); // solange wiederholen bis Daten korrekt zurückgelesen wurden.
 }
 
 
