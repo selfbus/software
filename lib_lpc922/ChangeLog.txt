@@ -7,6 +7,9 @@
 Selfbus Library für LPC922/LPC936
 =================================
 
+2014-07-23  Version 1.52
+		- USERRAM_ADDR_H hinzugefügt
+
 2014-06-01  Version 1.51
         - Bug in LPC936 support behoben
 
