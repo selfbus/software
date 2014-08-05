@@ -1,0 +1,38 @@
+Changes:
+
+1.00    erste Version
+1.01    Temperaturschwellen eingebaut
+1.02    Temperaturwert senden komplett
+1.03    Helligkeitsschwellen und Nachregelung eingebaut
+1.04    zyklisches Senden für Werte, Schwellen und Nachregelung geht, Lux-Berechnung korrigiert
+1.05    Wert senden für Helligkeitsschwellen zugefügt, auch zyklisch
+1.06    Verknüpfungsobjekte zugefügt, read_value_req() von hal in app verlegt
+        neue Struktur für schwelle()
+1.07    Verzögertes Senden bei Helligkeitsschwellen neu
+1.08    zuvor gesperrte Objekte senden bei Aufheben der Sperre sofort
+        Objektwerte werden nur beim Senden aktualisiert
+1.09    Bug bei sehr hohen Lux-Werten behoben
+1.10    Bug bei Schwellen Senden, wenn nur Unter- oder Überschreiten gesendet werden soll
+        Bug bei Timerüberlauf behoben
+2.00    auf lib portiert
+2.01    Korrekturwert Temperatur eingebaut
+2.02    Debug: zyklisches Senden nach restart ging nicht: Initialwerte geändert
+2.03    Parameter zyklisches Senden in der restart abgefragt
+2.04    Klammerfehler bei zykl. senden behoben (ging bei 3min,10min, etc. nicht)
+        ADC Routine wird bei interrupted unterbrochen um Programmieren zu erleichtern
+2.05    mit lib Version 1.24 compiliert
+2.06    HoRa- Feb 2012-
+        * measurement of temp and lux with 10sec cycle
+        * converting problem with signed and unsigned int by temp threshold calculation
+        * no transmit of temp/lux in case hysterese and tx-cycle equals 0
+        * object-values moved from eeprom/flash to ram- flash is reliable 10000 write cyles only (only few days)
+        * end of for-loop in delay() aligned with number of delrec =9,  logic object9 was never sent
+2.07    Senden bei Änderung von Lux wieder hergestellt, alle 10 sec Wandeln wieder raus, das gab Probleme beim Programmieren
+2.08    mit lib 1.31, statt userram ummappen die Objektwerte in variablen gelegt
+2.09    alle 10 Sekunden Wandeln über RTC realisiert
+2.10    Verzögerung bei Verknüpfungsobjekten repariert
+2.11    bugfix Verknüpfung mit Verzögerung des Helligkeitsobjektes
+
+2014-08-05 StefanT
+        Portierung auf Selfbus Library 1.52. Das ist aber nur die reine Portierung,
+        compilierte Firmware fehlt da die Portierung nicht getestet wurde.

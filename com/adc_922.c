@@ -27,7 +27,7 @@ unsigned char CMPbufaddr,CMPbuf[2];
 
 void Get_SD_ADC(void) __naked
 {
-	_asm
+	__asm
 	
 	00001$:					//Get_SD_ADC:
 	PUSH ACC
@@ -102,7 +102,7 @@ void Get_SD_ADC(void) __naked
 	POP ACC;
 	RET
 	
-	_endasm;
+	__endasm;
 }
 
 
