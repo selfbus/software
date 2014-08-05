@@ -316,6 +316,7 @@ Symbol Table
     _WFEED1                                                     =  00C2 G
     _WFEED2                                                     =  00C3 G
     _X1_int                                                        **** GX
+    __gptrget                                                      **** GX
  10 __interrupt_vect                                               0000 R
     __mcs51_genRAMCLEAR                                            **** GX
     __mcs51_genXINIT                                               **** GX
@@ -324,36 +325,43 @@ Symbol Table
     __sdcc_gsinit_startup                                          **** GX
  10 __sdcc_program_startup                                         0026 GR
   8 __start__stack                                                 0000 GR
- 1A __str_0                                                        0000 R
- 1A __str_1                                                        001B R
- 1A __str_2                                                        0020 R
- 1A __str_3                                                        002A R
- 1A __str_4                                                        0034 R
- 1A __str_5                                                        004E R
- 1A __str_6                                                        0054 R
+ 1A __str_0                                                        0010 R
+ 1A __str_1                                                        002B R
+ 1A __str_2                                                        0030 R
+ 1A __str_3                                                        003A R
+ 1A __str_4                                                        003F R
+ 1A __str_5                                                        0041 R
+ 1A __str_6                                                        004B R
+ 1A __str_7                                                        0065 R
+ 1A __str_8                                                        0068 R
+ 1A __str_9                                                        006E R
     _baud                                                          **** GX
+    _bp                                                            **** GX
     _convert_adr                                                   **** GX
     _echo                                                          **** GX
     _eibledcount                                                   **** GX
+    _esc_char                                                      **** GX
     _fb_state                                                      **** GX
   B _filtermode                                                    0000 GR
     _fm                                                            **** GX
     _ga_db                                                         **** GX
     _groupadr                                                      **** GX
+ 1A _hex                                                           0000 GR
     _ledcount                                                      **** GX
- 19 _main                                                          0000 GR
+ 19 _main                                                          0295 GR
     _pa_h                                                          **** GX
     _pa_l                                                          **** GX
     _pa_tmp                                                        **** GX
     _process_tel                                                   **** GX
     _restart_app                                                   **** GX
     _restart_hw                                                    **** GX
-    _rs_init                                                       **** GX
-    _rs_send                                                       **** GX
-    _rs_send_dec                                                   **** GX
-    _rs_send_hex                                                   **** GX
-    _rs_send_hex_i                                                 **** GX
-    _rs_send_s                                                     **** GX
+ 19 _rs_init                                                       0000 GR
+ 19 _rs_send                                                       028B GR
+ 19 _rs_send_dec                                                   007E GR
+ 19 _rs_send_hex                                                   026C GR
+ 19 _rs_send_hex_i                                                 0256 GR
+ 19 _rs_send_hex_l                                                 0231 GR
+ 19 _rs_send_s                                                     01EB GR
     _rsin                                                          **** GX
   B _rsin_busy                                                     0002 GR
     _rsinpos                                                       **** GX
@@ -366,9 +374,6 @@ Symbol Table
     _tel_arrived                                                   **** GX
     _tel_sent                                                      **** GX
     _wait_for_ack                                                  **** GX
-    _watchdog_feed                                                 **** GX
-    _watchdog_init                                                 **** GX
-    _watchdog_start                                                **** GX
   B _write_ok                                                      0001 GR
     a                                                              00E0 
     a.0                                                            00E0 
@@ -593,7 +598,7 @@ Area Table
   16 GSINIT5                                    size    0   flags 20
   17 GSINIT                                     size    0   flags 20
   18 GSFINAL                                    size    3   flags 20
-  19 CSEG                                       size  764   flags 20
-  1A CONST                                      size   5A   flags 20
+  19 CSEG                                       size  B37   flags 20
+  1A CONST                                      size   74   flags 20
   1B XINIT                                      size    0   flags 20
   1C CABS                                       size    0   flags 28

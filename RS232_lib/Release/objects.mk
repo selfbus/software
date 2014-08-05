@@ -4,4 +4,5 @@
 
 USER_OBJS :=
 
-LIBS := -lfb_lpc922_mini.lib
+LIBS := -lfb_lpc922_mini_1.4x.lib
+

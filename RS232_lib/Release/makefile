@@ -28,7 +28,7 @@ all: RS232_lib.hex
 RS232_lib.hex: $(RELS) $(USER_RELS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: SDCC Linker'
-	sdcc --stack-auto --vc -L"C:\Freebus\C_Programme\oldisprogramm\lib_lpc922_mini\Release" -o"RS232_lib.hex" $(RELS) $(USER_RELS) $(LIBS)
+	sdcc --stack-auto --vc -L"/home/stefan/Projekte/Selfbus/Workspace.lpc/software/lib_lpc922_mini/Releases" -o "RS232_lib.hex" $(RELS) $(USER_RELS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 

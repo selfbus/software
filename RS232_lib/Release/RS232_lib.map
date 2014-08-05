@@ -3,7 +3,7 @@ Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-CABS2                               00000000    00000002 =           2. bytes (ABS,CON,CODE)
+CABS3                               00000000    00000002 =           2. bytes (ABS,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -27,6 +27,7 @@ CABS2                               00000000    00000002 =           2. bytes (A
      0C:   00000000  s_BSEG                          
      0C:   00000000  s_CABS                          
      0C:   00000000  s_CABS2                         
+     0C:   00000000  s_CABS3                         
      0C:   00000000  s_DSEG                          
      0C:   00000000  s_HOME                          
      0C:   00000000  s_IABS                          
@@ -40,7 +41,8 @@ CABS2                               00000000    00000002 =           2. bytes (A
      0C:   00000000  s_XISEG                         
      0C:   00000000  s_XSEG                          
      0C:   00000001  l_BIT_BANK                      
-     0C:   00000002  l_CABS2                         
+     0C:   00000001  l_CABS2                         
+     0C:   00000002  l_CABS3                         
      0C:   00000003  l_BSEG_BYTES                    
      0C:   00000003  l_GSFINAL                       
      0C:   00000003  l_GSINIT0                       
@@ -55,17 +57,17 @@ CABS2                               00000000    00000002 =           2. bytes (A
      0C:   00000020  s_BSEG_BYTES                    
      0C:   00000020  s__CODE                         
      0C:   00000022  l_GSINIT3                       
-     0C:   00000023  s_BIT_BANK                      
-     0C:   00000023  s_OSEG                          
 ASxxxx Linker V02.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-CABS2                               00000000    00000002 =           2. bytes (ABS,CON,CODE)
+CABS3                               00000000    00000002 =           2. bytes (ABS,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
+     0C:   00000023  s_BIT_BANK                      
+     0C:   00000023  s_OSEG                          
      0C:   0000002A  l_GSINIT4                       
      0C:   0000002B  l_HOME                          
      0C:   0000002B  s_GSINIT0                       
@@ -73,21 +75,31 @@ CABS2                               00000000    00000002 =           2. bytes (A
      0C:   0000002E  s_GSINIT2                       
      0C:   00000038  s_GSINIT3                       
      0C:   0000005A  s_GSINIT4                       
-     0C:   0000006E  l_CONST                         
      0C:   00000071  l_DSEG                          
      0C:   00000079  s_SSEG                          
+     0C:   0000007A  l_CONST                         
      0C:   00000084  s_GSINIT                        
      0C:   00000084  s_GSINIT5                       
      0C:   00000087  l_SSEG                          
      0C:   00000089  s_GSFINAL                       
      0C:   0000008C  s_CSEG                          
      0C:   00000100  l_IRAM                          
-     0C:   00001AED  l_CSEG                          
-     0C:   00001B79  s_CONST                         
-     0C:   00001BE7  s_XINIT                         
+     0C:   00001B77  l_CSEG                          
+     0C:   00001C03  s_CONST                         
+     0C:   00001C7D  s_XINIT                         
      0C:   00001CFE  _baud                              fb_app_rs
-
 ASxxxx Linker V02.00 + NoICE + sdld,  page 3.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CABS2                               00000000    00000001 =           1. bytes (ABS,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   00001CF7  _esc_char                          fb_app_rs
+
+ASxxxx Linker V02.00 + NoICE + sdld,  page 4.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -146,7 +158,7 @@ Area                                    Addr        Size        Decimal Bytes (A
            00000098  _SCON                              fb_lpc922_mini
            00000098  _SCON_0                            fb_lpc922_mini
            00000099  _SBUF                              fb_lpc922_mini
-ASxxxx Linker V02.00 + NoICE + sdld,  page 4.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 5.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -206,7 +218,7 @@ Area                                    Addr        Size        Decimal Bytes (A
            000000D1  _RTCCON                            fb_lpc922_mini
            000000D2  _PSW_2                             fb_lpc922_mini
            000000D2  _RTCH                              fb_lpc922_mini
-ASxxxx Linker V02.00 + NoICE + sdld,  page 5.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 6.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -255,13 +267,16 @@ Area                                    Addr        Size        Decimal Bytes (A
            000000FA  _IP1_2                             fb_lpc922_mini
            000000FE  _IP1_6                             fb_lpc922_mini
            00001C00  _userram                           fb_lpc922_mini
+           00001CF8  _sga_h                             fb_app_rs
+           00001CF9  _sga_l                             fb_app_rs
            00001CFA  _fm                                fb_app_rs
            00001CFB  _pa_h                              fb_app_rs
            00001CFC  _pa_l                              fb_app_rs
            00001CFD  _echo                              fb_app_rs
            00001D00  _eeprom                            fb_lpc922_mini
            00001D00  _ga_db                             fb_app_rs
-ASxxxx Linker V02.00 + NoICE + sdld,  page 6.
+
+ASxxxx Linker V02.00 + NoICE + sdld,  page 7.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -270,7 +285,7 @@ BSEG_BYTES                          00000020    00000003 =           3. bytes (R
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-ASxxxx Linker V02.00 + NoICE + sdld,  page 7.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 8.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -279,7 +294,7 @@ REG_BANK_0                          00000000    00000008 =           8. bytes (R
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-ASxxxx Linker V02.00 + NoICE + sdld,  page 8.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 9.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -288,7 +303,7 @@ REG_BANK_1                          00000008    00000008 =           8. bytes (R
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-ASxxxx Linker V02.00 + NoICE + sdld,  page 9.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 10.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -317,7 +332,7 @@ BSEG                                00000000    00000013 =          19. bytes (R
      0B:   00000011  _connected                         fb_lpc922_mini
      0B:   00000012  _inc_pcount                        fb_lpc922_mini
 
-ASxxxx Linker V02.00 + NoICE + sdld,  page 10.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 11.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -326,7 +341,7 @@ BIT_BANK                            00000023    00000001 =           1. bytes (R
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-ASxxxx Linker V02.00 + NoICE + sdld,  page 11.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 12.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -362,7 +377,7 @@ DSEG                                00000000    00000071 =         113. bytes (R
            00000077  _tx_nextsend                       fb_lpc922_mini
            00000078  _status60                          fb_lpc922_mini
 
-ASxxxx Linker V02.00 + NoICE + sdld,  page 12.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 13.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -373,7 +388,7 @@ SSEG                                00000079    00000087 =         135. bytes (R
       -----  --------------------------------   ------------------------
            00000079  __start__stack                     fb_rs
 
-ASxxxx Linker V02.00 + NoICE + sdld,  page 13.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 14.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -384,7 +399,7 @@ HOME                                00000000    0000002B =          43. bytes (R
       -----  --------------------------------   ------------------------
      0C:   00000026  __sdcc_program_startup             fb_rs
 
-ASxxxx Linker V02.00 + NoICE + sdld,  page 14.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 15.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -395,7 +410,7 @@ GSINIT0                             0000002B    00000003 =           3. bytes (R
       -----  --------------------------------   ------------------------
      0C:   0000002B  __sdcc_gsinit_startup              
 
-ASxxxx Linker V02.00 + NoICE + sdld,  page 15.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 16.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -404,7 +419,7 @@ GSINIT2                             0000002E    0000000A =          10. bytes (R
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-ASxxxx Linker V02.00 + NoICE + sdld,  page 16.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 17.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -415,7 +430,7 @@ GSINIT3                             00000038    00000022 =          34. bytes (R
       -----  --------------------------------   ------------------------
      0C:   00000038  __mcs51_genXINIT                   
 
-ASxxxx Linker V02.00 + NoICE + sdld,  page 17.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 18.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -427,7 +442,7 @@ GSINIT4                             0000005A    0000002A =          42. bytes (R
      0C:   0000005A  __mcs51_genRAMCLEAR                
      0C:   00000060  __mcs51_genXRAMCLEAR               
 
-ASxxxx Linker V02.00 + NoICE + sdld,  page 18.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 19.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -436,7 +451,7 @@ GSINIT                              00000084    00000005 =           5. bytes (R
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-ASxxxx Linker V02.00 + NoICE + sdld,  page 19.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 20.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
@@ -445,100 +460,95 @@ GSFINAL                             00000089    00000003 =           3. bytes (R
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-ASxxxx Linker V02.00 + NoICE + sdld,  page 20.
-Hexadecimal  [32-Bits]
-
-Area                                    Addr        Size        Decimal Bytes (Attributes)
---------------------------------        ----        ----        ------- ----- ------------
-CSEG                                0000008C    00001AED =        6893. bytes (REL,CON,CODE)
-
-      Value  Global                              Global Defined In Module
-      -----  --------------------------------   ------------------------
-     0C:   0000008C  _build_tel                         fb_app_rs
-     0C:   0000067C  _gapos_in_gat                      fb_app_rs
-     0C:   000006F8  _write_value_req                   fb_app_rs
-     0C:   00000904  _read_value_req                    fb_app_rs
-     0C:   00000905  _save_ga                           fb_app_rs
-     0C:   000009B8  _tel_header                        fb_app_rs
-     0C:   000009EA  _convert_adr                       fb_app_rs
-     0C:   00000AF6  _equal_pos                         fb_app_rs
-     0C:   00000B27  _serial_int                        fb_app_rs
-     0C:   00000B72  _send_ok                           fb_app_rs
-     0C:   00000B7B  _set_filtermode                    fb_app_rs
-     0C:   00000BB1  _restart_app                       fb_app_rs
-     0C:   00000BCB  _main                              fb_rs
-     0C:   0000132F  _rs_init                           fb_rs232
-     0C:   000013AD  _rs_send_dec                       fb_rs232
-     0C:   0000151A  _rs_send_s                         fb_rs232
-     0C:   00001560  _rs_send_hex_l                     fb_rs232
-     0C:   00001585  _rs_send_hex_i                     fb_rs232
-     0C:   0000159B  _rs_send_hex                       fb_rs232
-     0C:   000015BA  _rs_send                           fb_rs232
-     0C:   000015C4  _watchdog_init                     watchdog
-     0C:   000015D5  _watchdog_feed                     watchdog
-     0C:   000015E0  _watchdog_start                    watchdog
-     0C:   000015F4  _watchdog_stop                     watchdog
-     0C:   0000160C  _X1_int                            fb_lpc922_mini
-     0C:   0000163C  _T1_int                            fb_lpc922_mini
-     0C:   00001988  _init_rx                           fb_lpc922_mini
-     0C:   000019B4  _init_tx                           fb_lpc922_mini
-     0C:   000019FE  _send_obj_value                    fb_lpc922_mini
-     0C:   00001A31  _process_tel                       fb_lpc922_mini
-     0C:   00001A68  _restart_hw                        fb_lpc922_mini
-     0C:   00001AC7  __mulint                           _mulint
-     0C:   00001AC7  __mulint_dummy                     _mulint
-     0C:   00001AE9  __gptrget                          _gptrget
-     0C:   00001B05  __mullong                          _mullong
-     0C:   00001B05  __mullong_dummy                    _mullong
-     0C:   00001B75  __sdcc_external_startup            _startup
-
 ASxxxx Linker V02.00 + NoICE + sdld,  page 21.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-CONST                               00001B79    0000006E =         110. bytes (REL,CON,CODE)
+CSEG                                0000008C    00001B77 =        7031. bytes (REL,CON,CODE)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     0C:   00001BD7  _hex                               fb_rs232
+     0C:   0000008C  _build_tel                         fb_app_rs
+     0C:   000005DE  _gapos_in_gat                      fb_app_rs
+     0C:   0000065A  _send_obj_done                     fb_app_rs
+     0C:   0000065B  _write_value_req                   fb_app_rs
+     0C:   00000864  _read_value_req                    fb_app_rs
+     0C:   00000865  _save_ga                           fb_app_rs
+     0C:   00000918  _tel_header                        fb_app_rs
+     0C:   0000094A  _convert_adr                       fb_app_rs
+     0C:   00000A57  _equal_pos                         fb_app_rs
+     0C:   00000A8C  _serial_int                        fb_app_rs
+     0C:   00000AD7  _send_ok                           fb_app_rs
+     0C:   00000AE0  _set_filtermode                    fb_app_rs
+     0C:   00000B16  _restart_app                       fb_app_rs
+     0C:   00000B30  _rs_init                           fb_rs
+     0C:   00000BAE  _rs_send_dec                       fb_rs
+     0C:   00000D1B  _rs_send_s                         fb_rs
+     0C:   00000D61  _rs_send_hex_l                     fb_rs
+     0C:   00000D86  _rs_send_hex_i                     fb_rs
+     0C:   00000D9C  _rs_send_hex                       fb_rs
+     0C:   00000DBB  _rs_send                           fb_rs
+     0C:   00000DC5  _main                              fb_rs
+     0C:   00001667  _X1_int                            fb_lpc922_mini
+     0C:   00001697  _T1_int                            fb_lpc922_mini
+     0C:   00001A12  _init_rx                           fb_lpc922_mini
+     0C:   00001A3E  _init_tx                           fb_lpc922_mini
+     0C:   00001A88  _send_obj_value                    fb_lpc922_mini
+     0C:   00001ABB  _process_tel                       fb_lpc922_mini
+     0C:   00001AF2  _restart_hw                        fb_lpc922_mini
+     0C:   00001B51  __mulint                           _mulint
+     0C:   00001B51  __mulint_dummy                     _mulint
+     0C:   00001B73  __gptrget                          _gptrget
+     0C:   00001B8F  __mullong                          _mullong
+     0C:   00001B8F  __mullong_dummy                    _mullong
+     0C:   00001BFF  __sdcc_external_startup            _startup
 
 ASxxxx Linker V02.00 + NoICE + sdld,  page 22.
+Hexadecimal  [32-Bits]
+
+Area                                    Addr        Size        Decimal Bytes (Attributes)
+--------------------------------        ----        ----        ------- ----- ------------
+CONST                               00001C03    0000007A =         122. bytes (REL,CON,CODE)
+
+      Value  Global                              Global Defined In Module
+      -----  --------------------------------   ------------------------
+     0C:   00001C09  _hex                               fb_rs
+
+ASxxxx Linker V02.00 + NoICE + sdld,  page 23.
 
 Files Linked                              [ module(s) ]
 
 ./fb_app_rs.rel                           [  ]
 ./fb_rs.rel                               [  ]
-./fb_rs232.rel                            [  ]
-./watchdog.rel                            [  ]
 
 
 Libraries Linked                          [ object file ]
 
-C:\Freebus\C_Programme\oldisprogramm\lib_lpc922_mini\Release/fb_lpc922_mini.lib
+/home/stefan/Projekte/Selfbus/Workspace.lpc/software/lib_lpc922_mini/Releases/fb_lpc922_mini_1.4x.lib
                                           [ fb_lpc922_mini ]
-C:\Programme\SDCC\bin\..\lib\small-stack-auto/mcs51.lib
+/usr/bin/../share/sdcc/lib/small-stack-auto/mcs51.lib
                                           [ crtclear.rel ]
-C:\Programme\SDCC\bin\..\lib\small-stack-auto/mcs51.lib
+/usr/bin/../share/sdcc/lib/small-stack-auto/mcs51.lib
                                           [ crtxinit.rel ]
-C:\Programme\SDCC\bin\..\lib\small-stack-auto/libint.lib
+/usr/bin/../share/sdcc/lib/small-stack-auto/libint.lib
                                           [ _mulint.rel ]
-C:\Programme\SDCC\bin\..\lib\small-stack-auto/mcs51.lib
+/usr/bin/../share/sdcc/lib/small-stack-auto/mcs51.lib
                                           [ crtxclear.rel ]
-C:\Programme\SDCC\bin\..\lib\small-stack-auto/libsdcc.lib
+/usr/bin/../share/sdcc/lib/small-stack-auto/libsdcc.lib
                                           [ _bp.rel ]
-C:\Programme\SDCC\bin\..\lib\small-stack-auto/mcs51.lib
+/usr/bin/../share/sdcc/lib/small-stack-auto/mcs51.lib
                                           [ crtpagesfr.rel ]
-C:\Programme\SDCC\bin\..\lib\small-stack-auto/mcs51.lib
+/usr/bin/../share/sdcc/lib/small-stack-auto/mcs51.lib
                                           [ crtstart.rel ]
-C:\Programme\SDCC\bin\..\lib\small-stack-auto/libsdcc.lib
+/usr/bin/../share/sdcc/lib/small-stack-auto/libsdcc.lib
                                           [ _gptrget.rel ]
-C:\Programme\SDCC\bin\..\lib\small-stack-auto/liblong.lib
+/usr/bin/../share/sdcc/lib/small-stack-auto/liblong.lib
                                           [ _mullong.rel ]
-C:\Programme\SDCC\bin\..\lib\small-stack-auto/libsdcc.lib
+/usr/bin/../share/sdcc/lib/small-stack-auto/libsdcc.lib
                                           [ _startup.rel ]
 
-ASxxxx Linker V02.00 + NoICE + sdld,  page 23.
+ASxxxx Linker V02.00 + NoICE + sdld,  page 24.
 
 User Base Address Definitions
 

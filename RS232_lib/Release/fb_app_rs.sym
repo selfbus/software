@@ -316,41 +316,46 @@ Symbol Table
     _WFEED2                                                     =  00C3 G
     __mulint                                                       **** GX
     __mullong                                                      **** GX
- 19 __str_0                                                        0000 R
- 1C _baud                                                          1CFE GR
+ 1A __str_0                                                        0000 R
+ 1A __str_1                                                        0002 R
+ 1E _baud                                                          1CFE GR
     _bp                                                            **** GX
- 18 _build_tel                                                     0000 GR
- 18 _convert_adr                                                   095E GR
+ 19 _build_tel                                                     0000 GR
+ 19 _convert_adr                                                   08BE GR
     _echo                                                       =  1CFD G
   7 _eibledcount                                                   0024 GR
- 18 _equal_pos                                                     0A6A GR
+ 19 _equal_pos                                                     09CB GR
+ 1D _esc_char                                                      1CF7 GR
     _filtermode                                                    **** GX
     _fm                                                         =  1CFA G
     _ga_db                                                      =  1D00 G
- 18 _gapos_in_gat                                                  05F0 GR
+ 19 _gapos_in_gat                                                  0552 GR
   7 _groupadr                                                      001F GR
   7 _ledcount                                                      0023 GR
     _pa_h                                                       =  1CFB G
     _pa_l                                                       =  1CFC G
   7 _pa_tmp                                                        0021 GR
- 18 _read_value_req                                                0878 GR
- 18 _restart_app                                                   0B25 GR
+ 19 _read_value_req                                                07D8 GR
+ 19 _restart_app                                                   0A8A GR
     _rs_send                                                       **** GX
     _rs_send_dec                                                   **** GX
     _rs_send_s                                                     **** GX
   7 _rsin                                                          0000 GR
   7 _rsinpos                                                       001E GR
   7 _rxledcount                                                    0025 GR
- 18 _save_ga                                                       0879 GR
- 18 _send_ok                                                       0AE6 GR
- 18 _serial_int                                                    0A9B GR
- 18 _set_filtermode                                                0AEF GR
- 18 _tel_header                                                    092C GR
+ 19 _save_ga                                                       07D9 GR
+ 19 _send_obj_done                                                 05CE GR
+ 19 _send_ok                                                       0A4B GR
+ 19 _serial_int                                                    0A00 GR
+ 19 _set_filtermode                                                0A54 GR
+    _sga_h                                                      =  1CF8 G
+    _sga_l                                                      =  1CF9 G
+ 19 _tel_header                                                    088C GR
     _tel_sent                                                      **** GX
     _telegramm                                                     **** GX
     _transparency                                                  **** GX
     _write_ok                                                      **** GX
- 18 _write_value_req                                               066C GR
+ 19 _write_value_req                                               05CF GR
     a                                                              00E0 
     a.0                                                            00E0 
     a.1                                                            00E1 
@@ -557,24 +562,26 @@ Area Table
    5 REG_BANK_1                                 size    8   flags 4
    6 BIT_BANK                                   size    1   flags 4
    7 DSEG                                       size   26   flags 0
-   8 ISEG                                       size    0   flags 0
-   9 IABS                                       size    0   flags 8
-   A BSEG                                       size    0   flags 80
-   B PSEG                                       size    0   flags 50
-   C XSEG                                       size    0   flags 40
-   D XABS                                       size    0   flags 48
-   E XISEG                                      size    0   flags 40
-   F HOME                                       size    0   flags 20
-  10 GSINIT0                                    size    0   flags 20
-  11 GSINIT1                                    size    0   flags 20
-  12 GSINIT2                                    size    0   flags 20
-  13 GSINIT3                                    size    0   flags 20
-  14 GSINIT4                                    size    0   flags 20
-  15 GSINIT5                                    size    0   flags 20
-  16 GSINIT                                     size    5   flags 20
-  17 GSFINAL                                    size    0   flags 20
-  18 CSEG                                       size  B3F   flags 20
-  19 CONST                                      size    4   flags 20
-  1A XINIT                                      size    0   flags 20
-  1B CABS                                       size    0   flags 28
-  1C CABS2                                      size    2   flags 28
+   8 OSEG                                       size    0   flags 4
+   9 ISEG                                       size    0   flags 0
+   A IABS                                       size    0   flags 8
+   B BSEG                                       size    0   flags 80
+   C PSEG                                       size    0   flags 50
+   D XSEG                                       size    0   flags 40
+   E XABS                                       size    0   flags 48
+   F XISEG                                      size    0   flags 40
+  10 HOME                                       size    0   flags 20
+  11 GSINIT0                                    size    0   flags 20
+  12 GSINIT1                                    size    0   flags 20
+  13 GSINIT2                                    size    0   flags 20
+  14 GSINIT3                                    size    0   flags 20
+  15 GSINIT4                                    size    0   flags 20
+  16 GSINIT5                                    size    0   flags 20
+  17 GSINIT                                     size    5   flags 20
+  18 GSFINAL                                    size    0   flags 20
+  19 CSEG                                       size  AA4   flags 20
+  1A CONST                                      size    6   flags 20
+  1B XINIT                                      size    0   flags 20
+  1C CABS                                       size    0   flags 28
+  1D CABS2                                      size    1   flags 28
+  1E CABS3                                      size    2   flags 28

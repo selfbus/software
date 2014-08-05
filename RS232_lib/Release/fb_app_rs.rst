@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
-                              3 ; Version 3.1.4 #7479 (Mar 23 2012) (MINGW32)
-                              4 ; This file was generated Fri Oct 19 23:17:24 2012
+                              3 ; Version 3.1.0 #7066 (Jun 14 2012) (Linux)
+                              4 ; This file was generated Tue Aug  5 21:17:44 2014
                               5 ;--------------------------------------------------------
                               6 	.module fb_app_rs
                               7 	.optsdcc -mmcs51 --model-small
@@ -10,2618 +10,2557 @@
                              10 ; Public variables in this module
                              11 ;--------------------------------------------------------
                              12 	.globl _baud
-                             13 	.globl _ga_db
+                             13 	.globl _esc_char
                              14 	.globl _echo
-                             15 	.globl _pa_l
-                             16 	.globl _pa_h
-                             17 	.globl _fm
-                             18 	.globl _rs_send_s
-                             19 	.globl _rs_send
-                             20 	.globl _rs_send_dec
-                             21 	.globl _P3_1
-                             22 	.globl _P3_0
-                             23 	.globl _P1_7
-                             24 	.globl _P1_6
-                             25 	.globl _P1_5
-                             26 	.globl _P1_4
-                             27 	.globl _P1_3
-                             28 	.globl _P1_2
-                             29 	.globl _P1_1
-                             30 	.globl _P1_0
-                             31 	.globl _P0_7
-                             32 	.globl _P0_6
-                             33 	.globl _P0_5
-                             34 	.globl _P0_4
-                             35 	.globl _P0_3
-                             36 	.globl _P0_2
-                             37 	.globl _P0_1
-                             38 	.globl _P0_0
-                             39 	.globl _I2CON_0
-                             40 	.globl _I2CON_2
-                             41 	.globl _I2CON_3
-                             42 	.globl _I2CON_4
-                             43 	.globl _I2CON_5
-                             44 	.globl _I2CON_6
-                             45 	.globl _SCON_7
-                             46 	.globl _SCON_6
-                             47 	.globl _SCON_5
-                             48 	.globl _SCON_4
-                             49 	.globl _SCON_3
-                             50 	.globl _SCON_2
-                             51 	.globl _SCON_1
-                             52 	.globl _SCON_0
-                             53 	.globl _IP0_0
-                             54 	.globl _IP0_1
-                             55 	.globl _IP0_2
-                             56 	.globl _IP0_3
-                             57 	.globl _IP0_4
-                             58 	.globl _IP0_5
-                             59 	.globl _IP0_6
-                             60 	.globl _IP1_0
-                             61 	.globl _IP1_1
-                             62 	.globl _IP1_2
-                             63 	.globl _IP1_6
-                             64 	.globl _IEN1_0
-                             65 	.globl _IEN1_1
-                             66 	.globl _IEN1_2
-                             67 	.globl _IEN0_0
-                             68 	.globl _IEN0_1
-                             69 	.globl _IEN0_2
-                             70 	.globl _IEN0_3
-                             71 	.globl _IEN0_4
-                             72 	.globl _IEN0_5
-                             73 	.globl _IEN0_6
-                             74 	.globl _IEN0_7
-                             75 	.globl _TCON_0
-                             76 	.globl _TCON_1
-                             77 	.globl _TCON_2
-                             78 	.globl _TCON_3
-                             79 	.globl _TCON_4
-                             80 	.globl _TCON_5
-                             81 	.globl _TCON_6
-                             82 	.globl _TCON_7
-                             83 	.globl _PSW_7
-                             84 	.globl _PSW_6
-                             85 	.globl _PSW_5
-                             86 	.globl _PSW_4
-                             87 	.globl _PSW_3
-                             88 	.globl _PSW_2
-                             89 	.globl _PSW_1
-                             90 	.globl _PSW_0
-                             91 	.globl _IEN1
-                             92 	.globl _IP0H
-                             93 	.globl _WFEED2
-                             94 	.globl _WFEED1
-                             95 	.globl _WDL
-                             96 	.globl _WDCON
-                             97 	.globl _TRIM
-                             98 	.globl _TAMOD
-                             99 	.globl _SSTAT
-                            100 	.globl _RTCL
-                            101 	.globl _RTCH
-                            102 	.globl _RTCCON
-                            103 	.globl _RSTSRC
-                            104 	.globl _PT0AD
-                            105 	.globl _PCONA
-                            106 	.globl _P3M2
-                            107 	.globl _P3M1
-                            108 	.globl _P1M2
-                            109 	.globl _P1M1
-                            110 	.globl _P0M2
-                            111 	.globl _P0M1
-                            112 	.globl _KBPATN
-                            113 	.globl _KBMASK
-                            114 	.globl _KBCON
-                            115 	.globl _IP1H
-                            116 	.globl _IP1
-                            117 	.globl _I2STAT
-                            118 	.globl _I2SCLL
-                            119 	.globl _I2SCLH
-                            120 	.globl _I2DAT
-                            121 	.globl _I2CON
-                            122 	.globl _I2ADR
-                            123 	.globl _FMDATA
-                            124 	.globl _FMCON
-                            125 	.globl _FMADRL
-                            126 	.globl _FMADRH
-                            127 	.globl _DIVM
-                            128 	.globl _CMP2
-                            129 	.globl _CMP1
-                            130 	.globl _BRGCON
-                            131 	.globl _BRGR1
-                            132 	.globl _BRGR0
-                            133 	.globl _SADEN
-                            134 	.globl _SADDR
-                            135 	.globl _AUXR1
-                            136 	.globl _SBUF
-                            137 	.globl _SCON
-                            138 	.globl _IP0
-                            139 	.globl _IEN0
-                            140 	.globl _TH1
-                            141 	.globl _TH0
-                            142 	.globl _TL1
-                            143 	.globl _TL0
-                            144 	.globl _TMOD
-                            145 	.globl _TCON
-                            146 	.globl _PCON
-                            147 	.globl _DPH
-                            148 	.globl _DPL
-                            149 	.globl _SP
-                            150 	.globl _B
-                            151 	.globl _ACC
-                            152 	.globl _PSW
-                            153 	.globl _P3
-                            154 	.globl _P1
-                            155 	.globl _P0
-                            156 	.globl _rxledcount
-                            157 	.globl _eibledcount
-                            158 	.globl _ledcount
-                            159 	.globl _pa_tmp
-                            160 	.globl _groupadr
-                            161 	.globl _rsinpos
-                            162 	.globl _rsin
-                            163 	.globl _build_tel
-                            164 	.globl _gapos_in_gat
-                            165 	.globl _write_value_req
-                            166 	.globl _read_value_req
-                            167 	.globl _save_ga
-                            168 	.globl _tel_header
-                            169 	.globl _convert_adr
-                            170 	.globl _equal_pos
-                            171 	.globl _serial_int
-                            172 	.globl _send_ok
-                            173 	.globl _set_filtermode
-                            174 	.globl _restart_app
-                            175 ;--------------------------------------------------------
-                            176 ; special function registers
-                            177 ;--------------------------------------------------------
-                            178 	.area RSEG    (ABS,DATA)
-   0000                     179 	.org 0x0000
-                    0080    180 _P0	=	0x0080
-                    0090    181 _P1	=	0x0090
-                    00B0    182 _P3	=	0x00b0
-                    00D0    183 _PSW	=	0x00d0
-                    00E0    184 _ACC	=	0x00e0
-                    00F0    185 _B	=	0x00f0
-                    0081    186 _SP	=	0x0081
-                    0082    187 _DPL	=	0x0082
-                    0083    188 _DPH	=	0x0083
-                    0087    189 _PCON	=	0x0087
-                    0088    190 _TCON	=	0x0088
-                    0089    191 _TMOD	=	0x0089
-                    008A    192 _TL0	=	0x008a
-                    008B    193 _TL1	=	0x008b
-                    008C    194 _TH0	=	0x008c
-                    008D    195 _TH1	=	0x008d
-                    00A8    196 _IEN0	=	0x00a8
-                    00B8    197 _IP0	=	0x00b8
-                    0098    198 _SCON	=	0x0098
-                    0099    199 _SBUF	=	0x0099
-                    00A2    200 _AUXR1	=	0x00a2
-                    00A9    201 _SADDR	=	0x00a9
-                    00B9    202 _SADEN	=	0x00b9
-                    00BE    203 _BRGR0	=	0x00be
-                    00BF    204 _BRGR1	=	0x00bf
-                    00BD    205 _BRGCON	=	0x00bd
-                    00AC    206 _CMP1	=	0x00ac
-                    00AD    207 _CMP2	=	0x00ad
-                    0095    208 _DIVM	=	0x0095
-                    00E7    209 _FMADRH	=	0x00e7
-                    00E6    210 _FMADRL	=	0x00e6
-                    00E4    211 _FMCON	=	0x00e4
-                    00E5    212 _FMDATA	=	0x00e5
-                    00DB    213 _I2ADR	=	0x00db
-                    00D8    214 _I2CON	=	0x00d8
-                    00DA    215 _I2DAT	=	0x00da
-                    00DD    216 _I2SCLH	=	0x00dd
-                    00DC    217 _I2SCLL	=	0x00dc
-                    00D9    218 _I2STAT	=	0x00d9
-                    00F8    219 _IP1	=	0x00f8
-                    00F7    220 _IP1H	=	0x00f7
-                    0094    221 _KBCON	=	0x0094
-                    0086    222 _KBMASK	=	0x0086
-                    0093    223 _KBPATN	=	0x0093
-                    0084    224 _P0M1	=	0x0084
-                    0085    225 _P0M2	=	0x0085
-                    0091    226 _P1M1	=	0x0091
-                    0092    227 _P1M2	=	0x0092
-                    00B1    228 _P3M1	=	0x00b1
-                    00B2    229 _P3M2	=	0x00b2
-                    00B5    230 _PCONA	=	0x00b5
-                    00F6    231 _PT0AD	=	0x00f6
-                    00DF    232 _RSTSRC	=	0x00df
-                    00D1    233 _RTCCON	=	0x00d1
-                    00D2    234 _RTCH	=	0x00d2
-                    00D3    235 _RTCL	=	0x00d3
-                    00BA    236 _SSTAT	=	0x00ba
-                    008F    237 _TAMOD	=	0x008f
-                    0096    238 _TRIM	=	0x0096
-                    00A7    239 _WDCON	=	0x00a7
-                    00C1    240 _WDL	=	0x00c1
-                    00C2    241 _WFEED1	=	0x00c2
-                    00C3    242 _WFEED2	=	0x00c3
-                    00B7    243 _IP0H	=	0x00b7
-                    00E8    244 _IEN1	=	0x00e8
-                            245 ;--------------------------------------------------------
-                            246 ; special function bits
-                            247 ;--------------------------------------------------------
-                            248 	.area RSEG    (ABS,DATA)
-   0000                     249 	.org 0x0000
-                    00D0    250 _PSW_0	=	0x00d0
-                    00D1    251 _PSW_1	=	0x00d1
-                    00D2    252 _PSW_2	=	0x00d2
-                    00D3    253 _PSW_3	=	0x00d3
-                    00D4    254 _PSW_4	=	0x00d4
-                    00D5    255 _PSW_5	=	0x00d5
-                    00D6    256 _PSW_6	=	0x00d6
-                    00D7    257 _PSW_7	=	0x00d7
-                    008F    258 _TCON_7	=	0x008f
-                    008E    259 _TCON_6	=	0x008e
-                    008D    260 _TCON_5	=	0x008d
-                    008C    261 _TCON_4	=	0x008c
-                    008B    262 _TCON_3	=	0x008b
-                    008A    263 _TCON_2	=	0x008a
-                    0089    264 _TCON_1	=	0x0089
-                    0088    265 _TCON_0	=	0x0088
-                    00AF    266 _IEN0_7	=	0x00af
-                    00AE    267 _IEN0_6	=	0x00ae
-                    00AD    268 _IEN0_5	=	0x00ad
-                    00AC    269 _IEN0_4	=	0x00ac
-                    00AB    270 _IEN0_3	=	0x00ab
-                    00AA    271 _IEN0_2	=	0x00aa
-                    00A9    272 _IEN0_1	=	0x00a9
-                    00A8    273 _IEN0_0	=	0x00a8
-                    00EA    274 _IEN1_2	=	0x00ea
-                    00E9    275 _IEN1_1	=	0x00e9
-                    00E8    276 _IEN1_0	=	0x00e8
-                    00FE    277 _IP1_6	=	0x00fe
-                    00FA    278 _IP1_2	=	0x00fa
-                    00F9    279 _IP1_1	=	0x00f9
-                    00F8    280 _IP1_0	=	0x00f8
-                    00BE    281 _IP0_6	=	0x00be
-                    00BD    282 _IP0_5	=	0x00bd
-                    00BC    283 _IP0_4	=	0x00bc
-                    00BB    284 _IP0_3	=	0x00bb
-                    00BA    285 _IP0_2	=	0x00ba
-                    00B9    286 _IP0_1	=	0x00b9
-                    00B8    287 _IP0_0	=	0x00b8
-                    0098    288 _SCON_0	=	0x0098
-                    0099    289 _SCON_1	=	0x0099
-                    009A    290 _SCON_2	=	0x009a
-                    009B    291 _SCON_3	=	0x009b
-                    009C    292 _SCON_4	=	0x009c
-                    009D    293 _SCON_5	=	0x009d
-                    009E    294 _SCON_6	=	0x009e
-                    009F    295 _SCON_7	=	0x009f
-                    00DE    296 _I2CON_6	=	0x00de
-                    00DD    297 _I2CON_5	=	0x00dd
-                    00DC    298 _I2CON_4	=	0x00dc
-                    00DB    299 _I2CON_3	=	0x00db
-                    00DA    300 _I2CON_2	=	0x00da
-                    00D8    301 _I2CON_0	=	0x00d8
-                    0080    302 _P0_0	=	0x0080
-                    0081    303 _P0_1	=	0x0081
-                    0082    304 _P0_2	=	0x0082
-                    0083    305 _P0_3	=	0x0083
-                    0084    306 _P0_4	=	0x0084
-                    0085    307 _P0_5	=	0x0085
-                    0086    308 _P0_6	=	0x0086
-                    0087    309 _P0_7	=	0x0087
-                    0090    310 _P1_0	=	0x0090
-                    0091    311 _P1_1	=	0x0091
-                    0092    312 _P1_2	=	0x0092
-                    0093    313 _P1_3	=	0x0093
-                    0094    314 _P1_4	=	0x0094
-                    0095    315 _P1_5	=	0x0095
-                    0096    316 _P1_6	=	0x0096
-                    0097    317 _P1_7	=	0x0097
-                    00B0    318 _P3_0	=	0x00b0
-                    00B1    319 _P3_1	=	0x00b1
-                            320 ;--------------------------------------------------------
-                            321 ; overlayable register banks
-                            322 ;--------------------------------------------------------
-                            323 	.area REG_BANK_0	(REL,OVR,DATA)
-   0000                     324 	.ds 8
-                            325 	.area REG_BANK_1	(REL,OVR,DATA)
-   0008                     326 	.ds 8
-                            327 ;--------------------------------------------------------
-                            328 ; overlayable bit register bank
-                            329 ;--------------------------------------------------------
-                            330 	.area BIT_BANK	(REL,OVR,DATA)
-   0023                     331 bits:
-   0023                     332 	.ds 1
-                    8000    333 	b0 = bits[0]
-                    8100    334 	b1 = bits[1]
-                    8200    335 	b2 = bits[2]
-                    8300    336 	b3 = bits[3]
-                    8400    337 	b4 = bits[4]
-                    8500    338 	b5 = bits[5]
-                    8600    339 	b6 = bits[6]
-                    8700    340 	b7 = bits[7]
-                            341 ;--------------------------------------------------------
-                            342 ; internal ram data
-                            343 ;--------------------------------------------------------
-                            344 	.area DSEG    (DATA)
-   0024                     345 _rsin::
-   0024                     346 	.ds 30
-   0042                     347 _rsinpos::
-   0042                     348 	.ds 1
-   0043                     349 _groupadr::
-   0043                     350 	.ds 2
-   0045                     351 _pa_tmp::
-   0045                     352 	.ds 2
-   0047                     353 _ledcount::
-   0047                     354 	.ds 1
-   0048                     355 _eibledcount::
-   0048                     356 	.ds 1
-   0049                     357 _rxledcount::
-   0049                     358 	.ds 1
-                            359 ;--------------------------------------------------------
-                            360 ; overlayable items in internal ram 
-                            361 ;--------------------------------------------------------
-                            362 ;--------------------------------------------------------
-                            363 ; indirectly addressable internal ram data
-                            364 ;--------------------------------------------------------
-                            365 	.area ISEG    (DATA)
-                            366 ;--------------------------------------------------------
-                            367 ; absolute internal ram data
-                            368 ;--------------------------------------------------------
-                            369 	.area IABS    (ABS,DATA)
-                            370 	.area IABS    (ABS,DATA)
+                             15 	.globl _ga_db
+                             16 	.globl _sga_l
+                             17 	.globl _sga_h
+                             18 	.globl _pa_l
+                             19 	.globl _pa_h
+                             20 	.globl _fm
+                             21 	.globl _rs_send_s
+                             22 	.globl _rs_send
+                             23 	.globl _rs_send_dec
+                             24 	.globl _P3_1
+                             25 	.globl _P3_0
+                             26 	.globl _P1_7
+                             27 	.globl _P1_6
+                             28 	.globl _P1_5
+                             29 	.globl _P1_4
+                             30 	.globl _P1_3
+                             31 	.globl _P1_2
+                             32 	.globl _P1_1
+                             33 	.globl _P1_0
+                             34 	.globl _P0_7
+                             35 	.globl _P0_6
+                             36 	.globl _P0_5
+                             37 	.globl _P0_4
+                             38 	.globl _P0_3
+                             39 	.globl _P0_2
+                             40 	.globl _P0_1
+                             41 	.globl _P0_0
+                             42 	.globl _I2CON_0
+                             43 	.globl _I2CON_2
+                             44 	.globl _I2CON_3
+                             45 	.globl _I2CON_4
+                             46 	.globl _I2CON_5
+                             47 	.globl _I2CON_6
+                             48 	.globl _SCON_7
+                             49 	.globl _SCON_6
+                             50 	.globl _SCON_5
+                             51 	.globl _SCON_4
+                             52 	.globl _SCON_3
+                             53 	.globl _SCON_2
+                             54 	.globl _SCON_1
+                             55 	.globl _SCON_0
+                             56 	.globl _IP0_0
+                             57 	.globl _IP0_1
+                             58 	.globl _IP0_2
+                             59 	.globl _IP0_3
+                             60 	.globl _IP0_4
+                             61 	.globl _IP0_5
+                             62 	.globl _IP0_6
+                             63 	.globl _IP1_0
+                             64 	.globl _IP1_1
+                             65 	.globl _IP1_2
+                             66 	.globl _IP1_6
+                             67 	.globl _IEN1_0
+                             68 	.globl _IEN1_1
+                             69 	.globl _IEN1_2
+                             70 	.globl _IEN0_0
+                             71 	.globl _IEN0_1
+                             72 	.globl _IEN0_2
+                             73 	.globl _IEN0_3
+                             74 	.globl _IEN0_4
+                             75 	.globl _IEN0_5
+                             76 	.globl _IEN0_6
+                             77 	.globl _IEN0_7
+                             78 	.globl _TCON_0
+                             79 	.globl _TCON_1
+                             80 	.globl _TCON_2
+                             81 	.globl _TCON_3
+                             82 	.globl _TCON_4
+                             83 	.globl _TCON_5
+                             84 	.globl _TCON_6
+                             85 	.globl _TCON_7
+                             86 	.globl _PSW_7
+                             87 	.globl _PSW_6
+                             88 	.globl _PSW_5
+                             89 	.globl _PSW_4
+                             90 	.globl _PSW_3
+                             91 	.globl _PSW_2
+                             92 	.globl _PSW_1
+                             93 	.globl _PSW_0
+                             94 	.globl _IEN1
+                             95 	.globl _IP0H
+                             96 	.globl _WFEED2
+                             97 	.globl _WFEED1
+                             98 	.globl _WDL
+                             99 	.globl _WDCON
+                            100 	.globl _TRIM
+                            101 	.globl _TAMOD
+                            102 	.globl _SSTAT
+                            103 	.globl _RTCL
+                            104 	.globl _RTCH
+                            105 	.globl _RTCCON
+                            106 	.globl _RSTSRC
+                            107 	.globl _PT0AD
+                            108 	.globl _PCONA
+                            109 	.globl _P3M2
+                            110 	.globl _P3M1
+                            111 	.globl _P1M2
+                            112 	.globl _P1M1
+                            113 	.globl _P0M2
+                            114 	.globl _P0M1
+                            115 	.globl _KBPATN
+                            116 	.globl _KBMASK
+                            117 	.globl _KBCON
+                            118 	.globl _IP1H
+                            119 	.globl _IP1
+                            120 	.globl _I2STAT
+                            121 	.globl _I2SCLL
+                            122 	.globl _I2SCLH
+                            123 	.globl _I2DAT
+                            124 	.globl _I2CON
+                            125 	.globl _I2ADR
+                            126 	.globl _FMDATA
+                            127 	.globl _FMCON
+                            128 	.globl _FMADRL
+                            129 	.globl _FMADRH
+                            130 	.globl _DIVM
+                            131 	.globl _CMP2
+                            132 	.globl _CMP1
+                            133 	.globl _BRGCON
+                            134 	.globl _BRGR1
+                            135 	.globl _BRGR0
+                            136 	.globl _SADEN
+                            137 	.globl _SADDR
+                            138 	.globl _AUXR1
+                            139 	.globl _SBUF
+                            140 	.globl _SCON
+                            141 	.globl _IP0
+                            142 	.globl _IEN0
+                            143 	.globl _TH1
+                            144 	.globl _TH0
+                            145 	.globl _TL1
+                            146 	.globl _TL0
+                            147 	.globl _TMOD
+                            148 	.globl _TCON
+                            149 	.globl _PCON
+                            150 	.globl _DPH
+                            151 	.globl _DPL
+                            152 	.globl _SP
+                            153 	.globl _B
+                            154 	.globl _ACC
+                            155 	.globl _PSW
+                            156 	.globl _P3
+                            157 	.globl _P1
+                            158 	.globl _P0
+                            159 	.globl _rxledcount
+                            160 	.globl _eibledcount
+                            161 	.globl _ledcount
+                            162 	.globl _pa_tmp
+                            163 	.globl _groupadr
+                            164 	.globl _rsinpos
+                            165 	.globl _rsin
+                            166 	.globl _build_tel
+                            167 	.globl _gapos_in_gat
+                            168 	.globl _send_obj_done
+                            169 	.globl _write_value_req
+                            170 	.globl _read_value_req
+                            171 	.globl _save_ga
+                            172 	.globl _tel_header
+                            173 	.globl _convert_adr
+                            174 	.globl _equal_pos
+                            175 	.globl _serial_int
+                            176 	.globl _send_ok
+                            177 	.globl _set_filtermode
+                            178 	.globl _restart_app
+                            179 ;--------------------------------------------------------
+                            180 ; special function registers
+                            181 ;--------------------------------------------------------
+                            182 	.area RSEG    (ABS,DATA)
+   0000                     183 	.org 0x0000
+                    0080    184 _P0	=	0x0080
+                    0090    185 _P1	=	0x0090
+                    00B0    186 _P3	=	0x00b0
+                    00D0    187 _PSW	=	0x00d0
+                    00E0    188 _ACC	=	0x00e0
+                    00F0    189 _B	=	0x00f0
+                    0081    190 _SP	=	0x0081
+                    0082    191 _DPL	=	0x0082
+                    0083    192 _DPH	=	0x0083
+                    0087    193 _PCON	=	0x0087
+                    0088    194 _TCON	=	0x0088
+                    0089    195 _TMOD	=	0x0089
+                    008A    196 _TL0	=	0x008a
+                    008B    197 _TL1	=	0x008b
+                    008C    198 _TH0	=	0x008c
+                    008D    199 _TH1	=	0x008d
+                    00A8    200 _IEN0	=	0x00a8
+                    00B8    201 _IP0	=	0x00b8
+                    0098    202 _SCON	=	0x0098
+                    0099    203 _SBUF	=	0x0099
+                    00A2    204 _AUXR1	=	0x00a2
+                    00A9    205 _SADDR	=	0x00a9
+                    00B9    206 _SADEN	=	0x00b9
+                    00BE    207 _BRGR0	=	0x00be
+                    00BF    208 _BRGR1	=	0x00bf
+                    00BD    209 _BRGCON	=	0x00bd
+                    00AC    210 _CMP1	=	0x00ac
+                    00AD    211 _CMP2	=	0x00ad
+                    0095    212 _DIVM	=	0x0095
+                    00E7    213 _FMADRH	=	0x00e7
+                    00E6    214 _FMADRL	=	0x00e6
+                    00E4    215 _FMCON	=	0x00e4
+                    00E5    216 _FMDATA	=	0x00e5
+                    00DB    217 _I2ADR	=	0x00db
+                    00D8    218 _I2CON	=	0x00d8
+                    00DA    219 _I2DAT	=	0x00da
+                    00DD    220 _I2SCLH	=	0x00dd
+                    00DC    221 _I2SCLL	=	0x00dc
+                    00D9    222 _I2STAT	=	0x00d9
+                    00F8    223 _IP1	=	0x00f8
+                    00F7    224 _IP1H	=	0x00f7
+                    0094    225 _KBCON	=	0x0094
+                    0086    226 _KBMASK	=	0x0086
+                    0093    227 _KBPATN	=	0x0093
+                    0084    228 _P0M1	=	0x0084
+                    0085    229 _P0M2	=	0x0085
+                    0091    230 _P1M1	=	0x0091
+                    0092    231 _P1M2	=	0x0092
+                    00B1    232 _P3M1	=	0x00b1
+                    00B2    233 _P3M2	=	0x00b2
+                    00B5    234 _PCONA	=	0x00b5
+                    00F6    235 _PT0AD	=	0x00f6
+                    00DF    236 _RSTSRC	=	0x00df
+                    00D1    237 _RTCCON	=	0x00d1
+                    00D2    238 _RTCH	=	0x00d2
+                    00D3    239 _RTCL	=	0x00d3
+                    00BA    240 _SSTAT	=	0x00ba
+                    008F    241 _TAMOD	=	0x008f
+                    0096    242 _TRIM	=	0x0096
+                    00A7    243 _WDCON	=	0x00a7
+                    00C1    244 _WDL	=	0x00c1
+                    00C2    245 _WFEED1	=	0x00c2
+                    00C3    246 _WFEED2	=	0x00c3
+                    00B7    247 _IP0H	=	0x00b7
+                    00E8    248 _IEN1	=	0x00e8
+                            249 ;--------------------------------------------------------
+                            250 ; special function bits
+                            251 ;--------------------------------------------------------
+                            252 	.area RSEG    (ABS,DATA)
+   0000                     253 	.org 0x0000
+                    00D0    254 _PSW_0	=	0x00d0
+                    00D1    255 _PSW_1	=	0x00d1
+                    00D2    256 _PSW_2	=	0x00d2
+                    00D3    257 _PSW_3	=	0x00d3
+                    00D4    258 _PSW_4	=	0x00d4
+                    00D5    259 _PSW_5	=	0x00d5
+                    00D6    260 _PSW_6	=	0x00d6
+                    00D7    261 _PSW_7	=	0x00d7
+                    008F    262 _TCON_7	=	0x008f
+                    008E    263 _TCON_6	=	0x008e
+                    008D    264 _TCON_5	=	0x008d
+                    008C    265 _TCON_4	=	0x008c
+                    008B    266 _TCON_3	=	0x008b
+                    008A    267 _TCON_2	=	0x008a
+                    0089    268 _TCON_1	=	0x0089
+                    0088    269 _TCON_0	=	0x0088
+                    00AF    270 _IEN0_7	=	0x00af
+                    00AE    271 _IEN0_6	=	0x00ae
+                    00AD    272 _IEN0_5	=	0x00ad
+                    00AC    273 _IEN0_4	=	0x00ac
+                    00AB    274 _IEN0_3	=	0x00ab
+                    00AA    275 _IEN0_2	=	0x00aa
+                    00A9    276 _IEN0_1	=	0x00a9
+                    00A8    277 _IEN0_0	=	0x00a8
+                    00EA    278 _IEN1_2	=	0x00ea
+                    00E9    279 _IEN1_1	=	0x00e9
+                    00E8    280 _IEN1_0	=	0x00e8
+                    00FE    281 _IP1_6	=	0x00fe
+                    00FA    282 _IP1_2	=	0x00fa
+                    00F9    283 _IP1_1	=	0x00f9
+                    00F8    284 _IP1_0	=	0x00f8
+                    00BE    285 _IP0_6	=	0x00be
+                    00BD    286 _IP0_5	=	0x00bd
+                    00BC    287 _IP0_4	=	0x00bc
+                    00BB    288 _IP0_3	=	0x00bb
+                    00BA    289 _IP0_2	=	0x00ba
+                    00B9    290 _IP0_1	=	0x00b9
+                    00B8    291 _IP0_0	=	0x00b8
+                    0098    292 _SCON_0	=	0x0098
+                    0099    293 _SCON_1	=	0x0099
+                    009A    294 _SCON_2	=	0x009a
+                    009B    295 _SCON_3	=	0x009b
+                    009C    296 _SCON_4	=	0x009c
+                    009D    297 _SCON_5	=	0x009d
+                    009E    298 _SCON_6	=	0x009e
+                    009F    299 _SCON_7	=	0x009f
+                    00DE    300 _I2CON_6	=	0x00de
+                    00DD    301 _I2CON_5	=	0x00dd
+                    00DC    302 _I2CON_4	=	0x00dc
+                    00DB    303 _I2CON_3	=	0x00db
+                    00DA    304 _I2CON_2	=	0x00da
+                    00D8    305 _I2CON_0	=	0x00d8
+                    0080    306 _P0_0	=	0x0080
+                    0081    307 _P0_1	=	0x0081
+                    0082    308 _P0_2	=	0x0082
+                    0083    309 _P0_3	=	0x0083
+                    0084    310 _P0_4	=	0x0084
+                    0085    311 _P0_5	=	0x0085
+                    0086    312 _P0_6	=	0x0086
+                    0087    313 _P0_7	=	0x0087
+                    0090    314 _P1_0	=	0x0090
+                    0091    315 _P1_1	=	0x0091
+                    0092    316 _P1_2	=	0x0092
+                    0093    317 _P1_3	=	0x0093
+                    0094    318 _P1_4	=	0x0094
+                    0095    319 _P1_5	=	0x0095
+                    0096    320 _P1_6	=	0x0096
+                    0097    321 _P1_7	=	0x0097
+                    00B0    322 _P3_0	=	0x00b0
+                    00B1    323 _P3_1	=	0x00b1
+                            324 ;--------------------------------------------------------
+                            325 ; overlayable register banks
+                            326 ;--------------------------------------------------------
+                            327 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                     328 	.ds 8
+                            329 	.area REG_BANK_1	(REL,OVR,DATA)
+   0008                     330 	.ds 8
+                            331 ;--------------------------------------------------------
+                            332 ; overlayable bit register bank
+                            333 ;--------------------------------------------------------
+                            334 	.area BIT_BANK	(REL,OVR,DATA)
+   0023                     335 bits:
+   0023                     336 	.ds 1
+                    8000    337 	b0 = bits[0]
+                    8100    338 	b1 = bits[1]
+                    8200    339 	b2 = bits[2]
+                    8300    340 	b3 = bits[3]
+                    8400    341 	b4 = bits[4]
+                    8500    342 	b5 = bits[5]
+                    8600    343 	b6 = bits[6]
+                    8700    344 	b7 = bits[7]
+                            345 ;--------------------------------------------------------
+                            346 ; internal ram data
+                            347 ;--------------------------------------------------------
+                            348 	.area DSEG    (DATA)
+   0024                     349 _rsin::
+   0024                     350 	.ds 30
+   0042                     351 _rsinpos::
+   0042                     352 	.ds 1
+   0043                     353 _groupadr::
+   0043                     354 	.ds 2
+   0045                     355 _pa_tmp::
+   0045                     356 	.ds 2
+   0047                     357 _ledcount::
+   0047                     358 	.ds 1
+   0048                     359 _eibledcount::
+   0048                     360 	.ds 1
+   0049                     361 _rxledcount::
+   0049                     362 	.ds 1
+                            363 ;--------------------------------------------------------
+                            364 ; overlayable items in internal ram 
+                            365 ;--------------------------------------------------------
+                            366 	.area OSEG    (OVR,DATA)
+                            367 ;--------------------------------------------------------
+                            368 ; indirectly addressable internal ram data
+                            369 ;--------------------------------------------------------
+                            370 	.area ISEG    (DATA)
                             371 ;--------------------------------------------------------
-                            372 ; bit data
+                            372 ; absolute internal ram data
                             373 ;--------------------------------------------------------
-                            374 	.area BSEG    (BIT)
-                            375 ;--------------------------------------------------------
-                            376 ; paged external ram data
-                            377 ;--------------------------------------------------------
-                            378 	.area PSEG    (PAG,XDATA)
-                            379 ;--------------------------------------------------------
-                            380 ; external ram data
-                            381 ;--------------------------------------------------------
-                            382 	.area XSEG    (XDATA)
-                            383 ;--------------------------------------------------------
-                            384 ; absolute external ram data
-                            385 ;--------------------------------------------------------
-                            386 	.area XABS    (ABS,XDATA)
-                            387 ;--------------------------------------------------------
-                            388 ; external initialized ram data
-                            389 ;--------------------------------------------------------
-                            390 	.area XISEG   (XDATA)
-                            391 	.area HOME    (CODE)
-                            392 	.area GSINIT0 (CODE)
-                            393 	.area GSINIT1 (CODE)
-                            394 	.area GSINIT2 (CODE)
-                            395 	.area GSINIT3 (CODE)
-                            396 	.area GSINIT4 (CODE)
-                            397 	.area GSINIT5 (CODE)
-                            398 	.area GSINIT  (CODE)
-                            399 	.area GSFINAL (CODE)
-                            400 	.area CSEG    (CODE)
-                            401 ;--------------------------------------------------------
-                            402 ; global & static initialisations
-                            403 ;--------------------------------------------------------
-                            404 	.area HOME    (CODE)
-                            405 	.area GSINIT  (CODE)
-                            406 	.area GSFINAL (CODE)
-                            407 	.area GSINIT  (CODE)
-                            408 ;	../fb_app_rs.c:26: unsigned int groupadr=0,pa_tmp;
-   0084 E4                  409 	clr	a
-   0085 F5 43               410 	mov	_groupadr,a
-   0087 F5 44               411 	mov	(_groupadr + 1),a
-                            412 ;--------------------------------------------------------
-                            413 ; Home
-                            414 ;--------------------------------------------------------
-                            415 	.area HOME    (CODE)
-                            416 	.area HOME    (CODE)
+                            374 	.area IABS    (ABS,DATA)
+                            375 	.area IABS    (ABS,DATA)
+                            376 ;--------------------------------------------------------
+                            377 ; bit data
+                            378 ;--------------------------------------------------------
+                            379 	.area BSEG    (BIT)
+                            380 ;--------------------------------------------------------
+                            381 ; paged external ram data
+                            382 ;--------------------------------------------------------
+                            383 	.area PSEG    (PAG,XDATA)
+                            384 ;--------------------------------------------------------
+                            385 ; external ram data
+                            386 ;--------------------------------------------------------
+                            387 	.area XSEG    (XDATA)
+                            388 ;--------------------------------------------------------
+                            389 ; absolute external ram data
+                            390 ;--------------------------------------------------------
+                            391 	.area XABS    (ABS,XDATA)
+                            392 ;--------------------------------------------------------
+                            393 ; external initialized ram data
+                            394 ;--------------------------------------------------------
+                            395 	.area XISEG   (XDATA)
+                            396 	.area HOME    (CODE)
+                            397 	.area GSINIT0 (CODE)
+                            398 	.area GSINIT1 (CODE)
+                            399 	.area GSINIT2 (CODE)
+                            400 	.area GSINIT3 (CODE)
+                            401 	.area GSINIT4 (CODE)
+                            402 	.area GSINIT5 (CODE)
+                            403 	.area GSINIT  (CODE)
+                            404 	.area GSFINAL (CODE)
+                            405 	.area CSEG    (CODE)
+                            406 ;--------------------------------------------------------
+                            407 ; global & static initialisations
+                            408 ;--------------------------------------------------------
+                            409 	.area HOME    (CODE)
+                            410 	.area GSINIT  (CODE)
+                            411 	.area GSFINAL (CODE)
+                            412 	.area GSINIT  (CODE)
+                            413 ;	../fb_app_rs.c:26: unsigned int groupadr=0,pa_tmp;
+   0084 E4                  414 	clr	a
+   0085 F5 43               415 	mov	_groupadr,a
+   0087 F5 44               416 	mov	(_groupadr + 1),a
                             417 ;--------------------------------------------------------
-                            418 ; code
+                            418 ; Home
                             419 ;--------------------------------------------------------
-                            420 	.area CSEG    (CODE)
-                            421 ;------------------------------------------------------------
-                            422 ;Allocation info for local variables in function 'build_tel'
-                            423 ;------------------------------------------------------------
-                            424 ;objno                     Allocated to registers r7 
-                            425 ;build_ok                  Allocated to registers 
-                            426 ;value                     Allocated to stack - _bp +1
-                            427 ;value_pos                 Allocated to registers r5 r4 
-                            428 ;eis5temp                  Allocated to registers r2 r3 
-                            429 ;d                         Allocated to stack - _bp +3
-                            430 ;exp                       Allocated to registers r5 r4 
-                            431 ;temp                      Allocated to stack - _bp +5
-                            432 ;day                       Allocated to registers r6 
-                            433 ;repeatflag                Allocated to registers b0 
-                            434 ;sloc0                     Allocated to stack - _bp +9
-                            435 ;sloc1                     Allocated to stack - _bp +20
-                            436 ;sloc2                     Allocated to stack - _bp +10
-                            437 ;sloc3                     Allocated to stack - _bp +11
-                            438 ;sloc4                     Allocated to stack - _bp +25
-                            439 ;------------------------------------------------------------
-                            440 ;	../fb_app_rs.c:50: __bit build_tel(unsigned char objno)
-                            441 ;	-----------------------------------------
-                            442 ;	 function build_tel
-                            443 ;	-----------------------------------------
-   008C                     444 _build_tel:
-                    0007    445 	ar7 = 0x07
-                    0006    446 	ar6 = 0x06
-                    0005    447 	ar5 = 0x05
-                    0004    448 	ar4 = 0x04
-                    0003    449 	ar3 = 0x03
-                    0002    450 	ar2 = 0x02
-                    0001    451 	ar1 = 0x01
-                    0000    452 	ar0 = 0x00
-   008C C0 10               453 	push	_bp
-   008E E5 81               454 	mov	a,sp
-   0090 F5 10               455 	mov	_bp,a
-   0092 24 0C               456 	add	a,#0x0C
-   0094 F5 81               457 	mov	sp,a
-   0096 AF 82               458 	mov	r7,dpl
-                            459 ;	../fb_app_rs.c:59: unsigned char day=0;//, length;
-   0098 7E 00               460 	mov	r6,#0x00
-                            461 ;	../fb_app_rs.c:63: repeatflag=objno&0x20;
-   009A EF                  462 	mov	a,r7
-   009B A2 E5               463 	mov	c,acc[5]
-   009D E4                  464 	clr	a
-   009E 33                  465 	rlc	a
-   009F 24 FF               466 	add	a,#0xff
-   00A1 92 18               467 	mov	b0,c
-                            468 ;	../fb_app_rs.c:64: groupadr=convert_adr(6);
-   00A3 75 82 06            469 	mov	dpl,#0x06
-   00A6 C0 07               470 	push	ar7
-   00A8 C0 06               471 	push	ar6
-   00AA C0 23               472 	push	bits
-   00AC 12 09 EA            473 	lcall	_convert_adr
-   00AF 85 82 43            474 	mov	_groupadr,dpl
-   00B2 85 83 44            475 	mov	(_groupadr + 1),dph
-   00B5 D0 23               476 	pop	bits
-                            477 ;	../fb_app_rs.c:65: value_pos=equal_pos()+1;
-   00B7 C0 23               478 	push	bits
-   00B9 12 0A F6            479 	lcall	_equal_pos
-   00BC AD 82               480 	mov	r5,dpl
-   00BE D0 23               481 	pop	bits
-   00C0 D0 06               482 	pop	ar6
-   00C2 D0 07               483 	pop	ar7
-   00C4 7C 00               484 	mov	r4,#0x00
-   00C6 0D                  485 	inc	r5
-   00C7 BD 00 01            486 	cjne	r5,#0x00,00205$
-   00CA 0C                  487 	inc	r4
-   00CB                     488 00205$:
-                            489 ;	../fb_app_rs.c:66: switch (objno)// entspricht in der rs soft dem eis type.
-   00CB BF 01 02            490 	cjne	r7,#0x01,00206$
-   00CE 80 2C               491 	sjmp	00101$
-   00D0                     492 00206$:
-   00D0 BF 02 02            493 	cjne	r7,#0x02,00207$
-   00D3 80 64               494 	sjmp	00105$
-   00D5                     495 00207$:
-   00D5 BF 03 03            496 	cjne	r7,#0x03,00208$
-   00D8 02 01 93            497 	ljmp	00109$
-   00DB                     498 00208$:
-   00DB BF 04 03            499 	cjne	r7,#0x04,00209$
-   00DE 02 01 A7            500 	ljmp	00110$
-   00E1                     501 00209$:
-   00E1 BF 05 03            502 	cjne	r7,#0x05,00210$
-   00E4 02 02 1C            503 	ljmp	00111$
-   00E7                     504 00210$:
-   00E7 BF 06 03            505 	cjne	r7,#0x06,00211$
-   00EA 02 05 35            506 	ljmp	00131$
-   00ED                     507 00211$:
-   00ED BF 0F 03            508 	cjne	r7,#0x0F,00212$
-   00F0 02 05 CD            509 	ljmp	00135$
-   00F3                     510 00212$:
-   00F3 BF 10 03            511 	cjne	r7,#0x10,00213$
-   00F6 02 06 46            512 	ljmp	00139$
-   00F9                     513 00213$:
-   00F9 02 06 6C            514 	ljmp	00140$
-                            515 ;	../fb_app_rs.c:71: case 1:// EIS1
-   00FC                     516 00101$:
-                            517 ;	../fb_app_rs.c:72: tel_header(groupadr, 1);
-   00FC C0 23               518 	push	bits
-   00FE 74 01               519 	mov	a,#0x01
-   0100 C0 E0               520 	push	acc
-   0102 85 43 82            521 	mov	dpl,_groupadr
-   0105 85 44 83            522 	mov	dph,(_groupadr + 1)
-   0108 12 09 B8            523 	lcall	_tel_header
-   010B 15 81               524 	dec	sp
-   010D D0 23               525 	pop	bits
-                            526 ;	../fb_app_rs.c:73: if (rsin[rsinpos-2]=='1') value=1;
-   010F E5 42               527 	mov	a,_rsinpos
-   0111 24 FE               528 	add	a,#0xFE
-   0113 24 24               529 	add	a,#_rsin
-   0115 F9                  530 	mov	r1,a
-   0116 87 07               531 	mov	ar7,@r1
-   0118 BF 31 0A            532 	cjne	r7,#0x31,00103$
-   011B A8 10               533 	mov	r0,_bp
-   011D 08                  534 	inc	r0
-   011E 76 01               535 	mov	@r0,#0x01
-   0120 08                  536 	inc	r0
-   0121 76 00               537 	mov	@r0,#0x00
-   0123 80 07               538 	sjmp	00104$
-   0125                     539 00103$:
-                            540 ;	../fb_app_rs.c:74: else value=0;
-   0125 A8 10               541 	mov	r0,_bp
-   0127 08                  542 	inc	r0
-   0128 E4                  543 	clr	a
-   0129 F6                  544 	mov	@r0,a
-   012A 08                  545 	inc	r0
-   012B F6                  546 	mov	@r0,a
-   012C                     547 00104$:
-                            548 ;	../fb_app_rs.c:75: telegramm[7]=0x80+value;
-   012C A8 10               549 	mov	r0,_bp
-   012E 08                  550 	inc	r0
-   012F 86 02               551 	mov	ar2,@r0
-   0131 74 80               552 	mov	a,#0x80
-   0133 2A                  553 	add	a,r2
-   0134 F5 58               554 	mov	(_telegramm + 0x0007),a
-                            555 ;	../fb_app_rs.c:77: break;	
-   0136 02 06 6C            556 	ljmp	00140$
-                            557 ;	../fb_app_rs.c:78: case 2:// EIS2
-   0139                     558 00105$:
-                            559 ;	../fb_app_rs.c:79: tel_header(groupadr, 1);
-   0139 C0 23               560 	push	bits
-   013B 74 01               561 	mov	a,#0x01
-   013D C0 E0               562 	push	acc
-   013F 85 43 82            563 	mov	dpl,_groupadr
-   0142 85 44 83            564 	mov	dph,(_groupadr + 1)
-   0145 12 09 B8            565 	lcall	_tel_header
-   0148 15 81               566 	dec	sp
-   014A D0 23               567 	pop	bits
-                            568 ;	../fb_app_rs.c:80: if (rsin[rsinpos-3]=='u') value=0x88;
-   014C E5 42               569 	mov	a,_rsinpos
-   014E 24 FD               570 	add	a,#0xFD
-   0150 24 24               571 	add	a,#_rsin
-   0152 F9                  572 	mov	r1,a
-   0153 87 02               573 	mov	ar2,@r1
-   0155 BA 75 0A            574 	cjne	r2,#0x75,00107$
-   0158 A8 10               575 	mov	r0,_bp
-   015A 08                  576 	inc	r0
-   015B 76 88               577 	mov	@r0,#0x88
-   015D 08                  578 	inc	r0
-   015E 76 00               579 	mov	@r0,#0x00
-   0160 80 08               580 	sjmp	00108$
-   0162                     581 00107$:
-                            582 ;	../fb_app_rs.c:81: else value=0x80;
-   0162 A8 10               583 	mov	r0,_bp
-   0164 08                  584 	inc	r0
-   0165 76 80               585 	mov	@r0,#0x80
-   0167 08                  586 	inc	r0
-   0168 76 00               587 	mov	@r0,#0x00
-   016A                     588 00108$:
-                            589 ;	../fb_app_rs.c:82: value+=((rsin[rsinpos-2]-48));
-   016A E5 42               590 	mov	a,_rsinpos
-   016C 24 FE               591 	add	a,#0xFE
-   016E 24 24               592 	add	a,#_rsin
-   0170 F9                  593 	mov	r1,a
-   0171 87 02               594 	mov	ar2,@r1
-   0173 7F 00               595 	mov	r7,#0x00
-   0175 EA                  596 	mov	a,r2
-   0176 24 D0               597 	add	a,#0xD0
-   0178 FA                  598 	mov	r2,a
-   0179 EF                  599 	mov	a,r7
-   017A 34 FF               600 	addc	a,#0xFF
-   017C FF                  601 	mov	r7,a
-   017D A8 10               602 	mov	r0,_bp
-   017F 08                  603 	inc	r0
-   0180 EA                  604 	mov	a,r2
-   0181 26                  605 	add	a,@r0
-   0182 F6                  606 	mov	@r0,a
-   0183 EF                  607 	mov	a,r7
-   0184 08                  608 	inc	r0
-   0185 36                  609 	addc	a,@r0
-   0186 F6                  610 	mov	@r0,a
-                            611 ;	../fb_app_rs.c:83: telegramm[7]=value&0xFF;
-   0187 A8 10               612 	mov	r0,_bp
-   0189 08                  613 	inc	r0
-   018A 86 03               614 	mov	ar3,@r0
-   018C 7F 00               615 	mov	r7,#0x00
-   018E 8B 58               616 	mov	(_telegramm + 0x0007),r3
-                            617 ;	../fb_app_rs.c:84: break;	
-   0190 02 06 6C            618 	ljmp	00140$
-                            619 ;	../fb_app_rs.c:85: case 3:// EIS3
-   0193                     620 00109$:
-                            621 ;	../fb_app_rs.c:86: day=(rsin[value_pos]-48)<<5;
-   0193 ED                  622 	mov	a,r5
-   0194 24 24               623 	add	a,#_rsin
-   0196 F9                  624 	mov	r1,a
-   0197 E7                  625 	mov	a,@r1
-   0198 24 D0               626 	add	a,#0xD0
-   019A FF                  627 	mov	r7,a
-   019B C4                  628 	swap	a
-   019C 23                  629 	rl	a
-   019D 54 E0               630 	anl	a,#0xE0
-   019F FE                  631 	mov	r6,a
-                            632 ;	../fb_app_rs.c:87: value_pos+=2;
-   01A0 74 02               633 	mov	a,#0x02
-   01A2 2D                  634 	add	a,r5
-   01A3 FD                  635 	mov	r5,a
-   01A4 E4                  636 	clr	a
-   01A5 3C                  637 	addc	a,r4
-   01A6 FC                  638 	mov	r4,a
-                            639 ;	../fb_app_rs.c:88: case 4:// EIS4	
-   01A7                     640 00110$:
-                            641 ;	../fb_app_rs.c:89: tel_header(groupadr, 4);
-   01A7 C0 06               642 	push	ar6
-   01A9 C0 05               643 	push	ar5
-   01AB C0 04               644 	push	ar4
-   01AD C0 23               645 	push	bits
-   01AF 74 04               646 	mov	a,#0x04
-   01B1 C0 E0               647 	push	acc
-   01B3 85 43 82            648 	mov	dpl,_groupadr
-   01B6 85 44 83            649 	mov	dph,(_groupadr + 1)
-   01B9 12 09 B8            650 	lcall	_tel_header
-   01BC 15 81               651 	dec	sp
-   01BE D0 23               652 	pop	bits
-   01C0 D0 04               653 	pop	ar4
-   01C2 D0 05               654 	pop	ar5
-   01C4 D0 06               655 	pop	ar6
-                            656 ;	../fb_app_rs.c:90: telegramm[7]=0x80;
-   01C6 75 58 80            657 	mov	(_telegramm + 0x0007),#0x80
-                            658 ;	../fb_app_rs.c:91: telegramm[8]=((rsin[value_pos]-48)*10)+(rsin[value_pos+1]-48)+day;
-   01C9 ED                  659 	mov	a,r5
-   01CA 24 24               660 	add	a,#_rsin
-   01CC F9                  661 	mov	r1,a
-   01CD E7                  662 	mov	a,@r1
-   01CE 24 D0               663 	add	a,#0xD0
-   01D0 75 F0 0A            664 	mov	b,#0x0A
-   01D3 A4                  665 	mul	ab
-   01D4 FF                  666 	mov	r7,a
-   01D5 8D 03               667 	mov	ar3,r5
-   01D7 EB                  668 	mov	a,r3
-   01D8 04                  669 	inc	a
-   01D9 24 24               670 	add	a,#_rsin
-   01DB F9                  671 	mov	r1,a
-   01DC E7                  672 	mov	a,@r1
-   01DD FA                  673 	mov	r2,a
-   01DE 24 D0               674 	add	a,#0xD0
-   01E0 2F                  675 	add	a,r7
-   01E1 2E                  676 	add	a,r6
-   01E2 F5 59               677 	mov	(_telegramm + 0x0008),a
-                            678 ;	../fb_app_rs.c:92: telegramm[9]=((rsin[value_pos+3]-48)*10)+(rsin[value_pos+4]-48);
-   01E4 74 03               679 	mov	a,#0x03
-   01E6 2B                  680 	add	a,r3
-   01E7 24 24               681 	add	a,#_rsin
-   01E9 F9                  682 	mov	r1,a
-   01EA E7                  683 	mov	a,@r1
-   01EB 24 D0               684 	add	a,#0xD0
-   01ED 75 F0 0A            685 	mov	b,#0x0A
-   01F0 A4                  686 	mul	ab
-   01F1 FF                  687 	mov	r7,a
-   01F2 74 04               688 	mov	a,#0x04
-   01F4 2B                  689 	add	a,r3
-   01F5 24 24               690 	add	a,#_rsin
-   01F7 F9                  691 	mov	r1,a
-   01F8 E7                  692 	mov	a,@r1
-   01F9 24 D0               693 	add	a,#0xD0
-   01FB 2F                  694 	add	a,r7
-   01FC F5 5A               695 	mov	(_telegramm + 0x0009),a
-                            696 ;	../fb_app_rs.c:93: telegramm[10]=((rsin[value_pos+6]-48)*10)+(rsin[value_pos+7]-48);
-   01FE 74 06               697 	mov	a,#0x06
-   0200 2B                  698 	add	a,r3
-   0201 24 24               699 	add	a,#_rsin
-   0203 F9                  700 	mov	r1,a
-   0204 E7                  701 	mov	a,@r1
-   0205 24 D0               702 	add	a,#0xD0
-   0207 75 F0 0A            703 	mov	b,#0x0A
-   020A A4                  704 	mul	ab
-   020B FF                  705 	mov	r7,a
-   020C 74 07               706 	mov	a,#0x07
-   020E 2B                  707 	add	a,r3
-   020F 24 24               708 	add	a,#_rsin
-   0211 F9                  709 	mov	r1,a
-   0212 E7                  710 	mov	a,@r1
-   0213 FE                  711 	mov	r6,a
-   0214 24 D0               712 	add	a,#0xD0
-   0216 2F                  713 	add	a,r7
-   0217 F5 5B               714 	mov	(_telegramm + 0x000a),a
-                            715 ;	../fb_app_rs.c:94: break;
-   0219 02 06 6C            716 	ljmp	00140$
-                            717 ;	../fb_app_rs.c:102: */	case 5://
-   021C                     718 00111$:
-                            719 ;	../fb_app_rs.c:103: tel_header(groupadr, 3);
-   021C C0 05               720 	push	ar5
-   021E C0 04               721 	push	ar4
-   0220 C0 23               722 	push	bits
-   0222 74 03               723 	mov	a,#0x03
-   0224 C0 E0               724 	push	acc
-   0226 85 43 82            725 	mov	dpl,_groupadr
-   0229 85 44 83            726 	mov	dph,(_groupadr + 1)
-   022C 12 09 B8            727 	lcall	_tel_header
-   022F 15 81               728 	dec	sp
-   0231 D0 23               729 	pop	bits
-   0233 D0 04               730 	pop	ar4
-   0235 D0 05               731 	pop	ar5
-                            732 ;	../fb_app_rs.c:104: telegramm[7]=0x80;
-   0237 75 58 80            733 	mov	(_telegramm + 0x0007),#0x80
-                            734 ;	../fb_app_rs.c:106: if(rsin[value_pos]<48 || rsin[value_pos]>57) d=value_pos+1; else d=value_pos;	// falls Vorzeichen
-   023A ED                  735 	mov	a,r5
-   023B 24 24               736 	add	a,#_rsin
-   023D F9                  737 	mov	r1,a
-   023E E5 10               738 	mov	a,_bp
-   0240 24 09               739 	add	a,#0x09
-   0242 F8                  740 	mov	r0,a
-   0243 E7                  741 	mov	a,@r1
-   0244 F6                  742 	mov	@r0,a
-   0245 E5 10               743 	mov	a,_bp
-   0247 24 09               744 	add	a,#0x09
-   0249 F8                  745 	mov	r0,a
-   024A B6 30 00            746 	cjne	@r0,#0x30,00218$
-   024D                     747 00218$:
-   024D 40 0A               748 	jc	00112$
-   024F E5 10               749 	mov	a,_bp
-   0251 24 09               750 	add	a,#0x09
-   0253 F8                  751 	mov	r0,a
-   0254 E6                  752 	mov	a,@r0
-   0255 24 C6               753 	add	a,#0xff - 0x39
-   0257 50 13               754 	jnc	00113$
-   0259                     755 00112$:
-   0259 74 01               756 	mov	a,#0x01
-   025B 2D                  757 	add	a,r5
-   025C FB                  758 	mov	r3,a
-   025D E4                  759 	clr	a
-   025E 3C                  760 	addc	a,r4
-   025F FE                  761 	mov	r6,a
-   0260 E5 10               762 	mov	a,_bp
-   0262 24 03               763 	add	a,#0x03
-   0264 F8                  764 	mov	r0,a
-   0265 A6 03               765 	mov	@r0,ar3
-   0267 08                  766 	inc	r0
-   0268 A6 06               767 	mov	@r0,ar6
-   026A 80 0A               768 	sjmp	00114$
-   026C                     769 00113$:
-   026C E5 10               770 	mov	a,_bp
-   026E 24 03               771 	add	a,#0x03
-   0270 F8                  772 	mov	r0,a
-   0271 A6 05               773 	mov	@r0,ar5
-   0273 08                  774 	inc	r0
-   0274 A6 04               775 	mov	@r0,ar4
-   0276                     776 00114$:
-                            777 ;	../fb_app_rs.c:109: temp=0;
-   0276 E5 10               778 	mov	a,_bp
-   0278 24 05               779 	add	a,#0x05
-   027A F8                  780 	mov	r0,a
-   027B E4                  781 	clr	a
-   027C F6                  782 	mov	@r0,a
-   027D 08                  783 	inc	r0
-   027E F6                  784 	mov	@r0,a
-   027F 08                  785 	inc	r0
-   0280 F6                  786 	mov	@r0,a
-   0281 08                  787 	inc	r0
-   0282 F6                  788 	mov	@r0,a
-                            789 ;	../fb_app_rs.c:110: while (d<(rsinpos-1) && rsin[d]!=0x2E && rsin[d]!=0x2C) {
-   0283 E5 10               790 	mov	a,_bp
-   0285 24 03               791 	add	a,#0x03
-   0287 F8                  792 	mov	r0,a
-   0288 E5 10               793 	mov	a,_bp
-   028A 24 0B               794 	add	a,#0x0b
-   028C F9                  795 	mov	r1,a
-   028D E6                  796 	mov	a,@r0
-   028E F7                  797 	mov	@r1,a
-   028F 08                  798 	inc	r0
-   0290 09                  799 	inc	r1
-   0291 E6                  800 	mov	a,@r0
-   0292 F7                  801 	mov	@r1,a
-   0293                     802 00118$:
-   0293 AD 42               803 	mov	r5,_rsinpos
-   0295 7C 00               804 	mov	r4,#0x00
-   0297 ED                  805 	mov	a,r5
-   0298 24 FF               806 	add	a,#0xFF
-   029A FA                  807 	mov	r2,a
-   029B EC                  808 	mov	a,r4
-   029C 34 FF               809 	addc	a,#0xFF
-   029E FB                  810 	mov	r3,a
-   029F E5 10               811 	mov	a,_bp
-   02A1 24 0B               812 	add	a,#0x0b
-   02A3 F8                  813 	mov	r0,a
-   02A4 C3                  814 	clr	c
-   02A5 E6                  815 	mov	a,@r0
-   02A6 9A                  816 	subb	a,r2
-   02A7 08                  817 	inc	r0
-   02A8 E6                  818 	mov	a,@r0
-   02A9 64 80               819 	xrl	a,#0x80
-   02AB 8B F0               820 	mov	b,r3
-   02AD 63 F0 80            821 	xrl	b,#0x80
-   02B0 95 F0               822 	subb	a,b
-   02B2 40 03               823 	jc	00221$
-   02B4 02 03 52            824 	ljmp	00120$
-   02B7                     825 00221$:
-   02B7 E5 10               826 	mov	a,_bp
-   02B9 24 0B               827 	add	a,#0x0b
-   02BB F8                  828 	mov	r0,a
-   02BC E6                  829 	mov	a,@r0
-   02BD 24 24               830 	add	a,#_rsin
-   02BF F9                  831 	mov	r1,a
-   02C0 E5 10               832 	mov	a,_bp
-   02C2 24 0A               833 	add	a,#0x0a
-   02C4 F8                  834 	mov	r0,a
-   02C5 E7                  835 	mov	a,@r1
-   02C6 F6                  836 	mov	@r0,a
-   02C7 E5 10               837 	mov	a,_bp
-   02C9 24 0A               838 	add	a,#0x0a
-   02CB F8                  839 	mov	r0,a
-   02CC B6 2E 03            840 	cjne	@r0,#0x2E,00222$
-   02CF 02 03 52            841 	ljmp	00120$
-   02D2                     842 00222$:
-   02D2 E5 10               843 	mov	a,_bp
-   02D4 24 0A               844 	add	a,#0x0a
-   02D6 F8                  845 	mov	r0,a
-   02D7 B6 2C 02            846 	cjne	@r0,#0x2C,00223$
-   02DA 80 76               847 	sjmp	00120$
-   02DC                     848 00223$:
-                            849 ;	../fb_app_rs.c:111: temp=temp*10;
-   02DC C0 23               850 	push	bits
-   02DE E5 10               851 	mov	a,_bp
-   02E0 24 05               852 	add	a,#0x05
-   02E2 F8                  853 	mov	r0,a
-   02E3 E6                  854 	mov	a,@r0
-   02E4 C0 E0               855 	push	acc
-   02E6 08                  856 	inc	r0
-   02E7 E6                  857 	mov	a,@r0
-   02E8 C0 E0               858 	push	acc
-   02EA 08                  859 	inc	r0
-   02EB E6                  860 	mov	a,@r0
-   02EC C0 E0               861 	push	acc
-   02EE 08                  862 	inc	r0
-   02EF E6                  863 	mov	a,@r0
-   02F0 C0 E0               864 	push	acc
-   02F2 90 00 0A            865 	mov	dptr,#(0x0A&0x00ff)
-   02F5 E4                  866 	clr	a
-   02F6 F5 F0               867 	mov	b,a
-   02F8 12 1B 05            868 	lcall	__mullong
-   02FB AA 82               869 	mov	r2,dpl
-   02FD AB 83               870 	mov	r3,dph
-   02FF AE F0               871 	mov	r6,b
-   0301 FF                  872 	mov	r7,a
-   0302 E5 81               873 	mov	a,sp
-   0304 24 FC               874 	add	a,#0xfc
-   0306 F5 81               875 	mov	sp,a
-   0308 D0 23               876 	pop	bits
-   030A E5 10               877 	mov	a,_bp
-   030C 24 05               878 	add	a,#0x05
-   030E F8                  879 	mov	r0,a
-   030F A6 02               880 	mov	@r0,ar2
-   0311 08                  881 	inc	r0
-   0312 A6 03               882 	mov	@r0,ar3
-   0314 08                  883 	inc	r0
-   0315 A6 06               884 	mov	@r0,ar6
-   0317 08                  885 	inc	r0
-   0318 A6 07               886 	mov	@r0,ar7
-                            887 ;	../fb_app_rs.c:112: temp=temp+(rsin[d]-48);
-   031A E5 10               888 	mov	a,_bp
-   031C 24 0A               889 	add	a,#0x0a
-   031E F8                  890 	mov	r0,a
-   031F 86 03               891 	mov	ar3,@r0
-   0321 7F 00               892 	mov	r7,#0x00
-   0323 EB                  893 	mov	a,r3
-   0324 24 D0               894 	add	a,#0xD0
-   0326 FB                  895 	mov	r3,a
-   0327 EF                  896 	mov	a,r7
-   0328 34 FF               897 	addc	a,#0xFF
-   032A FF                  898 	mov	r7,a
-   032B 33                  899 	rlc	a
-   032C 95 E0               900 	subb	a,acc
-   032E FE                  901 	mov	r6,a
-   032F FA                  902 	mov	r2,a
-   0330 E5 10               903 	mov	a,_bp
-   0332 24 05               904 	add	a,#0x05
-   0334 F8                  905 	mov	r0,a
-   0335 EB                  906 	mov	a,r3
-   0336 26                  907 	add	a,@r0
-   0337 F6                  908 	mov	@r0,a
-   0338 EF                  909 	mov	a,r7
-   0339 08                  910 	inc	r0
-   033A 36                  911 	addc	a,@r0
-   033B F6                  912 	mov	@r0,a
-   033C EE                  913 	mov	a,r6
-   033D 08                  914 	inc	r0
-   033E 36                  915 	addc	a,@r0
-   033F F6                  916 	mov	@r0,a
-   0340 EA                  917 	mov	a,r2
-   0341 08                  918 	inc	r0
-   0342 36                  919 	addc	a,@r0
-   0343 F6                  920 	mov	@r0,a
-                            921 ;	../fb_app_rs.c:113: d++;
-   0344 E5 10               922 	mov	a,_bp
-   0346 24 0B               923 	add	a,#0x0b
-   0348 F8                  924 	mov	r0,a
-   0349 06                  925 	inc	@r0
-   034A B6 00 02            926 	cjne	@r0,#0x00,00224$
-   034D 08                  927 	inc	r0
-   034E 06                  928 	inc	@r0
-   034F                     929 00224$:
-   034F 02 02 93            930 	ljmp	00118$
-   0352                     931 00120$:
-                            932 ;	../fb_app_rs.c:115: d++;
-   0352 E5 10               933 	mov	a,_bp
-   0354 24 0B               934 	add	a,#0x0b
-   0356 F8                  935 	mov	r0,a
-   0357 E5 10               936 	mov	a,_bp
-   0359 24 03               937 	add	a,#0x03
-   035B F9                  938 	mov	r1,a
-   035C 74 01               939 	mov	a,#0x01
-   035E 26                  940 	add	a,@r0
-   035F F7                  941 	mov	@r1,a
-   0360 E4                  942 	clr	a
-   0361 08                  943 	inc	r0
-   0362 36                  944 	addc	a,@r0
-   0363 09                  945 	inc	r1
-   0364 F7                  946 	mov	@r1,a
-                            947 ;	../fb_app_rs.c:116: temp=temp*10;
-   0365 C0 05               948 	push	ar5
-   0367 C0 04               949 	push	ar4
-   0369 C0 23               950 	push	bits
-   036B E5 10               951 	mov	a,_bp
-   036D 24 05               952 	add	a,#0x05
-   036F F8                  953 	mov	r0,a
-   0370 E6                  954 	mov	a,@r0
-   0371 C0 E0               955 	push	acc
-   0373 08                  956 	inc	r0
-   0374 E6                  957 	mov	a,@r0
-   0375 C0 E0               958 	push	acc
-   0377 08                  959 	inc	r0
-   0378 E6                  960 	mov	a,@r0
-   0379 C0 E0               961 	push	acc
-   037B 08                  962 	inc	r0
-   037C E6                  963 	mov	a,@r0
-   037D C0 E0               964 	push	acc
-   037F 90 00 0A            965 	mov	dptr,#(0x0A&0x00ff)
-   0382 E4                  966 	clr	a
-   0383 F5 F0               967 	mov	b,a
-   0385 12 1B 05            968 	lcall	__mullong
-   0388 AA 82               969 	mov	r2,dpl
-   038A AB 83               970 	mov	r3,dph
-   038C AE F0               971 	mov	r6,b
-   038E FF                  972 	mov	r7,a
-   038F E5 81               973 	mov	a,sp
-   0391 24 FC               974 	add	a,#0xfc
-   0393 F5 81               975 	mov	sp,a
-   0395 D0 23               976 	pop	bits
-   0397 D0 04               977 	pop	ar4
-   0399 D0 05               978 	pop	ar5
-   039B E5 10               979 	mov	a,_bp
-   039D 24 05               980 	add	a,#0x05
-   039F F8                  981 	mov	r0,a
-   03A0 A6 02               982 	mov	@r0,ar2
-   03A2 08                  983 	inc	r0
-   03A3 A6 03               984 	mov	@r0,ar3
-   03A5 08                  985 	inc	r0
-   03A6 A6 06               986 	mov	@r0,ar6
-   03A8 08                  987 	inc	r0
-   03A9 A6 07               988 	mov	@r0,ar7
-                            989 ;	../fb_app_rs.c:117: if(d<(rsinpos-1))temp=temp+(rsin[d]-48);//erste Stelle nach dem Komma
-   03AB ED                  990 	mov	a,r5
-   03AC 24 FF               991 	add	a,#0xFF
-   03AE FE                  992 	mov	r6,a
-   03AF EC                  993 	mov	a,r4
-   03B0 34 FF               994 	addc	a,#0xFF
-   03B2 FF                  995 	mov	r7,a
-   03B3 E5 10               996 	mov	a,_bp
-   03B5 24 03               997 	add	a,#0x03
-   03B7 F8                  998 	mov	r0,a
-   03B8 C3                  999 	clr	c
-   03B9 E6                 1000 	mov	a,@r0
-   03BA 9E                 1001 	subb	a,r6
-   03BB 08                 1002 	inc	r0
-   03BC E6                 1003 	mov	a,@r0
-   03BD 64 80              1004 	xrl	a,#0x80
-   03BF 8F F0              1005 	mov	b,r7
-   03C1 63 F0 80           1006 	xrl	b,#0x80
-   03C4 95 F0              1007 	subb	a,b
-   03C6 50 2E              1008 	jnc	00122$
-   03C8 E5 10              1009 	mov	a,_bp
-   03CA 24 03              1010 	add	a,#0x03
-   03CC F8                 1011 	mov	r0,a
-   03CD E6                 1012 	mov	a,@r0
-   03CE 24 24              1013 	add	a,#_rsin
-   03D0 F9                 1014 	mov	r1,a
-   03D1 87 07              1015 	mov	ar7,@r1
-   03D3 7E 00              1016 	mov	r6,#0x00
-   03D5 EF                 1017 	mov	a,r7
-   03D6 24 D0              1018 	add	a,#0xD0
-   03D8 FF                 1019 	mov	r7,a
-   03D9 EE                 1020 	mov	a,r6
-   03DA 34 FF              1021 	addc	a,#0xFF
-   03DC FE                 1022 	mov	r6,a
-   03DD 33                 1023 	rlc	a
-   03DE 95 E0              1024 	subb	a,acc
-   03E0 FB                 1025 	mov	r3,a
-   03E1 FA                 1026 	mov	r2,a
-   03E2 E5 10              1027 	mov	a,_bp
-   03E4 24 05              1028 	add	a,#0x05
-   03E6 F8                 1029 	mov	r0,a
-   03E7 EF                 1030 	mov	a,r7
-   03E8 26                 1031 	add	a,@r0
-   03E9 F6                 1032 	mov	@r0,a
-   03EA EE                 1033 	mov	a,r6
-   03EB 08                 1034 	inc	r0
-   03EC 36                 1035 	addc	a,@r0
-   03ED F6                 1036 	mov	@r0,a
-   03EE EB                 1037 	mov	a,r3
-   03EF 08                 1038 	inc	r0
-   03F0 36                 1039 	addc	a,@r0
-   03F1 F6                 1040 	mov	@r0,a
-   03F2 EA                 1041 	mov	a,r2
-   03F3 08                 1042 	inc	r0
-   03F4 36                 1043 	addc	a,@r0
-   03F5 F6                 1044 	mov	@r0,a
-   03F6                    1045 00122$:
-                           1046 ;	../fb_app_rs.c:118: d++;
-   03F6 E5 10              1047 	mov	a,_bp
-   03F8 24 03              1048 	add	a,#0x03
-   03FA F8                 1049 	mov	r0,a
-   03FB 06                 1050 	inc	@r0
-   03FC B6 00 02           1051 	cjne	@r0,#0x00,00226$
-   03FF 08                 1052 	inc	r0
-   0400 06                 1053 	inc	@r0
-   0401                    1054 00226$:
-                           1055 ;	../fb_app_rs.c:119: temp=temp*10;
-   0401 C0 05              1056 	push	ar5
-   0403 C0 04              1057 	push	ar4
-   0405 C0 23              1058 	push	bits
-   0407 E5 10              1059 	mov	a,_bp
-   0409 24 05              1060 	add	a,#0x05
-   040B F8                 1061 	mov	r0,a
-   040C E6                 1062 	mov	a,@r0
-   040D C0 E0              1063 	push	acc
-   040F 08                 1064 	inc	r0
-   0410 E6                 1065 	mov	a,@r0
-   0411 C0 E0              1066 	push	acc
-   0413 08                 1067 	inc	r0
-   0414 E6                 1068 	mov	a,@r0
-   0415 C0 E0              1069 	push	acc
-   0417 08                 1070 	inc	r0
-   0418 E6                 1071 	mov	a,@r0
-   0419 C0 E0              1072 	push	acc
-   041B 90 00 0A           1073 	mov	dptr,#(0x0A&0x00ff)
-   041E E4                 1074 	clr	a
-   041F F5 F0              1075 	mov	b,a
-   0421 12 1B 05           1076 	lcall	__mullong
-   0424 AA 82              1077 	mov	r2,dpl
-   0426 AB 83              1078 	mov	r3,dph
-   0428 AE F0              1079 	mov	r6,b
-   042A FF                 1080 	mov	r7,a
-   042B E5 81              1081 	mov	a,sp
-   042D 24 FC              1082 	add	a,#0xfc
-   042F F5 81              1083 	mov	sp,a
-   0431 D0 23              1084 	pop	bits
-   0433 D0 04              1085 	pop	ar4
-   0435 D0 05              1086 	pop	ar5
-   0437 E5 10              1087 	mov	a,_bp
-   0439 24 05              1088 	add	a,#0x05
-   043B F8                 1089 	mov	r0,a
-   043C A6 02              1090 	mov	@r0,ar2
-   043E 08                 1091 	inc	r0
-   043F A6 03              1092 	mov	@r0,ar3
-   0441 08                 1093 	inc	r0
-   0442 A6 06              1094 	mov	@r0,ar6
-   0444 08                 1095 	inc	r0
-   0445 A6 07              1096 	mov	@r0,ar7
-                           1097 ;	../fb_app_rs.c:120: if(d<(rsinpos-1))temp=temp+(rsin[d]-48);//zweite Stelle nach dem Komma gen
-   0447 ED                 1098 	mov	a,r5
-   0448 24 FF              1099 	add	a,#0xFF
-   044A FE                 1100 	mov	r6,a
-   044B EC                 1101 	mov	a,r4
-   044C 34 FF              1102 	addc	a,#0xFF
-   044E FF                 1103 	mov	r7,a
-   044F E5 10              1104 	mov	a,_bp
-   0451 24 03              1105 	add	a,#0x03
-   0453 F8                 1106 	mov	r0,a
-   0454 C3                 1107 	clr	c
-   0455 E6                 1108 	mov	a,@r0
-   0456 9E                 1109 	subb	a,r6
-   0457 08                 1110 	inc	r0
-   0458 E6                 1111 	mov	a,@r0
-   0459 64 80              1112 	xrl	a,#0x80
-   045B 8F F0              1113 	mov	b,r7
-   045D 63 F0 80           1114 	xrl	b,#0x80
-   0460 95 F0              1115 	subb	a,b
-   0462 50 2E              1116 	jnc	00167$
-   0464 E5 10              1117 	mov	a,_bp
-   0466 24 03              1118 	add	a,#0x03
-   0468 F8                 1119 	mov	r0,a
-   0469 E6                 1120 	mov	a,@r0
-   046A 24 24              1121 	add	a,#_rsin
-   046C F9                 1122 	mov	r1,a
-   046D 87 07              1123 	mov	ar7,@r1
-   046F 7E 00              1124 	mov	r6,#0x00
-   0471 EF                 1125 	mov	a,r7
-   0472 24 D0              1126 	add	a,#0xD0
-   0474 FF                 1127 	mov	r7,a
-   0475 EE                 1128 	mov	a,r6
-   0476 34 FF              1129 	addc	a,#0xFF
-   0478 FE                 1130 	mov	r6,a
-   0479 33                 1131 	rlc	a
-   047A 95 E0              1132 	subb	a,acc
-   047C FB                 1133 	mov	r3,a
-   047D FA                 1134 	mov	r2,a
-   047E E5 10              1135 	mov	a,_bp
-   0480 24 05              1136 	add	a,#0x05
-   0482 F8                 1137 	mov	r0,a
-   0483 EF                 1138 	mov	a,r7
-   0484 26                 1139 	add	a,@r0
-   0485 F6                 1140 	mov	@r0,a
-   0486 EE                 1141 	mov	a,r6
-   0487 08                 1142 	inc	r0
-   0488 36                 1143 	addc	a,@r0
-   0489 F6                 1144 	mov	@r0,a
-   048A EB                 1145 	mov	a,r3
-   048B 08                 1146 	inc	r0
-   048C 36                 1147 	addc	a,@r0
-   048D F6                 1148 	mov	@r0,a
-   048E EA                 1149 	mov	a,r2
-   048F 08                 1150 	inc	r0
-   0490 36                 1151 	addc	a,@r0
-   0491 F6                 1152 	mov	@r0,a
-                           1153 ;	../fb_app_rs.c:123: while(temp > 0x07FF) {
-   0492                    1154 00167$:
-   0492 7D 00              1155 	mov	r5,#0x00
-   0494 7C 00              1156 	mov	r4,#0x00
-   0496                    1157 00125$:
-   0496 E5 10              1158 	mov	a,_bp
-   0498 24 05              1159 	add	a,#0x05
-   049A F8                 1160 	mov	r0,a
-   049B 08                 1161 	inc	r0
-   049C E6                 1162 	mov	a,@r0
-   049D 54 F8              1163 	anl	a,#0xF8
-   049F 70 08              1164 	jnz	00228$
-   04A1 08                 1165 	inc	r0
-   04A2 E6                 1166 	mov	a,@r0
-   04A3 70 04              1167 	jnz	00228$
-   04A5 08                 1168 	inc	r0
-   04A6 E6                 1169 	mov	a,@r0
-   04A7 60 1E              1170 	jz	00127$
-   04A9                    1171 00228$:
-                           1172 ;	../fb_app_rs.c:124: temp=temp>>1;
-   04A9 E5 10              1173 	mov	a,_bp
-   04AB 24 05              1174 	add	a,#0x05
-   04AD F8                 1175 	mov	r0,a
-   04AE 08                 1176 	inc	r0
-   04AF 08                 1177 	inc	r0
-   04B0 08                 1178 	inc	r0
-   04B1 E6                 1179 	mov	a,@r0
-   04B2 C3                 1180 	clr	c
-   04B3 13                 1181 	rrc	a
-   04B4 F6                 1182 	mov	@r0,a
-   04B5 18                 1183 	dec	r0
-   04B6 E6                 1184 	mov	a,@r0
-   04B7 13                 1185 	rrc	a
-   04B8 F6                 1186 	mov	@r0,a
-   04B9 18                 1187 	dec	r0
-   04BA E6                 1188 	mov	a,@r0
-   04BB 13                 1189 	rrc	a
-   04BC F6                 1190 	mov	@r0,a
-   04BD 18                 1191 	dec	r0
-   04BE E6                 1192 	mov	a,@r0
-   04BF 13                 1193 	rrc	a
-   04C0 F6                 1194 	mov	@r0,a
-                           1195 ;	../fb_app_rs.c:125: exp=exp + (0x800);
-   04C1 74 08              1196 	mov	a,#0x08
-   04C3 2C                 1197 	add	a,r4
-   04C4 FC                 1198 	mov	r4,a
-   04C5 80 CF              1199 	sjmp	00125$
-   04C7                    1200 00127$:
-                           1201 ;	../fb_app_rs.c:127: if (rsin[value_pos]=='-') {
-   04C7 E5 10              1202 	mov	a,_bp
-   04C9 24 09              1203 	add	a,#0x09
-   04CB F8                 1204 	mov	r0,a
-   04CC B6 2D 3F           1205 	cjne	@r0,#0x2D,00129$
-                           1206 ;	../fb_app_rs.c:128: temp=(0x7FF-temp)+1;
-   04CF E5 10              1207 	mov	a,_bp
-   04D1 24 05              1208 	add	a,#0x05
-   04D3 F8                 1209 	mov	r0,a
-   04D4 E4                 1210 	clr	a
-   04D5 C3                 1211 	clr	c
-   04D6 96                 1212 	subb	a,@r0
-   04D7 F6                 1213 	mov	@r0,a
-   04D8 74 08              1214 	mov	a,#0x08
-   04DA 08                 1215 	inc	r0
-   04DB 96                 1216 	subb	a,@r0
-   04DC F6                 1217 	mov	@r0,a
-   04DD E4                 1218 	clr	a
-   04DE 08                 1219 	inc	r0
-   04DF 96                 1220 	subb	a,@r0
-   04E0 F6                 1221 	mov	@r0,a
-   04E1 E4                 1222 	clr	a
-   04E2 08                 1223 	inc	r0
-   04E3 96                 1224 	subb	a,@r0
-   04E4 F6                 1225 	mov	@r0,a
-                           1226 ;	../fb_app_rs.c:129: eis5temp=temp+exp;
-   04E5 8D 02              1227 	mov	ar2,r5
-   04E7 EC                 1228 	mov	a,r4
-   04E8 FB                 1229 	mov	r3,a
-   04E9 33                 1230 	rlc	a
-   04EA 95 E0              1231 	subb	a,acc
-   04EC FE                 1232 	mov	r6,a
-   04ED FF                 1233 	mov	r7,a
-   04EE E5 10              1234 	mov	a,_bp
-   04F0 24 05              1235 	add	a,#0x05
-   04F2 F8                 1236 	mov	r0,a
-   04F3 EA                 1237 	mov	a,r2
-   04F4 26                 1238 	add	a,@r0
-   04F5 FA                 1239 	mov	r2,a
-   04F6 EB                 1240 	mov	a,r3
-   04F7 08                 1241 	inc	r0
-   04F8 36                 1242 	addc	a,@r0
-   04F9 FB                 1243 	mov	r3,a
-   04FA EE                 1244 	mov	a,r6
-   04FB 08                 1245 	inc	r0
-   04FC 36                 1246 	addc	a,@r0
-   04FD EF                 1247 	mov	a,r7
-   04FE 08                 1248 	inc	r0
-   04FF 36                 1249 	addc	a,@r0
-                           1250 ;	../fb_app_rs.c:130: eis5temp+=0x8000;
-   0500 8A 06              1251 	mov	ar6,r2
-   0502 8B 07              1252 	mov	ar7,r3
-   0504 74 80              1253 	mov	a,#0x80
-   0506 2F                 1254 	add	a,r7
-   0507 FF                 1255 	mov	r7,a
-   0508 8E 02              1256 	mov	ar2,r6
-   050A 8F 03              1257 	mov	ar3,r7
-   050C 80 1E              1258 	sjmp	00130$
-   050E                    1259 00129$:
-                           1260 ;	../fb_app_rs.c:132: else eis5temp=temp+exp;
-   050E EC                 1261 	mov	a,r4
-   050F 33                 1262 	rlc	a
-   0510 95 E0              1263 	subb	a,acc
-   0512 FF                 1264 	mov	r7,a
-   0513 FE                 1265 	mov	r6,a
-   0514 E5 10              1266 	mov	a,_bp
-   0516 24 05              1267 	add	a,#0x05
-   0518 F8                 1268 	mov	r0,a
-   0519 ED                 1269 	mov	a,r5
-   051A 26                 1270 	add	a,@r0
-   051B FD                 1271 	mov	r5,a
-   051C EC                 1272 	mov	a,r4
-   051D 08                 1273 	inc	r0
-   051E 36                 1274 	addc	a,@r0
-   051F FC                 1275 	mov	r4,a
-   0520 EF                 1276 	mov	a,r7
-   0521 08                 1277 	inc	r0
-   0522 36                 1278 	addc	a,@r0
-   0523 FF                 1279 	mov	r7,a
-   0524 EE                 1280 	mov	a,r6
-   0525 08                 1281 	inc	r0
-   0526 36                 1282 	addc	a,@r0
-   0527 FE                 1283 	mov	r6,a
-   0528 8D 02              1284 	mov	ar2,r5
-   052A 8C 03              1285 	mov	ar3,r4
-   052C                    1286 00130$:
-                           1287 ;	../fb_app_rs.c:133: telegramm[8]=eis5temp>>8;
-   052C 8B 07              1288 	mov	ar7,r3
-   052E 8F 59              1289 	mov	(_telegramm + 0x0008),r7
-                           1290 ;	../fb_app_rs.c:134: telegramm[9]=eis5temp;		
-   0530 8A 5A              1291 	mov	(_telegramm + 0x0009),r2
-                           1292 ;	../fb_app_rs.c:135: break;
-   0532 02 06 6C           1293 	ljmp	00140$
-                           1294 ;	../fb_app_rs.c:136: case 6:// EIS 6
-   0535                    1295 00131$:
-                           1296 ;	../fb_app_rs.c:137: tel_header(groupadr, 2);
-   0535 C0 05              1297 	push	ar5
-   0537 C0 04              1298 	push	ar4
-   0539 C0 23              1299 	push	bits
-   053B 74 02              1300 	mov	a,#0x02
-   053D C0 E0              1301 	push	acc
-   053F 85 43 82           1302 	mov	dpl,_groupadr
-   0542 85 44 83           1303 	mov	dph,(_groupadr + 1)
-   0545 12 09 B8           1304 	lcall	_tel_header
-   0548 15 81              1305 	dec	sp
-   054A D0 23              1306 	pop	bits
-   054C D0 04              1307 	pop	ar4
-   054E D0 05              1308 	pop	ar5
-                           1309 ;	../fb_app_rs.c:138: telegramm[7]=0x80;
-   0550 75 58 80           1310 	mov	(_telegramm + 0x0007),#0x80
-                           1311 ;	../fb_app_rs.c:140: value=0;
-   0553 A8 10              1312 	mov	r0,_bp
-   0555 08                 1313 	inc	r0
-   0556 E4                 1314 	clr	a
-   0557 F6                 1315 	mov	@r0,a
-   0558 08                 1316 	inc	r0
-   0559 F6                 1317 	mov	@r0,a
-                           1318 ;	../fb_app_rs.c:141: d=value_pos;
-   055A 8D 06              1319 	mov	ar6,r5
-   055C 8C 07              1320 	mov	ar7,r4
-                           1321 ;	../fb_app_rs.c:142: while(d<(rsinpos-1)) {
-   055E                    1322 00132$:
-   055E AA 42              1323 	mov	r2,_rsinpos
-   0560 7B 00              1324 	mov	r3,#0x00
-   0562 1A                 1325 	dec	r2
-   0563 BA FF 01           1326 	cjne	r2,#0xFF,00231$
-   0566 1B                 1327 	dec	r3
-   0567                    1328 00231$:
-   0567 C3                 1329 	clr	c
-   0568 EE                 1330 	mov	a,r6
-   0569 9A                 1331 	subb	a,r2
-   056A EF                 1332 	mov	a,r7
-   056B 64 80              1333 	xrl	a,#0x80
-   056D 8B F0              1334 	mov	b,r3
-   056F 63 F0 80           1335 	xrl	b,#0x80
-   0572 95 F0              1336 	subb	a,b
-   0574 50 4D              1337 	jnc	00134$
-                           1338 ;	../fb_app_rs.c:143: value*=10;
-   0576 C0 07              1339 	push	ar7
-   0578 C0 06              1340 	push	ar6
-   057A C0 23              1341 	push	bits
-   057C A8 10              1342 	mov	r0,_bp
-   057E 08                 1343 	inc	r0
-   057F E6                 1344 	mov	a,@r0
-   0580 C0 E0              1345 	push	acc
-   0582 08                 1346 	inc	r0
-   0583 E6                 1347 	mov	a,@r0
-   0584 C0 E0              1348 	push	acc
-   0586 90 00 0A           1349 	mov	dptr,#0x000A
-   0589 12 1A C7           1350 	lcall	__mulint
-   058C AA 82              1351 	mov	r2,dpl
-   058E AB 83              1352 	mov	r3,dph
-   0590 15 81              1353 	dec	sp
-   0592 15 81              1354 	dec	sp
-   0594 D0 23              1355 	pop	bits
-   0596 D0 06              1356 	pop	ar6
-   0598 D0 07              1357 	pop	ar7
-   059A A8 10              1358 	mov	r0,_bp
-   059C 08                 1359 	inc	r0
-   059D A6 02              1360 	mov	@r0,ar2
-   059F 08                 1361 	inc	r0
-   05A0 A6 03              1362 	mov	@r0,ar3
-                           1363 ;	../fb_app_rs.c:144: value+=rsin[d]-48;
-   05A2 EE                 1364 	mov	a,r6
-   05A3 24 24              1365 	add	a,#_rsin
-   05A5 F9                 1366 	mov	r1,a
-   05A6 87 03              1367 	mov	ar3,@r1
-   05A8 7A 00              1368 	mov	r2,#0x00
-   05AA EB                 1369 	mov	a,r3
-   05AB 24 D0              1370 	add	a,#0xD0
-   05AD FB                 1371 	mov	r3,a
-   05AE EA                 1372 	mov	a,r2
-   05AF 34 FF              1373 	addc	a,#0xFF
-   05B1 FA                 1374 	mov	r2,a
-   05B2 A8 10              1375 	mov	r0,_bp
-   05B4 08                 1376 	inc	r0
-   05B5 EB                 1377 	mov	a,r3
-   05B6 26                 1378 	add	a,@r0
-   05B7 F6                 1379 	mov	@r0,a
-   05B8 EA                 1380 	mov	a,r2
-   05B9 08                 1381 	inc	r0
-   05BA 36                 1382 	addc	a,@r0
-   05BB F6                 1383 	mov	@r0,a
-                           1384 ;	../fb_app_rs.c:145: d++;
-   05BC 0E                 1385 	inc	r6
-   05BD BE 00 9E           1386 	cjne	r6,#0x00,00132$
-   05C0 0F                 1387 	inc	r7
-   05C1 80 9B              1388 	sjmp	00132$
-   05C3                    1389 00134$:
-                           1390 ;	../fb_app_rs.c:148: telegramm[8]=value;
-   05C3 A8 10              1391 	mov	r0,_bp
-   05C5 08                 1392 	inc	r0
-   05C6 86 03              1393 	mov	ar3,@r0
-   05C8 8B 59              1394 	mov	(_telegramm + 0x0008),r3
-                           1395 ;	../fb_app_rs.c:149: break;
-   05CA 02 06 6C           1396 	ljmp	00140$
-                           1397 ;	../fb_app_rs.c:150: case 15: // EIS 15
-   05CD                    1398 00135$:
-                           1399 ;	../fb_app_rs.c:151: tel_header(groupadr,15); //15
-   05CD C0 05              1400 	push	ar5
-   05CF C0 04              1401 	push	ar4
-   05D1 C0 23              1402 	push	bits
-   05D3 74 0F              1403 	mov	a,#0x0F
-   05D5 C0 E0              1404 	push	acc
-   05D7 85 43 82           1405 	mov	dpl,_groupadr
-   05DA 85 44 83           1406 	mov	dph,(_groupadr + 1)
-   05DD 12 09 B8           1407 	lcall	_tel_header
-   05E0 15 81              1408 	dec	sp
-   05E2 D0 23              1409 	pop	bits
-   05E4 D0 04              1410 	pop	ar4
-   05E6 D0 05              1411 	pop	ar5
-                           1412 ;	../fb_app_rs.c:152: telegramm[7]=0x80;
-   05E8 75 58 80           1413 	mov	(_telegramm + 0x0007),#0x80
-                           1414 ;	../fb_app_rs.c:153: for(d=8;d<22;d++){
-   05EB 7E 08              1415 	mov	r6,#0x08
-   05ED 7F 00              1416 	mov	r7,#0x00
-   05EF                    1417 00143$:
-   05EF C3                 1418 	clr	c
-   05F0 EE                 1419 	mov	a,r6
-   05F1 94 16              1420 	subb	a,#0x16
-   05F3 EF                 1421 	mov	a,r7
-   05F4 64 80              1422 	xrl	a,#0x80
-   05F6 94 80              1423 	subb	a,#0x80
-   05F8 50 72              1424 	jnc	00140$
-                           1425 ;	../fb_app_rs.c:154: if((value_pos+d-8)>=(rsinpos-1)) telegramm[d]=0x00;
-   05FA 8E 02              1426 	mov	ar2,r6
-   05FC 8F 03              1427 	mov	ar3,r7
-   05FE EA                 1428 	mov	a,r2
-   05FF 2D                 1429 	add	a,r5
-   0600 FA                 1430 	mov	r2,a
-   0601 EB                 1431 	mov	a,r3
-   0602 3C                 1432 	addc	a,r4
-   0603 FB                 1433 	mov	r3,a
-   0604 EA                 1434 	mov	a,r2
-   0605 24 F8              1435 	add	a,#0xF8
-   0607 FA                 1436 	mov	r2,a
-   0608 EB                 1437 	mov	a,r3
-   0609 34 FF              1438 	addc	a,#0xFF
-   060B FB                 1439 	mov	r3,a
-   060C C0 05              1440 	push	ar5
-   060E C0 04              1441 	push	ar4
-   0610 AC 42              1442 	mov	r4,_rsinpos
-   0612 7D 00              1443 	mov	r5,#0x00
-   0614 1C                 1444 	dec	r4
-   0615 BC FF 01           1445 	cjne	r4,#0xFF,00235$
-   0618 1D                 1446 	dec	r5
-   0619                    1447 00235$:
-   0619 C3                 1448 	clr	c
-   061A EA                 1449 	mov	a,r2
-   061B 9C                 1450 	subb	a,r4
-   061C EB                 1451 	mov	a,r3
-   061D 9D                 1452 	subb	a,r5
-   061E D0 04              1453 	pop	ar4
-   0620 D0 05              1454 	pop	ar5
-   0622 40 08              1455 	jc	00137$
-   0624 EE                 1456 	mov	a,r6
-   0625 24 51              1457 	add	a,#_telegramm
-   0627 F8                 1458 	mov	r0,a
-   0628 76 00              1459 	mov	@r0,#0x00
-   062A 80 13              1460 	sjmp	00145$
-   062C                    1461 00137$:
-                           1462 ;	../fb_app_rs.c:155: else telegramm[d]=rsin[(value_pos+d-8)];
-   062C EE                 1463 	mov	a,r6
-   062D 24 51              1464 	add	a,#_telegramm
-   062F F9                 1465 	mov	r1,a
-   0630 8D 03              1466 	mov	ar3,r5
-   0632 8E 02              1467 	mov	ar2,r6
-   0634 EA                 1468 	mov	a,r2
-   0635 2B                 1469 	add	a,r3
-   0636 24 F8              1470 	add	a,#0xF8
-   0638 24 24              1471 	add	a,#_rsin
-   063A F8                 1472 	mov	r0,a
-   063B 86 03              1473 	mov	ar3,@r0
-   063D A7 03              1474 	mov	@r1,ar3
-   063F                    1475 00145$:
-                           1476 ;	../fb_app_rs.c:153: for(d=8;d<22;d++){
-   063F 0E                 1477 	inc	r6
-                           1478 ;	../fb_app_rs.c:158: case 16:
-   0640 BE 00 AC           1479 	cjne	r6,#0x00,00143$
-   0643 0F                 1480 	inc	r7
-   0644 80 A9              1481 	sjmp	00143$
-   0646                    1482 00139$:
-                           1483 ;	../fb_app_rs.c:159: groupadr=convert_adr(5);
-   0646 75 82 05           1484 	mov	dpl,#0x05
-   0649 C0 23              1485 	push	bits
-   064B 12 09 EA           1486 	lcall	_convert_adr
-   064E 85 82 43           1487 	mov	_groupadr,dpl
-   0651 85 83 44           1488 	mov	(_groupadr + 1),dph
-   0654 D0 23              1489 	pop	bits
-                           1490 ;	../fb_app_rs.c:160: tel_header(groupadr, 1);
-   0656 C0 23              1491 	push	bits
-   0658 74 01              1492 	mov	a,#0x01
-   065A C0 E0              1493 	push	acc
-   065C 85 43 82           1494 	mov	dpl,_groupadr
-   065F 85 44 83           1495 	mov	dph,(_groupadr + 1)
-   0662 12 09 B8           1496 	lcall	_tel_header
-   0665 15 81              1497 	dec	sp
-   0667 D0 23              1498 	pop	bits
-                           1499 ;	../fb_app_rs.c:161: telegramm[7]=0x00;
-   0669 75 58 00           1500 	mov	(_telegramm + 0x0007),#0x00
-                           1501 ;	../fb_app_rs.c:163: }
-   066C                    1502 00140$:
-                           1503 ;	../fb_app_rs.c:164: if(repeatflag) telegramm[0]&=0xDF;		// Wiederholungsbit löschen für Wiederholtelegramm
-   066C 30 18 06           1504 	jnb	b0,00142$
-   066F 74 DF              1505 	mov	a,#0xDF
-   0671 55 51              1506 	anl	a,_telegramm
-   0673 F5 51              1507 	mov	_telegramm,a
-   0675                    1508 00142$:
-                           1509 ;	../fb_app_rs.c:165: return(build_ok);
-   0675 D3                 1510 	setb	c
-   0676 85 10 81           1511 	mov	sp,_bp
-   0679 D0 10              1512 	pop	_bp
-   067B 22                 1513 	ret
-                           1514 ;------------------------------------------------------------
-                           1515 ;Allocation info for local variables in function 'gapos_in_gat'
-                           1516 ;------------------------------------------------------------
-                           1517 ;gal                       Allocated to stack - _bp -3
-                           1518 ;gah                       Allocated to stack - _bp +1
-                           1519 ;ga_position               Allocated to registers r6 
-                           1520 ;n                         Allocated to stack - _bp +2
-                           1521 ;------------------------------------------------------------
-                           1522 ;	../fb_app_rs.c:170: unsigned char gapos_in_gat(unsigned char gah, unsigned char gal)
-                           1523 ;	-----------------------------------------
-                           1524 ;	 function gapos_in_gat
-                           1525 ;	-----------------------------------------
-   067C                    1526 _gapos_in_gat:
-   067C C0 10              1527 	push	_bp
-   067E 85 81 10           1528 	mov	_bp,sp
-   0681 C0 82              1529 	push	dpl
-   0683 05 81              1530 	inc	sp
-                           1531 ;	../fb_app_rs.c:174: ga_position=0xFF; 			// default return Wert 0xFF = nicht gefunden
-   0685 7E FF              1532 	mov	r6,#0xFF
-                           1533 ;	../fb_app_rs.c:176: while(ga_db[n].ga==((gah<<8)+gal) && n<=62){
-   0687 A8 10              1534 	mov	r0,_bp
-   0689 08                 1535 	inc	r0
-   068A 08                 1536 	inc	r0
-   068B 76 00              1537 	mov	@r0,#0x00
-   068D                    1538 00102$:
-   068D C0 06              1539 	push	ar6
-   068F A8 10              1540 	mov	r0,_bp
-   0691 08                 1541 	inc	r0
-   0692 08                 1542 	inc	r0
-   0693 E6                 1543 	mov	a,@r0
-   0694 25 E0              1544 	add	a,acc
-   0696 25 E0              1545 	add	a,acc
-   0698 F5 82              1546 	mov	dpl,a
-   069A 75 83 1D           1547 	mov	dph,#(_ga_db >> 8)
-   069D E4                 1548 	clr	a
-   069E 93                 1549 	movc	a,@a+dptr
-   069F FB                 1550 	mov	r3,a
-   06A0 A3                 1551 	inc	dptr
-   06A1 E4                 1552 	clr	a
-   06A2 93                 1553 	movc	a,@a+dptr
-   06A3 FC                 1554 	mov	r4,a
-   06A4 A8 10              1555 	mov	r0,_bp
-   06A6 08                 1556 	inc	r0
-   06A7 86 02              1557 	mov	ar2,@r0
-   06A9 8A 06              1558 	mov	ar6,r2
-   06AB 7A 00              1559 	mov	r2,#0x00
-   06AD E5 10              1560 	mov	a,_bp
-   06AF 24 FD              1561 	add	a,#0xfd
-   06B1 F8                 1562 	mov	r0,a
-   06B2 86 05              1563 	mov	ar5,@r0
-   06B4 7F 00              1564 	mov	r7,#0x00
-   06B6 ED                 1565 	mov	a,r5
-   06B7 2A                 1566 	add	a,r2
-   06B8 FA                 1567 	mov	r2,a
-   06B9 EF                 1568 	mov	a,r7
-   06BA 3E                 1569 	addc	a,r6
-   06BB FE                 1570 	mov	r6,a
-   06BC EB                 1571 	mov	a,r3
-   06BD B5 02 06           1572 	cjne	a,ar2,00119$
-   06C0 EC                 1573 	mov	a,r4
-   06C1 B5 06 02           1574 	cjne	a,ar6,00119$
-   06C4 80 04              1575 	sjmp	00120$
-   06C6                    1576 00119$:
-   06C6 D0 06              1577 	pop	ar6
-   06C8 80 12              1578 	sjmp	00114$
-   06CA                    1579 00120$:
-   06CA D0 06              1580 	pop	ar6
-   06CC A8 10              1581 	mov	r0,_bp
-   06CE 08                 1582 	inc	r0
-   06CF 08                 1583 	inc	r0
-   06D0 E6                 1584 	mov	a,@r0
-   06D1 24 C1              1585 	add	a,#0xff - 0x3E
-   06D3 40 07              1586 	jc	00114$
-                           1587 ;	../fb_app_rs.c:177: n++;
-   06D5 A8 10              1588 	mov	r0,_bp
-   06D7 08                 1589 	inc	r0
-   06D8 08                 1590 	inc	r0
-   06D9 06                 1591 	inc	@r0
-   06DA 80 B1              1592 	sjmp	00102$
-   06DC                    1593 00114$:
-   06DC A8 10              1594 	mov	r0,_bp
-   06DE 08                 1595 	inc	r0
-   06DF 08                 1596 	inc	r0
-   06E0 86 07              1597 	mov	ar7,@r0
-                           1598 ;	../fb_app_rs.c:179: if(n<62|| !filtermode)ga_position=n;// wenn GA gefunden oder kein filtermode aktiv ist... 
-   06E2 A8 10              1599 	mov	r0,_bp
-   06E4 08                 1600 	inc	r0
-   06E5 08                 1601 	inc	r0
-   06E6 B6 3E 00           1602 	cjne	@r0,#0x3E,00122$
-   06E9                    1603 00122$:
-   06E9 40 03              1604 	jc	00105$
-   06EB 20 00 02           1605 	jb	_filtermode,00106$
-   06EE                    1606 00105$:
-   06EE 8F 06              1607 	mov	ar6,r7
-   06F0                    1608 00106$:
-                           1609 ;	../fb_app_rs.c:180: return (ga_position);						// wird geackt
-   06F0 8E 82              1610 	mov	dpl,r6
-   06F2 85 10 81           1611 	mov	sp,_bp
-   06F5 D0 10              1612 	pop	_bp
-   06F7 22                 1613 	ret
-                           1614 ;------------------------------------------------------------
-                           1615 ;Allocation info for local variables in function 'write_value_req'
-                           1616 ;------------------------------------------------------------
-                           1617 ;length                    Allocated to registers r4 
-                           1618 ;n                         Allocated to stack - _bp +1
-                           1619 ;ga                        Allocated to stack - _bp +2
-                           1620 ;val                       Allocated to registers r5 r6 
-                           1621 ;------------------------------------------------------------
-                           1622 ;	../fb_app_rs.c:187: void write_value_req(void)
-                           1623 ;	-----------------------------------------
-                           1624 ;	 function write_value_req
-                           1625 ;	-----------------------------------------
-   06F8                    1626 _write_value_req:
-   06F8 C0 10              1627 	push	_bp
-   06FA 85 81 10           1628 	mov	_bp,sp
-   06FD 05 81              1629 	inc	sp
-   06FF 05 81              1630 	inc	sp
-   0701 05 81              1631 	inc	sp
-                           1632 ;	../fb_app_rs.c:189: unsigned char length,n=0;
-   0703 A8 10              1633 	mov	r0,_bp
-   0705 08                 1634 	inc	r0
-   0706 76 00              1635 	mov	@r0,#0x00
-                           1636 ;	../fb_app_rs.c:191: unsigned int val=0;
-   0708 7D 00              1637 	mov	r5,#0x00
-   070A 7E 00              1638 	mov	r6,#0x00
-                           1639 ;	../fb_app_rs.c:193: eibledcount=0xff;// EIBLED lang einschalten
-   070C 75 48 FF           1640 	mov	_eibledcount,#0xFF
-                           1641 ;	../fb_app_rs.c:194: length=telegramm[5]&0x0F;
-   070F 74 0F              1642 	mov	a,#0x0F
-   0711 55 56              1643 	anl	a,(_telegramm + 0x0005)
-                           1644 ;	../fb_app_rs.c:195: if (length<=15 )	{// wenn ein Telegramm reinkommt..
-   0713 FC                 1645 	mov  r4,a
-   0714 24 F0              1646 	add	a,#0xff - 0x0F
-   0716 50 03              1647 	jnc	00169$
-   0718 02 08 FE           1648 	ljmp	00134$
-   071B                    1649 00169$:
-                           1650 ;	../fb_app_rs.c:196: if(length==1)val=telegramm[7] & 0x3F;
-   071B BC 01 08           1651 	cjne	r4,#0x01,00102$
-   071E 74 3F              1652 	mov	a,#0x3F
-   0720 55 58              1653 	anl	a,(_telegramm + 0x0007)
-   0722 FB                 1654 	mov	r3,a
-   0723 FD                 1655 	mov	r5,a
-   0724 7E 00              1656 	mov	r6,#0x00
-   0726                    1657 00102$:
-                           1658 ;	../fb_app_rs.c:197: if(length==2)val=telegramm[8] ;
-   0726 BC 02 04           1659 	cjne	r4,#0x02,00104$
-   0729 AD 59              1660 	mov	r5,(_telegramm + 0x0008)
-   072B 7E 00              1661 	mov	r6,#0x00
-   072D                    1662 00104$:
-                           1663 ;	../fb_app_rs.c:198: if(length==3)val=256*telegramm[8]+telegramm[9];
-   072D BC 03 16           1664 	cjne	r4,#0x03,00106$
-   0730 C0 04              1665 	push	ar4
-   0732 AB 59              1666 	mov	r3,(_telegramm + 0x0008)
-   0734 7A 00              1667 	mov	r2,#0x00
-   0736 AC 5A              1668 	mov	r4,(_telegramm + 0x0009)
-   0738 7F 00              1669 	mov	r7,#0x00
-   073A EC                 1670 	mov	a,r4
-   073B 2A                 1671 	add	a,r2
-   073C FA                 1672 	mov	r2,a
-   073D EF                 1673 	mov	a,r7
-   073E 3B                 1674 	addc	a,r3
-   073F FB                 1675 	mov	r3,a
-   0740 8A 05              1676 	mov	ar5,r2
-   0742 8B 06              1677 	mov	ar6,r3
-                           1678 ;	../fb_app_rs.c:237: save_ga(ga,val);						// GA mit Wert speichern
-   0744 D0 04              1679 	pop	ar4
-                           1680 ;	../fb_app_rs.c:198: if(length==3)val=256*telegramm[8]+telegramm[9];
-   0746                    1681 00106$:
-                           1682 ;	../fb_app_rs.c:199: ga=256*telegramm[3]+telegramm[4];
-   0746 C0 05              1683 	push	ar5
-   0748 C0 06              1684 	push	ar6
-   074A AF 54              1685 	mov	r7,(_telegramm + 0x0003)
-   074C 8F 02              1686 	mov	ar2,r7
-   074E 8A 03              1687 	mov	ar3,r2
-   0750 7A 00              1688 	mov	r2,#0x00
-   0752 AD 55              1689 	mov	r5,(_telegramm + 0x0004)
-   0754 7E 00              1690 	mov	r6,#0x00
-   0756 ED                 1691 	mov	a,r5
-   0757 2A                 1692 	add	a,r2
-   0758 FA                 1693 	mov	r2,a
-   0759 EE                 1694 	mov	a,r6
-   075A 3B                 1695 	addc	a,r3
-   075B FB                 1696 	mov	r3,a
-   075C A8 10              1697 	mov	r0,_bp
-   075E 08                 1698 	inc	r0
-   075F 08                 1699 	inc	r0
-   0760 A6 02              1700 	mov	@r0,ar2
-   0762 08                 1701 	inc	r0
-   0763 A6 03              1702 	mov	@r0,ar3
-                           1703 ;	../fb_app_rs.c:200: if(filtermode){
-   0765 D0 06              1704 	pop	ar6
-   0767 D0 05              1705 	pop	ar5
-   0769 30 00 3D           1706 	jnb	_filtermode,00110$
-                           1707 ;	../fb_app_rs.c:201: for(n=0;n<=61;n++) {						// Wert der GA aus Flash lesen
-   076C A8 10              1708 	mov	r0,_bp
-   076E 08                 1709 	inc	r0
-   076F 76 00              1710 	mov	@r0,#0x00
-   0771                    1711 00126$:
-   0771 A8 10              1712 	mov	r0,_bp
-   0773 08                 1713 	inc	r0
-   0774 E6                 1714 	mov	a,@r0
-   0775 24 C2              1715 	add	a,#0xff - 0x3D
-   0777 40 30              1716 	jc	00110$
-                           1717 ;	../fb_app_rs.c:202: if(ga_db[n].ga==ga) {
-   0779 A8 10              1718 	mov	r0,_bp
-   077B 08                 1719 	inc	r0
-   077C E6                 1720 	mov	a,@r0
-   077D 25 E0              1721 	add	a,acc
-   077F 25 E0              1722 	add	a,acc
-   0781 F5 82              1723 	mov	dpl,a
-   0783 75 83 1D           1724 	mov	dph,#(_ga_db >> 8)
-   0786 E4                 1725 	clr	a
-   0787 93                 1726 	movc	a,@a+dptr
-   0788 FA                 1727 	mov	r2,a
-   0789 A3                 1728 	inc	dptr
-   078A E4                 1729 	clr	a
-   078B 93                 1730 	movc	a,@a+dptr
-   078C FB                 1731 	mov	r3,a
-   078D A8 10              1732 	mov	r0,_bp
-   078F 08                 1733 	inc	r0
-   0790 08                 1734 	inc	r0
-   0791 E6                 1735 	mov	a,@r0
-   0792 B5 02 07           1736 	cjne	a,ar2,00178$
-   0795 08                 1737 	inc	r0
-   0796 E6                 1738 	mov	a,@r0
-   0797 B5 03 02           1739 	cjne	a,ar3,00178$
-   079A 80 02              1740 	sjmp	00179$
-   079C                    1741 00178$:
-   079C 80 05              1742 	sjmp	00128$
-   079E                    1743 00179$:
-                           1744 ;	../fb_app_rs.c:203: n=63;
-   079E A8 10              1745 	mov	r0,_bp
-   07A0 08                 1746 	inc	r0
-   07A1 76 3F              1747 	mov	@r0,#0x3F
-   07A3                    1748 00128$:
-                           1749 ;	../fb_app_rs.c:201: for(n=0;n<=61;n++) {						// Wert der GA aus Flash lesen
-   07A3 A8 10              1750 	mov	r0,_bp
-   07A5 08                 1751 	inc	r0
-   07A6 06                 1752 	inc	@r0
-   07A7 80 C8              1753 	sjmp	00126$
-   07A9                    1754 00110$:
-                           1755 ;	../fb_app_rs.c:207: if ((n>=63 || !filtermode)) {
-   07A9 A8 10              1756 	mov	r0,_bp
-   07AB 08                 1757 	inc	r0
-   07AC B6 3F 00           1758 	cjne	@r0,#0x3F,00180$
-   07AF                    1759 00180$:
-   07AF 50 06              1760 	jnc	00121$
-   07B1 30 00 03           1761 	jnb	_filtermode,00182$
-   07B4 02 08 FE           1762 	ljmp	00134$
-   07B7                    1763 00182$:
-   07B7                    1764 00121$:
-                           1765 ;	../fb_app_rs.c:208: if(!tel_sent){
-   07B7 30 0A 03           1766 	jnb	_tel_sent,00183$
-   07BA 02 08 EA           1767 	ljmp	00120$
-   07BD                    1768 00183$:
-                           1769 ;	../fb_app_rs.c:209: rs_send_dec(telegramm[3]>>3);			// GA senden
-   07BD EF                 1770 	mov	a,r7
-   07BE C4                 1771 	swap	a
-   07BF 23                 1772 	rl	a
-   07C0 54 1F              1773 	anl	a,#0x1F
-   07C2 FF                 1774 	mov	r7,a
-   07C3 7B 00              1775 	mov	r3,#0x00
-   07C5 8F 82              1776 	mov	dpl,r7
-   07C7 8B 83              1777 	mov	dph,r3
-   07C9 C0 06              1778 	push	ar6
-   07CB C0 05              1779 	push	ar5
-   07CD C0 04              1780 	push	ar4
-   07CF 12 13 AD           1781 	lcall	_rs_send_dec
-                           1782 ;	../fb_app_rs.c:210: rs_send('/');
-   07D2 75 82 2F           1783 	mov	dpl,#0x2F
-   07D5 12 15 BA           1784 	lcall	_rs_send
-                           1785 ;	../fb_app_rs.c:211: rs_send_dec(telegramm[3] & 0x07);
-   07D8 74 07              1786 	mov	a,#0x07
-   07DA 55 54              1787 	anl	a,(_telegramm + 0x0003)
-   07DC FF                 1788 	mov	r7,a
-   07DD 7B 00              1789 	mov	r3,#0x00
-   07DF 8F 82              1790 	mov	dpl,r7
-   07E1 8B 83              1791 	mov	dph,r3
-   07E3 12 13 AD           1792 	lcall	_rs_send_dec
-                           1793 ;	../fb_app_rs.c:212: rs_send('/');
-   07E6 75 82 2F           1794 	mov	dpl,#0x2F
-   07E9 12 15 BA           1795 	lcall	_rs_send
-                           1796 ;	../fb_app_rs.c:213: rs_send_dec(telegramm[4]);
-   07EC AB 55              1797 	mov	r3,(_telegramm + 0x0004)
-   07EE 7F 00              1798 	mov	r7,#0x00
-   07F0 8B 82              1799 	mov	dpl,r3
-   07F2 8F 83              1800 	mov	dph,r7
-   07F4 12 13 AD           1801 	lcall	_rs_send_dec
-                           1802 ;	../fb_app_rs.c:214: rs_send('=');
-   07F7 75 82 3D           1803 	mov	dpl,#0x3D
-   07FA 12 15 BA           1804 	lcall	_rs_send
-   07FD D0 04              1805 	pop	ar4
-   07FF D0 05              1806 	pop	ar5
-   0801 D0 06              1807 	pop	ar6
-                           1808 ;	../fb_app_rs.c:215: if (length<=3)	rs_send_dec(val);		// Value senden
-   0803 EC                 1809 	mov	a,r4
-   0804 24 FC              1810 	add	a,#0xff - 0x03
-   0806 40 13              1811 	jc	00112$
-   0808 8D 82              1812 	mov	dpl,r5
-   080A 8E 83              1813 	mov	dph,r6
-   080C C0 06              1814 	push	ar6
-   080E C0 05              1815 	push	ar5
-   0810 C0 04              1816 	push	ar4
-   0812 12 13 AD           1817 	lcall	_rs_send_dec
-   0815 D0 04              1818 	pop	ar4
-   0817 D0 05              1819 	pop	ar5
-   0819 D0 06              1820 	pop	ar6
-   081B                    1821 00112$:
-                           1822 ;	../fb_app_rs.c:216: if(length==4){
-   081B BC 04 6F           1823 	cjne	r4,#0x04,00116$
-                           1824 ;	../fb_app_rs.c:217: n='.';  
-   081E A8 10              1825 	mov	r0,_bp
-   0820 08                 1826 	inc	r0
-   0821 76 2E              1827 	mov	@r0,#0x2E
-                           1828 ;	../fb_app_rs.c:218: if(telegramm[8]>31){// time
-   0823 E5 59              1829 	mov	a,(_telegramm + 0x0008)
-   0825 FF                 1830 	mov	r7,a
-   0826 24 E0              1831 	add	a,#0xff - 0x1F
-   0828 50 23              1832 	jnc	00114$
-                           1833 ;	../fb_app_rs.c:219: rs_send((telegramm[8]>>5)+48);
-   082A EF                 1834 	mov	a,r7
-   082B C4                 1835 	swap	a
-   082C 03                 1836 	rr	a
-   082D 54 07              1837 	anl	a,#0x07
-   082F 24 30              1838 	add	a,#0x30
-   0831 F5 82              1839 	mov	dpl,a
-   0833 C0 06              1840 	push	ar6
-   0835 C0 05              1841 	push	ar5
-   0837 C0 04              1842 	push	ar4
-   0839 12 15 BA           1843 	lcall	_rs_send
-                           1844 ;	../fb_app_rs.c:220: rs_send(',');
-   083C 75 82 2C           1845 	mov	dpl,#0x2C
-   083F 12 15 BA           1846 	lcall	_rs_send
-   0842 D0 04              1847 	pop	ar4
-   0844 D0 05              1848 	pop	ar5
-   0846 D0 06              1849 	pop	ar6
-                           1850 ;	../fb_app_rs.c:221: n=':';
-   0848 A8 10              1851 	mov	r0,_bp
-   084A 08                 1852 	inc	r0
-   084B 76 3A              1853 	mov	@r0,#0x3A
-   084D                    1854 00114$:
-                           1855 ;	../fb_app_rs.c:223: rs_send_dec(telegramm[8]&0x1F);
-   084D 74 1F              1856 	mov	a,#0x1F
-   084F 55 59              1857 	anl	a,(_telegramm + 0x0008)
-   0851 FF                 1858 	mov	r7,a
-   0852 7B 00              1859 	mov	r3,#0x00
-   0854 8F 82              1860 	mov	dpl,r7
-   0856 8B 83              1861 	mov	dph,r3
-   0858 C0 06              1862 	push	ar6
-   085A C0 05              1863 	push	ar5
-   085C C0 04              1864 	push	ar4
-   085E 12 13 AD           1865 	lcall	_rs_send_dec
-                           1866 ;	../fb_app_rs.c:224: rs_send(n);
-   0861 A8 10              1867 	mov	r0,_bp
-   0863 08                 1868 	inc	r0
-   0864 86 82              1869 	mov	dpl,@r0
-   0866 12 15 BA           1870 	lcall	_rs_send
-                           1871 ;	../fb_app_rs.c:225: rs_send_dec(telegramm[9]);
-   0869 AB 5A              1872 	mov	r3,(_telegramm + 0x0009)
-   086B 7F 00              1873 	mov	r7,#0x00
-   086D 8B 82              1874 	mov	dpl,r3
-   086F 8F 83              1875 	mov	dph,r7
-   0871 12 13 AD           1876 	lcall	_rs_send_dec
-                           1877 ;	../fb_app_rs.c:226: rs_send(n);
-   0874 A8 10              1878 	mov	r0,_bp
-   0876 08                 1879 	inc	r0
-   0877 86 82              1880 	mov	dpl,@r0
-   0879 12 15 BA           1881 	lcall	_rs_send
-                           1882 ;	../fb_app_rs.c:227: rs_send_dec(telegramm[10]);
-   087C AB 5B              1883 	mov	r3,(_telegramm + 0x000a)
-   087E 7F 00              1884 	mov	r7,#0x00
-   0880 8B 82              1885 	mov	dpl,r3
-   0882 8F 83              1886 	mov	dph,r7
-   0884 12 13 AD           1887 	lcall	_rs_send_dec
-   0887 D0 04              1888 	pop	ar4
-   0889 D0 05              1889 	pop	ar5
-   088B D0 06              1890 	pop	ar6
-   088D                    1891 00116$:
-                           1892 ;	../fb_app_rs.c:229: if(length>4){
-   088D EC                 1893 	mov	a,r4
-   088E 24 FB              1894 	add	a,#0xff - 0x04
-   0890 50 44              1895 	jnc	00118$
-                           1896 ;	../fb_app_rs.c:230: for(n=8;n <= length+6;n++){
-   0892 7F 08              1897 	mov	r7,#0x08
-   0894                    1898 00130$:
-   0894 C0 05              1899 	push	ar5
-   0896 C0 06              1900 	push	ar6
-   0898 8C 02              1901 	mov	ar2,r4
-   089A 7B 00              1902 	mov	r3,#0x00
-   089C 74 06              1903 	mov	a,#0x06
-   089E 2A                 1904 	add	a,r2
-   089F FA                 1905 	mov	r2,a
-   08A0 E4                 1906 	clr	a
-   08A1 3B                 1907 	addc	a,r3
-   08A2 FB                 1908 	mov	r3,a
-   08A3 8F 05              1909 	mov	ar5,r7
-   08A5 7E 00              1910 	mov	r6,#0x00
-   08A7 C3                 1911 	clr	c
-   08A8 EA                 1912 	mov	a,r2
-   08A9 9D                 1913 	subb	a,r5
-   08AA EB                 1914 	mov	a,r3
-   08AB 64 80              1915 	xrl	a,#0x80
-   08AD 8E F0              1916 	mov	b,r6
-   08AF 63 F0 80           1917 	xrl	b,#0x80
-   08B2 95 F0              1918 	subb	a,b
-   08B4 D0 06              1919 	pop	ar6
-   08B6 D0 05              1920 	pop	ar5
-   08B8 40 1C              1921 	jc	00118$
-                           1922 ;	../fb_app_rs.c:231: rs_send(telegramm[n]);
-   08BA EF                 1923 	mov	a,r7
-   08BB 24 51              1924 	add	a,#_telegramm
-   08BD F9                 1925 	mov	r1,a
-   08BE 87 82              1926 	mov	dpl,@r1
-   08C0 C0 07              1927 	push	ar7
-   08C2 C0 06              1928 	push	ar6
-   08C4 C0 05              1929 	push	ar5
-   08C6 C0 04              1930 	push	ar4
-   08C8 12 15 BA           1931 	lcall	_rs_send
-   08CB D0 04              1932 	pop	ar4
-   08CD D0 05              1933 	pop	ar5
-   08CF D0 06              1934 	pop	ar6
-   08D1 D0 07              1935 	pop	ar7
-                           1936 ;	../fb_app_rs.c:230: for(n=8;n <= length+6;n++){
-   08D3 0F                 1937 	inc	r7
-   08D4 80 BE              1938 	sjmp	00130$
-   08D6                    1939 00118$:
-                           1940 ;	../fb_app_rs.c:234: rs_send(13);							// CR LF
-   08D6 75 82 0D           1941 	mov	dpl,#0x0D
-   08D9 C0 06              1942 	push	ar6
-   08DB C0 05              1943 	push	ar5
-   08DD 12 15 BA           1944 	lcall	_rs_send
-                           1945 ;	../fb_app_rs.c:235: rs_send(10);
-   08E0 75 82 0A           1946 	mov	dpl,#0x0A
-   08E3 12 15 BA           1947 	lcall	_rs_send
-   08E6 D0 05              1948 	pop	ar5
-   08E8 D0 06              1949 	pop	ar6
-   08EA                    1950 00120$:
-                           1951 ;	../fb_app_rs.c:237: save_ga(ga,val);						// GA mit Wert speichern
-   08EA C0 05              1952 	push	ar5
-   08EC C0 06              1953 	push	ar6
-   08EE A8 10              1954 	mov	r0,_bp
-   08F0 08                 1955 	inc	r0
-   08F1 08                 1956 	inc	r0
-   08F2 86 82              1957 	mov	dpl,@r0
-   08F4 08                 1958 	inc	r0
-   08F5 86 83              1959 	mov	dph,@r0
-   08F7 12 09 05           1960 	lcall	_save_ga
-   08FA 15 81              1961 	dec	sp
-   08FC 15 81              1962 	dec	sp
-   08FE                    1963 00134$:
-   08FE 85 10 81           1964 	mov	sp,_bp
-   0901 D0 10              1965 	pop	_bp
-   0903 22                 1966 	ret
-                           1967 ;------------------------------------------------------------
-                           1968 ;Allocation info for local variables in function 'read_value_req'
-                           1969 ;------------------------------------------------------------
-                           1970 ;	../fb_app_rs.c:246: void read_value_req(void)
-                           1971 ;	-----------------------------------------
-                           1972 ;	 function read_value_req
-                           1973 ;	-----------------------------------------
-   0904                    1974 _read_value_req:
-                           1975 ;	../fb_app_rs.c:249: }
-   0904 22                 1976 	ret
-                           1977 ;------------------------------------------------------------
-                           1978 ;Allocation info for local variables in function 'save_ga'
-                           1979 ;------------------------------------------------------------
-                           1980 ;val                       Allocated to stack - _bp -4
-                           1981 ;ga                        Allocated to stack - _bp +1
-                           1982 ;n                         Allocated to registers r5 
-                           1983 ;write_ok                  Allocated to registers b0 
-                           1984 ;------------------------------------------------------------
-                           1985 ;	../fb_app_rs.c:256: void save_ga(unsigned int ga, unsigned int val)
-                           1986 ;	-----------------------------------------
-                           1987 ;	 function save_ga
-                           1988 ;	-----------------------------------------
-   0905                    1989 _save_ga:
-   0905 C0 10              1990 	push	_bp
-   0907 85 81 10           1991 	mov	_bp,sp
-   090A C0 82              1992 	push	dpl
-   090C C0 83              1993 	push	dph
-                           1994 ;	../fb_app_rs.c:261: n=0;
-   090E 7D 00              1995 	mov	r5,#0x00
-                           1996 ;	../fb_app_rs.c:262: do {								// Wert der GA in Flash schreiben
-   0910 A8 10              1997 	mov	r0,_bp
-   0912 08                 1998 	inc	r0
-   0913 08                 1999 	inc	r0
-   0914 86 04              2000 	mov	ar4,@r0
-   0916 E5 10              2001 	mov	a,_bp
-   0918 24 FC              2002 	add	a,#0xfc
-   091A F8                 2003 	mov	r0,a
-   091B 08                 2004 	inc	r0
-   091C 86 03              2005 	mov	ar3,@r0
-   091E                    2006 00111$:
-                           2007 ;	../fb_app_rs.c:263: if(ga_db[n].ga==ga || ga_db[n].ga==0xFFFF) {
-   091E C0 03              2008 	push	ar3
-   0920 ED                 2009 	mov	a,r5
-   0921 2D                 2010 	add	a,r5
-   0922 25 E0              2011 	add	a,acc
-   0924 FA                 2012 	mov	r2,a
-   0925 F5 82              2013 	mov	dpl,a
-   0927 75 83 1D           2014 	mov	dph,#(_ga_db >> 8)
-   092A E4                 2015 	clr	a
-   092B 93                 2016 	movc	a,@a+dptr
-   092C FB                 2017 	mov	r3,a
-   092D A3                 2018 	inc	dptr
-   092E E4                 2019 	clr	a
-   092F 93                 2020 	movc	a,@a+dptr
-   0930 FF                 2021 	mov	r7,a
-   0931 A8 10              2022 	mov	r0,_bp
-   0933 08                 2023 	inc	r0
-   0934 E6                 2024 	mov	a,@r0
-   0935 B5 03 09           2025 	cjne	a,ar3,00128$
-   0938 08                 2026 	inc	r0
-   0939 E6                 2027 	mov	a,@r0
-   093A B5 07 04           2028 	cjne	a,ar7,00128$
-   093D D0 03              2029 	pop	ar3
-   093F 80 14              2030 	sjmp	00108$
-   0941                    2031 00128$:
-   0941 D0 03              2032 	pop	ar3
-   0943 8A 82              2033 	mov	dpl,r2
-   0945 75 83 1D           2034 	mov	dph,#(_ga_db >> 8)
-   0948 E4                 2035 	clr	a
-   0949 93                 2036 	movc	a,@a+dptr
-   094A FE                 2037 	mov	r6,a
-   094B A3                 2038 	inc	dptr
-   094C E4                 2039 	clr	a
-   094D 93                 2040 	movc	a,@a+dptr
-   094E FF                 2041 	mov	r7,a
-   094F BE FF 57           2042 	cjne	r6,#0xFF,00109$
-   0952 BF FF 54           2043 	cjne	r7,#0xFF,00109$
-   0955                    2044 00108$:
-                           2045 ;	../fb_app_rs.c:264: write_ok=0;
-   0955 C2 18              2046 	clr	b0
-                           2047 ;	../fb_app_rs.c:265: while (!write_ok) {
-   0957 ED                 2048 	mov	a,r5
-   0958 2D                 2049 	add	a,r5
-   0959 25 E0              2050 	add	a,acc
-   095B FF                 2051 	mov	r7,a
-   095C 24 02              2052 	add	a,#0x02
-   095E FE                 2053 	mov	r6,a
-   095F                    2054 00105$:
-   095F 20 18 45           2055 	jb	b0,00107$
-                           2056 ;	../fb_app_rs.c:266: START_WRITECYCLE
-   0962 C0 03              2057 	push	ar3
-   0964 75 E4 00           2058 	mov	_FMCON,#0x00
-                           2059 ;	../fb_app_rs.c:267: if(ga_db[n].ga==0xFFFF) {			// GA noch nicht gespeichert
-   0967 8F 82              2060 	mov	dpl,r7
-   0969 75 83 1D           2061 	mov	dph,#(_ga_db >> 8)
-   096C E4                 2062 	clr	a
-   096D 93                 2063 	movc	a,@a+dptr
-   096E FA                 2064 	mov	r2,a
-   096F A3                 2065 	inc	dptr
-   0970 E4                 2066 	clr	a
-   0971 93                 2067 	movc	a,@a+dptr
-   0972 FB                 2068 	mov	r3,a
-   0973 BA FF 05           2069 	cjne	r2,#0xFF,00132$
-   0976 BB FF 02           2070 	cjne	r3,#0xFF,00132$
-   0979 80 04              2071 	sjmp	00133$
-   097B                    2072 00132$:
-   097B D0 03              2073 	pop	ar3
-   097D 80 0E              2074 	sjmp	00102$
-   097F                    2075 00133$:
-   097F D0 03              2076 	pop	ar3
-                           2077 ;	../fb_app_rs.c:268: FMADRH = 0x1D;//(n >> 6) + 0x1D;		// GA schreiben
-   0981 75 E7 1D           2078 	mov	_FMADRH,#0x1D
-                           2079 ;	../fb_app_rs.c:269: FMADRL = n*4;//((n & 0x3F) * 4);		// (int wird LSB first abgelegt)
-   0984 8F E6              2080 	mov	_FMADRL,r7
-                           2081 ;	../fb_app_rs.c:270: FMDATA=ga;
-   0986 A8 10              2082 	mov	r0,_bp
-   0988 08                 2083 	inc	r0
-   0989 86 E5              2084 	mov	_FMDATA,@r0
-                           2085 ;	../fb_app_rs.c:271: FMDATA=ga>>8;
-   098B 8C E5              2086 	mov	_FMDATA,r4
-   098D                    2087 00102$:
-                           2088 ;	../fb_app_rs.c:273: FMADRH = 0x1D;//(n >> 6) + 0x1D;		// Value schreiben
-   098D 75 E7 1D           2089 	mov	_FMADRH,#0x1D
-                           2090 ;	../fb_app_rs.c:274: FMADRL = (n*4) +2;//((n & 0x3F) * 4) + 2;
-   0990 8E E6              2091 	mov	_FMADRL,r6
-                           2092 ;	../fb_app_rs.c:275: FMDATA=val;
-   0992 E5 10              2093 	mov	a,_bp
-   0994 24 FC              2094 	add	a,#0xfc
-   0996 F8                 2095 	mov	r0,a
-   0997 86 E5              2096 	mov	_FMDATA,@r0
-                           2097 ;	../fb_app_rs.c:276: FMDATA=val>>8;					// High Byte schreiben
-   0999 8B E5              2098 	mov	_FMDATA,r3
-                           2099 ;	../fb_app_rs.c:277: STOP_WRITECYCLE
-   099B 75 E4 68           2100 	mov	_FMCON,#0x68
-                           2101 ;	../fb_app_rs.c:278: if(!(FMCON & 0x01)) write_ok=1;	// pruefen, ob erfolgreich geflasht
-   099E E5 E4              2102 	mov	a,_FMCON
-   09A0 20 E0 BC           2103 	jb	acc.0,00105$
-   09A3 D2 18              2104 	setb	b0
-   09A5 80 B8              2105 	sjmp	00105$
-   09A7                    2106 00107$:
-                           2107 ;	../fb_app_rs.c:280: n=62;	// Schleife abbrechen
-   09A7 7D 3E              2108 	mov	r5,#0x3E
-   09A9                    2109 00109$:
-                           2110 ;	../fb_app_rs.c:282: n++;
-   09A9 0D                 2111 	inc	r5
-                           2112 ;	../fb_app_rs.c:283: }while (n<62);
-   09AA BD 3E 00           2113 	cjne	r5,#0x3E,00135$
-   09AD                    2114 00135$:
-   09AD 50 03              2115 	jnc	00136$
-   09AF 02 09 1E           2116 	ljmp	00111$
-   09B2                    2117 00136$:
-   09B2 85 10 81           2118 	mov	sp,_bp
-   09B5 D0 10              2119 	pop	_bp
-   09B7 22                 2120 	ret
-                           2121 ;------------------------------------------------------------
-                           2122 ;Allocation info for local variables in function 'tel_header'
-                           2123 ;------------------------------------------------------------
-                           2124 ;length                    Allocated to stack - _bp -3
-                           2125 ;ga                        Allocated to registers r6 r7 
-                           2126 ;------------------------------------------------------------
-                           2127 ;	../fb_app_rs.c:288: void tel_header(unsigned int ga, unsigned char length)
-                           2128 ;	-----------------------------------------
-                           2129 ;	 function tel_header
-                           2130 ;	-----------------------------------------
-   09B8                    2131 _tel_header:
-   09B8 C0 10              2132 	push	_bp
-   09BA 85 81 10           2133 	mov	_bp,sp
-   09BD AE 82              2134 	mov	r6,dpl
-   09BF AF 83              2135 	mov	r7,dph
-                           2136 ;	../fb_app_rs.c:290: telegramm[0]=0xBC;
-   09C1 75 51 BC           2137 	mov	_telegramm,#0xBC
-                           2138 ;	../fb_app_rs.c:291: telegramm[1]=pa_h;
-   09C4 90 1C FB           2139 	mov	dptr,#_pa_h
-   09C7 E4                 2140 	clr	a
-   09C8 93                 2141 	movc	a,@a+dptr
-   09C9 FD                 2142 	mov	r5,a
-   09CA 8D 52              2143 	mov	(_telegramm + 0x0001),r5
-                           2144 ;	../fb_app_rs.c:292: telegramm[2]=pa_l;
-   09CC 90 1C FC           2145 	mov	dptr,#_pa_l
-   09CF E4                 2146 	clr	a
-   09D0 93                 2147 	movc	a,@a+dptr
-   09D1 FD                 2148 	mov	r5,a
-   09D2 8D 53              2149 	mov	(_telegramm + 0x0002),r5
-                           2150 ;	../fb_app_rs.c:293: telegramm[3]=ga>>8;
-   09D4 8F 05              2151 	mov	ar5,r7
-   09D6 8D 54              2152 	mov	(_telegramm + 0x0003),r5
-                           2153 ;	../fb_app_rs.c:294: telegramm[4]=ga;
-   09D8 8E 55              2154 	mov	(_telegramm + 0x0004),r6
-                           2155 ;	../fb_app_rs.c:295: telegramm[5]=0xE0 + length;
-   09DA E5 10              2156 	mov	a,_bp
-   09DC 24 FD              2157 	add	a,#0xfd
-   09DE F8                 2158 	mov	r0,a
-   09DF 74 E0              2159 	mov	a,#0xE0
-   09E1 26                 2160 	add	a,@r0
-   09E2 F5 56              2161 	mov	(_telegramm + 0x0005),a
-                           2162 ;	../fb_app_rs.c:296: telegramm[6]=0x00;
-   09E4 75 57 00           2163 	mov	(_telegramm + 0x0006),#0x00
-   09E7 D0 10              2164 	pop	_bp
-   09E9 22                 2165 	ret
-                           2166 ;------------------------------------------------------------
-                           2167 ;Allocation info for local variables in function 'convert_adr'
-                           2168 ;------------------------------------------------------------
-                           2169 ;pos                       Allocated to registers 
-                           2170 ;adr                       Allocated to stack - _bp +1
-                           2171 ;sepcount                  Allocated to registers r3 
-                           2172 ;n                         Allocated to stack - _bp +3
-                           2173 ;adr_tmp                   Allocated to registers r5 
-                           2174 ;firstrun                  Allocated to registers b0 
-                           2175 ;------------------------------------------------------------
-                           2176 ;	../fb_app_rs.c:301: unsigned int convert_adr(unsigned char pos)
-                           2177 ;	-----------------------------------------
-                           2178 ;	 function convert_adr
-                           2179 ;	-----------------------------------------
-   09EA                    2180 _convert_adr:
-   09EA C0 10              2181 	push	_bp
-   09EC 85 81 10           2182 	mov	_bp,sp
-   09EF 05 81              2183 	inc	sp
-   09F1 05 81              2184 	inc	sp
-   09F3 05 81              2185 	inc	sp
-   09F5 A8 10              2186 	mov	r0,_bp
-   09F7 08                 2187 	inc	r0
-   09F8 08                 2188 	inc	r0
-   09F9 08                 2189 	inc	r0
-   09FA A6 82              2190 	mov	@r0,dpl
-                           2191 ;	../fb_app_rs.c:307: firstrun=1;
-   09FC D2 18              2192 	setb	b0
-                           2193 ;	../fb_app_rs.c:310: adr=0;
-   09FE A8 10              2194 	mov	r0,_bp
-   0A00 08                 2195 	inc	r0
-   0A01 E4                 2196 	clr	a
-   0A02 F6                 2197 	mov	@r0,a
-   0A03 08                 2198 	inc	r0
-   0A04 F6                 2199 	mov	@r0,a
-                           2200 ;	../fb_app_rs.c:311: adr_tmp=0;
-   0A05 7D 00              2201 	mov	r5,#0x00
-                           2202 ;	../fb_app_rs.c:312: while(rsin[n]!='=' && n<(rsinpos-1)) {
-   0A07 7B 00              2203 	mov	r3,#0x00
-   0A09                    2204 00117$:
-   0A09 E5 10              2205 	mov	a,_bp
-   0A0B 24 03              2206 	add	a,#0x03
-   0A0D F8                 2207 	mov	r0,a
-   0A0E E6                 2208 	mov	a,@r0
-   0A0F 24 24              2209 	add	a,#_rsin
-   0A11 F9                 2210 	mov	r1,a
-   0A12 87 02              2211 	mov	ar2,@r1
-   0A14 BA 3D 03           2212 	cjne	r2,#0x3D,00141$
-   0A17 02 0A DA           2213 	ljmp	00119$
-   0A1A                    2214 00141$:
-   0A1A C0 03              2215 	push	ar3
-   0A1C AB 42              2216 	mov	r3,_rsinpos
-   0A1E 7C 00              2217 	mov	r4,#0x00
-   0A20 1B                 2218 	dec	r3
-   0A21 BB FF 01           2219 	cjne	r3,#0xFF,00142$
-   0A24 1C                 2220 	dec	r4
-   0A25                    2221 00142$:
-   0A25 E5 10              2222 	mov	a,_bp
-   0A27 24 03              2223 	add	a,#0x03
-   0A29 F8                 2224 	mov	r0,a
-   0A2A 86 06              2225 	mov	ar6,@r0
-   0A2C 7F 00              2226 	mov	r7,#0x00
-   0A2E C3                 2227 	clr	c
-   0A2F EE                 2228 	mov	a,r6
-   0A30 9B                 2229 	subb	a,r3
-   0A31 EF                 2230 	mov	a,r7
-   0A32 64 80              2231 	xrl	a,#0x80
-   0A34 8C F0              2232 	mov	b,r4
-   0A36 63 F0 80           2233 	xrl	b,#0x80
-   0A39 95 F0              2234 	subb	a,b
-   0A3B D0 03              2235 	pop	ar3
-   0A3D 40 03              2236 	jc	00143$
-   0A3F 02 0A DA           2237 	ljmp	00119$
-   0A42                    2238 00143$:
-                           2239 ;	../fb_app_rs.c:313: if(rsin[n]!='/' && rsin[n]!='.') {
-   0A42 BA 2F 02           2240 	cjne	r2,#0x2F,00144$
-   0A45 80 21              2241 	sjmp	00113$
-   0A47                    2242 00144$:
-   0A47 BA 2E 02           2243 	cjne	r2,#0x2E,00145$
-   0A4A 80 1C              2244 	sjmp	00113$
-   0A4C                    2245 00145$:
-                           2246 ;	../fb_app_rs.c:314: if(!firstrun) adr_tmp*=10;
-   0A4C 20 18 06           2247 	jb	b0,00102$
-   0A4F ED                 2248 	mov	a,r5
-   0A50 75 F0 0A           2249 	mov	b,#0x0A
-   0A53 A4                 2250 	mul	ab
-   0A54 FD                 2251 	mov	r5,a
-   0A55                    2252 00102$:
-                           2253 ;	../fb_app_rs.c:315: adr_tmp+=rsin[n]-48;
-   0A55 E5 10              2254 	mov	a,_bp
-   0A57 24 03              2255 	add	a,#0x03
-   0A59 F8                 2256 	mov	r0,a
-   0A5A E6                 2257 	mov	a,@r0
-   0A5B 24 24              2258 	add	a,#_rsin
-   0A5D F9                 2259 	mov	r1,a
-   0A5E E7                 2260 	mov	a,@r1
-   0A5F 24 D0              2261 	add	a,#0xD0
-   0A61 FF                 2262 	mov	r7,a
-   0A62 2D                 2263 	add	a,r5
-   0A63 FD                 2264 	mov	r5,a
-                           2265 ;	../fb_app_rs.c:316: firstrun=0;
-   0A64 C2 18              2266 	clr	b0
-   0A66 80 69              2267 	sjmp	00114$
-   0A68                    2268 00113$:
-                           2269 ;	../fb_app_rs.c:319: sepcount++;
-   0A68 0B                 2270 	inc	r3
-                           2271 ;	../fb_app_rs.c:320: firstrun=1;
-   0A69 D2 18              2272 	setb	b0
-                           2273 ;	../fb_app_rs.c:321: adr+=adr_tmp;
-   0A6B 8D 04              2274 	mov	ar4,r5
-   0A6D 7F 00              2275 	mov	r7,#0x00
-   0A6F A8 10              2276 	mov	r0,_bp
-   0A71 08                 2277 	inc	r0
-   0A72 EC                 2278 	mov	a,r4
-   0A73 26                 2279 	add	a,@r0
-   0A74 F6                 2280 	mov	@r0,a
-   0A75 EF                 2281 	mov	a,r7
-   0A76 08                 2282 	inc	r0
-   0A77 36                 2283 	addc	a,@r0
-   0A78 F6                 2284 	mov	@r0,a
-                           2285 ;	../fb_app_rs.c:322: if (rsin[n]=='/') {		// für GA
-   0A79 E5 10              2286 	mov	a,_bp
-   0A7B 24 03              2287 	add	a,#0x03
-   0A7D F8                 2288 	mov	r0,a
-   0A7E E6                 2289 	mov	a,@r0
-   0A7F 24 24              2290 	add	a,#_rsin
-   0A81 F9                 2291 	mov	r1,a
-   0A82 87 07              2292 	mov	ar7,@r1
-   0A84 BF 2F 26           2293 	cjne	r7,#0x2F,00110$
-                           2294 ;	../fb_app_rs.c:323: if (sepcount==1) adr=adr<<3; else adr=adr<<8;
-   0A87 BB 01 18           2295 	cjne	r3,#0x01,00104$
-   0A8A A8 10              2296 	mov	r0,_bp
-   0A8C 08                 2297 	inc	r0
-   0A8D 08                 2298 	inc	r0
-   0A8E E6                 2299 	mov	a,@r0
-   0A8F 18                 2300 	dec	r0
-   0A90 C4                 2301 	swap	a
-   0A91 03                 2302 	rr	a
-   0A92 54 F8              2303 	anl	a,#0xF8
-   0A94 C6                 2304 	xch	a,@r0
-   0A95 C4                 2305 	swap	a
-   0A96 03                 2306 	rr	a
-   0A97 C6                 2307 	xch	a,@r0
-   0A98 66                 2308 	xrl	a,@r0
-   0A99 C6                 2309 	xch	a,@r0
-   0A9A 54 F8              2310 	anl	a,#0xF8
-   0A9C C6                 2311 	xch	a,@r0
-   0A9D 66                 2312 	xrl	a,@r0
-   0A9E 08                 2313 	inc	r0
-   0A9F F6                 2314 	mov	@r0,a
-   0AA0 80 2D              2315 	sjmp	00111$
-   0AA2                    2316 00104$:
-   0AA2 A8 10              2317 	mov	r0,_bp
-   0AA4 08                 2318 	inc	r0
-   0AA5 E6                 2319 	mov	a,@r0
-   0AA6 08                 2320 	inc	r0
-   0AA7 F6                 2321 	mov	@r0,a
-   0AA8 18                 2322 	dec	r0
-   0AA9 76 00              2323 	mov	@r0,#0x00
-   0AAB 80 22              2324 	sjmp	00111$
-   0AAD                    2325 00110$:
-                           2326 ;	../fb_app_rs.c:326: if (sepcount==1) adr=adr<<4; else adr=adr<<8;
-   0AAD BB 01 16           2327 	cjne	r3,#0x01,00107$
-   0AB0 A8 10              2328 	mov	r0,_bp
-   0AB2 08                 2329 	inc	r0
-   0AB3 08                 2330 	inc	r0
-   0AB4 E6                 2331 	mov	a,@r0
-   0AB5 18                 2332 	dec	r0
-   0AB6 C4                 2333 	swap	a
-   0AB7 54 F0              2334 	anl	a,#0xF0
-   0AB9 C6                 2335 	xch	a,@r0
-   0ABA C4                 2336 	swap	a
-   0ABB C6                 2337 	xch	a,@r0
-   0ABC 66                 2338 	xrl	a,@r0
-   0ABD C6                 2339 	xch	a,@r0
-   0ABE 54 F0              2340 	anl	a,#0xF0
-   0AC0 C6                 2341 	xch	a,@r0
-   0AC1 66                 2342 	xrl	a,@r0
-   0AC2 08                 2343 	inc	r0
-   0AC3 F6                 2344 	mov	@r0,a
-   0AC4 80 09              2345 	sjmp	00111$
-   0AC6                    2346 00107$:
-   0AC6 A8 10              2347 	mov	r0,_bp
-   0AC8 08                 2348 	inc	r0
-   0AC9 E6                 2349 	mov	a,@r0
-   0ACA 08                 2350 	inc	r0
-   0ACB F6                 2351 	mov	@r0,a
-   0ACC 18                 2352 	dec	r0
-   0ACD 76 00              2353 	mov	@r0,#0x00
-   0ACF                    2354 00111$:
-                           2355 ;	../fb_app_rs.c:328: adr_tmp=0;
-   0ACF 7D 00              2356 	mov	r5,#0x00
-   0AD1                    2357 00114$:
-                           2358 ;	../fb_app_rs.c:330: n++;
-   0AD1 E5 10              2359 	mov	a,_bp
-   0AD3 24 03              2360 	add	a,#0x03
-   0AD5 F8                 2361 	mov	r0,a
-   0AD6 06                 2362 	inc	@r0
-   0AD7 02 0A 09           2363 	ljmp	00117$
-   0ADA                    2364 00119$:
-                           2365 ;	../fb_app_rs.c:332: adr+=adr_tmp;
-   0ADA 8D 04              2366 	mov	ar4,r5
-   0ADC 7F 00              2367 	mov	r7,#0x00
-   0ADE A8 10              2368 	mov	r0,_bp
-   0AE0 08                 2369 	inc	r0
-   0AE1 EC                 2370 	mov	a,r4
-   0AE2 26                 2371 	add	a,@r0
-   0AE3 F6                 2372 	mov	@r0,a
-   0AE4 EF                 2373 	mov	a,r7
-   0AE5 08                 2374 	inc	r0
-   0AE6 36                 2375 	addc	a,@r0
-   0AE7 F6                 2376 	mov	@r0,a
-                           2377 ;	../fb_app_rs.c:333: return(adr);
-   0AE8 A8 10              2378 	mov	r0,_bp
-   0AEA 08                 2379 	inc	r0
-   0AEB 86 82              2380 	mov	dpl,@r0
-   0AED 08                 2381 	inc	r0
-   0AEE 86 83              2382 	mov	dph,@r0
-   0AF0 85 10 81           2383 	mov	sp,_bp
-   0AF3 D0 10              2384 	pop	_bp
-   0AF5 22                 2385 	ret
-                           2386 ;------------------------------------------------------------
-                           2387 ;Allocation info for local variables in function 'equal_pos'
-                           2388 ;------------------------------------------------------------
-                           2389 ;n                         Allocated to registers 
-                           2390 ;pos                       Allocated to registers r7 
-                           2391 ;------------------------------------------------------------
-                           2392 ;	../fb_app_rs.c:339: unsigned char equal_pos(void)
-                           2393 ;	-----------------------------------------
-                           2394 ;	 function equal_pos
-                           2395 ;	-----------------------------------------
-   0AF6                    2396 _equal_pos:
-                           2397 ;	../fb_app_rs.c:344: pos=0xFF;
-   0AF6 7F FF              2398 	mov	r7,#0xFF
-                           2399 ;	../fb_app_rs.c:345: while(n<(rsinpos-1)) {
-   0AF8 7E 00              2400 	mov	r6,#0x00
-   0AFA                    2401 00103$:
-   0AFA AC 42              2402 	mov	r4,_rsinpos
-   0AFC 7D 00              2403 	mov	r5,#0x00
-   0AFE 1C                 2404 	dec	r4
-   0AFF BC FF 01           2405 	cjne	r4,#0xFF,00115$
-   0B02 1D                 2406 	dec	r5
-   0B03                    2407 00115$:
-   0B03 8E 02              2408 	mov	ar2,r6
-   0B05 7B 00              2409 	mov	r3,#0x00
-   0B07 C3                 2410 	clr	c
-   0B08 EA                 2411 	mov	a,r2
-   0B09 9C                 2412 	subb	a,r4
-   0B0A EB                 2413 	mov	a,r3
-   0B0B 64 80              2414 	xrl	a,#0x80
-   0B0D 8D F0              2415 	mov	b,r5
-   0B0F 63 F0 80           2416 	xrl	b,#0x80
-   0B12 95 F0              2417 	subb	a,b
-   0B14 50 0E              2418 	jnc	00105$
-                           2419 ;	../fb_app_rs.c:346: if(rsin[n]=='=') pos=n;
-   0B16 EE                 2420 	mov	a,r6
-   0B17 24 24              2421 	add	a,#_rsin
-   0B19 F9                 2422 	mov	r1,a
-   0B1A 87 05              2423 	mov	ar5,@r1
-   0B1C BD 3D 02           2424 	cjne	r5,#0x3D,00102$
-   0B1F 8E 07              2425 	mov	ar7,r6
-   0B21                    2426 00102$:
-                           2427 ;	../fb_app_rs.c:347: n++;
-   0B21 0E                 2428 	inc	r6
-   0B22 80 D6              2429 	sjmp	00103$
-   0B24                    2430 00105$:
-                           2431 ;	../fb_app_rs.c:349: return(pos);
-   0B24 8F 82              2432 	mov	dpl,r7
-   0B26 22                 2433 	ret
-                           2434 ;------------------------------------------------------------
-                           2435 ;Allocation info for local variables in function 'serial_int'
-                           2436 ;------------------------------------------------------------
-                           2437 ;	../fb_app_rs.c:353: void serial_int(void) __interrupt (4) __using (1)	// Interrupt on received char from serial port
-                           2438 ;	-----------------------------------------
-                           2439 ;	 function serial_int
-                           2440 ;	-----------------------------------------
-   0B27                    2441 _serial_int:
-                    000F   2442 	ar7 = 0x0F
-                    000E   2443 	ar6 = 0x0E
-                    000D   2444 	ar5 = 0x0D
-                    000C   2445 	ar4 = 0x0C
-                    000B   2446 	ar3 = 0x0B
-                    000A   2447 	ar2 = 0x0A
-                    0009   2448 	ar1 = 0x09
-                    0008   2449 	ar0 = 0x08
-   0B27 C0 E0              2450 	push	acc
-   0B29 C0 82              2451 	push	dpl
-   0B2B C0 83              2452 	push	dph
-   0B2D C0 D0              2453 	push	psw
-   0B2F 75 D0 08           2454 	mov	psw,#0x08
-                           2455 ;	../fb_app_rs.c:355: ES=0;
-   0B32 C2 AC              2456 	clr	_IEN0_4
-                           2457 ;	../fb_app_rs.c:356: if (RI){
-   0B34 30 98 30           2458 	jnb	_SCON_0,00112$
-                           2459 ;	../fb_app_rs.c:357: if (rsinpos<30) {
-   0B37 74 E2              2460 	mov	a,#0x100 - 0x1E
-   0B39 25 42              2461 	add	a,_rsinpos
-   0B3B 40 25              2462 	jc	00109$
-                           2463 ;	../fb_app_rs.c:358: rxledcount=0x40;// * RXLED kurz eischalten
-   0B3D 75 49 40           2464 	mov	_rxledcount,#0x40
-                           2465 ;	../fb_app_rs.c:359: if(SBUF!=0x0A) {
-   0B40 74 0A              2466 	mov	a,#0x0A
-   0B42 B5 99 02           2467 	cjne	a,_SBUF,00127$
-   0B45 80 1E              2468 	sjmp	00110$
-   0B47                    2469 00127$:
-                           2470 ;	../fb_app_rs.c:360: rsin[rsinpos]=SBUF;		// store byte in rsin
-   0B47 E5 42              2471 	mov	a,_rsinpos
-   0B49 24 24              2472 	add	a,#_rsin
-   0B4B F8                 2473 	mov	r0,a
-   0B4C A6 99              2474 	mov	@r0,_SBUF
-                           2475 ;	../fb_app_rs.c:361: rsinpos++;
-   0B4E 05 42              2476 	inc	_rsinpos
-                           2477 ;	../fb_app_rs.c:362: if (echo) {
-   0B50 90 1C FD           2478 	mov	dptr,#_echo
-   0B53 E4                 2479 	clr	a
-   0B54 93                 2480 	movc	a,@a+dptr
-   0B55 FF                 2481 	mov	r7,a
-   0B56 60 0D              2482 	jz	00110$
-                           2483 ;	../fb_app_rs.c:363: while(!TI);
-   0B58                    2484 00101$:
-                           2485 ;	../fb_app_rs.c:364: TI=0;
-   0B58 10 99 02           2486 	jbc	_SCON_1,00129$
-   0B5B 80 FB              2487 	sjmp	00101$
-   0B5D                    2488 00129$:
-                           2489 ;	../fb_app_rs.c:365: SBUF=SBUF;
-   0B5D 85 99 99           2490 	mov	_SBUF,_SBUF
-   0B60 80 03              2491 	sjmp	00110$
-   0B62                    2492 00109$:
-                           2493 ;	../fb_app_rs.c:369: else rsinpos=0;
-   0B62 75 42 00           2494 	mov	_rsinpos,#0x00
-   0B65                    2495 00110$:
-                           2496 ;	../fb_app_rs.c:370: RI=0;	
-   0B65 C2 98              2497 	clr	_SCON_0
-   0B67                    2498 00112$:
-                           2499 ;	../fb_app_rs.c:372: ES=1;
-   0B67 D2 AC              2500 	setb	_IEN0_4
-   0B69 D0 D0              2501 	pop	psw
-   0B6B D0 83              2502 	pop	dph
-   0B6D D0 82              2503 	pop	dpl
-   0B6F D0 E0              2504 	pop	acc
-   0B71 32                 2505 	reti
-                           2506 ;	eliminated unneeded push/pop b
-                           2507 ;------------------------------------------------------------
-                           2508 ;Allocation info for local variables in function 'send_ok'
-                           2509 ;------------------------------------------------------------
-                           2510 ;	../fb_app_rs.c:375: void send_ok(void)
-                           2511 ;	-----------------------------------------
-                           2512 ;	 function send_ok
-                           2513 ;	-----------------------------------------
-   0B72                    2514 _send_ok:
-                    0007   2515 	ar7 = 0x07
-                    0006   2516 	ar6 = 0x06
-                    0005   2517 	ar5 = 0x05
-                    0004   2518 	ar4 = 0x04
-                    0003   2519 	ar3 = 0x03
-                    0002   2520 	ar2 = 0x02
-                    0001   2521 	ar1 = 0x01
-                    0000   2522 	ar0 = 0x00
-                           2523 ;	../fb_app_rs.c:377: rs_send_s("OK\n");
-   0B72 90 1B 79           2524 	mov	dptr,#__str_0
-   0B75 75 F0 80           2525 	mov	b,#0x80
-   0B78 02 15 1A           2526 	ljmp	_rs_send_s
-                           2527 ;------------------------------------------------------------
-                           2528 ;Allocation info for local variables in function 'set_filtermode'
-                           2529 ;------------------------------------------------------------
-                           2530 ;mode                      Allocated to registers r7 
-                           2531 ;------------------------------------------------------------
-                           2532 ;	../fb_app_rs.c:380: void set_filtermode(unsigned char mode)
-                           2533 ;	-----------------------------------------
-                           2534 ;	 function set_filtermode
-                           2535 ;	-----------------------------------------
-   0B7B                    2536 _set_filtermode:
-   0B7B AF 82              2537 	mov	r7,dpl
-                           2538 ;	../fb_app_rs.c:382: write_ok=0;
-   0B7D C2 01              2539 	clr	_write_ok
-                           2540 ;	../fb_app_rs.c:383: while (!write_ok) {
-   0B7F E4                 2541 	clr	a
-   0B80 BF 31 01           2542 	cjne	r7,#0x31,00119$
-   0B83 04                 2543 	inc	a
-   0B84                    2544 00119$:
-   0B84 FF                 2545 	mov	r7,a
-   0B85                    2546 00106$:
-   0B85 20 01 28           2547 	jb	_write_ok,00109$
-                           2548 ;	../fb_app_rs.c:384: START_WRITECYCLE
-   0B88 75 E4 00           2549 	mov	_FMCON,#0x00
-                           2550 ;	../fb_app_rs.c:385: FMADRH = 0x1C;
-   0B8B 75 E7 1C           2551 	mov	_FMADRH,#0x1C
-                           2552 ;	../fb_app_rs.c:386: FMADRL = 0xFA;
-   0B8E 75 E6 FA           2553 	mov	_FMADRL,#0xFA
-                           2554 ;	../fb_app_rs.c:387: if(mode =='1'){
-   0B91 EF                 2555 	mov	a,r7
-   0B92 60 09              2556 	jz	00102$
-                           2557 ;	../fb_app_rs.c:388: filtermode=1;
-   0B94 D2 00              2558 	setb	_filtermode
-                           2559 ;	../fb_app_rs.c:389: transparency=0;
-   0B96 C2 10              2560 	clr	_transparency
-                           2561 ;	../fb_app_rs.c:390: FMDATA = 1;		// LSB
-   0B98 75 E5 01           2562 	mov	_FMDATA,#0x01
-   0B9B 80 07              2563 	sjmp	00103$
-   0B9D                    2564 00102$:
-                           2565 ;	../fb_app_rs.c:393: filtermode=0;
-   0B9D C2 00              2566 	clr	_filtermode
-                           2567 ;	../fb_app_rs.c:394: transparency=1;
-   0B9F D2 10              2568 	setb	_transparency
-                           2569 ;	../fb_app_rs.c:395: FMDATA=0;
-   0BA1 75 E5 00           2570 	mov	_FMDATA,#0x00
-   0BA4                    2571 00103$:
-                           2572 ;	../fb_app_rs.c:397: STOP_WRITECYCLE
-   0BA4 75 E4 68           2573 	mov	_FMCON,#0x68
-                           2574 ;	../fb_app_rs.c:398: if(!(FMCON & 0x01)) write_ok=1;	// pruefen, ob erfolgreich geflasht
-   0BA7 E5 E4              2575 	mov	a,_FMCON
-   0BA9 20 E0 D9           2576 	jb	acc.0,00106$
-   0BAC D2 01              2577 	setb	_write_ok
-   0BAE 80 D5              2578 	sjmp	00106$
-   0BB0                    2579 00109$:
-   0BB0 22                 2580 	ret
-                           2581 ;------------------------------------------------------------
-                           2582 ;Allocation info for local variables in function 'restart_app'
-                           2583 ;------------------------------------------------------------
-                           2584 ;n                         Allocated to registers r7 
-                           2585 ;------------------------------------------------------------
-                           2586 ;	../fb_app_rs.c:403: void restart_app(void)
-                           2587 ;	-----------------------------------------
-                           2588 ;	 function restart_app
-                           2589 ;	-----------------------------------------
-   0BB1                    2590 _restart_app:
-                           2591 ;	../fb_app_rs.c:408: P0M1=0x00;
-   0BB1 75 84 00           2592 	mov	_P0M1,#0x00
-                           2593 ;	../fb_app_rs.c:409: P0M2=0xC0;
-   0BB4 75 85 C0           2594 	mov	_P0M2,#0xC0
-                           2595 ;	../fb_app_rs.c:410: P0=0xC0;
-   0BB7 75 80 C0           2596 	mov	_P0,#0xC0
-                           2597 ;	../fb_app_rs.c:412: for (n=0;n<255;n++) ;	// Warten bis Bus stabil
-   0BBA 7F FF              2598 	mov	r7,#0xFF
-   0BBC                    2599 00103$:
-   0BBC 8F 06              2600 	mov	ar6,r7
-   0BBE 1E                 2601 	dec	r6
-   0BBF 8E 07              2602 	mov	ar7,r6
-   0BC1 EF                 2603 	mov	a,r7
-   0BC2 70 F8              2604 	jnz	00103$
-                           2605 ;	../fb_app_rs.c:417: RI=0;
-   0BC4 C2 98              2606 	clr	_SCON_0
-                           2607 ;	../fb_app_rs.c:418: TI=1;
-   0BC6 D2 99              2608 	setb	_SCON_1
-                           2609 ;	../fb_app_rs.c:419: ES=1;
-   0BC8 D2 AC              2610 	setb	_IEN0_4
-   0BCA 22                 2611 	ret
-                           2612 	.area CSEG    (CODE)
-                           2613 	.area CONST   (CODE)
-                    1CFA   2614 _fm	=	0x1cfa
-                    1CFB   2615 _pa_h	=	0x1cfb
-                    1CFC   2616 _pa_l	=	0x1cfc
-                    1CFD   2617 _echo	=	0x1cfd
-                    1D00   2618 _ga_db	=	0x1d00
-   1B79                    2619 __str_0:
-   1B79 4F 4B              2620 	.ascii "OK"
-   1B7B 0A                 2621 	.db 0x0A
-   1B7C 00                 2622 	.db 0x00
-                           2623 	.area XINIT   (CODE)
-                           2624 	.area CABS    (ABS,CODE)
-   1CFE                    2625 	.org 0x1CFE
-   1CFE                    2626 _baud:
-   1CFE C0 00              2627 	.byte #0xC0,#0x00	; 192
+                            420 	.area HOME    (CODE)
+                            421 	.area HOME    (CODE)
+                            422 ;--------------------------------------------------------
+                            423 ; code
+                            424 ;--------------------------------------------------------
+                            425 	.area CSEG    (CODE)
+                            426 ;------------------------------------------------------------
+                            427 ;Allocation info for local variables in function 'build_tel'
+                            428 ;------------------------------------------------------------
+                            429 ;objno                     Allocated to registers r7 
+                            430 ;build_ok                  Allocated to registers 
+                            431 ;value                     Allocated to registers r4 r7 
+                            432 ;eis5temp                  Allocated to registers r7 r5 
+                            433 ;exp                       Allocated to registers r6 r5 
+                            434 ;temp                      Allocated to stack - _bp +1
+                            435 ;d                         Allocated to registers r4 
+                            436 ;value_pos                 Allocated to registers r5 
+                            437 ;day                       Allocated to registers r6 
+                            438 ;repeatflag                Allocated to registers b0 
+                            439 ;sloc0                     Allocated to stack - _bp +17
+                            440 ;sloc1                     Allocated to stack - _bp +5
+                            441 ;sloc2                     Allocated to stack - _bp +20
+                            442 ;sloc3                     Allocated to stack - _bp +7
+                            443 ;sloc4                     Allocated to stack - _bp +23
+                            444 ;------------------------------------------------------------
+                            445 ;	../fb_app_rs.c:55: __bit build_tel(unsigned char objno)
+                            446 ;	-----------------------------------------
+                            447 ;	 function build_tel
+                            448 ;	-----------------------------------------
+   008C                     449 _build_tel:
+                    0007    450 	ar7 = 0x07
+                    0006    451 	ar6 = 0x06
+                    0005    452 	ar5 = 0x05
+                    0004    453 	ar4 = 0x04
+                    0003    454 	ar3 = 0x03
+                    0002    455 	ar2 = 0x02
+                    0001    456 	ar1 = 0x01
+                    0000    457 	ar0 = 0x00
+   008C C0 10               458 	push	_bp
+   008E E5 81               459 	mov	a,sp
+   0090 F5 10               460 	mov	_bp,a
+   0092 24 07               461 	add	a,#0x07
+   0094 F5 81               462 	mov	sp,a
+   0096 AF 82               463 	mov	r7,dpl
+                            464 ;	../fb_app_rs.c:64: unsigned char day=0;//, length;
+   0098 7E 00               465 	mov	r6,#0x00
+                            466 ;	../fb_app_rs.c:68: repeatflag=objno&0x20;
+   009A EF                  467 	mov	a,r7
+   009B A2 E5               468 	mov	c,acc[5]
+   009D E4                  469 	clr	a
+   009E 33                  470 	rlc	a
+   009F 24 FF               471 	add	a,#0xff
+   00A1 92 18               472 	mov	b0,c
+                            473 ;	../fb_app_rs.c:69: groupadr=convert_adr(6);
+   00A3 75 82 06            474 	mov	dpl,#0x06
+   00A6 C0 07               475 	push	ar7
+   00A8 C0 06               476 	push	ar6
+   00AA C0 23               477 	push	bits
+   00AC 12 09 4A            478 	lcall	_convert_adr
+   00AF 85 82 43            479 	mov	_groupadr,dpl
+   00B2 85 83 44            480 	mov	(_groupadr + 1),dph
+   00B5 D0 23               481 	pop	bits
+                            482 ;	../fb_app_rs.c:70: value_pos=equal_pos()+1;
+   00B7 C0 23               483 	push	bits
+   00B9 12 0A 57            484 	lcall	_equal_pos
+   00BC AD 82               485 	mov	r5,dpl
+   00BE D0 23               486 	pop	bits
+   00C0 D0 06               487 	pop	ar6
+   00C2 D0 07               488 	pop	ar7
+   00C4 0D                  489 	inc	r5
+                            490 ;	../fb_app_rs.c:71: switch (objno)// entspricht in der rs soft dem eis type.
+   00C5 EF                  491 	mov	a,r7
+   00C6 24 EF               492 	add	a,#0xff - 0x10
+   00C8 50 03               493 	jnc	00173$
+   00CA 02 05 CE            494 	ljmp	00141$
+   00CD                     495 00173$:
+   00CD EF                  496 	mov	a,r7
+   00CE 24 09               497 	add	a,#(00174$-3-.)
+   00D0 83                  498 	movc	a,@a+pc
+   00D1 C0 E0               499 	push	acc
+   00D3 EF                  500 	mov	a,r7
+   00D4 24 14               501 	add	a,#(00175$-3-.)
+   00D6 83                  502 	movc	a,@a+pc
+   00D7 C0 E0               503 	push	acc
+   00D9 22                  504 	ret
+   00DA                     505 00174$:
+   00DA CE                  506 	.db	00141$
+   00DB FC                  507 	.db	00101$
+   00DC 2F                  508 	.db	00105$
+   00DD 7A                  509 	.db	00109$
+   00DE 89                  510 	.db	00110$
+   00DF F8                  511 	.db	00111$
+   00E0 A6                  512 	.db	00131$
+   00E1 CE                  513 	.db	00141$
+   00E2 CE                  514 	.db	00141$
+   00E3 CE                  515 	.db	00141$
+   00E4 CE                  516 	.db	00141$
+   00E5 CE                  517 	.db	00141$
+   00E6 CE                  518 	.db	00141$
+   00E7 CE                  519 	.db	00141$
+   00E8 26                  520 	.db	00135$
+   00E9 3F                  521 	.db	00136$
+   00EA A8                  522 	.db	00140$
+   00EB                     523 00175$:
+   00EB 05                  524 	.db	00141$>>8
+   00EC 00                  525 	.db	00101$>>8
+   00ED 01                  526 	.db	00105$>>8
+   00EE 01                  527 	.db	00109$>>8
+   00EF 01                  528 	.db	00110$>>8
+   00F0 01                  529 	.db	00111$>>8
+   00F1 04                  530 	.db	00131$>>8
+   00F2 05                  531 	.db	00141$>>8
+   00F3 05                  532 	.db	00141$>>8
+   00F4 05                  533 	.db	00141$>>8
+   00F5 05                  534 	.db	00141$>>8
+   00F6 05                  535 	.db	00141$>>8
+   00F7 05                  536 	.db	00141$>>8
+   00F8 05                  537 	.db	00141$>>8
+   00F9 05                  538 	.db	00135$>>8
+   00FA 05                  539 	.db	00136$>>8
+   00FB 05                  540 	.db	00140$>>8
+                            541 ;	../fb_app_rs.c:76: case 1:// EIS1
+   00FC                     542 00101$:
+                            543 ;	../fb_app_rs.c:77: tel_header(groupadr, 1);
+   00FC C0 23               544 	push	bits
+   00FE 74 01               545 	mov	a,#0x01
+   0100 C0 E0               546 	push	acc
+   0102 85 43 82            547 	mov	dpl,_groupadr
+   0105 85 44 83            548 	mov	dph,(_groupadr + 1)
+   0108 12 09 18            549 	lcall	_tel_header
+   010B 15 81               550 	dec	sp
+   010D D0 23               551 	pop	bits
+                            552 ;	../fb_app_rs.c:78: if (rsin[rsinpos-2]=='1') value=1;
+   010F E5 42               553 	mov	a,_rsinpos
+   0111 24 FE               554 	add	a,#0xFE
+   0113 24 24               555 	add	a,#_rsin
+   0115 F9                  556 	mov	r1,a
+   0116 87 07               557 	mov	ar7,@r1
+   0118 BF 31 06            558 	cjne	r7,#0x31,00103$
+   011B 7C 01               559 	mov	r4,#0x01
+   011D 7F 00               560 	mov	r7,#0x00
+   011F 80 04               561 	sjmp	00104$
+   0121                     562 00103$:
+                            563 ;	../fb_app_rs.c:79: else value=0;
+   0121 7C 00               564 	mov	r4,#0x00
+   0123 7F 00               565 	mov	r7,#0x00
+   0125                     566 00104$:
+                            567 ;	../fb_app_rs.c:80: telegramm[7]=0x80+value;
+   0125 8C 03               568 	mov	ar3,r4
+   0127 74 80               569 	mov	a,#0x80
+   0129 2B                  570 	add	a,r3
+   012A F5 58               571 	mov	(_telegramm + 0x0007),a
+                            572 ;	../fb_app_rs.c:82: break;	
+   012C 02 05 CE            573 	ljmp	00141$
+                            574 ;	../fb_app_rs.c:83: case 2:// EIS2
+   012F                     575 00105$:
+                            576 ;	../fb_app_rs.c:84: tel_header(groupadr, 1);
+   012F C0 23               577 	push	bits
+   0131 74 01               578 	mov	a,#0x01
+   0133 C0 E0               579 	push	acc
+   0135 85 43 82            580 	mov	dpl,_groupadr
+   0138 85 44 83            581 	mov	dph,(_groupadr + 1)
+   013B 12 09 18            582 	lcall	_tel_header
+   013E 15 81               583 	dec	sp
+   0140 D0 23               584 	pop	bits
+                            585 ;	../fb_app_rs.c:85: if (rsin[rsinpos-3]=='u') value=0x88;
+   0142 E5 42               586 	mov	a,_rsinpos
+   0144 24 FD               587 	add	a,#0xFD
+   0146 24 24               588 	add	a,#_rsin
+   0148 F9                  589 	mov	r1,a
+   0149 87 03               590 	mov	ar3,@r1
+   014B BB 75 06            591 	cjne	r3,#0x75,00107$
+   014E 7C 88               592 	mov	r4,#0x88
+   0150 7F 00               593 	mov	r7,#0x00
+   0152 80 04               594 	sjmp	00108$
+   0154                     595 00107$:
+                            596 ;	../fb_app_rs.c:86: else value=0x80;
+   0154 7C 80               597 	mov	r4,#0x80
+   0156 7F 00               598 	mov	r7,#0x00
+   0158                     599 00108$:
+                            600 ;	../fb_app_rs.c:87: value+=((rsin[rsinpos-2]-48));
+   0158 E5 42               601 	mov	a,_rsinpos
+   015A 24 FE               602 	add	a,#0xFE
+   015C 24 24               603 	add	a,#_rsin
+   015E F9                  604 	mov	r1,a
+   015F 87 03               605 	mov	ar3,@r1
+   0161 7A 00               606 	mov	r2,#0x00
+   0163 EB                  607 	mov	a,r3
+   0164 24 D0               608 	add	a,#0xD0
+   0166 FB                  609 	mov	r3,a
+   0167 EA                  610 	mov	a,r2
+   0168 34 FF               611 	addc	a,#0xFF
+   016A FA                  612 	mov	r2,a
+   016B EB                  613 	mov	a,r3
+   016C 2C                  614 	add	a,r4
+   016D FC                  615 	mov	r4,a
+   016E EA                  616 	mov	a,r2
+   016F 3F                  617 	addc	a,r7
+   0170 FF                  618 	mov	r7,a
+                            619 ;	../fb_app_rs.c:88: telegramm[7]=value&0xFF;
+   0171 8C 02               620 	mov	ar2,r4
+   0173 7B 00               621 	mov	r3,#0x00
+   0175 8A 58               622 	mov	(_telegramm + 0x0007),r2
+                            623 ;	../fb_app_rs.c:89: break;	
+   0177 02 05 CE            624 	ljmp	00141$
+                            625 ;	../fb_app_rs.c:90: case 3:// EIS3
+   017A                     626 00109$:
+                            627 ;	../fb_app_rs.c:91: day=(rsin[value_pos]-48)<<5;
+   017A ED                  628 	mov	a,r5
+   017B 24 24               629 	add	a,#_rsin
+   017D F9                  630 	mov	r1,a
+   017E E7                  631 	mov	a,@r1
+   017F 24 D0               632 	add	a,#0xD0
+   0181 FB                  633 	mov	r3,a
+   0182 C4                  634 	swap	a
+   0183 23                  635 	rl	a
+   0184 54 E0               636 	anl	a,#0xE0
+   0186 FE                  637 	mov	r6,a
+                            638 ;	../fb_app_rs.c:92: value_pos+=2;
+   0187 0D                  639 	inc	r5
+   0188 0D                  640 	inc	r5
+                            641 ;	../fb_app_rs.c:93: case 4:// EIS4	
+   0189                     642 00110$:
+                            643 ;	../fb_app_rs.c:94: tel_header(groupadr, 4);
+   0189 C0 06               644 	push	ar6
+   018B C0 05               645 	push	ar5
+   018D C0 23               646 	push	bits
+   018F 74 04               647 	mov	a,#0x04
+   0191 C0 E0               648 	push	acc
+   0193 85 43 82            649 	mov	dpl,_groupadr
+   0196 85 44 83            650 	mov	dph,(_groupadr + 1)
+   0199 12 09 18            651 	lcall	_tel_header
+   019C 15 81               652 	dec	sp
+   019E D0 23               653 	pop	bits
+   01A0 D0 05               654 	pop	ar5
+   01A2 D0 06               655 	pop	ar6
+                            656 ;	../fb_app_rs.c:95: telegramm[7]=0x80;
+   01A4 75 58 80            657 	mov	(_telegramm + 0x0007),#0x80
+                            658 ;	../fb_app_rs.c:96: telegramm[8]=((rsin[value_pos]-48)*10)+(rsin[value_pos+1]-48)+day;
+   01A7 ED                  659 	mov	a,r5
+   01A8 24 24               660 	add	a,#_rsin
+   01AA F9                  661 	mov	r1,a
+   01AB E7                  662 	mov	a,@r1
+   01AC 24 D0               663 	add	a,#0xD0
+   01AE 75 F0 0A            664 	mov	b,#0x0A
+   01B1 A4                  665 	mul	ab
+   01B2 FB                  666 	mov	r3,a
+   01B3 ED                  667 	mov	a,r5
+   01B4 04                  668 	inc	a
+   01B5 24 24               669 	add	a,#_rsin
+   01B7 F9                  670 	mov	r1,a
+   01B8 E7                  671 	mov	a,@r1
+   01B9 FA                  672 	mov	r2,a
+   01BA 24 D0               673 	add	a,#0xD0
+   01BC 2B                  674 	add	a,r3
+   01BD 2E                  675 	add	a,r6
+   01BE F5 59               676 	mov	(_telegramm + 0x0008),a
+                            677 ;	../fb_app_rs.c:97: telegramm[9]=((rsin[value_pos+3]-48)*10)+(rsin[value_pos+4]-48);
+   01C0 74 03               678 	mov	a,#0x03
+   01C2 2D                  679 	add	a,r5
+   01C3 24 24               680 	add	a,#_rsin
+   01C5 F9                  681 	mov	r1,a
+   01C6 E7                  682 	mov	a,@r1
+   01C7 24 D0               683 	add	a,#0xD0
+   01C9 75 F0 0A            684 	mov	b,#0x0A
+   01CC A4                  685 	mul	ab
+   01CD FE                  686 	mov	r6,a
+   01CE 74 04               687 	mov	a,#0x04
+   01D0 2D                  688 	add	a,r5
+   01D1 24 24               689 	add	a,#_rsin
+   01D3 F9                  690 	mov	r1,a
+   01D4 E7                  691 	mov	a,@r1
+   01D5 24 D0               692 	add	a,#0xD0
+   01D7 2E                  693 	add	a,r6
+   01D8 F5 5A               694 	mov	(_telegramm + 0x0009),a
+                            695 ;	../fb_app_rs.c:98: telegramm[10]=((rsin[value_pos+6]-48)*10)+(rsin[value_pos+7]-48);
+   01DA 74 06               696 	mov	a,#0x06
+   01DC 2D                  697 	add	a,r5
+   01DD 24 24               698 	add	a,#_rsin
+   01DF F9                  699 	mov	r1,a
+   01E0 E7                  700 	mov	a,@r1
+   01E1 24 D0               701 	add	a,#0xD0
+   01E3 75 F0 0A            702 	mov	b,#0x0A
+   01E6 A4                  703 	mul	ab
+   01E7 FE                  704 	mov	r6,a
+   01E8 74 07               705 	mov	a,#0x07
+   01EA 2D                  706 	add	a,r5
+   01EB 24 24               707 	add	a,#_rsin
+   01ED F9                  708 	mov	r1,a
+   01EE E7                  709 	mov	a,@r1
+   01EF FB                  710 	mov	r3,a
+   01F0 24 D0               711 	add	a,#0xD0
+   01F2 2E                  712 	add	a,r6
+   01F3 F5 5B               713 	mov	(_telegramm + 0x000a),a
+                            714 ;	../fb_app_rs.c:99: break;
+   01F5 02 05 CE            715 	ljmp	00141$
+                            716 ;	../fb_app_rs.c:107: */	case 5://
+   01F8                     717 00111$:
+                            718 ;	../fb_app_rs.c:108: tel_header(groupadr, 3);
+   01F8 C0 05               719 	push	ar5
+   01FA C0 23               720 	push	bits
+   01FC 74 03               721 	mov	a,#0x03
+   01FE C0 E0               722 	push	acc
+   0200 85 43 82            723 	mov	dpl,_groupadr
+   0203 85 44 83            724 	mov	dph,(_groupadr + 1)
+   0206 12 09 18            725 	lcall	_tel_header
+   0209 15 81               726 	dec	sp
+   020B D0 23               727 	pop	bits
+   020D D0 05               728 	pop	ar5
+                            729 ;	../fb_app_rs.c:109: telegramm[7]=0x80;
+   020F 75 58 80            730 	mov	(_telegramm + 0x0007),#0x80
+                            731 ;	../fb_app_rs.c:111: if(rsin[value_pos]<48 || rsin[value_pos]>57) d=value_pos+1; else d=value_pos;	// falls Vorzeichen
+   0212 ED                  732 	mov	a,r5
+   0213 24 24               733 	add	a,#_rsin
+   0215 F9                  734 	mov	r1,a
+   0216 87 07               735 	mov	ar7,@r1
+   0218 BF 30 00            736 	cjne	r7,#0x30,00180$
+   021B                     737 00180$:
+   021B 40 05               738 	jc	00112$
+   021D EF                  739 	mov	a,r7
+   021E 24 C6               740 	add	a,#0xff - 0x39
+   0220 50 05               741 	jnc	00113$
+   0222                     742 00112$:
+   0222 ED                  743 	mov	a,r5
+   0223 04                  744 	inc	a
+   0224 FC                  745 	mov	r4,a
+   0225 80 02               746 	sjmp	00114$
+   0227                     747 00113$:
+   0227 8D 04               748 	mov	ar4,r5
+   0229                     749 00114$:
+                            750 ;	../fb_app_rs.c:114: temp=0;
+   0229 A8 10               751 	mov	r0,_bp
+   022B 08                  752 	inc	r0
+   022C E4                  753 	clr	a
+   022D F6                  754 	mov	@r0,a
+   022E 08                  755 	inc	r0
+   022F F6                  756 	mov	@r0,a
+   0230 08                  757 	inc	r0
+   0231 F6                  758 	mov	@r0,a
+   0232 08                  759 	inc	r0
+   0233 F6                  760 	mov	@r0,a
+                            761 ;	../fb_app_rs.c:115: while (d<(rsinpos-1) && rsin[d]!=0x2E && rsin[d]!=0x2C) {
+   0234 E5 10               762 	mov	a,_bp
+   0236 24 07               763 	add	a,#0x07
+   0238 F8                  764 	mov	r0,a
+   0239 A6 04               765 	mov	@r0,ar4
+   023B                     766 00118$:
+   023B E5 10               767 	mov	a,_bp
+   023D 24 05               768 	add	a,#0x05
+   023F F8                  769 	mov	r0,a
+   0240 A6 42               770 	mov	@r0,_rsinpos
+   0242 08                  771 	inc	r0
+   0243 76 00               772 	mov	@r0,#0x00
+   0245 E5 10               773 	mov	a,_bp
+   0247 24 05               774 	add	a,#0x05
+   0249 F8                  775 	mov	r0,a
+   024A E6                  776 	mov	a,@r0
+   024B 24 FF               777 	add	a,#0xFF
+   024D FE                  778 	mov	r6,a
+   024E 08                  779 	inc	r0
+   024F E6                  780 	mov	a,@r0
+   0250 34 FF               781 	addc	a,#0xFF
+   0252 FD                  782 	mov	r5,a
+   0253 E5 10               783 	mov	a,_bp
+   0255 24 07               784 	add	a,#0x07
+   0257 F8                  785 	mov	r0,a
+   0258 86 02               786 	mov	ar2,@r0
+   025A 7B 00               787 	mov	r3,#0x00
+   025C C3                  788 	clr	c
+   025D EA                  789 	mov	a,r2
+   025E 9E                  790 	subb	a,r6
+   025F EB                  791 	mov	a,r3
+   0260 64 80               792 	xrl	a,#0x80
+   0262 8D F0               793 	mov	b,r5
+   0264 63 F0 80            794 	xrl	b,#0x80
+   0267 95 F0               795 	subb	a,b
+   0269 40 03               796 	jc	00183$
+   026B 02 02 F1            797 	ljmp	00120$
+   026E                     798 00183$:
+   026E E5 10               799 	mov	a,_bp
+   0270 24 07               800 	add	a,#0x07
+   0272 F8                  801 	mov	r0,a
+   0273 E6                  802 	mov	a,@r0
+   0274 24 24               803 	add	a,#_rsin
+   0276 F9                  804 	mov	r1,a
+   0277 87 06               805 	mov	ar6,@r1
+   0279 BE 2E 02            806 	cjne	r6,#0x2E,00184$
+   027C 80 73               807 	sjmp	00120$
+   027E                     808 00184$:
+   027E BE 2C 02            809 	cjne	r6,#0x2C,00185$
+   0281 80 6E               810 	sjmp	00120$
+   0283                     811 00185$:
+                            812 ;	../fb_app_rs.c:116: temp=temp*10;
+   0283 C0 07               813 	push	ar7
+   0285 C0 06               814 	push	ar6
+   0287 C0 23               815 	push	bits
+   0289 A8 10               816 	mov	r0,_bp
+   028B 08                  817 	inc	r0
+   028C E6                  818 	mov	a,@r0
+   028D C0 E0               819 	push	acc
+   028F 08                  820 	inc	r0
+   0290 E6                  821 	mov	a,@r0
+   0291 C0 E0               822 	push	acc
+   0293 08                  823 	inc	r0
+   0294 E6                  824 	mov	a,@r0
+   0295 C0 E0               825 	push	acc
+   0297 08                  826 	inc	r0
+   0298 E6                  827 	mov	a,@r0
+   0299 C0 E0               828 	push	acc
+   029B 90 00 0A            829 	mov	dptr,#(0x0A&0x00ff)
+   029E E4                  830 	clr	a
+   029F F5 F0               831 	mov	b,a
+   02A1 12 1B 8F            832 	lcall	__mullong
+   02A4 AD 82               833 	mov	r5,dpl
+   02A6 AC 83               834 	mov	r4,dph
+   02A8 AB F0               835 	mov	r3,b
+   02AA FA                  836 	mov	r2,a
+   02AB E5 81               837 	mov	a,sp
+   02AD 24 FC               838 	add	a,#0xfc
+   02AF F5 81               839 	mov	sp,a
+   02B1 D0 23               840 	pop	bits
+   02B3 D0 06               841 	pop	ar6
+   02B5 D0 07               842 	pop	ar7
+   02B7 A8 10               843 	mov	r0,_bp
+   02B9 08                  844 	inc	r0
+   02BA A6 05               845 	mov	@r0,ar5
+   02BC 08                  846 	inc	r0
+   02BD A6 04               847 	mov	@r0,ar4
+   02BF 08                  848 	inc	r0
+   02C0 A6 03               849 	mov	@r0,ar3
+   02C2 08                  850 	inc	r0
+   02C3 A6 02               851 	mov	@r0,ar2
+                            852 ;	../fb_app_rs.c:117: temp=temp+(rsin[d]-48);
+   02C5 8E 03               853 	mov	ar3,r6
+   02C7 7E 00               854 	mov	r6,#0x00
+   02C9 EB                  855 	mov	a,r3
+   02CA 24 D0               856 	add	a,#0xD0
+   02CC FB                  857 	mov	r3,a
+   02CD EE                  858 	mov	a,r6
+   02CE 34 FF               859 	addc	a,#0xFF
+   02D0 FE                  860 	mov	r6,a
+   02D1 33                  861 	rlc	a
+   02D2 95 E0               862 	subb	a,acc
+   02D4 FD                  863 	mov	r5,a
+   02D5 FC                  864 	mov	r4,a
+   02D6 A8 10               865 	mov	r0,_bp
+   02D8 08                  866 	inc	r0
+   02D9 EB                  867 	mov	a,r3
+   02DA 26                  868 	add	a,@r0
+   02DB F6                  869 	mov	@r0,a
+   02DC EE                  870 	mov	a,r6
+   02DD 08                  871 	inc	r0
+   02DE 36                  872 	addc	a,@r0
+   02DF F6                  873 	mov	@r0,a
+   02E0 ED                  874 	mov	a,r5
+   02E1 08                  875 	inc	r0
+   02E2 36                  876 	addc	a,@r0
+   02E3 F6                  877 	mov	@r0,a
+   02E4 EC                  878 	mov	a,r4
+   02E5 08                  879 	inc	r0
+   02E6 36                  880 	addc	a,@r0
+   02E7 F6                  881 	mov	@r0,a
+                            882 ;	../fb_app_rs.c:118: d++;
+   02E8 E5 10               883 	mov	a,_bp
+   02EA 24 07               884 	add	a,#0x07
+   02EC F8                  885 	mov	r0,a
+   02ED 06                  886 	inc	@r0
+   02EE 02 02 3B            887 	ljmp	00118$
+   02F1                     888 00120$:
+                            889 ;	../fb_app_rs.c:120: d++;
+   02F1 E5 10               890 	mov	a,_bp
+   02F3 24 07               891 	add	a,#0x07
+   02F5 F8                  892 	mov	r0,a
+   02F6 E6                  893 	mov	a,@r0
+   02F7 04                  894 	inc	a
+   02F8 FC                  895 	mov	r4,a
+                            896 ;	../fb_app_rs.c:121: temp=temp*10;
+   02F9 C0 07               897 	push	ar7
+   02FB C0 04               898 	push	ar4
+   02FD C0 23               899 	push	bits
+   02FF A8 10               900 	mov	r0,_bp
+   0301 08                  901 	inc	r0
+   0302 E6                  902 	mov	a,@r0
+   0303 C0 E0               903 	push	acc
+   0305 08                  904 	inc	r0
+   0306 E6                  905 	mov	a,@r0
+   0307 C0 E0               906 	push	acc
+   0309 08                  907 	inc	r0
+   030A E6                  908 	mov	a,@r0
+   030B C0 E0               909 	push	acc
+   030D 08                  910 	inc	r0
+   030E E6                  911 	mov	a,@r0
+   030F C0 E0               912 	push	acc
+   0311 90 00 0A            913 	mov	dptr,#(0x0A&0x00ff)
+   0314 E4                  914 	clr	a
+   0315 F5 F0               915 	mov	b,a
+   0317 12 1B 8F            916 	lcall	__mullong
+   031A AE 82               917 	mov	r6,dpl
+   031C AD 83               918 	mov	r5,dph
+   031E AB F0               919 	mov	r3,b
+   0320 FA                  920 	mov	r2,a
+   0321 E5 81               921 	mov	a,sp
+   0323 24 FC               922 	add	a,#0xfc
+   0325 F5 81               923 	mov	sp,a
+   0327 D0 23               924 	pop	bits
+   0329 D0 04               925 	pop	ar4
+   032B D0 07               926 	pop	ar7
+   032D A8 10               927 	mov	r0,_bp
+   032F 08                  928 	inc	r0
+   0330 A6 06               929 	mov	@r0,ar6
+   0332 08                  930 	inc	r0
+   0333 A6 05               931 	mov	@r0,ar5
+   0335 08                  932 	inc	r0
+   0336 A6 03               933 	mov	@r0,ar3
+   0338 08                  934 	inc	r0
+   0339 A6 02               935 	mov	@r0,ar2
+                            936 ;	../fb_app_rs.c:122: if(d<(rsinpos-1))temp=temp+(rsin[d]-48);//erste Stelle nach dem Komma
+   033B E5 10               937 	mov	a,_bp
+   033D 24 05               938 	add	a,#0x05
+   033F F8                  939 	mov	r0,a
+   0340 E6                  940 	mov	a,@r0
+   0341 24 FF               941 	add	a,#0xFF
+   0343 FD                  942 	mov	r5,a
+   0344 08                  943 	inc	r0
+   0345 E6                  944 	mov	a,@r0
+   0346 34 FF               945 	addc	a,#0xFF
+   0348 FB                  946 	mov	r3,a
+   0349 8C 02               947 	mov	ar2,r4
+   034B 7E 00               948 	mov	r6,#0x00
+   034D C3                  949 	clr	c
+   034E EA                  950 	mov	a,r2
+   034F 9D                  951 	subb	a,r5
+   0350 EE                  952 	mov	a,r6
+   0351 64 80               953 	xrl	a,#0x80
+   0353 8B F0               954 	mov	b,r3
+   0355 63 F0 80            955 	xrl	b,#0x80
+   0358 95 F0               956 	subb	a,b
+   035A 50 27               957 	jnc	00122$
+   035C EC                  958 	mov	a,r4
+   035D 24 24               959 	add	a,#_rsin
+   035F F9                  960 	mov	r1,a
+   0360 87 06               961 	mov	ar6,@r1
+   0362 7B 00               962 	mov	r3,#0x00
+   0364 EE                  963 	mov	a,r6
+   0365 24 D0               964 	add	a,#0xD0
+   0367 FE                  965 	mov	r6,a
+   0368 EB                  966 	mov	a,r3
+   0369 34 FF               967 	addc	a,#0xFF
+   036B FB                  968 	mov	r3,a
+   036C 33                  969 	rlc	a
+   036D 95 E0               970 	subb	a,acc
+   036F FD                  971 	mov	r5,a
+   0370 FA                  972 	mov	r2,a
+   0371 A8 10               973 	mov	r0,_bp
+   0373 08                  974 	inc	r0
+   0374 EE                  975 	mov	a,r6
+   0375 26                  976 	add	a,@r0
+   0376 F6                  977 	mov	@r0,a
+   0377 EB                  978 	mov	a,r3
+   0378 08                  979 	inc	r0
+   0379 36                  980 	addc	a,@r0
+   037A F6                  981 	mov	@r0,a
+   037B ED                  982 	mov	a,r5
+   037C 08                  983 	inc	r0
+   037D 36                  984 	addc	a,@r0
+   037E F6                  985 	mov	@r0,a
+   037F EA                  986 	mov	a,r2
+   0380 08                  987 	inc	r0
+   0381 36                  988 	addc	a,@r0
+   0382 F6                  989 	mov	@r0,a
+   0383                     990 00122$:
+                            991 ;	../fb_app_rs.c:123: d++;
+   0383 0C                  992 	inc	r4
+                            993 ;	../fb_app_rs.c:124: temp=temp*10;
+   0384 C0 07               994 	push	ar7
+   0386 C0 04               995 	push	ar4
+   0388 C0 23               996 	push	bits
+   038A A8 10               997 	mov	r0,_bp
+   038C 08                  998 	inc	r0
+   038D E6                  999 	mov	a,@r0
+   038E C0 E0              1000 	push	acc
+   0390 08                 1001 	inc	r0
+   0391 E6                 1002 	mov	a,@r0
+   0392 C0 E0              1003 	push	acc
+   0394 08                 1004 	inc	r0
+   0395 E6                 1005 	mov	a,@r0
+   0396 C0 E0              1006 	push	acc
+   0398 08                 1007 	inc	r0
+   0399 E6                 1008 	mov	a,@r0
+   039A C0 E0              1009 	push	acc
+   039C 90 00 0A           1010 	mov	dptr,#(0x0A&0x00ff)
+   039F E4                 1011 	clr	a
+   03A0 F5 F0              1012 	mov	b,a
+   03A2 12 1B 8F           1013 	lcall	__mullong
+   03A5 AE 82              1014 	mov	r6,dpl
+   03A7 AD 83              1015 	mov	r5,dph
+   03A9 AB F0              1016 	mov	r3,b
+   03AB FA                 1017 	mov	r2,a
+   03AC E5 81              1018 	mov	a,sp
+   03AE 24 FC              1019 	add	a,#0xfc
+   03B0 F5 81              1020 	mov	sp,a
+   03B2 D0 23              1021 	pop	bits
+   03B4 D0 04              1022 	pop	ar4
+   03B6 D0 07              1023 	pop	ar7
+   03B8 A8 10              1024 	mov	r0,_bp
+   03BA 08                 1025 	inc	r0
+   03BB A6 06              1026 	mov	@r0,ar6
+   03BD 08                 1027 	inc	r0
+   03BE A6 05              1028 	mov	@r0,ar5
+   03C0 08                 1029 	inc	r0
+   03C1 A6 03              1030 	mov	@r0,ar3
+   03C3 08                 1031 	inc	r0
+   03C4 A6 02              1032 	mov	@r0,ar2
+                           1033 ;	../fb_app_rs.c:125: if(d<(rsinpos-1))temp=temp+(rsin[d]-48);//zweite Stelle nach dem Komma gen
+   03C6 E5 10              1034 	mov	a,_bp
+   03C8 24 05              1035 	add	a,#0x05
+   03CA F8                 1036 	mov	r0,a
+   03CB E6                 1037 	mov	a,@r0
+   03CC 24 FF              1038 	add	a,#0xFF
+   03CE FD                 1039 	mov	r5,a
+   03CF 08                 1040 	inc	r0
+   03D0 E6                 1041 	mov	a,@r0
+   03D1 34 FF              1042 	addc	a,#0xFF
+   03D3 FB                 1043 	mov	r3,a
+   03D4 8C 02              1044 	mov	ar2,r4
+   03D6 7E 00              1045 	mov	r6,#0x00
+   03D8 C3                 1046 	clr	c
+   03D9 EA                 1047 	mov	a,r2
+   03DA 9D                 1048 	subb	a,r5
+   03DB EE                 1049 	mov	a,r6
+   03DC 64 80              1050 	xrl	a,#0x80
+   03DE 8B F0              1051 	mov	b,r3
+   03E0 63 F0 80           1052 	xrl	b,#0x80
+   03E3 95 F0              1053 	subb	a,b
+   03E5 50 27              1054 	jnc	00161$
+   03E7 EC                 1055 	mov	a,r4
+   03E8 24 24              1056 	add	a,#_rsin
+   03EA F9                 1057 	mov	r1,a
+   03EB 87 06              1058 	mov	ar6,@r1
+   03ED 7B 00              1059 	mov	r3,#0x00
+   03EF EE                 1060 	mov	a,r6
+   03F0 24 D0              1061 	add	a,#0xD0
+   03F2 FE                 1062 	mov	r6,a
+   03F3 EB                 1063 	mov	a,r3
+   03F4 34 FF              1064 	addc	a,#0xFF
+   03F6 FB                 1065 	mov	r3,a
+   03F7 33                 1066 	rlc	a
+   03F8 95 E0              1067 	subb	a,acc
+   03FA FD                 1068 	mov	r5,a
+   03FB FC                 1069 	mov	r4,a
+   03FC A8 10              1070 	mov	r0,_bp
+   03FE 08                 1071 	inc	r0
+   03FF EE                 1072 	mov	a,r6
+   0400 26                 1073 	add	a,@r0
+   0401 F6                 1074 	mov	@r0,a
+   0402 EB                 1075 	mov	a,r3
+   0403 08                 1076 	inc	r0
+   0404 36                 1077 	addc	a,@r0
+   0405 F6                 1078 	mov	@r0,a
+   0406 ED                 1079 	mov	a,r5
+   0407 08                 1080 	inc	r0
+   0408 36                 1081 	addc	a,@r0
+   0409 F6                 1082 	mov	@r0,a
+   040A EC                 1083 	mov	a,r4
+   040B 08                 1084 	inc	r0
+   040C 36                 1085 	addc	a,@r0
+   040D F6                 1086 	mov	@r0,a
+                           1087 ;	../fb_app_rs.c:128: while(temp > 0x07FF) {
+   040E                    1088 00161$:
+   040E 7E 00              1089 	mov	r6,#0x00
+   0410 7D 00              1090 	mov	r5,#0x00
+   0412                    1091 00125$:
+   0412 A8 10              1092 	mov	r0,_bp
+   0414 08                 1093 	inc	r0
+   0415 08                 1094 	inc	r0
+   0416 E6                 1095 	mov	a,@r0
+   0417 54 F8              1096 	anl	a,#0xF8
+   0419 70 08              1097 	jnz	00188$
+   041B 08                 1098 	inc	r0
+   041C E6                 1099 	mov	a,@r0
+   041D 70 04              1100 	jnz	00188$
+   041F 08                 1101 	inc	r0
+   0420 E6                 1102 	mov	a,@r0
+   0421 60 1C              1103 	jz	00127$
+   0423                    1104 00188$:
+                           1105 ;	../fb_app_rs.c:129: temp=temp>>1;
+   0423 A8 10              1106 	mov	r0,_bp
+   0425 08                 1107 	inc	r0
+   0426 08                 1108 	inc	r0
+   0427 08                 1109 	inc	r0
+   0428 08                 1110 	inc	r0
+   0429 E6                 1111 	mov	a,@r0
+   042A C3                 1112 	clr	c
+   042B 13                 1113 	rrc	a
+   042C F6                 1114 	mov	@r0,a
+   042D 18                 1115 	dec	r0
+   042E E6                 1116 	mov	a,@r0
+   042F 13                 1117 	rrc	a
+   0430 F6                 1118 	mov	@r0,a
+   0431 18                 1119 	dec	r0
+   0432 E6                 1120 	mov	a,@r0
+   0433 13                 1121 	rrc	a
+   0434 F6                 1122 	mov	@r0,a
+   0435 18                 1123 	dec	r0
+   0436 E6                 1124 	mov	a,@r0
+   0437 13                 1125 	rrc	a
+   0438 F6                 1126 	mov	@r0,a
+                           1127 ;	../fb_app_rs.c:130: exp=exp + (0x800);
+   0439 74 08              1128 	mov	a,#0x08
+   043B 2D                 1129 	add	a,r5
+   043C FD                 1130 	mov	r5,a
+   043D 80 D3              1131 	sjmp	00125$
+   043F                    1132 00127$:
+                           1133 ;	../fb_app_rs.c:132: if (rsin[value_pos]=='-') {
+   043F BF 2D 3D           1134 	cjne	r7,#0x2D,00129$
+                           1135 ;	../fb_app_rs.c:133: temp=(0x7FF-temp)+1;
+   0442 A8 10              1136 	mov	r0,_bp
+   0444 08                 1137 	inc	r0
+   0445 E4                 1138 	clr	a
+   0446 C3                 1139 	clr	c
+   0447 96                 1140 	subb	a,@r0
+   0448 F6                 1141 	mov	@r0,a
+   0449 74 08              1142 	mov	a,#0x08
+   044B 08                 1143 	inc	r0
+   044C 96                 1144 	subb	a,@r0
+   044D F6                 1145 	mov	@r0,a
+   044E E4                 1146 	clr	a
+   044F 08                 1147 	inc	r0
+   0450 96                 1148 	subb	a,@r0
+   0451 F6                 1149 	mov	@r0,a
+   0452 E4                 1150 	clr	a
+   0453 08                 1151 	inc	r0
+   0454 96                 1152 	subb	a,@r0
+   0455 F6                 1153 	mov	@r0,a
+                           1154 ;	../fb_app_rs.c:134: eis5temp=temp+exp;
+   0456 8E 07              1155 	mov	ar7,r6
+   0458 ED                 1156 	mov	a,r5
+   0459 FC                 1157 	mov	r4,a
+   045A 33                 1158 	rlc	a
+   045B 95 E0              1159 	subb	a,acc
+   045D FB                 1160 	mov	r3,a
+   045E FA                 1161 	mov	r2,a
+   045F A8 10              1162 	mov	r0,_bp
+   0461 08                 1163 	inc	r0
+   0462 EF                 1164 	mov	a,r7
+   0463 26                 1165 	add	a,@r0
+   0464 FF                 1166 	mov	r7,a
+   0465 EC                 1167 	mov	a,r4
+   0466 08                 1168 	inc	r0
+   0467 36                 1169 	addc	a,@r0
+   0468 FC                 1170 	mov	r4,a
+   0469 EB                 1171 	mov	a,r3
+   046A 08                 1172 	inc	r0
+   046B 36                 1173 	addc	a,@r0
+   046C EA                 1174 	mov	a,r2
+   046D 08                 1175 	inc	r0
+   046E 36                 1176 	addc	a,@r0
+   046F 8C 05              1177 	mov	ar5,r4
+                           1178 ;	../fb_app_rs.c:135: eis5temp+=0x8000;
+   0471 8F 02              1179 	mov	ar2,r7
+   0473 8D 06              1180 	mov	ar6,r5
+   0475 74 80              1181 	mov	a,#0x80
+   0477 2E                 1182 	add	a,r6
+   0478 FE                 1183 	mov	r6,a
+   0479 8A 07              1184 	mov	ar7,r2
+   047B 8E 05              1185 	mov	ar5,r6
+   047D 80 1C              1186 	sjmp	00130$
+   047F                    1187 00129$:
+                           1188 ;	../fb_app_rs.c:137: else eis5temp=temp+exp;
+   047F ED                 1189 	mov	a,r5
+   0480 33                 1190 	rlc	a
+   0481 95 E0              1191 	subb	a,acc
+   0483 FF                 1192 	mov	r7,a
+   0484 FC                 1193 	mov	r4,a
+   0485 A8 10              1194 	mov	r0,_bp
+   0487 08                 1195 	inc	r0
+   0488 EE                 1196 	mov	a,r6
+   0489 26                 1197 	add	a,@r0
+   048A FE                 1198 	mov	r6,a
+   048B ED                 1199 	mov	a,r5
+   048C 08                 1200 	inc	r0
+   048D 36                 1201 	addc	a,@r0
+   048E FA                 1202 	mov	r2,a
+   048F EF                 1203 	mov	a,r7
+   0490 08                 1204 	inc	r0
+   0491 36                 1205 	addc	a,@r0
+   0492 FB                 1206 	mov	r3,a
+   0493 EC                 1207 	mov	a,r4
+   0494 08                 1208 	inc	r0
+   0495 36                 1209 	addc	a,@r0
+   0496 FC                 1210 	mov	r4,a
+   0497 8E 07              1211 	mov	ar7,r6
+   0499 8A 05              1212 	mov	ar5,r2
+   049B                    1213 00130$:
+                           1214 ;	../fb_app_rs.c:138: telegramm[8]=eis5temp>>8;
+   049B 8D 06              1215 	mov	ar6,r5
+   049D 8E 59              1216 	mov	(_telegramm + 0x0008),r6
+                           1217 ;	../fb_app_rs.c:139: telegramm[9]=eis5temp;		
+   049F 8F 03              1218 	mov	ar3,r7
+   04A1 8B 5A              1219 	mov	(_telegramm + 0x0009),r3
+                           1220 ;	../fb_app_rs.c:140: break;
+   04A3 02 05 CE           1221 	ljmp	00141$
+                           1222 ;	../fb_app_rs.c:141: case 6:// EIS 6
+   04A6                    1223 00131$:
+                           1224 ;	../fb_app_rs.c:142: tel_header(groupadr, 2);
+   04A6 C0 05              1225 	push	ar5
+   04A8 C0 23              1226 	push	bits
+   04AA 74 02              1227 	mov	a,#0x02
+   04AC C0 E0              1228 	push	acc
+   04AE 85 43 82           1229 	mov	dpl,_groupadr
+   04B1 85 44 83           1230 	mov	dph,(_groupadr + 1)
+   04B4 12 09 18           1231 	lcall	_tel_header
+   04B7 15 81              1232 	dec	sp
+   04B9 D0 23              1233 	pop	bits
+   04BB D0 05              1234 	pop	ar5
+                           1235 ;	../fb_app_rs.c:143: telegramm[7]=0x80;
+   04BD 75 58 80           1236 	mov	(_telegramm + 0x0007),#0x80
+                           1237 ;	../fb_app_rs.c:145: value=0;
+   04C0 7C 00              1238 	mov	r4,#0x00
+   04C2 7F 00              1239 	mov	r7,#0x00
+                           1240 ;	../fb_app_rs.c:147: while(d<(rsinpos-1)) {
+   04C4 8D 06              1241 	mov	ar6,r5
+   04C6                    1242 00132$:
+   04C6 C0 04              1243 	push	ar4
+   04C8 C0 07              1244 	push	ar7
+   04CA AA 42              1245 	mov	r2,_rsinpos
+   04CC 7B 00              1246 	mov	r3,#0x00
+   04CE 1A                 1247 	dec	r2
+   04CF BA FF 01           1248 	cjne	r2,#0xFF,00191$
+   04D2 1B                 1249 	dec	r3
+   04D3                    1250 00191$:
+   04D3 8E 04              1251 	mov	ar4,r6
+   04D5 7F 00              1252 	mov	r7,#0x00
+   04D7 C3                 1253 	clr	c
+   04D8 EC                 1254 	mov	a,r4
+   04D9 9A                 1255 	subb	a,r2
+   04DA EF                 1256 	mov	a,r7
+   04DB 64 80              1257 	xrl	a,#0x80
+   04DD 8B F0              1258 	mov	b,r3
+   04DF 63 F0 80           1259 	xrl	b,#0x80
+   04E2 95 F0              1260 	subb	a,b
+   04E4 D0 07              1261 	pop	ar7
+   04E6 D0 04              1262 	pop	ar4
+   04E8 50 37              1263 	jnc	00134$
+                           1264 ;	../fb_app_rs.c:148: value*=10;
+   04EA C0 06              1265 	push	ar6
+   04EC C0 23              1266 	push	bits
+   04EE C0 04              1267 	push	ar4
+   04F0 C0 07              1268 	push	ar7
+   04F2 90 00 0A           1269 	mov	dptr,#0x000A
+   04F5 12 1B 51           1270 	lcall	__mulint
+   04F8 AA 82              1271 	mov	r2,dpl
+   04FA AB 83              1272 	mov	r3,dph
+   04FC 15 81              1273 	dec	sp
+   04FE 15 81              1274 	dec	sp
+   0500 D0 23              1275 	pop	bits
+   0502 D0 06              1276 	pop	ar6
+   0504 8A 04              1277 	mov	ar4,r2
+   0506 8B 07              1278 	mov	ar7,r3
+                           1279 ;	../fb_app_rs.c:149: value+=rsin[d]-48;
+   0508 EE                 1280 	mov	a,r6
+   0509 24 24              1281 	add	a,#_rsin
+   050B F9                 1282 	mov	r1,a
+   050C 87 03              1283 	mov	ar3,@r1
+   050E 7A 00              1284 	mov	r2,#0x00
+   0510 EB                 1285 	mov	a,r3
+   0511 24 D0              1286 	add	a,#0xD0
+   0513 FB                 1287 	mov	r3,a
+   0514 EA                 1288 	mov	a,r2
+   0515 34 FF              1289 	addc	a,#0xFF
+   0517 FA                 1290 	mov	r2,a
+   0518 EB                 1291 	mov	a,r3
+   0519 2C                 1292 	add	a,r4
+   051A FC                 1293 	mov	r4,a
+   051B EA                 1294 	mov	a,r2
+   051C 3F                 1295 	addc	a,r7
+   051D FF                 1296 	mov	r7,a
+                           1297 ;	../fb_app_rs.c:150: d++;
+   051E 0E                 1298 	inc	r6
+   051F 80 A5              1299 	sjmp	00132$
+   0521                    1300 00134$:
+                           1301 ;	../fb_app_rs.c:153: telegramm[8]=value;
+   0521 8C 59              1302 	mov	(_telegramm + 0x0008),r4
+                           1303 ;	../fb_app_rs.c:154: break;
+   0523 02 05 CE           1304 	ljmp	00141$
+                           1305 ;	../fb_app_rs.c:156: case 14: // EIS 15 auf voreingestellter GA
+   0526                    1306 00135$:
+                           1307 ;	../fb_app_rs.c:157: groupadr=((unsigned int)sga_h<<8)+sga_l; //
+   0526 90 1C F8           1308 	mov	dptr,#_sga_h
+   0529 E4                 1309 	clr	a
+   052A 93                 1310 	movc	a,@a+dptr
+   052B FE                 1311 	mov	r6,a
+   052C 7F 00              1312 	mov	r7,#0x00
+   052E 90 1C F9           1313 	mov	dptr,#_sga_l
+   0531 E4                 1314 	clr	a
+   0532 93                 1315 	movc	a,@a+dptr
+   0533 FC                 1316 	mov	r4,a
+   0534 7B 00              1317 	mov	r3,#0x00
+   0536 2F                 1318 	add	a,r7
+   0537 F5 43              1319 	mov	_groupadr,a
+   0539 EB                 1320 	mov	a,r3
+   053A 3E                 1321 	addc	a,r6
+   053B F5 44              1322 	mov	(_groupadr + 1),a
+                           1323 ;	../fb_app_rs.c:158: value_pos=0;
+   053D 7D 00              1324 	mov	r5,#0x00
+                           1325 ;	../fb_app_rs.c:161: case 15: // EIS 15
+   053F                    1326 00136$:
+                           1327 ;	../fb_app_rs.c:162: tel_header(groupadr,15); //15
+   053F C0 05              1328 	push	ar5
+   0541 C0 23              1329 	push	bits
+   0543 74 0F              1330 	mov	a,#0x0F
+   0545 C0 E0              1331 	push	acc
+   0547 85 43 82           1332 	mov	dpl,_groupadr
+   054A 85 44 83           1333 	mov	dph,(_groupadr + 1)
+   054D 12 09 18           1334 	lcall	_tel_header
+   0550 15 81              1335 	dec	sp
+   0552 D0 23              1336 	pop	bits
+   0554 D0 05              1337 	pop	ar5
+                           1338 ;	../fb_app_rs.c:163: telegramm[7]=0x80;
+   0556 75 58 80           1339 	mov	(_telegramm + 0x0007),#0x80
+                           1340 ;	../fb_app_rs.c:164: for(d=8;d<22;d++){
+   0559 7F 08              1341 	mov	r7,#0x08
+   055B                    1342 00144$:
+   055B BF 16 00           1343 	cjne	r7,#0x16,00193$
+   055E                    1344 00193$:
+   055E 50 6E              1345 	jnc	00141$
+                           1346 ;	../fb_app_rs.c:165: if((value_pos+d-8)>=(rsinpos-1)) telegramm[d]=0x00;
+   0560 8D 04              1347 	mov	ar4,r5
+   0562 7E 00              1348 	mov	r6,#0x00
+   0564 8F 02              1349 	mov	ar2,r7
+   0566 7B 00              1350 	mov	r3,#0x00
+   0568 EA                 1351 	mov	a,r2
+   0569 2C                 1352 	add	a,r4
+   056A FC                 1353 	mov	r4,a
+   056B EB                 1354 	mov	a,r3
+   056C 3E                 1355 	addc	a,r6
+   056D FE                 1356 	mov	r6,a
+   056E EC                 1357 	mov	a,r4
+   056F 24 F8              1358 	add	a,#0xF8
+   0571 FC                 1359 	mov	r4,a
+   0572 EE                 1360 	mov	a,r6
+   0573 34 FF              1361 	addc	a,#0xFF
+   0575 FE                 1362 	mov	r6,a
+   0576 AA 42              1363 	mov	r2,_rsinpos
+   0578 7B 00              1364 	mov	r3,#0x00
+   057A 1A                 1365 	dec	r2
+   057B BA FF 01           1366 	cjne	r2,#0xFF,00195$
+   057E 1B                 1367 	dec	r3
+   057F                    1368 00195$:
+   057F C3                 1369 	clr	c
+   0580 EC                 1370 	mov	a,r4
+   0581 9A                 1371 	subb	a,r2
+   0582 EE                 1372 	mov	a,r6
+   0583 64 80              1373 	xrl	a,#0x80
+   0585 8B F0              1374 	mov	b,r3
+   0587 63 F0 80           1375 	xrl	b,#0x80
+   058A 95 F0              1376 	subb	a,b
+   058C 40 08              1377 	jc	00138$
+   058E EF                 1378 	mov	a,r7
+   058F 24 51              1379 	add	a,#_telegramm
+   0591 F8                 1380 	mov	r0,a
+   0592 76 00              1381 	mov	@r0,#0x00
+   0594 80 0F              1382 	sjmp	00146$
+   0596                    1383 00138$:
+                           1384 ;	../fb_app_rs.c:166: else telegramm[d]=rsin[(value_pos+d-8)];
+   0596 EF                 1385 	mov	a,r7
+   0597 24 51              1386 	add	a,#_telegramm
+   0599 F9                 1387 	mov	r1,a
+   059A EF                 1388 	mov	a,r7
+   059B 2D                 1389 	add	a,r5
+   059C 24 F8              1390 	add	a,#0xF8
+   059E 24 24              1391 	add	a,#_rsin
+   05A0 F8                 1392 	mov	r0,a
+   05A1 86 06              1393 	mov	ar6,@r0
+   05A3 A7 06              1394 	mov	@r1,ar6
+   05A5                    1395 00146$:
+                           1396 ;	../fb_app_rs.c:164: for(d=8;d<22;d++){
+   05A5 0F                 1397 	inc	r7
+                           1398 ;	../fb_app_rs.c:169: case 16:
+   05A6 80 B3              1399 	sjmp	00144$
+   05A8                    1400 00140$:
+                           1401 ;	../fb_app_rs.c:170: groupadr=convert_adr(5);
+   05A8 75 82 05           1402 	mov	dpl,#0x05
+   05AB C0 23              1403 	push	bits
+   05AD 12 09 4A           1404 	lcall	_convert_adr
+   05B0 85 82 43           1405 	mov	_groupadr,dpl
+   05B3 85 83 44           1406 	mov	(_groupadr + 1),dph
+   05B6 D0 23              1407 	pop	bits
+                           1408 ;	../fb_app_rs.c:171: tel_header(groupadr, 1);
+   05B8 C0 23              1409 	push	bits
+   05BA 74 01              1410 	mov	a,#0x01
+   05BC C0 E0              1411 	push	acc
+   05BE 85 43 82           1412 	mov	dpl,_groupadr
+   05C1 85 44 83           1413 	mov	dph,(_groupadr + 1)
+   05C4 12 09 18           1414 	lcall	_tel_header
+   05C7 15 81              1415 	dec	sp
+   05C9 D0 23              1416 	pop	bits
+                           1417 ;	../fb_app_rs.c:172: telegramm[7]=0x00;
+   05CB 75 58 00           1418 	mov	(_telegramm + 0x0007),#0x00
+                           1419 ;	../fb_app_rs.c:174: }
+   05CE                    1420 00141$:
+                           1421 ;	../fb_app_rs.c:175: if(repeatflag) telegramm[0]&=0xDF;		// Wiederholungsbit löschen für Wiederholtelegramm
+   05CE 30 18 06           1422 	jnb	b0,00143$
+   05D1 74 DF              1423 	mov	a,#0xDF
+   05D3 55 51              1424 	anl	a,_telegramm
+   05D5 F5 51              1425 	mov	_telegramm,a
+   05D7                    1426 00143$:
+                           1427 ;	../fb_app_rs.c:176: return(build_ok);
+   05D7 D3                 1428 	setb	c
+   05D8 85 10 81           1429 	mov	sp,_bp
+   05DB D0 10              1430 	pop	_bp
+   05DD 22                 1431 	ret
+                           1432 ;------------------------------------------------------------
+                           1433 ;Allocation info for local variables in function 'gapos_in_gat'
+                           1434 ;------------------------------------------------------------
+                           1435 ;gal                       Allocated to stack - _bp -3
+                           1436 ;gah                       Allocated to stack - _bp +1
+                           1437 ;ga_position               Allocated to registers r6 
+                           1438 ;n                         Allocated to stack - _bp +2
+                           1439 ;------------------------------------------------------------
+                           1440 ;	../fb_app_rs.c:181: unsigned char gapos_in_gat(unsigned char gah, unsigned char gal)
+                           1441 ;	-----------------------------------------
+                           1442 ;	 function gapos_in_gat
+                           1443 ;	-----------------------------------------
+   05DE                    1444 _gapos_in_gat:
+   05DE C0 10              1445 	push	_bp
+   05E0 85 81 10           1446 	mov	_bp,sp
+   05E3 C0 82              1447 	push	dpl
+   05E5 05 81              1448 	inc	sp
+                           1449 ;	../fb_app_rs.c:185: ga_position=0xFF; 			// default return Wert 0xFF = nicht gefunden
+   05E7 7E FF              1450 	mov	r6,#0xFF
+                           1451 ;	../fb_app_rs.c:187: while(ga_db[n].ga==((gah<<8)+gal) && n<=62){
+   05E9 A8 10              1452 	mov	r0,_bp
+   05EB 08                 1453 	inc	r0
+   05EC 08                 1454 	inc	r0
+   05ED 76 00              1455 	mov	@r0,#0x00
+   05EF                    1456 00102$:
+   05EF C0 06              1457 	push	ar6
+   05F1 A8 10              1458 	mov	r0,_bp
+   05F3 08                 1459 	inc	r0
+   05F4 08                 1460 	inc	r0
+   05F5 E6                 1461 	mov	a,@r0
+   05F6 25 E0              1462 	add	a,acc
+   05F8 25 E0              1463 	add	a,acc
+   05FA F5 82              1464 	mov	dpl,a
+   05FC 75 83 1D           1465 	mov	dph,#(_ga_db >> 8)
+   05FF E4                 1466 	clr	a
+   0600 93                 1467 	movc	a,@a+dptr
+   0601 FB                 1468 	mov	r3,a
+   0602 A3                 1469 	inc	dptr
+   0603 E4                 1470 	clr	a
+   0604 93                 1471 	movc	a,@a+dptr
+   0605 FC                 1472 	mov	r4,a
+   0606 A8 10              1473 	mov	r0,_bp
+   0608 08                 1474 	inc	r0
+   0609 86 02              1475 	mov	ar2,@r0
+   060B 8A 06              1476 	mov	ar6,r2
+   060D 7A 00              1477 	mov	r2,#0x00
+   060F E5 10              1478 	mov	a,_bp
+   0611 24 FD              1479 	add	a,#0xfd
+   0613 F8                 1480 	mov	r0,a
+   0614 86 05              1481 	mov	ar5,@r0
+   0616 7F 00              1482 	mov	r7,#0x00
+   0618 ED                 1483 	mov	a,r5
+   0619 2A                 1484 	add	a,r2
+   061A FA                 1485 	mov	r2,a
+   061B EF                 1486 	mov	a,r7
+   061C 3E                 1487 	addc	a,r6
+   061D FE                 1488 	mov	r6,a
+   061E EB                 1489 	mov	a,r3
+   061F B5 02 06           1490 	cjne	a,ar2,00115$
+   0622 EC                 1491 	mov	a,r4
+   0623 B5 06 02           1492 	cjne	a,ar6,00115$
+   0626 80 04              1493 	sjmp	00116$
+   0628                    1494 00115$:
+   0628 D0 06              1495 	pop	ar6
+   062A 80 12              1496 	sjmp	00114$
+   062C                    1497 00116$:
+   062C D0 06              1498 	pop	ar6
+   062E A8 10              1499 	mov	r0,_bp
+   0630 08                 1500 	inc	r0
+   0631 08                 1501 	inc	r0
+   0632 E6                 1502 	mov	a,@r0
+   0633 24 C1              1503 	add	a,#0xff - 0x3E
+   0635 40 07              1504 	jc	00114$
+                           1505 ;	../fb_app_rs.c:188: n++;
+   0637 A8 10              1506 	mov	r0,_bp
+   0639 08                 1507 	inc	r0
+   063A 08                 1508 	inc	r0
+   063B 06                 1509 	inc	@r0
+   063C 80 B1              1510 	sjmp	00102$
+   063E                    1511 00114$:
+   063E A8 10              1512 	mov	r0,_bp
+   0640 08                 1513 	inc	r0
+   0641 08                 1514 	inc	r0
+   0642 86 07              1515 	mov	ar7,@r0
+                           1516 ;	../fb_app_rs.c:190: if(n<62|| !filtermode)ga_position=n;// wenn GA gefunden oder kein filtermode aktiv ist...
+   0644 A8 10              1517 	mov	r0,_bp
+   0646 08                 1518 	inc	r0
+   0647 08                 1519 	inc	r0
+   0648 B6 3E 00           1520 	cjne	@r0,#0x3E,00118$
+   064B                    1521 00118$:
+   064B 40 03              1522 	jc	00105$
+   064D 20 00 02           1523 	jb	_filtermode,00106$
+   0650                    1524 00105$:
+   0650 8F 06              1525 	mov	ar6,r7
+   0652                    1526 00106$:
+                           1527 ;	../fb_app_rs.c:191: return (ga_position);						// wird geackt
+   0652 8E 82              1528 	mov	dpl,r6
+   0654 85 10 81           1529 	mov	sp,_bp
+   0657 D0 10              1530 	pop	_bp
+   0659 22                 1531 	ret
+                           1532 ;------------------------------------------------------------
+                           1533 ;Allocation info for local variables in function 'send_obj_done'
+                           1534 ;------------------------------------------------------------
+                           1535 ;success                   Allocated to registers 
+                           1536 ;objno                     Allocated to registers 
+                           1537 ;------------------------------------------------------------
+                           1538 ;	../fb_app_rs.c:194: void send_obj_done(unsigned char objno, __bit success)
+                           1539 ;	-----------------------------------------
+                           1540 ;	 function send_obj_done
+                           1541 ;	-----------------------------------------
+   065A                    1542 _send_obj_done:
+                           1543 ;	../fb_app_rs.c:197: success;
+   065A 22                 1544 	ret
+                           1545 ;------------------------------------------------------------
+                           1546 ;Allocation info for local variables in function 'write_value_req'
+                           1547 ;------------------------------------------------------------
+                           1548 ;length                    Allocated to registers r4 
+                           1549 ;n                         Allocated to stack - _bp +1
+                           1550 ;ga                        Allocated to stack - _bp +2
+                           1551 ;val                       Allocated to registers r5 r6 
+                           1552 ;------------------------------------------------------------
+                           1553 ;	../fb_app_rs.c:201: void write_value_req(void)
+                           1554 ;	-----------------------------------------
+                           1555 ;	 function write_value_req
+                           1556 ;	-----------------------------------------
+   065B                    1557 _write_value_req:
+   065B C0 10              1558 	push	_bp
+   065D 85 81 10           1559 	mov	_bp,sp
+   0660 05 81              1560 	inc	sp
+   0662 05 81              1561 	inc	sp
+   0664 05 81              1562 	inc	sp
+                           1563 ;	../fb_app_rs.c:203: unsigned char length,n=0;
+   0666 A8 10              1564 	mov	r0,_bp
+   0668 08                 1565 	inc	r0
+   0669 76 00              1566 	mov	@r0,#0x00
+                           1567 ;	../fb_app_rs.c:205: unsigned int val=0;
+   066B 7D 00              1568 	mov	r5,#0x00
+   066D 7E 00              1569 	mov	r6,#0x00
+                           1570 ;	../fb_app_rs.c:207: eibledcount=0xff;// EIBLED lang einschalten
+   066F 75 48 FF           1571 	mov	_eibledcount,#0xFF
+                           1572 ;	../fb_app_rs.c:208: length=telegramm[5]&0x0F;
+   0672 74 0F              1573 	mov	a,#0x0F
+   0674 55 56              1574 	anl	a,(_telegramm + 0x0005)
+                           1575 ;	../fb_app_rs.c:209: if (length<=15 )	{// wenn ein Telegramm reinkommt..
+   0676 FC                 1576 	mov  r4,a
+   0677 24 F0              1577 	add	a,#0xff - 0x0F
+   0679 50 03              1578 	jnc	00153$
+   067B 02 08 5E           1579 	ljmp	00134$
+   067E                    1580 00153$:
+                           1581 ;	../fb_app_rs.c:210: if(length==1)val=telegramm[7] & 0x3F;
+   067E BC 01 08           1582 	cjne	r4,#0x01,00102$
+   0681 74 3F              1583 	mov	a,#0x3F
+   0683 55 58              1584 	anl	a,(_telegramm + 0x0007)
+   0685 FB                 1585 	mov	r3,a
+   0686 FD                 1586 	mov	r5,a
+   0687 7E 00              1587 	mov	r6,#0x00
+   0689                    1588 00102$:
+                           1589 ;	../fb_app_rs.c:211: if(length==2)val=telegramm[8] ;
+   0689 BC 02 04           1590 	cjne	r4,#0x02,00104$
+   068C AD 59              1591 	mov	r5,(_telegramm + 0x0008)
+   068E 7E 00              1592 	mov	r6,#0x00
+   0690                    1593 00104$:
+                           1594 ;	../fb_app_rs.c:212: if(length==3)val=256*telegramm[8]+telegramm[9];
+   0690 BC 03 16           1595 	cjne	r4,#0x03,00106$
+   0693 C0 04              1596 	push	ar4
+   0695 AB 59              1597 	mov	r3,(_telegramm + 0x0008)
+   0697 7A 00              1598 	mov	r2,#0x00
+   0699 AC 5A              1599 	mov	r4,(_telegramm + 0x0009)
+   069B 7F 00              1600 	mov	r7,#0x00
+   069D EC                 1601 	mov	a,r4
+   069E 2A                 1602 	add	a,r2
+   069F FA                 1603 	mov	r2,a
+   06A0 EF                 1604 	mov	a,r7
+   06A1 3B                 1605 	addc	a,r3
+   06A2 FB                 1606 	mov	r3,a
+   06A3 8A 05              1607 	mov	ar5,r2
+   06A5 8B 06              1608 	mov	ar6,r3
+                           1609 ;	../fb_app_rs.c:251: save_ga(ga,val);						// GA mit Wert speichern
+   06A7 D0 04              1610 	pop	ar4
+                           1611 ;	../fb_app_rs.c:212: if(length==3)val=256*telegramm[8]+telegramm[9];
+   06A9                    1612 00106$:
+                           1613 ;	../fb_app_rs.c:213: ga=256*telegramm[3]+telegramm[4];
+   06A9 C0 05              1614 	push	ar5
+   06AB C0 06              1615 	push	ar6
+   06AD AF 54              1616 	mov	r7,(_telegramm + 0x0003)
+   06AF 8F 02              1617 	mov	ar2,r7
+   06B1 8A 03              1618 	mov	ar3,r2
+   06B3 7A 00              1619 	mov	r2,#0x00
+   06B5 AD 55              1620 	mov	r5,(_telegramm + 0x0004)
+   06B7 7E 00              1621 	mov	r6,#0x00
+   06B9 ED                 1622 	mov	a,r5
+   06BA 2A                 1623 	add	a,r2
+   06BB FA                 1624 	mov	r2,a
+   06BC EE                 1625 	mov	a,r6
+   06BD 3B                 1626 	addc	a,r3
+   06BE FB                 1627 	mov	r3,a
+   06BF A8 10              1628 	mov	r0,_bp
+   06C1 08                 1629 	inc	r0
+   06C2 08                 1630 	inc	r0
+   06C3 A6 02              1631 	mov	@r0,ar2
+   06C5 08                 1632 	inc	r0
+   06C6 A6 03              1633 	mov	@r0,ar3
+                           1634 ;	../fb_app_rs.c:214: if(filtermode){
+   06C8 D0 06              1635 	pop	ar6
+   06CA D0 05              1636 	pop	ar5
+   06CC 30 00 3D           1637 	jnb	_filtermode,00110$
+                           1638 ;	../fb_app_rs.c:215: for(n=0;n<=61;n++) {						// Wert der GA aus Flash lesen
+   06CF A8 10              1639 	mov	r0,_bp
+   06D1 08                 1640 	inc	r0
+   06D2 76 00              1641 	mov	@r0,#0x00
+   06D4                    1642 00126$:
+   06D4 A8 10              1643 	mov	r0,_bp
+   06D6 08                 1644 	inc	r0
+   06D7 E6                 1645 	mov	a,@r0
+   06D8 24 C2              1646 	add	a,#0xff - 0x3D
+   06DA 40 30              1647 	jc	00110$
+                           1648 ;	../fb_app_rs.c:216: if(ga_db[n].ga==ga) {
+   06DC A8 10              1649 	mov	r0,_bp
+   06DE 08                 1650 	inc	r0
+   06DF E6                 1651 	mov	a,@r0
+   06E0 25 E0              1652 	add	a,acc
+   06E2 25 E0              1653 	add	a,acc
+   06E4 F5 82              1654 	mov	dpl,a
+   06E6 75 83 1D           1655 	mov	dph,#(_ga_db >> 8)
+   06E9 E4                 1656 	clr	a
+   06EA 93                 1657 	movc	a,@a+dptr
+   06EB FA                 1658 	mov	r2,a
+   06EC A3                 1659 	inc	dptr
+   06ED E4                 1660 	clr	a
+   06EE 93                 1661 	movc	a,@a+dptr
+   06EF FB                 1662 	mov	r3,a
+   06F0 A8 10              1663 	mov	r0,_bp
+   06F2 08                 1664 	inc	r0
+   06F3 08                 1665 	inc	r0
+   06F4 E6                 1666 	mov	a,@r0
+   06F5 B5 02 07           1667 	cjne	a,ar2,00162$
+   06F8 08                 1668 	inc	r0
+   06F9 E6                 1669 	mov	a,@r0
+   06FA B5 03 02           1670 	cjne	a,ar3,00162$
+   06FD 80 02              1671 	sjmp	00163$
+   06FF                    1672 00162$:
+   06FF 80 05              1673 	sjmp	00128$
+   0701                    1674 00163$:
+                           1675 ;	../fb_app_rs.c:217: n=63;
+   0701 A8 10              1676 	mov	r0,_bp
+   0703 08                 1677 	inc	r0
+   0704 76 3F              1678 	mov	@r0,#0x3F
+   0706                    1679 00128$:
+                           1680 ;	../fb_app_rs.c:215: for(n=0;n<=61;n++) {						// Wert der GA aus Flash lesen
+   0706 A8 10              1681 	mov	r0,_bp
+   0708 08                 1682 	inc	r0
+   0709 06                 1683 	inc	@r0
+   070A 80 C8              1684 	sjmp	00126$
+   070C                    1685 00110$:
+                           1686 ;	../fb_app_rs.c:221: if ((n>=63 || !filtermode)) {
+   070C A8 10              1687 	mov	r0,_bp
+   070E 08                 1688 	inc	r0
+   070F B6 3F 00           1689 	cjne	@r0,#0x3F,00164$
+   0712                    1690 00164$:
+   0712 50 06              1691 	jnc	00121$
+   0714 30 00 03           1692 	jnb	_filtermode,00166$
+   0717 02 08 5E           1693 	ljmp	00134$
+   071A                    1694 00166$:
+   071A                    1695 00121$:
+                           1696 ;	../fb_app_rs.c:222: if(!tel_sent){
+   071A 30 0A 03           1697 	jnb	_tel_sent,00167$
+   071D 02 08 4A           1698 	ljmp	00120$
+   0720                    1699 00167$:
+                           1700 ;	../fb_app_rs.c:223: rs_send_dec(telegramm[3]>>3);			// GA senden
+   0720 EF                 1701 	mov	a,r7
+   0721 C4                 1702 	swap	a
+   0722 23                 1703 	rl	a
+   0723 54 1F              1704 	anl	a,#0x1F
+   0725 FF                 1705 	mov	r7,a
+   0726 7B 00              1706 	mov	r3,#0x00
+   0728 8F 82              1707 	mov	dpl,r7
+   072A 8B 83              1708 	mov	dph,r3
+   072C C0 06              1709 	push	ar6
+   072E C0 05              1710 	push	ar5
+   0730 C0 04              1711 	push	ar4
+   0732 12 0B AE           1712 	lcall	_rs_send_dec
+                           1713 ;	../fb_app_rs.c:224: rs_send('/');
+   0735 75 82 2F           1714 	mov	dpl,#0x2F
+   0738 12 0D BB           1715 	lcall	_rs_send
+                           1716 ;	../fb_app_rs.c:225: rs_send_dec(telegramm[3] & 0x07);
+   073B 74 07              1717 	mov	a,#0x07
+   073D 55 54              1718 	anl	a,(_telegramm + 0x0003)
+   073F FF                 1719 	mov	r7,a
+   0740 7B 00              1720 	mov	r3,#0x00
+   0742 8F 82              1721 	mov	dpl,r7
+   0744 8B 83              1722 	mov	dph,r3
+   0746 12 0B AE           1723 	lcall	_rs_send_dec
+                           1724 ;	../fb_app_rs.c:226: rs_send('/');
+   0749 75 82 2F           1725 	mov	dpl,#0x2F
+   074C 12 0D BB           1726 	lcall	_rs_send
+                           1727 ;	../fb_app_rs.c:227: rs_send_dec(telegramm[4]);
+   074F AB 55              1728 	mov	r3,(_telegramm + 0x0004)
+   0751 7F 00              1729 	mov	r7,#0x00
+   0753 8B 82              1730 	mov	dpl,r3
+   0755 8F 83              1731 	mov	dph,r7
+   0757 12 0B AE           1732 	lcall	_rs_send_dec
+                           1733 ;	../fb_app_rs.c:228: rs_send('=');
+   075A 75 82 3D           1734 	mov	dpl,#0x3D
+   075D 12 0D BB           1735 	lcall	_rs_send
+   0760 D0 04              1736 	pop	ar4
+   0762 D0 05              1737 	pop	ar5
+   0764 D0 06              1738 	pop	ar6
+                           1739 ;	../fb_app_rs.c:229: if (length<=3)	rs_send_dec(val);		// Value senden
+   0766 EC                 1740 	mov	a,r4
+   0767 24 FC              1741 	add	a,#0xff - 0x03
+   0769 40 13              1742 	jc	00112$
+   076B 8D 82              1743 	mov	dpl,r5
+   076D 8E 83              1744 	mov	dph,r6
+   076F C0 06              1745 	push	ar6
+   0771 C0 05              1746 	push	ar5
+   0773 C0 04              1747 	push	ar4
+   0775 12 0B AE           1748 	lcall	_rs_send_dec
+   0778 D0 04              1749 	pop	ar4
+   077A D0 05              1750 	pop	ar5
+   077C D0 06              1751 	pop	ar6
+   077E                    1752 00112$:
+                           1753 ;	../fb_app_rs.c:230: if(length==4){
+   077E BC 04 6F           1754 	cjne	r4,#0x04,00116$
+                           1755 ;	../fb_app_rs.c:231: n='.';  
+   0781 A8 10              1756 	mov	r0,_bp
+   0783 08                 1757 	inc	r0
+   0784 76 2E              1758 	mov	@r0,#0x2E
+                           1759 ;	../fb_app_rs.c:232: if(telegramm[8]>31){// time
+   0786 E5 59              1760 	mov	a,(_telegramm + 0x0008)
+   0788 FF                 1761 	mov	r7,a
+   0789 24 E0              1762 	add	a,#0xff - 0x1F
+   078B 50 23              1763 	jnc	00114$
+                           1764 ;	../fb_app_rs.c:233: rs_send((telegramm[8]>>5)+'0');
+   078D EF                 1765 	mov	a,r7
+   078E C4                 1766 	swap	a
+   078F 03                 1767 	rr	a
+   0790 54 07              1768 	anl	a,#0x07
+   0792 24 30              1769 	add	a,#0x30
+   0794 F5 82              1770 	mov	dpl,a
+   0796 C0 06              1771 	push	ar6
+   0798 C0 05              1772 	push	ar5
+   079A C0 04              1773 	push	ar4
+   079C 12 0D BB           1774 	lcall	_rs_send
+                           1775 ;	../fb_app_rs.c:234: rs_send(',');
+   079F 75 82 2C           1776 	mov	dpl,#0x2C
+   07A2 12 0D BB           1777 	lcall	_rs_send
+   07A5 D0 04              1778 	pop	ar4
+   07A7 D0 05              1779 	pop	ar5
+   07A9 D0 06              1780 	pop	ar6
+                           1781 ;	../fb_app_rs.c:235: n=':';
+   07AB A8 10              1782 	mov	r0,_bp
+   07AD 08                 1783 	inc	r0
+   07AE 76 3A              1784 	mov	@r0,#0x3A
+   07B0                    1785 00114$:
+                           1786 ;	../fb_app_rs.c:237: rs_send_dec(telegramm[8]&0x1F);
+   07B0 74 1F              1787 	mov	a,#0x1F
+   07B2 55 59              1788 	anl	a,(_telegramm + 0x0008)
+   07B4 FF                 1789 	mov	r7,a
+   07B5 7B 00              1790 	mov	r3,#0x00
+   07B7 8F 82              1791 	mov	dpl,r7
+   07B9 8B 83              1792 	mov	dph,r3
+   07BB C0 06              1793 	push	ar6
+   07BD C0 05              1794 	push	ar5
+   07BF C0 04              1795 	push	ar4
+   07C1 12 0B AE           1796 	lcall	_rs_send_dec
+                           1797 ;	../fb_app_rs.c:238: rs_send(n);
+   07C4 A8 10              1798 	mov	r0,_bp
+   07C6 08                 1799 	inc	r0
+   07C7 86 82              1800 	mov	dpl,@r0
+   07C9 12 0D BB           1801 	lcall	_rs_send
+                           1802 ;	../fb_app_rs.c:239: rs_send_dec(telegramm[9]);
+   07CC AB 5A              1803 	mov	r3,(_telegramm + 0x0009)
+   07CE 7F 00              1804 	mov	r7,#0x00
+   07D0 8B 82              1805 	mov	dpl,r3
+   07D2 8F 83              1806 	mov	dph,r7
+   07D4 12 0B AE           1807 	lcall	_rs_send_dec
+                           1808 ;	../fb_app_rs.c:240: rs_send(n);
+   07D7 A8 10              1809 	mov	r0,_bp
+   07D9 08                 1810 	inc	r0
+   07DA 86 82              1811 	mov	dpl,@r0
+   07DC 12 0D BB           1812 	lcall	_rs_send
+                           1813 ;	../fb_app_rs.c:241: rs_send_dec(telegramm[10]);
+   07DF AB 5B              1814 	mov	r3,(_telegramm + 0x000a)
+   07E1 7F 00              1815 	mov	r7,#0x00
+   07E3 8B 82              1816 	mov	dpl,r3
+   07E5 8F 83              1817 	mov	dph,r7
+   07E7 12 0B AE           1818 	lcall	_rs_send_dec
+   07EA D0 04              1819 	pop	ar4
+   07EC D0 05              1820 	pop	ar5
+   07EE D0 06              1821 	pop	ar6
+   07F0                    1822 00116$:
+                           1823 ;	../fb_app_rs.c:243: if(length>4){
+   07F0 EC                 1824 	mov	a,r4
+   07F1 24 FB              1825 	add	a,#0xff - 0x04
+   07F3 50 44              1826 	jnc	00118$
+                           1827 ;	../fb_app_rs.c:244: for(n=8;n <= length+6;n++){
+   07F5 7F 08              1828 	mov	r7,#0x08
+   07F7                    1829 00130$:
+   07F7 C0 05              1830 	push	ar5
+   07F9 C0 06              1831 	push	ar6
+   07FB 8C 02              1832 	mov	ar2,r4
+   07FD 7B 00              1833 	mov	r3,#0x00
+   07FF 74 06              1834 	mov	a,#0x06
+   0801 2A                 1835 	add	a,r2
+   0802 FA                 1836 	mov	r2,a
+   0803 E4                 1837 	clr	a
+   0804 3B                 1838 	addc	a,r3
+   0805 FB                 1839 	mov	r3,a
+   0806 8F 05              1840 	mov	ar5,r7
+   0808 7E 00              1841 	mov	r6,#0x00
+   080A C3                 1842 	clr	c
+   080B EA                 1843 	mov	a,r2
+   080C 9D                 1844 	subb	a,r5
+   080D EB                 1845 	mov	a,r3
+   080E 64 80              1846 	xrl	a,#0x80
+   0810 8E F0              1847 	mov	b,r6
+   0812 63 F0 80           1848 	xrl	b,#0x80
+   0815 95 F0              1849 	subb	a,b
+   0817 D0 06              1850 	pop	ar6
+   0819 D0 05              1851 	pop	ar5
+   081B 40 1C              1852 	jc	00118$
+                           1853 ;	../fb_app_rs.c:245: rs_send(telegramm[n]);
+   081D EF                 1854 	mov	a,r7
+   081E 24 51              1855 	add	a,#_telegramm
+   0820 F9                 1856 	mov	r1,a
+   0821 87 82              1857 	mov	dpl,@r1
+   0823 C0 07              1858 	push	ar7
+   0825 C0 06              1859 	push	ar6
+   0827 C0 05              1860 	push	ar5
+   0829 C0 04              1861 	push	ar4
+   082B 12 0D BB           1862 	lcall	_rs_send
+   082E D0 04              1863 	pop	ar4
+   0830 D0 05              1864 	pop	ar5
+   0832 D0 06              1865 	pop	ar6
+   0834 D0 07              1866 	pop	ar7
+                           1867 ;	../fb_app_rs.c:244: for(n=8;n <= length+6;n++){
+   0836 0F                 1868 	inc	r7
+   0837 80 BE              1869 	sjmp	00130$
+   0839                    1870 00118$:
+                           1871 ;	../fb_app_rs.c:248: rs_send_s("\n");							// CR LF
+   0839 90 1C 03           1872 	mov	dptr,#__str_0
+   083C 75 F0 80           1873 	mov	b,#0x80
+   083F C0 06              1874 	push	ar6
+   0841 C0 05              1875 	push	ar5
+   0843 12 0D 1B           1876 	lcall	_rs_send_s
+   0846 D0 05              1877 	pop	ar5
+   0848 D0 06              1878 	pop	ar6
+   084A                    1879 00120$:
+                           1880 ;	../fb_app_rs.c:251: save_ga(ga,val);						// GA mit Wert speichern
+   084A C0 05              1881 	push	ar5
+   084C C0 06              1882 	push	ar6
+   084E A8 10              1883 	mov	r0,_bp
+   0850 08                 1884 	inc	r0
+   0851 08                 1885 	inc	r0
+   0852 86 82              1886 	mov	dpl,@r0
+   0854 08                 1887 	inc	r0
+   0855 86 83              1888 	mov	dph,@r0
+   0857 12 08 65           1889 	lcall	_save_ga
+   085A 15 81              1890 	dec	sp
+   085C 15 81              1891 	dec	sp
+   085E                    1892 00134$:
+   085E 85 10 81           1893 	mov	sp,_bp
+   0861 D0 10              1894 	pop	_bp
+   0863 22                 1895 	ret
+                           1896 ;------------------------------------------------------------
+                           1897 ;Allocation info for local variables in function 'read_value_req'
+                           1898 ;------------------------------------------------------------
+                           1899 ;	../fb_app_rs.c:260: void read_value_req(void)
+                           1900 ;	-----------------------------------------
+                           1901 ;	 function read_value_req
+                           1902 ;	-----------------------------------------
+   0864                    1903 _read_value_req:
+                           1904 ;	../fb_app_rs.c:263: }
+   0864 22                 1905 	ret
+                           1906 ;------------------------------------------------------------
+                           1907 ;Allocation info for local variables in function 'save_ga'
+                           1908 ;------------------------------------------------------------
+                           1909 ;val                       Allocated to stack - _bp -4
+                           1910 ;ga                        Allocated to stack - _bp +1
+                           1911 ;n                         Allocated to registers r5 
+                           1912 ;write_ok                  Allocated to registers b0 
+                           1913 ;------------------------------------------------------------
+                           1914 ;	../fb_app_rs.c:270: void save_ga(unsigned int ga, unsigned int val)
+                           1915 ;	-----------------------------------------
+                           1916 ;	 function save_ga
+                           1917 ;	-----------------------------------------
+   0865                    1918 _save_ga:
+   0865 C0 10              1919 	push	_bp
+   0867 85 81 10           1920 	mov	_bp,sp
+   086A C0 82              1921 	push	dpl
+   086C C0 83              1922 	push	dph
+                           1923 ;	../fb_app_rs.c:275: n=0;
+   086E 7D 00              1924 	mov	r5,#0x00
+                           1925 ;	../fb_app_rs.c:276: do {								// Wert der GA in Flash schreiben
+   0870 A8 10              1926 	mov	r0,_bp
+   0872 08                 1927 	inc	r0
+   0873 08                 1928 	inc	r0
+   0874 86 04              1929 	mov	ar4,@r0
+   0876 E5 10              1930 	mov	a,_bp
+   0878 24 FC              1931 	add	a,#0xfc
+   087A F8                 1932 	mov	r0,a
+   087B 08                 1933 	inc	r0
+   087C 86 03              1934 	mov	ar3,@r0
+   087E                    1935 00111$:
+                           1936 ;	../fb_app_rs.c:277: if(ga_db[n].ga==ga || ga_db[n].ga==0xFFFF) {
+   087E C0 03              1937 	push	ar3
+   0880 ED                 1938 	mov	a,r5
+   0881 2D                 1939 	add	a,r5
+   0882 25 E0              1940 	add	a,acc
+   0884 FA                 1941 	mov	r2,a
+   0885 F5 82              1942 	mov	dpl,a
+   0887 75 83 1D           1943 	mov	dph,#(_ga_db >> 8)
+   088A E4                 1944 	clr	a
+   088B 93                 1945 	movc	a,@a+dptr
+   088C FB                 1946 	mov	r3,a
+   088D A3                 1947 	inc	dptr
+   088E E4                 1948 	clr	a
+   088F 93                 1949 	movc	a,@a+dptr
+   0890 FF                 1950 	mov	r7,a
+   0891 A8 10              1951 	mov	r0,_bp
+   0893 08                 1952 	inc	r0
+   0894 E6                 1953 	mov	a,@r0
+   0895 B5 03 09           1954 	cjne	a,ar3,00122$
+   0898 08                 1955 	inc	r0
+   0899 E6                 1956 	mov	a,@r0
+   089A B5 07 04           1957 	cjne	a,ar7,00122$
+   089D D0 03              1958 	pop	ar3
+   089F 80 14              1959 	sjmp	00108$
+   08A1                    1960 00122$:
+   08A1 D0 03              1961 	pop	ar3
+   08A3 8A 82              1962 	mov	dpl,r2
+   08A5 75 83 1D           1963 	mov	dph,#(_ga_db >> 8)
+   08A8 E4                 1964 	clr	a
+   08A9 93                 1965 	movc	a,@a+dptr
+   08AA FE                 1966 	mov	r6,a
+   08AB A3                 1967 	inc	dptr
+   08AC E4                 1968 	clr	a
+   08AD 93                 1969 	movc	a,@a+dptr
+   08AE FF                 1970 	mov	r7,a
+   08AF BE FF 57           1971 	cjne	r6,#0xFF,00109$
+   08B2 BF FF 54           1972 	cjne	r7,#0xFF,00109$
+   08B5                    1973 00108$:
+                           1974 ;	../fb_app_rs.c:278: write_ok=0;
+   08B5 C2 18              1975 	clr	b0
+                           1976 ;	../fb_app_rs.c:279: while (!write_ok) {
+   08B7 ED                 1977 	mov	a,r5
+   08B8 2D                 1978 	add	a,r5
+   08B9 25 E0              1979 	add	a,acc
+   08BB FF                 1980 	mov	r7,a
+   08BC 24 02              1981 	add	a,#0x02
+   08BE FE                 1982 	mov	r6,a
+   08BF                    1983 00105$:
+   08BF 20 18 45           1984 	jb	b0,00107$
+                           1985 ;	../fb_app_rs.c:280: START_WRITECYCLE
+   08C2 C0 03              1986 	push	ar3
+   08C4 75 E4 00           1987 	mov	_FMCON,#0x00
+                           1988 ;	../fb_app_rs.c:281: if(ga_db[n].ga==0xFFFF) {			// GA noch nicht gespeichert
+   08C7 8F 82              1989 	mov	dpl,r7
+   08C9 75 83 1D           1990 	mov	dph,#(_ga_db >> 8)
+   08CC E4                 1991 	clr	a
+   08CD 93                 1992 	movc	a,@a+dptr
+   08CE FA                 1993 	mov	r2,a
+   08CF A3                 1994 	inc	dptr
+   08D0 E4                 1995 	clr	a
+   08D1 93                 1996 	movc	a,@a+dptr
+   08D2 FB                 1997 	mov	r3,a
+   08D3 BA FF 05           1998 	cjne	r2,#0xFF,00126$
+   08D6 BB FF 02           1999 	cjne	r3,#0xFF,00126$
+   08D9 80 04              2000 	sjmp	00127$
+   08DB                    2001 00126$:
+   08DB D0 03              2002 	pop	ar3
+   08DD 80 0E              2003 	sjmp	00102$
+   08DF                    2004 00127$:
+   08DF D0 03              2005 	pop	ar3
+                           2006 ;	../fb_app_rs.c:282: FMADRH = 0x1D;//(n >> 6) + 0x1D;		// GA schreiben
+   08E1 75 E7 1D           2007 	mov	_FMADRH,#0x1D
+                           2008 ;	../fb_app_rs.c:283: FMADRL = n*4;//((n & 0x3F) * 4);		// (int wird LSB first abgelegt)
+   08E4 8F E6              2009 	mov	_FMADRL,r7
+                           2010 ;	../fb_app_rs.c:284: FMDATA=ga;
+   08E6 A8 10              2011 	mov	r0,_bp
+   08E8 08                 2012 	inc	r0
+   08E9 86 E5              2013 	mov	_FMDATA,@r0
+                           2014 ;	../fb_app_rs.c:285: FMDATA=ga>>8;
+   08EB 8C E5              2015 	mov	_FMDATA,r4
+   08ED                    2016 00102$:
+                           2017 ;	../fb_app_rs.c:287: FMADRH = 0x1D;//(n >> 6) + 0x1D;		// Value schreiben
+   08ED 75 E7 1D           2018 	mov	_FMADRH,#0x1D
+                           2019 ;	../fb_app_rs.c:288: FMADRL = (n*4) +2;//((n & 0x3F) * 4) + 2;
+   08F0 8E E6              2020 	mov	_FMADRL,r6
+                           2021 ;	../fb_app_rs.c:289: FMDATA=val;
+   08F2 E5 10              2022 	mov	a,_bp
+   08F4 24 FC              2023 	add	a,#0xfc
+   08F6 F8                 2024 	mov	r0,a
+   08F7 86 E5              2025 	mov	_FMDATA,@r0
+                           2026 ;	../fb_app_rs.c:290: FMDATA=val>>8;					// High Byte schreiben
+   08F9 8B E5              2027 	mov	_FMDATA,r3
+                           2028 ;	../fb_app_rs.c:291: STOP_WRITECYCLE
+   08FB 75 E4 68           2029 	mov	_FMCON,#0x68
+                           2030 ;	../fb_app_rs.c:292: if(!(FMCON & 0x01)) write_ok=1;	// pruefen, ob erfolgreich geflasht
+   08FE E5 E4              2031 	mov	a,_FMCON
+   0900 20 E0 BC           2032 	jb	acc.0,00105$
+   0903 D2 18              2033 	setb	b0
+   0905 80 B8              2034 	sjmp	00105$
+   0907                    2035 00107$:
+                           2036 ;	../fb_app_rs.c:294: n=62;	// Schleife abbrechen
+   0907 7D 3E              2037 	mov	r5,#0x3E
+   0909                    2038 00109$:
+                           2039 ;	../fb_app_rs.c:296: n++;
+   0909 0D                 2040 	inc	r5
+                           2041 ;	../fb_app_rs.c:297: }while (n<62);
+   090A BD 3E 00           2042 	cjne	r5,#0x3E,00129$
+   090D                    2043 00129$:
+   090D 50 03              2044 	jnc	00130$
+   090F 02 08 7E           2045 	ljmp	00111$
+   0912                    2046 00130$:
+   0912 85 10 81           2047 	mov	sp,_bp
+   0915 D0 10              2048 	pop	_bp
+   0917 22                 2049 	ret
+                           2050 ;------------------------------------------------------------
+                           2051 ;Allocation info for local variables in function 'tel_header'
+                           2052 ;------------------------------------------------------------
+                           2053 ;length                    Allocated to stack - _bp -3
+                           2054 ;ga                        Allocated to registers r6 r7 
+                           2055 ;------------------------------------------------------------
+                           2056 ;	../fb_app_rs.c:303: void tel_header(unsigned int ga, unsigned char length)
+                           2057 ;	-----------------------------------------
+                           2058 ;	 function tel_header
+                           2059 ;	-----------------------------------------
+   0918                    2060 _tel_header:
+   0918 C0 10              2061 	push	_bp
+   091A 85 81 10           2062 	mov	_bp,sp
+   091D AE 82              2063 	mov	r6,dpl
+   091F AF 83              2064 	mov	r7,dph
+                           2065 ;	../fb_app_rs.c:305: telegramm[0]=0xBC;
+   0921 75 51 BC           2066 	mov	_telegramm,#0xBC
+                           2067 ;	../fb_app_rs.c:306: telegramm[1]=pa_h;
+   0924 90 1C FB           2068 	mov	dptr,#_pa_h
+   0927 E4                 2069 	clr	a
+   0928 93                 2070 	movc	a,@a+dptr
+   0929 FD                 2071 	mov	r5,a
+   092A 8D 52              2072 	mov	(_telegramm + 0x0001),r5
+                           2073 ;	../fb_app_rs.c:307: telegramm[2]=pa_l;
+   092C 90 1C FC           2074 	mov	dptr,#_pa_l
+   092F E4                 2075 	clr	a
+   0930 93                 2076 	movc	a,@a+dptr
+   0931 FD                 2077 	mov	r5,a
+   0932 8D 53              2078 	mov	(_telegramm + 0x0002),r5
+                           2079 ;	../fb_app_rs.c:308: telegramm[3]=ga>>8;
+   0934 8F 05              2080 	mov	ar5,r7
+   0936 8D 54              2081 	mov	(_telegramm + 0x0003),r5
+                           2082 ;	../fb_app_rs.c:309: telegramm[4]=ga;
+   0938 8E 55              2083 	mov	(_telegramm + 0x0004),r6
+                           2084 ;	../fb_app_rs.c:310: telegramm[5]=0xE0 + length;
+   093A E5 10              2085 	mov	a,_bp
+   093C 24 FD              2086 	add	a,#0xfd
+   093E F8                 2087 	mov	r0,a
+   093F 74 E0              2088 	mov	a,#0xE0
+   0941 26                 2089 	add	a,@r0
+   0942 F5 56              2090 	mov	(_telegramm + 0x0005),a
+                           2091 ;	../fb_app_rs.c:311: telegramm[6]=0x00;
+   0944 75 57 00           2092 	mov	(_telegramm + 0x0006),#0x00
+   0947 D0 10              2093 	pop	_bp
+   0949 22                 2094 	ret
+                           2095 ;------------------------------------------------------------
+                           2096 ;Allocation info for local variables in function 'convert_adr'
+                           2097 ;------------------------------------------------------------
+                           2098 ;pos                       Allocated to registers r7 
+                           2099 ;adr                       Allocated to stack - _bp +1
+                           2100 ;sepcount                  Allocated to registers r3 
+                           2101 ;n                         Allocated to stack - _bp +3
+                           2102 ;adr_tmp                   Allocated to registers r5 
+                           2103 ;firstrun                  Allocated to registers b0 
+                           2104 ;------------------------------------------------------------
+                           2105 ;	../fb_app_rs.c:316: unsigned int convert_adr(unsigned char pos)
+                           2106 ;	-----------------------------------------
+                           2107 ;	 function convert_adr
+                           2108 ;	-----------------------------------------
+   094A                    2109 _convert_adr:
+   094A C0 10              2110 	push	_bp
+   094C 85 81 10           2111 	mov	_bp,sp
+   094F 05 81              2112 	inc	sp
+   0951 05 81              2113 	inc	sp
+   0953 05 81              2114 	inc	sp
+   0955 AF 82              2115 	mov	r7,dpl
+                           2116 ;	../fb_app_rs.c:322: firstrun=1;
+   0957 D2 18              2117 	setb	b0
+                           2118 ;	../fb_app_rs.c:325: adr=0;
+   0959 A8 10              2119 	mov	r0,_bp
+   095B 08                 2120 	inc	r0
+   095C E4                 2121 	clr	a
+   095D F6                 2122 	mov	@r0,a
+   095E 08                 2123 	inc	r0
+   095F F6                 2124 	mov	@r0,a
+                           2125 ;	../fb_app_rs.c:326: adr_tmp=0;
+                           2126 ;	../fb_app_rs.c:327: while(rsin[n]!='=' && n<(rsinpos-1)) {
+   0960 E4                 2127 	clr	a
+   0961 FD                 2128 	mov	r5,a
+   0962 FB                 2129 	mov	r3,a
+   0963 E5 10              2130 	mov	a,_bp
+   0965 24 03              2131 	add	a,#0x03
+   0967 F8                 2132 	mov	r0,a
+   0968 A6 07              2133 	mov	@r0,ar7
+   096A                    2134 00117$:
+   096A E5 10              2135 	mov	a,_bp
+   096C 24 03              2136 	add	a,#0x03
+   096E F8                 2137 	mov	r0,a
+   096F E6                 2138 	mov	a,@r0
+   0970 24 24              2139 	add	a,#_rsin
+   0972 F9                 2140 	mov	r1,a
+   0973 87 02              2141 	mov	ar2,@r1
+   0975 BA 3D 03           2142 	cjne	r2,#0x3D,00132$
+   0978 02 0A 3B           2143 	ljmp	00119$
+   097B                    2144 00132$:
+   097B C0 03              2145 	push	ar3
+   097D AB 42              2146 	mov	r3,_rsinpos
+   097F 7C 00              2147 	mov	r4,#0x00
+   0981 1B                 2148 	dec	r3
+   0982 BB FF 01           2149 	cjne	r3,#0xFF,00133$
+   0985 1C                 2150 	dec	r4
+   0986                    2151 00133$:
+   0986 E5 10              2152 	mov	a,_bp
+   0988 24 03              2153 	add	a,#0x03
+   098A F8                 2154 	mov	r0,a
+   098B 86 06              2155 	mov	ar6,@r0
+   098D 7F 00              2156 	mov	r7,#0x00
+   098F C3                 2157 	clr	c
+   0990 EE                 2158 	mov	a,r6
+   0991 9B                 2159 	subb	a,r3
+   0992 EF                 2160 	mov	a,r7
+   0993 64 80              2161 	xrl	a,#0x80
+   0995 8C F0              2162 	mov	b,r4
+   0997 63 F0 80           2163 	xrl	b,#0x80
+   099A 95 F0              2164 	subb	a,b
+   099C D0 03              2165 	pop	ar3
+   099E 40 03              2166 	jc	00134$
+   09A0 02 0A 3B           2167 	ljmp	00119$
+   09A3                    2168 00134$:
+                           2169 ;	../fb_app_rs.c:328: if(rsin[n]!='/' && rsin[n]!='.') {
+   09A3 BA 2F 02           2170 	cjne	r2,#0x2F,00135$
+   09A6 80 21              2171 	sjmp	00113$
+   09A8                    2172 00135$:
+   09A8 BA 2E 02           2173 	cjne	r2,#0x2E,00136$
+   09AB 80 1C              2174 	sjmp	00113$
+   09AD                    2175 00136$:
+                           2176 ;	../fb_app_rs.c:329: if(!firstrun) adr_tmp*=10;
+   09AD 20 18 06           2177 	jb	b0,00102$
+   09B0 ED                 2178 	mov	a,r5
+   09B1 75 F0 0A           2179 	mov	b,#0x0A
+   09B4 A4                 2180 	mul	ab
+   09B5 FD                 2181 	mov	r5,a
+   09B6                    2182 00102$:
+                           2183 ;	../fb_app_rs.c:330: adr_tmp+=rsin[n]-48;
+   09B6 E5 10              2184 	mov	a,_bp
+   09B8 24 03              2185 	add	a,#0x03
+   09BA F8                 2186 	mov	r0,a
+   09BB E6                 2187 	mov	a,@r0
+   09BC 24 24              2188 	add	a,#_rsin
+   09BE F9                 2189 	mov	r1,a
+   09BF E7                 2190 	mov	a,@r1
+   09C0 24 D0              2191 	add	a,#0xD0
+   09C2 FF                 2192 	mov	r7,a
+   09C3 2D                 2193 	add	a,r5
+   09C4 FD                 2194 	mov	r5,a
+                           2195 ;	../fb_app_rs.c:331: firstrun=0;
+   09C5 C2 18              2196 	clr	b0
+   09C7 80 69              2197 	sjmp	00114$
+   09C9                    2198 00113$:
+                           2199 ;	../fb_app_rs.c:334: sepcount++;
+   09C9 0B                 2200 	inc	r3
+                           2201 ;	../fb_app_rs.c:335: firstrun=1;
+   09CA D2 18              2202 	setb	b0
+                           2203 ;	../fb_app_rs.c:336: adr+=adr_tmp;
+   09CC 8D 04              2204 	mov	ar4,r5
+   09CE 7F 00              2205 	mov	r7,#0x00
+   09D0 A8 10              2206 	mov	r0,_bp
+   09D2 08                 2207 	inc	r0
+   09D3 EC                 2208 	mov	a,r4
+   09D4 26                 2209 	add	a,@r0
+   09D5 F6                 2210 	mov	@r0,a
+   09D6 EF                 2211 	mov	a,r7
+   09D7 08                 2212 	inc	r0
+   09D8 36                 2213 	addc	a,@r0
+   09D9 F6                 2214 	mov	@r0,a
+                           2215 ;	../fb_app_rs.c:337: if (rsin[n]=='/') {		// für GA
+   09DA E5 10              2216 	mov	a,_bp
+   09DC 24 03              2217 	add	a,#0x03
+   09DE F8                 2218 	mov	r0,a
+   09DF E6                 2219 	mov	a,@r0
+   09E0 24 24              2220 	add	a,#_rsin
+   09E2 F9                 2221 	mov	r1,a
+   09E3 87 07              2222 	mov	ar7,@r1
+   09E5 BF 2F 26           2223 	cjne	r7,#0x2F,00110$
+                           2224 ;	../fb_app_rs.c:338: if (sepcount==1) adr=adr<<3; else adr=adr<<8;
+   09E8 BB 01 18           2225 	cjne	r3,#0x01,00104$
+   09EB A8 10              2226 	mov	r0,_bp
+   09ED 08                 2227 	inc	r0
+   09EE 08                 2228 	inc	r0
+   09EF E6                 2229 	mov	a,@r0
+   09F0 18                 2230 	dec	r0
+   09F1 C4                 2231 	swap	a
+   09F2 03                 2232 	rr	a
+   09F3 54 F8              2233 	anl	a,#0xF8
+   09F5 C6                 2234 	xch	a,@r0
+   09F6 C4                 2235 	swap	a
+   09F7 03                 2236 	rr	a
+   09F8 C6                 2237 	xch	a,@r0
+   09F9 66                 2238 	xrl	a,@r0
+   09FA C6                 2239 	xch	a,@r0
+   09FB 54 F8              2240 	anl	a,#0xF8
+   09FD C6                 2241 	xch	a,@r0
+   09FE 66                 2242 	xrl	a,@r0
+   09FF 08                 2243 	inc	r0
+   0A00 F6                 2244 	mov	@r0,a
+   0A01 80 2D              2245 	sjmp	00111$
+   0A03                    2246 00104$:
+   0A03 A8 10              2247 	mov	r0,_bp
+   0A05 08                 2248 	inc	r0
+   0A06 E6                 2249 	mov	a,@r0
+   0A07 08                 2250 	inc	r0
+   0A08 F6                 2251 	mov	@r0,a
+   0A09 18                 2252 	dec	r0
+   0A0A 76 00              2253 	mov	@r0,#0x00
+   0A0C 80 22              2254 	sjmp	00111$
+   0A0E                    2255 00110$:
+                           2256 ;	../fb_app_rs.c:341: if (sepcount==1) adr=adr<<4; else adr=adr<<8;
+   0A0E BB 01 16           2257 	cjne	r3,#0x01,00107$
+   0A11 A8 10              2258 	mov	r0,_bp
+   0A13 08                 2259 	inc	r0
+   0A14 08                 2260 	inc	r0
+   0A15 E6                 2261 	mov	a,@r0
+   0A16 18                 2262 	dec	r0
+   0A17 C4                 2263 	swap	a
+   0A18 54 F0              2264 	anl	a,#0xF0
+   0A1A C6                 2265 	xch	a,@r0
+   0A1B C4                 2266 	swap	a
+   0A1C C6                 2267 	xch	a,@r0
+   0A1D 66                 2268 	xrl	a,@r0
+   0A1E C6                 2269 	xch	a,@r0
+   0A1F 54 F0              2270 	anl	a,#0xF0
+   0A21 C6                 2271 	xch	a,@r0
+   0A22 66                 2272 	xrl	a,@r0
+   0A23 08                 2273 	inc	r0
+   0A24 F6                 2274 	mov	@r0,a
+   0A25 80 09              2275 	sjmp	00111$
+   0A27                    2276 00107$:
+   0A27 A8 10              2277 	mov	r0,_bp
+   0A29 08                 2278 	inc	r0
+   0A2A E6                 2279 	mov	a,@r0
+   0A2B 08                 2280 	inc	r0
+   0A2C F6                 2281 	mov	@r0,a
+   0A2D 18                 2282 	dec	r0
+   0A2E 76 00              2283 	mov	@r0,#0x00
+   0A30                    2284 00111$:
+                           2285 ;	../fb_app_rs.c:343: adr_tmp=0;
+   0A30 7D 00              2286 	mov	r5,#0x00
+   0A32                    2287 00114$:
+                           2288 ;	../fb_app_rs.c:345: n++;
+   0A32 E5 10              2289 	mov	a,_bp
+   0A34 24 03              2290 	add	a,#0x03
+   0A36 F8                 2291 	mov	r0,a
+   0A37 06                 2292 	inc	@r0
+   0A38 02 09 6A           2293 	ljmp	00117$
+   0A3B                    2294 00119$:
+                           2295 ;	../fb_app_rs.c:347: adr+=adr_tmp;
+   0A3B 8D 04              2296 	mov	ar4,r5
+   0A3D 7F 00              2297 	mov	r7,#0x00
+   0A3F A8 10              2298 	mov	r0,_bp
+   0A41 08                 2299 	inc	r0
+   0A42 EC                 2300 	mov	a,r4
+   0A43 26                 2301 	add	a,@r0
+   0A44 F6                 2302 	mov	@r0,a
+   0A45 EF                 2303 	mov	a,r7
+   0A46 08                 2304 	inc	r0
+   0A47 36                 2305 	addc	a,@r0
+   0A48 F6                 2306 	mov	@r0,a
+                           2307 ;	../fb_app_rs.c:348: return(adr);
+   0A49 A8 10              2308 	mov	r0,_bp
+   0A4B 08                 2309 	inc	r0
+   0A4C 86 82              2310 	mov	dpl,@r0
+   0A4E 08                 2311 	inc	r0
+   0A4F 86 83              2312 	mov	dph,@r0
+   0A51 85 10 81           2313 	mov	sp,_bp
+   0A54 D0 10              2314 	pop	_bp
+   0A56 22                 2315 	ret
+                           2316 ;------------------------------------------------------------
+                           2317 ;Allocation info for local variables in function 'equal_pos'
+                           2318 ;------------------------------------------------------------
+                           2319 ;n                         Allocated to registers r7 
+                           2320 ;------------------------------------------------------------
+                           2321 ;	../fb_app_rs.c:354: unsigned char equal_pos(void)
+                           2322 ;	-----------------------------------------
+                           2323 ;	 function equal_pos
+                           2324 ;	-----------------------------------------
+   0A57                    2325 _equal_pos:
+                           2326 ;	../fb_app_rs.c:358: n=0;
+   0A57 7F 00              2327 	mov	r7,#0x00
+                           2328 ;	../fb_app_rs.c:360: while(n<(rsinpos-1))
+   0A59 7E 00              2329 	mov	r6,#0x00
+   0A5B                    2330 00103$:
+   0A5B AC 42              2331 	mov	r4,_rsinpos
+   0A5D 7D 00              2332 	mov	r5,#0x00
+   0A5F 1C                 2333 	dec	r4
+   0A60 BC FF 01           2334 	cjne	r4,#0xFF,00111$
+   0A63 1D                 2335 	dec	r5
+   0A64                    2336 00111$:
+   0A64 8E 02              2337 	mov	ar2,r6
+   0A66 7B 00              2338 	mov	r3,#0x00
+   0A68 C3                 2339 	clr	c
+   0A69 EA                 2340 	mov	a,r2
+   0A6A 9C                 2341 	subb	a,r4
+   0A6B EB                 2342 	mov	a,r3
+   0A6C 64 80              2343 	xrl	a,#0x80
+   0A6E 8D F0              2344 	mov	b,r5
+   0A70 63 F0 80           2345 	xrl	b,#0x80
+   0A73 95 F0              2346 	subb	a,b
+   0A75 50 11              2347 	jnc	00105$
+                           2348 ;	../fb_app_rs.c:362: if(rsin[n]=='=')return(n);
+   0A77 EE                 2349 	mov	a,r6
+   0A78 24 24              2350 	add	a,#_rsin
+   0A7A F9                 2351 	mov	r1,a
+   0A7B 87 05              2352 	mov	ar5,@r1
+   0A7D BD 3D 03           2353 	cjne	r5,#0x3D,00102$
+   0A80 8F 82              2354 	mov	dpl,r7
+   0A82 22                 2355 	ret
+   0A83                    2356 00102$:
+                           2357 ;	../fb_app_rs.c:363: n++;
+   0A83 0E                 2358 	inc	r6
+   0A84 8E 07              2359 	mov	ar7,r6
+   0A86 80 D3              2360 	sjmp	00103$
+   0A88                    2361 00105$:
+                           2362 ;	../fb_app_rs.c:365: return(0xFF);
+   0A88 75 82 FF           2363 	mov	dpl,#0xFF
+   0A8B 22                 2364 	ret
+                           2365 ;------------------------------------------------------------
+                           2366 ;Allocation info for local variables in function 'serial_int'
+                           2367 ;------------------------------------------------------------
+                           2368 ;	../fb_app_rs.c:369: void serial_int(void) __interrupt (4) __using (1)	// Interrupt on received char from serial port
+                           2369 ;	-----------------------------------------
+                           2370 ;	 function serial_int
+                           2371 ;	-----------------------------------------
+   0A8C                    2372 _serial_int:
+                    000F   2373 	ar7 = 0x0F
+                    000E   2374 	ar6 = 0x0E
+                    000D   2375 	ar5 = 0x0D
+                    000C   2376 	ar4 = 0x0C
+                    000B   2377 	ar3 = 0x0B
+                    000A   2378 	ar2 = 0x0A
+                    0009   2379 	ar1 = 0x09
+                    0008   2380 	ar0 = 0x08
+   0A8C C0 E0              2381 	push	acc
+   0A8E C0 82              2382 	push	dpl
+   0A90 C0 83              2383 	push	dph
+   0A92 C0 D0              2384 	push	psw
+   0A94 75 D0 08           2385 	mov	psw,#0x08
+                           2386 ;	../fb_app_rs.c:371: ES=0;
+   0A97 C2 AC              2387 	clr	_IEN0_4
+                           2388 ;	../fb_app_rs.c:372: if (RI){
+   0A99 30 98 30           2389 	jnb	_SCON_0,00112$
+                           2390 ;	../fb_app_rs.c:373: if (rsinpos<30) {
+   0A9C 74 E2              2391 	mov	a,#0x100 - 0x1E
+   0A9E 25 42              2392 	add	a,_rsinpos
+   0AA0 40 25              2393 	jc	00109$
+                           2394 ;	../fb_app_rs.c:374: rxledcount=0x40;// * RXLED kurz eischalten
+   0AA2 75 49 40           2395 	mov	_rxledcount,#0x40
+                           2396 ;	../fb_app_rs.c:375: if(SBUF!=0x0A) {
+   0AA5 74 0A              2397 	mov	a,#0x0A
+   0AA7 B5 99 02           2398 	cjne	a,_SBUF,00122$
+   0AAA 80 1E              2399 	sjmp	00110$
+   0AAC                    2400 00122$:
+                           2401 ;	../fb_app_rs.c:376: rsin[rsinpos]=SBUF;		// store byte in rsin
+   0AAC E5 42              2402 	mov	a,_rsinpos
+   0AAE 24 24              2403 	add	a,#_rsin
+   0AB0 F8                 2404 	mov	r0,a
+   0AB1 A6 99              2405 	mov	@r0,_SBUF
+                           2406 ;	../fb_app_rs.c:377: rsinpos++;
+   0AB3 05 42              2407 	inc	_rsinpos
+                           2408 ;	../fb_app_rs.c:378: if (echo) {
+   0AB5 90 1C FD           2409 	mov	dptr,#_echo
+   0AB8 E4                 2410 	clr	a
+   0AB9 93                 2411 	movc	a,@a+dptr
+   0ABA FF                 2412 	mov	r7,a
+   0ABB 60 0D              2413 	jz	00110$
+                           2414 ;	../fb_app_rs.c:379: while(!TI);
+   0ABD                    2415 00101$:
+                           2416 ;	../fb_app_rs.c:380: TI=0;
+   0ABD 10 99 02           2417 	jbc	_SCON_1,00124$
+   0AC0 80 FB              2418 	sjmp	00101$
+   0AC2                    2419 00124$:
+                           2420 ;	../fb_app_rs.c:381: SBUF=SBUF;
+   0AC2 85 99 99           2421 	mov	_SBUF,_SBUF
+   0AC5 80 03              2422 	sjmp	00110$
+   0AC7                    2423 00109$:
+                           2424 ;	../fb_app_rs.c:385: else rsinpos=0;
+   0AC7 75 42 00           2425 	mov	_rsinpos,#0x00
+   0ACA                    2426 00110$:
+                           2427 ;	../fb_app_rs.c:386: RI=0;	
+   0ACA C2 98              2428 	clr	_SCON_0
+   0ACC                    2429 00112$:
+                           2430 ;	../fb_app_rs.c:388: ES=1;
+   0ACC D2 AC              2431 	setb	_IEN0_4
+   0ACE D0 D0              2432 	pop	psw
+   0AD0 D0 83              2433 	pop	dph
+   0AD2 D0 82              2434 	pop	dpl
+   0AD4 D0 E0              2435 	pop	acc
+   0AD6 32                 2436 	reti
+                           2437 ;	eliminated unneeded push/pop b
+                           2438 ;------------------------------------------------------------
+                           2439 ;Allocation info for local variables in function 'send_ok'
+                           2440 ;------------------------------------------------------------
+                           2441 ;	../fb_app_rs.c:391: void send_ok(void)
+                           2442 ;	-----------------------------------------
+                           2443 ;	 function send_ok
+                           2444 ;	-----------------------------------------
+   0AD7                    2445 _send_ok:
+                    0007   2446 	ar7 = 0x07
+                    0006   2447 	ar6 = 0x06
+                    0005   2448 	ar5 = 0x05
+                    0004   2449 	ar4 = 0x04
+                    0003   2450 	ar3 = 0x03
+                    0002   2451 	ar2 = 0x02
+                    0001   2452 	ar1 = 0x01
+                    0000   2453 	ar0 = 0x00
+                           2454 ;	../fb_app_rs.c:393: rs_send_s("OK\n");
+   0AD7 90 1C 05           2455 	mov	dptr,#__str_1
+   0ADA 75 F0 80           2456 	mov	b,#0x80
+   0ADD 02 0D 1B           2457 	ljmp	_rs_send_s
+                           2458 ;------------------------------------------------------------
+                           2459 ;Allocation info for local variables in function 'set_filtermode'
+                           2460 ;------------------------------------------------------------
+                           2461 ;mode                      Allocated to registers r7 
+                           2462 ;------------------------------------------------------------
+                           2463 ;	../fb_app_rs.c:396: void set_filtermode(unsigned char mode)
+                           2464 ;	-----------------------------------------
+                           2465 ;	 function set_filtermode
+                           2466 ;	-----------------------------------------
+   0AE0                    2467 _set_filtermode:
+   0AE0 AF 82              2468 	mov	r7,dpl
+                           2469 ;	../fb_app_rs.c:398: write_ok=0;
+   0AE2 C2 01              2470 	clr	_write_ok
+                           2471 ;	../fb_app_rs.c:399: while (!write_ok) {
+   0AE4 E4                 2472 	clr	a
+   0AE5 BF 31 01           2473 	cjne	r7,#0x31,00115$
+   0AE8 04                 2474 	inc	a
+   0AE9                    2475 00115$:
+   0AE9 FF                 2476 	mov	r7,a
+   0AEA                    2477 00106$:
+   0AEA 20 01 28           2478 	jb	_write_ok,00109$
+                           2479 ;	../fb_app_rs.c:400: START_WRITECYCLE
+   0AED 75 E4 00           2480 	mov	_FMCON,#0x00
+                           2481 ;	../fb_app_rs.c:401: FMADRH = 0x1C;
+   0AF0 75 E7 1C           2482 	mov	_FMADRH,#0x1C
+                           2483 ;	../fb_app_rs.c:402: FMADRL = 0xFA;
+   0AF3 75 E6 FA           2484 	mov	_FMADRL,#0xFA
+                           2485 ;	../fb_app_rs.c:403: if(mode =='1'){
+   0AF6 EF                 2486 	mov	a,r7
+   0AF7 60 09              2487 	jz	00102$
+                           2488 ;	../fb_app_rs.c:404: filtermode=1;
+   0AF9 D2 00              2489 	setb	_filtermode
+                           2490 ;	../fb_app_rs.c:405: transparency=0;
+   0AFB C2 10              2491 	clr	_transparency
+                           2492 ;	../fb_app_rs.c:406: FMDATA = 1;		// LSB
+   0AFD 75 E5 01           2493 	mov	_FMDATA,#0x01
+   0B00 80 07              2494 	sjmp	00103$
+   0B02                    2495 00102$:
+                           2496 ;	../fb_app_rs.c:409: filtermode=0;
+   0B02 C2 00              2497 	clr	_filtermode
+                           2498 ;	../fb_app_rs.c:410: transparency=1;
+   0B04 D2 10              2499 	setb	_transparency
+                           2500 ;	../fb_app_rs.c:411: FMDATA=0;
+   0B06 75 E5 00           2501 	mov	_FMDATA,#0x00
+   0B09                    2502 00103$:
+                           2503 ;	../fb_app_rs.c:413: STOP_WRITECYCLE
+   0B09 75 E4 68           2504 	mov	_FMCON,#0x68
+                           2505 ;	../fb_app_rs.c:414: if(!(FMCON & 0x01)) write_ok=1;	// pruefen, ob erfolgreich geflasht
+   0B0C E5 E4              2506 	mov	a,_FMCON
+   0B0E 20 E0 D9           2507 	jb	acc.0,00106$
+   0B11 D2 01              2508 	setb	_write_ok
+   0B13 80 D5              2509 	sjmp	00106$
+   0B15                    2510 00109$:
+   0B15 22                 2511 	ret
+                           2512 ;------------------------------------------------------------
+                           2513 ;Allocation info for local variables in function 'restart_app'
+                           2514 ;------------------------------------------------------------
+                           2515 ;n                         Allocated to registers r7 
+                           2516 ;------------------------------------------------------------
+                           2517 ;	../fb_app_rs.c:419: void restart_app(void)
+                           2518 ;	-----------------------------------------
+                           2519 ;	 function restart_app
+                           2520 ;	-----------------------------------------
+   0B16                    2521 _restart_app:
+                           2522 ;	../fb_app_rs.c:424: P0M1=0x00;
+   0B16 75 84 00           2523 	mov	_P0M1,#0x00
+                           2524 ;	../fb_app_rs.c:425: P0M2=0xC0;
+   0B19 75 85 C0           2525 	mov	_P0M2,#0xC0
+                           2526 ;	../fb_app_rs.c:426: P0=0xC0;
+   0B1C 75 80 C0           2527 	mov	_P0,#0xC0
+                           2528 ;	../fb_app_rs.c:428: for (n=0;n<255;n++) ;	// Warten bis Bus stabil
+   0B1F 7F FF              2529 	mov	r7,#0xFF
+   0B21                    2530 00103$:
+   0B21 8F 06              2531 	mov	ar6,r7
+   0B23 1E                 2532 	dec	r6
+   0B24 8E 07              2533 	mov	ar7,r6
+   0B26 EF                 2534 	mov	a,r7
+   0B27 70 F8              2535 	jnz	00103$
+                           2536 ;	../fb_app_rs.c:433: RI=0;
+   0B29 C2 98              2537 	clr	_SCON_0
+                           2538 ;	../fb_app_rs.c:434: TI=1;
+   0B2B D2 99              2539 	setb	_SCON_1
+                           2540 ;	../fb_app_rs.c:435: ES=1;
+   0B2D D2 AC              2541 	setb	_IEN0_4
+   0B2F 22                 2542 	ret
+                           2543 	.area CSEG    (CODE)
+                           2544 	.area CONST   (CODE)
+                    1CFA   2545 _fm	=	0x1cfa
+                    1CFB   2546 _pa_h	=	0x1cfb
+                    1CFC   2547 _pa_l	=	0x1cfc
+                    1CF8   2548 _sga_h	=	0x1cf8
+                    1CF9   2549 _sga_l	=	0x1cf9
+                    1D00   2550 _ga_db	=	0x1d00
+                    1CFD   2551 _echo	=	0x1cfd
+   1C03                    2552 __str_0:
+   1C03 0A                 2553 	.db 0x0A
+   1C04 00                 2554 	.db 0x00
+   1C05                    2555 __str_1:
+   1C05 4F 4B              2556 	.ascii "OK"
+   1C07 0A                 2557 	.db 0x0A
+   1C08 00                 2558 	.db 0x00
+                           2559 	.area XINIT   (CODE)
+                           2560 	.area CABS    (ABS,CODE)
+   1CF7                    2561 	.org 0x1CF7
+   1CF7                    2562 _esc_char:
+   1CF7 66                 2563 	.db #0x66	; 102	'f'
+   1CFE                    2564 	.org 0x1CFE
+   1CFE                    2565 _baud:
+   1CFE C0 00              2566 	.byte #0xC0,#0x00	; 192

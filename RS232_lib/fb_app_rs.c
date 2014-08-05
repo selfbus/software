@@ -1,5 +1,4 @@
 /*
-<<<<<<< HEAD
  *   
  *      __________  ________________  __  _______
  *     / ____/ __ \/ ____/ ____/ __ )/ / / / ___/
@@ -8,11 +7,6 @@
  *  /_/   /_/ |_/_____/_____/_____/\____//____/
  *
  *  Copyright (c) 2008-2014 Andreas Krebs <kubi@krebsworld.de>
-=======
- *  Copyright (c) 2008-2010 Andreas Krebs <kubi@krebsworld.de>
- *                2011-2014 Andreas Krieger <service@krieger-elektro.de>
- *                2014 Stefan Taferner <stefan.taferner@gmx.at>
->>>>>>> b005610e1d351dd814c6f7b69d1d169c9b05a81d
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 2 as
@@ -22,11 +16,9 @@
 
 
 #include <P89LPC922.h>
-
-#include "fb_app_rs.h"
-
 #include <fb_lpc922_mini_1.4x.h>
-#include <fb_rs232.h>
+#include "fb_app_rs.h"
+#include "../com/fb_rs232.h"
 
 
 unsigned char rsin[30];		// seriell empfangener string
@@ -35,7 +27,6 @@ unsigned int groupadr=0,pa_tmp;
 unsigned char ledcount;
 unsigned char eibledcount;
 unsigned char rxledcount;
-<<<<<<< HEAD
 __code unsigned char __at 0x1CF7 esc_char={'f'};
 __code unsigned char __at 0x1CFA fm;
 __code unsigned char __at 0x1CFB pa_h;
@@ -43,23 +34,12 @@ __code unsigned char __at 0x1CFC pa_l;
 #ifdef ASCII_MODE
 __code unsigned char __at 0x1CF8 sga_h;
 __code unsigned char __at 0x1CF9 sga_l;
-=======
-__code unsigned char __at(0x1CFA) fm;
-__code unsigned char __at(0x1CFB) pa_h;
-__code unsigned char __at(0x1CFC) pa_l;
-#ifdef ASCII_MODE
-__code unsigned char __at(0x1CF8) sga_h;
-__code unsigned char __at(0x1CF9) sga_l;
-__code struct ga_record __at(0x1D00) ga_db[61];
-#else
-__code struct ga_record __at(0x1D00) ga_db[62];
->>>>>>> b005610e1d351dd814c6f7b69d1d169c9b05a81d
 #endif
 __code struct ga_record __at 0x1D00 ga_db[62];
 
-__code unsigned char __at(0x1CFD) echo;
-__code unsigned int __at(0x1CFE) baud=192;
-//const unsigned char __at(1D0) [62*4]={0xFF};
+__code unsigned char __at 0x1CFD echo;
+__code unsigned int __at 0x1CFE baud=192;
+//const unsigned char __at 1D0 [62*4]={0xFF}; 
 
 /* Flash Belegung:
  * 1D00 bis 1Dxx    62 mal GA und 2-Byte Wert
@@ -98,6 +78,7 @@ __bit build_tel(unsigned char objno)
 		if (rsin[rsinpos-2]=='1') value=1;
 		else value=0;
 		telegramm[7]=0x80+value;
+
 		break;	
 	case 2:// EIS2
 		tel_header(groupadr, 1);
@@ -105,26 +86,25 @@ __bit build_tel(unsigned char objno)
 		else value=0x80;
 		value+=((rsin[rsinpos-2]-48));
 		telegramm[7]=value&0xFF;
-		break;
+	break;	
 	case 3:// EIS3
 		day=(rsin[value_pos]-48)<<5;
 		value_pos+=2;
-		// hier kommt kein break
 	case 4:// EIS4	
 		tel_header(groupadr, 4);
 		telegramm[7]=0x80;
 		telegramm[8]=((rsin[value_pos]-48)*10)+(rsin[value_pos+1]-48)+day;
 		telegramm[9]=((rsin[value_pos+3]-48)*10)+(rsin[value_pos+4]-48);
 		telegramm[10]=((rsin[value_pos+6]-48)*10)+(rsin[value_pos+7]-48);
-		break;
+	break;
 /*	case 4:// EIS4
 		tel_header(groupadr, 4);
 		if (rsin[rsinpos-3]=='u') value=0x88;
 		else value=0x80;
 		value+=((rsin[rsinpos-2]-48));
 		telegramm[7]=value&0xFF;
-		break;
-*/	case 5:// EIS5
+	break;	
+*/	case 5://
 		tel_header(groupadr, 3);
 		telegramm[7]=0x80;
 
@@ -201,18 +181,21 @@ __bit build_tel(unsigned char objno)
 unsigned char gapos_in_gat(unsigned char gah, unsigned char gal)
 {
 	unsigned char ga_position,n;
-	
+
 	ga_position=0xFF; 			// default return Wert 0xFF = nicht gefunden
 	n=0;
 		while(ga_db[n].ga==((gah<<8)+gal) && n<=62){
 			n++;
 			}
-		if(n<62|| !filtermode)ga_position=n;// wenn GA gefunden oder kein filtermode aktiv ist... 
+		if(n<62|| !filtermode)ga_position=n;// wenn GA gefunden oder kein filtermode aktiv ist...
   return (ga_position);						// wird geackt
 }
 
-
-
+void send_obj_done(unsigned char objno, __bit success)
+{
+	objno;
+	success;
+}
 
 // Empfangenes Telegramm verarbeiten
 void write_value_req(void)
@@ -276,14 +259,8 @@ void write_value_req(void)
 
 void read_value_req(void)
 {
-}
 
-void send_obj_done(unsigned char objno, __bit success)
-{
-	objno = 1;
-	success = 1;
 }
-
 /**
 * Gruppenadresse und deren Wert im Flash speichern
 *
