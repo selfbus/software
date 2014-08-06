@@ -241,7 +241,8 @@ void write_value_req(void)
 					rs_send_dec(telegramm[10]);
 				}
 				if(length>4){
-					for(n=8;n <= length+6;n++){
+					// EIS15 (String): immer 14 Byte, wird mit Null Bytes aufgefüllt
+					for(n=8;n <= length+6 && telegramm[n];n++){
 						rs_send(telegramm[n]);
 					}
 				}
