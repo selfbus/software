@@ -19,7 +19,7 @@
 
 #define DELAY_CONST_1WIRE_DHT_MASTER_1  16  // 20 = lesen approx. 15us nach Vorderkante; 16=7.5µs
 #define DHT1x_SENSOR    0
-#define DHT2x_SENSOR    1
+#define DHT2x_SENSOR    8
 
 extern const unsigned char bitmask_1[8];
 

@@ -39,7 +39,7 @@ void messwert (unsigned char eingang);
 
 extern unsigned int timer;				        // Timer für zyklisches senden, wird alle 130ms hochgezählt
 extern __bit delay_toggle;				        // um nur jedes 2. Mal die delay routine auszuführen
-extern int __idata __at (0xFE-0x10) temp[8];    // Temperatur und Luftfeuchte speichern
+extern int __idata __at (0xFE-0x10) temp_humid[8];    // Temperatur und Luftfeuchte speichern
 
 extern unsigned char zyk_senden_basis;
 extern unsigned char sequence;

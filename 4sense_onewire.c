@@ -16,7 +16,7 @@
 
 
 #include <fb_lpc922.h>
-#include "4temp_onewire.h"
+#include "4sense_onewire.h"
 #include <stdbool.h>
 
 
@@ -376,7 +376,7 @@ signed int read_temp(unsigned char sensortyp)   // Temperatur einlesen
   		msb=ow_read();			// MSB von Temperaturwert
 
 
-		if(sensortyp==1){		// DS18S20
+		if(sensortyp &0x08){		// DS18S20
 			counts=ow_read();
 			counts=ow_read();
 			counts=ow_read();
@@ -403,7 +403,7 @@ signed int read_temp(unsigned char sensortyp)   // Temperatur einlesen
   		t=t+t2;					// hier ist t die Teperatur in 0,01°C
 
 
-		if(sensortyp==1){		// DS18S20
+		if(sensortyp &0x08){		// DS18S20
 			t-=25;
 		}
 

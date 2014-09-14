@@ -15,18 +15,18 @@
  */
 
 #include <fb_lpc922.h>
-#include "fb_app_4temp.h"
-#include "4temp_onewire.h"
+#include "fb_app_4sense.h"
+#include "4sense_onewire.h"
 
 
 unsigned char timerbase[TIMERANZ];	// Speicherplatz für die Zeitbasis
 unsigned char timercnt[TIMERANZ];   // speicherplatz für den timercounter und 1 status bit
 unsigned int timer;		            // Timer für Schaltverzögerungen, wird alle 130ms hochgezählt
 
-int __idata __at (0xFE-0x10) temp[8];	// Temperatur und Luftfeuchte speichern
+int __idata __at (0xFE-0x10) temp_humid[8];	// Temperatur und Luftfeuchte speichern
 int __idata __at (0xFE-0x18) lasttemp[4];
-int __idata __at (0xFE-0x20) lastsendtemp[4];
-unsigned char grenzwerte;	// Grenzwertobjekte
+int __idata __at (0xFE-0x20) lastsend[8];
+unsigned int grenzwerte;	// Grenzwertobjekte
 // DEBUG ========================
 unsigned char grenzwert_eingang=0;
 int schwelle1, schwelle2;
@@ -67,11 +67,12 @@ void write_value_req(unsigned char objno)
 */
 void read_value_req(unsigned char objno)    // Empfangenes read_value_request Telegramm verarbeiten
 {
-	unsigned char objflags;
+//	unsigned char objflags;
 
-	objflags=read_objflags(objno);		    // Objekt Flags lesen
+//	objflags=read_objflags(objno);		    // Objekt Flags lesen
 	// Objekt lesen, nur wenn read enable gesetzt (Bit3) und Kommunikation zulaessig (Bit2)
-	if((objflags&0x0C)==0x0C) send_obj_value(objno+64);
+	//if((objflags&0x0C)==0x0C)
+	    send_obj_value(objno+64);
 }
 
 
@@ -80,15 +81,16 @@ unsigned long read_obj_value(unsigned char objno) 	// gibt den Wert eines Objekt
 {
 	unsigned long objvalue=0;
 
-	// Messwerte Objekte 0,2,4,6,8
-		if((objno&0x01)==0)
-		{
-			objvalue=sendewert(objno);
-			lastsendtemp[objno>>1]=temp[objno>>1];
-		}
-		// Grenzwerte Objekte 1,3,5,7
-		else
-			objvalue= (grenzwerte>>objno)&0x01;
+	// Temp Messwerte Objekte 0,2,4,6
+	// Humid Messwerte Objekte 1,3,5,7
+    if(objno<7)
+    {
+        objvalue= sendewert(objno);
+        lastsend[objno]=temp_humid[objno];
+    }
+    // Grenzwerte Objekte 8-10,11-13,14-16,17-19
+    else
+        objvalue= (grenzwerte>>(objno-8) & 0x01);
 
 	return(objvalue);
 }
@@ -104,17 +106,17 @@ unsigned long read_obj_value(unsigned char objno) 	// gibt den Wert eines Objekt
 unsigned int sendewert(unsigned char objno)
 {
 	int eis5temp, eis6temp;
-	unsigned char objno_help, n;
-
-	objno_help=objno>>1;
+	unsigned char n;
 
 	eis6temp=-5500;
 	n=255;
 
 	// Sendeformat EIS 6
-	if ((eeprom[0xA4]>>4)&(1<<objno_help))
+	// Adressen A9, BD, D1, E5
+	// Bit 6= Temp, 7= Humid
+	if ( (eeprom[0xA9+((objno>>1)*20)] & (0x40<<(objno &0x01))) )
 	{
-		while(eis6temp<temp[objno])
+		while(eis6temp<temp_humid[objno])
 		{
 			n++;
 			eis6temp+=70;
@@ -126,9 +128,9 @@ unsigned int sendewert(unsigned char objno)
 	// Sendeformat EIS 5
 	else
 	{
-		eis5temp=(temp[objno_help]>>3)&0x07FF;			// durch 8 teilen, da sp�ter Exponent 3 dazukommt
+		eis5temp=(temp_humid[objno]>>3)&0x07FF;			// durch 8 teilen, da später Exponent 3 dazukommt
 		eis5temp=eis5temp+(0x18 << 8);
-		if (temp[objno_help]<0) eis5temp+=0x8000;		// Vorzeichen
+		if (temp_humid[objno]<0) eis5temp+=0x8000;		// Vorzeichen
 
 		return eis5temp;
 	}
@@ -165,14 +167,14 @@ void grenzwert (unsigned char eingang)
 
 
 	//steigend
-	if ((lasttemp[eingang]<schwelle2 || sende_sofort_bus_return) && temp[eingang]>schwelle2) {	// GW 2 überschritten
+	if ((lasttemp[eingang]<schwelle2 || sende_sofort_bus_return) && temp_humid[eingang]>schwelle2) {	// GW 2 überschritten
 		if (reaktion&0x0C)
 		{
 			grenzwert_eingang= (reaktion>>2)&0x01;
 			gw_changed = 1;
 		} }
 
-	if ((lasttemp[eingang]<schwelle1 || sende_sofort_bus_return) && temp[eingang]>schwelle1) {	// GW 1 überschritten
+	if ((lasttemp[eingang]<schwelle1 || sende_sofort_bus_return) && temp_humid[eingang]>schwelle1) {	// GW 1 überschritten
 		if (reaktion&0xC0)
 		{
 			grenzwert_eingang= (reaktion>>6)&0x01;
@@ -181,14 +183,14 @@ void grenzwert (unsigned char eingang)
 
 
 	//fallend
-	if ((lasttemp[eingang]>schwelle1 || sende_sofort_bus_return) && temp[eingang]<schwelle1) {	// GW 1 unterschritten
+	if ((lasttemp[eingang]>schwelle1 || sende_sofort_bus_return) && temp_humid[eingang]<schwelle1) {	// GW 1 unterschritten
 		if (reaktion&0x30)
 		{
 			grenzwert_eingang= (reaktion>>4)&0x01;
 			gw_changed = 1;
 		} }
 
-	if ((lasttemp[eingang]>schwelle2 || sende_sofort_bus_return) && temp[eingang]<schwelle2) {	// GW 2 unterschritten
+	if ((lasttemp[eingang]>schwelle2 || sende_sofort_bus_return) && temp_humid[eingang]<schwelle2) {	// GW 2 unterschritten
 		if (reaktion&0x03)
 		{
 			grenzwert_eingang= reaktion&0x01;
@@ -213,7 +215,7 @@ void grenzwert (unsigned char eingang)
 	}
 
 	// Aktuellen Wert speichern
-	lasttemp[eingang]=temp[eingang];
+	lasttemp[eingang]=temp_humid[eingang];
 }
 
 
@@ -239,13 +241,13 @@ void messwert (unsigned char eingang)
 		// Senden ab x % Messwertdifferenz
 		mess_diff=180*(eeprom[0x65+eingang]&0x7F);
 
-		if (temp[eingang]<=lastsendtemp[eingang])
+		if (temp_humid[eingang]<=lastsend[eingang])
 		{
-			mess_change=lastsendtemp[eingang]-temp[eingang];
+			mess_change=lastsend[eingang]-temp_humid[eingang];
 		}
 		else
 		{
-			mess_change=temp[eingang]-lastsendtemp[eingang];
+			mess_change=temp_humid[eingang]-lastsend[eingang];
 		}
 
 //		if (mess_change<0) mess_change=0-mess_change;
@@ -322,7 +324,7 @@ void delay_timer(void)
 				objno_help=tmr_obj-4;
 
 				send_obj_value(objno_help<<1);
-				lastsendtemp[objno_help]=temp[objno_help];
+				lastsend[objno_help]=temp_humid[objno_help];
 
 				// Zeit holen und deaktivieren, Bit 7 = 0
 				//zykval_help=(eeprom[0x69+(eingang>>1)])>>(4*(!(eingang&0x01)))&0x0F;
@@ -374,14 +376,17 @@ void bus_return(void)
 	if (sende_sofort_bus_return&(0x80>>kanal_help))
 	{
 		// Messwerte
-		send_obj_value(kanal_help);
+		send_obj_value(kanal*5);
 		sende_sofort_bus_return &= 0xFF-(0x80>>kanal_help);	// Löschen wenn gesendet
 	}
 
 	if (sende_sofort_bus_return&(0x40>>kanal_help))
 	{
 		// Grenzwerte
-		send_obj_value(kanal_help+1);
+	    // TODO prüfung ob grenzwert eingeschaltet? an sich nicht nötig da keine GA auf Com-objekt liegen sollte
+		send_obj_value(kanal+2);
+		send_obj_value(kanal+3);
+		send_obj_value(kanal+4);
 		sende_sofort_bus_return &= 0xFF-(0x40>>kanal_help); // Löschen wenn gesendet
 	}
 }
@@ -412,31 +417,30 @@ void restart_app()		// Alle Applikations-Parameter zurücksetzen
 
 
 	// Zeit für Sendeverzögerung bei Busspannungswiederkehr in Timer 8 laden
-	timerbase[8] = 4;	// 2 Sekunde als Basis
-	timercnt[8] = ( (eeprom[0xA0]>>1) | 0x80);	// Zeit holen, Timer einschalten - Bit7
+	// TODO Faktor wird nur für 1. Messwert geholt, 2-4 fehlen noch
+	timerbase[8] = eeprom[0xF9] & 0xF0 ;    // Basis
+	timercnt[8] = ( (eeprom[0xFB]>>1) | 0x80);	// Zeit holen, Timer einschalten - Bit7
 
-	// Verhalten bei Busspannungswiederkehr Messwerte
-	sende_sofort_bus_return = eeprom[0x79]&0xAA;
+	// Verhalten bei Busspannungswiederkehr Messwerte (jeweils Bit 1)
+	sende_sofort_bus_return = eeprom[0xFA]&0xAA;
 
 	// Zyklisches Senden konfigurieren
 	for(n=0;n<=3;n++)
 	{
-		// zyk Senden Basis für alle Eingänge, Beschränkung alte VD
-		timerbase[n] = eeprom[0x060]&0x0F;
+		// zyk Senden Basis pro Kanal
+	    // TODO DHT Kanäle haben 2 unterschiedliche Basen, fehlt noch
+		timerbase[n] = eeprom[0xB7+(n*20)] & 0x0F;
 
 		// Faktor und aktiv Bit7 holen
-		timercnt[n] = eeprom[0x61+n];
-//		zyk_funk=(eeprom[0x61+n]&0x80);
-//		zyk_funk=zyk_funk+((eeprom[0x75+n]>>7)&0x01);
+		timercnt[n] = eeprom[0xB5+(n*20)];
 
-
-		// Verhalten bei Busspannungswiederkehr Grenzwerte
-		sende_sofort_bus_return |= (eeprom[0x71+n]&0x80)>>(2*n+1);
+		// Verhalten bei Busspannungswiederkehr Grenzwerte (Bit 0-3)
+		sende_sofort_bus_return |= (eeprom[0xF9] & (0x01<<n) );
 
 		// Werte initialisieren
-		temp[n]=0;
+		temp_humid[n]=0;
 		lasttemp[n]=0;
-		lastsendtemp[n]=0;
+		lastsend[n]=0;
 
 		// Sendeverzögerung bei Messwertdifferenz
 		//zykval_help=(eeprom[0x69+(eingang>>1)])>>(4*(!(eingang&0x01)))&0x0F;
@@ -471,7 +475,6 @@ void restart_app()		// Alle Applikations-Parameter zurücksetzen
 	//WRITE_BYTE(0x01,0x07,0x01)	// Versionnumber of application programm
 	WRITE_BYTE(0x01,0x0C,0x00)	    // PORT A Direction Bit Setting
 	//WRITE_BYTE(0x01,0x0D,0xFF)	// Run-Status (00=stop FF=run)
-	//WRITE_BYTE(0x01,0x12,0x3A)	// COMMSTAB Pointer
 	STOP_WRITECYCLE
 	EA=1;				// Interrupts freigeben
 

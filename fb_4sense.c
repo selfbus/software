@@ -21,8 +21,8 @@
 
 #include "debug.h"
 #include <fb_lpc922.h>
-#include "fb_app_4temp.h"
-#include "4temp_onewire.h"
+#include "fb_app_4sense.h"
+#include "4sense_onewire.h"
 
 //#ifdef DEBUG_H_
 	// Setup the debug variables
@@ -97,64 +97,66 @@ void main(void)
 			}
 
             // Sensortyp für aktuellen Kanal holen
-			sensor_type = ( ((eeprom[0x6B+(kanal>>1)])>> ((kanal&0x01)<<2)) &0x0F);
-			//sensor_type = ( ((eeprom[0x6B+(kanal>>1)])>> (((~kanal)&0x01)<<2)) &0x0F); // For old VD
+			// Bit 0-1      0= kein Sensor, 1= Temperatur, 2= Temp/Feuchte
+			// Bit 3        0= DS18B20/DHT11, 1= DS18S20/DHT22
+			sensor_type = ( (eeprom[0xA9+(kanal*20)]) &0x0F);
 
 			switch (sensor_type)
 			{
-			default:
-			    // Kanalumschaltung wenn Sensor unbekannt
-			    kanal++;
-			    kanal&=0x03;
-			    break;
+			// DS Series
+            case 1:
+            case 9:
+                if (sequence==1)
+                {
+                    interrupted=0;
+                    start_tempconversion();         // Konvertierung starten
+                    if (!interrupted) sequence=2;
+                }
+                else if (sequence==2)
+                {
+                    if (ow_read_bit()) sequence=3;  // Konvertierung abgeschlossen
+                }
+                else
+                {
+                    interrupted=0;
+                    // Temperatur einlesen + Übergabe Sensortyp
+                    th=read_temp(sensor_type);
+                    if (!interrupted)
+                    {
+                        // Bei Sensorfehler wird letzter Messwert gehalten TODO Fehler Com-Objekt einfügen??
+                        temp_humid[kanal]=th;
+                        new_reading = 1;
+                    }
+                }
+                break;
 
 			// DHT Series
-			case 8:
+			case 2:
 			    if (dht_read_delay >=31) //min 2 sec. delay
 			        dht1x_init(kanal);
 			    // no break!
-			case 9:
+			case 10:
                 if (dht_read_delay >=31) //min 2 sec. delay
                 {
                     // Temperatur einlesen
                     dht_error_code = receive_1wire_dht(kanal);    // TODO: Delay timer kanal sync!!
                     if (dht_error_code==0)
-                       if(dht_decode(sensor_type &0x01))
+                       if(dht_decode(sensor_type))
                         {
-                           temp[kanal]= dht_temp;
+                           temp_humid[kanal]= dht_temp;
                            //temp[kanal+4]= dht_humid;
-                           temp[4]= dht_humid;  // Test, old VD
+                           temp_humid[4]= dht_humid;  // Test, old VD
                            new_reading = 1;
                         }
                     dht_read_delay =0;
                 }
                 break;
 
-			// DS Series
-			case 4:
-			case 5:
-                if (sequence==1)
-                {
-                    interrupted=0;
-                    start_tempconversion();			// Konvertierung starten
-                    if (!interrupted) sequence=2;
-                }
-                else if (sequence==2)
-                {
-                    if (ow_read_bit()) sequence=3;	// Konvertierung abgeschlossen
-                }
-                else
-                {
-                    interrupted=0;
-                    // Temperatur einlesen + Übergabe Sensortyp
-                    th=read_temp(sensor_type &0x01);
-                    if (!interrupted)
-                    {
-                        // Bei Sensorfehler wird letzter Messwert gehalten TODO Fehler Com-Objekt einfügen??
-                        temp[kanal]=th;
-                        new_reading = 1;
-                    }
-                }
+
+			default:
+                // Kanalumschaltung wenn kein Sensor oder unbekannt
+                kanal++;
+                kanal&=0x03;
                 break;
 			}
 
@@ -214,6 +216,3 @@ void main(void)
 
 		} while(1);
 }
-
-
-
