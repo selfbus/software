@@ -226,7 +226,7 @@ void button_changed( unsigned char buttonno, __bit buttonval)
 		/****************************
 		 * Funktion Wertgeber
 		 ****************************/
-	
+	/*
 	case 4:	// Wertgeber..
 		switch ((eeprom[0xD3+(buttonno*4)]>>4)& 0x07){// Art des Wertgebers holen
 		case 0: // ++++++++ Lichtszenenabruf ohne Speicherfunktion
@@ -322,7 +322,7 @@ void button_changed( unsigned char buttonno, __bit buttonval)
 		}
 		
 		
-		break;
+		break; */
 	}
 }
 /*
@@ -690,10 +690,10 @@ void restart_app(void)
 
 	button_buffer=0x0F;	// Variable für letzten abgearbeiteten Taster Status
 	
-	RTCCON=0x60;	//stop_rtc();
-	RTCH=0x00;
-	RTCL=0xE6;	
-	RTCCON=0x61;	//start_rtc(8);		// RTC neu mit 8ms starten
+	//RTCCON=0x60;	//stop_rtc();
+	//RTCH=0x00;
+	//RTCL=0xE6;	
+	RTCCON=0x81;	//start_rtc(8);		// RTC neu mit 8ms starten
 	
 	timer=0;			// Timer-Variable, wird alle 8ms inkrementiert
 

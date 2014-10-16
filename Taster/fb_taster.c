@@ -39,14 +39,14 @@
 	#include <P89LPC935_6.h>
 #endif	
 
-#include "../lib_lpc922/Releases/fb_lpc922_1.4x.h"
+#include "../lib_lpc922/Releases/fb_lpc922_1.53.h"
+//#include "../lib_lpc922/fb_lpc922.h"
 #include "fb_app_taster.h"
 #include"../com/watchdog.h"
 #include  "../com/debug.h"
 #include "../com/fb_rs232.h"
-
 //#define debugmode
-//#define NOPROGLED //typ 0,2 Die Progled blinkt im Progmodus da sie auch Betriebs LED ist
+#define NOPROGLED //typ 0,2 Die Progled blinkt im Progmodus da sie auch Betriebs LED ist
 //#define NOPROGBUTTON	//typ 1,3 es ist kein prog Taster vorhanden sondern progmode wird durch druecken von taste 1&3 oder 2&4 aktiviert
 
 #ifdef NOPROGBUTTON
@@ -64,7 +64,7 @@
 #endif
 
 #define VERSION		106
-
+ 
 unsigned char __at 0x00 RAM[00]; 
 
 unsigned char object_value[12];	// wird hier deklariert um den Speicher besser auszunutzen!!!
@@ -82,7 +82,7 @@ void main(void)
 	__bit blink, verstell, verstellt,tastergetoggelt=0;
 	signed char cal,buttonpattern=1;
 	static __code signed char __at 0x1CBF trimsave;
-	static __code unsigned char __at 0x1CBE LED_hell;
+	static __code unsigned char __at 0x1CFE LED_hell = {255};
 	// Verions bit 6 und 7 für die varianten, bit 0-5 für die verionen (63)
 	//Varianten sind hier noprogbutton=0x040, noprogled=0x80
 	__bit wduf;
@@ -128,15 +128,27 @@ void main(void)
 
 	do  {
 		WATCHDOG_FEED
-		if (RTCCON>=0x80) delay_timer();	// Realtime clock ueberlauf
+		if (RTCCON>=0x80)	// Realtime clock ueberlauf
+			{
+			RTCCON=0x61;// RTC flag löschen
+			if(!connected)delay_timer();// die normal RTC Behandlung
+			else// wenn connected den timeout für Unicast connect behandeln
+				{
+				if(connected_timeout <= 110)// 11x 520ms --> ca 6 Sekunden
+					{
+					connected_timeout ++;
+					}
+				else send_obj_value(T_DISCONNECT);// wenn timeout dann disconnect, flag und var wird in build_tel() gelöscht
+				}
+			}
 
+		
 		n=timer;
 		blink=((n>>5) & 0x01);
 		verstell=((n>>2) & 0x01);
 		
 		if (verstell==0)verstellt=0;
 		
-
 		
 		if (status60 & 0x01){			//wenn progmode aktiv ist...
 			//n=dimmwert;//LED_hell;
@@ -226,7 +238,7 @@ void main(void)
 						EA=0;
 						START_WRITECYCLE;
 						FMADRH= 0x1C;		//1B
-						FMADRL= 0xBE; 		//FE
+						FMADRL= 0xFE; 		//FE
 						FMDATA=	dimmwert; 
 						STOP_WRITECYCLE;
 						EA=1;
@@ -249,7 +261,7 @@ void main(void)
 					EA=0;
 					START_WRITECYCLE;
 					FMADRH= 0x1C;		
-					FMADRL= 0xBE; 
+					FMADRL= 0xFE; 
 					FMDATA=	dimmwert; 
 					STOP_WRITECYCLE;
 					EA=1;
