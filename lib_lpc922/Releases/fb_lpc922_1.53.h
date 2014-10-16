@@ -1,10 +1,11 @@
 /*
  *    _____ ______ __   __________  __  _______ *
  *   / ___// ____// /  / ____/ __ )/ / / / ___/ *
- *   \__ \/ __/  / /  / /__ / __  / / / /\__ \  * 
- *  ___/ / /__  / /__/ /__// /_/ / /_/ /___/ /  * 
- * /____/_____//____/_/   /_____/\____//____/   *  
- *                                      
+ *   \__ \/ __/  / /  / /__ / __  / / / /\__ \  *
+ *  ___/ / /__  / /__/ /__// /_/ / /_/ /___/ /  *
+ * /____/_____//____/_/   /_____/\____//____/   *
+ *
+ *  Copyright (c) 2014 		Stefan Haller
  *  Copyright (c) 2013-2014 Andreas Krieger
  *  Copyright (c) 2009-2013 Andreas Krebs <kubi@krebsworld.de>
  *
@@ -25,7 +26,8 @@
 # include <P89LPC922.h>
 #endif
 
-
+// Optionen
+//#define LOCK_DEVICE_ID    // Schreibschutz Addresse 0x01-0x06
 
 // Damit die Eclipse Code Analyse nicht so viele Warnungen anzeigt:
 #ifndef SDCC
@@ -43,7 +45,7 @@
 #define PORT	P0		// Port fuer 8-bit I/O
 #define RECEIVE_INT_ENABLE	EX1		// Interrupt enable Flag fuer Empfang
 
-// Pseudo-Objekte für Unicast senden
+// Pseudo-Objekte fÃ¼r Unicast senden
 #define NCD_ACK						129
 #define READ_MASK_VERSION_RESPONSE	130
 #define READ_PHYSADDR_RESPONSE		131
@@ -103,7 +105,7 @@
 	}
 
 
-// Konfiguriert den entsprechenden pin als input-only (high impedance, ohne pull-up R) 
+// Konfiguriert den entsprechenden pin als input-only (high impedance, ohne pull-up R)
 #define  SET_PORT_MODE_INPUT(pin) \
 	if (pin<8) { \
 		P0M1|=(1<<pin); \
@@ -123,10 +125,11 @@
 #define STOP_WRITECYCLE \
 	FMCON=0x68;
 
-#define WRITE_BYTE(addrh, addrl, zdata) \
-		{FMADRH=(addrh&0x01)+0x1C; \
+#define WRITE_BYTE(addrh, addrl, zdata) { \
+		FMADRH=(addrh&0x01) + (EEPROM_ADDR_H - 1); \
 		FMADRL=addrl; \
-		FMDATA=zdata;} 
+		FMDATA=zdata; \
+	}
 
 
 // Globale Variablen
@@ -138,16 +141,18 @@ extern volatile unsigned char fb_state;
 extern volatile __bit connected;
 extern __bit ack, nack, tel_arrived, tel_sent, auto_ack, wait_for_ack;
 extern __bit send_ack, send_nack, transparency;
-extern unsigned char tx_nextwrite, tx_nextsend, status60;
-extern unsigned char connected_timeout;
+extern unsigned char tx_nextwrite, tx_nextsend, status60, connected_timeout;
 
 #ifdef LPC936
-# define USERRAM_ADDR 0x3800
-# define restart_hw  restart_hw_lpc936
+	#define USERRAM_ADDR 0x3800
+	#define restart_hw  restart_hw_lpc936
 #else
-# define USERRAM_ADDR 0x1C00
+	#define USERRAM_ADDR 0x1C00
 #endif
+#define USERRAM_ADDR_H (USERRAM_ADDR / 256)
+
 #define EEPROM_ADDR (USERRAM_ADDR + 0x100)
+#define EEPROM_ADDR_H (EEPROM_ADDR / 256)
 
 //extern __code unsigned char __at(USERRAM_ADDR) userram[255]; // Bereich im Flash fuer User-RAM
 extern __code unsigned char __at(EEPROM_ADDR)  eeprom[255];	 // Bereich im Flash fuer EEPROM

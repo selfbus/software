@@ -1,11 +1,10 @@
 /*
  *    _____ ______ __   __________  __  _______ *
  *   / ___// ____// /  / ____/ __ )/ / / / ___/ *
- *   \__ \/ __/  / /  / /__ / __  / / / /\__ \  *
- *  ___/ / /__  / /__/ /__// /_/ / /_/ /___/ /  *
- * /____/_____//____/_/   /_____/\____//____/   *
- *
- *  Copyright (c) 2014 		Stefan Haller
+ *   \__ \/ __/  / /  / /__ / __  / / / /\__ \  * 
+ *  ___/ / /__  / /__/ /__// /_/ / /_/ /___/ /  * 
+ * /____/_____//____/_/   /_____/\____//____/   *  
+ *                                      
  *  Copyright (c) 2013-2014 Andreas Krieger
  *  Copyright (c) 2009-2013 Andreas Krebs <kubi@krebsworld.de>
  *
@@ -16,21 +15,21 @@
 
 
 
-#include "fb_lpc922.h"
+#include "Releases/fb_lpc922_1.53.h"
 
 
 unsigned char conh, conl;	// bei bestehender Verbindung phys. Adresse des Kommunikationspartners
 unsigned char pcount;		// Paketzaehler, Gruppenadresszaehler
-unsigned char mem_length, mem_adrh, mem_adrl, senders_pcount;	// lÃ¤nge bei memory_read_request
+unsigned char mem_length, mem_adrh, mem_adrl, senders_pcount;	// länge bei memory_read_request
 
 unsigned char telegramm[23];
-unsigned char tx_buffer[8];		// Ringspeicher fÃ¼r zu sendende Telegramme
+unsigned char tx_buffer[8];		// Ringspeicher für zu sendende Telegramme
 unsigned char telpos;			// Zeiger auf naechste Position im Array Telegramm
 unsigned char cs;				// checksum
 unsigned char fbrx_byte, fb_pattern;
 volatile unsigned char fb_state, repeat_count;
 
-static unsigned char __at(0x00) RAM[00]; //nur fÃ¼r die Debug Ausgabe
+unsigned char __at(0x00) RAM[00]; //nur für die Debug Ausgabe
 
 
 //__code unsigned char __at(USERRAM_ADDR) userram[255];/// Bereich im Flash fuer User-RAM
@@ -43,6 +42,7 @@ __bit send_ack, send_nack, transparency;
 volatile __bit connected;	/// Verbindung aufgebaut
 unsigned char tx_nextwrite, tx_nextsend;
 unsigned char status60;		// Statusbyte, das normalerweise im userram an Adresse 0x60 steht
+unsigned char connected_timeout;
 __bit inc_pcount;
 
 
@@ -50,20 +50,20 @@ __bit inc_pcount;
 
 
 
-void X1_int(void) __interrupt (2)		// Flanke des Startbits lÃ¶st int1 aus
+void X1_int(void) __interrupt (2)		// Flanke des Startbits löst int1 aus
 {
 					//											5 (3..8) cycle Einsprung
 	EX1=0;			// int1 stoppen								1 cycle = 0,27127us
 	TR1=0;			// Timer 1 stoppen
 	TMOD=(TMOD & 0x0F) + 0x20;	// Timer 1 als 8-Bit autoreload
-	TL1=53;//108;//128;		// Timer laden so dass in state 2 bei 75Âµs abgefragt wird
-	TH1=128;//128;			// autoreload auf 35Âµs setzen (gilt fÃ¼r sprung von 2 auf 3)
-	TF1=0;			// Timer1-flag lÃ¶schen						1 cycle
+	TL1=53;//108;//128;		// Timer laden so dass in state 2 bei 75µs abgefragt wird
+	TH1=128;//128;			// autoreload auf 35µs setzen (gilt für sprung von 2 auf 3)
+	TF1=0;			// Timer1-flag löschen						1 cycle
 	TR1=1;			// Timer1 starten							1 cycle
 	ET1=1;			// Timer1-int aktiv							1 cycle
-	fb_state=2;		// nÃ¤chster state
-	fb_parity=0;	// Parity Bit lÃ¶schen
-	parity_ok=1;	// wird bei Fehler gelÃ¶scht
+	fb_state=2;		// nächster state
+	fb_parity=0;	// Parity Bit löschen
+	parity_ok=1;	// wird bei Fehler gelöscht
 	fb_pattern=0;
 	fbrx_byte=0;
 	interrupted=1;	// signalisiert app, dass unterbrochen wurde
@@ -79,25 +79,25 @@ void T1_int(void) __interrupt (3) 	// Timer 1 Interrupt
 
 	switch (fb_state){
 
-	// Empfang aktiv, Busfrei counter runterzÃ¤hlen und wenn Bus frei, dann Sendespeicher
-	// prÃ¼fen und ggf. Senden initiieren
+	// Empfang aktiv, Busfrei counter runterzählen und wenn Bus frei, dann Sendespeicher
+	// prüfen und ggf. Senden initiieren
 	case 0:
 		TR1=0;			// Timer 1 stoppen
 		TMOD=(TMOD & 0x0F) + 0x20;	// Timer 1 als 8-Bit autoreload
 		TL1=128;		// Timer laden
 		TH1=128;
-		TF1=0;			// Timer1-flag lÃ¶schen						1 cycle
+		TF1=0;			// Timer1-flag löschen						1 cycle
 		TR1=1;			// Timer1 starten							1 cycle
 		if(tx_nextsend != tx_nextwrite) { 			// wenn zu sendendes Objekt vorhanden
 			if(build_tel(tx_buffer[tx_nextsend])) {	// wenn Telegramm gebildet werden konnte
-				EX1=0; 				//Um zu vermeiden dass man in die Abfrage hinein-empfÃ¤ngt
+				EX1=0; 				//Um zu vermeiden dass man in die Abfrage hinein-empfängt
 				if(!fb_state) { 	//nur bilden wenn vorher kein rx_intit durch ext int kam
 					if((tx_buffer[tx_nextsend]&0x20)==0) {	// wenn erstmaliges Senden des Objektes
-						tx_buffer[tx_nextsend]|=0x20;		// Bit fÃ¼r "wird gerade gesendet"
-						repeat_count=0;						// WiederholungszÃ¤hler fÃ¼r nicht geackte Telegramme
+						tx_buffer[tx_nextsend]|=0x20;		// Bit für "wird gerade gesendet"
+						repeat_count=0;						// Wiederholungszähler für nicht geackte Telegramme
 					}
 					if (repeat_count<4) init_tx();		// Senden starten
-					else {		// wenn bereits 4 x wiederholt oder erfolgreich gesendet(geackt) -> nÃ¤chstes Objekt
+					else {		// wenn bereits 4 x wiederholt oder erfolgreich gesendet(geackt) -> nächstes Objekt
 						tx_nextsend++;
 						tx_nextsend&=0x07;
 						wait_for_ack=0;
@@ -112,7 +112,7 @@ void T1_int(void) __interrupt (3) 	// Timer 1 Interrupt
 				EX1=1;	// ext1 int einschalten falls Empfang...
 			}
 			else {
-				tx_nextsend++; //hier Zeiger erhÃ¶hen wenn Telegramm nicht gebildet werden konnte
+				tx_nextsend++; //hier Zeiger erhöhen wenn Telegramm nicht gebildet werden konnte
 				tx_nextsend&=0x07;
 			}
 		}
@@ -125,12 +125,12 @@ void T1_int(void) __interrupt (3) 	// Timer 1 Interrupt
 
 	case 2: // T=75us
 		fbrx_bit=!IE1;				// Flipflop des ext. Int. 1 auslesen, ist 1 bei fallender Flanke am Pin
-		IE1=0;						// Flipflop zurÃ¼cksetzen
-		fb_state=3;// nÃ¤chster state: 3
-		TH1=0;// reload auf 70Âµs (zeit swischen state 3 und 2)
+		IE1=0;						// Flipflop zurücksetzen
+		fb_state=3;// nächster state: 3
+		TH1=0;// reload auf 70µs (zeit swischen state 3 und 2)
 		if(fb_pattern==0) {			// fb_pattern=0 bedeutet, dass bisher nur das Startbit empfangen wurde
-			fb_pattern=1;			// 70us nach Startbit, als nÃ¤cstes kommt Datenbit 0
-			ack=0;					// Empfang eines neuen Bytes, also ack/nack Flags zurÃ¼cksetzen
+			fb_pattern=1;			// 70us nach Startbit, als näcstes kommt Datenbit 0
+			ack=0;					// Empfang eines neuen Bytes, also ack/nack Flags zurücksetzen
 			nack=0;
 		}
 		else {						// Daten oder Parity Bit
@@ -139,12 +139,12 @@ void T1_int(void) __interrupt (3) 	// Timer 1 Interrupt
 					fb_parity=!fb_parity;			// Paritybit berechnen
 					fbrx_byte+=fb_pattern;			// Datenbit speichern
 				}
-				fb_pattern=fb_pattern<<1;			// nÃ¤chstes Bit
+				fb_pattern=fb_pattern<<1;			// nächstes Bit
 				if(fb_pattern==0) fb_pattern=129;	// alle Daten-Bits gelesen, Parity-Bit folgt
 			}
 			else {									// Parity-Bit wurde empfangen
 				TR1=0;
-				TF1=0; //prÃ¼fen ob erforderlich!!!
+				TF1=0; //prüfen ob erforderlich!!!
 				if(fb_parity==fbrx_bit) {				// Parity-Bit OK
 					if (telpos==0) {						// erstes empfangenes Byte
 						if (fbrx_byte==0xCC) ack=1;				// ACK empfangen
@@ -153,13 +153,13 @@ void T1_int(void) __interrupt (3) 	// Timer 1 Interrupt
 					if (!ack && !nack) {					// Datenbyte empfangen
 						telegramm[telpos]=fbrx_byte;			// Byte speichern
 						cs^=fbrx_byte;							// Checksum berechnen
-						telpos++;								// Telegrammzeiger erhÃ¶hen
+						telpos++;								// Telegrammzeiger erhöhen
 					}
 				}
 				else parity_ok=0;						// Parity Error
 
 				if (wait_for_ack) {						// es wird ein ACK erwartet
-					wait_for_ack=0;							// Flag zurÃ¼cksetzen, da wir es ja gerade abarbeiten
+					wait_for_ack=0;							// Flag zurücksetzen, da wir es ja gerade abarbeiten
 					if (ack && parity_ok) {					// ACK empfangen und auch erwartet
 						repeat_count=4;						// keine Wiederholtelegramme mehr senden
 						if(inc_pcount) {
@@ -174,9 +174,9 @@ void T1_int(void) __interrupt (3) 	// Timer 1 Interrupt
 					if (parity_ok && (!ack && !nack)) {		// ganz normales Datenbyte
 						TMOD=(TMOD & 0x0F) +0x10;			// Timer 1 als 16-Bit Timer
 						TH1=0xFA;//0xFA;							// Timer 1 auf Timeout-Position setzen (370us)
-						TL1=0x70;//4f 0xAB; (bis hierher sinds 91Âµs)
+						TL1=0x70;//4f 0xAB; (bis hierher sinds 91µs)
 						TR1=1;
-						fb_state=4;							// nÃ¤chster state: timeout = Telegramm fertig
+						fb_state=4;							// nächster state: timeout = Telegramm fertig
 						EX1=1;								// int1 aktiv, falls noch ein Byte kommt
 					}
 					else init_rx();							// irgendwas empfangen
@@ -186,7 +186,7 @@ void T1_int(void) __interrupt (3) 	// Timer 1 Interrupt
 		break;
 
 	case 3: // T=104us=0us
-		TH1=128;// reload auf 35Âµs (Zeit zwischen State 2 und 3)
+		TH1=128;// reload auf 35µs (Zeit zwischen State 2 und 3)
 		fb_state=2;//1
 		break;
 
@@ -194,34 +194,34 @@ void T1_int(void) __interrupt (3) 	// Timer 1 Interrupt
 		if (auto_ack && telpos>4) {		// wenn ACK gesendet werden soll und Telegramm zumindest 5 Bytes hat
 			TR1=0;
 			TMOD=(TMOD & 0x0F) +0x10;	// Timer 1 als 16-Bit Timer
-			TH1=0xEF;					// Timer 1 auf ACK-Position setzen (15 Bit Pause = 2708Âµs (26 Bit) nach Beginn Startbit vom letzten Datenbyte)
+			TH1=0xEF;					// Timer 1 auf ACK-Position setzen (15 Bit Pause = 2708µs (26 Bit) nach Beginn Startbit vom letzten Datenbyte)
 			TL1=0x42;
 			TR1=1;
-			its_me=transparency;			// indiziert, ob dieses GerÃ¤t adressiert wurde, bei transparecy=1 immer
+			its_me=transparency;			// indiziert, ob dieses Gerät adressiert wurde, bei transparecy=1 immer
 			if(telegramm[5]&0x80) {
 				if (gapos_in_gat(telegramm[3],telegramm[4])!=0xFF) its_me=1;	// Gruppenadresse
 				if (telegramm[3]==0 && telegramm[4]==0) its_me=1;				// Broadcast
 			}
 			else if(telegramm[3]==eeprom[ADDRTAB+1] && telegramm[4]==eeprom[ADDRTAB+2]) its_me=1;	// phys. Adresse
 			if ((cs==0xFF) && its_me) tel_arrived=1;
-			fb_state=5;					// nÃ¤chster state: ACK-Position erreicht
+			fb_state=5;					// nächster state: ACK-Position erreicht
 		}
-		else {					// Telegramm soll nicht per ACK bestÃ¤tigt werden
+		else {					// Telegramm soll nicht per ACK bestätigt werden
 
 			if (telpos>1) tel_arrived=1;	// trotzdem den Eingang eines Telegramms anzeigen
-			init_rx();						// wieder in den Empfang zurÃ¼ck
+			init_rx();						// wieder in den Empfang zurück
 		}
 		break;
 
 	case 5:	// ACK-Position erreicht
 		TR1=0;
 		if (cs==0xFF) {	// Checksum OK
-			if (its_me) {					// GerÃ¤t adressiert
+			if (its_me) {					// Gerät adressiert
 				send_ack=1;
 				init_tx();						// Senden initiieren
 				wait_for_ack=0;					// bei ACK senden nicht erneut auf ACK warten
 			}
-			else init_rx();					// GerÃ¤t nicht adressiert, also zurÃ¼ck zu Empfang
+			else init_rx();					// Gerät nicht adressiert, also zurück zu Empfang
 		}
 		else {							// Checksum oder Parity nicht OK
 			send_nack=1;
@@ -243,35 +243,35 @@ void T1_int(void) __interrupt (3) 	// Timer 1 Interrupt
 			//	P1_0=0;
 					FBOUTC=1;						// Bus runter ziehen
 			//	P1_0=1;
-					fbtx_bit=0;						// fbtx_bit dient zur spÃ¤teren KollisionsprÃ¼fung
+					fbtx_bit=0;						// fbtx_bit dient zur späteren Kollisionsprüfung
 					fb_parity=!fb_parity;			// Parity-Bit berechnen
 				}
 				else fbtx_bit=1;
-				if (fb_pattern==0) {				// wenn Startbit: parity zurÃ¼cksetzen
+				if (fb_pattern==0) {				// wenn Startbit: parity zurücksetzen
 					fb_pattern=1;					// auf erstes Datenbit zeigen
 					fb_parity=0;
 				}
-				else fb_pattern=fb_pattern<<1;		// nÃ¤chstes Datenbit
+				else fb_pattern=fb_pattern<<1;		// nächstes Datenbit
 				if(fb_pattern==0) fb_pattern=129;	// alle Daten-Bits gesendet, Parity-Bit folgt
 				fb_state=11;
 			}
 			else {							// Paritybit senden
 				if (!fb_parity) {				// wenn Parity-Bit logisch 0
 					FBOUTC=1;						// Bus runterziehen
-					fbtx_bit=0;						// fbtx_bit dient zur spÃ¤teren KollisionsprÃ¼fung
+					fbtx_bit=0;						// fbtx_bit dient zur späteren Kollisionsprüfung
 				}
 				else fbtx_bit=1;
-				telpos++;					// nÃ¤chstes Byte
+				telpos++;					// nächstes Byte
 				fb_pattern=0;				// wieder mit Startbit beginnen
-				fb_state=13;				// PrÃ¼fen ob Telegramm fertig
+				fb_state=13;				// Prüfen ob Telegramm fertig
 			}
-			TH1=18; //reload 70Âµ -delay interrupt (von state 11 auf 13)
+			TH1=18; //reload 70µ -delay interrupt (von state 11 auf 13)
 		}
 		break;
 
 	case 11:	// Sendestufe aus, T=35us
 		if(telpos==0 && fb_pattern==1) {	// 1. Byte Startbit
-			repeat_count++;		// angefangener Sendeversuch, also ZÃ¤hler erhÃ¶hen
+			repeat_count++;		// angefangener Sendeversuch, also Zähler erhöhen
 		}
 		FBOUTC=0;				// Sendestufe aus
 		if (fbtx_bit & IE1) {	// Kollision
@@ -280,20 +280,20 @@ void T1_int(void) __interrupt (3) 	// Timer 1 Interrupt
 		}
 		else {
 			fb_state=10;//12;
-			TH1=110;// 35Âµs + delay (von state 10 auf 11)
+			TH1=110;// 35µs + delay (von state 10 auf 11)
 		}
-		IE1=0;					// Flipflop lÃ¶schen
+		IE1=0;					// Flipflop löschen
 		break;
 /*
 	case 12:	// T=70us
 		fb_state=10;
 		break;
 */
-	case 13:	// Byte Ã¼bertragen, T=35us, prÃ¼fen ob Telegramm fertig
+	case 13:	// Byte übertragen, T=35us, prüfen ob Telegramm fertig
 		FBOUTC=0;
 		TR1=0;
 		TMOD=(TMOD & 0x0F) +0x10;	// Timer 1 als 16-Bit Timer
-		TH1=0xFB;					// Timer 1 auf Interbyte Abstand setzen (3 Bit Pause = 312Âµs
+		TH1=0xFB;					// Timer 1 auf Interbyte Abstand setzen (3 Bit Pause = 312µs
 		TL1=0x90;
 		TR1=1;
 		if (send_ack || send_nack) {	// ACK/NACK senden
@@ -304,7 +304,7 @@ void T1_int(void) __interrupt (3) 	// Timer 1 Interrupt
 				tel_sent=1;
 				init_rx();	// Telegramm senden abgeschlossen, ggf. wiederholen wenn nicht geackt wird
 			}
-			else fb_state=14;		// nÃ¤chstes Byte: Interbyte Abstand einhalten
+			else fb_state=14;		// nächstes Byte: Interbyte Abstand einhalten
 		}
 		IE1=0;
 		break;
@@ -320,7 +320,7 @@ void T1_int(void) __interrupt (3) 	// Timer 1 Interrupt
 		break;
 
 //	default:
-		//fb_state++;			// bei allen nicht angegebenen states nur state erhÃ¶hen
+		//fb_state++;			// bei allen nicht angegebenen states nur state erhöhen
 	}
 	interrupted=1;			// zeigt der app, dass sie unterbrochen wurde
 }
@@ -362,14 +362,14 @@ void init_tx(void) 		// Checksum des Telegramms berechnen und Senden initiieren
 	for(n=0;n<cs_pos;n++) {
 		cs^=telegramm[n];				// Checksum berechnen
 	}
-	telegramm[cs_pos]=cs;				// Checksum hinter Nutzdaten anfÃ¼gen
+	telegramm[cs_pos]=cs;				// Checksum hinter Nutzdaten anfügen
 	ack=0;
 	nack=0;
 	wait_for_ack=1;
 
-	fb_state=10;						// nÃ¤chster state: senden
-	fb_pattern=0;						// nÃ¤chstes zu sendendes Bit, 0=Startbit
-	telpos=0;							// nÃ¤chstes zu sendende Byte
+	fb_state=10;						// nächster state: senden
+	fb_pattern=0;						// nächstes zu sendendes Bit, 0=Startbit
+	telpos=0;							// nächstes zu sendende Byte
 	EX1=0;								// ext. int1 inaktiv
 	TR1=1;								// Timer 1 starten
 	ET1=1;								// Timer 1 int. aktiv
@@ -490,11 +490,12 @@ __bit build_tel(unsigned char objno)
 		case 5:	// T-disconnect (133)
 			telegramm[5]=0x60;
 			telegramm[6]=0x81;
+			connected=0;
 			break;
 		}
 		build_ok=1;
 	}
-	if(repeatflag) telegramm[0]&=0xDF;		// Wiederholungsbit lÃ¶schen fÃ¼r Wiederholtelegramm
+	if(repeatflag) telegramm[0]&=0xDF;		// Wiederholungsbit löschen für Wiederholtelegramm
 	return(build_ok);
 }
 
@@ -540,18 +541,18 @@ void process_tel(void)
 	else {	// Unicast oder Multiccast
 		if((telegramm[5]&0x80)==0x00) {	// Destination Adress Flag Bit 7, 0=phys. Adr., 1=Gruppenadr.
 			if(telegramm[3]==eeprom[ADDRTAB+1] && telegramm[4]==eeprom[ADDRTAB+2]) {	// nur wenn es die eigene phys. Adr. ist
-
+				connected_timeout=0;//wenn ein unicast uns betrifft den timeout rücksetzen
 
 				// Unicast
 				switch (tpdu) {	// transport layer control field
 
 				case DATA_PDU_MEMORY_OPERATIONS:
-					if(connected){
+					if(connected){ 
 						senders_pcount=telegramm[6]&0x3C;
 						apdu &= 0xF0;						// da bei memory operations nur obere 4 Bits aktiv
 						if(apdu==WRITE_MEMORY_REQUEST) {	// 01pppp10 1000xxxx
 							send_obj_value(NCD_ACK);
-
+							
 							//write_memory();
 							{
 								unsigned char ab,n;
@@ -564,12 +565,7 @@ void process_tel(void)
 								START_WRITECYCLE;					// load command, leert das pageregister
 								for(n=0;n<ab;n++) {
 									if(telegramm[8]==0 && (telegramm[9]+n)==0x60) status60=telegramm[10+n];
-                                #ifdef LOCK_DEVICE_ID       // Device Lock option
-									else if ( (telegramm[9]+n) == 0x00 || (telegramm[9]+n) >0x06 )  // Manufacturer & Device ID sperren
-                                #else
-									else
-                                #endif
-									WRITE_BYTE(telegramm[8],telegramm[9]+n,telegramm[n+10]);
+									else WRITE_BYTE(telegramm[8],telegramm[9]+n,telegramm[n+10]);
 
 									if ((((telegramm[9]+n)&0x3F)==0x3F) && n!=(ab-1)) {		// Ende des 64-Byte Pageregisters, also zwischendurch flashen
 										STOP_WRITECYCLE;			// write command, schreibt pageregister ins flash und versetzt CPU in idle fuer 4ms
@@ -582,7 +578,7 @@ void process_tel(void)
 							}
 						}
 						if(apdu==READ_MEMORY_REQUEST) {		// 01pppp10 0000xxxx
-							mem_length=telegramm[7];		// Anzahl Bytes fÃ¼r spÃ¤teres(!) memory Auslesen
+							mem_length=telegramm[7];		// Anzahl Bytes für späteres(!) memory Auslesen
 							mem_adrh = telegramm[8];		// Adresse
 							mem_adrl = telegramm[9];
 							send_obj_value(NCD_ACK);
@@ -609,19 +605,23 @@ void process_tel(void)
 						conl=telegramm[2];
 						pcount=0;					// Paketzaehler zuruecksetzen
 						inc_pcount=0;
+                        RTCCON=0x60;	//RTC stoppen
+                        RTCH=0x0B;      // reload Real Time Clock, 52ms
+                        RTCL=0xB3;
+                        RTCCON=0x61;	// RTC starten
+//sparen						connected_timeout=0;// den timeout rücksetzen
 					}
 					break;
 
 				case DISCONNECT_PDU:	// 10000001 xxxxxxxx
-					if(conh==telegramm[1] && conl==telegramm[2] && connected)	{	// nur abbauen, wenn verbunden und Anforderung vom Verbindungspartner, kein ACK senden
-						connected=0;
-						//pcount=0;					// Paketzaehler zuruecksetzen
-						//inc_pcount=0;
+					if(conh==telegramm[1] && conl==telegramm[2] )	{	// nur abbauen, wenn verbunden und Anforderung vom Verbindungspartner, kein ACK senden
+						connected=0;// warum: && connected ???
 					}
 					break;
 
 				case NACK_PDU:	// 11pppp11 xxxxxxxx
 					send_obj_value(T_DISCONNECT);
+					connected=0;//connected_timeout=111; spartipp 5 Byte wenn send.. weg kommt.
 					break;
 				}
 			}
@@ -638,14 +638,14 @@ void process_tel(void)
 			if (gapos != 0xFF)
 			{
 				atp = eeprom[ASSOCTABPTR];  // Association Table Pointer
-				assmax = atp + eeprom[atp] * 2;	// Erster Eintrag = Anzahl EintrÃ¤ge
+				assmax = atp + eeprom[atp] * 2;	// Erster Eintrag = Anzahl Einträge
 
-				// Schleife Ã¼ber alle Eintraege in der Ass-Table, denn es kÃ¶nnten mehrere Objekte
+				// Schleife über alle Eintraege in der Ass-Table, denn es könnten mehrere Objekte
 				// der gleichen Gruppenadresse zugeordnet sein.
 				for (asspos = atp + 1; asspos < assmax; asspos+=2)
 				{
 					// Erste GA-Position aus ASS Tabelle lesen
-					// Wenn Positionsnummer Ã¼bereinstimmt dann behandeln
+					// Wenn Positionsnummer übereinstimmt dann behandeln
 					if (gapos == eeprom[asspos])
 					{
 						objno = eeprom[asspos + 1];	     // Objektnummer
@@ -654,7 +654,7 @@ void process_tel(void)
 						// Objektwerte schreiben (zB. EISx)		00000000 10xxxxxx
 						if((apdu&0xC0)==WRITE_GROUP)
 						{
-							// Wenn Kommunikation zulÃ¤ssig (Bit 2 = communication enable) und
+							// Wenn Kommunikation zulässig (Bit 2 = communication enable) und
 							// Schreiben zulaessig (Bit 4 = write enable) dann behandeln wir
 							// das Telegramm
 							if ((objflags & 0x14) == 0x14)
@@ -709,10 +709,10 @@ void set_pa(void)
 	while(fb_state!=0);		// warten falls noch gesendet wird
 	EA=0;
 	FMCON=0x00;				// load command, leert das pageregister
-    FMADRH=EEPROM_ADDR_H;	// 0x1D;
+    FMADRH=0x1D;
     FMADRL=ADDRTAB+1;
     FMDATA=telegramm[8];
-    FMDATA=telegramm[9];	// nÃ¤chstes Byte, da autoinkrement
+    FMDATA=telegramm[9];	// nächstes Byte, da autoinkrement
 	FMCON=0x68;				// write command, schreibt pageregister ins flash und versetzt CPU in idle fuer 4ms
 	EA=1;
 }
@@ -765,23 +765,23 @@ unsigned char find_first_objno(unsigned char gah, unsigned char gal)
 void restart_hw(void)
 {
 	DIVM=0;			// Taktferquenz nicht teilen -> volles Tempo
-
+  
 	P1M1=0x14;		// Port 1 auf quasi-bidirektional,
 	P1M2=0x4C;		// ausser P1.2(T0 als PWM Ausgang)=open-drain,
 					// P1.3 open drain (muss sein),
 					// P1.4(INT1)=Input only, P1.6(FBOUTC) push-pull
-
+   
 	FBOUTC=0;		// Bus-Ausgang auf low
-
+  
 	TMOD=0x21;		// Timer 0 als 16-Bit Timer, Timer 1 als 8 Bit autoreload
 	TAMOD=0x00;
-	TR0=0;			// Timer 0 (zur Verwendung in app) zunaechst stoppen
+	TR0=0;			// Timer 0 (zur Verwendung in app) zunaechst stoppen 
 	TR1=0;			// Timer 1 (Empfangs-Timer, nicht in app verwenden!) zunaechst stoppen
 	TH1=128;		// Timer 1 auf 104us/3
 	TL1=128;
 	TF1=0;
 
-//  RTC gehÃ¶rt in die restart_app !!
+//  RTC gehört in die restart_app !!
 //	RTCH=0x0E;		// Real Time Clock auf 65ms laden
 //	RTCL=0xA0;		// (RTC ist ein down-counter mit 128 bit prescaler und osc-clock)
 //	RTCCON=0x61;	// ... und starten
@@ -794,21 +794,21 @@ void restart_hw(void)
 //	EX0=0;			// Externen Interrupt 0 sperren
 //	EX1=0;			// Externen Interrupt 1 sperren
 //	EA=1;			// Interrupts prinzipiell freigeben
-
-	IP0=0x04;		// hÃ¶chste PrioritÃ¤t fuer ext1
+	
+	IP0=0x04;		// höchste Priorität fuer ext1
 	IP0H=0x0C;
 	IT1=1;			// Interrupt 1 flankengetriggert=1
 
 	status60=0x2E;	// Status-Byte (steht normal im userram an 0x60)
 
-	ack=0;			// ack und nack flag zurÃ¼cksetzen
+	ack=0;			// ack und nack flag zurücksetzen
 	nack=0;
 	send_ack=0;
 	send_nack=0;
 	tel_arrived=0;	// kein Telegramm empfangen
-	auto_ack=1;		// empfangene Telegramme automatisch mit ack bestÃ¤tigen
-	tx_nextwrite=0;	// Zeiger auf nÃ¤chste zu schreibende Objektnr. in tx_buffer
-	tx_nextsend=0;	// Zeiger auf nÃ¤chste zu sendende Objektnr. in tx_buffer
+	auto_ack=1;		// empfangene Telegramme automatisch mit ack bestätigen
+	tx_nextwrite=0;	// Zeiger auf nächste zu schreibende Objektnr. in tx_buffer
+	tx_nextsend=0;	// Zeiger auf nächste zu sendende Objektnr. in tx_buffer
 	pcount=0;		// Paketzaehler initialisieren
 	inc_pcount=0;
 	connected=0;	// keine Verbindung
