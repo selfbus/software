@@ -81,7 +81,8 @@
 #define COMMSTABPTR 	0x12	// Adresse des Pointers auf die Kommunikationsobjekt-Tabelle
 #define ADDRTAB			0x16	// Startadresse der Adresstabelle
 
-#define USERRAMADDRH	0x1C
+// Replaced by USER USERRAM_ADDR_H
+//#define USERRAMADDRH	0x1C
 
 #define APPLICATION_RUN		(eeprom[RUNSTATE]==0xFF && !connected)&& !(status60&0x01)
 
@@ -126,7 +127,7 @@
 	FMCON=0x68;
 
 #define WRITE_BYTE(addrh, addrl, zdata) { \
-		FMADRH=(addrh&0x01) + USERRAM_ADDR; \
+		FMADRH=(addrh&0x01) + USERRAM_ADDR_H; \
 		FMADRL=addrl; \
 		FMDATA=zdata;}
 

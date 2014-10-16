@@ -16,7 +16,7 @@
 
 
 
-#include "Releases/fb_lpc922_1.53.h"
+#include "fb_lpc922.h"
 
 
 unsigned char conh, conl;	// bei bestehender Verbindung phys. Adresse des Kommunikationspartners
