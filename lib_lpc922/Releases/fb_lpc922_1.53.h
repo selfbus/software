@@ -128,8 +128,7 @@
 #define WRITE_BYTE(addrh, addrl, zdata) { \
 		FMADRH=(addrh&0x01) + (EEPROM_ADDR_H - 1); \
 		FMADRL=addrl; \
-		FMDATA=zdata; \
-	}
+		FMDATA=zdata;}
 
 
 // Globale Variablen
@@ -141,7 +140,8 @@ extern volatile unsigned char fb_state;
 extern volatile __bit connected;
 extern __bit ack, nack, tel_arrived, tel_sent, auto_ack, wait_for_ack;
 extern __bit send_ack, send_nack, transparency;
-extern unsigned char tx_nextwrite, tx_nextsend, status60, connected_timeout;
+extern unsigned char tx_nextwrite, tx_nextsend, status60;
+extern unsigned char connected_timeout;
 
 #ifdef LPC936
 	#define USERRAM_ADDR 0x3800
