@@ -16,6 +16,12 @@
 #ifndef FB_APP_IN8
 #define FB_APP_IN8
 
+//#define debugmode
+#ifdef LPC936
+	#include <fb_lpc936_1.53.h>
+#else
+#include <fb_lpc922_1.53.h>
+#endif
 
 #define USERRAMADDRH  	0x1C	// UserRam start
 #define DEBTIME			0xD2	// Entprellzeit in 0,5ms
@@ -26,15 +32,70 @@
 #define TIMERANZ		0x09	// timeranzahl (17)
 #define PROTTIMER		TIMERANZ-1// PROTTIMER ist stets der letzte timer(0-7user,8prot,Gesmatzahl=9)
 
-//#define in4					// schaltet P0_4 - P0_7 auf pullup
-#define IN8_2TE					// nur für shifter version des in8 /typebit 3
-#define wertgeber				// mit Wertgeber
-//#define zaehler				// mit Zähler
-#define dimmer					// mit Dimmfunktionen
-#define zykls					// mit zyklisches senden
+#define VERSION 9
+#define TYPE    0x0D
 
-#define VERSION 8
-#define TYPE    0x08
+#if TYPE == 1
+# define wertgeber
+# define dimmer
+# define zykls
+#elif TYPE == 2
+# define wertgeber
+# define zaehler
+# define zykls
+#elif TYPE == 3
+# define wertgeber
+# define dimmer
+#elif TYPE == 4
+# define zaehler
+# define dimmer
+# define zykls
+#elif TYPE == 5
+# define zaehler
+# define dimmer
+#elif TYPE == 6
+# define in4
+# define wertgeber
+# define dimmer
+# define zykls
+#elif TYPE == 8
+# define IN8_2TE
+# define wertgeber
+# define dimmer
+# define zykls
+#elif TYPE == 9
+# define IN8_2TE
+# define wertgeber
+# define zaehler
+#elif TYPE == 0x0A
+# define IN8_2TE
+# define wertgeber
+# define dimmer
+#elif TYPE == 0x0B
+# define IN8_2TE
+# define zaehler
+# define dimmer
+# define zykls
+#elif TYPE == 0x0C
+# define IN8_2TE
+# define zaehler
+# define dimmer
+#elif TYPE == 0x0D
+# define IN8_2TE
+# define wertgeber
+# define zaehler
+# define zykls
+#else
+# error "ungültiger TYPE"
+#endif
+
+//#define in4					// schaltet P0_4 - P0_7 auf pullup
+//#define IN8_2TE					// nur für shifter version des in8 /typebit 3
+//#define wertgeber				// mit Wertgeber
+//#define zaehler				// mit Zähler
+//#define dimmer					// mit Dimmfunktionen
+//#define zykls					// mit zyklisches senden
+
 
 extern unsigned char portbuffer,p0h;	// Zwischenspeicherung der Portzustände
 extern unsigned char blocked;	// Sperrobjekte

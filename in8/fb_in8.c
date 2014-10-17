@@ -22,9 +22,11 @@
 //				3.06	Bug: aktuellen Eingangswert senden entfernt
 //				3.07	BUG: dto	
 //				3.08	auf LIB 1.4x umgebaut
+//				3.09	bugfix zyklisch senden
 
-#include <P89LPC922.h>
-#include "../lib_lpc922/fb_lpc922.h"
+
+//#include <P89LPC922.h>
+//#include "../lib_lpc922/fb_lpc922.h"
 #include "fb_app_in8.h"
 #include"../com/watchdog.h"
 #include "../com/fb_rs232.h"
@@ -138,7 +140,6 @@ void main(void)
 			delay_timer();	// Realtime clock ueberlauf
 		}
 
-		
 #ifdef zykls
 		for(objno=0;objno<=7;objno++){	
 	    	tmp=(eeprom[0xD5+(objno*4)]&0x0C);//0xD5/ bit 2-3 zykl senden aktiv 
@@ -173,6 +174,17 @@ void main(void)
 		
 		
 	}// end if(APLIAKTION_RUN...
+	else if (RTCCON>=0x80 && connected)	// Realtime clock ueberlauf
+	{			// wenn connected den timeout für Unicast connect behandeln
+		RTCCON=0x61;// RTC flag löschen
+		if(connected_timeout <= 110)// 11x 520ms --> ca 6 Sekunden
+			{
+			connected_timeout ++;
+			}
+			else send_obj_value(T_DISCONNECT);// wenn timeout dann disconnect, flag und var wird in build_tel() gelöscht
+	}
+ 
+	 
 	if (tel_arrived || tel_sent) { 
 		tel_arrived=0;
 		tel_sent=0;

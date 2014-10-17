@@ -15,8 +15,8 @@
 
 
 
-#include <P89LPC922.h>
-#include "../lib_lpc922/fb_lpc922.h"
+//#include <P89LPC922.h>
+//#include "../lib_lpc922/fb_lpc922.h"
 
 #include "fb_app_in8.h"
 #include "../com/fb_rs232.h"
@@ -353,8 +353,11 @@ void delay_timer(void)
 	unsigned int timerflags;
 	__bit jobj=0;
 
-	
+
 //	SET_RTC(65)// timer auf die hälfte der kleinsten basis setzen
+	RTCCON=0x60;		// RTC anhalten und Flag löschen
+	RTCH=0x0E;			// reload Real Time Clock
+	RTCL=0xA0;			// auf 65ms
 	RTCCON=0x61;//	START_RTC	// RTC starten
 	timer++;
 	timerflags = timer&(~(timer-1));// flanke generieren
@@ -797,10 +800,7 @@ void restart_app(void)		// Alle Applikations-Parameter zurücksetzen
 	P0=0x22;	// WRITE=1 SER_IN=1
 #endif
 #endif
-	RTCCON=0x60;		// RTC anhalten und Flag löschen
-	RTCH=0x0E;			// reload Real Time Clock
-	RTCL=0xA0;			// auf 65ms
-	RTCCON=0x61;		// RTC starten
+	RTCCON=0x81;		// RTC starten
 	
 	timer=0;			// Timer-Variable, wird alle 65ms inkrementiert
 /*
