@@ -40,10 +40,10 @@
  */
  
 
-#include <P89LPC922.h>
-#include "../lib_lpc922/Releases/fb_lpc922_1.4x.h"
+//#include <P89LPC922.h>
+//#include "fb_lpc922_1.53.h"
 #include  "fb_app_out.h"
-#include  "../com/debug.h"
+//#include  "../com/debug.h"
 #include "../com/fb_rs232.h"
 #include"../com/watchdog.h"
 
@@ -946,9 +946,6 @@ void restart_app(void) 		// Alle Applikations-Parameter zurücksetzen
 	STOP_WRITECYCLE
 	EA=1;						// Interrupts freigeben
 	IT0=0;// ??
-	RTCCON=0x60;		// RTC Flag löschen
-	RTCH=0x03;			//0E reload Real Time Clock
-	RTCL=0x9A;			//A0 16ms +precounter x4
-	RTCCON=0x61;
+	RTCCON=0x81;
 	//EX0=1;
 }

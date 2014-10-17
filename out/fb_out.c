@@ -78,15 +78,13 @@
 	- Prio beim Senden implementieren \n
 	- Zwangsstellungsobjekte implementieren \n
 */
-#include <P89LPC922.h>
-#include "../lib_lpc922/Releases/fb_lpc922_1.4x.h"
+//#include <P89LPC922.h>
+//#include "fb_lpc922_1.53.h"
 #include "fb_app_out.h"
-#include  "../com/debug.h"
+//#include  "../com/debug.h"
 #include "../com/fb_rs232.h"
 #include"../com/watchdog.h"
 
-//#include"../com/debug.c"
-//#include"../com/debug.h"
 /** 
 * The start point of the program, init all libraries, start the bus interface, the application
 * and check the status of the program button.
@@ -196,6 +194,9 @@ void main(void)
 		if(APPLICATION_RUN) {	// nur wenn run-mode gesetzt
 
 			if(RTCCON>=0x80){
+				RTCCON=0x60;		// RTC Flag löschen
+				RTCH=0x03;			//0E reload Real Time Clock
+				RTCL=0x9A;			//A0 16ms +precounter x4
 				RTCCON=0x61;		// RTC  Flag löschen
 #ifdef HAND				
 				handbedienung();// alle 16ms
@@ -273,7 +274,18 @@ void main(void)
 				STOP_WRITECYCLE;
 			}
 		
-		}// end if(runstate...
+		}// end if(APPLICATION RUN..
+		else if (RTCCON>=0x80 && connected)	// Realtime clock ueberlauf
+			{			// wenn connected den timeout für Unicast connect behandeln
+			RTCCON=0x61;// RTC flag löschen
+			if(connected_timeout <= 110)// 11x 520ms --> ca 6 Sekunden
+				{
+				connected_timeout ++;
+				}
+				else send_obj_value(T_DISCONNECT);// wenn timeout dann disconnect, flag und var wird in build_tel() gelöscht
+			}
+		
+
 		
 		// Telegrammverarbeitung..
 		if (tel_arrived || tel_sent) {
