@@ -39,7 +39,7 @@
 	#include <P89LPC935_6.h>
 #endif	
 
-#include "../lib_lpc922/Releases/fb_lpc922_1.53.h"
+//#include "../lib_lpc922/Releases/fb_lpc922_1.53.h"
 //#include "../lib_lpc922/fb_lpc922.h"
 #include "fb_app_taster.h"
 #include"../com/watchdog.h"

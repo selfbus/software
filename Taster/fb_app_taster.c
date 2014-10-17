@@ -25,8 +25,8 @@
 * 
 */
 
-#include <P89LPC922.h>
-#include "../lib_lpc922/Releases/fb_lpc922_1.4x.h"
+//#include <P89LPC922.h>
+//#include "../lib_lpc922/Releases/fb_lpc922_1.4x.h"
 #include "fb_app_taster.h"
 
 
@@ -690,10 +690,7 @@ void restart_app(void)
 
 	button_buffer=0x0F;	// Variable für letzten abgearbeiteten Taster Status
 	
-	//RTCCON=0x60;	//stop_rtc();
-	//RTCH=0x00;
-	//RTCL=0xE6;	
-	RTCCON=0x81;	//start_rtc(8);		// RTC neu mit 8ms starten
+	RTCCON=0x81;	//start_rtc(8);		// RTC neu  starten und OV Flag setzen
 	
 	timer=0;			// Timer-Variable, wird alle 8ms inkrementiert
 
