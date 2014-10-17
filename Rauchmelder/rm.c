@@ -6,8 +6,8 @@
  *  published by the Free Software Foundation.
  */
 
-#include <mcs51/P89LPC922.h>
-#include <fb_lpc922_1.4x.h>
+//#include <mcs51/P89LPC922.h>
+//#include <fb_lpc922_1.4x.h>
 
 #include "rm_app.h"
 #include "rm_com.h"
@@ -54,6 +54,15 @@ void main(void)
 			if (!answerWait)
 				process_objs();
 		}
+		else if (RTCCON>=0x80 && connected)	// Realtime clock ueberlauf
+			{			// wenn connected den timeout für Unicast connect behandeln
+			RTCCON=0x61;// RTC flag löschen
+			if(connected_timeout <= 110)// 11x 520ms --> ca 6 Sekunden
+				{
+				connected_timeout ++;
+				}
+				else send_obj_value(T_DISCONNECT);// wenn timeout dann disconnect, flag und var wird in build_tel() gelöscht
+			}
 
 		//
 		// Empfangenes Telegramm bearbeiten, aber nur wenn wir gerade nichts
