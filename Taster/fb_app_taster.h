@@ -1,10 +1,10 @@
 /*
  *      __________  ________________  __  _______
  *     / ____/ __ \/ ____/ ____/ __ )/ / / / ___/
- *    / /_  / /_/ / __/ / __/ / __  / / / /\__ \ 
- *   / __/ / _, _/ /___/ /___/ /_/ / /_/ /___/ / 
- *  /_/   /_/ |_/_____/_____/_____/\____//____/  
- *                                      
+ *    / /_  / /_/ / __/ / __/ / __  / / / /\__ \
+ *   / __/ / _, _/ /___/ /___/ /_/ / /_/ /___/ /
+ *  /_/   /_/ |_/_____/_____/_____/\____//____/
+ *
  *  Copyright (c) 2008,2009,2010 Andreas Krebs <kubi@krebsworld.de>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -16,19 +16,21 @@
 * @file   fb_app_taster.h
 * @author Andreas Krebs <kubi@krebsworld.de>
 * @date    2008
-* 
-* @brief The Freebus Taster Application, Firmware f�r einen 4-fach Taster mit 4 LEDs
-* 
-* 
+*
+* @brief The Freebus Taster Application, Firmware f?r einen 4-fach Taster mit 4 LEDs
+*
+*
 */
 
 #ifndef FB_APP
 #define FB_APP
 
+//#define LPC936        // LPC936 anstatt LPC922
+
 #ifdef LPC936
-	#include <fb_lpc936_1.53.h>
+	#include <Releases/fb_lpc936_1.53.h>
 #else
-#include <fb_lpc922_1.53.h>
+    #include <Releases/fb_lpc922_1.53.h>
 #endif
 
 
