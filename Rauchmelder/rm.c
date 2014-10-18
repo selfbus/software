@@ -6,8 +6,7 @@
  *  published by the Free Software Foundation.
  */
 
-//#include <mcs51/P89LPC922.h>
-//#include <fb_lpc922_1.4x.h>
+#include <fb_lpc922_1.53.h>
 
 #include "rm_app.h"
 #include "rm_com.h"
@@ -21,6 +20,7 @@ void main(void)
 	//  Initialisierung
 	//
 	restart_hw();
+	TASTER=0;                       // Prog. LED kurz Ein
 
 	// Warten bis Bus stabil, nach Busspannungswiederkehr
 	for (n = 0; n < 50; n++)
@@ -55,13 +55,13 @@ void main(void)
 				process_objs();
 		}
 		else if (RTCCON>=0x80 && connected)	// Realtime clock ueberlauf
-			{			// wenn connected den timeout für Unicast connect behandeln
-			RTCCON=0x61;// RTC flag löschen
+			{			// wenn connected den timeout fÃ¼r Unicast connect behandeln
+			RTCCON=0x61;// RTC flag lÃ¶schen
 			if(connected_timeout <= 110)// 11x 520ms --> ca 6 Sekunden
 				{
 				connected_timeout ++;
 				}
-				else send_obj_value(T_DISCONNECT);// wenn timeout dann disconnect, flag und var wird in build_tel() gelöscht
+				else send_obj_value(T_DISCONNECT);// wenn timeout dann disconnect, flag und var wird in build_tel() gelÃ¶scht
 			}
 
 		//

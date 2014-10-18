@@ -12,8 +12,7 @@
 #include "rm_conv.h"
 #include "rm_eeprom.h"
 
-#include <mcs51/P89LPC922.h>
-#include <fb_lpc922_1.4x.h>
+#include <fb_lpc922_1.53.h>
 
 
 // Befehle an den Rauchmelder

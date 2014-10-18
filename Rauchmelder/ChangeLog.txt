@@ -1,3 +1,6 @@
+2014-10-18 Version 2.11
+        Bugfix to handle connection timeout correctly, RM is shown in LineScan now.
+
 2013-05-03
         Das Temperatur Objekt liefert jetzt den Mittelwert der beiden Temperatur Sensoren.
 
