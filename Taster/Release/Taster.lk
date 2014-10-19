@@ -6,9 +6,10 @@
 -b HOME = 0x0000
 -b ISEG = 0x0000
 -b BSEG = 0x0000
--k C:\Freebus\C_Programme\oldisprogramm\lib_lpc922\Releases
--k C:\Programme\SDCC\bin\..\lib\small-stack-auto
--l fb_lpc922_1.4x.lib
+-k /home/stefan/_selfbus_/software/lib_lpc922/Release
+-k /usr/bin/../share/sdcc/lib/small-stack-auto
+-k /usr/share/sdcc/lib/small-stack-auto
+-l fb_lpc922.lib
 -l mcs51
 -l libsdcc
 -l libint

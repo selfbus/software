@@ -6,7 +6,7 @@
 C_SRCS += \
 ../fb_app_in8.c \
 ../fb_in8.c \
-C:/Freebus/C_Programme/oldisprogramm/com/watchdog.c 
+/home/stefan/C:/Freebus/C_Programme/oldisprogramm/com/watchdog.c 
 
 C_DEPS += \
 ./fb_app_in8.d \
@@ -29,7 +29,7 @@ RELS += \
 	@echo 'Finished building: $<'
 	@echo ' '
 
-watchdog.rel: C:/Freebus/C_Programme/oldisprogramm/com/watchdog.c
+watchdog.rel: /home/stefan/C:/Freebus/C_Programme/oldisprogramm/com/watchdog.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: SDCC Compiler'
 	sdcc -c --stack-auto --data-loc 0x20 --model-small --iram-size $v256 --xram-size $v0 --code-size $v0x1bff -o"$@" "$<" && \

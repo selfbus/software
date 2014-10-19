@@ -62,7 +62,7 @@ void main(void)
 		// ***************************************************************************
 
 
-
+s
 
 		if (wait_bus_return) // prüfen ob Wartezeit noch läuft
 		{

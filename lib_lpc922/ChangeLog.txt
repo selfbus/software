@@ -6,6 +6,11 @@
 
 Selfbus Library für LPC922/LPC936
 =================================
+2014-10-19  Version 1.54
+		- VD Version Lock Option hinzugefügt
+
+2014-10-17  Version 1.53
+		- Connection Timeout Bugfix (LinienScan)
 
 2014-07-23  Version 1.52
 		- USERRAM_ADDR_H hinzugefügt

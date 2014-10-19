@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
-; Version 3.1.0 #7066 (Nov 22 2011) (MINGW32)
-; This file was generated Sat Jan 25 09:11:23 2014
+; Version 3.1.0 #7066 (Jun 14 2012) (Linux)
+; This file was generated Sat Oct 18 20:04:36 2014
 ;--------------------------------------------------------
 	.module fb_app_taster
 	.optsdcc -mmcs51 --model-small
@@ -567,8 +567,8 @@ _delay_toggle::
 ;buttonpattern             Allocated to registers r5 
 ;------------------------------------------------------------
 	G$port_changed$0$0 ==.
-	C$fb_app_taster.c$46$0$0 ==.
-;	..\fb_app_taster.c:46: void port_changed(unsigned char portval)
+	C$fb_app_taster.c$44$0$0 ==.
+;	../fb_app_taster.c:44: void port_changed(unsigned char portval)
 ;	-----------------------------------------
 ;	 function port_changed
 ;	-----------------------------------------
@@ -582,46 +582,46 @@ _port_changed:
 	ar1 = 0x01
 	ar0 = 0x00
 	mov	r7,dpl
-	C$fb_app_taster.c$57$1$1 ==.
-;	..\fb_app_taster.c:57: oldvalue=dimmcompare;
+	C$fb_app_taster.c$55$1$1 ==.
+;	../fb_app_taster.c:55: oldvalue=dimmcompare;
 	mov	r6,_dimmcompare
-	C$fb_app_taster.c$58$2$1 ==.
-;	..\fb_app_taster.c:58: do{
+	C$fb_app_taster.c$56$2$1 ==.
+;	../fb_app_taster.c:56: do{
 	mov	r5,#0x00
 00103$:
-	C$fb_app_taster.c$59$2$2 ==.
-;	..\fb_app_taster.c:59: if (oldvalue!=dimmcompare)// dimmcompare wird in der ISR T0 erhöht
+	C$fb_app_taster.c$57$2$2 ==.
+;	../fb_app_taster.c:57: if (oldvalue!=dimmcompare)// dimmcompare wird in der ISR T0 erhöht
 	mov	a,r6
 	cjne	a,_dimmcompare,00132$
 	sjmp	00104$
 00132$:
-	C$fb_app_taster.c$61$3$3 ==.
-;	..\fb_app_taster.c:61: n++;
+	C$fb_app_taster.c$59$3$3 ==.
+;	../fb_app_taster.c:59: n++;
 	inc	r5
-	C$fb_app_taster.c$62$3$3 ==.
-;	..\fb_app_taster.c:62: oldvalue=dimmcompare;
+	C$fb_app_taster.c$60$3$3 ==.
+;	../fb_app_taster.c:60: oldvalue=dimmcompare;
 	mov	r6,_dimmcompare
 00104$:
-	C$fb_app_taster.c$65$1$1 ==.
-;	..\fb_app_taster.c:65: while (n<=200);				// warten auf 200 x Timer 0 (0.05ms)= 10ms
+	C$fb_app_taster.c$63$1$1 ==.
+;	../fb_app_taster.c:63: while (n<=200);				// warten auf 200 x Timer 0 (0.05ms)= 10ms
 	mov	a,r5
 	add	a,#0xff - 0xC8
 	jnc	00103$
-	C$fb_app_taster.c$66$1$1 ==.
-;	..\fb_app_taster.c:66: if ((PORT & 0x0F) == portval) {
+	C$fb_app_taster.c$64$1$1 ==.
+;	../fb_app_taster.c:64: if ((PORT & 0x0F) == portval) {
 	mov	a,#0x0F
 	anl	a,_P0
 	mov	r6,a
 	cjne	a,ar7,00118$
-	C$fb_app_taster.c$67$2$1 ==.
-;	..\fb_app_taster.c:67: for (n=0; n<4; n++) {	// alle 4 Taster einzeln pruefen (koennten ja mehrere gleichzeitig gedrueckt worden sein)
+	C$fb_app_taster.c$65$2$1 ==.
+;	../fb_app_taster.c:65: for (n=0; n<4; n++) {	// alle 4 Taster einzeln pruefen (koennten ja mehrere gleichzeitig gedrueckt worden sein)
 	mov	r6,#0x00
 00114$:
 	cjne	r6,#0x04,00136$
 00136$:
 	jnc	00117$
-	C$fb_app_taster.c$68$3$5 ==.
-;	..\fb_app_taster.c:68: buttonpattern=1<<n;
+	C$fb_app_taster.c$66$3$5 ==.
+;	../fb_app_taster.c:66: buttonpattern=1<<n;
 	mov	b,r6
 	inc	b
 	mov	a,#0x01
@@ -630,8 +630,8 @@ _port_changed:
 	add	a,acc
 00140$:
 	djnz	b,00138$
-	C$fb_app_taster.c$69$3$5 ==.
-;	..\fb_app_taster.c:69: if ((portval & buttonpattern) && !(button_buffer & buttonpattern)) button_changed(n,0);	// Taster losgelassen
+	C$fb_app_taster.c$67$3$5 ==.
+;	../fb_app_taster.c:67: if ((portval & buttonpattern) && !(button_buffer & buttonpattern)) button_changed(n,0);	// Taster losgelassen
 	mov	r5,a
 	anl	a,r7
 	jz	00107$
@@ -649,8 +649,8 @@ _port_changed:
 	pop	ar6
 	pop	ar7
 00107$:
-	C$fb_app_taster.c$70$3$5 ==.
-;	..\fb_app_taster.c:70: if (!(portval & buttonpattern) && (button_buffer & buttonpattern)) button_changed(n,1);	// Taster gedrueckt
+	C$fb_app_taster.c$68$3$5 ==.
+;	../fb_app_taster.c:68: if (!(portval & buttonpattern) && (button_buffer & buttonpattern)) button_changed(n,1);	// Taster gedrueckt
 	mov	a,r5
 	anl	a,r7
 	jnz	00116$
@@ -666,16 +666,16 @@ _port_changed:
 	pop	ar6
 	pop	ar7
 00116$:
-	C$fb_app_taster.c$67$2$4 ==.
-;	..\fb_app_taster.c:67: for (n=0; n<4; n++) {	// alle 4 Taster einzeln pruefen (koennten ja mehrere gleichzeitig gedrueckt worden sein)
+	C$fb_app_taster.c$65$2$4 ==.
+;	../fb_app_taster.c:65: for (n=0; n<4; n++) {	// alle 4 Taster einzeln pruefen (koennten ja mehrere gleichzeitig gedrueckt worden sein)
 	inc	r6
 	sjmp	00114$
 00117$:
-	C$fb_app_taster.c$72$2$4 ==.
-;	..\fb_app_taster.c:72: button_buffer=portval;	// aktuellen port wert in buffer fuer naechsten Vergleich uebernehmen
+	C$fb_app_taster.c$70$2$4 ==.
+;	../fb_app_taster.c:70: button_buffer=portval;	// aktuellen port wert in buffer fuer naechsten Vergleich uebernehmen
 	mov	_button_buffer,r7
 00118$:
-	C$fb_app_taster.c$74$2$1 ==.
+	C$fb_app_taster.c$72$2$1 ==.
 	XG$port_changed$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -688,8 +688,8 @@ _port_changed:
 ;objval                    Allocated to registers b1 
 ;------------------------------------------------------------
 	G$button_changed$0$0 ==.
-	C$fb_app_taster.c$87$2$1 ==.
-;	..\fb_app_taster.c:87: void button_changed(unsigned char buttonno, __bit buttonval)
+	C$fb_app_taster.c$85$2$1 ==.
+;	../fb_app_taster.c:85: void button_changed( unsigned char buttonno, __bit buttonval)
 ;	-----------------------------------------
 ;	 function button_changed
 ;	-----------------------------------------
@@ -697,11 +697,11 @@ _button_changed:
 	push	_bp
 	mov	_bp,sp
 	push	dpl
-	C$fb_app_taster.c$90$1$1 ==.
-;	..\fb_app_taster.c:90: __bit objval=0;
+	C$fb_app_taster.c$88$1$1 ==.
+;	../fb_app_taster.c:88: __bit objval=0;
 	clr	b1
-	C$fb_app_taster.c$92$1$1 ==.
-;	..\fb_app_taster.c:92: switch ((eeprom[FUNCTION+(buttonno>>1)] >> ((buttonno & 0x01)*4)) & 0x0F) {		// Funktion des Tasters
+	C$fb_app_taster.c$90$1$1 ==.
+;	../fb_app_taster.c:90: switch ((eeprom[FUNCTION+(buttonno>>1)] >> ((buttonno & 0x01)*4)) & 0x0F) {		// Funktion des Tasters
 	mov	r0,_bp
 	inc	r0
 	mov	a,@r0
@@ -720,32 +720,29 @@ _button_changed:
 	mov	b,a
 	inc	b
 	mov	a,r6
-	sjmp	00218$
-00217$:
+	sjmp	00171$
+00170$:
 	clr	c
 	rrc	a
-00218$:
-	djnz	b,00217$
+00171$:
+	djnz	b,00170$
 	anl	a,#0x0F
 	mov	r6,a
-	cjne	r6,#0x01,00219$
+	cjne	r6,#0x01,00172$
 	sjmp	00101$
-00219$:
-	cjne	r6,#0x02,00220$
+00172$:
+	cjne	r6,#0x02,00173$
 	ljmp	00111$
-00220$:
-	cjne	r6,#0x03,00221$
+00173$:
+	cjne	r6,#0x03,00174$
 	ljmp	00139$
-00221$:
-	cjne	r6,#0x04,00222$
-	ljmp	00146$
-00222$:
-	ljmp	00181$
-	C$fb_app_taster.c$97$2$2 ==.
-;	..\fb_app_taster.c:97: case 1:
+00174$:
+	ljmp	00147$
+	C$fb_app_taster.c$95$2$2 ==.
+;	../fb_app_taster.c:95: case 1:
 00101$:
-	C$fb_app_taster.c$98$2$2 ==.
-;	..\fb_app_taster.c:98: if (buttonval) command = (((eeprom[COMMAND+(buttonno*4)]) >> 6) & 0x03);	// Befehl beim druecken
+	C$fb_app_taster.c$96$2$2 ==.
+;	../fb_app_taster.c:96: if (buttonval) command = (((eeprom[COMMAND+(buttonno*4)]) >> 6) & 0x03);	// Befehl beim druecken
 	jnb	b0,00103$
 	mov	r0,_bp
 	inc	r0
@@ -762,8 +759,8 @@ _button_changed:
 	anl	ar6,#0x03
 	sjmp	00104$
 00103$:
-	C$fb_app_taster.c$99$2$2 ==.
-;	..\fb_app_taster.c:99: else command = (((eeprom[COMMAND+(buttonno*4)]) >> 4) & 0x03);				// Befehl beim loslassen
+	C$fb_app_taster.c$97$2$2 ==.
+;	../fb_app_taster.c:97: else command = (((eeprom[COMMAND+(buttonno*4)]) >> 4) & 0x03);				// Befehl beim loslassen
 	mov	r0,_bp
 	inc	r0
 	mov	a,@r0
@@ -779,30 +776,30 @@ _button_changed:
 	anl	a,r5
 	mov	r6,a
 00104$:
-	C$fb_app_taster.c$100$2$2 ==.
-;	..\fb_app_taster.c:100: switch (command) {	// Befehl des Tasters bei Schalten
-	cjne	r6,#0x01,00224$
+	C$fb_app_taster.c$98$2$2 ==.
+;	../fb_app_taster.c:98: switch (command) {	// Befehl des Tasters bei Schalten
+	cjne	r6,#0x01,00176$
 	sjmp	00105$
-00224$:
-	cjne	r6,#0x02,00225$
+00176$:
+	cjne	r6,#0x02,00177$
 	sjmp	00106$
-00225$:
-	C$fb_app_taster.c$101$3$3 ==.
-;	..\fb_app_taster.c:101: case 1:		// EIN
+00177$:
+	C$fb_app_taster.c$99$3$3 ==.
+;	../fb_app_taster.c:99: case 1:		// EIN
 	cjne	r6,#0x03,00108$
 	sjmp	00107$
 00105$:
-	C$fb_app_taster.c$102$3$3 ==.
-;	..\fb_app_taster.c:102: objval=1;
+	C$fb_app_taster.c$100$3$3 ==.
+;	../fb_app_taster.c:100: objval=1;
 	setb	b1
-	C$fb_app_taster.c$103$3$3 ==.
-;	..\fb_app_taster.c:103: break;
-	C$fb_app_taster.c$104$3$3 ==.
-;	..\fb_app_taster.c:104: case 2:		// UM
+	C$fb_app_taster.c$101$3$3 ==.
+;	../fb_app_taster.c:101: break;
+	C$fb_app_taster.c$102$3$3 ==.
+;	../fb_app_taster.c:102: case 2:		// UM
 	sjmp	00108$
 00106$:
-	C$fb_app_taster.c$105$3$3 ==.
-;	..\fb_app_taster.c:105: objval = read_obj_value(buttonno)&0x01;
+	C$fb_app_taster.c$103$3$3 ==.
+;	../fb_app_taster.c:103: objval = read_obj_value(buttonno)&0x01;
 	mov	r0,_bp
 	inc	r0
 	mov	dpl,@r0
@@ -817,30 +814,30 @@ _button_changed:
 	anl	a,#0x01
 	mov	r2,a
 	add	a,#0xff
-	C$fb_app_taster.c$106$3$3 ==.
-;	..\fb_app_taster.c:106: objval = !objval;
+	C$fb_app_taster.c$104$3$3 ==.
+;	../fb_app_taster.c:104: objval = !objval;
 	cpl	c
 	mov	b1,c
-	C$fb_app_taster.c$107$3$3 ==.
-;	..\fb_app_taster.c:107: break;
-	C$fb_app_taster.c$108$3$3 ==.
-;	..\fb_app_taster.c:108: case 3:		// AUS
+	C$fb_app_taster.c$105$3$3 ==.
+;	../fb_app_taster.c:105: break;
+	C$fb_app_taster.c$106$3$3 ==.
+;	../fb_app_taster.c:106: case 3:		// AUS
 	sjmp	00108$
 00107$:
-	C$fb_app_taster.c$109$3$3 ==.
-;	..\fb_app_taster.c:109: objval=0;
+	C$fb_app_taster.c$107$3$3 ==.
+;	../fb_app_taster.c:107: objval=0;
 	clr	b1
-	C$fb_app_taster.c$111$2$2 ==.
-;	..\fb_app_taster.c:111: }
+	C$fb_app_taster.c$109$2$2 ==.
+;	../fb_app_taster.c:109: }
 00108$:
-	C$fb_app_taster.c$112$2$2 ==.
-;	..\fb_app_taster.c:112: if (command) {	// nur wenn EIN, UM oder AUS (0=keine Funktion)
+	C$fb_app_taster.c$110$2$2 ==.
+;	../fb_app_taster.c:110: if (command) {	// nur wenn EIN, UM oder AUS (0=keine Funktion)
 	mov	a,r6
-	jnz	00227$
-	ljmp	00181$
-00227$:
-	C$fb_app_taster.c$114$3$4 ==.
-;	..\fb_app_taster.c:114: write_obj_value(buttonno,objval);
+	jnz	00179$
+	ljmp	00147$
+00179$:
+	C$fb_app_taster.c$112$3$4 ==.
+;	../fb_app_taster.c:112: write_obj_value(buttonno,objval);
 	mov	c,b1
 	clr	a
 	rlc	a
@@ -856,16 +853,16 @@ _button_changed:
 	dec	sp
 	dec	sp
 	pop	bits
-	C$fb_app_taster.c$115$3$4 ==.
-;	..\fb_app_taster.c:115: send_obj_value(buttonno);
+	C$fb_app_taster.c$113$3$4 ==.
+;	../fb_app_taster.c:113: send_obj_value(buttonno);
 	mov	r0,_bp
 	inc	r0
 	mov	dpl,@r0
 	push	bits
 	lcall	_send_obj_value
 	pop	bits
-	C$fb_app_taster.c$117$3$4 ==.
-;	..\fb_app_taster.c:117: switch_led(buttonno, objval);		// LED schalten
+	C$fb_app_taster.c$115$3$4 ==.
+;	../fb_app_taster.c:115: switch_led(buttonno, objval);		// LED schalten
 	mov	c,b1
 	mov	b[0],c
 	mov	bits,b
@@ -873,14 +870,14 @@ _button_changed:
 	inc	r0
 	mov	dpl,@r0
 	lcall	_switch_led
-	C$fb_app_taster.c$119$2$2 ==.
-;	..\fb_app_taster.c:119: break;
-	ljmp	00181$
-	C$fb_app_taster.c$125$2$2 ==.
-;	..\fb_app_taster.c:125: case 2:
+	C$fb_app_taster.c$117$2$2 ==.
+;	../fb_app_taster.c:117: break;
+	ljmp	00147$
+	C$fb_app_taster.c$123$2$2 ==.
+;	../fb_app_taster.c:123: case 2:
 00111$:
-	C$fb_app_taster.c$126$2$2 ==.
-;	..\fb_app_taster.c:126: bedienung=eeprom[COMMAND+(buttonno*4)]&0x30;
+	C$fb_app_taster.c$124$2$2 ==.
+;	../fb_app_taster.c:124: bedienung=eeprom[COMMAND+(buttonno*4)]&0x30;
 	mov	r0,_bp
 	inc	r0
 	mov	a,@r0
@@ -892,13 +889,13 @@ _button_changed:
 	movc	a,@a+dptr
 	mov	r5,a
 	anl	ar5,#0x30
-	C$fb_app_taster.c$127$2$2 ==.
-;	..\fb_app_taster.c:127: if (buttonval) {	// Taster gedrueckt -> schauen wie lange gehalten
-	jb	b0,00228$
+	C$fb_app_taster.c$125$2$2 ==.
+;	../fb_app_taster.c:125: if (buttonval) {	// Taster gedrueckt -> schauen wie lange gehalten
+	jb	b0,00180$
 	ljmp	00137$
-00228$:
-	C$fb_app_taster.c$128$3$5 ==.
-;	..\fb_app_taster.c:128: if ((eeprom[COMMAND+(buttonno*4)]) & 0x04) switch_led(buttonno,0);	// wenn Betuetigungsanzeige, dann gleich beim druecken einschalten
+00180$:
+	C$fb_app_taster.c$126$3$5 ==.
+;	../fb_app_taster.c:126: if ((eeprom[COMMAND+(buttonno*4)]) & 0x04) switch_led(buttonno,0);	// wenn Betuetigungsanzeige, dann gleich beim druecken einschalten
 	mov	a,#0xD3
 	add	a,r6
 	mov	dptr,#_eeprom
@@ -916,8 +913,8 @@ _button_changed:
 	pop	ar5
 	pop	ar6
 00113$:
-	C$fb_app_taster.c$129$3$5 ==.
-;	..\fb_app_taster.c:129: timercnt[buttonno+4]=eeprom[0xD6+(buttonno*4)];	// Faktor Dauer			
+	C$fb_app_taster.c$127$3$5 ==.
+;	../fb_app_taster.c:127: timercnt[buttonno+4]=eeprom[0xD6+(buttonno*4)];	// Faktor Dauer
 	mov	r0,_bp
 	inc	r0
 	mov	a,#0x04
@@ -931,8 +928,8 @@ _button_changed:
 	movc	a,@a+dptr
 	mov	r3,a
 	mov	@r1,a
-	C$fb_app_taster.c$144$3$5 ==.
-;	..\fb_app_taster.c:144: */			timerbase[buttonno+4]=(eeprom[0xD5+(buttonno*4)]&0x70)>>4;// Basis Dauer zwischen kurz und langzeit
+	C$fb_app_taster.c$142$3$5 ==.
+;	../fb_app_taster.c:142: */			timerbase[buttonno+4]=(eeprom[0xD5+(buttonno*4)]&0x70)>>4;// Basis Dauer zwischen kurz und langzeit
 	mov	a,r4
 	add	a,#_timerbase
 	mov	r1,a
@@ -945,11 +942,11 @@ _button_changed:
 	anl	a,#0x0F
 	mov	r4,a
 	mov	@r1,a
-	C$fb_app_taster.c$145$3$5 ==.
-;	..\fb_app_taster.c:145: if (bedienung==0x20) {// umschalten der dimmrichtung...
+	C$fb_app_taster.c$143$3$5 ==.
+;	../fb_app_taster.c:143: if (bedienung==0x20) {// umschalten der dimmrichtung...
 	cjne	r5,#0x20,00118$
-	C$fb_app_taster.c$146$1$1 ==.
-;	..\fb_app_taster.c:146: if(read_obj_value(buttonno+8)&0x08)bedienung=0x30;//wenn heller, dann dunkler
+	C$fb_app_taster.c$144$1$1 ==.
+;	../fb_app_taster.c:144: if(read_obj_value(buttonno+8)&0x08)bedienung=0x30;//wenn heller, dann dunkler
 	push	ar6
 	mov	r0,_bp
 	inc	r0
@@ -966,15 +963,15 @@ _button_changed:
 	mov	r5,#0x30
 	sjmp	00118$
 00115$:
-	C$fb_app_taster.c$147$4$6 ==.
-;	..\fb_app_taster.c:147: else bedienung=0x10;//sonst heller
+	C$fb_app_taster.c$145$4$6 ==.
+;	../fb_app_taster.c:145: else bedienung=0x10;//sonst heller
 	mov	r5,#0x10
 00118$:
-	C$fb_app_taster.c$149$3$5 ==.
-;	..\fb_app_taster.c:149: if (bedienung==0x10){	// heller
+	C$fb_app_taster.c$147$3$5 ==.
+;	../fb_app_taster.c:147: if (bedienung==0x10){	// heller
 	cjne	r5,#0x10,00120$
-	C$fb_app_taster.c$150$4$7 ==.
-;	..\fb_app_taster.c:150: timerstate[buttonno+4]= ((eeprom[0xD4+(buttonno*4)]&0xF0)>>4)+0x20;	// dimmen
+	C$fb_app_taster.c$148$4$7 ==.
+;	../fb_app_taster.c:148: timerstate[buttonno+4]= ((eeprom[0xD4+(buttonno*4)]&0xF0)>>4)+0x20;	// dimmen
 	mov	r0,_bp
 	inc	r0
 	mov	a,#0x04
@@ -992,15 +989,15 @@ _button_changed:
 	add	a,#0x20
 	mov	@r1,a
 00120$:
-	C$fb_app_taster.c$152$3$5 ==.
-;	..\fb_app_taster.c:152: if(bedienung==0x30){	//  dunkler
-	cjne	r5,#0x30,00235$
-	sjmp	00236$
-00235$:
-	ljmp	00181$
-00236$:
-	C$fb_app_taster.c$153$4$8 ==.
-;	..\fb_app_taster.c:153: timerstate[buttonno+4]= ((eeprom[0xD4+(buttonno*4)]&0x0F))+0x20;	// dimmen
+	C$fb_app_taster.c$150$3$5 ==.
+;	../fb_app_taster.c:150: if(bedienung==0x30){	//  dunkler
+	cjne	r5,#0x30,00187$
+	sjmp	00188$
+00187$:
+	ljmp	00147$
+00188$:
+	C$fb_app_taster.c$151$4$8 ==.
+;	../fb_app_taster.c:151: timerstate[buttonno+4]= ((eeprom[0xD4+(buttonno*4)]&0x0F))+0x20;	// dimmen
 	mov	r0,_bp
 	inc	r0
 	mov	a,#0x04
@@ -1016,10 +1013,10 @@ _button_changed:
 	anl	a,r4
 	add	a,#0x20
 	mov	@r1,a
-	ljmp	00181$
+	ljmp	00147$
 00137$:
-	C$fb_app_taster.c$159$3$9 ==.
-;	..\fb_app_taster.c:159: if ((timerstate[buttonno+4]& 0xF0)==0x20) { // wenn delaytimer noch lauft, dann Schalten, also EIS1 telegramm senden
+	C$fb_app_taster.c$157$3$9 ==.
+;	../fb_app_taster.c:157: if ((timerstate[buttonno+4]& 0xF0)==0x20) { // wenn delaytimer noch lauft, dann Schalten, also EIS1 telegramm senden
 	mov	r0,_bp
 	inc	r0
 	mov	a,#0x04
@@ -1029,11 +1026,11 @@ _button_changed:
 	mov	ar4,@r1
 	anl	ar4,#0xF0
 	cjne	r4,#0x20,00134$
-	C$fb_app_taster.c$160$4$10 ==.
-;	..\fb_app_taster.c:160: if(bedienung==0x20) { //umschalten des Schaltzustandes
+	C$fb_app_taster.c$158$4$10 ==.
+;	../fb_app_taster.c:158: if(bedienung==0x20) { //umschalten des Schaltzustandes
 	cjne	r5,#0x20,00127$
-	C$fb_app_taster.c$161$5$11 ==.
-;	..\fb_app_taster.c:161: if(read_obj_value(buttonno)& 0x01)bedienung=0x30;//wenn ein, dann aus
+	C$fb_app_taster.c$159$5$11 ==.
+;	../fb_app_taster.c:159: if(read_obj_value(buttonno)& 0x01)bedienung=0x30;//wenn ein, dann aus
 	mov	r0,_bp
 	inc	r0
 	mov	dpl,@r0
@@ -1047,15 +1044,15 @@ _button_changed:
 	mov	r5,#0x30
 	sjmp	00127$
 00124$:
-	C$fb_app_taster.c$162$5$11 ==.
-;	..\fb_app_taster.c:162: else bedienung=0x10; // sonst ein
+	C$fb_app_taster.c$160$5$11 ==.
+;	../fb_app_taster.c:160: else bedienung=0x10; // sonst ein
 	mov	r5,#0x10
 00127$:
-	C$fb_app_taster.c$164$4$10 ==.
-;	..\fb_app_taster.c:164: if(bedienung== 0x10){	//  ein
+	C$fb_app_taster.c$162$4$10 ==.
+;	../fb_app_taster.c:162: if(bedienung== 0x10){	//  ein
 	cjne	r5,#0x10,00129$
-	C$fb_app_taster.c$165$5$12 ==.
-;	..\fb_app_taster.c:165: write_obj_value(buttonno,1);
+	C$fb_app_taster.c$163$5$12 ==.
+;	../fb_app_taster.c:163: write_obj_value(buttonno,1);
 	mov	a,#0x01
 	push	acc
 	clr	a
@@ -1066,14 +1063,14 @@ _button_changed:
 	lcall	_write_obj_value
 	dec	sp
 	dec	sp
-	C$fb_app_taster.c$166$5$12 ==.
-;	..\fb_app_taster.c:166: send_obj_value(buttonno);
+	C$fb_app_taster.c$164$5$12 ==.
+;	../fb_app_taster.c:164: send_obj_value(buttonno);
 	mov	r0,_bp
 	inc	r0
 	mov	dpl,@r0
 	lcall	_send_obj_value
-	C$fb_app_taster.c$167$5$12 ==.
-;	..\fb_app_taster.c:167: switch_led(buttonno,1);
+	C$fb_app_taster.c$165$5$12 ==.
+;	../fb_app_taster.c:165: switch_led(buttonno,1);
 	setb	b[0]
 	mov	bits,b
 	mov	r0,_bp
@@ -1082,8 +1079,8 @@ _button_changed:
 	lcall	_switch_led
 	sjmp	00135$
 00129$:
-	C$fb_app_taster.c$170$5$13 ==.
-;	..\fb_app_taster.c:170: write_obj_value(buttonno,0);
+	C$fb_app_taster.c$168$5$13 ==.
+;	../fb_app_taster.c:168: write_obj_value(buttonno,0);
 	clr	a
 	push	acc
 	push	acc
@@ -1093,14 +1090,14 @@ _button_changed:
 	lcall	_write_obj_value
 	dec	sp
 	dec	sp
-	C$fb_app_taster.c$171$5$13 ==.
-;	..\fb_app_taster.c:171: send_obj_value(buttonno);
+	C$fb_app_taster.c$169$5$13 ==.
+;	../fb_app_taster.c:169: send_obj_value(buttonno);
 	mov	r0,_bp
 	inc	r0
 	mov	dpl,@r0
 	lcall	_send_obj_value
-	C$fb_app_taster.c$172$5$13 ==.
-;	..\fb_app_taster.c:172: switch_led(buttonno,0);
+	C$fb_app_taster.c$170$5$13 ==.
+;	../fb_app_taster.c:170: switch_led(buttonno,0);
 	clr	b[0]
 	mov	bits,b
 	mov	r0,_bp
@@ -1109,8 +1106,8 @@ _button_changed:
 	lcall	_switch_led
 	sjmp	00135$
 00134$:
-	C$fb_app_taster.c$176$4$14 ==.
-;	..\fb_app_taster.c:176: write_obj_value(buttonno+8,read_obj_value(buttonno+8)& 0x08);	// auch wenn Stopp Telegramm nicht gesendet wird, Objektwert auf 0 setzen
+	C$fb_app_taster.c$174$4$14 ==.
+;	../fb_app_taster.c:174: write_obj_value(buttonno+8,read_obj_value(buttonno+8)& 0x08);	// auch wenn Stopp Telegramm nicht gesendet wird, Objektwert auf 0 setzen
 	mov	r0,_bp
 	inc	r0
 	mov	a,#0x08
@@ -1133,16 +1130,16 @@ _button_changed:
 	dec	sp
 	dec	sp
 	pop	ar6
-	C$fb_app_taster.c$177$4$14 ==.
-;	..\fb_app_taster.c:177: if ((eeprom[COMMAND+(buttonno*4)] & 0x40) == 0) {	// ... natuerlich nur wenn parameter dementsprechend (0=senden!!!)
+	C$fb_app_taster.c$175$4$14 ==.
+;	../fb_app_taster.c:175: if ((eeprom[COMMAND+(buttonno*4)] & 0x40) == 0) {	// ... natuerlich nur wenn parameter dementsprechend (0=senden!!!)
 	mov	a,#0xD3
 	add	a,r6
 	mov	dptr,#_eeprom
 	movc	a,@a+dptr
 	mov	r7,a
 	jb	acc.6,00135$
-	C$fb_app_taster.c$178$5$15 ==.
-;	..\fb_app_taster.c:178: send_obj_value(buttonno+8);// Stop Telegramm senden
+	C$fb_app_taster.c$176$5$15 ==.
+;	../fb_app_taster.c:176: send_obj_value(buttonno+8);// Stop Telegramm senden
 	mov	r0,_bp
 	inc	r0
 	mov	a,#0x08
@@ -1150,8 +1147,8 @@ _button_changed:
 	mov	dpl,a
 	lcall	_send_obj_value
 00135$:
-	C$fb_app_taster.c$181$3$9 ==.
-;	..\fb_app_taster.c:181: timercnt[buttonno+4]=0;
+	C$fb_app_taster.c$179$3$9 ==.
+;	../fb_app_taster.c:179: timercnt[buttonno+4]=0;
 	mov	r0,_bp
 	inc	r0
 	mov	a,#0x04
@@ -1160,25 +1157,25 @@ _button_changed:
 	add	a,#_timercnt
 	mov	r0,a
 	mov	@r0,#0x00
-	C$fb_app_taster.c$182$3$9 ==.
-;	..\fb_app_taster.c:182: timerstate[buttonno+4]=0;
+	C$fb_app_taster.c$180$3$9 ==.
+;	../fb_app_taster.c:180: timerstate[buttonno+4]=0;
 	mov	a,r7
 	add	a,#_timerstate
 	mov	r0,a
 	mov	@r0,#0x00
-	C$fb_app_taster.c$184$2$2 ==.
-;	..\fb_app_taster.c:184: break;
-	ljmp	00181$
-	C$fb_app_taster.c$190$2$2 ==.
-;	..\fb_app_taster.c:190: case 3:
+	C$fb_app_taster.c$182$2$2 ==.
+;	../fb_app_taster.c:182: break;
+	ljmp	00147$
+	C$fb_app_taster.c$188$2$2 ==.
+;	../fb_app_taster.c:188: case 3:
 00139$:
-	C$fb_app_taster.c$191$2$2 ==.
-;	..\fb_app_taster.c:191: if (buttonval) {	// Taster gedrueckt -> schauen wie lange gehalten
-	jb	b0,00245$
+	C$fb_app_taster.c$189$2$2 ==.
+;	../fb_app_taster.c:189: if (buttonval) {	// Taster gedrueckt -> schauen wie lange gehalten
+	jb	b0,00197$
 	ljmp	00144$
-00245$:
-	C$fb_app_taster.c$193$3$16 ==.
-;	..\fb_app_taster.c:193: write_obj_value(buttonno,((eeprom[0xD3+(buttonno*4)]&0x10)>>4));
+00197$:
+	C$fb_app_taster.c$191$3$16 ==.
+;	../fb_app_taster.c:191: write_obj_value(buttonno,((eeprom[0xD3+(buttonno*4)]&0x10)>>4));
 	mov	r0,_bp
 	inc	r0
 	mov	a,@r0
@@ -1206,14 +1203,14 @@ _button_changed:
 	lcall	_write_obj_value
 	dec	sp
 	dec	sp
-	C$fb_app_taster.c$194$3$16 ==.
-;	..\fb_app_taster.c:194: send_obj_value(buttonno);
+	C$fb_app_taster.c$192$3$16 ==.
+;	../fb_app_taster.c:192: send_obj_value(buttonno);
 	mov	r0,_bp
 	inc	r0
 	mov	dpl,@r0
 	lcall	_send_obj_value
-	C$fb_app_taster.c$195$3$16 ==.
-;	..\fb_app_taster.c:195: switch_led(buttonno,1);	// Status-LED schalten (hier nur nie,immer,betätigung)
+	C$fb_app_taster.c$193$3$16 ==.
+;	../fb_app_taster.c:193: switch_led(buttonno,1);	// Status-LED schalten (hier nur nie,immer,betätigung)
 	setb	b[0]
 	mov	bits,b
 	mov	r0,_bp
@@ -1222,8 +1219,8 @@ _button_changed:
 	lcall	_switch_led
 	pop	ar6
 	pop	ar7
-	C$fb_app_taster.c$196$3$16 ==.
-;	..\fb_app_taster.c:196: timercnt[buttonno+4]=eeprom[0xD5+(buttonno*4)];	// Faktor Dauer			
+	C$fb_app_taster.c$194$3$16 ==.
+;	../fb_app_taster.c:194: timercnt[buttonno+4]=eeprom[0xD5+(buttonno*4)];	// Faktor Dauer
 	mov	r0,_bp
 	inc	r0
 	mov	a,#0x04
@@ -1237,8 +1234,8 @@ _button_changed:
 	movc	a,@a+dptr
 	mov	r4,a
 	mov	@r1,a
-	C$fb_app_taster.c$211$3$16 ==.
-;	..\fb_app_taster.c:211: */			timerbase[buttonno+4]=(eeprom[0xD4+(buttonno*4)]&0x06)*2;// Basis Dauer zwischen kurz und langzeit
+	C$fb_app_taster.c$209$3$16 ==.
+;	../fb_app_taster.c:209: */			timerbase[buttonno+4]=(eeprom[0xD4+(buttonno*4)]&0x06)*2;// Basis Dauer zwischen kurz und langzeit
 	mov	a,r5
 	add	a,#_timerbase
 	mov	r1,a
@@ -1249,8 +1246,8 @@ _button_changed:
 	anl	a,#0x06
 	add	a,acc
 	mov	@r1,a
-	C$fb_app_taster.c$212$3$16 ==.
-;	..\fb_app_taster.c:212: timerstate[buttonno+4]=((eeprom[0xD3+(buttonno*4)]&0x10)>>4)+0x30;
+	C$fb_app_taster.c$210$3$16 ==.
+;	../fb_app_taster.c:210: timerstate[buttonno+4]=((eeprom[0xD3+(buttonno*4)]&0x10)>>4)+0x30;
 	mov	a,r5
 	add	a,#_timerstate
 	mov	r1,a
@@ -1264,10 +1261,10 @@ _button_changed:
 	mov	r7,a
 	add	a,#0x30
 	mov	@r1,a
-	ljmp	00181$
+	sjmp	00147$
 00144$:
-	C$fb_app_taster.c$215$3$17 ==.
-;	..\fb_app_taster.c:215: if (timerstate[buttonno+4] == 0x40) {//innerhalb T2
+	C$fb_app_taster.c$213$3$17 ==.
+;	../fb_app_taster.c:213: if (timerstate[buttonno+4] == 0x40) {//innerhalb T2
 	mov	r0,_bp
 	inc	r0
 	mov	a,#0x04
@@ -1276,8 +1273,8 @@ _button_changed:
 	mov	r1,a
 	mov	ar7,@r1
 	cjne	r7,#0x40,00141$
-	C$fb_app_taster.c$216$4$18 ==.
-;	..\fb_app_taster.c:216: write_obj_value(buttonno,((eeprom[0xD3+(buttonno*4)]&0x10)>>4));
+	C$fb_app_taster.c$214$4$18 ==.
+;	../fb_app_taster.c:214: write_obj_value(buttonno,((eeprom[0xD3+(buttonno*4)]&0x10)>>4));
 	mov	r0,_bp
 	inc	r0
 	mov	a,@r0
@@ -1299,16 +1296,16 @@ _button_changed:
 	lcall	_write_obj_value
 	dec	sp
 	dec	sp
-	C$fb_app_taster.c$217$4$18 ==.
-;	..\fb_app_taster.c:217: send_obj_value(buttonno);
+	C$fb_app_taster.c$215$4$18 ==.
+;	../fb_app_taster.c:215: send_obj_value(buttonno);
 	mov	r0,_bp
 	inc	r0
 	mov	dpl,@r0
 	lcall	_send_obj_value
-	ljmp	00181$
+	sjmp	00147$
 00141$:
-	C$fb_app_taster.c$221$4$19 ==.
-;	..\fb_app_taster.c:221: timerstate[buttonno+4]=0;// T2 bereits abgelaufen
+	C$fb_app_taster.c$219$4$19 ==.
+;	../fb_app_taster.c:219: timerstate[buttonno+4]=0;// T2 bereits abgelaufen
 	mov	r0,_bp
 	inc	r0
 	mov	a,#0x04
@@ -1316,539 +1313,12 @@ _button_changed:
 	add	a,#_timerstate
 	mov	r0,a
 	mov	@r0,#0x00
-	C$fb_app_taster.c$224$2$2 ==.
-;	..\fb_app_taster.c:224: break;
-	ljmp	00181$
-	C$fb_app_taster.c$230$2$2 ==.
-;	..\fb_app_taster.c:230: case 4:	// Wertgeber..
-00146$:
-	C$fb_app_taster.c$231$2$2 ==.
-;	..\fb_app_taster.c:231: switch ((eeprom[0xD3+(buttonno*4)]>>4)& 0x07){// Art des Wertgebers holen
-	mov	r0,_bp
-	inc	r0
-	mov	a,@r0
-	add	a,acc
-	add	a,acc
-	mov	r7,a
-	add	a,#0xD3
-	mov	dptr,#_eeprom
-	movc	a,@a+dptr
-	swap	a
-	anl	a,#(0x0F&0x07)
-	mov	r6,a
-	add	a,#0xff - 0x04
-	jnc	00248$
-	ljmp	00181$
-00248$:
-	mov	a,r6
-	add	a,r6
-	add	a,r6
-	mov	dptr,#00249$
-	jmp	@a+dptr
-00249$:
-	ljmp	00147$
-	ljmp	00152$
-	ljmp	00159$
-	ljmp	00165$
-	ljmp	00171$
-	C$fb_app_taster.c$232$3$20 ==.
-;	..\fb_app_taster.c:232: case 0: // ++++++++ Lichtszenenabruf ohne Speicherfunktion
+	C$fb_app_taster.c$324$1$1 ==.
+;	../fb_app_taster.c:324: }
 00147$:
-	C$fb_app_taster.c$233$3$20 ==.
-;	..\fb_app_taster.c:233: if(buttonval){
-	jb	b0,00250$
-	ljmp	00181$
-00250$:
-	C$fb_app_taster.c$234$4$21 ==.
-;	..\fb_app_taster.c:234: if ((eeprom[COMMAND+(buttonno*4)]) & 0x04) switch_led(buttonno,0);	// wenn Betuetigungsanzeige, dann gleich beim druecken einschalten
-	mov	a,#0xD3
-	add	a,r7
-	mov	dptr,#_eeprom
-	movc	a,@a+dptr
-	mov	r6,a
-	jnb	acc.2,00149$
-	clr	b[0]
-	push	ar7
-	mov	bits,b
-	mov	r0,_bp
-	inc	r0
-	mov	dpl,@r0
-	lcall	_switch_led
-	pop	ar7
-00149$:
-	C$fb_app_taster.c$235$4$21 ==.
-;	..\fb_app_taster.c:235: write_obj_value(buttonno+8,eeprom[0xD5+(buttonno*4)]);
-	mov	a,#0xD5
-	add	a,r7
-	mov	dptr,#_eeprom
-	movc	a,@a+dptr
-	mov	r6,a
-	mov	r5,#0x00
-	mov	r0,_bp
-	inc	r0
-	mov	a,#0x08
-	add	a,@r0
-	mov	r4,a
-	push	ar4
-	push	ar6
-	push	ar5
-	mov	dpl,r4
-	lcall	_write_obj_value
-	dec	sp
-	dec	sp
-	pop	ar4
-	C$fb_app_taster.c$236$4$21 ==.
-;	..\fb_app_taster.c:236: send_obj_value(buttonno+8);
-	mov	dpl,r4
-	lcall	_send_obj_value
-	C$fb_app_taster.c$237$4$21 ==.
-;	..\fb_app_taster.c:237: switch_led(buttonno,0);
-	clr	b[0]
-	mov	bits,b
-	mov	r0,_bp
-	inc	r0
-	mov	dpl,@r0
-	lcall	_switch_led
-	C$fb_app_taster.c$239$3$20 ==.
-;	..\fb_app_taster.c:239: break;
-	ljmp	00181$
-	C$fb_app_taster.c$240$3$20 ==.
-;	..\fb_app_taster.c:240: case 1:	// ++++++++ Lichtszenenabruf mit Speicherfunktion
-00152$:
-	C$fb_app_taster.c$241$3$20 ==.
-;	..\fb_app_taster.c:241: if(buttonval){// beim drücken
-	jnb	b0,00157$
-	C$fb_app_taster.c$243$4$22 ==.
-;	..\fb_app_taster.c:243: timercnt[buttonno+4]=156;
-	mov	r0,_bp
-	inc	r0
-	mov	a,#0x04
-	add	a,@r0
-	mov	r6,a
-	add	a,#_timercnt
-	mov	r0,a
-	mov	@r0,#0x9C
-	C$fb_app_taster.c$244$4$22 ==.
-;	..\fb_app_taster.c:244: timerbase[buttonno+4]=2; //(32ms)
-	mov	a,r6
-	add	a,#_timerbase
-	mov	r0,a
-	mov	@r0,#0x02
-	C$fb_app_taster.c$245$4$22 ==.
-;	..\fb_app_taster.c:245: timerstate[buttonno+4]=0x50;// Betätigung länger 5 sekunden bei Lichtszene
-	mov	a,r6
-	add	a,#_timerstate
-	mov	r0,a
-	mov	@r0,#0x50
-	ljmp	00181$
-00157$:
-	C$fb_app_taster.c$249$4$23 ==.
-;	..\fb_app_taster.c:249: if (timerstate[buttonno+4]==0x50){// wenn 5 sekunden noch nicht erreicht LZ senden
-	mov	r0,_bp
-	inc	r0
-	mov	a,#0x04
-	add	a,@r0
-	add	a,#_timerstate
-	mov	r1,a
-	mov	ar6,@r1
-	cjne	r6,#0x50,00154$
-	C$fb_app_taster.c$250$5$24 ==.
-;	..\fb_app_taster.c:250: write_obj_value(buttonno+8,eeprom[0xD5+(buttonno*4)]);
-	mov	a,#0xD5
-	add	a,r7
-	mov	dptr,#_eeprom
-	movc	a,@a+dptr
-	mov	r6,a
-	mov	r5,#0x00
-	mov	r0,_bp
-	inc	r0
-	mov	a,#0x08
-	add	a,@r0
-	mov	dpl,a
-	push	ar6
-	push	ar5
-	lcall	_write_obj_value
-	dec	sp
-	dec	sp
-	C$fb_app_taster.c$251$5$24 ==.
-;	..\fb_app_taster.c:251: switch_led(buttonno,1);
-	setb	b[0]
-	mov	bits,b
-	mov	r0,_bp
-	inc	r0
-	mov	dpl,@r0
-	lcall	_switch_led
-	sjmp	00155$
-00154$:
-	C$fb_app_taster.c$254$5$25 ==.
-;	..\fb_app_taster.c:254: write_obj_value(buttonno+8,eeprom[0xD5+(buttonno*4)]|0x80);
-	mov	a,#0xD5
-	add	a,r7
-	mov	dptr,#_eeprom
-	movc	a,@a+dptr
-	mov	r6,a
-	orl	ar6,#0x80
-	mov	r5,#0x00
-	mov	r0,_bp
-	inc	r0
-	mov	a,#0x08
-	add	a,@r0
-	mov	dpl,a
-	push	ar6
-	push	ar5
-	lcall	_write_obj_value
-	dec	sp
-	dec	sp
-00155$:
-	C$fb_app_taster.c$256$4$23 ==.
-;	..\fb_app_taster.c:256: send_obj_value(buttonno+8);
-	mov	r0,_bp
-	inc	r0
-	mov	a,#0x08
-	add	a,@r0
-	mov	dpl,a
-	lcall	_send_obj_value
-	C$fb_app_taster.c$257$4$23 ==.
-;	..\fb_app_taster.c:257: timerstate[buttonno+4]=0;
-	mov	r0,_bp
-	inc	r0
-	mov	a,#0x04
-	add	a,@r0
-	mov	r6,a
-	add	a,#_timerstate
-	mov	r0,a
-	mov	@r0,#0x00
-	C$fb_app_taster.c$258$4$23 ==.
-;	..\fb_app_taster.c:258: timercnt[buttonno+4]=0;
-	mov	a,r6
-	add	a,#_timercnt
-	mov	r0,a
-	mov	@r0,#0x00
-	C$fb_app_taster.c$260$3$20 ==.
-;	..\fb_app_taster.c:260: break;
-	ljmp	00181$
-	C$fb_app_taster.c$261$3$20 ==.
-;	..\fb_app_taster.c:261: case 2: // ++++++  Helligkeitswertgeber
-00159$:
-	C$fb_app_taster.c$262$3$20 ==.
-;	..\fb_app_taster.c:262: if (buttonval){
-	jnb	b0,00163$
-	C$fb_app_taster.c$263$4$26 ==.
-;	..\fb_app_taster.c:263: write_obj_value(buttonno+8,(eeprom[0xD5+(buttonno*4)]<<8)+ eeprom[0xD6+(buttonno*4)]);
-	mov	a,#0xD5
-	add	a,r7
-	mov	dptr,#_eeprom
-	movc	a,@a+dptr
-	mov	r5,a
-	mov	r6,#0x00
-	mov	a,#0xD6
-	add	a,r7
-	mov	dptr,#_eeprom
-	movc	a,@a+dptr
-	mov	r3,#0x00
-	add	a,r6
-	mov	r6,a
-	mov	a,r3
-	addc	a,r5
-	mov	r5,a
-	mov	r0,_bp
-	inc	r0
-	mov	a,#0x08
-	add	a,@r0
-	mov	r4,a
-	push	ar7
-	push	ar4
-	push	ar6
-	push	ar5
-	mov	dpl,r4
-	lcall	_write_obj_value
-	dec	sp
-	dec	sp
-	pop	ar4
-	C$fb_app_taster.c$264$4$26 ==.
-;	..\fb_app_taster.c:264: send_obj_value(buttonno+8);
-	mov	dpl,r4
-	lcall	_send_obj_value
-	C$fb_app_taster.c$265$4$26 ==.
-;	..\fb_app_taster.c:265: switch_led(buttonno,1);
-	setb	b[0]
-	mov	bits,b
-	mov	r0,_bp
-	inc	r0
-	mov	dpl,@r0
-	lcall	_switch_led
-	pop	ar7
-	C$fb_app_taster.c$266$4$26 ==.
-;	..\fb_app_taster.c:266: if(!(eeprom[0xD3+(buttonno*4)]& 0x80)){// schauen ob Verstellung freigegeben
-	mov	a,#0xD3
-	add	a,r7
-	mov	dptr,#_eeprom
-	movc	a,@a+dptr
-	mov	r6,a
-	jnb	acc.7,00256$
-	ljmp	00181$
-00256$:
-	C$fb_app_taster.c$267$5$27 ==.
-;	..\fb_app_taster.c:267: timercnt[buttonno+4]=156;
-	mov	r0,_bp
-	inc	r0
-	mov	a,#0x04
-	add	a,@r0
-	mov	r6,a
-	add	a,#_timercnt
-	mov	r0,a
-	mov	@r0,#0x9C
-	C$fb_app_taster.c$268$5$27 ==.
-;	..\fb_app_taster.c:268: timerbase[buttonno+4]=2; //(32ms)
-	mov	a,r6
-	add	a,#_timerbase
-	mov	r0,a
-	mov	@r0,#0x02
-	C$fb_app_taster.c$269$5$27 ==.
-;	..\fb_app_taster.c:269: timerstate[buttonno+4]=0x70;// Betätigung länger 5 sekunden bei Dimmwert
-	mov	a,r6
-	add	a,#_timerstate
-	mov	r0,a
-	mov	@r0,#0x70
-	ljmp	00181$
-00163$:
-	C$fb_app_taster.c$276$4$28 ==.
-;	..\fb_app_taster.c:276: timerstate[buttonno+4]=0;
-	mov	r0,_bp
-	inc	r0
-	mov	a,#0x04
-	add	a,@r0
-	add	a,#_timerstate
-	mov	r0,a
-	mov	@r0,#0x00
-	C$fb_app_taster.c$278$3$20 ==.
-;	..\fb_app_taster.c:278: break;
-	ljmp	00181$
-	C$fb_app_taster.c$279$3$20 ==.
-;	..\fb_app_taster.c:279: case 3:	// ++++++  Temperaturwertgeber
-00165$:
-	C$fb_app_taster.c$280$3$20 ==.
-;	..\fb_app_taster.c:280: if (buttonval){
-	jnb	b0,00169$
-	C$fb_app_taster.c$281$4$30 ==.
-;	..\fb_app_taster.c:281: write_obj_value(buttonno+8,(eeprom[0xD5+(buttonno*4)]<<8)+ eeprom[0xD6+(buttonno*4)]);
-	mov	a,#0xD5
-	add	a,r7
-	mov	dptr,#_eeprom
-	movc	a,@a+dptr
-	mov	r5,a
-	mov	r6,#0x00
-	mov	a,#0xD6
-	add	a,r7
-	mov	dptr,#_eeprom
-	movc	a,@a+dptr
-	mov	r3,#0x00
-	add	a,r6
-	mov	r6,a
-	mov	a,r3
-	addc	a,r5
-	mov	r5,a
-	mov	r0,_bp
-	inc	r0
-	mov	a,#0x08
-	add	a,@r0
-	mov	r4,a
-	push	ar7
-	push	ar4
-	push	ar6
-	push	ar5
-	mov	dpl,r4
-	lcall	_write_obj_value
-	dec	sp
-	dec	sp
-	pop	ar4
-	C$fb_app_taster.c$282$4$30 ==.
-;	..\fb_app_taster.c:282: send_obj_value(buttonno+8);
-	mov	dpl,r4
-	lcall	_send_obj_value
-	C$fb_app_taster.c$283$4$30 ==.
-;	..\fb_app_taster.c:283: switch_led(buttonno,1);
-	setb	b[0]
-	mov	bits,b
-	mov	r0,_bp
-	inc	r0
-	mov	dpl,@r0
-	lcall	_switch_led
-	pop	ar7
-	C$fb_app_taster.c$284$4$30 ==.
-;	..\fb_app_taster.c:284: if(!(eeprom[0xD3+(buttonno*4)]& 0x80)){// schauen ob Verstellung freigegeben
-	mov	a,#0xD3
-	add	a,r7
-	mov	dptr,#_eeprom
-	movc	a,@a+dptr
-	mov	r6,a
-	jnb	acc.7,00258$
-	ljmp	00181$
-00258$:
-	C$fb_app_taster.c$285$5$31 ==.
-;	..\fb_app_taster.c:285: timercnt[buttonno+4]=156;
-	mov	r0,_bp
-	inc	r0
-	mov	a,#0x04
-	add	a,@r0
-	mov	r6,a
-	add	a,#_timercnt
-	mov	r0,a
-	mov	@r0,#0x9C
-	C$fb_app_taster.c$286$5$31 ==.
-;	..\fb_app_taster.c:286: timerbase[buttonno+4]=2; //(32ms)
-	mov	a,r6
-	add	a,#_timerbase
-	mov	r0,a
-	mov	@r0,#0x02
-	C$fb_app_taster.c$287$5$31 ==.
-;	..\fb_app_taster.c:287: timerstate[buttonno+4]=0x90;// Betätigung länger 5 sekunden bei Dimmwert
-	mov	a,r6
-	add	a,#_timerstate
-	mov	r0,a
-	mov	@r0,#0x90
-	ljmp	00181$
-00169$:
-	C$fb_app_taster.c$295$4$32 ==.
-;	..\fb_app_taster.c:295: timerstate[buttonno+4]=0;
-	mov	r0,_bp
-	inc	r0
-	mov	a,#0x04
-	add	a,@r0
-	add	a,#_timerstate
-	mov	r0,a
-	mov	@r0,#0x00
-	C$fb_app_taster.c$297$3$20 ==.
-;	..\fb_app_taster.c:297: break;
-	ljmp	00181$
-	C$fb_app_taster.c$298$3$20 ==.
-;	..\fb_app_taster.c:298: case 4: // ++++++   Dimmwertgeber
-00171$:
-	C$fb_app_taster.c$299$3$20 ==.
-;	..\fb_app_taster.c:299: if (buttonval){
-	jnb	b0,00177$
-	C$fb_app_taster.c$300$4$34 ==.
-;	..\fb_app_taster.c:300: write_obj_value(buttonno+8,eeprom[0xD5+(buttonno*4)]);
-	mov	a,#0xD5
-	add	a,r7
-	mov	dptr,#_eeprom
-	movc	a,@a+dptr
-	mov	r6,a
-	mov	r5,#0x00
-	mov	r0,_bp
-	inc	r0
-	mov	a,#0x08
-	add	a,@r0
-	mov	r4,a
-	push	ar7
-	push	ar4
-	push	ar6
-	push	ar5
-	mov	dpl,r4
-	lcall	_write_obj_value
-	dec	sp
-	dec	sp
-	pop	ar4
-	C$fb_app_taster.c$301$4$34 ==.
-;	..\fb_app_taster.c:301: send_obj_value(buttonno+8);
-	mov	dpl,r4
-	lcall	_send_obj_value
-	C$fb_app_taster.c$302$4$34 ==.
-;	..\fb_app_taster.c:302: switch_led(buttonno,1);
-	setb	b[0]
-	mov	bits,b
-	mov	r0,_bp
-	inc	r0
-	mov	dpl,@r0
-	lcall	_switch_led
-	pop	ar7
-	C$fb_app_taster.c$303$4$34 ==.
-;	..\fb_app_taster.c:303: if(!(eeprom[0xD3+(buttonno*4)]& 0x80)){// schauen ob Verstellung freigegeben
-	mov	a,#0xD3
-	add	a,r7
-	mov	dptr,#_eeprom
-	movc	a,@a+dptr
-	mov	r6,a
-	jb	acc.7,00181$
-	C$fb_app_taster.c$304$5$35 ==.
-;	..\fb_app_taster.c:304: timercnt[buttonno+4]=156;
-	mov	r0,_bp
-	inc	r0
-	mov	a,#0x04
-	add	a,@r0
-	mov	r6,a
-	add	a,#_timercnt
-	mov	r0,a
-	mov	@r0,#0x9C
-	C$fb_app_taster.c$305$5$35 ==.
-;	..\fb_app_taster.c:305: timerbase[buttonno+4]=2; //(32ms)
-	mov	a,r6
-	add	a,#_timerbase
-	mov	r0,a
-	mov	@r0,#0x02
-	C$fb_app_taster.c$306$5$35 ==.
-;	..\fb_app_taster.c:306: timerstate[buttonno+4]=0xB0;// Betätigung länger 5 sekunden bei Dimmwert
-	mov	a,r6
-	add	a,#_timerstate
-	mov	r0,a
-	mov	@r0,#0xB0
-	sjmp	00181$
-00177$:
-	C$fb_app_taster.c$310$4$36 ==.
-;	..\fb_app_taster.c:310: if (timerstate[buttonno+4]==0xC0){
-	mov	r0,_bp
-	inc	r0
-	mov	a,#0x04
-	add	a,@r0
-	add	a,#_timerstate
-	mov	r1,a
-	mov	ar6,@r1
-	cjne	r6,#0xC0,00175$
-	C$fb_app_taster.c$312$5$37 ==.
-;	..\fb_app_taster.c:312: EA=0;		// Interrupts sperren, damit flashen nicht unterbrochen wird
-	clr	_IEN0_7
-	C$fb_app_taster.c$313$5$37 ==.
-;	..\fb_app_taster.c:313: START_WRITECYCLE
-	mov	_FMCON,#0x00
-	C$fb_app_taster.c$314$5$37 ==.
-;	..\fb_app_taster.c:314: WRITE_BYTE(0x01,0xD5+(buttonno*4),read_obj_value(buttonno+8));
-	mov	_FMADRH,#0x1D
-	mov	a,#0xD5
-	add	a,r7
-	mov	_FMADRL,a
-	mov	r0,_bp
-	inc	r0
-	mov	a,#0x08
-	add	a,@r0
-	mov	dpl,a
-	lcall	_read_obj_value
-	mov	r4,dpl
-	mov	r5,dph
-	mov	r6,b
-	mov	r7,a
-	mov	_FMDATA,r4
-	C$fb_app_taster.c$315$5$37 ==.
-;	..\fb_app_taster.c:315: STOP_WRITECYCLE // Lichtszene speichern
-	mov	_FMCON,#0x68
-	C$fb_app_taster.c$316$5$37 ==.
-;	..\fb_app_taster.c:316: EA=1;
-	setb	_IEN0_7
-00175$:
-	C$fb_app_taster.c$319$4$36 ==.
-;	..\fb_app_taster.c:319: timerstate[buttonno+4]=0;
-	mov	r0,_bp
-	inc	r0
-	mov	a,#0x04
-	add	a,@r0
-	add	a,#_timerstate
-	mov	r0,a
-	mov	@r0,#0x00
-	C$fb_app_taster.c$326$1$1 ==.
-;	..\fb_app_taster.c:326: }
-00181$:
 	dec	sp
 	pop	_bp
-	C$fb_app_taster.c$327$1$1 ==.
+	C$fb_app_taster.c$325$1$1 ==.
 	XG$button_changed$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -1857,15 +1327,15 @@ _button_changed:
 ;objno                     Allocated to registers r7 
 ;------------------------------------------------------------
 	G$read_obj_value$0$0 ==.
-	C$fb_app_taster.c$353$1$1 ==.
-;	..\fb_app_taster.c:353: unsigned long read_obj_value(unsigned char objno)
+	C$fb_app_taster.c$351$1$1 ==.
+;	../fb_app_taster.c:351: unsigned long read_obj_value(unsigned char objno)
 ;	-----------------------------------------
 ;	 function read_obj_value
 ;	-----------------------------------------
 _read_obj_value:
 	mov	r7,dpl
-	C$fb_app_taster.c$356$1$1 ==.
-;	..\fb_app_taster.c:356: if(objno<4)	return(object_value[objno]);
+	C$fb_app_taster.c$354$1$1 ==.
+;	../fb_app_taster.c:354: if(objno<4)	return(object_value[objno]);
 	cjne	r7,#0x04,00107$
 00107$:
 	jnc	00102$
@@ -1882,8 +1352,8 @@ _read_obj_value:
 	mov	a,r3
 	sjmp	00104$
 00102$:
-	C$fb_app_taster.c$357$1$1 ==.
-;	..\fb_app_taster.c:357: else return((object_value[objno-4]<<8)+object_value[objno]);
+	C$fb_app_taster.c$355$1$1 ==.
+;	../fb_app_taster.c:355: else return((object_value[objno-4]<<8)+object_value[objno]);
 	mov	a,r7
 	add	a,#0xFC
 	add	a,#_object_value
@@ -1910,7 +1380,7 @@ _read_obj_value:
 	mov	dph,r5
 	mov	b,r7
 00104$:
-	C$fb_app_taster.c$359$1$1 ==.
+	C$fb_app_taster.c$357$1$1 ==.
 	XG$read_obj_value$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -1920,8 +1390,8 @@ _read_obj_value:
 ;objno                     Allocated to registers r7 
 ;------------------------------------------------------------
 	G$write_obj_value$0$0 ==.
-	C$fb_app_taster.c$361$1$1 ==.
-;	..\fb_app_taster.c:361: void write_obj_value(unsigned char objno, unsigned int objval)
+	C$fb_app_taster.c$359$1$1 ==.
+;	../fb_app_taster.c:359: void write_obj_value(unsigned char objno, unsigned int objval)
 ;	-----------------------------------------
 ;	 function write_obj_value
 ;	-----------------------------------------
@@ -1929,8 +1399,8 @@ _write_obj_value:
 	push	_bp
 	mov	_bp,sp
 	mov	r7,dpl
-	C$fb_app_taster.c$363$1$1 ==.
-;	..\fb_app_taster.c:363: if(objno<4)object_value[objno]=objval;
+	C$fb_app_taster.c$361$1$1 ==.
+;	../fb_app_taster.c:361: if(objno<4)object_value[objno]=objval;
 	cjne	r7,#0x04,00107$
 00107$:
 	jnc	00102$
@@ -1944,8 +1414,8 @@ _write_obj_value:
 	mov	@r1,ar6
 	sjmp	00104$
 00102$:
-	C$fb_app_taster.c$365$2$2 ==.
-;	..\fb_app_taster.c:365: object_value[objno-4]=objval>>8;
+	C$fb_app_taster.c$363$2$2 ==.
+;	../fb_app_taster.c:363: object_value[objno-4]=objval>>8;
 	mov	a,r7
 	add	a,#0xFC
 	add	a,#_object_value
@@ -1956,8 +1426,8 @@ _write_obj_value:
 	inc	r0
 	mov	ar6,@r0
 	mov	@r1,ar6
-	C$fb_app_taster.c$366$2$2 ==.
-;	..\fb_app_taster.c:366: object_value[objno]=objval&0xFF;
+	C$fb_app_taster.c$364$2$2 ==.
+;	../fb_app_taster.c:364: object_value[objno]=objval&0xFF;
 	mov	a,r7
 	add	a,#_object_value
 	mov	r1,a
@@ -1969,7 +1439,7 @@ _write_obj_value:
 	mov	@r1,ar6
 00104$:
 	pop	_bp
-	C$fb_app_taster.c$368$1$1 ==.
+	C$fb_app_taster.c$366$1$1 ==.
 	XG$write_obj_value$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -1979,22 +1449,22 @@ _write_obj_value:
 ;objtype                   Allocated to registers r6 
 ;------------------------------------------------------------
 	G$write_value_req$0$0 ==.
-	C$fb_app_taster.c$378$1$1 ==.
-;	..\fb_app_taster.c:378: void write_value_req(unsigned char objno)
+	C$fb_app_taster.c$376$1$1 ==.
+;	../fb_app_taster.c:376: void write_value_req(unsigned char objno)
 ;	-----------------------------------------
 ;	 function write_value_req
 ;	-----------------------------------------
 _write_value_req:
 	mov	r7,dpl
-	C$fb_app_taster.c$381$1$1 ==.
-;	..\fb_app_taster.c:381: if (objno<12) {					// max 12 objekte (0-11)
+	C$fb_app_taster.c$379$1$1 ==.
+;	../fb_app_taster.c:379: if (objno<12) {					// max 12 objekte (0-11)
 	cjne	r7,#0x0C,00120$
 00120$:
 	jc	00121$
 	ljmp	00112$
 00121$:
-	C$fb_app_taster.c$382$2$2 ==.
-;	..\fb_app_taster.c:382: objtype=eeprom[eeprom[COMMSTABPTR]+objno*3+4];
+	C$fb_app_taster.c$380$2$2 ==.
+;	../fb_app_taster.c:380: objtype=eeprom[eeprom[COMMSTABPTR]+objno*3+4];
 	mov	dptr,#(_eeprom + 0x0012)
 	clr	a
 	movc	a,@a+dptr
@@ -2006,13 +1476,13 @@ _write_value_req:
 	add	a,#0x04
 	mov	dptr,#_eeprom
 	movc	a,@a+dptr
-	C$fb_app_taster.c$383$2$2 ==.
-;	..\fb_app_taster.c:383: if (objtype<=6){
+	C$fb_app_taster.c$381$2$2 ==.
+;	../fb_app_taster.c:381: if (objtype<=6){
 	mov  r6,a
 	add	a,#0xff - 0x06
 	jc	00102$
-	C$fb_app_taster.c$384$3$3 ==.
-;	..\fb_app_taster.c:384: write_obj_value(objno,telegramm[7]& 0x3F); //bit 6+7 löschen (0x40,0x80)
+	C$fb_app_taster.c$382$3$3 ==.
+;	../fb_app_taster.c:382: write_obj_value(objno,telegramm[7]& 0x3F); //bit 6+7 löschen (0x40,0x80)
 	mov	a,#0x3F
 	anl	a,(_telegramm + 0x0007)
 	mov	r5,a
@@ -2028,8 +1498,8 @@ _write_value_req:
 	pop	ar6
 	pop	ar7
 00102$:
-	C$fb_app_taster.c$386$2$2 ==.
-;	..\fb_app_taster.c:386: if (objtype==7)write_obj_value(objno,telegramm[8]);
+	C$fb_app_taster.c$384$2$2 ==.
+;	../fb_app_taster.c:384: if (objtype==7)write_obj_value(objno,telegramm[8]);
 	cjne	r6,#0x07,00104$
 	mov	r4,(_telegramm + 0x0008)
 	mov	r5,#0x00
@@ -2044,8 +1514,8 @@ _write_value_req:
 	pop	ar6
 	pop	ar7
 00104$:
-	C$fb_app_taster.c$387$2$2 ==.
-;	..\fb_app_taster.c:387: if (objtype==8)write_obj_value(objno,telegramm[9]+(telegramm[8]<<8));
+	C$fb_app_taster.c$385$2$2 ==.
+;	../fb_app_taster.c:385: if (objtype==8)write_obj_value(objno,telegramm[9]+(telegramm[8]<<8));
 	cjne	r6,#0x08,00106$
 	mov	r5,(_telegramm + 0x0009)
 	mov	r6,#0x00
@@ -2066,8 +1536,8 @@ _write_value_req:
 	dec	sp
 	pop	ar7
 00106$:
-	C$fb_app_taster.c$388$2$2 ==.
-;	..\fb_app_taster.c:388: if ((objno<4) && ((eeprom[COMMAND+(objno*4)]) & 0x07) <4) switch_led(objno,telegramm[7]&0x01);	// LED nur schalten, wenn nicht auf Betï¿½tigungsanzeige parametriert
+	C$fb_app_taster.c$386$2$2 ==.
+;	../fb_app_taster.c:386: if ((objno<4) && ((eeprom[COMMAND+(objno*4)]) & 0x07) <4) switch_led(objno,telegramm[7]&0x01);	// LED nur schalten, wenn nicht auf Betï¿½tigungsanzeige parametriert
 	cjne	r7,#0x04,00127$
 00127$:
 	jnc	00112$
@@ -2091,7 +1561,7 @@ _write_value_req:
 	mov	dpl,r7
 	lcall	_switch_led
 00112$:
-	C$fb_app_taster.c$390$1$1 ==.
+	C$fb_app_taster.c$388$1$1 ==.
 	XG$write_value_req$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -2100,20 +1570,20 @@ _write_value_req:
 ;objno                     Allocated to registers r7 
 ;------------------------------------------------------------
 	G$read_value_req$0$0 ==.
-	C$fb_app_taster.c$400$1$1 ==.
-;	..\fb_app_taster.c:400: void read_value_req(unsigned char objno)
+	C$fb_app_taster.c$398$1$1 ==.
+;	../fb_app_taster.c:398: void read_value_req(unsigned char objno)
 ;	-----------------------------------------
 ;	 function read_value_req
 ;	-----------------------------------------
 _read_value_req:
 	mov	r7,dpl
-	C$fb_app_taster.c$402$1$1 ==.
-;	..\fb_app_taster.c:402: send_obj_value(objno+0x40);
+	C$fb_app_taster.c$400$1$1 ==.
+;	../fb_app_taster.c:400: send_obj_value(objno+0x40);
 	mov	a,#0x40
 	add	a,r7
 	mov	dpl,a
 	lcall	_send_obj_value
-	C$fb_app_taster.c$403$1$1 ==.
+	C$fb_app_taster.c$401$1$1 ==.
 	XG$read_value_req$0$0 ==.
 	ret
 ;------------------------------------------------------------
@@ -2125,22 +1595,22 @@ _read_value_req:
 ;ledvar                    Allocated to registers r6 
 ;------------------------------------------------------------
 	G$switch_led$0$0 ==.
-	C$fb_app_taster.c$415$1$1 ==.
-;	..\fb_app_taster.c:415: void switch_led(unsigned char ledno, __bit onoff)
+	C$fb_app_taster.c$413$1$1 ==.
+;	../fb_app_taster.c:413: void switch_led(unsigned char ledno, __bit onoff)
 ;	-----------------------------------------
 ;	 function switch_led
 ;	-----------------------------------------
 _switch_led:
 	mov	r7,dpl
-	C$fb_app_taster.c$419$1$1 ==.
-;	..\fb_app_taster.c:419: if (ledno<4) {
+	C$fb_app_taster.c$417$1$1 ==.
+;	../fb_app_taster.c:417: if (ledno<4) {
 	cjne	r7,#0x04,00122$
 00122$:
 	jc	00123$
 	ljmp	00112$
 00123$:
-	C$fb_app_taster.c$420$2$2 ==.
-;	..\fb_app_taster.c:420: command = ((eeprom[COMMAND+(ledno*4)]) & 0x07);	// Befehl der Status LED
+	C$fb_app_taster.c$418$2$2 ==.
+;	../fb_app_taster.c:418: command = ((eeprom[COMMAND+(ledno*4)]) & 0x07);	// Befehl der Status LED
 	mov	a,r7
 	add	a,r7
 	add	a,acc
@@ -2149,8 +1619,8 @@ _switch_led:
 	movc	a,@a+dptr
 	mov	r6,a
 	anl	ar6,#0x07
-	C$fb_app_taster.c$421$2$2 ==.
-;	..\fb_app_taster.c:421: switch (command) {
+	C$fb_app_taster.c$419$2$2 ==.
+;	../fb_app_taster.c:419: switch (command) {
 	cjne	r6,#0x00,00124$
 	sjmp	00101$
 00124$:
@@ -2160,55 +1630,55 @@ _switch_led:
 	cjne	r6,#0x03,00126$
 	sjmp	00103$
 00126$:
-	C$fb_app_taster.c$422$3$3 ==.
-;	..\fb_app_taster.c:422: case 0:		// immer AUS
+	C$fb_app_taster.c$420$3$3 ==.
+;	../fb_app_taster.c:420: case 0:		// immer AUS
 	cjne	r6,#0x04,00109$
 	sjmp	00104$
 00101$:
-	C$fb_app_taster.c$423$3$3 ==.
-;	..\fb_app_taster.c:423: onoff=0;
+	C$fb_app_taster.c$421$3$3 ==.
+;	../fb_app_taster.c:421: onoff=0;
 	clr	b0
-	C$fb_app_taster.c$424$3$3 ==.
-;	..\fb_app_taster.c:424: break;
-	C$fb_app_taster.c$425$3$3 ==.
-;	..\fb_app_taster.c:425: case 1:		// immer an
+	C$fb_app_taster.c$422$3$3 ==.
+;	../fb_app_taster.c:422: break;
+	C$fb_app_taster.c$423$3$3 ==.
+;	../fb_app_taster.c:423: case 1:		// immer an
 	sjmp	00109$
 00102$:
-	C$fb_app_taster.c$426$3$3 ==.
-;	..\fb_app_taster.c:426: onoff=1;
+	C$fb_app_taster.c$424$3$3 ==.
+;	../fb_app_taster.c:424: onoff=1;
 	setb	b0
+	C$fb_app_taster.c$425$3$3 ==.
+;	../fb_app_taster.c:425: break;
 	C$fb_app_taster.c$427$3$3 ==.
-;	..\fb_app_taster.c:427: break;
-	C$fb_app_taster.c$429$3$3 ==.
-;	..\fb_app_taster.c:429: case 3:		// LED = invertierte Statusanzeige
+;	../fb_app_taster.c:427: case 3:		// LED = invertierte Statusanzeige
 	sjmp	00109$
 00103$:
-	C$fb_app_taster.c$430$3$3 ==.
-;	..\fb_app_taster.c:430: onoff=!onoff;
+	C$fb_app_taster.c$428$3$3 ==.
+;	../fb_app_taster.c:428: onoff=!onoff;
 	cpl	b0
-	C$fb_app_taster.c$431$3$3 ==.
-;	..\fb_app_taster.c:431: break;
-	C$fb_app_taster.c$432$3$3 ==.
-;	..\fb_app_taster.c:432: case 4:		// LED = Betaetigungsanzeige
+	C$fb_app_taster.c$429$3$3 ==.
+;	../fb_app_taster.c:429: break;
+	C$fb_app_taster.c$430$3$3 ==.
+;	../fb_app_taster.c:430: case 4:		// LED = Betaetigungsanzeige
 	sjmp	00109$
 00104$:
-	C$fb_app_taster.c$433$3$3 ==.
-;	..\fb_app_taster.c:433: onoff=1;	// erstmal an beim druecken der Taste
+	C$fb_app_taster.c$431$3$3 ==.
+;	../fb_app_taster.c:431: onoff=1;	// erstmal an beim druecken der Taste
 	setb	b0
-	C$fb_app_taster.c$434$3$3 ==.
-;	..\fb_app_taster.c:434: timerstate[ledno]= 0x10;
+	C$fb_app_taster.c$432$3$3 ==.
+;	../fb_app_taster.c:432: timerstate[ledno]= 0x10;
 	mov	a,r7
 	add	a,#_timerstate
 	mov	r0,a
 	mov	@r0,#0x10
-	C$fb_app_taster.c$435$3$3 ==.
-;	..\fb_app_taster.c:435: timerbase[ledno]=1;
+	C$fb_app_taster.c$433$3$3 ==.
+;	../fb_app_taster.c:433: timerbase[ledno]=1;
 	mov	a,r7
 	add	a,#_timerbase
 	mov	r0,a
 	mov	@r0,#0x01
-	C$fb_app_taster.c$436$3$3 ==.
-;	..\fb_app_taster.c:436: switch (eeprom[LED_DURATION]) {		// dann ueber delay-timer aus
+	C$fb_app_taster.c$434$3$3 ==.
+;	../fb_app_taster.c:434: switch (eeprom[LED_DURATION]) {		// dann ueber delay-timer aus
 	mov	dptr,#(_eeprom + 0x00ce)
 	clr	a
 	movc	a,@a+dptr
@@ -2219,49 +1689,49 @@ _switch_led:
 	cjne	r6,#0x76,00129$
 	sjmp	00106$
 00129$:
-	C$fb_app_taster.c$437$4$4 ==.
-;	..\fb_app_taster.c:437: case 38:	// 0,75 sec
+	C$fb_app_taster.c$435$4$4 ==.
+;	../fb_app_taster.c:435: case 38:	// 0,75 sec
 	cjne	r6,#0x96,00109$
 	sjmp	00107$
 00105$:
-	C$fb_app_taster.c$438$4$4 ==.
-;	..\fb_app_taster.c:438: timercnt[ledno]=47;
+	C$fb_app_taster.c$436$4$4 ==.
+;	../fb_app_taster.c:436: timercnt[ledno]=47;
 	mov	a,r7
 	add	a,#_timercnt
 	mov	r0,a
 	mov	@r0,#0x2F
-	C$fb_app_taster.c$439$4$4 ==.
-;	..\fb_app_taster.c:439: break;
-	C$fb_app_taster.c$440$4$4 ==.
-;	..\fb_app_taster.c:440: case 118:	// 2,25 sec
+	C$fb_app_taster.c$437$4$4 ==.
+;	../fb_app_taster.c:437: break;
+	C$fb_app_taster.c$438$4$4 ==.
+;	../fb_app_taster.c:438: case 118:	// 2,25 sec
 	sjmp	00109$
 00106$:
-	C$fb_app_taster.c$441$4$4 ==.
-;	..\fb_app_taster.c:441: timercnt[ledno]=141;
+	C$fb_app_taster.c$439$4$4 ==.
+;	../fb_app_taster.c:439: timercnt[ledno]=141;
 	mov	a,r7
 	add	a,#_timercnt
 	mov	r0,a
 	mov	@r0,#0x8D
-	C$fb_app_taster.c$442$4$4 ==.
-;	..\fb_app_taster.c:442: break;
-	C$fb_app_taster.c$443$4$4 ==.
-;	..\fb_app_taster.c:443: case 150:	// 3 sec
+	C$fb_app_taster.c$440$4$4 ==.
+;	../fb_app_taster.c:440: break;
+	C$fb_app_taster.c$441$4$4 ==.
+;	../fb_app_taster.c:441: case 150:	// 3 sec
 	sjmp	00109$
 00107$:
-	C$fb_app_taster.c$444$4$4 ==.
-;	..\fb_app_taster.c:444: timercnt[ledno]=188;
+	C$fb_app_taster.c$442$4$4 ==.
+;	../fb_app_taster.c:442: timercnt[ledno]=188;
 	mov	a,r7
 	add	a,#_timercnt
 	mov	r0,a
 	mov	@r0,#0xBC
-	C$fb_app_taster.c$447$2$2 ==.
-;	..\fb_app_taster.c:447: }
+	C$fb_app_taster.c$445$2$2 ==.
+;	../fb_app_taster.c:445: }
 00109$:
-	C$fb_app_taster.c$448$2$2 ==.
-;	..\fb_app_taster.c:448: ledvar=LEDSTATE;
+	C$fb_app_taster.c$446$2$2 ==.
+;	../fb_app_taster.c:446: ledvar=LEDSTATE;
 	mov	r6,_LEDSTATE
-	C$fb_app_taster.c$449$2$2 ==.
-;	..\fb_app_taster.c:449: ledvar&= ~(1<<(ledno+4));	// LEDs sind an Pin 4-7
+	C$fb_app_taster.c$447$2$2 ==.
+;	../fb_app_taster.c:447: ledvar&= ~(1<<(ledno+4));	// LEDs sind an Pin 4-7
 	mov	a,r7
 	add	a,#0x04
 	mov	r7,a
@@ -2275,8 +1745,8 @@ _switch_led:
 	djnz	b,00131$
 	cpl	a
 	anl	ar6,a
-	C$fb_app_taster.c$450$2$2 ==.
-;	..\fb_app_taster.c:450: ledvar |= ((onoff<<(ledno+4)) | 0x0F);	// unteren 4 bits immer auf 1 lassen !!!
+	C$fb_app_taster.c$448$2$2 ==.
+;	../fb_app_taster.c:448: ledvar |= ((onoff<<(ledno+4)) | 0x0F);	// unteren 4 bits immer auf 1 lassen !!!
 	mov	c,b0
 	clr	a
 	rlc	a
@@ -2293,32 +1763,32 @@ _switch_led:
 	mov	r7,a
 	orl	a,r6
 	mov	_LEDSTATE,a
-	C$fb_app_taster.c$451$2$1 ==.
-;	..\fb_app_taster.c:451: LEDSTATE=ledvar;
+	C$fb_app_taster.c$449$2$1 ==.
+;	../fb_app_taster.c:449: LEDSTATE=ledvar;
 00112$:
-	C$fb_app_taster.c$453$2$1 ==.
+	C$fb_app_taster.c$451$2$1 ==.
 	XG$switch_led$0$0 ==.
 	ret
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'timer0_int'
 ;------------------------------------------------------------
 	G$timer0_int$0$0 ==.
-	C$fb_app_taster.c$456$2$1 ==.
-;	..\fb_app_taster.c:456: void timer0_int  (void) __interrupt (1) // Interrupt T0 für soft PWM LED
+	C$fb_app_taster.c$454$2$1 ==.
+;	../fb_app_taster.c:454: void timer0_int  (void) __interrupt (1) // Interrupt T0 für soft PWM LED
 ;	-----------------------------------------
 ;	 function timer0_int
 ;	-----------------------------------------
 _timer0_int:
 	push	acc
 	push	psw
-	C$fb_app_taster.c$458$1$1 ==.
-;	..\fb_app_taster.c:458: dimmcompare++;
+	C$fb_app_taster.c$456$1$1 ==.
+;	../fb_app_taster.c:456: dimmcompare++;
 	inc	_dimmcompare
-	C$fb_app_taster.c$459$1$1 ==.
-;	..\fb_app_taster.c:459: TF0=0;
+	C$fb_app_taster.c$457$1$1 ==.
+;	../fb_app_taster.c:457: TF0=0;
 	clr	_TCON_5
-	C$fb_app_taster.c$460$1$1 ==.
-;	..\fb_app_taster.c:460: if((dimmcompare) <= dimmwert) PORT = LEDSTATE | 0x0F;// LEDs ein
+	C$fb_app_taster.c$458$1$1 ==.
+;	../fb_app_taster.c:458: if((dimmcompare) <= dimmwert) PORT = LEDSTATE | 0x0F;// LEDs ein
 	clr	c
 	mov	a,_dimmwert
 	subb	a,_dimmcompare
@@ -2328,13 +1798,13 @@ _timer0_int:
 	mov	_P0,a
 	sjmp	00104$
 00102$:
-	C$fb_app_taster.c$461$1$1 ==.
-;	..\fb_app_taster.c:461: else PORT = 0x0F;//LEDs aus
+	C$fb_app_taster.c$459$1$1 ==.
+;	../fb_app_taster.c:459: else PORT = 0x0F;//LEDs aus
 	mov	_P0,#0x0F
 00104$:
 	pop	psw
 	pop	acc
-	C$fb_app_taster.c$463$1$1 ==.
+	C$fb_app_taster.c$461$1$1 ==.
 	XG$timer0_int$0$0 ==.
 	reti
 ;	eliminated unneeded mov psw,# (no regs used in bank)
@@ -2355,8 +1825,8 @@ _timer0_int:
 ;sloc1                     Allocated to stack - _bp +2
 ;------------------------------------------------------------
 	G$delay_timer$0$0 ==.
-	C$fb_app_taster.c$474$1$1 ==.
-;	..\fb_app_taster.c:474: void delay_timer(void)
+	C$fb_app_taster.c$472$1$1 ==.
+;	../fb_app_taster.c:472: void delay_timer(void)
 ;	-----------------------------------------
 ;	 function delay_timer
 ;	-----------------------------------------
@@ -2365,27 +1835,27 @@ _delay_timer:
 	mov	_bp,sp
 	inc	sp
 	inc	sp
-	C$fb_app_taster.c$480$1$1 ==.
-;	..\fb_app_taster.c:480: RTCCON=0x60;
+	C$fb_app_taster.c$478$1$1 ==.
+;	../fb_app_taster.c:478: RTCCON=0x60;
 	mov	_RTCCON,#0x60
-	C$fb_app_taster.c$481$1$1 ==.
-;	..\fb_app_taster.c:481: RTCH=0x00;//RTCH=0x01; 
+	C$fb_app_taster.c$479$1$1 ==.
+;	../fb_app_taster.c:479: RTCH=0x00;//RTCH=0x01;
 	mov	_RTCH,#0x00
-	C$fb_app_taster.c$482$1$1 ==.
-;	..\fb_app_taster.c:482: RTCL=0xE6;//RTCL=0xCD;	
+	C$fb_app_taster.c$480$1$1 ==.
+;	../fb_app_taster.c:480: RTCL=0xE6;//RTCL=0xCD;
 	mov	_RTCL,#0xE6
-	C$fb_app_taster.c$483$1$1 ==.
-;	..\fb_app_taster.c:483: RTCCON=0x61; //	start_rtc(8) RTC neu starten mit 4ms
+	C$fb_app_taster.c$481$1$1 ==.
+;	../fb_app_taster.c:481: RTCCON=0x61; //	start_rtc(8) RTC neu starten mit 4ms
 	mov	_RTCCON,#0x61
-	C$fb_app_taster.c$485$1$1 ==.
-;	..\fb_app_taster.c:485: timer++;
+	C$fb_app_taster.c$483$1$1 ==.
+;	../fb_app_taster.c:483: timer++;
 	inc	_timer
 	clr	a
-	cjne	a,_timer,00190$
+	cjne	a,_timer,00192$
 	inc	(_timer + 1)
-00190$:
-	C$fb_app_taster.c$486$1$1 ==.
-;	..\fb_app_taster.c:486: timerflags = timer&(~(timer-1));// flanke generieren
+00192$:
+	C$fb_app_taster.c$484$1$1 ==.
+;	../fb_app_taster.c:484: timerflags = timer&(~(timer-1));// flanke generieren
 	mov	a,_timer
 	add	a,#0xFF
 	mov	r6,a
@@ -2404,54 +1874,54 @@ _delay_timer:
 	mov	a,r7
 	anl	a,(_timer + 1)
 	mov	(_timerflags + 1),a
-	C$fb_app_taster.c$487$5$5 ==.
-;	..\fb_app_taster.c:487: for(n=0;n<16;n++){
+	C$fb_app_taster.c$485$5$5 ==.
+;	../fb_app_taster.c:485: for(n=0;n<16;n++){
 	mov	r7,#0x00
-00148$:
-	cjne	r7,#0x10,00191$
-00191$:
-	jnc	00151$
-	C$fb_app_taster.c$488$2$2 ==.
-;	..\fb_app_taster.c:488: if(timerflags & 0x0001){// positive flags erzeugen und schieben
+00149$:
+	cjne	r7,#0x10,00193$
+00193$:
+	jnc	00152$
+	C$fb_app_taster.c$486$2$2 ==.
+;	../fb_app_taster.c:486: if(timerflags & 0x0001){// positive flags erzeugen und schieben
 	mov	a,_timerflags
 	jnb	acc.0,00106$
-	C$fb_app_taster.c$489$1$1 ==.
-;	..\fb_app_taster.c:489: for(m=0;m<8;m++){// die timer der reihe nach checken und dec wenn laufen
+	C$fb_app_taster.c$487$1$1 ==.
+;	../fb_app_taster.c:487: for(m=0;m<8;m++){// die timer der reihe nach checken und dec wenn laufen
 	mov	r6,#0x00
-00144$:
-	cjne	r6,#0x08,00194$
-00194$:
+00145$:
+	cjne	r6,#0x08,00196$
+00196$:
 	jnc	00106$
-	C$fb_app_taster.c$490$4$4 ==.
-;	..\fb_app_taster.c:490: if( timercnt[m]){
+	C$fb_app_taster.c$488$4$4 ==.
+;	../fb_app_taster.c:488: if( timercnt[m]){
 	mov	a,r6
 	add	a,#_timercnt
 	mov	r1,a
 	mov	a,@r1
 	mov	r5,a
-	jz	00146$
-	C$fb_app_taster.c$491$5$5 ==.
-;	..\fb_app_taster.c:491: if ((timerbase[m]& 0x0F)==n){// wenn die base mit der gespeicherten base übereinstimmt
+	jz	00147$
+	C$fb_app_taster.c$489$5$5 ==.
+;	../fb_app_taster.c:489: if ((timerbase[m]& 0x0F)==n){// wenn die base mit der gespeicherten base übereinstimmt
 	mov	a,r6
 	add	a,#_timerbase
 	mov	r0,a
 	mov	ar4,@r0
 	anl	ar4,#0x0F
 	mov	a,r4
-	cjne	a,ar7,00146$
-	C$fb_app_taster.c$492$6$6 ==.
-;	..\fb_app_taster.c:492: timercnt[m]=timercnt[m]-1;// den timer[m]decrementieren
+	cjne	a,ar7,00147$
+	C$fb_app_taster.c$490$6$6 ==.
+;	../fb_app_taster.c:490: timercnt[m]=timercnt[m]-1;// den timer[m]decrementieren
 	mov	a,r5
 	dec	a
 	mov	@r1,a
-00146$:
-	C$fb_app_taster.c$489$3$3 ==.
-;	..\fb_app_taster.c:489: for(m=0;m<8;m++){// die timer der reihe nach checken und dec wenn laufen
+00147$:
+	C$fb_app_taster.c$487$3$3 ==.
+;	../fb_app_taster.c:487: for(m=0;m<8;m++){// die timer der reihe nach checken und dec wenn laufen
 	inc	r6
-	sjmp	00144$
+	sjmp	00145$
 00106$:
-	C$fb_app_taster.c$497$2$2 ==.
-;	..\fb_app_taster.c:497: timerflags = timerflags>>1;
+	C$fb_app_taster.c$495$2$2 ==.
+;	../fb_app_taster.c:495: timerflags = timerflags>>1;
 	mov	a,(_timerflags + 1)
 	clr	c
 	rrc	a
@@ -2459,37 +1929,37 @@ _delay_timer:
 	rrc	a
 	xch	a,_timerflags
 	mov	(_timerflags + 1),a
-	C$fb_app_taster.c$487$1$1 ==.
-;	..\fb_app_taster.c:487: for(n=0;n<16;n++){
+	C$fb_app_taster.c$485$1$1 ==.
+;	../fb_app_taster.c:485: for(n=0;n<16;n++){
 	inc	r7
-	sjmp	00148$
-00151$:
-	C$fb_app_taster.c$500$4$9 ==.
-;	..\fb_app_taster.c:500: for(objno=0;objno<8;objno++) {
+	sjmp	00149$
+00152$:
+	C$fb_app_taster.c$498$4$9 ==.
+;	../fb_app_taster.c:498: for(objno=0;objno<8;objno++) {
 	mov	r0,_bp
 	inc	r0
 	mov	@r0,#0x00
-00152$:
+00153$:
 	mov	r0,_bp
 	inc	r0
-	cjne	@r0,#0x08,00199$
-00199$:
-	jc	00200$
-	ljmp	00156$
-00200$:
-	C$fb_app_taster.c$501$2$7 ==.
-;	..\fb_app_taster.c:501: if(!timercnt[objno]) {	// ... es ist also soweit
+	cjne	@r0,#0x08,00201$
+00201$:
+	jc	00202$
+	ljmp	00157$
+00202$:
+	C$fb_app_taster.c$499$2$7 ==.
+;	../fb_app_taster.c:499: if(!timercnt[objno]) {	// ... es ist also soweit
 	mov	r0,_bp
 	inc	r0
 	mov	a,@r0
 	add	a,#_timercnt
 	mov	r1,a
 	mov	a,@r1
-	jz	00201$
-	ljmp	00154$
-00201$:
-	C$fb_app_taster.c$502$3$8 ==.
-;	..\fb_app_taster.c:502: delay_value=timerstate[objno]& 0x0F;
+	jz	00203$
+	ljmp	00155$
+00203$:
+	C$fb_app_taster.c$500$3$8 ==.
+;	../fb_app_taster.c:500: delay_value=timerstate[objno]& 0x0F;
 	push	ar1
 	mov	r1,_bp
 	inc	r1
@@ -2501,54 +1971,57 @@ _delay_timer:
 	mov	a,#0x0F
 	anl	a,r6
 	mov	r5,a
-	C$fb_app_taster.c$504$3$8 ==.
-;	..\fb_app_taster.c:504: switch(timerstate[objno] & 0xF0){
+	C$fb_app_taster.c$502$3$8 ==.
+;	../fb_app_taster.c:502: switch(timerstate[objno] & 0xF0){
 	anl	ar6,#0xF0
-	cjne	r6,#0x10,00202$
+	cjne	r6,#0x10,00204$
 	sjmp	00107$
-00202$:
-	cjne	r6,#0x20,00203$
-	sjmp	00108$
-00203$:
-	cjne	r6,#0x30,00204$
-	ljmp	00112$
 00204$:
-	cjne	r6,#0x40,00205$
-	ljmp	00116$
+	cjne	r6,#0x20,00205$
+	sjmp	00108$
 00205$:
-	cjne	r6,#0x50,00206$
-	ljmp	00117$
+	cjne	r6,#0x30,00206$
+	ljmp	00113$
 00206$:
-	cjne	r6,#0x60,00207$
-	ljmp	00154$
+	cjne	r6,#0x40,00207$
+	ljmp	00117$
 00207$:
-	cjne	r6,#0x70,00208$
-	ljmp	00120$
+	cjne	r6,#0x50,00208$
+	ljmp	00118$
 00208$:
-	cjne	r6,#0x80,00209$
-	ljmp	00120$
+	cjne	r6,#0x60,00209$
+	ljmp	00155$
 00209$:
-	cjne	r6,#0x90,00210$
-	ljmp	00128$
+	cjne	r6,#0x70,00210$
+	ljmp	00121$
 00210$:
-	cjne	r6,#0xA0,00211$
-	ljmp	00128$
+	cjne	r6,#0x80,00211$
+	ljmp	00121$
 00211$:
-	cjne	r6,#0xB0,00212$
-	ljmp	00133$
+	cjne	r6,#0x90,00212$
+	ljmp	00129$
 00212$:
-	cjne	r6,#0xC0,00213$
-	ljmp	00133$
+	cjne	r6,#0xA0,00213$
+	ljmp	00129$
 00213$:
-	ljmp	00154$
-	C$fb_app_taster.c$506$4$9 ==.
-;	..\fb_app_taster.c:506: case 0x10:
+	cjne	r6,#0xB0,00214$
+	ljmp	00134$
+00214$:
+	cjne	r6,#0xC0,00215$
+	ljmp	00134$
+00215$:
+	cjne	r6,#0xF0,00216$
+	sjmp	00109$
+00216$:
+	ljmp	00155$
+	C$fb_app_taster.c$504$4$9 ==.
+;	../fb_app_taster.c:504: case 0x10:
 00107$:
-	C$fb_app_taster.c$508$4$9 ==.
-;	..\fb_app_taster.c:508: ledvar=LEDSTATE;
+	C$fb_app_taster.c$506$4$9 ==.
+;	../fb_app_taster.c:506: ledvar=LEDSTATE;
 	mov	r6,_LEDSTATE
-	C$fb_app_taster.c$509$4$9 ==.
-;	..\fb_app_taster.c:509: ledvar &= ~(1<<(objno+4));	// LEDs sind an Pin 4-7
+	C$fb_app_taster.c$507$4$9 ==.
+;	../fb_app_taster.c:507: ledvar &= ~(1<<(objno+4));	// LEDs sind an Pin 4-7
 	mov	r1,_bp
 	inc	r1
 	mov	a,#0x04
@@ -2556,30 +2029,39 @@ _delay_timer:
 	mov	b,a
 	inc	b
 	mov	a,#0x01
-	sjmp	00216$
-00214$:
+	sjmp	00219$
+00217$:
 	add	a,acc
-00216$:
-	djnz	b,00214$
+00219$:
+	djnz	b,00217$
 	cpl	a
 	mov	r4,a
 	anl	ar6,a
-	C$fb_app_taster.c$510$4$9 ==.
-;	..\fb_app_taster.c:510: ledvar |= 0x0F;				// unbedingt taster pins wieder auf 1
+	C$fb_app_taster.c$508$4$9 ==.
+;	../fb_app_taster.c:508: ledvar |= 0x0F;				// unbedingt taster pins wieder auf 1
 	mov	a,#0x0F
 	orl	a,r6
 	mov	_LEDSTATE,a
-	C$fb_app_taster.c$512$4$9 ==.
-;	..\fb_app_taster.c:512: timerstate[objno]=0;
+	C$fb_app_taster.c$510$4$9 ==.
+;	../fb_app_taster.c:510: timerstate[objno]=0;
 	mov	@r0,#0x00
-	C$fb_app_taster.c$513$4$9 ==.
-;	..\fb_app_taster.c:513: break;
-	ljmp	00154$
-	C$fb_app_taster.c$514$4$9 ==.
-;	..\fb_app_taster.c:514: case 0x20:	// Dimmen
+	C$fb_app_taster.c$511$4$9 ==.
+;	../fb_app_taster.c:511: break;
+	ljmp	00155$
+	C$fb_app_taster.c$512$4$9 ==.
+;	../fb_app_taster.c:512: case 0x20:	// Dimmen
 00108$:
+	C$fb_app_taster.c$513$4$9 ==.
+;	../fb_app_taster.c:513: timerstate[objno]|=0xD0;// d0 or 20 = F0
+	mov	ar6,@r0
+	mov	a,#0xD0
+	orl	a,r6
+	mov	@r0,a
+	C$fb_app_taster.c$514$4$9 ==.
+;	../fb_app_taster.c:514: case 0xF0:
+00109$:
 	C$fb_app_taster.c$515$4$9 ==.
-;	..\fb_app_taster.c:515: write_obj_value(objno+4,delay_value);
+;	../fb_app_taster.c:515: write_obj_value(objno+4,delay_value);
 	mov	ar4,r5
 	mov	r6,#0x00
 	mov	r0,_bp
@@ -2596,11 +2078,11 @@ _delay_timer:
 	dec	sp
 	pop	ar3
 	C$fb_app_taster.c$516$4$9 ==.
-;	..\fb_app_taster.c:516: send_obj_value(objno+4);		// dimmkommando senden
+;	../fb_app_taster.c:516: send_obj_value(objno+4);		// dimmkommando senden
 	mov	dpl,r3
 	lcall	_send_obj_value
 	C$fb_app_taster.c$518$4$9 ==.
-;	..\fb_app_taster.c:518: if(!(eeprom[0xD5+((objno-4)*4)]& 0x08)){// wenn Telegrammwiederholung eingeschalten
+;	../fb_app_taster.c:518: if(!(eeprom[0xD5+((objno-4)*4)]& 0x08)){// wenn Telegrammwiederholung eingeschalten
 	mov	r0,_bp
 	inc	r0
 	mov	a,@r0
@@ -2611,9 +2093,9 @@ _delay_timer:
 	mov	dptr,#_eeprom
 	movc	a,@a+dptr
 	mov	r6,a
-	jb	acc.3,00110$
+	jb	acc.3,00111$
 	C$fb_app_taster.c$545$5$10 ==.
-;	..\fb_app_taster.c:545: */				timercnt[objno]=tele_repeat_value[eeprom[0xD5+((objno-4)*4)]& 0x07];	
+;	../fb_app_taster.c:545: */				timercnt[objno]=tele_repeat_value[eeprom[0xD5+((objno-4)*4)]& 0x07];
 	mov	r0,_bp
 	inc	r0
 	mov	a,@r0
@@ -2637,17 +2119,17 @@ _delay_timer:
 	mov	r0,ar6
 	mov	@r0,ar4
 	C$fb_app_taster.c$547$5$10 ==.
-;	..\fb_app_taster.c:547: timerbase[objno]=0;
+;	../fb_app_taster.c:547: timerbase[objno]=0;
 	mov	r0,_bp
 	inc	r0
 	mov	a,@r0
 	add	a,#_timerbase
 	mov	r0,a
 	mov	@r0,#0x00
-	ljmp	00154$
-00110$:
+	ljmp	00155$
+00111$:
 	C$fb_app_taster.c$550$5$11 ==.
-;	..\fb_app_taster.c:550: timercnt[objno]=0;
+;	../fb_app_taster.c:550: timercnt[objno]=0;
 	mov	r0,_bp
 	inc	r0
 	mov	a,@r0
@@ -2655,7 +2137,7 @@ _delay_timer:
 	mov	r0,a
 	mov	@r0,#0x00
 	C$fb_app_taster.c$551$5$11 ==.
-;	..\fb_app_taster.c:551: timerstate[objno]=0;
+;	../fb_app_taster.c:551: timerstate[objno]=0;
 	mov	r0,_bp
 	inc	r0
 	mov	a,@r0
@@ -2663,13 +2145,13 @@ _delay_timer:
 	mov	r0,a
 	mov	@r0,#0x00
 	C$fb_app_taster.c$553$4$9 ==.
-;	..\fb_app_taster.c:553: break;
-	ljmp	00154$
+;	../fb_app_taster.c:553: break;
+	ljmp	00155$
 	C$fb_app_taster.c$556$4$9 ==.
-;	..\fb_app_taster.c:556: case 0x30:	// 0x30, 0x31 für langzeit telegramm senden
-00112$:
+;	../fb_app_taster.c:556: case 0x30:	// 0x30, 0x31 für langzeit telegramm senden
+00113$:
 	C$fb_app_taster.c$557$4$9 ==.
-;	..\fb_app_taster.c:557: write_obj_value(objno+4,delay_value & 0x01);
+;	../fb_app_taster.c:557: write_obj_value(objno+4,delay_value & 0x01);
 	anl	ar5,#0x01
 	mov	r6,#0x00
 	mov	r0,_bp
@@ -2686,11 +2168,11 @@ _delay_timer:
 	dec	sp
 	pop	ar4
 	C$fb_app_taster.c$558$4$9 ==.
-;	..\fb_app_taster.c:558: send_obj_value(objno+4);				// Langzeit Telegramm senden
+;	../fb_app_taster.c:558: send_obj_value(objno+4);				// Langzeit Telegramm senden
 	mov	dpl,r4
 	lcall	_send_obj_value
 	C$fb_app_taster.c$561$4$9 ==.
-;	..\fb_app_taster.c:561: timercnt[objno]=eeprom[DEL_FACTOR2+((objno-4)*4)];	// Faktor Dauer	T2		
+;	../fb_app_taster.c:561: timercnt[objno]=eeprom[DEL_FACTOR2+((objno-4)*4)];	// Faktor Dauer	T2
 	mov	r0,_bp
 	inc	r0
 	mov	a,@r0
@@ -2710,7 +2192,7 @@ _delay_timer:
 	mov	r0,ar6
 	mov	@r0,ar4
 	C$fb_app_taster.c$562$4$9 ==.
-;	..\fb_app_taster.c:562: timerbase[objno]=(eeprom[0xD4+((objno-4)*4)]&0x60)>>3;	// Basis Dauer T2
+;	../fb_app_taster.c:562: timerbase[objno]=(eeprom[0xD4+((objno-4)*4)]&0x60)>>3;	// Basis Dauer T2
 	mov	r0,_bp
 	inc	r0
 	mov	a,@r0
@@ -2728,12 +2210,12 @@ _delay_timer:
 	mov	r0,ar4
 	mov	@r0,ar5
 	C$fb_app_taster.c$563$4$9 ==.
-;	..\fb_app_taster.c:563: if (timercnt[objno]) {	// wenn keine lamellenverstellzeit dann nix tun
+;	../fb_app_taster.c:563: if (timercnt[objno]) {	// wenn keine lamellenverstellzeit dann nix tun
 	mov	r0,ar6
 	mov	a,@r0
-	jz	00114$
+	jz	00115$
 	C$fb_app_taster.c$564$5$12 ==.
-;	..\fb_app_taster.c:564: timerstate[objno]=((eeprom[COMMAND+((objno-4)*4)]&0x10)>>4)+0x40; // 0x40,0x41 fuer ende T2 (lamellenvestellzeit)
+;	../fb_app_taster.c:564: timerstate[objno]=((eeprom[COMMAND+((objno-4)*4)]&0x10)>>4)+0x40; // 0x40,0x41 fuer ende T2 (lamellenvestellzeit)
 	mov	r0,_bp
 	inc	r0
 	mov	a,@r0
@@ -2755,14 +2237,14 @@ _delay_timer:
 	add	a,#0x40
 	mov	r0,ar5
 	mov	@r0,a
-	ljmp	00154$
-00114$:
+	ljmp	00155$
+00115$:
 	C$fb_app_taster.c$567$5$13 ==.
-;	..\fb_app_taster.c:567: timercnt[objno]=0;
+;	../fb_app_taster.c:567: timercnt[objno]=0;
 	mov	r0,ar6
 	mov	@r0,#0x00
 	C$fb_app_taster.c$568$5$13 ==.
-;	..\fb_app_taster.c:568: timerstate[objno]=0;
+;	../fb_app_taster.c:568: timerstate[objno]=0;
 	mov	r0,_bp
 	inc	r0
 	mov	a,@r0
@@ -2770,25 +2252,25 @@ _delay_timer:
 	mov	r0,a
 	mov	@r0,#0x00
 	C$fb_app_taster.c$570$4$9 ==.
-;	..\fb_app_taster.c:570: break;			
-	ljmp	00154$
+;	../fb_app_taster.c:570: break;
+	ljmp	00155$
 	C$fb_app_taster.c$571$4$9 ==.
-;	..\fb_app_taster.c:571: case 0x40:
-00116$:
+;	../fb_app_taster.c:571: case 0x40:
+00117$:
 	C$fb_app_taster.c$573$4$9 ==.
-;	..\fb_app_taster.c:573: timerstate[objno]=0; // wenn T2 abgelaufen dann nichts mehr machen
+;	../fb_app_taster.c:573: timerstate[objno]=0; // wenn T2 abgelaufen dann nichts mehr machen
 	mov	@r0,#0x00
 	C$fb_app_taster.c$574$4$9 ==.
-;	..\fb_app_taster.c:574: timercnt[objno]=0;
+;	../fb_app_taster.c:574: timercnt[objno]=0;
 	mov	@r1,#0x00
 	C$fb_app_taster.c$575$4$9 ==.
-;	..\fb_app_taster.c:575: break;
-	ljmp	00154$
+;	../fb_app_taster.c:575: break;
+	ljmp	00155$
 	C$fb_app_taster.c$576$4$9 ==.
-;	..\fb_app_taster.c:576: case 0x50: // Wertgeber Lichtszene lang drücken zum speichern
-00117$:
+;	../fb_app_taster.c:576: case 0x50: // Wertgeber Lichtszene lang drücken zum speichern
+00118$:
 	C$fb_app_taster.c$577$4$9 ==.
-;	..\fb_app_taster.c:577: switch_led(objno-4,1);
+;	../fb_app_taster.c:577: switch_led(objno-4,1);
 	mov	r0,_bp
 	inc	r0
 	mov	a,@r0
@@ -2798,7 +2280,7 @@ _delay_timer:
 	mov	bits,b
 	lcall	_switch_led
 	C$fb_app_taster.c$578$4$9 ==.
-;	..\fb_app_taster.c:578: timerstate[objno]=0x60;
+;	../fb_app_taster.c:578: timerstate[objno]=0x60;
 	mov	r0,_bp
 	inc	r0
 	mov	a,@r0
@@ -2806,13 +2288,13 @@ _delay_timer:
 	mov	r0,a
 	mov	@r0,#0x60
 	C$fb_app_taster.c$579$4$9 ==.
-;	..\fb_app_taster.c:579: break;
-	ljmp	00154$
+;	../fb_app_taster.c:579: break;
+	ljmp	00155$
 	C$fb_app_taster.c$584$4$9 ==.
-;	..\fb_app_taster.c:584: case 0x80: // Wertgeber Helligkeit verstellen
-00120$:
+;	../fb_app_taster.c:584: case 0x80: // Wertgeber Helligkeit verstellen
+00121$:
 	C$fb_app_taster.c$585$4$9 ==.
-;	..\fb_app_taster.c:585: timerbase[objno]=0;
+;	../fb_app_taster.c:585: timerbase[objno]=0;
 	mov	r0,_bp
 	inc	r0
 	mov	a,@r0
@@ -2820,7 +2302,7 @@ _delay_timer:
 	mov	r0,a
 	mov	@r0,#0x00
 	C$fb_app_taster.c$586$4$9 ==.
-;	..\fb_app_taster.c:586: timercnt[objno]=tele_repeat_value[(eeprom[0xD4+((objno-4)*4)]& 0x30)>>4];// schrittweite und zeit zw. telegrammen
+;	../fb_app_taster.c:586: timercnt[objno]=tele_repeat_value[(eeprom[0xD4+((objno-4)*4)]& 0x30)>>4];// schrittweite und zeit zw. telegrammen
 	mov	r0,_bp
 	inc	r0
 	mov	a,@r0
@@ -2843,7 +2325,7 @@ _delay_timer:
 	movc	a,@a+dptr
 	mov	@r1,a
 	C$fb_app_taster.c$587$4$9 ==.
-;	..\fb_app_taster.c:587: i_tmp=(eeprom[0xD5+4*(objno-4)])<<8;
+;	../fb_app_taster.c:587: i_tmp=(eeprom[0xD5+4*(objno-4)])<<8;
 	mov	a,#0xD5
 	add	a,r6
 	mov	dptr,#_eeprom
@@ -2851,7 +2333,7 @@ _delay_timer:
 	mov	r4,a
 	mov	r5,#0x00
 	C$fb_app_taster.c$588$4$9 ==.
-;	..\fb_app_taster.c:588: i_tmp +=eeprom[0xD6+4*(objno-4)];
+;	../fb_app_taster.c:588: i_tmp +=eeprom[0xD6+4*(objno-4)];
 	mov	a,#0xD6
 	add	a,r6
 	mov	dptr,#_eeprom
@@ -2864,40 +2346,40 @@ _delay_timer:
 	addc	a,r4
 	mov	r4,a
 	C$fb_app_taster.c$589$4$9 ==.
-;	..\fb_app_taster.c:589: if (i_tmp==0x39FD || i_tmp==0x3828)	//Differenz ausgleichen
-	cjne	r5,#0xFD,00219$
-	cjne	r4,#0x39,00219$
-	sjmp	00121$
-00219$:
-	cjne	r5,#0x28,00122$
-	cjne	r4,#0x38,00122$
-00121$:
-	C$fb_app_taster.c$591$5$14 ==.
-;	..\fb_app_taster.c:591: i_tmp--;
-	dec	r5
-	cjne	r5,#0xFF,00222$
-	dec	r4
+;	../fb_app_taster.c:589: if (i_tmp==0x39FD || i_tmp==0x3828)	//Differenz ausgleichen
+	cjne	r5,#0xFD,00222$
+	cjne	r4,#0x39,00222$
+	sjmp	00122$
 00222$:
+	cjne	r5,#0x28,00123$
+	cjne	r4,#0x38,00123$
 00122$:
+	C$fb_app_taster.c$591$5$14 ==.
+;	../fb_app_taster.c:591: i_tmp--;
+	dec	r5
+	cjne	r5,#0xFF,00225$
+	dec	r4
+00225$:
+00123$:
 	C$fb_app_taster.c$593$4$9 ==.
-;	..\fb_app_taster.c:593: i_tmp -= 0x27;
+;	../fb_app_taster.c:593: i_tmp -= 0x27;
 	mov	a,r5
 	add	a,#0xD9
 	mov	r5,a
 	mov	a,r4
 	addc	a,#0xFF
 	C$fb_app_taster.c$595$4$9 ==.
-;	..\fb_app_taster.c:595: if(!(i_tmp&0x0800)){
+;	../fb_app_taster.c:595: if(!(i_tmp&0x0800)){
 	mov	r4,a
-	jb	acc.3,00125$
+	jb	acc.3,00126$
 	C$fb_app_taster.c$596$5$15 ==.
-;	..\fb_app_taster.c:596: i_tmp=0x03C94;
+;	../fb_app_taster.c:596: i_tmp=0x03C94;
 	mov	r5,#0x94
 	mov	r4,#0x3C
-	sjmp	00126$
-00125$:
+	sjmp	00127$
+00126$:
 	C$fb_app_taster.c$599$5$16 ==.
-;	..\fb_app_taster.c:599: switch_led(objno-4,1);
+;	../fb_app_taster.c:599: switch_led(objno-4,1);
 	mov	r0,_bp
 	inc	r0
 	mov	a,@r0
@@ -2910,9 +2392,9 @@ _delay_timer:
 	lcall	_switch_led
 	pop	ar4
 	pop	ar5
-00126$:
+00127$:
 	C$fb_app_taster.c$601$4$9 ==.
-;	..\fb_app_taster.c:601: write_obj_value(objno+4,i_tmp);// wir rechnen immer mit exp 2^7
+;	../fb_app_taster.c:601: write_obj_value(objno+4,i_tmp);// wir rechnen immer mit exp 2^7
 	mov	r0,_bp
 	inc	r0
 	mov	r1,_bp
@@ -2931,7 +2413,7 @@ _delay_timer:
 	dec	sp
 	dec	sp
 	C$fb_app_taster.c$602$4$9 ==.
-;	..\fb_app_taster.c:602: timerstate[objno]=0x80;
+;	../fb_app_taster.c:602: timerstate[objno]=0x80;
 	mov	r0,_bp
 	inc	r0
 	mov	a,@r0
@@ -2939,13 +2421,13 @@ _delay_timer:
 	mov	r0,a
 	mov	@r0,#0x80
 	C$fb_app_taster.c$603$4$9 ==.
-;	..\fb_app_taster.c:603: EA=0;		// Interrupts sperren, damit flashen nicht unterbrochen wird
+;	../fb_app_taster.c:603: EA=0;		// Interrupts sperren, damit flashen nicht unterbrochen wird
 	clr	_IEN0_7
 	C$fb_app_taster.c$604$4$9 ==.
-;	..\fb_app_taster.c:604: START_WRITECYCLE
+;	../fb_app_taster.c:604: START_WRITECYCLE
 	mov	_FMCON,#0x00
-	C$fb_app_taster.c$605$4$9 ==.
-;	..\fb_app_taster.c:605: WRITE_BYTE(0x01,0xD5+((objno-4)*4),read_obj_value(objno+4)>>8);
+	C$fb_app_taster.c$605$5$17 ==.
+;	../fb_app_taster.c:605: WRITE_BYTE(0x01,0xD5+((objno-4)*4),read_obj_value(objno+4)>>8);
 	mov	_FMADRH,#0x1D
 	mov	r0,_bp
 	inc	r0
@@ -2965,8 +2447,8 @@ _delay_timer:
 	mov	r3,dph
 	pop	ar5
 	mov	_FMDATA,r3
-	C$fb_app_taster.c$606$4$9 ==.
-;	..\fb_app_taster.c:606: WRITE_BYTE(0x01,0xD6+((objno-4)*4),read_obj_value(objno+4)& 0xFF);
+	C$fb_app_taster.c$606$5$18 ==.
+;	../fb_app_taster.c:606: WRITE_BYTE(0x01,0xD6+((objno-4)*4),read_obj_value(objno+4)& 0xFF);
 	mov	_FMADRH,#0x1D
 	mov	a,#0xD6
 	add	a,r5
@@ -2979,26 +2461,26 @@ _delay_timer:
 	mov	r2,dpl
 	mov	_FMDATA,r2
 	C$fb_app_taster.c$607$4$9 ==.
-;	..\fb_app_taster.c:607: STOP_WRITECYCLE // Luxwert speichern
+;	../fb_app_taster.c:607: STOP_WRITECYCLE // Luxwert speichern
 	mov	_FMCON,#0x68
 	C$fb_app_taster.c$608$4$9 ==.
-;	..\fb_app_taster.c:608: EA=1;
+;	../fb_app_taster.c:608: EA=1;
 	setb	_IEN0_7
 	C$fb_app_taster.c$609$4$9 ==.
-;	..\fb_app_taster.c:609: send_obj_value(objno+4);
+;	../fb_app_taster.c:609: send_obj_value(objno+4);
 	mov	r0,_bp
 	inc	r0
 	inc	r0
 	mov	dpl,@r0
 	lcall	_send_obj_value
 	C$fb_app_taster.c$611$4$9 ==.
-;	..\fb_app_taster.c:611: break;
-	ljmp	00154$
+;	../fb_app_taster.c:611: break;
+	ljmp	00155$
 	C$fb_app_taster.c$614$4$9 ==.
-;	..\fb_app_taster.c:614: case 0xA0: // Wertgeber Temperatur verstellen
-00128$:
+;	../fb_app_taster.c:614: case 0xA0: // Wertgeber Temperatur verstellen
+00129$:
 	C$fb_app_taster.c$615$4$9 ==.
-;	..\fb_app_taster.c:615: timerbase[objno]=0;
+;	../fb_app_taster.c:615: timerbase[objno]=0;
 	mov	r0,_bp
 	inc	r0
 	mov	a,@r0
@@ -3006,7 +2488,7 @@ _delay_timer:
 	mov	r0,a
 	mov	@r0,#0x00
 	C$fb_app_taster.c$616$4$9 ==.
-;	..\fb_app_taster.c:616: timercnt[objno]=tele_repeat_value[(eeprom[0xD4+((objno-4)*4)]& 0x30)>>4];// schrittweite und zeit zw. telegrammen
+;	../fb_app_taster.c:616: timercnt[objno]=tele_repeat_value[(eeprom[0xD4+((objno-4)*4)]& 0x30)>>4];// schrittweite und zeit zw. telegrammen
 	mov	r0,_bp
 	inc	r0
 	mov	a,@r0
@@ -3029,7 +2511,7 @@ _delay_timer:
 	movc	a,@a+dptr
 	mov	@r1,a
 	C$fb_app_taster.c$617$4$9 ==.
-;	..\fb_app_taster.c:617: i_tmp=(eeprom[0xD5+4*(objno-4)]&0x07)<<8;
+;	../fb_app_taster.c:617: i_tmp=(eeprom[0xD5+4*(objno-4)]&0x07)<<8;
 	mov	a,#0xD5
 	add	a,r7
 	mov	dptr,#_eeprom
@@ -3041,7 +2523,7 @@ _delay_timer:
 	mov	ar5,r6
 	mov	ar4,r3
 	C$fb_app_taster.c$618$4$9 ==.
-;	..\fb_app_taster.c:618: i_tmp +=eeprom[0xD6+4*(objno-4)];
+;	../fb_app_taster.c:618: i_tmp +=eeprom[0xD6+4*(objno-4)];
 	mov	a,#0xD6
 	add	a,r7
 	mov	dptr,#_eeprom
@@ -3054,23 +2536,23 @@ _delay_timer:
 	addc	a,r4
 	mov	r4,a
 	C$fb_app_taster.c$619$4$9 ==.
-;	..\fb_app_taster.c:619: if(i_tmp>=0x0032){
+;	../fb_app_taster.c:619: if(i_tmp>=0x0032){
 	clr	c
 	mov	a,r5
 	subb	a,#0x32
 	mov	a,r4
 	subb	a,#0x00
-	jc	00130$
-	C$fb_app_taster.c$620$5$17 ==.
-;	..\fb_app_taster.c:620: i_tmp -= 0x32;
+	jc	00131$
+	C$fb_app_taster.c$620$5$19 ==.
+;	../fb_app_taster.c:620: i_tmp -= 0x32;
 	mov	a,r5
 	add	a,#0xCE
 	mov	r5,a
 	mov	a,r4
 	addc	a,#0xFF
 	mov	r4,a
-	C$fb_app_taster.c$621$5$17 ==.
-;	..\fb_app_taster.c:621: switch_led(objno-4,1);
+	C$fb_app_taster.c$621$5$19 ==.
+;	../fb_app_taster.c:621: switch_led(objno-4,1);
 	mov	r0,_bp
 	inc	r0
 	mov	a,@r0
@@ -3083,15 +2565,15 @@ _delay_timer:
 	lcall	_switch_led
 	pop	ar4
 	pop	ar5
-	sjmp	00131$
-00130$:
-	C$fb_app_taster.c$624$5$18 ==.
-;	..\fb_app_taster.c:624: i_tmp=0x07D0;
+	sjmp	00132$
+00131$:
+	C$fb_app_taster.c$624$5$20 ==.
+;	../fb_app_taster.c:624: i_tmp=0x07D0;
 	mov	r5,#0xD0
 	mov	r4,#0x07
-00131$:
+00132$:
 	C$fb_app_taster.c$626$4$9 ==.
-;	..\fb_app_taster.c:626: write_obj_value(objno+4,i_tmp|0x0800);// wir rechnen immer mit exp 2^1
+;	../fb_app_taster.c:626: write_obj_value(objno+4,i_tmp|0x0800);// wir rechnen immer mit exp 2^1
 	orl	ar4,#0x08
 	mov	r0,_bp
 	inc	r0
@@ -3107,7 +2589,7 @@ _delay_timer:
 	dec	sp
 	pop	ar7
 	C$fb_app_taster.c$627$4$9 ==.
-;	..\fb_app_taster.c:627: timerstate[objno]=0xA0;
+;	../fb_app_taster.c:627: timerstate[objno]=0xA0;
 	mov	r0,_bp
 	inc	r0
 	mov	a,@r0
@@ -3115,13 +2597,13 @@ _delay_timer:
 	mov	r0,a
 	mov	@r0,#0xA0
 	C$fb_app_taster.c$628$4$9 ==.
-;	..\fb_app_taster.c:628: EA=0;		// Interrupts sperren, damit flashen nicht unterbrochen wird
+;	../fb_app_taster.c:628: EA=0;		// Interrupts sperren, damit flashen nicht unterbrochen wird
 	clr	_IEN0_7
 	C$fb_app_taster.c$629$4$9 ==.
-;	..\fb_app_taster.c:629: START_WRITECYCLE
+;	../fb_app_taster.c:629: START_WRITECYCLE
 	mov	_FMCON,#0x00
-	C$fb_app_taster.c$630$4$9 ==.
-;	..\fb_app_taster.c:630: WRITE_BYTE(0x01,0xD5+((objno-4)*4),read_obj_value(objno+4)>>8);
+	C$fb_app_taster.c$630$5$21 ==.
+;	../fb_app_taster.c:630: WRITE_BYTE(0x01,0xD5+((objno-4)*4),read_obj_value(objno+4)>>8);
 	mov	_FMADRH,#0x1D
 	mov	r0,_bp
 	inc	r0
@@ -3140,8 +2622,8 @@ _delay_timer:
 	pop	ar6
 	pop	ar7
 	mov	_FMDATA,r3
-	C$fb_app_taster.c$631$4$9 ==.
-;	..\fb_app_taster.c:631: WRITE_BYTE(0x01,0xD6+((objno-4)*4),read_obj_value(objno+4)& 0xFF);
+	C$fb_app_taster.c$631$5$22 ==.
+;	../fb_app_taster.c:631: WRITE_BYTE(0x01,0xD6+((objno-4)*4),read_obj_value(objno+4)& 0xFF);
 	mov	_FMADRH,#0x1D
 	mov	a,#0xD6
 	add	a,r6
@@ -3153,23 +2635,23 @@ _delay_timer:
 	pop	ar7
 	mov	_FMDATA,r3
 	C$fb_app_taster.c$632$4$9 ==.
-;	..\fb_app_taster.c:632: STOP_WRITECYCLE // Temperaturwert speichern
+;	../fb_app_taster.c:632: STOP_WRITECYCLE // Temperaturwert speichern
 	mov	_FMCON,#0x68
 	C$fb_app_taster.c$633$4$9 ==.
-;	..\fb_app_taster.c:633: EA=1;
+;	../fb_app_taster.c:633: EA=1;
 	setb	_IEN0_7
 	C$fb_app_taster.c$634$4$9 ==.
-;	..\fb_app_taster.c:634: send_obj_value(objno+4);
+;	../fb_app_taster.c:634: send_obj_value(objno+4);
 	mov	dpl,r7
 	lcall	_send_obj_value
 	C$fb_app_taster.c$636$4$9 ==.
-;	..\fb_app_taster.c:636: break;
-	ljmp	00154$
+;	../fb_app_taster.c:636: break;
+	ljmp	00155$
 	C$fb_app_taster.c$639$4$9 ==.
-;	..\fb_app_taster.c:639: case 0xC0: // Wertgeber Dimmer verstellen
-00133$:
+;	../fb_app_taster.c:639: case 0xC0: // Wertgeber Dimmer verstellen
+00134$:
 	C$fb_app_taster.c$640$4$9 ==.
-;	..\fb_app_taster.c:640: tmp=read_obj_value(objno+4);//
+;	../fb_app_taster.c:640: tmp=read_obj_value(objno+4);//
 	mov	r0,_bp
 	inc	r0
 	mov	a,#0x04
@@ -3179,7 +2661,7 @@ _delay_timer:
 	mov	r4,dpl
 	mov	r5,dph
 	C$fb_app_taster.c$641$4$9 ==.
-;	..\fb_app_taster.c:641: m=eeprom[0xD4+((objno-4)*4)]& 0x3F;// schrittweite und zeit zw. telegrammen
+;	../fb_app_taster.c:641: m=eeprom[0xD4+((objno-4)*4)]& 0x3F;// schrittweite und zeit zw. telegrammen
 	mov	r0,_bp
 	inc	r0
 	mov	a,@r0
@@ -3192,43 +2674,43 @@ _delay_timer:
 	mov	r7,a
 	anl	ar7,#0x3F
 	C$fb_app_taster.c$642$4$9 ==.
-;	..\fb_app_taster.c:642: n= m & 0x0F;  // Schrittweite
+;	../fb_app_taster.c:642: n= m & 0x0F;  // Schrittweite
 	mov	a,#0x0F
 	anl	a,r7
 	mov	r6,a
 	C$fb_app_taster.c$643$4$9 ==.
-;	..\fb_app_taster.c:643: m=m>>4;// zeit zwischen telegrammen
+;	../fb_app_taster.c:643: m=m>>4;// zeit zwischen telegrammen
 	mov	a,r7
 	swap	a
 	anl	a,#0x0F
 	mov	r7,a
 	C$fb_app_taster.c$644$4$9 ==.
-;	..\fb_app_taster.c:644: if (!tmp){
+;	../fb_app_taster.c:644: if (!tmp){
 	mov	a,r4
-	jnz	00138$
-	C$fb_app_taster.c$645$5$19 ==.
-;	..\fb_app_taster.c:645: tmp=255;
+	jnz	00139$
+	C$fb_app_taster.c$645$5$23 ==.
+;	../fb_app_taster.c:645: tmp=255;
 	mov	r4,#0xFF
-	sjmp	00139$
-00138$:
-	C$fb_app_taster.c$648$5$20 ==.
-;	..\fb_app_taster.c:648: if (tmp>=n)tmp-=n;
+	sjmp	00140$
+00139$:
+	C$fb_app_taster.c$648$5$24 ==.
+;	../fb_app_taster.c:648: if (tmp>=n)tmp-=n;
 	clr	c
 	mov	a,r4
 	subb	a,r6
-	jc	00135$
+	jc	00136$
 	mov	a,r4
 	clr	c
 	subb	a,r6
 	mov	r4,a
-	sjmp	00139$
-00135$:
-	C$fb_app_taster.c$649$5$20 ==.
-;	..\fb_app_taster.c:649: else tmp=0;
+	sjmp	00140$
+00136$:
+	C$fb_app_taster.c$649$5$24 ==.
+;	../fb_app_taster.c:649: else tmp=0;
 	mov	r4,#0x00
-00139$:
+00140$:
 	C$fb_app_taster.c$651$4$9 ==.
-;	..\fb_app_taster.c:651: write_obj_value(objno+4,tmp);
+;	../fb_app_taster.c:651: write_obj_value(objno+4,tmp);
 	mov	r6,#0x00
 	mov	r0,_bp
 	inc	r0
@@ -3244,7 +2726,7 @@ _delay_timer:
 	dec	sp
 	dec	sp
 	C$fb_app_taster.c$652$4$9 ==.
-;	..\fb_app_taster.c:652: switch_led(objno-4,1);
+;	../fb_app_taster.c:652: switch_led(objno-4,1);
 	mov	r0,_bp
 	inc	r0
 	mov	a,@r0
@@ -3255,12 +2737,12 @@ _delay_timer:
 	lcall	_switch_led
 	pop	ar5
 	C$fb_app_taster.c$653$4$9 ==.
-;	..\fb_app_taster.c:653: send_obj_value(objno+4);		// dimmkommando senden
+;	../fb_app_taster.c:653: send_obj_value(objno+4);		// dimmkommando senden
 	mov	dpl,r5
 	lcall	_send_obj_value
 	pop	ar7
 	C$fb_app_taster.c$654$4$9 ==.
-;	..\fb_app_taster.c:654: timerstate[objno]=0xC0;
+;	../fb_app_taster.c:654: timerstate[objno]=0xC0;
 	mov	r0,_bp
 	inc	r0
 	mov	a,@r0
@@ -3268,7 +2750,7 @@ _delay_timer:
 	mov	r0,a
 	mov	@r0,#0xC0
 	C$fb_app_taster.c$655$4$9 ==.
-;	..\fb_app_taster.c:655: timercnt[objno]=tele_repeat_value[m];// 0,5/1/1,5/2 Sec.
+;	../fb_app_taster.c:655: timercnt[objno]=tele_repeat_value[m];// 0,5/1/1,5/2 Sec.
 	mov	r0,_bp
 	inc	r0
 	mov	a,@r0
@@ -3280,7 +2762,7 @@ _delay_timer:
 	mov	r7,a
 	mov	@r1,a
 	C$fb_app_taster.c$656$4$9 ==.
-;	..\fb_app_taster.c:656: timerbase[objno]=0;
+;	../fb_app_taster.c:656: timerbase[objno]=0;
 	mov	r0,_bp
 	inc	r0
 	mov	a,@r0
@@ -3288,15 +2770,15 @@ _delay_timer:
 	mov	r0,a
 	mov	@r0,#0x00
 	C$fb_app_taster.c$659$1$7 ==.
-;	..\fb_app_taster.c:659: }// ende switch (timerstate...
-00154$:
-	C$fb_app_taster.c$500$1$1 ==.
-;	..\fb_app_taster.c:500: for(objno=0;objno<8;objno++) {
+;	../fb_app_taster.c:659: }// ende switch (timerstate...
+00155$:
+	C$fb_app_taster.c$498$1$1 ==.
+;	../fb_app_taster.c:498: for(objno=0;objno<8;objno++) {
 	mov	r0,_bp
 	inc	r0
 	inc	@r0
-	ljmp	00152$
-00156$:
+	ljmp	00153$
+00157$:
 	mov	sp,_bp
 	pop	_bp
 	C$fb_app_taster.c$662$1$1 ==.
@@ -3310,20 +2792,20 @@ _delay_timer:
 ;------------------------------------------------------------
 	G$restart_app$0$0 ==.
 	C$fb_app_taster.c$672$1$1 ==.
-;	..\fb_app_taster.c:672: void restart_app(void)
+;	../fb_app_taster.c:672: void restart_app(void)
 ;	-----------------------------------------
 ;	 function restart_app
 ;	-----------------------------------------
 _restart_app:
 	C$fb_app_taster.c$678$1$1 ==.
-;	..\fb_app_taster.c:678: for (n=0;n<4;n++) {
+;	../fb_app_taster.c:678: for (n=0;n<4;n++) {
 	mov	r7,#0x00
 00105$:
 	cjne	r7,#0x04,00137$
 00137$:
 	jnc	00108$
 	C$fb_app_taster.c$679$2$2 ==.
-;	..\fb_app_taster.c:679: SET_PORT_MODE_BIDIRECTIONAL(n)
+;	../fb_app_taster.c:679: SET_PORT_MODE_BIDIRECTIONAL(n)
 	cjne	r7,#0x08,00139$
 00139$:
 	jnc	00107$
@@ -3345,12 +2827,12 @@ _restart_app:
 	anl	_P0M2,a
 00107$:
 	C$fb_app_taster.c$678$1$1 ==.
-;	..\fb_app_taster.c:678: for (n=0;n<4;n++) {
+;	../fb_app_taster.c:678: for (n=0;n<4;n++) {
 	inc	r7
 	sjmp	00105$
 00108$:
 	C$fb_app_taster.c$683$1$1 ==.
-;	..\fb_app_taster.c:683: for (n=4;n<8;n++) {
+;	../fb_app_taster.c:683: for (n=4;n<8;n++) {
 	mov	r7,#0x04
 00109$:
 	cjne	r7,#0x08,00144$
@@ -3360,7 +2842,7 @@ _restart_app:
 	mov	r6,a
 	jz	00112$
 	C$fb_app_taster.c$684$2$4 ==.
-;	..\fb_app_taster.c:684: SET_PORT_MODE_PUSHPULL(n)
+;	../fb_app_taster.c:684: SET_PORT_MODE_PUSHPULL(n)
 	mov	a,r6
 	jz	00111$
 	mov	b,r7
@@ -3380,64 +2862,55 @@ _restart_app:
 	orl	_P0M2,a
 00111$:
 	C$fb_app_taster.c$683$1$1 ==.
-;	..\fb_app_taster.c:683: for (n=4;n<8;n++) {
+;	../fb_app_taster.c:683: for (n=4;n<8;n++) {
 	inc	r7
 	sjmp	00109$
 00112$:
 	C$fb_app_taster.c$687$1$1 ==.
-;	..\fb_app_taster.c:687: PORT=0x0F;			// Taster auf high, LEDs zunächst aus
+;	../fb_app_taster.c:687: PORT=0x0F;			// Taster auf high, LEDs zunächst aus
 	mov	_P0,#0x0F
 	C$fb_app_taster.c$689$1$1 ==.
-;	..\fb_app_taster.c:689: button_buffer=0x0F;	// Variable für letzten abgearbeiteten Taster Status
+;	../fb_app_taster.c:689: button_buffer=0x0F;	// Variable für letzten abgearbeiteten Taster Status
 	mov	_button_buffer,#0x0F
 	C$fb_app_taster.c$691$1$1 ==.
-;	..\fb_app_taster.c:691: RTCCON=0x60;	//stop_rtc();
-	mov	_RTCCON,#0x60
-	C$fb_app_taster.c$692$1$1 ==.
-;	..\fb_app_taster.c:692: RTCH=0x00;
-	mov	_RTCH,#0x00
+;	../fb_app_taster.c:691: RTCCON=0x81;	//start_rtc(8);		// RTC neu  starten und OV Flag setzen
+	mov	_RTCCON,#0x81
 	C$fb_app_taster.c$693$1$1 ==.
-;	..\fb_app_taster.c:693: RTCL=0xE6;	
-	mov	_RTCL,#0xE6
-	C$fb_app_taster.c$694$1$1 ==.
-;	..\fb_app_taster.c:694: RTCCON=0x61;	//start_rtc(8);		// RTC neu mit 8ms starten
-	mov	_RTCCON,#0x61
-	C$fb_app_taster.c$696$1$1 ==.
-;	..\fb_app_taster.c:696: timer=0;			// Timer-Variable, wird alle 8ms inkrementiert
+;	../fb_app_taster.c:693: timer=0;			// Timer-Variable, wird alle 8ms inkrementiert
 	clr	a
 	mov	_timer,a
 	mov	(_timer + 1),a
-	C$fb_app_taster.c$698$1$1 ==.
-;	..\fb_app_taster.c:698: EA=0;		// Interrupts sperren
+	C$fb_app_taster.c$695$1$1 ==.
+;	../fb_app_taster.c:695: EA=0;		// Interrupts sperren
 	clr	_IEN0_7
-	C$fb_app_taster.c$700$1$1 ==.
-;	..\fb_app_taster.c:700: START_WRITECYCLE			
+	C$fb_app_taster.c$697$1$1 ==.
+;	../fb_app_taster.c:697: START_WRITECYCLE
 	mov	_FMCON,#0x00
-	C$fb_app_taster.c$701$1$1 ==.
-;	..\fb_app_taster.c:701: WRITE_BYTE(0x01,0x03,0x00)	// Herstellercode 0x0004 = Jung
+	C$fb_app_taster.c$698$2$6 ==.
+;	../fb_app_taster.c:698: WRITE_BYTE(0x01,0x03,0x00)	// Herstellercode 0x0004 = Jung
 	mov	_FMADRH,#0x1D
 	mov	_FMADRL,#0x03
 	mov	_FMDATA,#0x00
-	C$fb_app_taster.c$702$1$1 ==.
-;	..\fb_app_taster.c:702: WRITE_BYTE(0x01,0x04,0x04)
+	C$fb_app_taster.c$699$2$7 ==.
+;	../fb_app_taster.c:699: WRITE_BYTE(0x01,0x04,0x04)
 	mov	_FMADRH,#0x1D
 	mov	_FMADRL,#0x04
 	mov	_FMDATA,#0x04
-	C$fb_app_taster.c$706$1$1 ==.
-;	..\fb_app_taster.c:706: WRITE_BYTE(0x01,0x0C,0x00)	// PORT A Direction Bit Setting
+	C$fb_app_taster.c$703$2$8 ==.
+;	../fb_app_taster.c:703: WRITE_BYTE(0x01,0x0C,0x00)	// PORT A Direction Bit Setting
 	mov	_FMADRH,#0x1D
 	mov	_FMADRL,#0x0C
 	mov	_FMDATA,#0x00
-	C$fb_app_taster.c$707$1$1 ==.
-;	..\fb_app_taster.c:707: WRITE_BYTE(0x01,0x0D,0xFF)	// Run-Status (00=stop FF=run)
+	C$fb_app_taster.c$704$2$9 ==.
+;	../fb_app_taster.c:704: WRITE_BYTE(0x01,0x0D,0xFF)	// Run-Status (00=stop FF=run)
 	mov	_FMADRH,#0x1D
 	mov	_FMADRL,#0x0D
 	mov	_FMDATA,#0xFF
-	C$fb_app_taster.c$709$1$1 ==.
-;	..\fb_app_taster.c:709: STOP_WRITECYCLE
+	C$fb_app_taster.c$706$1$1 ==.
+;	../fb_app_taster.c:706: STOP_WRITECYCLE
 	mov	_FMCON,#0x68
-	C$fb_app_taster.c$714$1$1 ==.
-;	..\fb_app_taster.c:714: for (n=0;n<12;n++) write_obj_value(n,0);		// Objektwerte alle auf 0 setzen
+	C$fb_app_taster.c$711$1$1 ==.
+;	../fb_app_taster.c:711: for (n=0;n<12;n++) write_obj_value(n,0);		// Objektwerte alle auf 0 setzen
 	mov	r7,#0x00
 00113$:
 	cjne	r7,#0x0C,00150$
@@ -3455,8 +2928,8 @@ _restart_app:
 	inc	r7
 	sjmp	00113$
 00116$:
-	C$fb_app_taster.c$716$1$1 ==.
-;	..\fb_app_taster.c:716: for (n=0;n<8;n++) timercnt[n]=0;		// delay records loeschen
+	C$fb_app_taster.c$713$1$1 ==.
+;	../fb_app_taster.c:713: for (n=0;n<8;n++) timercnt[n]=0;		// delay records loeschen
 	mov	r7,#0x00
 00117$:
 	cjne	r7,#0x08,00152$
@@ -3469,46 +2942,46 @@ _restart_app:
 	inc	r7
 	sjmp	00117$
 00120$:
-	C$fb_app_taster.c$721$1$1 ==.
-;	..\fb_app_taster.c:721: TR0=0;
+	C$fb_app_taster.c$718$1$1 ==.
+;	../fb_app_taster.c:718: TR0=0;
 	clr	_TCON_4
-	C$fb_app_taster.c$722$1$1 ==.
-;	..\fb_app_taster.c:722: TMOD &= 0xF0;
+	C$fb_app_taster.c$719$1$1 ==.
+;	../fb_app_taster.c:719: TMOD &= 0xF0;
 	anl	_TMOD,#0xF0
-	C$fb_app_taster.c$723$1$1 ==.
-;	..\fb_app_taster.c:723: TMOD |= 0x02;// T0 autoreload
+	C$fb_app_taster.c$720$1$1 ==.
+;	../fb_app_taster.c:720: TMOD |= 0x02;// T0 autoreload
 	orl	_TMOD,#0x02
-	C$fb_app_taster.c$724$1$1 ==.
-;	..\fb_app_taster.c:724: TH0=0x47;
+	C$fb_app_taster.c$721$1$1 ==.
+;	../fb_app_taster.c:721: TH0=0x47;
 	mov	_TH0,#0x47
-	C$fb_app_taster.c$725$1$1 ==.
-;	..\fb_app_taster.c:725: TL0=0x47;
+	C$fb_app_taster.c$722$1$1 ==.
+;	../fb_app_taster.c:722: TL0=0x47;
 	mov	_TL0,#0x47
-	C$fb_app_taster.c$726$1$1 ==.
-;	..\fb_app_taster.c:726: TR0=1;
+	C$fb_app_taster.c$723$1$1 ==.
+;	../fb_app_taster.c:723: TR0=1;
 	setb	_TCON_4
-	C$fb_app_taster.c$728$1$1 ==.
-;	..\fb_app_taster.c:728: IP0 &= 0xFC; //FC		F6	für flackerfrei bei 1 kanal
+	C$fb_app_taster.c$725$1$1 ==.
+;	../fb_app_taster.c:725: IP0 &= 0xFC; //FC		F6	für flackerfrei bei 1 kanal
 	anl	_IP0,#0xFC
-	C$fb_app_taster.c$729$1$1 ==.
-;	..\fb_app_taster.c:729: IP0 |= 0x0C; //0C		06	dto.
+	C$fb_app_taster.c$726$1$1 ==.
+;	../fb_app_taster.c:726: IP0 |= 0x0C; //0C		06	dto.
 	orl	_IP0,#0x0C
-	C$fb_app_taster.c$730$1$1 ==.
-;	..\fb_app_taster.c:730: IP0H &= 0xF4;// 
+	C$fb_app_taster.c$727$1$1 ==.
+;	../fb_app_taster.c:727: IP0H &= 0xF4;//
 	anl	_IP0H,#0xF4
-	C$fb_app_taster.c$731$1$1 ==.
-;	..\fb_app_taster.c:731: IP0H |= 0x04;// 		Timer 1 auf Level 2
+	C$fb_app_taster.c$728$1$1 ==.
+;	../fb_app_taster.c:728: IP0H |= 0x04;// 		Timer 1 auf Level 2
 	orl	_IP0H,#0x04
-	C$fb_app_taster.c$733$1$1 ==.
-;	..\fb_app_taster.c:733: ET0=1;// timer 0 interupt freigeben	
+	C$fb_app_taster.c$730$1$1 ==.
+;	../fb_app_taster.c:730: ET0=1;// timer 0 interupt freigeben
 	setb	_IEN0_1
-	C$fb_app_taster.c$735$1$1 ==.
-;	..\fb_app_taster.c:735: TF0=0; //timer0 flag löschen
+	C$fb_app_taster.c$732$1$1 ==.
+;	../fb_app_taster.c:732: TF0=0; //timer0 flag löschen
 	clr	_TCON_5
-	C$fb_app_taster.c$736$1$1 ==.
-;	..\fb_app_taster.c:736: EA=1;// Interrupts freigeben	
+	C$fb_app_taster.c$733$1$1 ==.
+;	../fb_app_taster.c:733: EA=1;// Interrupts freigeben
 	setb	_IEN0_7
-	C$fb_app_taster.c$738$1$1 ==.
+	C$fb_app_taster.c$735$1$1 ==.
 	XG$restart_app$0$0 ==.
 	ret
 	.area CSEG    (CODE)

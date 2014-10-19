@@ -4,232 +4,285 @@ Symbol Table
 
     .__.ABS.                                                    =  0000 G
     A                                                              00E0 
- 10 A$fb_taster$519                                                0000 GR
- 10 A$fb_taster$520                                                0003 GR
- 10 A$fb_taster$522                                                000B GR
- 10 A$fb_taster$524                                                0013 GR
- 10 A$fb_taster$526                                                001B GR
- 18 A$fb_taster$541                                                0000 GR
- 10 A$fb_taster$548                                                001E GR
- 10 A$fb_taster$550                                                0021 GR
- 19 A$fb_taster$587                                                0000 GR
- 19 A$fb_taster$590                                                0002 GR
- 19 A$fb_taster$593                                                0004 GR
- 19 A$fb_taster$594                                                0006 GR
- 19 A$fb_taster$595                                                0007 GR
- 19 A$fb_taster$596                                                0009 GR
- 19 A$fb_taster$597                                                000B GR
- 19 A$fb_taster$600                                                000D GR
- 19 A$fb_taster$601                                                000F GR
- 19 A$fb_taster$602                                                0011 GR
- 19 A$fb_taster$603                                                0014 GR
- 19 A$fb_taster$604                                                0016 GR
- 19 A$fb_taster$607                                                0018 GR
- 19 A$fb_taster$610                                                001A GR
- 19 A$fb_taster$611                                                001D GR
- 19 A$fb_taster$615                                                0020 GR
- 19 A$fb_taster$616                                                0023 GR
- 19 A$fb_taster$617                                                0024 GR
- 19 A$fb_taster$621                                                0025 GR
- 19 A$fb_taster$622                                                0028 GR
- 19 A$fb_taster$623                                                0029 GR
- 19 A$fb_taster$624                                                002A GR
- 19 A$fb_taster$625                                                002C GR
- 19 A$fb_taster$626                                                002D GR
+ 19 A$fb_taster$1004                                               01F0 GR
+ 19 A$fb_taster$1005                                               01F3 GR
+ 19 A$fb_taster$1009                                               01F5 GR
+ 19 A$fb_taster$1013                                               01F8 GR
+ 19 A$fb_taster$1019                                               01FB GR
+ 19 A$fb_taster$1020                                               01FE GR
+ 19 A$fb_taster$1024                                               0200 GR
+ 19 A$fb_taster$1028                                               0203 GR
+ 19 A$fb_taster$1031                                               0205 GR
+ 19 A$fb_taster$1034                                               0208 GR
+ 19 A$fb_taster$1036                                               020B GR
+ 19 A$fb_taster$1037                                               020D GR
+ 19 A$fb_taster$1038                                               020E GR
+ 19 A$fb_taster$1042                                               0210 GR
+ 19 A$fb_taster$1043                                               0213 GR
+ 19 A$fb_taster$1047                                               0216 GR
+ 19 A$fb_taster$1050                                               0218 GR
+ 19 A$fb_taster$1051                                               021A GR
+ 19 A$fb_taster$1054                                               021D GR
+ 19 A$fb_taster$1057                                               021F GR
+ 19 A$fb_taster$1060                                               0222 GR
+ 19 A$fb_taster$1063                                               0225 GR
+ 19 A$fb_taster$1066                                               0228 GR
+ 19 A$fb_taster$1069                                               022B GR
+ 19 A$fb_taster$1072                                               022E GR
+ 19 A$fb_taster$1073                                               0230 GR
+ 19 A$fb_taster$1077                                               0232 GR
+ 19 A$fb_taster$1078                                               0233 GR
+ 19 A$fb_taster$1079                                               0235 GR
+ 19 A$fb_taster$1080                                               0236 GR
+ 19 A$fb_taster$1084                                               0238 GR
+ 19 A$fb_taster$1088                                               023A GR
+ 19 A$fb_taster$1089                                               023C GR
+ 19 A$fb_taster$1090                                               023F GR
+ 19 A$fb_taster$1091                                               0241 GR
+ 19 A$fb_taster$1095                                               0244 GR
+ 19 A$fb_taster$1098                                               0246 GR
+ 19 A$fb_taster$1101                                               0249 GR
+ 10 A$fb_taster$520                                                0000 GR
+ 10 A$fb_taster$521                                                0003 GR
+ 10 A$fb_taster$523                                                000B GR
+ 10 A$fb_taster$525                                                0013 GR
+ 10 A$fb_taster$527                                                001B GR
+ 18 A$fb_taster$542                                                0000 GR
+ 10 A$fb_taster$549                                                001E GR
+ 10 A$fb_taster$551                                                0021 GR
+ 19 A$fb_taster$588                                                0000 GR
+ 19 A$fb_taster$591                                                0002 GR
+ 19 A$fb_taster$594                                                0004 GR
+ 19 A$fb_taster$595                                                0006 GR
+ 19 A$fb_taster$596                                                0007 GR
+ 19 A$fb_taster$597                                                0009 GR
+ 19 A$fb_taster$598                                                000B GR
+ 19 A$fb_taster$601                                                000D GR
+ 19 A$fb_taster$602                                                000F GR
+ 19 A$fb_taster$603                                                0011 GR
+ 19 A$fb_taster$604                                                0014 GR
+ 19 A$fb_taster$605                                                0016 GR
+ 19 A$fb_taster$608                                                0018 GR
+ 19 A$fb_taster$611                                                001A GR
+ 19 A$fb_taster$612                                                001D GR
+ 19 A$fb_taster$613                                                0020 GR
+ 19 A$fb_taster$614                                                0022 GR
+ 19 A$fb_taster$618                                                0024 GR
+ 19 A$fb_taster$619                                                0027 GR
+ 19 A$fb_taster$620                                                0028 GR
+ 19 A$fb_taster$621                                                0029 GR
+ 19 A$fb_taster$622                                                002A GR
+ 19 A$fb_taster$626                                                002B GR
  19 A$fb_taster$627                                                002E GR
- 19 A$fb_taster$630                                                0030 GR
- 19 A$fb_taster$633                                                0033 GR
- 19 A$fb_taster$634                                                0036 GR
- 19 A$fb_taster$635                                                0038 GR
- 19 A$fb_taster$636                                                003B GR
- 19 A$fb_taster$637                                                003E GR
- 19 A$fb_taster$638                                                0041 GR
- 19 A$fb_taster$641                                                0043 GR
- 19 A$fb_taster$642                                                0045 GR
- 19 A$fb_taster$643                                                0048 GR
- 19 A$fb_taster$644                                                004B GR
- 19 A$fb_taster$645                                                004E GR
- 19 A$fb_taster$648                                                0050 GR
- 19 A$fb_taster$651                                                0052 GR
- 19 A$fb_taster$653                                                0054 GR
- 19 A$fb_taster$655                                                0057 GR
- 19 A$fb_taster$658                                                0059 GR
- 19 A$fb_taster$661                                                005B GR
- 19 A$fb_taster$662                                                005E GR
+ 19 A$fb_taster$628                                                002F GR
+ 19 A$fb_taster$629                                                0030 GR
+ 19 A$fb_taster$630                                                0032 GR
+ 19 A$fb_taster$631                                                0033 GR
+ 19 A$fb_taster$632                                                0034 GR
+ 19 A$fb_taster$635                                                0036 GR
+ 19 A$fb_taster$638                                                0039 GR
+ 19 A$fb_taster$639                                                003C GR
+ 19 A$fb_taster$640                                                003E GR
+ 19 A$fb_taster$641                                                0041 GR
+ 19 A$fb_taster$642                                                0044 GR
+ 19 A$fb_taster$643                                                0047 GR
+ 19 A$fb_taster$646                                                0049 GR
+ 19 A$fb_taster$647                                                004B GR
+ 19 A$fb_taster$648                                                004E GR
+ 19 A$fb_taster$649                                                0051 GR
+ 19 A$fb_taster$650                                                0054 GR
+ 19 A$fb_taster$653                                                0056 GR
+ 19 A$fb_taster$656                                                0058 GR
+ 19 A$fb_taster$658                                                005A GR
+ 19 A$fb_taster$660                                                005D GR
  19 A$fb_taster$663                                                005F GR
- 19 A$fb_taster$664                                                0060 GR
- 19 A$fb_taster$667                                                0062 GR
+ 19 A$fb_taster$666                                                0061 GR
+ 19 A$fb_taster$667                                                0064 GR
  19 A$fb_taster$668                                                0065 GR
  19 A$fb_taster$669                                                0066 GR
- 19 A$fb_taster$670                                                0067 GR
- 19 A$fb_taster$673                                                0069 GR
- 19 A$fb_taster$676                                                006B GR
- 19 A$fb_taster$680                                                006D GR
- 19 A$fb_taster$683                                                0070 GR
- 19 A$fb_taster$684                                                0071 GR
- 19 A$fb_taster$688                                                0073 GR
- 19 A$fb_taster$689                                                0075 GR
- 19 A$fb_taster$690                                                0077 GR
- 19 A$fb_taster$691                                                007A GR
- 19 A$fb_taster$692                                                007C GR
- 19 A$fb_taster$695                                                007E GR
- 19 A$fb_taster$696                                                0081 GR
- 19 A$fb_taster$697                                                0084 GR
- 19 A$fb_taster$698                                                0087 GR
- 19 A$fb_taster$699                                                008A GR
- 19 A$fb_taster$700                                                008D GR
- 19 A$fb_taster$701                                                0090 GR
- 19 A$fb_taster$704                                                0093 GR
- 19 A$fb_taster$707                                                0096 GR
- 19 A$fb_taster$709                                                0098 GR
- 19 A$fb_taster$711                                                009B GR
- 19 A$fb_taster$712                                                009D GR
- 19 A$fb_taster$713                                                009F GR
- 19 A$fb_taster$714                                                00A1 GR
- 19 A$fb_taster$715                                                00A3 GR
- 19 A$fb_taster$716                                                00A5 GR
- 19 A$fb_taster$717                                                00A8 GR
- 19 A$fb_taster$718                                                00AA GR
- 19 A$fb_taster$719                                                00AD GR
- 19 A$fb_taster$720                                                00AF GR
- 19 A$fb_taster$721                                                00B1 GR
- 19 A$fb_taster$722                                                00B3 GR
- 19 A$fb_taster$723                                                00B4 GR
- 19 A$fb_taster$727                                                00B6 GR
- 19 A$fb_taster$730                                                00B8 GR
- 19 A$fb_taster$731                                                00BB GR
- 19 A$fb_taster$732                                                00BC GR
- 19 A$fb_taster$733                                                00BD GR
- 19 A$fb_taster$739                                                00BF GR
- 19 A$fb_taster$740                                                00C1 GR
- 19 A$fb_taster$741                                                00C4 GR
- 19 A$fb_taster$742                                                00C7 GR
- 19 A$fb_taster$745                                                00C9 GR
- 19 A$fb_taster$746                                                00CB GR
- 19 A$fb_taster$747                                                00CD GR
- 19 A$fb_taster$748                                                00CF GR
- 19 A$fb_taster$749                                                00D1 GR
- 19 A$fb_taster$750                                                00D3 GR
- 19 A$fb_taster$751                                                00D6 GR
- 19 A$fb_taster$752                                                00D8 GR
- 19 A$fb_taster$758                                                00DA GR
- 19 A$fb_taster$759                                                00DC GR
- 19 A$fb_taster$760                                                00DD GR
- 19 A$fb_taster$761                                                00DE GR
- 19 A$fb_taster$762                                                00DF GR
- 19 A$fb_taster$763                                                00E1 GR
- 19 A$fb_taster$764                                                00E2 GR
- 19 A$fb_taster$767                                                00E4 GR
- 19 A$fb_taster$768                                                00E6 GR
- 19 A$fb_taster$769                                                00E8 GR
- 19 A$fb_taster$773                                                00EA GR
- 19 A$fb_taster$774                                                00EC GR
- 19 A$fb_taster$777                                                00EF GR
- 19 A$fb_taster$778                                                00F1 GR
- 19 A$fb_taster$779                                                00F3 GR
- 19 A$fb_taster$780                                                00F4 GR
- 19 A$fb_taster$783                                                00F7 GR
- 19 A$fb_taster$784                                                00F9 GR
- 19 A$fb_taster$785                                                00FB GR
- 19 A$fb_taster$786                                                00FD GR
- 19 A$fb_taster$787                                                00FF GR
- 19 A$fb_taster$788                                                0100 GR
- 19 A$fb_taster$789                                                0101 GR
- 19 A$fb_taster$790                                                0102 GR
- 19 A$fb_taster$791                                                0105 GR
- 19 A$fb_taster$794                                                0108 GR
- 19 A$fb_taster$797                                                010A GR
- 19 A$fb_taster$801                                                010C GR
- 19 A$fb_taster$802                                                010E GR
- 19 A$fb_taster$803                                                0110 GR
- 19 A$fb_taster$804                                                0111 GR
- 19 A$fb_taster$807                                                0114 GR
- 19 A$fb_taster$808                                                0116 GR
- 19 A$fb_taster$809                                                0118 GR
- 19 A$fb_taster$810                                                011A GR
- 19 A$fb_taster$811                                                011C GR
- 19 A$fb_taster$812                                                011D GR
- 19 A$fb_taster$813                                                011E GR
- 19 A$fb_taster$814                                                011F GR
- 19 A$fb_taster$815                                                0122 GR
- 19 A$fb_taster$818                                                0125 GR
- 19 A$fb_taster$821                                                0127 GR
- 19 A$fb_taster$822                                                0129 GR
- 19 A$fb_taster$826                                                012B GR
- 19 A$fb_taster$827                                                012E GR
- 19 A$fb_taster$828                                                012F GR
- 19 A$fb_taster$829                                                0130 GR
- 19 A$fb_taster$830                                                0131 GR
- 19 A$fb_taster$831                                                0134 GR
- 19 A$fb_taster$832                                                0137 GR
- 19 A$fb_taster$833                                                0139 GR
- 19 A$fb_taster$836                                                013C GR
- 19 A$fb_taster$837                                                013E GR
- 19 A$fb_taster$838                                                0140 GR
- 19 A$fb_taster$839                                                0141 GR
- 19 A$fb_taster$840                                                0144 GR
+ 19 A$fb_taster$672                                                0068 GR
+ 19 A$fb_taster$673                                                006B GR
+ 19 A$fb_taster$674                                                006C GR
+ 19 A$fb_taster$675                                                006D GR
+ 19 A$fb_taster$678                                                006F GR
+ 19 A$fb_taster$681                                                0071 GR
+ 19 A$fb_taster$685                                                0073 GR
+ 19 A$fb_taster$688                                                0076 GR
+ 19 A$fb_taster$689                                                0077 GR
+ 19 A$fb_taster$693                                                0079 GR
+ 19 A$fb_taster$694                                                007B GR
+ 19 A$fb_taster$695                                                007D GR
+ 19 A$fb_taster$696                                                007F GR
+ 19 A$fb_taster$697                                                0082 GR
+ 19 A$fb_taster$698                                                0084 GR
+ 19 A$fb_taster$699                                                0086 GR
+ 19 A$fb_taster$702                                                0088 GR
+ 19 A$fb_taster$703                                                008B GR
+ 19 A$fb_taster$704                                                008E GR
+ 19 A$fb_taster$705                                                0091 GR
+ 19 A$fb_taster$706                                                0094 GR
+ 19 A$fb_taster$707                                                0097 GR
+ 19 A$fb_taster$708                                                009A GR
+ 19 A$fb_taster$711                                                009D GR
+ 19 A$fb_taster$714                                                00A0 GR
+ 19 A$fb_taster$716                                                00A2 GR
+ 19 A$fb_taster$718                                                00A5 GR
+ 19 A$fb_taster$719                                                00A7 GR
+ 19 A$fb_taster$720                                                00A9 GR
+ 19 A$fb_taster$721                                                00AB GR
+ 19 A$fb_taster$722                                                00AD GR
+ 19 A$fb_taster$723                                                00AF GR
+ 19 A$fb_taster$724                                                00B1 GR
+ 19 A$fb_taster$725                                                00B4 GR
+ 19 A$fb_taster$726                                                00B6 GR
+ 19 A$fb_taster$727                                                00B9 GR
+ 19 A$fb_taster$728                                                00BB GR
+ 19 A$fb_taster$729                                                00BD GR
+ 19 A$fb_taster$730                                                00BF GR
+ 19 A$fb_taster$731                                                00C1 GR
+ 19 A$fb_taster$732                                                00C2 GR
+ 19 A$fb_taster$736                                                00C4 GR
+ 19 A$fb_taster$739                                                00C6 GR
+ 19 A$fb_taster$740                                                00C9 GR
+ 19 A$fb_taster$741                                                00CA GR
+ 19 A$fb_taster$742                                                00CB GR
+ 19 A$fb_taster$748                                                00CD GR
+ 19 A$fb_taster$749                                                00CF GR
+ 19 A$fb_taster$750                                                00D2 GR
+ 19 A$fb_taster$751                                                00D5 GR
+ 19 A$fb_taster$754                                                00D7 GR
+ 19 A$fb_taster$755                                                00D9 GR
+ 19 A$fb_taster$756                                                00DB GR
+ 19 A$fb_taster$759                                                00DD GR
+ 19 A$fb_taster$762                                                00E0 GR
+ 19 A$fb_taster$763                                                00E3 GR
+ 19 A$fb_taster$764                                                00E5 GR
+ 19 A$fb_taster$765                                                00E7 GR
+ 19 A$fb_taster$766                                                00E9 GR
+ 19 A$fb_taster$767                                                00EC GR
+ 19 A$fb_taster$768                                                00EE GR
+ 19 A$fb_taster$769                                                00F0 GR
+ 19 A$fb_taster$770                                                00F2 GR
+ 19 A$fb_taster$774                                                00F4 GR
+ 19 A$fb_taster$775                                                00F6 GR
+ 19 A$fb_taster$776                                                00F8 GR
+ 19 A$fb_taster$779                                                00FA GR
+ 19 A$fb_taster$780                                                00FC GR
+ 19 A$fb_taster$784                                                00FE GR
+ 19 A$fb_taster$785                                                0101 GR
+ 19 A$fb_taster$786                                                0103 GR
+ 19 A$fb_taster$787                                                0105 GR
+ 19 A$fb_taster$788                                                0107 GR
+ 19 A$fb_taster$789                                                010A GR
+ 19 A$fb_taster$790                                                010C GR
+ 19 A$fb_taster$791                                                010E GR
+ 19 A$fb_taster$797                                                0110 GR
+ 19 A$fb_taster$798                                                0112 GR
+ 19 A$fb_taster$799                                                0113 GR
+ 19 A$fb_taster$800                                                0114 GR
+ 19 A$fb_taster$801                                                0115 GR
+ 19 A$fb_taster$802                                                0117 GR
+ 19 A$fb_taster$803                                                0118 GR
+ 19 A$fb_taster$806                                                011A GR
+ 19 A$fb_taster$807                                                011C GR
+ 19 A$fb_taster$808                                                011E GR
+ 19 A$fb_taster$812                                                0120 GR
+ 19 A$fb_taster$813                                                0122 GR
+ 19 A$fb_taster$816                                                0125 GR
+ 19 A$fb_taster$817                                                0127 GR
+ 19 A$fb_taster$818                                                0129 GR
+ 19 A$fb_taster$819                                                012A GR
+ 19 A$fb_taster$822                                                012D GR
+ 19 A$fb_taster$823                                                012F GR
+ 19 A$fb_taster$824                                                0131 GR
+ 19 A$fb_taster$825                                                0133 GR
+ 19 A$fb_taster$826                                                0135 GR
+ 19 A$fb_taster$827                                                0136 GR
+ 19 A$fb_taster$828                                                0137 GR
+ 19 A$fb_taster$829                                                0138 GR
+ 19 A$fb_taster$830                                                013B GR
+ 19 A$fb_taster$833                                                013E GR
+ 19 A$fb_taster$836                                                0140 GR
+ 19 A$fb_taster$840                                                0142 GR
+ 19 A$fb_taster$841                                                0144 GR
  19 A$fb_taster$842                                                0146 GR
- 19 A$fb_taster$843                                                0148 GR
- 19 A$fb_taster$844                                                014A GR
- 19 A$fb_taster$845                                                014C GR
- 19 A$fb_taster$846                                                014E GR
- 19 A$fb_taster$847                                                0150 GR
- 19 A$fb_taster$848                                                0153 GR
- 19 A$fb_taster$849                                                0155 GR
- 19 A$fb_taster$853                                                0157 GR
- 19 A$fb_taster$854                                                015A GR
- 19 A$fb_taster$858                                                015D GR
+ 19 A$fb_taster$843                                                0147 GR
+ 19 A$fb_taster$846                                                014A GR
+ 19 A$fb_taster$847                                                014C GR
+ 19 A$fb_taster$848                                                014E GR
+ 19 A$fb_taster$849                                                0150 GR
+ 19 A$fb_taster$850                                                0152 GR
+ 19 A$fb_taster$851                                                0153 GR
+ 19 A$fb_taster$852                                                0154 GR
+ 19 A$fb_taster$853                                                0155 GR
+ 19 A$fb_taster$854                                                0158 GR
+ 19 A$fb_taster$857                                                015B GR
+ 19 A$fb_taster$860                                                015D GR
  19 A$fb_taster$861                                                015F GR
- 19 A$fb_taster$862                                                0161 GR
- 19 A$fb_taster$863                                                0163 GR
- 19 A$fb_taster$864                                                0166 GR
- 19 A$fb_taster$865                                                0168 GR
- 19 A$fb_taster$866                                                016A GR
- 19 A$fb_taster$870                                                016C GR
- 19 A$fb_taster$872                                                016E GR
- 19 A$fb_taster$873                                                0170 GR
- 19 A$fb_taster$874                                                0171 GR
- 19 A$fb_taster$875                                                0173 GR
+ 19 A$fb_taster$865                                                0161 GR
+ 19 A$fb_taster$866                                                0164 GR
+ 19 A$fb_taster$867                                                0165 GR
+ 19 A$fb_taster$868                                                0166 GR
+ 19 A$fb_taster$869                                                0167 GR
+ 19 A$fb_taster$870                                                016A GR
+ 19 A$fb_taster$871                                                016D GR
+ 19 A$fb_taster$872                                                016F GR
+ 19 A$fb_taster$875                                                0172 GR
  19 A$fb_taster$876                                                0174 GR
- 19 A$fb_taster$880                                                0176 GR
- 19 A$fb_taster$881                                                0179 GR
- 19 A$fb_taster$884                                                017B GR
- 19 A$fb_taster$885                                                017E GR
- 19 A$fb_taster$887                                                0180 GR
- 19 A$fb_taster$888                                                0182 GR
- 19 A$fb_taster$889                                                0184 GR
- 19 A$fb_taster$890                                                0185 GR
- 19 A$fb_taster$894                                                0187 GR
- 19 A$fb_taster$897                                                0189 GR
- 19 A$fb_taster$900                                                018C GR
- 19 A$fb_taster$902                                                018F GR
- 19 A$fb_taster$903                                                0191 GR
- 19 A$fb_taster$904                                                0192 GR
- 19 A$fb_taster$908                                                0194 GR
- 19 A$fb_taster$909                                                0197 GR
- 19 A$fb_taster$913                                                019A GR
- 19 A$fb_taster$916                                                019C GR
- 19 A$fb_taster$917                                                019E GR
- 19 A$fb_taster$920                                                01A1 GR
- 19 A$fb_taster$923                                                01A3 GR
- 19 A$fb_taster$926                                                01A6 GR
- 19 A$fb_taster$929                                                01A9 GR
- 19 A$fb_taster$932                                                01AC GR
- 19 A$fb_taster$935                                                01AF GR
- 19 A$fb_taster$938                                                01B2 GR
- 19 A$fb_taster$939                                                01B4 GR
- 19 A$fb_taster$943                                                01B6 GR
- 19 A$fb_taster$944                                                01B7 GR
- 19 A$fb_taster$945                                                01B9 GR
- 19 A$fb_taster$946                                                01BA GR
- 19 A$fb_taster$950                                                01BC GR
- 19 A$fb_taster$954                                                01BE GR
- 19 A$fb_taster$955                                                01C0 GR
- 19 A$fb_taster$956                                                01C3 GR
- 19 A$fb_taster$957                                                01C5 GR
- 19 A$fb_taster$961                                                01C8 GR
- 19 A$fb_taster$964                                                01CA GR
- 19 A$fb_taster$967                                                01CD GR
+ 19 A$fb_taster$877                                                0176 GR
+ 19 A$fb_taster$878                                                0177 GR
+ 19 A$fb_taster$879                                                017A GR
+ 19 A$fb_taster$881                                                017C GR
+ 19 A$fb_taster$882                                                017E GR
+ 19 A$fb_taster$883                                                0180 GR
+ 19 A$fb_taster$884                                                0182 GR
+ 19 A$fb_taster$885                                                0184 GR
+ 19 A$fb_taster$886                                                0186 GR
+ 19 A$fb_taster$887                                                0188 GR
+ 19 A$fb_taster$888                                                018B GR
+ 19 A$fb_taster$889                                                018D GR
+ 19 A$fb_taster$890                                                018F GR
+ 19 A$fb_taster$894                                                0191 GR
+ 19 A$fb_taster$895                                                0194 GR
+ 19 A$fb_taster$899                                                0197 GR
+ 19 A$fb_taster$902                                                0199 GR
+ 19 A$fb_taster$903                                                019B GR
+ 19 A$fb_taster$904                                                019D GR
+ 19 A$fb_taster$905                                                019F GR
+ 19 A$fb_taster$906                                                01A2 GR
+ 19 A$fb_taster$907                                                01A4 GR
+ 19 A$fb_taster$908                                                01A6 GR
+ 19 A$fb_taster$909                                                01A8 GR
+ 19 A$fb_taster$913                                                01AA GR
+ 19 A$fb_taster$915                                                01AC GR
+ 19 A$fb_taster$916                                                01AE GR
+ 19 A$fb_taster$917                                                01AF GR
+ 19 A$fb_taster$918                                                01B1 GR
+ 19 A$fb_taster$919                                                01B2 GR
+ 19 A$fb_taster$925                                                01B4 GR
+ 19 A$fb_taster$926                                                01B7 GR
+ 19 A$fb_taster$930                                                01B9 GR
+ 19 A$fb_taster$933                                                01BB GR
+ 19 A$fb_taster$939                                                01BE GR
+ 19 A$fb_taster$940                                                01C1 GR
+ 19 A$fb_taster$944                                                01C3 GR
+ 19 A$fb_taster$948                                                01C6 GR
+ 19 A$fb_taster$951                                                01C9 GR
+ 19 A$fb_taster$954                                                01CB GR
+ 19 A$fb_taster$958                                                01CC GR
+ 19 A$fb_taster$961                                                01CF GR
+ 19 A$fb_taster$964                                                01D1 GR
+ 19 A$fb_taster$968                                                01D2 GR
+ 19 A$fb_taster$971                                                01D5 GR
+ 19 A$fb_taster$974                                                01D7 GR
+ 19 A$fb_taster$977                                                01DA GR
+ 19 A$fb_taster$980                                                01DD GR
+ 19 A$fb_taster$983                                                01E0 GR
+ 19 A$fb_taster$986                                                01E2 GR
+ 19 A$fb_taster$989                                                01E5 GR
+ 19 A$fb_taster$993                                                01E7 GR
+ 19 A$fb_taster$994                                                01EA GR
+ 19 A$fb_taster$998                                                01ED GR
     A.0                                                            00E0 
     A.1                                                            00E1 
     A.2                                                            00E2 
@@ -257,73 +310,107 @@ Symbol Table
     B.5                                                            00F5 
     B.6                                                            00F6 
     B.7                                                            00F7 
- 19 C$fb_taster.c$101$1$1                                       =  0025 GR
- 19 C$fb_taster.c$102$1$1                                       =  0030 GR
- 19 C$fb_taster.c$103$2$2                                       =  0033 GR
- 19 C$fb_taster.c$104$1$1                                       =  0043 GR
- 19 C$fb_taster.c$105$1$1                                       =  0050 GR
- 19 C$fb_taster.c$106$1$1                                       =  0070 GR
- 19 C$fb_taster.c$107$2$3                                       =  0059 GR
- 19 C$fb_taster.c$108$2$3                                       =  005B GR
- 19 C$fb_taster.c$109$2$3                                       =  0062 GR
- 19 C$fb_taster.c$110$2$3                                       =  0069 GR
- 19 C$fb_taster.c$111$2$3                                       =  006B GR
- 19 C$fb_taster.c$112$2$3                                       =  006D GR
- 19 C$fb_taster.c$114$1$1                                       =  0073 GR
- 19 C$fb_taster.c$119$1$1                                       =  007E GR
- 19 C$fb_taster.c$121$1$1                                       =  0093 GR
- 19 C$fb_taster.c$123$1$1                                       =  0096 GR
- 19 C$fb_taster.c$126$1$1                                       =  00B6 GR
- 19 C$fb_taster.c$127$1$1                                       =  00B8 GR
- 19 C$fb_taster.c$129$1$1                                       =  00BF GR
- 19 C$fb_taster.c$130$2$4                                       =  00BF GR
- 19 C$fb_taster.c$131$2$4                                       =  00C9 GR
- 19 C$fb_taster.c$133$2$4                                       =  00DA GR
- 19 C$fb_taster.c$135$2$4                                       =  00DA GR
- 19 C$fb_taster.c$137$2$4                                       =  00E4 GR
- 19 C$fb_taster.c$141$2$4                                       =  00EA GR
- 19 C$fb_taster.c$143$3$5                                       =  00EF GR
- 19 C$fb_taster.c$144$4$6                                       =  00F7 GR
- 19 C$fb_taster.c$145$5$7                                       =  0108 GR
- 19 C$fb_taster.c$146$5$7                                       =  010A GR
- 19 C$fb_taster.c$149$3$5                                       =  010C GR
- 19 C$fb_taster.c$150$4$8                                       =  0114 GR
- 19 C$fb_taster.c$151$5$9                                       =  0125 GR
- 19 C$fb_taster.c$152$5$9                                       =  0127 GR
- 19 C$fb_taster.c$159$3$10                                      =  012B GR
- 19 C$fb_taster.c$160$4$11                                      =  013C GR
- 19 C$fb_taster.c$164$2$4                                       =  0157 GR
- 19 C$fb_taster.c$165$3$12                                      =  015D GR
- 19 C$fb_taster.c$166$3$12                                      =  015F GR
- 19 C$fb_taster.c$169$3$4                                       =  016C GR
- 19 C$fb_taster.c$216$2$4                                       =  0176 GR
- 19 C$fb_taster.c$219$2$4                                       =  0187 GR
- 19 C$fb_taster.c$220$2$4                                       =  0189 GR
- 19 C$fb_taster.c$221$3$15                                      =  018C GR
- 19 C$fb_taster.c$223$4$16                                      =  0194 GR
- 19 C$fb_taster.c$224$4$16                                      =  019A GR
- 19 C$fb_taster.c$225$4$16                                      =  019C GR
- 19 C$fb_taster.c$226$5$17                                      =  01A1 GR
- 19 C$fb_taster.c$227$5$17                                      =  01A3 GR
- 19 C$fb_taster.c$228$5$17                                      =  01A6 GR
- 19 C$fb_taster.c$229$5$17                                      =  01A9 GR
- 19 C$fb_taster.c$230$5$17                                      =  01AC GR
- 19 C$fb_taster.c$231$5$17                                      =  01AF GR
- 19 C$fb_taster.c$232$5$17                                      =  01B2 GR
- 19 C$fb_taster.c$237$3$18                                      =  01B6 GR
- 19 C$fb_taster.c$238$3$18                                      =  01BC GR
- 19 C$fb_taster.c$271$2$4                                       =  01BE GR
- 19 C$fb_taster.c$272$2$4                                       =  01C8 GR
- 19 C$fb_taster.c$276$1$1                                       =  01CA GR
- 19 C$fb_taster.c$277$1$1                                       =  01CD GR
- 19 C$fb_taster.c$79$0$0                                        =  0000 GR
- 19 C$fb_taster.c$81$1$0                                        =  0000 GR
- 19 C$fb_taster.c$82$1$0                                        =  0002 GR
- 19 C$fb_taster.c$89$1$1                                        =  0004 GR
- 19 C$fb_taster.c$91$1$1                                        =  000D GR
- 19 C$fb_taster.c$97$1$1                                        =  0018 GR
- 19 C$fb_taster.c$98$1$1                                        =  001A GR
- 19 C$fb_taster.c$99$1$1                                        =  0020 GR
+ 19 C$fb_taster.c$100$1$1                                       =  0056 GR
+ 19 C$fb_taster.c$101$1$1                                       =  0076 GR
+ 19 C$fb_taster.c$102$2$4                                       =  005F GR
+ 19 C$fb_taster.c$103$2$4                                       =  0061 GR
+ 19 C$fb_taster.c$104$2$4                                       =  0068 GR
+ 19 C$fb_taster.c$105$2$4                                       =  006F GR
+ 19 C$fb_taster.c$106$2$4                                       =  0071 GR
+ 19 C$fb_taster.c$107$2$4                                       =  0073 GR
+ 19 C$fb_taster.c$109$1$1                                       =  0079 GR
+ 19 C$fb_taster.c$112$2$5                                       =  0088 GR
+ 19 C$fb_taster.c$116$1$1                                       =  009D GR
+ 19 C$fb_taster.c$118$1$1                                       =  00A0 GR
+ 19 C$fb_taster.c$121$1$1                                       =  00C4 GR
+ 19 C$fb_taster.c$122$1$1                                       =  00C6 GR
+ 19 C$fb_taster.c$124$1$1                                       =  00CD GR
+ 19 C$fb_taster.c$125$3$7                                       =  00CD GR
+ 19 C$fb_taster.c$126$2$6                                       =  00D7 GR
+ 19 C$fb_taster.c$128$3$8                                       =  00DD GR
+ 19 C$fb_taster.c$129$3$8                                       =  00E0 GR
+ 19 C$fb_taster.c$132$4$9                                       =  00F4 GR
+ 19 C$fb_taster.c$134$5$10                                      =  00FA GR
+ 19 C$fb_taster.c$136$4$9                                       =  00FE GR
+ 19 C$fb_taster.c$141$2$6                                       =  0110 GR
+ 19 C$fb_taster.c$143$2$6                                       =  0110 GR
+ 19 C$fb_taster.c$145$2$6                                       =  011A GR
+ 19 C$fb_taster.c$148$2$6                                       =  0120 GR
+ 19 C$fb_taster.c$150$3$11                                      =  0125 GR
+ 19 C$fb_taster.c$151$4$12                                      =  012D GR
+ 19 C$fb_taster.c$152$5$13                                      =  013E GR
+ 19 C$fb_taster.c$153$5$13                                      =  0140 GR
+ 19 C$fb_taster.c$156$3$11                                      =  0142 GR
+ 19 C$fb_taster.c$157$4$14                                      =  014A GR
+ 19 C$fb_taster.c$158$5$15                                      =  015B GR
+ 19 C$fb_taster.c$159$5$15                                      =  015D GR
+ 19 C$fb_taster.c$166$3$16                                      =  0161 GR
+ 19 C$fb_taster.c$167$4$17                                      =  0172 GR
+ 19 C$fb_taster.c$171$2$6                                       =  0191 GR
+ 19 C$fb_taster.c$172$3$18                                      =  0197 GR
+ 19 C$fb_taster.c$173$3$18                                      =  0199 GR
+ 19 C$fb_taster.c$176$3$6                                       =  01AA GR
+ 19 C$fb_taster.c$180$2$6                                       =  01B4 GR
+ 19 C$fb_taster.c$181$3$20                                      =  01B4 GR
+ 19 C$fb_taster.c$182$3$20                                      =  01B9 GR
+ 19 C$fb_taster.c$183$3$20                                      =  01BB GR
+ 19 C$fb_taster.c$184$4$21                                      =  01BE GR
+ 19 C$fb_taster.c$185$4$21                                      =  01BE GR
+ 19 C$fb_taster.c$186$4$21                                      =  01C3 GR
+ 19 C$fb_taster.c$188$3$20                                      =  01C6 GR
+ 19 C$fb_taster.c$189$4$22                                      =  01C9 GR
+ 19 C$fb_taster.c$190$4$22                                      =  01CB GR
+ 19 C$fb_taster.c$192$3$20                                      =  01CC GR
+ 19 C$fb_taster.c$193$4$23                                      =  01CF GR
+ 19 C$fb_taster.c$194$4$23                                      =  01D1 GR
+ 19 C$fb_taster.c$196$3$20                                      =  01D2 GR
+ 19 C$fb_taster.c$197$4$24                                      =  01D5 GR
+ 19 C$fb_taster.c$198$4$24                                      =  01D7 GR
+ 19 C$fb_taster.c$199$4$24                                      =  01DA GR
+ 19 C$fb_taster.c$200$4$24                                      =  01DD GR
+ 19 C$fb_taster.c$201$4$24                                      =  01E0 GR
+ 19 C$fb_taster.c$202$4$24                                      =  01E2 GR
+ 19 C$fb_taster.c$203$4$24                                      =  01E5 GR
+ 19 C$fb_taster.c$205$3$20                                      =  01E7 GR
+ 19 C$fb_taster.c$206$3$20                                      =  01ED GR
+ 19 C$fb_taster.c$207$4$25                                      =  01F0 GR
+ 19 C$fb_taster.c$208$4$25                                      =  01F0 GR
+ 19 C$fb_taster.c$209$4$25                                      =  01F5 GR
+ 19 C$fb_taster.c$211$3$20                                      =  01F8 GR
+ 19 C$fb_taster.c$212$4$26                                      =  01FB GR
+ 19 C$fb_taster.c$213$4$26                                      =  01FB GR
+ 19 C$fb_taster.c$214$4$26                                      =  0200 GR
+ 19 C$fb_taster.c$226$2$6                                       =  0203 GR
+ 19 C$fb_taster.c$227$2$6                                       =  0205 GR
+ 19 C$fb_taster.c$228$3$27                                      =  0208 GR
+ 19 C$fb_taster.c$230$4$28                                      =  0210 GR
+ 19 C$fb_taster.c$231$4$28                                      =  0216 GR
+ 19 C$fb_taster.c$232$4$28                                      =  0218 GR
+ 19 C$fb_taster.c$233$5$29                                      =  021D GR
+ 19 C$fb_taster.c$234$5$29                                      =  021F GR
+ 19 C$fb_taster.c$235$5$29                                      =  0222 GR
+ 19 C$fb_taster.c$236$5$29                                      =  0225 GR
+ 19 C$fb_taster.c$237$5$29                                      =  0228 GR
+ 19 C$fb_taster.c$238$5$29                                      =  022B GR
+ 19 C$fb_taster.c$239$5$29                                      =  022E GR
+ 19 C$fb_taster.c$244$3$30                                      =  0232 GR
+ 19 C$fb_taster.c$245$3$30                                      =  0238 GR
+ 19 C$fb_taster.c$278$2$6                                       =  023A GR
+ 19 C$fb_taster.c$279$2$6                                       =  0244 GR
+ 19 C$fb_taster.c$283$1$1                                       =  0246 GR
+ 19 C$fb_taster.c$284$1$1                                       =  0249 GR
+ 19 C$fb_taster.c$74$0$0                                        =  0000 GR
+ 19 C$fb_taster.c$76$1$0                                        =  0000 GR
+ 19 C$fb_taster.c$77$1$0                                        =  0002 GR
+ 19 C$fb_taster.c$84$1$1                                        =  0004 GR
+ 19 C$fb_taster.c$86$1$1                                        =  000D GR
+ 19 C$fb_taster.c$92$1$1                                        =  0018 GR
+ 19 C$fb_taster.c$93$1$1                                        =  001A GR
+ 19 C$fb_taster.c$94$1$1                                        =  0024 GR
+ 19 C$fb_taster.c$96$1$1                                        =  002B GR
+ 19 C$fb_taster.c$97$1$1                                        =  0036 GR
+ 19 C$fb_taster.c$98$2$2                                        =  0039 GR
+ 19 C$fb_taster.c$99$2$3                                        =  0049 GR
     CPRL2                                                          00C8 
     CT2                                                            00C9 
     CY                                                             00D7 
@@ -498,8 +585,8 @@ Symbol Table
     IP.5                                                           00BD 
     IT0                                                            0088 
     IT1                                                            008A 
-    Lfb_taster.main$LED_hell$1$1                                =  1CBE G
-    Lfb_taster.main$trimsave$1$1                                =  1CBF G
+ 1D Lfb_taster.main$LED_hell$1$1                                =  1CFE GR
+    Lfb_taster.main$trimsave$1$1                                =  1CFF G
     OV                                                             00D2 
     P                                                              00D0 
     P0                                                             0080 
@@ -612,7 +699,7 @@ Symbol Table
     TR1                                                            008E 
     TR2                                                            00CA 
     TXD                                                            00B1 
- 19 XG$main$0$0                                                 =  01CD GR
+ 19 XG$main$0$0                                                 =  0249 GR
     _ACC                                                        =  00E0 G
     _AUXR1                                                      =  00A2 G
     _B                                                          =  00F0 G
@@ -760,17 +847,19 @@ Symbol Table
   8 __start__stack                                                 0000 GR
     _button_buffer                                                 **** GX
     _connected                                                     **** GX
+    _connected_timeout                                             **** GX
     _delay_timer                                                   **** GX
     _dimmwert                                                      **** GX
     _eeprom                                                        **** GX
  19 _main                                                          0000 GR
-    _main_LED_hell_1_1                                          =  1CBE 
-    _main_trimsave_1_1                                          =  1CBF 
+ 1D _main_LED_hell_1_1                                             1CFE R
+    _main_trimsave_1_1                                          =  1CFF 
   6 _object_value                                                  0000 GR
     _port_changed                                                  **** GX
     _process_tel                                                   **** GX
     _restart_app                                                   **** GX
     _restart_hw                                                    **** GX
+    _send_obj_value                                                **** GX
     _status60                                                      **** GX
     _switch_led                                                    **** GX
     _tel_arrived                                                   **** GX
@@ -1000,7 +1089,8 @@ Area Table
   16 GSINIT5                                    size    0   flags 20
   17 GSINIT                                     size    0   flags 20
   18 GSFINAL                                    size    3   flags 20
-  19 CSEG                                       size  1CE   flags 20
+  19 CSEG                                       size  24A   flags 20
   1A CONST                                      size    0   flags 20
   1B XINIT                                      size    0   flags 20
   1C CABS                                       size    0   flags 28
+  1D CABS2                                      size    1   flags 28

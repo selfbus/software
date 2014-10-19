@@ -28,7 +28,7 @@ all: in8.hex
 in8.hex: $(RELS) $(USER_RELS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: SDCC Linker'
-	sdcc --stack-auto --vc --data-loc 0x20 -L"C:\Freebus\C_Programme\oldisprogramm\lib_lpc922\Release" -o"in8.hex" $(RELS) $(USER_RELS) $(LIBS)
+	sdcc --stack-auto --vc --data-loc 0x20 -L"/home/stefan/_selfbus_/software-incubation/lib_lpc922/Release" -o "in8.hex" $(RELS) $(USER_RELS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 

@@ -457,6 +457,7 @@ unsigned long read_obj_value(unsigned char objno)
 			lval = ((int) answer[0]) + answer[1];
 			lval *= 25;  // in lval sind zwei Temperaturen, daher halber Multiplikator
 			lval -= 2000;
+			lval += (char)eeprom[0xFE] *10;  // Temperatur Abgleich
 			return conv_dpt_9_001(lval);
 
 		case RM_TYPE_VOLT:
@@ -802,9 +803,12 @@ void restart_app()
 	START_WRITECYCLE;
 	WRITE_BYTE(0x01, 0x03, 0x00);	// Herstellercode 0x004C = Bosch
 	WRITE_BYTE(0x01, 0x04, 0x4C);
-//	WRITE_BYTE(0x01, 0x05, 0x03);	// Devicetype 1010 (0x03F2)
-//	WRITE_BYTE(0x01, 0x06, 0xF2);
-//	WRITE_BYTE(0x01, 0x07, 0x21);	// Version der Applikation: 2.1
+
+	// Wenn VD Version Lock oder Device Lock aktiv hier ID und Version setzen
+	WRITE_BYTE(0x01, 0x05, 0x03);	// Devicetype 1010 (0x03F2)
+	WRITE_BYTE(0x01, 0x06, 0xF2);
+	WRITE_BYTE(0x01, 0x07, 0x22);	// Version der Applikation: 2.2
+
 	WRITE_BYTE(0x01, 0x0C, 0x00);	// PORT A Direction Bit Setting
 	WRITE_BYTE(0x01, 0x0D, 0xFF);	// Run-Status (00=stop FF=run)
 //	WRITE_BYTE(0x01, 0x12, 0xA0);	// COMMSTAB Pointer

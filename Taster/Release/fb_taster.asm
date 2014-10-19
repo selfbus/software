@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
-; Version 3.1.0 #7066 (Nov 22 2011) (MINGW32)
-; This file was generated Sat Jan 25 10:33:40 2014
+; Version 3.1.0 #7066 (Jun 14 2012) (Linux)
+; This file was generated Sat Oct 18 20:04:36 2014
 ;--------------------------------------------------------
 	.module fb_taster
 	.optsdcc -mmcs51 --model-small
@@ -16,6 +16,7 @@
 	.globl _restart_app
 	.globl _process_tel
 	.globl _restart_hw
+	.globl _send_obj_value
 	.globl _P3_1
 	.globl _P3_0
 	.globl _P1_7
@@ -555,21 +556,21 @@ __sdcc_program_startup:
 ;------------------------------------------------------------
 ;Allocation info for local variables in function 'main'
 ;------------------------------------------------------------
-;n                         Allocated to registers r6 
+;n                         Allocated to registers r5 
 ;LED                       Allocated to registers 
-;cmd                       Allocated to registers 
+;cmd                       Allocated to registers r5 
 ;tasterpegel               Allocated to registers r7 
 ;blink                     Allocated to registers 
 ;verstell                  Allocated to registers b2 
 ;verstellt                 Allocated to registers b1 
 ;tastergetoggelt           Allocated to registers b0 
-;cal                       Allocated to registers 
+;cal                       Allocated to registers r6 
 ;buttonpattern             Allocated to registers 
 ;wduf                      Allocated to registers b1 
 ;------------------------------------------------------------
 	G$main$0$0 ==.
-	C$fb_taster.c$79$0$0 ==.
-;	..\fb_taster.c:79: void main(void)
+	C$fb_taster.c$74$0$0 ==.
+;	../fb_taster.c:74: void main(void)
 ;	-----------------------------------------
 ;	 function main
 ;	-----------------------------------------
@@ -582,394 +583,529 @@ _main:
 	ar2 = 0x02
 	ar1 = 0x01
 	ar0 = 0x00
-	C$fb_taster.c$81$1$0 ==.
-;	..\fb_taster.c:81: unsigned char n,LED,cmd,tasterpegel=0;
+	C$fb_taster.c$76$1$0 ==.
+;	../fb_taster.c:76: unsigned char n,LED,cmd,tasterpegel=0;
 	mov	r7,#0x00
-	C$fb_taster.c$82$1$0 ==.
-;	..\fb_taster.c:82: __bit blink, verstell, verstellt,tastergetoggelt=0;
+	C$fb_taster.c$77$1$0 ==.
+;	../fb_taster.c:77: __bit blink, verstell, verstellt,tastergetoggelt=0;
 	clr	b0
-	C$fb_taster.c$89$1$1 ==.
-;	..\fb_taster.c:89: wduf=WDCON&0x02;
+	C$fb_taster.c$84$1$1 ==.
+;	../fb_taster.c:84: wduf=WDCON&0x02;
 	mov	a,_WDCON
 	rr	a
 	anl	a,#0x01
 	add	a,#0xff
 	mov	b1,c
-	C$fb_taster.c$91$1$1 ==.
-;	..\fb_taster.c:91: restart_hw();							// Hardware zuruecksetzen	
+	C$fb_taster.c$86$1$1 ==.
+;	../fb_taster.c:86: restart_hw();							// Hardware zuruecksetzen
 	push	ar7
 	push	bits
 	lcall	_restart_hw
 	pop	bits
 	pop	ar7
-	C$fb_taster.c$97$1$1 ==.
-;	..\fb_taster.c:97: TASTER=1;
+	C$fb_taster.c$92$1$1 ==.
+;	../fb_taster.c:92: TASTER=1;
 	setb	_P1_7
-	C$fb_taster.c$98$1$1 ==.
-;	..\fb_taster.c:98: if(!TASTER && wduf)cal=0;
+	C$fb_taster.c$93$1$1 ==.
+;	../fb_taster.c:93: if(!TASTER && wduf)cal=0;
 	jb	_P1_7,00102$
-	jb	b1,00103$
+	jnb	b1,00102$
+	mov	r6,#0x00
+	sjmp	00103$
 00102$:
-	C$fb_taster.c$99$1$1 ==.
-;	..\fb_taster.c:99: else cal=trimsave;
+	C$fb_taster.c$94$1$1 ==.
+;	../fb_taster.c:94: else cal=trimsave;
 	mov	dptr,#_main_trimsave_1_1
 	clr	a
 	movc	a,@a+dptr
-00103$:
-	C$fb_taster.c$101$1$1 ==.
-;	..\fb_taster.c:101: TRIM = (TRIM+trimsave);
-	mov	dptr,#_main_trimsave_1_1
-	clr	a
-	movc	a,@a+dptr
-	mov	r5,_TRIM
-	add	a,r5
+	mov	r5,a
 	mov	r6,a
-	mov	_TRIM,r6
-	C$fb_taster.c$102$1$1 ==.
-;	..\fb_taster.c:102: TRIM &= 0x3F;//oberen 2 bits ausblenden
+00103$:
+	C$fb_taster.c$96$1$1 ==.
+;	../fb_taster.c:96: TRIM = (TRIM+trimsave);
+	mov	dptr,#_main_trimsave_1_1
+	clr	a
+	movc	a,@a+dptr
+	mov	r4,_TRIM
+	add	a,r4
+	mov	r5,a
+	mov	_TRIM,r5
+	C$fb_taster.c$97$1$1 ==.
+;	../fb_taster.c:97: TRIM &= 0x3F;//oberen 2 bits ausblenden
 	anl	_TRIM,#0x3F
-	C$fb_taster.c$103$2$2 ==.
-;	..\fb_taster.c:103: WATCHDOG_INIT
+	C$fb_taster.c$98$2$2 ==.
+;	../fb_taster.c:98: WATCHDOG_INIT
 	mov	_WDL,#0xFF
 	clr	_IEN0_7
 	mov	_WDCON,#0xE5
 	mov	_WFEED1,#0xA5
 	mov	_WFEED2,#0x5A
 	setb	_IEN0_7
-	C$fb_taster.c$104$1$1 ==.
-;	..\fb_taster.c:104: WATCHDOG_START
+	C$fb_taster.c$99$2$3 ==.
+;	../fb_taster.c:99: WATCHDOG_START
 	clr	_IEN0_7
 	orl	_WDCON,#0x04
 	mov	_WFEED1,#0xA5
 	mov	_WFEED2,#0x5A
 	setb	_IEN0_7
-	C$fb_taster.c$105$1$1 ==.
-;	..\fb_taster.c:105: TASTER=0;
+	C$fb_taster.c$100$1$1 ==.
+;	../fb_taster.c:100: TASTER=0;
 	clr	_P1_7
-	C$fb_taster.c$106$1$1 ==.
-;	..\fb_taster.c:106: for (n=0;n<50;n++) {
-	mov	r6,#0x00
-00161$:
-	cjne	r6,#0x32,00214$
-00214$:
-	jnc	00164$
-	C$fb_taster.c$107$2$3 ==.
-;	..\fb_taster.c:107: TR0=0;					// Timer 0 anhalten
+	C$fb_taster.c$101$1$1 ==.
+;	../fb_taster.c:101: for (n=0;n<50;n++) {
+	mov	r5,#0x00
+00187$:
+	cjne	r5,#0x32,00250$
+00250$:
+	jnc	00190$
+	C$fb_taster.c$102$2$4 ==.
+;	../fb_taster.c:102: TR0=0;					// Timer 0 anhalten
 	clr	_TCON_4
-	C$fb_taster.c$108$2$3 ==.
-;	..\fb_taster.c:108: TH0=eeprom[ADDRTAB+1];	// Timer 0 setzen mit phys. Adr. damit Geräte unterschiedlich beginnen zu senden
+	C$fb_taster.c$103$2$4 ==.
+;	../fb_taster.c:103: TH0=eeprom[ADDRTAB+1];	// Timer 0 setzen mit phys. Adr. damit Geräte unterschiedlich beginnen zu senden
 	mov	dptr,#(_eeprom + 0x0017)
 	clr	a
 	movc	a,@a+dptr
 	mov	_TH0,a
-	C$fb_taster.c$109$2$3 ==.
-;	..\fb_taster.c:109: TL0=eeprom[ADDRTAB+2];
+	C$fb_taster.c$104$2$4 ==.
+;	../fb_taster.c:104: TL0=eeprom[ADDRTAB+2];
 	mov	dptr,#(_eeprom + 0x0018)
 	clr	a
 	movc	a,@a+dptr
 	mov	_TL0,a
-	C$fb_taster.c$110$2$3 ==.
-;	..\fb_taster.c:110: TF0=0;					// Überlauf-Flag zurücksetzen
+	C$fb_taster.c$105$2$4 ==.
+;	../fb_taster.c:105: TF0=0;					// Überlauf-Flag zurücksetzen
 	clr	_TCON_5
-	C$fb_taster.c$111$2$3 ==.
-;	..\fb_taster.c:111: TR0=1;					// Timer 0 starten
+	C$fb_taster.c$106$2$4 ==.
+;	../fb_taster.c:106: TR0=1;					// Timer 0 starten
 	setb	_TCON_4
-	C$fb_taster.c$112$2$3 ==.
-;	..\fb_taster.c:112: while(!TF0);
+	C$fb_taster.c$107$2$4 ==.
+;	../fb_taster.c:107: while(!TF0);
 00105$:
 	jnb	_TCON_5,00105$
-	C$fb_taster.c$106$1$1 ==.
-;	..\fb_taster.c:106: for (n=0;n<50;n++) {
-	inc	r6
-	sjmp	00161$
-00164$:
-	C$fb_taster.c$114$1$1 ==.
-;	..\fb_taster.c:114: restart_app();							// Anwendungsspezifische Einstellungen zuruecksetzen
+	C$fb_taster.c$101$1$1 ==.
+;	../fb_taster.c:101: for (n=0;n<50;n++) {
+	inc	r5
+	sjmp	00187$
+00190$:
+	C$fb_taster.c$109$1$1 ==.
+;	../fb_taster.c:109: restart_app();							// Anwendungsspezifische Einstellungen zuruecksetzen
 	push	ar7
+	push	ar6
 	push	bits
 	lcall	_restart_app
 	pop	bits
+	pop	ar6
 	pop	ar7
-	C$fb_taster.c$119$1$1 ==.
-;	..\fb_taster.c:119: RS_INIT_115200
+	C$fb_taster.c$112$2$5 ==.
+;	../fb_taster.c:112: RS_INIT_600
 	anl	_BRGCON,#0xFE
 	mov	_SCON,#0x50
 	orl	_SSTAT,#0xE0
 	orl	_BRGCON,#0x02
-	mov	_BRGR1,#0x00
-	mov	_BRGR0,#0x30
+	mov	_BRGR1,#0x2F
+	mov	_BRGR0,#0xF0
 	orl	_BRGCON,#0x01
-	C$fb_taster.c$121$1$1 ==.
-;	..\fb_taster.c:121: SBUF=0x55; // hiernach ist TI==1
+	C$fb_taster.c$116$1$1 ==.
+;	../fb_taster.c:116: SBUF=0x55; // hiernach ist TI==1
 	mov	_SBUF,#0x55
-	C$fb_taster.c$123$1$1 ==.
-;	..\fb_taster.c:123: for (n=0;n<4;n++) switch_led(n,0);	// Alle LEDs gemaess ihren Parametern setzen
-	mov	r6,#0x00
-00165$:
-	cjne	r6,#0x04,00217$
-00217$:
-	jnc	00168$
+	C$fb_taster.c$118$1$1 ==.
+;	../fb_taster.c:118: for (n=0;n<4;n++) switch_led(n,0);	// Alle LEDs gemaess ihren Parametern setzen
+	mov	r5,#0x00
+00191$:
+	cjne	r5,#0x04,00253$
+00253$:
+	jnc	00194$
 	clr	b[0]
 	push	ar7
 	push	ar6
+	push	ar5
 	push	bits
 	mov	bits,b
-	mov	dpl,r6
+	mov	dpl,r5
 	lcall	_switch_led
 	pop	bits
+	pop	ar5
 	pop	ar6
 	pop	ar7
-	inc	r6
-	sjmp	00165$
-00168$:
-	C$fb_taster.c$126$1$1 ==.
-;	..\fb_taster.c:126: verstellt=0;
+	inc	r5
+	sjmp	00191$
+00194$:
+	C$fb_taster.c$121$1$1 ==.
+;	../fb_taster.c:121: verstellt=0;
 	clr	b1
-	C$fb_taster.c$127$1$1 ==.
-;	..\fb_taster.c:127: dimmwert = LED_hell;
+	C$fb_taster.c$122$1$1 ==.
+;	../fb_taster.c:122: dimmwert = LED_hell;
 	mov	dptr,#_main_LED_hell_1_1
 	clr	a
 	movc	a,@a+dptr
 	mov	_dimmwert,a
-	C$fb_taster.c$129$1$1 ==.
-;	..\fb_taster.c:129: do  {
-00158$:
-	C$fb_taster.c$130$2$4 ==.
-;	..\fb_taster.c:130: WATCHDOG_FEED
+	C$fb_taster.c$124$1$1 ==.
+;	../fb_taster.c:124: do  {
+00184$:
+	C$fb_taster.c$125$3$7 ==.
+;	../fb_taster.c:125: WATCHDOG_FEED
 	clr	_IEN0_7
 	mov	_WFEED1,#0xA5
 	mov	_WFEED2,#0x5A
 	setb	_IEN0_7
-	C$fb_taster.c$131$2$4 ==.
-;	..\fb_taster.c:131: if (RTCCON>=0x80) delay_timer();	// Realtime clock ueberlauf
+	C$fb_taster.c$126$2$6 ==.
+;	../fb_taster.c:126: if (RTCCON>=0x80)	// Realtime clock ueberlauf
 	mov	a,#0x100 - 0x80
 	add	a,_RTCCON
-	jnc	00109$
+	jnc	00115$
+	C$fb_taster.c$128$3$8 ==.
+;	../fb_taster.c:128: RTCCON=0x61;// RTC flag löschen
+	mov	_RTCCON,#0x61
+	C$fb_taster.c$129$3$8 ==.
+;	../fb_taster.c:129: if(!connected)delay_timer();// die normal RTC Behandlung
+	jb	_connected,00112$
 	push	ar7
+	push	ar6
 	push	bits
 	lcall	_delay_timer
 	pop	bits
+	pop	ar6
 	pop	ar7
+	sjmp	00115$
+00112$:
+	C$fb_taster.c$132$4$9 ==.
+;	../fb_taster.c:132: if(connected_timeout <= 110)// 11x 520ms --> ca 6 Sekunden
+	mov	a,_connected_timeout
+	add	a,#0xff - 0x6E
+	jc	00109$
+	C$fb_taster.c$134$5$10 ==.
+;	../fb_taster.c:134: connected_timeout ++;
+	inc	_connected_timeout
+	sjmp	00115$
 00109$:
-	C$fb_taster.c$133$2$4 ==.
-;	..\fb_taster.c:133: n=timer;
-	C$fb_taster.c$135$2$4 ==.
-;	..\fb_taster.c:135: verstell=((n>>2) & 0x01);
+	C$fb_taster.c$136$4$9 ==.
+;	../fb_taster.c:136: else send_obj_value(T_DISCONNECT);// wenn timeout dann disconnect, flag und var wird in build_tel() gelöscht
+	mov	dpl,#0x85
+	push	ar7
+	push	ar6
+	push	bits
+	lcall	_send_obj_value
+	pop	bits
+	pop	ar6
+	pop	ar7
+00115$:
+	C$fb_taster.c$141$2$6 ==.
+;	../fb_taster.c:141: n=timer;
+	C$fb_taster.c$143$2$6 ==.
+;	../fb_taster.c:143: verstell=((n>>2) & 0x01);
 	mov	a,_timer
-	mov	r6,a
+	mov	r5,a
 	rr	a
 	rr	a
 	anl	a,#0x01
-	mov	r5,a
+	mov	r4,a
 	add	a,#0xff
-	C$fb_taster.c$137$2$4 ==.
-;	..\fb_taster.c:137: if (verstell==0)verstellt=0;
+	C$fb_taster.c$145$2$6 ==.
+;	../fb_taster.c:145: if (verstell==0)verstellt=0;
 	mov	b2,c
-	jc	00111$
+	jc	00117$
 	clr	b1
-00111$:
-	C$fb_taster.c$141$2$4 ==.
-;	..\fb_taster.c:141: if (status60 & 0x01){			//wenn progmode aktiv ist...
+00117$:
+	C$fb_taster.c$148$2$6 ==.
+;	../fb_taster.c:148: if (status60 & 0x01){			//wenn progmode aktiv ist...
 	mov	a,_status60
-	jnb	acc.0,00131$
-	C$fb_taster.c$143$3$5 ==.
-;	..\fb_taster.c:143: if ((PORT & 0x0F)==0x0E){	// Taste 1 gedrück
+	jnb	acc.0,00137$
+	C$fb_taster.c$150$3$11 ==.
+;	../fb_taster.c:150: if ((PORT & 0x0F)==0x0E){	// Taste 1 gedrück
 	mov	a,#0x0F
 	anl	a,_P0
-	mov	r5,a
-	cjne	r5,#0x0E,00117$
-	C$fb_taster.c$144$4$6 ==.
-;	..\fb_taster.c:144: if ((dimmwert<254) && (verstell==1)&& verstellt==0){
+	mov	r4,a
+	cjne	r4,#0x0E,00123$
+	C$fb_taster.c$151$4$12 ==.
+;	../fb_taster.c:151: if ((dimmwert<254) && (verstell==1)&& verstellt==0){
 	mov	a,#0x100 - 0xFE
 	add	a,_dimmwert
-	jc	00117$
+	jc	00123$
 	mov	c,b2
 	clr	a
 	rlc	a
-	mov	r5,a
-	cjne	r5,#0x01,00117$
-	jb	b1,00117$
-	C$fb_taster.c$145$5$7 ==.
-;	..\fb_taster.c:145: dimmwert++;
+	mov	r4,a
+	cjne	r4,#0x01,00123$
+	jb	b1,00123$
+	C$fb_taster.c$152$5$13 ==.
+;	../fb_taster.c:152: dimmwert++;
 	inc	_dimmwert
-	C$fb_taster.c$146$5$7 ==.
-;	..\fb_taster.c:146: verstellt=1;
+	C$fb_taster.c$153$5$13 ==.
+;	../fb_taster.c:153: verstellt=1;
 	setb	b1
-00117$:
-	C$fb_taster.c$149$3$5 ==.
-;	..\fb_taster.c:149: if ((PORT & 0x0F)==0x0D){ // Taste 2 gedrückt
+00123$:
+	C$fb_taster.c$156$3$11 ==.
+;	../fb_taster.c:156: if ((PORT & 0x0F)==0x0D){ // Taste 2 gedrückt
 	mov	a,#0x0F
 	anl	a,_P0
-	mov	r5,a
-	cjne	r5,#0x0D,00132$
-	C$fb_taster.c$150$4$8 ==.
-;	..\fb_taster.c:150: if ((dimmwert>1) && (verstell==1)&& verstellt==0){
+	mov	r4,a
+	cjne	r4,#0x0D,00138$
+	C$fb_taster.c$157$4$14 ==.
+;	../fb_taster.c:157: if ((dimmwert>1) && (verstell==1)&& verstellt==0){
 	mov	a,_dimmwert
 	add	a,#0xff - 0x01
-	jnc	00132$
+	jnc	00138$
 	mov	c,b2
 	clr	a
 	rlc	a
-	mov	r5,a
-	cjne	r5,#0x01,00132$
-	jb	b1,00132$
-	C$fb_taster.c$151$5$9 ==.
-;	..\fb_taster.c:151: dimmwert--;
+	mov	r4,a
+	cjne	r4,#0x01,00138$
+	jb	b1,00138$
+	C$fb_taster.c$158$5$15 ==.
+;	../fb_taster.c:158: dimmwert--;
 	dec	_dimmwert
-	C$fb_taster.c$152$5$9 ==.
-;	..\fb_taster.c:152: verstellt=1;
+	C$fb_taster.c$159$5$15 ==.
+;	../fb_taster.c:159: verstellt=1;
 	setb	b1
-	sjmp	00132$
-00131$:
-	C$fb_taster.c$159$3$10 ==.
-;	..\fb_taster.c:159: if(APPLICATION_RUN)	{// nur wenn im Run modus und nicht connected
+	sjmp	00138$
+00137$:
+	C$fb_taster.c$166$3$16 ==.
+;	../fb_taster.c:166: if(APPLICATION_RUN)	{// nur wenn im Run modus und nicht connected
 	mov	dptr,#(_eeprom + 0x000d)
 	clr	a
 	movc	a,@a+dptr
-	mov	r5,a
-	cjne	r5,#0xFF,00132$
-	jb	_connected,00132$
+	mov	r4,a
+	cjne	r4,#0xFF,00138$
+	jb	_connected,00138$
 	mov	a,_status60
-	jb	acc.0,00132$
-	C$fb_taster.c$160$4$11 ==.
-;	..\fb_taster.c:160: if ((PORT & 0x0F) != button_buffer) port_changed(PORT & 0x0F);	// ein Taster wurde gedrueckt
+	jb	acc.0,00138$
+	C$fb_taster.c$167$4$17 ==.
+;	../fb_taster.c:167: if ((PORT & 0x0F) != button_buffer) port_changed(PORT & 0x0F);	// ein Taster wurde gedrueckt
 	mov	a,#0x0F
 	anl	a,_P0
-	mov	r5,a
-	cjne	a,_button_buffer,00238$
-	sjmp	00132$
-00238$:
+	mov	r4,a
+	cjne	a,_button_buffer,00276$
+	sjmp	00138$
+00276$:
 	mov	a,#0x0F
 	anl	a,_P0
 	mov	dpl,a
 	push	ar7
+	push	ar6
 	push	bits
 	lcall	_port_changed
 	pop	bits
+	pop	ar6
 	pop	ar7
-00132$:
-	C$fb_taster.c$164$2$4 ==.
-;	..\fb_taster.c:164: if (tel_arrived || tel_sent) {//
-	jb	_tel_arrived,00133$
-	jnb	_tel_sent,00134$
-00133$:
-	C$fb_taster.c$165$3$12 ==.
-;	..\fb_taster.c:165: tel_sent=0;
+00138$:
+	C$fb_taster.c$171$2$6 ==.
+;	../fb_taster.c:171: if (tel_arrived || tel_sent) {//
+	jb	_tel_arrived,00139$
+	jnb	_tel_sent,00140$
+00139$:
+	C$fb_taster.c$172$3$18 ==.
+;	../fb_taster.c:172: tel_sent=0;
 	clr	_tel_sent
-	C$fb_taster.c$166$3$12 ==.
-;	..\fb_taster.c:166: process_tel();
+	C$fb_taster.c$173$3$18 ==.
+;	../fb_taster.c:173: process_tel();
 	push	ar7
+	push	ar6
 	push	bits
 	lcall	_process_tel
 	pop	bits
+	pop	ar6
 	pop	ar7
-	sjmp	00135$
-00134$:
-	C$fb_taster.c$169$3$4 ==.
-;	..\fb_taster.c:169: for(n=0;n<100;n++);
-	mov	r6,#0x64
-00171$:
-	mov	ar5,r6
-	dec	r5
-	mov	ar6,r5
-	mov	a,r6
-	jnz	00171$
-00135$:
-	C$fb_taster.c$216$2$4 ==.
-;	..\fb_taster.c:216: DEBUGPOINT
-	jbc	_SCON_0,00242$
 	sjmp	00141$
-00242$:
-00137$:
-	jbc	_SCON_1,00243$
-	sjmp	00137$
-00243$:
-	mov	a,_SBUF
-	add	a,#_RAM
-	mov	r1,a
-	mov	_SBUF,@r1
+00140$:
+	C$fb_taster.c$176$3$6 ==.
+;	../fb_taster.c:176: for(n=0;n<100;n++);
+	mov	r5,#0x64
+00197$:
+	mov	ar4,r5
+	dec	r4
+	mov	ar5,r4
+	mov	a,r5
+	jnz	00197$
 00141$:
-	C$fb_taster.c$219$2$4 ==.
-;	..\fb_taster.c:219: TASTER=1;				        	// Pin als Eingang schalten um Programmiertaster abzufragen
-	setb	_P1_7
-	C$fb_taster.c$220$2$4 ==.
-;	..\fb_taster.c:220: if(!TASTER){ // Taster gedrückt
-	jb	_P1_7,00153$
-	C$fb_taster.c$221$3$15 ==.
-;	..\fb_taster.c:221: if(tasterpegel<255)	tasterpegel++;
-	cjne	r7,#0xFF,00245$
-00245$:
-	jnc	00147$
-	inc	r7
-	sjmp	00154$
-00147$:
-	C$fb_taster.c$223$4$16 ==.
-;	..\fb_taster.c:223: if(!tastergetoggelt)status60^=0x81;	// Prog-Bit und Parity-Bit im system_state toggeln
-	jb	b0,00143$
-	xrl	_status60,#0x81
+	C$fb_taster.c$180$2$6 ==.
+;	../fb_taster.c:180: if (RI){
+	C$fb_taster.c$181$3$20 ==.
+;	../fb_taster.c:181: RI=0;
+	jbc	_SCON_0,00280$
+	sjmp	00167$
+00280$:
+	C$fb_taster.c$182$3$20 ==.
+;	../fb_taster.c:182: cmd=SBUF;
+	mov	r5,_SBUF
+	C$fb_taster.c$183$3$20 ==.
+;	../fb_taster.c:183: if(cmd=='c'){
+	cjne	r5,#0x63,00147$
+	C$fb_taster.c$184$4$21 ==.
+;	../fb_taster.c:184: while(!TI);
 00143$:
-	C$fb_taster.c$224$4$16 ==.
-;	..\fb_taster.c:224: tastergetoggelt=1;
-	setb	b0
-	C$fb_taster.c$225$4$16 ==.
-;	..\fb_taster.c:225: if((status60 & 0x01)==0){	//wenn ausgemacht, Dimmwert speichern
-	mov	a,_status60
-	jb	acc.0,00154$
-	C$fb_taster.c$226$5$17 ==.
-;	..\fb_taster.c:226: EA=0;
+	C$fb_taster.c$185$4$21 ==.
+;	../fb_taster.c:185: TI=0;
+	jbc	_SCON_1,00283$
+	sjmp	00143$
+00283$:
+	C$fb_taster.c$186$4$21 ==.
+;	../fb_taster.c:186: SBUF=0x55;
+	mov	_SBUF,#0x55
+00147$:
+	C$fb_taster.c$188$3$20 ==.
+;	../fb_taster.c:188: if(cmd=='+'){
+	cjne	r5,#0x2B,00149$
+	C$fb_taster.c$189$4$22 ==.
+;	../fb_taster.c:189: TRIM--;
+	dec	_TRIM
+	C$fb_taster.c$190$4$22 ==.
+;	../fb_taster.c:190: cal--;
+	dec	r6
+00149$:
+	C$fb_taster.c$192$3$20 ==.
+;	../fb_taster.c:192: if(cmd=='-'){
+	cjne	r5,#0x2D,00151$
+	C$fb_taster.c$193$4$23 ==.
+;	../fb_taster.c:193: TRIM++;
+	inc	_TRIM
+	C$fb_taster.c$194$4$23 ==.
+;	../fb_taster.c:194: cal++;
+	inc	r6
+00151$:
+	C$fb_taster.c$196$3$20 ==.
+;	../fb_taster.c:196: if(cmd=='w'){
+	cjne	r5,#0x77,00153$
+	C$fb_taster.c$197$4$24 ==.
+;	../fb_taster.c:197: EA=0;
 	clr	_IEN0_7
-	C$fb_taster.c$227$5$17 ==.
-;	..\fb_taster.c:227: START_WRITECYCLE;
+	C$fb_taster.c$198$4$24 ==.
+;	../fb_taster.c:198: START_WRITECYCLE;	//cal an 0x1cFF schreiben
 	mov	_FMCON,#0x00
-	C$fb_taster.c$228$5$17 ==.
-;	..\fb_taster.c:228: FMADRH= 0x1B;		
-	mov	_FMADRH,#0x1B
-	C$fb_taster.c$229$5$17 ==.
-;	..\fb_taster.c:229: FMADRL= 0xFE; 
-	mov	_FMADRL,#0xFE
-	C$fb_taster.c$230$5$17 ==.
-;	..\fb_taster.c:230: FMDATA=	dimmwert; 
-	mov	_FMDATA,_dimmwert
-	C$fb_taster.c$231$5$17 ==.
-;	..\fb_taster.c:231: STOP_WRITECYCLE;
+	C$fb_taster.c$199$4$24 ==.
+;	../fb_taster.c:199: FMADRH= USERRAM_ADDR_H;
+	mov	_FMADRH,#0x1C
+	C$fb_taster.c$200$4$24 ==.
+;	../fb_taster.c:200: FMADRL= 0xFF;
+	mov	_FMADRL,#0xFF
+	C$fb_taster.c$201$4$24 ==.
+;	../fb_taster.c:201: FMDATA=	cal;
+	mov	_FMDATA,r6
+	C$fb_taster.c$202$4$24 ==.
+;	../fb_taster.c:202: STOP_WRITECYCLE;
 	mov	_FMCON,#0x68
-	C$fb_taster.c$232$5$17 ==.
-;	..\fb_taster.c:232: EA=1;
+	C$fb_taster.c$203$4$24 ==.
+;	../fb_taster.c:203: EA=1;				//int wieder freigeben
 	setb	_IEN0_7
-	sjmp	00154$
 00153$:
-	C$fb_taster.c$237$3$18 ==.
-;	..\fb_taster.c:237: if(tasterpegel>0) tasterpegel--;
-	mov	a,r7
-	jz	00150$
-	dec	r7
-	sjmp	00154$
-00150$:
-	C$fb_taster.c$238$3$18 ==.
-;	..\fb_taster.c:238: else tastergetoggelt=0;
-	clr	b0
-00154$:
-	C$fb_taster.c$271$2$4 ==.
-;	..\fb_taster.c:271: if (status60 & 0x01) TASTER = 0;		// LED leuchtet im Prog-Mode
-	mov	a,_status60
-	jnb	acc.0,00156$
-	clr	_P1_7
-	ljmp	00158$
+	C$fb_taster.c$205$3$20 ==.
+;	../fb_taster.c:205: if(cmd=='p')status60^=0x81;	// Prog-Bit und Parity-Bit im system_state toggeln
+	cjne	r5,#0x70,00155$
+	xrl	_status60,#0x81
+00155$:
+	C$fb_taster.c$206$3$20 ==.
+;	../fb_taster.c:206: if(cmd=='v'){
+	cjne	r5,#0x76,00160$
+	C$fb_taster.c$207$4$25 ==.
+;	../fb_taster.c:207: while(!TI);
 00156$:
-	C$fb_taster.c$272$2$4 ==.
-;	..\fb_taster.c:272: else TASTER = 1;						// LED aus
+	C$fb_taster.c$208$4$25 ==.
+;	../fb_taster.c:208: TI=0;
+	jbc	_SCON_1,00294$
+	sjmp	00156$
+00294$:
+	C$fb_taster.c$209$4$25 ==.
+;	../fb_taster.c:209: SBUF=VERSION;
+	mov	_SBUF,#0x6B
+00160$:
+	C$fb_taster.c$211$3$20 ==.
+;	../fb_taster.c:211: if(cmd=='t'){
+	cjne	r5,#0x74,00167$
+	C$fb_taster.c$212$4$26 ==.
+;	../fb_taster.c:212: while(!TI);
+00161$:
+	C$fb_taster.c$213$4$26 ==.
+;	../fb_taster.c:213: TI=0;
+	jbc	_SCON_1,00297$
+	sjmp	00161$
+00297$:
+	C$fb_taster.c$214$4$26 ==.
+;	../fb_taster.c:214: SBUF=TYPE;
+	mov	_SBUF,#0x00
+00167$:
+	C$fb_taster.c$226$2$6 ==.
+;	../fb_taster.c:226: TASTER=1;				        	// Pin als Eingang schalten um Programmiertaster abzufragen
 	setb	_P1_7
-	C$fb_taster.c$276$1$1 ==.
-;	..\fb_taster.c:276: }  while(1);
-	ljmp	00158$
-	C$fb_taster.c$277$1$1 ==.
+	C$fb_taster.c$227$2$6 ==.
+;	../fb_taster.c:227: if(!TASTER){ // Taster gedrückt
+	jb	_P1_7,00179$
+	C$fb_taster.c$228$3$27 ==.
+;	../fb_taster.c:228: if(tasterpegel<255)	tasterpegel++;
+	cjne	r7,#0xFF,00299$
+00299$:
+	jnc	00173$
+	inc	r7
+	sjmp	00180$
+00173$:
+	C$fb_taster.c$230$4$28 ==.
+;	../fb_taster.c:230: if(!tastergetoggelt)status60^=0x81;	// Prog-Bit und Parity-Bit im system_state toggeln
+	jb	b0,00169$
+	xrl	_status60,#0x81
+00169$:
+	C$fb_taster.c$231$4$28 ==.
+;	../fb_taster.c:231: tastergetoggelt=1;
+	setb	b0
+	C$fb_taster.c$232$4$28 ==.
+;	../fb_taster.c:232: if((status60 & 0x01)==0){	//wenn ausgemacht, Dimmwert speichern
+	mov	a,_status60
+	jb	acc.0,00180$
+	C$fb_taster.c$233$5$29 ==.
+;	../fb_taster.c:233: EA=0;
+	clr	_IEN0_7
+	C$fb_taster.c$234$5$29 ==.
+;	../fb_taster.c:234: START_WRITECYCLE;
+	mov	_FMCON,#0x00
+	C$fb_taster.c$235$5$29 ==.
+;	../fb_taster.c:235: FMADRH= USERRAM_ADDR_H; //0x1C
+	mov	_FMADRH,#0x1C
+	C$fb_taster.c$236$5$29 ==.
+;	../fb_taster.c:236: FMADRL= 0xFE;
+	mov	_FMADRL,#0xFE
+	C$fb_taster.c$237$5$29 ==.
+;	../fb_taster.c:237: FMDATA=	dimmwert;
+	mov	_FMDATA,_dimmwert
+	C$fb_taster.c$238$5$29 ==.
+;	../fb_taster.c:238: STOP_WRITECYCLE;
+	mov	_FMCON,#0x68
+	C$fb_taster.c$239$5$29 ==.
+;	../fb_taster.c:239: EA=1;
+	setb	_IEN0_7
+	sjmp	00180$
+00179$:
+	C$fb_taster.c$244$3$30 ==.
+;	../fb_taster.c:244: if(tasterpegel>0) tasterpegel--;
+	mov	a,r7
+	jz	00176$
+	dec	r7
+	sjmp	00180$
+00176$:
+	C$fb_taster.c$245$3$30 ==.
+;	../fb_taster.c:245: else tastergetoggelt=0;
+	clr	b0
+00180$:
+	C$fb_taster.c$278$2$6 ==.
+;	../fb_taster.c:278: if (status60 & 0x01) TASTER = 0;		// LED leuchtet im Prog-Mode
+	mov	a,_status60
+	jnb	acc.0,00182$
+	clr	_P1_7
+	ljmp	00184$
+00182$:
+	C$fb_taster.c$279$2$6 ==.
+;	../fb_taster.c:279: else TASTER = 1;						// LED aus
+	setb	_P1_7
+	C$fb_taster.c$283$1$1 ==.
+;	../fb_taster.c:283: }  while(1);
+	ljmp	00184$
+	C$fb_taster.c$284$1$1 ==.
 	XG$main$0$0 ==.
 	ret
 	.area CSEG    (CODE)
 	.area CONST   (CODE)
-Lfb_taster.main$trimsave$1$1 == 0x1cbf
-_main_trimsave_1_1	=	0x1cbf
-Lfb_taster.main$LED_hell$1$1 == 0x1cbe
-_main_LED_hell_1_1	=	0x1cbe
+Lfb_taster.main$trimsave$1$1 == 0x1cff
+_main_trimsave_1_1	=	0x1cff
 	.area XINIT   (CODE)
 	.area CABS    (ABS,CODE)
+	.org 0x1CFE
+Lfb_taster.main$LED_hell$1$1 == .
+_main_LED_hell_1_1:
+	.db #0xFF	; 255
