@@ -1,3 +1,7 @@
+2014-10-20 Version 2.20
+		Added temperature offset feature. This version is compiled with VD Version Lock,
+		ETS download will fail if VD and Firmware version do not match!
+
 2014-10-18 Version 2.11
         Bugfix to handle connection timeout correctly, RM is shown in LineScan now.
 

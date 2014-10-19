@@ -27,7 +27,9 @@
 #endif
 
 // Optionen
+//#define LOCK_VD_VERSION   // Schreibschutz Addresse 0x01-0x07
 //#define LOCK_DEVICE_ID    // Schreibschutz Addresse 0x01-0x06
+
 
 // Damit die Eclipse Code Analyse nicht so viele Warnungen anzeigt:
 #ifndef SDCC

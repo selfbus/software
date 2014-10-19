@@ -566,8 +566,12 @@ void process_tel(void)
 								START_WRITECYCLE;					// load command, leert das pageregister
 								for(n=0;n<ab;n++) {
 									if(telegramm[8]==0 && (telegramm[9]+n)==0x60) status60=telegramm[10+n];
-                                #ifdef LOCK_DEVICE_ID       // Device Lock option
-									else if ( (telegramm[9]+n) == 0x00 || (telegramm[9]+n) >0x06 )  // Manufacturer & Device ID sperren
+                                #ifdef LOCK_VD_VERSION      // Lock Firmware to specified VD Version
+                                    #warning VD Version Lock is active!
+                                    else if ( (telegramm[9]+n) == 0x00 || (telegramm[9]+n) >0x07 )  // Manufacturer & Device ID sperren
+                                #elif defined LOCK_DEVICE_ID       // Device Lock option
+                                    #warning Device Lock Option is active!
+                                    else if ( (telegramm[9]+n) == 0x00 || (telegramm[9]+n) >0x06 )  // Manufacturer & Device ID sperren
                                 #else
 									else
                                 #endif
