@@ -1,11 +1,12 @@
 /*
- *      __________  ________________  __  _______
- *     / ____/ __ \/ ____/ ____/ __ )/ / / / ___/
- *    / /_  / /_/ / __/ / __/ / __  / / / /\__ \ 
- *   / __/ / _, _/ /___/ /___/ /_/ / /_/ /___/ / 
- *  /_/   /_/ |_/_____/_____/_____/\____//____/  
- *                                      
+ *    _____ ______ __   __________  __  _______
+ *   / ___// ____// /  / ____/ __ )/ / / / ___/
+ *   \__ \/ __/  / /  / /__ / __  / / / /\__ \
+ *  ___/ / /__  / /__/ /__// /_/ / /_/ /___/ /
+ * /____/_____//____/_/   /_____/\____//____/
+ *
  *  Copyright (c) 2010 Jan Wegner
+ *  Copyright (c) 2014 Stefan Haller
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 2 as
@@ -13,18 +14,27 @@
  *
  */
 
-#include <P89LPC922.h>
-#include "../com/fb_hal_lpc.h"
-#include "../com/fb_prot.h"
-#include "4temp_delay.h"
 #include "fb_app_4temp.h"
 #include "4temp_onewire.h"
 
 
+unsigned char timerbase[TIMERANZ];	// Speicherplatz fÃ¼r die Zeitbasis
+unsigned char timercnt[TIMERANZ];   // speicherplatz fÃ¼r den timercounter und 1 status bit
+unsigned int timer;		            // Timer fÃ¼r SchaltverzÃ¶gerungen, wird alle 130ms hochgezÃ¤hlt
 
-long timer;			// Timer für Schaltverzögerungen, wird alle 130us hochgezählt
-bit delay_toggle;	// um nur jedes 2. Mal die delay routine auszuführen
-int temp[4],lasttemp[4],lastsendtemp[4];	// Temperaturwerte speichern
+int __idata __at (0xFE-0x08) temp[4];	// Temperaturwerte speichern
+int __idata __at (0xFE-0x10) lasttemp[4];
+int __idata __at (0xFE-0x18) lastsendtemp[4];
+unsigned char grenzwerte;	// Grenzwertobjekte
+// DEBUG ========================
+unsigned char grenzwert_eingang=0;
+int schwelle1, schwelle2;
+unsigned char reaktion, objno;
+
+unsigned int mess_diff;
+int mess_change;
+
+
 
 //unsigned char kanal;
 unsigned char zyk_senden_basis;
@@ -34,52 +44,53 @@ unsigned char sende_sofort_bus_return;
 
 /**
 * Empfangenes write_value_request Telegramm verarbeiten
-*	unbenutzt, Objekte können nicht geschrieben werden
+*	unbenutzt, Objekte kÃ¶nnen nicht geschrieben werden
 *
 * \param  void
 *
 * @return void
 */
-void write_value_req(void)
+void write_value_req(unsigned char objno)
 {
 	// nix zu schreiben
+    objno;
 }
-
 
 
 /**
 * Empfangenes read_value_request Telegramm verarbeiten
 *
-* \param  void
+* \param  Objekt das beantwortet werden soll
 *
 * @return void
 */
-void read_value_req(void)	// Empfangenes read_value_request Telegramm verarbeiten
+void read_value_req(unsigned char objno)    // Empfangenes read_value_request Telegramm verarbeiten
 {
-	unsigned char objno, objflags;
-	unsigned int objvalue;
+	unsigned char objflags;
 
-	objno=find_first_objno(telegramm[3],telegramm[4]);	// erste Objektnummer zu empfangener GA finden
-	if(objno!=0xFF) {	// falls Gruppenadresse nicht gefunden
-		send_ack();
+	objflags=read_objflags(objno);		    // Objekt Flags lesen
+	// Objekt lesen, nur wenn read enable gesetzt (Bit3) und Kommunikation zulaessig (Bit2)
+	if((objflags&0x0C)==0x0C) send_obj_value(objno+64);
+}
 
-		// Messwerte Objekte 0,2,4,6
+
+// Objektwert von Lib angefordert
+unsigned long read_obj_value(unsigned char objno) 	// gibt den Wert eines Objektes zurueck
+{
+	unsigned long objvalue=0;
+
+	// Messwerte Objekte 0,2,4,6
 		if((objno&0x01)==0)
 		{
 			objvalue=sendewert(objno);
+			lastsendtemp[objno>>1]=temp[objno>>1];
 		}
 		// Grenzwerte Objekte 1,3,5,7
 		else
-		{
-			objvalue=read_obj_value(objno);		// Objektwert aus USER-RAM lesen (Standard Einstellung)
-		}
+			objvalue= (grenzwerte>>objno)&0x01;
 
-		objflags=read_objflags(objno);		// Objekt Flags lesen
-		// Objekt lesen, nur wenn read enable gesetzt (Bit3) und Kommunikation zulaessig (Bit2)
-		if((objflags&0x0C)==0x0C) send_value(0,objno,objvalue);
-    }
+	return(objvalue);
 }
-
 
 
 /**
@@ -114,7 +125,7 @@ unsigned int sendewert(unsigned char objno)
 	// Sendeformat EIS 5
 	else
 	{
-		eis5temp=(temp[objno_help]>>3)&0x07FF;			// durch 8 teilen, da später Exponent 3 dazukommt
+		eis5temp=(temp[objno_help]>>3)&0x07FF;			// durch 8 teilen, da spï¿½ter Exponent 3 dazukommt
 		eis5temp=eis5temp+(0x18 << 8);
 		if (temp[objno_help]<0) eis5temp+=0x8000;		// Vorzeichen
 
@@ -123,70 +134,9 @@ unsigned int sendewert(unsigned char objno)
 }
 
 
-
-
 /**
-* sucht Gruppenadresse für das Objekt objno uns sendet ein EIS Telegramm
-*
-* \param  type
-* \param  objno
-* \param  sval
-*
-* @return void
-*/
-void send_value(unsigned char type, unsigned char objno, unsigned int sval)
-{
-	unsigned int ga;
-	unsigned char objtype;
-
-	if (((eeprom[0x6B+((objno>>2)&0x01)])<<(4*((objno>>1)&0x01))&0xF0)!=0x70)
-	{
-		ga=find_ga(objno);					// wenn keine Gruppenadresse hintrlegt nix tun
-		if (ga!=0)
-		{
-			telegramm[0]=0xBC;
-			telegramm[1]=eeprom[ADDRTAB+1];
-			telegramm[2]=eeprom[ADDRTAB+2];
-			telegramm[3]=ga>>8;
-			telegramm[4]=ga;
-			telegramm[6]=0x00;
-
-			telegramm[7]=0x80;					// write_value_request Telegramm (nicht angefordert)
-			if (type==0) telegramm[7]=0x40;		// read_value_response Telegramm (angefordert)
-
-
-			objtype=read_obj_type(objno);
-
-			if(objtype<=5)			// Objekttyp, 1-6 Bit
-			{
-				telegramm[5]=0xE1;
-				telegramm[7]+=sval;
-			}
-			else if(objtype<=7)		// Objekttyp, 7-8 Bit
-			{
-				telegramm[5]=0xE2;
-				telegramm[8]=sval;
-			}
-			else if(objtype<=8)		// Objekttyp, 16 Bit
-			{
-				telegramm[5]=0xE3;
-				telegramm[8]=sval>>8;
-				telegramm[9]=sval;
-			}
-
-			EX1=0;
-			send_telegramm();
-			IE1=0;
-			EX1=1;
-
-		}
-	}
-}
-
-
-/**
-* Senden bei Grenzwertüber- bzw. unterschreitung
-*	überprüft die Grenzwerte
+* Senden bei GrenzwertÃ¼ber- bzw. unterschreitung
+*	Ã¼berprÃ¼ft die Grenzwerte
 *	schreibt die Objektwerte und sendet Telegramm
 *
 * \param  eingang
@@ -195,82 +145,81 @@ void send_value(unsigned char type, unsigned char objno, unsigned int sval)
 */
 void grenzwert (unsigned char eingang)
 {
-	int schwelle1, schwelle2;
-	unsigned char reaktion, wert, objno;
+	//int schwelle1, schwelle2;
+	//unsigned char reaktion, objno;
+	//unsigned char grenzwert_eingang=0;
+	__bit gw_changed = 0;
+	grenzwert_eingang = 0;
 
-	objno=(eingang<<1)+1;
 
+	eingang &= 0x03;	    // Nur bis 3 erlaubt
+	// Objekt fÃ¼r Eingang
+	objno=(eingang<<1)+1;	// Objekte 1,3,5,7
+
+	// Reaktion und Schwellen lesen
 	reaktion=eeprom[0x6D+eingang];
-
 	schwelle1=-5500+180*(eeprom[0x71+eingang]&0x7F);
 	schwelle2=-5500+180*(eeprom[0x75+eingang]&0x7F);
+	//schwelle2 = ((eeprom[0xB0] & (eeprom[0xB1]<<8)) /10);
 
 
 	//steigend
-	if ((lasttemp[eingang]<schwelle2 || sende_sofort_bus_return) && temp[eingang]>schwelle2)	// GW 2 überschritten
-	{
+	if ((lasttemp[eingang]<schwelle2 || sende_sofort_bus_return) && temp[eingang]>schwelle2) {	// GW 2 Ã¼berschritten
 		if (reaktion&0x0C)
 		{
-			wert=(reaktion>>2)&0x01;
-			write_obj_value(objno,wert);
-			if(!sende_sofort_bus_return)
-			{
-				send_value(1,objno,wert);
-			}
-		}
-	}
+			grenzwert_eingang= (reaktion>>2)&0x01;
+			gw_changed = 1;
+		} }
 
-	if ((lasttemp[eingang]<schwelle1 || sende_sofort_bus_return) && temp[eingang]>schwelle1)	// GW 1 überschritten
-	{
+	if ((lasttemp[eingang]<schwelle1 || sende_sofort_bus_return) && temp[eingang]>schwelle1) {	// GW 1 Ã¼berschritten
 		if (reaktion&0xC0)
 		{
-			wert=(reaktion>>6)&0x01;
-			write_obj_value(objno,wert);
-			if(!sende_sofort_bus_return)
-			{
-				send_value(1,objno,wert);
-			}
-		}
-	}
+			grenzwert_eingang= (reaktion>>6)&0x01;
+			gw_changed = 1;
+		} }
 
 
 	//fallend
-	if ((lasttemp[eingang]>schwelle1 || sende_sofort_bus_return) && temp[eingang]<schwelle1)	// GW 1 unterschritten
-	{
+	if ((lasttemp[eingang]>schwelle1 || sende_sofort_bus_return) && temp[eingang]<schwelle1) {	// GW 1 unterschritten
 		if (reaktion&0x30)
 		{
-			wert=(reaktion>>4)&0x01;
-			write_obj_value(objno,wert);
-			if(!sende_sofort_bus_return)
-			{
-				send_value(1,objno,wert);
-			}
-		}
-	}
+			grenzwert_eingang= (reaktion>>4)&0x01;
+			gw_changed = 1;
+		} }
 
-	if ((lasttemp[eingang]>schwelle2 || sende_sofort_bus_return) && temp[eingang]<schwelle2)	// GW 2 unterschritten
-	{
+	if ((lasttemp[eingang]>schwelle2 || sende_sofort_bus_return) && temp[eingang]<schwelle2) {	// GW 2 unterschritten
 		if (reaktion&0x03)
 		{
-			wert=reaktion&0x01;
-			write_obj_value(objno,wert);
-			if(!sende_sofort_bus_return)
-			{
-				send_value(1,objno,wert);
-			}
-		}
+			grenzwert_eingang= reaktion&0x01;
+			gw_changed = 1;
+		} }
+
+	// Grenzwert dem Eingangsobjekt zuordnen
+	if(grenzwert_eingang)
+	{
+		grenzwerte |= (1<<objno);
+	}
+	else
+	{
+		grenzwerte &= ~(1<<objno);
 	}
 
+	// Nicht senden nach Neustart
+	if(gw_changed && !sende_sofort_bus_return)
+	//if(gw_changed)
+	{
+		send_obj_value(objno);
+	}
 
+	// Aktuellen Wert speichern
 	lasttemp[eingang]=temp[eingang];
 }
 
 
-
 /**
 * Senden bei Messwertdifferenz
-*	überprüft die Messwertdifferenz
-*	schreibt die Verzögerungszeit ins delrec
+*	Ã¼berprÃ¼ft die Messwertdifferenz
+*	schreibt die VerzÃ¶gerungszeit ins delrec
 *
 * \param  eingang
 *
@@ -278,14 +227,15 @@ void grenzwert (unsigned char eingang)
 */
 void messwert (unsigned char eingang)
 {
-	unsigned int mess_diff;
-	int mess_change;
-	unsigned long zyk_val;
+	//unsigned int mess_diff;
+	//int mess_change;
 
-	unsigned char zykval_help;
+	eingang &= 0x03;	// Nur bis 3 erlaubt
 
+	// Senden bei Messwertdifferenz
 	if (eeprom[0x65+eingang]&0x80)
 	{
+		// Senden ab x % Messwertdifferenz
 		mess_diff=180*(eeprom[0x65+eingang]&0x7F);
 
 		if (temp[eingang]<=lastsendtemp[eingang])
@@ -301,43 +251,18 @@ void messwert (unsigned char eingang)
 
 		if(mess_change>mess_diff)
 		{
-			if (delrec[(eingang+4)*4]==0)
-			{
-				zykval_help=(eeprom[0x69+(eingang>>1)])>>(4*(!(eingang&0x01)))&0x0F;
-
-				if (zykval_help<=5)
-				{
-					zyk_val=zykval_help*8;
-				}
-				else if (zykval_help<=10)
-				{
-					zyk_val=(zykval_help-5)*77;
-				}
-				else
-				{
-					zyk_val=(zykval_help-10)*462;
-				}
-
-				zyk_val=zyk_val+timer+1;
-
-				write_delay_record((eingang+4),1,zyk_val);
-			}
-		}
-		else
-		{
-			clear_delay_record(eingang+4);
+			// SendeverzÃ¶gerung bei Messwertdifferenz
+			timercnt[eingang+4] |= 0x80;	// Einschalten
 		}
 	}
 }
 
 
-
-
 /**
-* zählt alle 130ms die Variable Timer hoch und prüft Queue
+* zÃ¤hlt alle 130ms die Variable Timer hoch und prÃ¼ft Queue
 *	Zyklisch senden Messwerte und Grenzwerte
-*	Verzögerungszeit senden Messwerte
-*	Sendeverzögerung Messwerte bei Busspannungswiederkehr
+*	VerzÃ¶gerungszeit senden Messwerte
+*	SendeverzÃ¶gerung Messwerte bei Busspannungswiederkehr
 *
 * \param  void
 *
@@ -345,75 +270,94 @@ void messwert (unsigned char eingang)
 */
 void delay_timer(void)
 {
-	unsigned char objno,delay_state,zyk_faktor,objno_help,n;
-	unsigned long delval,zyk_val;
+	unsigned char tmr_obj,n,m, verz_start;
+	unsigned char objno_help;
+	unsigned int timerflags;
 
-
-	RTCCON=0x60;		// RTC anhalten und Flag löschen
-	RTCH=0x0E;			// reload Real Time Clock
+	tmr_obj = 0;		// Timer Objekt
+	// Reconfig because of t_connect timeout!!
+	RTCCON=0x60;        // RTC anhalten und Flag lÃ¶schen
+	RTCH=0x0E;          // reload Real Time Clock, 65ms
 	RTCL=0xA0;
-	objno=0;
+	RTCCON=0x61;		// RTC starten
 
-	if (delay_toggle) {	// RTC läuft auf 65ms, daher nur jedes 2. mal timer erhöhen
 		timer++;
-		timer&=0x00FFFFFF;
+		timerflags = timer&(~(timer-1));
+		for(n=0;n<16;n++){
+			if(timerflags & 0x0001){                // positive flags erzeugen und schieben
+				for(m=0;m<TIMERANZ;m++){            // die timer der reihe nach checken und dec wenn laufen
+					if ((timerbase[m]& 0x0F)==n){   // wenn die base mit der gespeicherten base Ã¼bereinstimmt
+						if (timercnt[m]>0x80){      // wenn der counter lÃ¤uft...
+							timercnt[m]=timercnt[m]-1;// den timer [m]decrementieren
+						}// end if (timercnt...
+					}//end if(timerbase...
+				}// end  for(m..
+			}// end if timer...
+			timerflags = timerflags>>1;
+		}//end for (n=...
 
-		for(objno=0;objno<=8;objno++) {
-			delay_state=delrec[objno*4];
-			if(delay_state!=0x00) {			// 0x00 = delay Eintrag ist leer
-				delval=delrec[objno*4+1];
-				delval=(delval<<8)+delrec[objno*4+2];
-				delval=(delval<<8)+delrec[objno*4+3];
-				if(delval==timer) {
+	// ab Hier die aktion...
+	for(tmr_obj=0;tmr_obj<=8;tmr_obj++)
+	{
+		verz_start = eeprom[0x79]&0x55;
 
-					if (objno<=3)	// Zyklisch Senden Eingänge Messwert und Grenzwert
-					{
-						zyk_faktor=eeprom[0x61+objno]&0x7F;
+		if(timercnt[tmr_obj]==0x80)		// 0x00 = Timer abgelaufen und aktiv
+		{
+			// Zyklisch Senden EingÃ¤nge Messwert und Grenzwert
+			if (tmr_obj<=3)
+			{
+				// Zyklisch senden Faktor holen
+				timercnt[tmr_obj] = eeprom[0x61+tmr_obj];
+				//zyk_faktor=eeprom[0x61+objno]&0x7F;
 
-						zyk_val=(zyk_faktor<<zyk_senden_basis);
+				// Messwert senden
+				send_obj_value(tmr_obj<<1);
 
-						zyk_val=zyk_val+timer;
-
-						write_delay_record(objno,delay_state,zyk_val);
-
-						if ((delay_state&0x80) && (sende_sofort_bus_return==0))	// Messwert zyk senden
-						{
-							send_value(1,(objno<<1),sendewert(objno<<1));
-							if (delay_state&0x01)	// Grenzwert zyk senden
-							{
-								send_value(1,((objno<<1)+1),read_obj_value((objno<<1)+1));
-							}
-						}
-					}
-					else if (objno<=7)	// Sendeverzögerung Eingänge Messwerte
-					{
-						objno_help=objno-4;
-
-						send_value(1,(objno_help<<1),sendewert(objno_help<<1));
-						lastsendtemp[objno_help]=temp[objno_help];
-
-						clear_delay_record(objno);
-					}
-
-					else	// Sendeverzögerung Eingänge Messwerte Busspannungswiederkehr
-					{
-						for (n=0;n<=6;n=n+2)
-						{
-							if (delay_state&(0x40>>n))
-							{
-								send_value(1,n,sendewert(n));
-							}
-						}
-						delrec[8*4]=0;
-					}
+				// Grenzwert senden wenn aktiv
+				if ( (eeprom[0x75+tmr_obj]) & 0x80)
+				{
+					send_obj_value((tmr_obj<<1)+1);
 				}
+			}
+			// SendeverzÃ¶gerung EingÃ¤nge Messwertedifferenz
+			else if (tmr_obj<=7)
+			{
+				objno_help=tmr_obj-4;
+
+				send_obj_value(objno_help<<1);
+				//lastsendtemp[objno_help]=temp[objno_help];
+
+				// Zeit holen und deaktivieren, Bit 7 = 0
+				//zykval_help=(eeprom[0x69+(eingang>>1)])>>(4*(!(eingang&0x01)))&0x0F;
+				if(objno_help & 0x01)	// 0,2
+				{
+					timercnt[tmr_obj] = (eeprom[0x69+(objno_help>>1)] & 0x0F);
+				}
+				else						// 1,3
+				{
+					timercnt[tmr_obj] = (eeprom[0x69+(objno_help>>1)] >>4);
+				}
+			}
+			// SendeverzÃ¶gerung EingÃ¤nge Messwerte Busspannungswiederkehr Ã¼ber Objekt 8
+			else
+			{
+				timercnt[8] = 0;	// Timer 8 anhalten
+				// VerzÃ¶gertes senden aktiv, Bit 0,2,4,6
+				verz_start = eeprom[0x79]&0x55;
+
+				for (n=0;n<=6;n+=2)
+				{
+					if (verz_start & 0x40)	    // Start mit Eingang 4
+					{
+						send_obj_value(n);
+					}
+					verz_start = verz_start<<2;	// vorheringer Eingang
+				}
+
 			}
 		}
 	}
-	RTCCON=0x61;		// RTC starten
-	delay_toggle=!delay_toggle;
 }
-
 
 
 /**
@@ -432,95 +376,111 @@ void bus_return(void)
 
 	if (sende_sofort_bus_return&(0x80>>kanal_help))
 	{
-		send_value(1,(kanal_help),sendewert(kanal_help));
-		sende_sofort_bus_return&=0xFF-(0x80>>kanal_help);
+		// Messwerte
+		send_obj_value(kanal_help);
+		sende_sofort_bus_return &= 0xFF-(0x80>>kanal_help);	// LÃ¶schen wenn gesendet
 	}
 
 	if (sende_sofort_bus_return&(0x40>>kanal_help))
 	{
-		send_value(1,(kanal_help+1),read_obj_value(kanal_help+1));
-		sende_sofort_bus_return&=0xFF-(0x40>>kanal_help);
+		// Grenzwerte
+		send_obj_value(kanal_help+1);
+		sende_sofort_bus_return &= 0xFF-(0x40>>kanal_help); // LÃ¶schen wenn gesendet
 	}
-
-
 }
 
 
-
 /**
-* Alle Applikations-Parameter zurücksetzen
+* Alle Applikations-Parameter zurÃ¼cksetzen
 *
 * \param  void
 *
 * @return void
 */
-void restart_app(void)		// Alle Applikations-Parameter zurücksetzen
+void restart_app()		// Alle Applikations-Parameter zurÃ¼cksetzen
 {
+	unsigned char n;
 
-	unsigned char zyk_funk, n;
-	unsigned int sendeverzoegerung;
-
-	RTCCON=0x60;				// RTC anhalten und Flag löschen
-	RTCH=0x0E;					// reload Real Time Clock
-	RTCL=0xA0;
+	// Done in delay_timer now
+	//RTCCON=0x60;		// RTC anhalten und Flag lÃ¶schen
+	//RTCH=0x0E;			// reload Real Time Clock, 65ms
+	//RTCL=0xA0;
 
 	// Port Konfigurieren
+	// Port 0
 	P0M1= 0x00;
 	P0M2= 0x00;	// alle auf quasi bidirektional
+	// Port 1, nach restart_hw()!
+	P1M1 &= ~0x03;	// P1.0/TXD auf input wg. Busdown Erkennung
+	P1M2 &= ~0x03;
+	ES = 0;
+	SCON = 0;
+	SSTAT = 0;
 
-	// Zeit für Sendeverzögerung bei Busspannungswiederkehr ins delrec schreiben
-	sendeverzoegerung=eeprom[0xA0]<<3;
-	delrec[8*4+2]=sendeverzoegerung>>8;
-	delrec[8*4+3]=sendeverzoegerung;
+	// Zeit fÃ¼r SendeverzÃ¶gerung bei Busspannungswiederkehr in Timer 8 laden
+	timerbase[8] = 4;	// 2 Sekunde als Basis
+	timercnt[8] = ( (eeprom[0xA0]>>1) | 0x80);	// Zeit holen, Timer einschalten - Bit7
 
-	// Verhalten bei Busspannungswiederkehr Messwewrte
-	sende_sofort_bus_return=eeprom[0x79]&0xAA;
-	delrec[8*4]=eeprom[0x79]&0x55;
+	// Verhalten bei Busspannungswiederkehr Messwerte
+	sende_sofort_bus_return = eeprom[0x79]&0xAA;
 
-	// zyk Senden Basis für alle Eingänge
-	zyk_senden_basis=eeprom[0x060]&0x0F;
-
-	// Schleife für alle Eingänge
+	// Zyklisches Senden konfigurieren
 	for(n=0;n<=3;n++)
 	{
+		// zyk Senden Basis fÃ¼r alle EingÃ¤nge, BeschrÃ¤nkung alte VD
+		timerbase[n] = eeprom[0x060]&0x0F;
+
+		// Faktor und aktiv Bit7 holen
+		timercnt[n] = eeprom[0x61+n];
+//		zyk_funk=(eeprom[0x61+n]&0x80);
+//		zyk_funk=zyk_funk+((eeprom[0x75+n]>>7)&0x01);
+
+
 		// Verhalten bei Busspannungswiederkehr Grenzwerte
-		sende_sofort_bus_return|=(eeprom[0x71+n]&0x80)>>(2*n+1);
+		sende_sofort_bus_return |= (eeprom[0x71+n]&0x80)>>(2*n+1);
 
-		// Bedingungen für zyklisch senden ins delrec schreiben
-		zyk_funk=(eeprom[0x61+n]&0x80);
-		zyk_funk=zyk_funk+((eeprom[0x75+n]>>7)&0x01);
-//		delrec[n*4]=zyk_funk;
-//		delrec[n*4+3]=0x05;
-
-		write_delay_record(n,zyk_funk,0x01);
-
-
-		// Werte zurücksetzen
+		// Werte initialisieren
 		temp[n]=0;
 		lasttemp[n]=0;
 		lastsendtemp[n]=0;
+
+		// SendeverzÃ¶gerung bei Messwertdifferenz
+		//zykval_help=(eeprom[0x69+(eingang>>1)])>>(4*(!(eingang&0x01)))&0x0F;
+		// Zeit holen und deaktivieren, Bit 7 = 0
+		if(n & 0x01)	// 0,2
+		{
+			timercnt[n+4] = (eeprom[0x69+(n>>1)] & 0x0F);
+		}
+		else						// 1,3
+		{
+			timercnt[n+4] = (eeprom[0x69+(n>>1)] >>4);
+		}
+		// Zeitbasis setzen, TODO: Anpassung an neue/alte VD
+		if (timercnt[n+4] >0)
+			timerbase[n+4] = 3;	// 1 Sekunde
+		else if (timercnt[n+4] >5)
+			timerbase[n+4] = 3;	// 8,4 Sekunde
+		else
+			timerbase[n+4] = 0;	// 130ms, kleinste Zeit
 	}
 
 	sequence=1;
 	kanal=0;
-
-	EA=0;						// Interrupts sperren, damit flashen nicht unterbrochen wird
+	timer=0;			// Timer-Variable, wird alle 130ms inkrementiert
+/*
+	EA=0;				// Interrupts sperren, damit flashen nicht unterbrochen wird
 	START_WRITECYCLE
-	WRITE_BYTE(0x01,0x03,0x00)	// Herstellercode 0x0008 = GIRA
+	WRITE_BYTE(0x01,0x03,0x00)	    // Herstellercode 0x0008 = GIRA
 	WRITE_BYTE(0x01,0x04,0x08)
-	WRITE_BYTE(0x01,0x05,0xB0)	// Devicetype 0xB003 = GIRA Analogeingang 960 00
+	WRITE_BYTE(0x01,0x05,0xB0)	    // Devicetype 0x0438 = Selfbus 1080 4temp
 	WRITE_BYTE(0x01,0x06,0x03)
-	WRITE_BYTE(0x01,0x07,0x01)	// Versionnumber of application programm
-	WRITE_BYTE(0x01,0x0C,0x00)	// PORT A Direction Bit Setting
-	WRITE_BYTE(0x01,0x0D,0xFF)	// Run-Status (00=stop FF=run)
-	WRITE_BYTE(0x01,0x12,0x3A)	// COMMSTAB Pointer
+	//WRITE_BYTE(0x01,0x07,0x01)	// Versionnumber of application programm
+	WRITE_BYTE(0x01,0x0C,0x00)	    // PORT A Direction Bit Setting
+	//WRITE_BYTE(0x01,0x0D,0xFF)	// Run-Status (00=stop FF=run)
+	//WRITE_BYTE(0x01,0x12,0x3A)	// COMMSTAB Pointer
 	STOP_WRITECYCLE
-	START_WRITECYCLE;
-	WRITE_BYTE(0x00,0x60,0x2E);	// system state: all layers active (run), not in prog mode
-	STOP_WRITECYCLE;
-	EA=1;						// Interrupts freigeben
+	EA=1;				// Interrupts freigeben
+*/
 
-	timer=0;					// Timer-Variable, wird alle 130ms inkrementiert
-	RTCCON=0x61;				// RTC starten
-
+	RTCCON=0x81; 		//RTC starten und flag setzen -> delay timer setzt RTC
 }

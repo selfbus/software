@@ -1,11 +1,12 @@
 /*
- *      __________  ________________  __  _______
- *     / ____/ __ \/ ____/ ____/ __ )/ / / / ___/
- *    / /_  / /_/ / __/ / __/ / __  / / / /\__ \
- *   / __/ / _, _/ /___/ /___/ /_/ / /_/ /___/ /
- *  /_/   /_/ |_/_____/_____/_____/\____//____/
+ *    _____ ______ __   __________  __  _______
+ *   / ___// ____// /  / ____/ __ )/ / / / ___/
+ *   \__ \/ __/  / /  / /__ / __  / / / /\__ \
+ *  ___/ / /__  / /__/ /__// /_/ / /_/ /___/ /
+ * /____/_____//____/_/   /_____/\____//____/
  *
  *  Copyright (c) 2010 Jan Wegner
+ *  Copyright (c) 2014 Stefan Haller
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 2 as
@@ -16,12 +17,12 @@
 
 //#define multiplex
 
-bit ow_init(void);						// one-wire Ger‰t initialisieren
-void ow_write(unsigned char owbyte);	// Byte an one-wire Ger‰t senden
-unsigned char ow_read(void);			// Byte von one-wire Ger‰t lesen
-bit ow_read_bit(void);					// Bit von one-wire Datenleitung einlesen
+__bit ow_init(void);					// one-wire Ger√§t initialisieren
+void ow_write(unsigned char owbyte);	// Byte an one-wire Ger√§t senden
+unsigned char ow_read(void);			// Byte von one-wire Ger√§t lesen
+__bit ow_read_bit(void);				// Bit von one-wire Datenleitung einlesen
 void start_tempconversion(void);		// Temperaturmessung starten
 int read_temp(unsigned char sensortyp);	// Temperatur einlesen
 void owdelay(int deltime);
 
-
+extern unsigned char kanal;

@@ -1,11 +1,12 @@
 /*
- *      __________  ________________  __  _______
- *     / ____/ __ \/ ____/ ____/ __ )/ / / / ___/
- *    / /_  / /_/ / __/ / __/ / __  / / / /\__ \
- *   / __/ / _, _/ /___/ /___/ /_/ / /_/ /___/ /
- *  /_/   /_/ |_/_____/_____/_____/\____//____/
+ *    _____ ______ __   __________  __  _______
+ *   / ___// ____// /  / ____/ __ )/ / / / ___/
+ *   \__ \/ __/  / /  / /__ / __  / / / /\__ \
+ *  ___/ / /__  / /__/ /__// /_/ / /_/ /___/ /
+ * /____/_____//____/_/   /_____/\____//____/
  *
  *  Copyright (c) 2010 Jan Wegner
+ *  Copyright (c) 2014 Stefan Haller
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 2 as
@@ -14,16 +15,17 @@
  */
 
 
-#include <P89LPC922.h>
+#include <fb_lpc922.h>
 #include "4temp_onewire.h"
 
-#define OWDATA 	P0_2	// Data-Pin f¸r one-wire Sensor
+
+#define OWDATA 	P0_2	// Data-Pin f√ºr one-wire Sensor
 unsigned char kanal;
 
 #ifdef multiplex
-bit ow_init(void)		// one-wire Ger‰t initialisieren
+__bit ow_init(void)		// one-wire Ger√§t initialisieren
 {
-  bit presence;
+  __bit presence;
   unsigned char n;
 
   presence=1;
@@ -39,9 +41,9 @@ bit ow_init(void)		// one-wire Ger‰t initialisieren
   return (presence);
 }
 #else
-bit ow_init(void)		// one-wire Ger‰t initialisieren
+__bit ow_init(void)     // one-wire Ger√§t initialisieren
 {
-  bit presence;
+  __bit presence;
   unsigned char n;
   presence=1;
 
@@ -83,7 +85,7 @@ bit ow_init(void)		// one-wire Ger‰t initialisieren
 #endif
 
 #ifdef multiplex
-void ow_write(unsigned char owbyte)	// Byte an one-wire Ger‰t senden
+void ow_write(unsigned char owbyte) // Byte an one-wire Ger√§t senden
 {
   unsigned char n,m;
 
@@ -91,7 +93,7 @@ void ow_write(unsigned char owbyte)	// Byte an one-wire Ger‰t senden
   {
 	if (owbyte & n)
     {
-      for (m=0;m<2;m++) OWDATA=0;	// 1-Bit: 5µs auf low dann auf high und 85µs warten
+      for (m=0;m<2;m++) OWDATA=0;   // 1-Bit: 5us auf low dann auf high und 85us warten
 
       OWDATA=1;
 
@@ -99,7 +101,7 @@ void ow_write(unsigned char owbyte)	// Byte an one-wire Ger‰t senden
     }
     else
     {
-      OWDATA=0;			// 0-Bit: 90µs auf low dann auf high
+      OWDATA=0;			    // 0-Bit: 90us auf low dann auf high
 
       owdelay(275);
 
@@ -109,7 +111,7 @@ void ow_write(unsigned char owbyte)	// Byte an one-wire Ger‰t senden
   }
 }
 #else
-void ow_write(unsigned char owbyte)	// Byte an one-wire Ger‰t senden
+void ow_write(unsigned char owbyte) // Byte an one-wire Ger√§t senden
 {
   unsigned char n,m;
   switch (kanal)
@@ -119,7 +121,7 @@ void ow_write(unsigned char owbyte)	// Byte an one-wire Ger‰t senden
   {
 	if (owbyte & n)
     {
-      for (m=0;m<2;m++) P0_0=0;	// 1-Bit: 5µs auf low dann auf high und 85µs warten
+      for (m=0;m<2;m++) P0_0=0; // 1-Bit: 5us auf low dann auf high und 85us warten
 
       P0_0=1;
 
@@ -127,7 +129,7 @@ void ow_write(unsigned char owbyte)	// Byte an one-wire Ger‰t senden
     }
     else
     {
-      P0_0=0;			// 0-Bit: 90µs auf low dann auf high
+      P0_0=0;			    // 0-Bit: 90us auf low dann auf high
 
       owdelay(275);
 
@@ -142,7 +144,7 @@ void ow_write(unsigned char owbyte)	// Byte an one-wire Ger‰t senden
   {
 	if (owbyte & n)
     {
-      for (m=0;m<2;m++) P0_1=0;	// 1-Bit: 5µs auf low dann auf high und 85µs warten
+      for (m=0;m<2;m++) P0_1=0; // 1-Bit: 5us auf low dann auf high und 85us warten
 
       P0_1=1;
 
@@ -150,7 +152,7 @@ void ow_write(unsigned char owbyte)	// Byte an one-wire Ger‰t senden
     }
     else
     {
-      P0_1=0;			// 0-Bit: 90µs auf low dann auf high
+      P0_1=0;			    // 0-Bit: 90us auf low dann auf high
 
       owdelay(275);
 
@@ -165,7 +167,7 @@ void ow_write(unsigned char owbyte)	// Byte an one-wire Ger‰t senden
   {
 	if (owbyte & n)
     {
-      for (m=0;m<2;m++) P0_2=0;	// 1-Bit: 5µs auf low dann auf high und 85µs warten
+      for (m=0;m<2;m++) P0_2=0; // 1-Bit: 5us auf low dann auf high und 85us warten
 
       P0_2=1;
 
@@ -173,7 +175,7 @@ void ow_write(unsigned char owbyte)	// Byte an one-wire Ger‰t senden
     }
     else
     {
-      P0_2=0;			// 0-Bit: 90µs auf low dann auf high
+      P0_2=0;			    // 0-Bit: 90us auf low dann auf high
 
       owdelay(275);
 
@@ -188,7 +190,7 @@ void ow_write(unsigned char owbyte)	// Byte an one-wire Ger‰t senden
   {
 	if (owbyte & n)
     {
-      for (m=0;m<2;m++) P0_3=0;	// 1-Bit: 5µs auf low dann auf high und 85µs warten
+      for (m=0;m<2;m++) P0_3=0; // 1-Bit: 5us auf low dann auf high und 85us warten
 
       P0_3=1;
 
@@ -196,7 +198,7 @@ void ow_write(unsigned char owbyte)	// Byte an one-wire Ger‰t senden
     }
     else
     {
-      P0_3=0;			// 0-Bit: 90µs auf low dann auf high
+      P0_3=0;			    // 0-Bit: 90us auf low dann auf high
 
       owdelay(275);
 
@@ -212,7 +214,7 @@ void ow_write(unsigned char owbyte)	// Byte an one-wire Ger‰t senden
 #endif
 
 #ifdef multiplex
-unsigned char ow_read(void)			// Byte von one-wire Ger‰t lesen
+unsigned char ow_read(void)			// Byte von one-wire Ger√§t lesen
 {
   unsigned char n,m,d;
 
@@ -231,7 +233,7 @@ unsigned char ow_read(void)			// Byte von one-wire Ger‰t lesen
   return(d);
 }
 #else
-unsigned char ow_read(void)			// Byte von one-wire Ger‰t lesen
+unsigned char ow_read(void)			// Byte von one-wire Ger√§t lesen
 {
   unsigned char n,m,d;
 
@@ -250,7 +252,7 @@ unsigned char ow_read(void)			// Byte von one-wire Ger‰t lesen
 
 	owdelay(140);
   }
-  break;	
+  break;
 
   case 1:
   for (n=1;n!=0;n=n<<1)
@@ -264,7 +266,7 @@ unsigned char ow_read(void)			// Byte von one-wire Ger‰t lesen
 
 	owdelay(140);
   }
-  break;	
+  break;
 
   case 2:
   for (n=1;n!=0;n=n<<1)
@@ -278,7 +280,7 @@ unsigned char ow_read(void)			// Byte von one-wire Ger‰t lesen
 
 	owdelay(140);
   }
-  break;	
+  break;
   case 3:
   for (n=1;n!=0;n=n<<1)
   {
@@ -291,7 +293,7 @@ unsigned char ow_read(void)			// Byte von one-wire Ger‰t lesen
 
 	owdelay(140);
   }
-  break;	
+  break;
 
 }//end switch
   return(d);
@@ -299,10 +301,10 @@ unsigned char ow_read(void)			// Byte von one-wire Ger‰t lesen
 #endif
 
 #ifdef multiplex
-bit ow_read_bit(void)				// Bit von one-wire Datenleitung einlesen
+__bit ow_read_bit(void)				// Bit von one-wire Datenleitung einlesen
 {
 	unsigned char m;
-	bit b;
+	__bit b;
 
 	for (m=0;m<2;m++) OWDATA=0;
 
@@ -316,11 +318,11 @@ bit ow_read_bit(void)				// Bit von one-wire Datenleitung einlesen
 	return (b);
 }
 #else
-bit ow_read_bit(void)				// Bit von one-wire Datenleitung einlesen
+__bit ow_read_bit(void)				// Bit von one-wire Datenleitung einlesen
 {
 	unsigned char m;
-	bit b=0;
-	
+	__bit b=0;
+
   switch (kanal)
   {
   case 0:
@@ -340,7 +342,7 @@ bit ow_read_bit(void)				// Bit von one-wire Datenleitung einlesen
 
 	owdelay(1);
 
-	b=P1_0;
+	b=P0_1;
   break;
 
   case 2:
@@ -370,17 +372,17 @@ bit ow_read_bit(void)				// Bit von one-wire Datenleitung einlesen
 #endif
 
 
-void start_tempconversion(void)		// Temperaturmessung starten
+void start_tempconversion(void)	// Temperaturmessung starten
 {
 	if (ow_init()) {
-		ow_write(0xCC);			// Skip-ROM command: alle parallel angeschlossenen Ger‰te werden angesprochen
+		ow_write(0xCC);			// Skip-ROM command: alle parallel angeschlossenen Ger√§te werden angesprochen
 		ow_write(0x44);			// start single temperature conversion command
 	}
 }
 
 
 
-signed int read_temp(unsigned char sensortyp)					// Temperatur einlesen
+signed int read_temp(unsigned char sensortyp)   // Temperatur einlesen
 {
 	unsigned char lsb,msb;
 	signed int t;
@@ -390,24 +392,24 @@ signed int read_temp(unsigned char sensortyp)					// Temperatur einlesen
 
 
   	if (ow_init()) {
-  		ow_write(0xCC);				// Skip-ROM command: alle parallel angeschlossenen Ger‰te werden angesprochen
-  		ow_write(0xBE);				// read scratchpad command: Speicher einlesen
-  		lsb=ow_read();				// LSB von Temperaturwert
-  		msb=ow_read();				// MSB von Temperaturwert
+  		ow_write(0xCC);			// Skip-ROM command: alle parallel angeschlossenen Ger√§te werden angesprochen
+  		ow_write(0xBE);			// read scratchpad command: Speicher einlesen
+  		lsb=ow_read();			// LSB von Temperaturwert
+  		msb=ow_read();			// MSB von Temperaturwert
 
 
-		if(sensortyp==2){			// DS18S20
+		if(sensortyp==2){		// DS18S20
 			counts=ow_read();
 			counts=ow_read();
 			counts=ow_read();
 			counts=ow_read();
-			counts=ow_read();		// counts remaining
+			counts=ow_read();	// counts remaining
 
-			msb&=0xF8;				// oberen 3 Bits von LSB in untere 3 von MSB
+			msb&=0xF8;			// oberen 3 Bits von LSB in untere 3 von MSB
 			msb+=(lsb>>5)&0x07;
 
-			lsb=lsb<<3;				// LSB um 3 Bit nach oben verschieben
-			lsb&=0xF0;				// alles unterhalb 2^0 abschneiden
+			lsb=lsb<<3;			// LSB um 3 Bit nach oben verschieben
+			lsb&=0xF0;			// alles unterhalb 2^0 abschneiden
 			lsb+=(16-counts);
 		}
 
@@ -420,33 +422,32 @@ signed int read_temp(unsigned char sensortyp)					// Temperatur einlesen
 
   		t=t2*6;
   		t2=t2>>2;
-  		t=t+t2;						// hier ist t die Teperatur in 0,01∞C
+  		t=t+t2;					// hier ist t die Teperatur in 0,01¬∞C
 
 
-		if(sensortyp==2){			// DS18S20
+		if(sensortyp==2){		// DS18S20
 			t-=25;
 		}
 
 
-  		if (sign) t=-t;				// Vorzeichen
+  		if (sign) t=-t;			// Vorzeichen
 
   	}
-  	else t=0xFFFF;					// im Fehlerfall 0xFFFF zur¸ckmelden
+  	else t=0xFFFF;				// im Fehlerfall 0xFFFF zur√ºckmelden
   	return (t);
 }
 
 
 
-void owdelay(int deltime)			// Warten, deltime = Anzahl Takte / 2 (Timer wird mit CCLK/2 betrieben) 
-{									// Der Aufruf allein dauert schon ca. 12µs !!!
-									// NICHT IN APP VERWENDEN !!!
-  TR0=0;							// Timer 0 anhalten
+void owdelay(int deltime)		// Warten, deltime = Anzahl Takte / 2 (Timer wird mit CCLK/2 betrieben)
+{								// Der Aufruf allein dauert schon ca. 12us !!!
+								// NICHT IN APP VERWENDEN !!!
+  TR0=0;						// Timer 0 anhalten
   deltime=0xFFFF-deltime;
-  TH0=deltime>>8;					// Timer 0 setzen
-  TL0=deltime;	
+  TH0=deltime>>8;				// Timer 0 setzen
+  TL0=deltime;
   TF0=0;
   TR0=1;
-  while(!TF0);						// warten auf Timer 0
-  TR0=0;		
+  while(!TF0);					// warten auf Timer 0
+  TR0=0;
 }
-
