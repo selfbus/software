@@ -15,8 +15,9 @@
 
 #ifndef FB_APP_IN8
 #define FB_APP_IN8
-
+#define terminal
 //#define debugmode
+#include  "../com/debug.h"
 #ifdef LPC936
 	#include <fb_lpc936_1.53.h>
 #else
@@ -32,8 +33,8 @@
 #define TIMERANZ		0x09	// timeranzahl (17)
 #define PROTTIMER		TIMERANZ-1// PROTTIMER ist stets der letzte timer(0-7user,8prot,Gesmatzahl=9)
 
-#define VERSION 9
-#define TYPE    0x0D
+#define VERSION 10
+#define TYPE    0x0B
 
 #if TYPE == 1
 # define wertgeber

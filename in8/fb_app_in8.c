@@ -58,17 +58,16 @@ void pin_changed(unsigned char pin_no)
 	timer_base=0;
 	para_value=0;
 
-
 	pinno=pin_no;
 	pinnoX4=pinno*4;
 	para_adr=0xD5+(pinnoX4);
 	n;
-  if (debounce(pinno))			// Entprellzeit abwarten und prüfen
+
+	if (debounce(pinno))			// Entprellzeit abwarten und prüfen
   {
 	timer_base=(eeprom[0xF6+((pinno+1)>>1)]>>(4*((pinno&0x01)^0x01)))&0x07  ;
 	st_Flanke=(((portbuffer>>pinno)&0x01)==0) && (((p0h>>pinno)&0x01)==1);
 	timer_state=timerstate[pinno];
-
 	switch ((eeprom[0xCE+(pinno>>1)] >> ((pinno & 0x01)*4)) & 0x0F)	// Funktion des Eingangs
     {
     case 0x01:				// Funktion Schalten
@@ -278,7 +277,7 @@ void pin_changed(unsigned char pin_no)
         		if(tmp)write_send(pinno,tmp&0x01);
         	}
         	break;
-        case 10:
+        case 10:// ### Schaltzähler ###
         	n=eeprom[0xD5+(pinno*4)];// Parameter Flanke für Zählimpuls
             	if ((n&0x01 && st_Flanke)||(n&0x02 &! st_Flanke)){
             		zaehlervalue[pinno]++;// zählwert erhöhen
@@ -302,6 +301,8 @@ void pin_changed(unsigned char pin_no)
             	}
         
         	break;
+        default:
+        break;
 #endif        	
     }
 	timerstate[pinno]=timer_state;
@@ -631,7 +632,7 @@ void bus_return(void){
 	unsigned char n,senden;
 	  //  ++++++++++++    Startverhalten bei Buswiederkehr ++++++++++
 	__bit objval=0;
-	Sperre=0;
+	blocked=0;
 	
 	for (n=0;n<8;n++){
 		  senden=0;
@@ -680,11 +681,11 @@ void bus_return(void){
 			write_obj_value(n,objval);// eis1, kein selftele, speichern ja
 			while(!send_obj_value(n));
 		}
-		if((eeprom[0xD5+(n*4)]& 0x03)==1){
-			blocked |= bitmask_1[n];
+		if((eeprom[0xD5+(n*4)]& 0x03)==2){ //bei invertierter Sperre Sperrobjekt setzen.
+			Sperre |= bitmask_1[n];
 		}
 		else{
-			blocked &= (~bitmask_1[n]);
+			Sperre &= (~bitmask_1[n]);
 		}
 	  }
 }

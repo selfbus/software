@@ -23,7 +23,7 @@
 //				3.07	BUG: dto	
 //				3.08	auf LIB 1.4x umgebaut
 //				3.09	bugfix zyklisch senden
-
+//				3.10	auf LIB 1.53, connected timeout, Sperre bugfix
 
 //#include <P89LPC922.h>
 //#include "../lib_lpc922/fb_lpc922.h"
@@ -37,7 +37,7 @@
 #endif
 
 const unsigned char bitmask_1[8] ={0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80};
-const unsigned char __at 0x01CCE space[18];// Hier schreibt und liest die ETS !!
+
 static __code unsigned char __at 0x1D03 manufacturer[2]={0,4};	// Herstellercode 0x0004 = Jung
 static __code unsigned char __at 0x1D0C port_A_direction={0};	// PORT A Direction Bit Setting
 static __code unsigned char __at 0x1D0D run_state={255};		// Run-Status (00=stop FF=run)
@@ -57,21 +57,31 @@ void main(void)
 	unsigned char objno;
 	#endif
 #endif
+	
 	__bit wduf;
 	__bit tastergetoggelt=0;
 	__bit bus_return_ready=0; 
+	cmd,cal;
 	wduf=WDCON&0x02;
+#ifdef terminal
 	TASTER=1;
 	if(!TASTER && wduf)cal=0;
 	else cal=trimsave;
 	TRIM = (TRIM+trimsave);
 	TRIM &= 0x3F;//oberen 2 bits ausblenden
+#endif
 	TASTER=0;
 	restart_hw();				// Hardware zurücksetzen
 		// serielle Schnittstelle initialisieren
+#ifndef debugmode
 	RS_INIT_600
 	SBUF=0x55;// 'U' senden
-
+#else 
+#	ifdef terminal
+	RS_INIT_115200
+	SBUF=0x55;// 'U' senden
+#	endif
+#endif
   restart_app();			// Anwendungsspezifische Einstellungen zurücksetzen
 
   if(!wduf){
@@ -121,6 +131,7 @@ void main(void)
 	    {	
 //	      for(n=0;n<8;n++)					// jeden Eingangspin einzel prüfen
 //	      {
+//	    	if (((p0h^portbuffer) & bitmask_1[pin]) )// Version ohne Sperre!!
 	    	if (((p0h^portbuffer) & bitmask_1[pin])&& !(blocked & bitmask_1[pin]) )//kürzeste Version
 	        {
 	          pin_changed(pin);				// Änderung verarbeiten
@@ -195,6 +206,8 @@ void main(void)
 	}
 	
 	// Eingehendes Terminal Kommando verarbeiten...
+#ifdef terminal
+#	ifndef debugmode
 	if (RI){
 		RI=0;
 		cmd=SBUF;
@@ -213,7 +226,7 @@ void main(void)
 		}
 		if(cmd=='w'){
 			EA=0;
-			START_WRITECYCLE;	//cal an 0x1bff schreiben
+			START_WRITECYCLE;	//cal an 0x1cff schreiben
 
 			FMADRH= 0x1C;		
 			FMADRL= 0xFF; 
@@ -236,6 +249,14 @@ void main(void)
 		}
 
 	}//end if(RI...
+#	else // wenn also debugmode + terminal
+	DEBUGPOINT;
+#	endif
+#else
+#	ifdef debugmode// wenn nicht terminal und debugmode 
+	DEBUGPOINT;
+#	endif
+#endif
 	
 	TASTER=1;				// Pin als Eingang schalten um Taster abzufragen
 	if(!TASTER){ // Taster gedrückt

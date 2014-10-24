@@ -14,7 +14,8 @@
  */
 
 #include <P89LPC922.h>
-#include "../lib_lpc922/fb_lpc922.h"
+
+#include "../lib_lpc922/Releases/fb_lpc922_1.53.h"
 
 #include "spi.h"
 
