@@ -15,6 +15,7 @@
 
 #ifndef FB_APP_IN8
 #define FB_APP_IN8
+
 #define terminal
 //#define debugmode
 #include  "../com/debug.h"
@@ -34,7 +35,7 @@
 #define PROTTIMER		TIMERANZ-1// PROTTIMER ist stets der letzte timer(0-7user,8prot,Gesmatzahl=9)
 
 #define VERSION 10
-#define TYPE    0x0B
+#define TYPE    0x01
 
 #if TYPE == 1
 # define wertgeber
@@ -57,6 +58,11 @@
 #elif TYPE == 6
 # define in4
 # define wertgeber
+# define dimmer
+# define zykls
+#elif TYPE == 7
+# define in4
+# define zaehler
 # define dimmer
 # define zykls
 #elif TYPE == 8

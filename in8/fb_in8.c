@@ -155,14 +155,17 @@ void main(void)
 		for(objno=0;objno<=7;objno++){	
 	    	tmp=(eeprom[0xD5+(objno*4)]&0x0C);//0xD5/ bit 2-3 zykl senden aktiv 
     		objstate=read_obj_value(objno);
-	    	if (((eeprom[0xCE+(objno>>1)] >> ((objno & 0x01)*4)) & 0x0F)==1){// bei Funktion=Schalten
+    		if (((eeprom[0xCE+(objno>>1)] >> ((objno & 0x01)*4)) & 0x0F)==1){// bei Funktion=Schalten
 	    		if ((tmp==0x04 && objstate==1)||(tmp==0x08 && objstate==0)|| tmp==0x0C){//bei zykl senden aktiviert
 					n=timercnt[objno];
 					if ((n & 0x7F) ==0){ 		//    wenn aus oder abgelaufen
 						timercnt[objno] = (eeprom[0xD6+(objno*4)]& 0x3F)+ 0x80 ;//0xD6 Faktor Zyklisch senden x.1 + x.2 )+ einschalten
 						timerbase[objno]=(eeprom[0xF6+((objno+1)>>1)]>>(4*((objno&0x01)^0x01)))&0x07;	//Basis zyklisch senden
 						if (n & 0x80){// wenn timer ein war
+							if(!(blocked & bitmask_1[objno]))
+							{
 							while(!send_obj_value(objno));//send_obj_value(objno);		// Eingang x.1 zyklisch senden
+							}
 						}
 					}
 				}
