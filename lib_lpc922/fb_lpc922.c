@@ -151,10 +151,10 @@ void T1_int(void) __interrupt (3) 	// Timer 1 Interrupt
 						if (fbrx_byte==0xCC) ack=1;				// ACK empfangen
 						if (fbrx_byte==0x0C) nack=1;			// NACK empfangen
 					}
-					if (!ack && !nack) {					// Datenbyte empfangen
+					if (!ack && !nack && telpos<=22) {			// Datenbyte empfangen, pointer auf Arraygroesse begrenzen
 						telegramm[telpos]=fbrx_byte;			// Byte speichern
 						cs^=fbrx_byte;							// Checksum berechnen
-						if(telpos<22)telpos++;								// Telegrammzeiger erhoehen
+						telpos++;								// Telegrammzeiger erhoehen
 					}
 				}
 				else parity_ok=0;						// Parity Error
