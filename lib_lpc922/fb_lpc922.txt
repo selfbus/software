@@ -1,4 +1,4 @@
-    _____ ______ __   __________  __  _______
+﻿    _____ ______ __   __________  __  _______
    / ___// ____// /  / ____/ __ )/ / / / ___/
    \__ \/ __/  / /  / /__ / __  / / / /\__ \
   ___/ / /__  / /__/ /__// /_/ / /_/ /___/ /
@@ -36,7 +36,7 @@ auto_ack	wenn gesetzt, werden empfangene Telegramme geprüft, ob sie für das Ge
 interrupted	wird gesetzt wenn entweder der externe interrupt oder timer1 interrupt aufgerufen wird,
 			muss in der app zurückgesetzt werden
 		
-transparency	0: nur Gruppentelegramme mit einer eigenen GA werden per tel_arrived angekündigt (default)
+transparency	0: (ab 1.54 entfernt) nur Gruppentelegramme mit einer eigenen GA werden per tel_arrived angekündigt (default)
 				1: alle Gruppentelegramme werden angekündigt
 				Diese Variable kann bei Bedarf in der restart_app() gesetzt werden
 
@@ -136,14 +136,14 @@ void process_tel(void)	wenn die app die Bitvariable tel_arrived ausgewertet hat,
 						diese Funktion aufgerufen werden, es werden alle Telegramm-Typen
 						analysiert und die Unicast und Broadcast Telegramme direkt
 						abgearbeitet, wenn es ein Multicast Telegramm war, dann wird
-						entweder die Funktion read_value_req() oder write_value_req()
+						entweder die Funktion read_value_req(objectnomber) oder write_value_req(objectnomber)
 						in der app aufgerufen
 						
 void write_memory(void)	Funktion zum Speicher schreiben bei Unicast, wird für app nicht
-						gebraucht
+						gebraucht (entfallen)
 						
 void set_pa(void)		Funktion zum Schreiben der phys. Adr. bei Unicast, wird für app nicht
-						gebraucht
+						gebraucht(entfallen)
 						
 unsigned char read_objflags(unsigned char objno)
 						liest die Objektflags eines Objektes (Lesen, Schreiben, Kommunikation,
@@ -151,29 +151,27 @@ unsigned char read_objflags(unsigned char objno)
 						
 unsigned char find_first_objno(unsigned char gah, unsigned char gal)
 						findet die erste vorkommende Objektnummer zu einer Gruppenadresse
-						
+						(entfallen)
 
 Folgende Funktionen müssen in der app vorhanden sein, da sie von der Library aufgerufen werden:
 -----------------------------------------------------------------------------------------------
 
-void write_value_req(void)
+void write_value_req(objno)
 						wird beim eintreffen eines Multicast Telegrammes vom Typ 
 						write_value_request aufgerufen, die app muss hier die entsprechende
 						Aktion veranlassen, die dazu nötigen Daten lassen sich aus
 						telegramm[] entnehmen 
 
-void read_value_req(void)
+void read_value_req(objno)
 						wird beim eintreffen eines Multicast Telegrammes vom Typ 
 						read_value_request aufgerufen, die app muss hier die entsprechende
 						Aktion veranlassen, die dazu nötigen Daten lassen sich aus
-						telegramm[] entnehmen
+						telegramm[] entnehmen.
 						
 unsigned long read_obj_value(unsigned char objno)
 						muss den Wert eines Objektes zurückgeben
 						
-void restart_app(void)	muß die Applikations Variablen zurücksetzen, wird zB. durch
-						ein restar_request Telegramm aufgerufen, was am Ende der Programmierung
-						von der ETS gesendet wird
+void restart_app(void)	muß die Applikations Variablen zurücksetzen
 						
 			
 Senden eines Telegrammes aus der app:
@@ -181,11 +179,11 @@ Senden eines Telegrammes aus der app:
 
 Man ermittelt die Objektnummer dessen Wert gesendet werden soll. Es ist sicherzustellen, daß
 man den Wert des Objektes vorher so gespeichert hat, daß read_obj_value() ihn ausgeben kann. Dann wird einfach
-die Funktion send_obj_value(objno) aufgerufen. Das Senden erfolgt komplett im 
+die Funktion __bit send_obj_value(objno) aufgerufen. Das Senden erfolgt komplett im 
 Hintergrund. Man kann also ruhig mehrere Telegramme direkt hintereinander senden. Der
-Ringspeicher reicht für 8 Telegramme, was im Normalfall völlig ausreicht. Sollten doch
-einmal mehr als 8 Telegramme gesendet werden, kan man über tx_nextwrite und tx_nextsend das
-Sendeverhalten überwachen.
+Ringspeicher reicht für 7 Telegramme, was im Normalfall völlig ausreicht. Sollten doch
+einmal mehr als 7 Telegramme gesendet werden, kann man das zurückgelieferte bit(succes) abfragen
+und bei 0 wiederholen.
 
 
 Zeitverhalten der Library:
