@@ -131,8 +131,11 @@ void T1_int(void) __interrupt (3) 	// Timer 1 Interrupt
 						if (length>1) telegramm[length+6]=objvalue; else telegramm[7]+=(objvalue&0x3F);
 						if (length>2) telegramm[length+5]=objvalue>>8;
 						if (length>3) telegramm[length+4]=objvalue>>16;
-						if (length>4) telegramm[length+3]=objvalue>>24;
-
+						if (length>4){
+							telegramm[length+3]=objvalue>>24;
+							telegramm[5]=0xE0+15;
+						}
+						// length 6..8..10..14 nicht unterstuetzt
 						build_ok=1;
 					}
 				}
@@ -535,6 +538,7 @@ __bit send_obj_value(unsigned char objno)
 void process_tel(void)
 {
 	unsigned char tpdu, apdu;
+	unsigned char ab,n;
 
 	tel_arrived=0;
 	tpdu=telegramm[6]&0xC3;
@@ -568,7 +572,7 @@ void process_tel(void)
 	else {	// Unicast oder Multiccast
 		if((telegramm[5]&0x80)==0x00) {	// Destination Adress Flag Bit 7, 0=phys. Adr., 1=Gruppenadr.
 			if(telegramm[3]==eeprom[ADDRTAB+1] && telegramm[4]==eeprom[ADDRTAB+2]) {	// nur wenn es die eigene phys. Adr. ist
-				connected_timeout=0;//wenn ein unicast uns betrifft den timeout rücksetzen
+				connected_timeout=0;//wenn ein unicast uns betrifft den timeout ruecksetzen
 
 				// Unicast
 				switch (tpdu) {	// transport layer control field
@@ -579,11 +583,8 @@ void process_tel(void)
 						apdu &= 0xF0;						// da bei memory operations nur obere 4 Bits aktiv
 						if(apdu==WRITE_MEMORY_REQUEST) {	// 01pppp10 1000xxxx
 							send_obj_value(NCD_ACK);
-
 							//write_memory();
 							{
-							unsigned char ab,n;
-							  if(telegramm[8]){
 								ab=telegramm[7]&0x0F;		// Anzahl Bytes
 
 								while(fb_state!=0);					// warten falls noch gesendet wird
@@ -591,7 +592,10 @@ void process_tel(void)
 								EA=0;
 								START_WRITECYCLE;					// load command, leert das pageregister
 								for(n=0;n<ab;n++) {
-									if(telegramm[8]==0 && (telegramm[9]+n)==0x60) status60=telegramm[10+n];
+									if(telegramm[8]==0)
+									{
+										if((telegramm[9]+n)==0x60) status60=telegramm[10+n];
+									}
                                 #ifdef LOCK_VD_VERSION      // Lock Firmware to specified VD Version
                                     #warning VD Version Lock is active!
                                     else if ( (telegramm[9]+n) == 0x00 || (telegramm[9]+n) >0x07 )  // Manufacturer & Device ID sperren
@@ -610,7 +614,6 @@ void process_tel(void)
 								}
 								STOP_WRITECYCLE;					// write command, schreibt pageregister ins flash und versetzt CPU in idle fuer 4ms
 								EA=1;
-							  }
 							}
 						}
 						if(apdu==READ_MEMORY_REQUEST) {		// 01pppp10 0000xxxx
