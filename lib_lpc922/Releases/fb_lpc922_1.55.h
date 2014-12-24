@@ -27,7 +27,9 @@
 #endif
 
 // Optionen
+//#define LOCK_VD_VERSION   // Schreibschutz Addresse 0x01-0x07
 //#define LOCK_DEVICE_ID    // Schreibschutz Addresse 0x01-0x06
+
 
 // Damit die Eclipse Code Analyse nicht so viele Warnungen anzeigt:
 #ifndef SDCC
@@ -45,7 +47,7 @@
 #define PORT	P0		// Port fuer 8-bit I/O
 #define RECEIVE_INT_ENABLE	EX1		// Interrupt enable Flag fuer Empfang
 
-// Pseudo-Objekte fuer Unicast senden
+// Pseudo-Objekte für Unicast senden
 #define NCD_ACK						129
 #define READ_MASK_VERSION_RESPONSE	130
 #define READ_PHYSADDR_RESPONSE		131
