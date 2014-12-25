@@ -18,7 +18,7 @@
 						<toolChain id="cdt.managedbuild.toolchain.sdcc.exe.release.166100442" name="SDCC Tool Chain" superClass="cdt.managedbuild.toolchain.sdcc.exe.release">
 							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="cdt.managedbuild.target.sdcc.platform.exe.release.414044462" name="Release Platform" osList="solaris,linux,hpux,aix,qnx,win32" superClass="cdt.managedbuild.target.sdcc.platform.exe.release"/>
 							<builder buildPath="${workspace_loc:/ds_temp}/Release" id="org.eclipse.cdt.build.core.internal.builder.921475197" keepEnvironmentInBuildfile="false" name="CDT Internal Builder" superClass="org.eclipse.cdt.build.core.internal.builder"/>
-							<tool command="sdcc -c --stack-auto" id="cdt.managedbuild.tool.sdcc.c.compiler.exe.release.290586606" name="SDCC Compiler" superClass="cdt.managedbuild.tool.sdcc.c.compiler.exe.release">
+							<tool command="sdcc -c --stack-auto --std-c99" id="cdt.managedbuild.tool.sdcc.c.compiler.exe.release.290586606" name="SDCC Compiler" superClass="cdt.managedbuild.tool.sdcc.c.compiler.exe.release">
 								<option id="sdcc.c.compiler.option.include.paths.1991075891" name="Include paths (-I)" superClass="sdcc.c.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="/usr/share/sdcc/include/mcs51"/>
 									<listOptionValue builtIn="false" value="/usr/share/sdcc/include"/>
@@ -62,9 +62,9 @@
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
 				<configuration artifactExtension="hex" artifactName="${ProjName}" buildProperties="" cleanCommand="rm -rf" description="" errorParsers="org.eclipse.cdt.core.MakeErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser" id="cdt.managedbuild.config.sdcc.exe.release.682020468.768777581" name="Debug" parent="cdt.managedbuild.config.sdcc.exe.release">
 					<folderInfo id="cdt.managedbuild.config.sdcc.exe.release.682020468.768777581." name="/" resourcePath="">
-						<toolChain id="cdt.managedbuild.toolchain.sdcc.exe.release.715283764" name="SDCC Tool Chain" superClass="cdt.managedbuild.toolchain.sdcc.exe.release">
+						<toolChain id="cdt.managedbuild.toolchain.sdcc.exe.release.715283764" name="SDCC Tool Chain" nonInternalBuilderId="cdt.managedbuild.target.sdcc.builder.exe.release" superClass="cdt.managedbuild.toolchain.sdcc.exe.release">
 							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="cdt.managedbuild.target.sdcc.platform.exe.release.1224093607" name="Release Platform" osList="solaris,linux,hpux,aix,qnx,win32" superClass="cdt.managedbuild.target.sdcc.platform.exe.release"/>
-							<builder buildPath="${workspace_loc:/ds_temp}/Release" id="org.eclipse.cdt.build.core.internal.builder.1520163855" keepEnvironmentInBuildfile="false" name="CDT Internal Builder" superClass="org.eclipse.cdt.build.core.internal.builder"/>
+							<builder buildPath="${workspace_loc:/4temp}/Debug" id="org.eclipse.cdt.build.core.internal.builder.375535545" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="CDT Internal Builder" superClass="org.eclipse.cdt.build.core.internal.builder"/>
 							<tool command="sdcc -c --stack-auto --debug" id="cdt.managedbuild.tool.sdcc.c.compiler.exe.release.68085426" name="SDCC Compiler" superClass="cdt.managedbuild.tool.sdcc.c.compiler.exe.release">
 								<option id="sdcc.c.compiler.option.include.paths.716792506" name="Include paths (-I)" superClass="sdcc.c.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="/usr/share/sdcc/include/mcs51"/>
@@ -104,12 +104,16 @@
 		<configuration configurationName="Release">
 			<resource resourceType="PROJECT" workspacePath="/ds_temp"/>
 		</configuration>
+		<configuration configurationName="Debug"/>
 	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 	<storageModule moduleId="scannerConfiguration">
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.sdcc.exe.release.682020468;cdt.managedbuild.config.sdcc.exe.release.682020468.">
 			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="net.sourceforge.eclipsesdcc.SDCCManagedMakePerProjectProfile"/>
 		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.sdcc.exe.release.682020468.768777581;cdt.managedbuild.config.sdcc.exe.release.682020468.768777581.">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="net.sourceforge.eclipsesdcc.SDCCManagedMakePerProjectProfile"/>
+		</scannerConfigBuildInfo>
 	</storageModule>
-	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 </cproject>

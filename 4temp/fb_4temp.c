@@ -20,7 +20,6 @@
  *				2.02  Bugifx, Verbindung wird nach timeout abgebaut (Line-Scan)
  */
 
-//#include "debug.h"
 #include "fb_app_4temp.h"
 #include "4temp_onewire.h"
 
@@ -29,13 +28,17 @@
 	DEBUG_VARIABLES;
 #endif
 
-const unsigned char bitmask_1[8] ={0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80};
-// Geräteparameter setzen, diese können von der ETS übschrieben werden
-// Daher zusätzlich bei jedem restart_app neu schreiben
+extern unsigned char family_code[4];
+
+#ifndef DEBUG_H_
+// Wenn Debug aktiv ist werden die Werte in der restart_app() geschrieben damit die Konfiguration nicht
+// immer neu geschrieben werden muss.
+// Geräteparameter setzen, diese können von der ETS übschrieben werden wenn Schreibschutz nicht aktiv
 static __code unsigned char __at (EEPROM_ADDR + 0x03) manufacturer[2]={0x00,0x08};	// Herstellercode 0x0008 = GIRA
 static __code unsigned char __at (EEPROM_ADDR + 0x05) device_type[2]={0x04, 0x38};	// 1080 Selfbus 4temp
 static __code unsigned char __at (EEPROM_ADDR + 0x0C) port_A_direction={0};			// PORT A Direction Bit Setting
 static __code unsigned char __at (EEPROM_ADDR + 0x0D) run_state={255};				// Run-Status (00=stop FF=run)
+#endif
 
 
 
@@ -45,13 +48,9 @@ void main(void)
 	__bit tastergetoggelt=0;
 
 	int th;
-#ifdef DEBUG_H_
-	// Initialize the debugging
-	DEBUG_SETUP;
-#endif
-	// Port 0 all open drain
-	P0M1 = 0xff;
-	P0M2 = 0xff;
+    // Port 0 all open drain
+    P0M1 = 0xff;
+    P0M2 = 0xff;
 
 	// ***************************************************************************
 	// Initialisierung
@@ -71,6 +70,11 @@ void main(void)
 			;
 	}
 	restart_app();
+// Needs to be after restart_app
+#ifdef DEBUG_H_
+    // Initialize the debugging
+    DEBUG_SETUP;
+#endif
 
 
 	// ***************************************************************************
@@ -96,22 +100,33 @@ void main(void)
 
 			if (sequence==1)
 			{
-				interrupted=0;
-				start_tempconversion();			// Konvertierung starten
-				if (!interrupted) sequence=2;
+			    interrupted=0;                                      // TODO: Info, family code check optional
+				if(family_code[kanal] && start_tempconversion())    // Start convert if sensor known
+				{
+				    if(!interrupted)
+				        sequence=2;
+				}
+				else
+				{
+				    onewire_error |= bitmask_1[kanal<<1];    // not connected
+				    kanal++;                    // No present sensor, next channel
+				}
+
 			}
 			else if (sequence==2)
 			{
-				if (ow_read_bit()) sequence=3;	// Konvertierung abgeschlossen
+			    timercnt[9] = 0x80+7;   // wait approx. 0.9s for sensor to be done
+			                            // secuence 3 set by delaytimer
+			    sequence=3;             // Konvertierung abgeschlossen
 			}
-			else
+			else if(sequence==4)        // && !TR1 // can be used to sync
 			{
-				interrupted=0;
-
 				// Temperatur einlesen + Übergabe Sensortyp
-				th=read_temp(  ((eeprom[0x6B+(kanal>>1)])>>(((~kanal)&0x01)<<2))&0x0F  );
-
-				if (!interrupted)
+				//th=read_temp(  ((eeprom[0x6B+(kanal>>1)])>>(((~kanal)&0x01)<<2))&0x0F  ); // VD
+				th=read_temp(family_code[kanal]);   // Read sensor with detected codes
+				// interrupted/crc error -60
+				// sensor not found -61
+				if(th>-5600)
 				{
 					temp[kanal]=th;
 
@@ -124,24 +139,24 @@ void main(void)
 					// Buswiederkehr bearbeiten
 					if (sende_sofort_bus_return)
 						bus_return();
-
-					sequence=1;
-
-					// Kanalumschaltung
-					kanal++;
-					kanal&=0x03;
-#ifdef multiplex
-					P0_0=kanal&0x01;
-					P0_1=(kanal>>1)&0x01;
-#endif
 				}
+
+                sequence=1;
+
+                // OK, next channel
+                kanal++;
+#ifdef multiplex
+                P0_0=kanal&0x01;
+                P0_1=(kanal>>1)&0x01;
+#endif
 			}
+            // Only channel 0-3
+			kanal&=0x03;
 		} // end if(APPLICATION_RUN)
 
 			// Telegrammverarbeitung
 			if (tel_arrived || tel_sent)
 			{
-				tel_arrived=0;
 				tel_sent=0;
 				process_tel();
 			}
@@ -167,6 +182,3 @@ void main(void)
 
 		} while(1);
 }
-
-
-
