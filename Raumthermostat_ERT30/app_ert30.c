@@ -13,11 +13,9 @@
  *
  */
 
-#include <mcs51/p89lpc935_6.h>
+#include <p89lpc935_6.h>
 
-#include "const.h"
-#include <fb_hal_lpc936.h>
-
+#include "lib_lpc936/fb_lpc936.h"
 #include "app_ert30.h"
 
 
@@ -39,7 +37,7 @@ __xdata unsigned int lux;
 __xdata unsigned char overrun, dimmwert, underrun, sequence, lockatt, resend;
 volatile __xdata unsigned char solltemplpc, solltemplcd;
 __bit lastrly;
-volatile __bit editmode;
+volatile unsigned char editmode;
 
 
 struct delayrecord {
@@ -309,15 +307,26 @@ void write_obj_value(unsigned char objno,int objvalue)
 
 
 // Objektwert lesen wurde angefordert, read_value_response Telegramm zurücksenden
-void read_value_req(unsigned char objno)
+void read_value_req(void)
 {
-	send_obj_value(objno + 0x40);
+	unsigned char objno, objflags;
+	
+	objno=find_first_objno(telegramm[3],telegramm[4]);	// erste Objektnummer zu empfangener GA finden
+	if(objno!=0xFF) {									// falls Gruppenadresse nicht gefunden
+		objflags=read_objflags(objno);					// Objekt Flags lesen
+		// Objekt lesen, nur wenn read enable gesetzt (Bit3) und Kommunikation zulaessig (Bit2)
+		if((objflags&0x0C)==0x0C) send_obj_value(objno+0x40);
+	}
 }
 
 
 
-void write_value_req(unsigned char objno)
+void write_value_req(void)
 {
+	unsigned char objno;
+	
+	objno=find_first_objno(telegramm[3],telegramm[4]); 
+	
 	if (objno==10) {	// nur Sperrobjekt darf beschrieben werden
 		write_obj_value(objno,telegramm[7]&0x01);
 		
@@ -347,6 +356,7 @@ void write_value_req(unsigned char objno)
 		if (solltemplpc<20) solltemplpc=20;	// minimal 10°
 		if (solltemplpc>70) solltemplpc=70;	// maximal 35°
 	}
+
 }
 
 
@@ -429,7 +439,7 @@ void delay_timer(void)	// zählt alle 130ms die Variable Timer hoch und prüft Ein
 		delrec[8].delayactive=0;
 	}
 
-	if (editmode && delrec[9].delayactive==0) {
+	if (editmode > 0 && delrec[9].delayactive==0) {
 		WRITE_DELAY_RECORD(9,1,0,timer+EDITTIMEOUT);
 	}
 	if (delrec[9].delayvalue==timer && delrec[9].delayactive) {	//editmode manuelle Sollwerteinstellung
@@ -507,83 +517,60 @@ unsigned int int100_to_eis5(int int100)
 
 void sync(void)
 {
-	unsigned char n,m;
-	
-	
-	EKBI=0;
-	if (solltemplpc<solltemplcd) {	// Sollwert am LCD reduzieren
-		for (n=0;n<=(solltemplcd-solltemplpc);n++) {
-			DOWN=0;
-			for (m=0;m<10;m++) {
-				TR0=0;					// Timer 0 anhalten
-				TH0=0;					// Timer 0 setzen
-				TL0=0;
-				TF0=0;					// Überlauf-Flag zurücksetzen
-				TR0=1;					// Timer 0 starten
-				while (!TF0);
-				TF0=0;
-				TR0=0;
-			}
-			DOWN=1;
-			for (m=0;m<10;m++) {
-				TR0=0;					// Timer 0 anhalten
-				TH0=0;					// Timer 0 setzen
-				TL0=0;
-				TF0=0;					// Überlauf-Flag zurücksetzen
-				TR0=1;					// Timer 0 starten
-				while (!TF0);
-				TF0=0;
-				TR0=0;
-			}
-			// feed watchdog
-			EA=0;
-			WFEED1=0xA5;
-			WFEED2=0x5A;
-			EA=1;
+	unsigned char n, m, count;
+	count = 0;
 
+	EKBI = 0;	// Disable keyboard interrupt
+	PBCOM = 1;	// Taster inaktiv
+	
+	if (solltemplpc < solltemplcd) count = (solltemplcd - solltemplpc) + g_uch_ERT_Editmode; // Bestimmung wie oft muss Sollwert am LCD reduziert werden
+	if (solltemplpc > solltemplcd) count = (solltemplpc - solltemplcd) + g_uch_ERT_Editmode; // Bestimmung wie oft muss Sollwert am LCD erhöht werden
+
+	for (n = 1; n <= count; n++)
+	{
+		if (solltemplpc < solltemplcd) DOWN = 0; 	// Sollwert am LCD reduzieren
+		if (solltemplpc > solltemplcd) UP = 0;		// Sollwert am LCD erhöhen
+		for (m = 0; m < 14; m++)
+		{
+			TR0=0;					// Timer 0 anhalten
+			TH0=0;					// Timer 0 setzen
+			TL0=0;
+			TF0=0;					// Überlauf-Flag zurücksetzen
+			TR0=1;					// Timer 0 starten
+			while (!TF0);
+			//TF0=0;
+			TR0=0;
 		}
-		editmode=1;
-		WRITE_DELAY_RECORD(9,1,0,timer+EDITTIMEOUT)
-	}
-	
-	if (solltemplpc>solltemplcd) {	// Sollwert am LCD erhöhen
-		for (n=0;n<=(solltemplpc-solltemplcd);n++) {
-			UP=0;
-			for (m=0;m<10;m++) {
-				TR0=0;					// Timer 0 anhalten
-				TH0=0;					// Timer 0 setzen
-				TL0=0;
-				TF0=0;					// Überlauf-Flag zurücksetzen
-				TR0=1;					// Timer 0 starten
-				while (!TF0);
-				TF0=0;
-				TR0=0;
-			}
-			UP=1;
-			for (m=0;m<10;m++) {
-				TR0=0;					// Timer 0 anhalten
-				TH0=0;					// Timer 0 setzen
-				TL0=0;
-				TF0=0;					// Überlauf-Flag zurücksetzen
-				TR0=1;					// Timer 0 starten
-				while (!TF0);
-				TF0=0;
-				TR0=0;
-			}
-			// feed watchdog
-			EA=0;
-			WFEED1=0xA5;
-			WFEED2=0x5A;
-			EA=1;
-
+		if (solltemplpc < solltemplcd) DOWN = 1; 	// Sollwert am LCD reduzieren
+		if (solltemplpc > solltemplcd) UP = 1; 		// Sollwert am LCD erhöhen
+		for (m = 0; m < 14; m++)
+		{
+			TR0=0;					// Timer 0 anhalten
+			TH0=0;					// Timer 0 setzen
+			TL0=0;
+			TF0=0;					// Überlauf-Flag zurücksetzen
+			TR0=1;					// Timer 0 starten
+			while (!TF0);
+			//TF0=0;
+			TR0=0;
 		}
-		editmode=1;
-		WRITE_DELAY_RECORD(9,1,0,timer+EDITTIMEOUT)
-
+		// feed watchdog
+		EA=0;
+		WFEED1=0xA5;
+		WFEED2=0x5A;
+		EA=1;
 	}
-	solltemplcd=solltemplpc;
-	KBCON=0;
-	EKBI=1;
+
+	// War bisher reduntant da so oder so im editmode, weil in main() bereits eine
+	// Differenz festgestellt wurde, also müssen auch Tasten simuliert werden!
+	editmode = 1;
+	WRITE_DELAY_RECORD(9, 1, 0, timer + EDITTIMEOUT)
+
+	WRITE_DELAY_RECORD(8, 1, 0, timer + 4);
+
+	solltemplcd = solltemplpc;
+	KBCON = 0;
+	EKBI = 1;
 }
 
 
@@ -592,20 +579,21 @@ void key (void) __interrupt (7)
 	unsigned char n;
 	__bit upkey, downkey;
 
-	EKBI=0;				// keyboard Interrupt sperren
+	EKBI = 0; // keyboard Interrupt sperren
 
-
-	upkey=UP;
-	downkey=DOWN;
-	PBCOM=1;			// Taster inaktiv
+	upkey = UP;
+	downkey = DOWN;
+	PBCOM = 1; // Taster inaktiv
 	
-	if (!upkey) UP=0;
-	if (!downkey) DOWN=0;
+	if(!upkey) UP = 0;
+	if(!downkey) DOWN = 0;
 
 	WD_FEED;
 
-	if(!upkey || !downkey) {
-		for (n=0;n<200;n++) {
+	if(!upkey || !downkey)
+	{
+		for(n = 0; n < 200; n++)
+		{
 			TR0=0;					// Timer 0 anhalten
 			TH0=0xF1;				// Timer 0 setzen (1ms)
 			TL0=0x99;
@@ -617,25 +605,28 @@ void key (void) __interrupt (7)
 		}
 	}
 
-	UP=1;
-	DOWN=1;
+	UP = 1;
+	DOWN = 1;
 
-
-	if (editmode) {		// erster Tastendruck bewirkt nichts, geht nur in Editier-Modus
-		if (!upkey && solltemplcd<70) solltemplcd++;	// + Taste gedrückt
-		if (!downkey && solltemplcd>20) solltemplcd--;	// - Taste gedrückt
+	// Wenn im Editiermodus
+	if (editmode == g_uch_ERT_Editmode)
+	{
+		if (!upkey && solltemplcd < 70) solltemplcd++;	// + Taste gedrückt
+		if (!downkey && solltemplcd > 20) solltemplcd--;	// - Taste gedrückt
+		solltemplpc = solltemplcd;
 	}
-	solltemplpc=solltemplcd;
-	if(!upkey || !downkey) {
-		editmode=1;
-		WRITE_DELAY_RECORD(9,1,0,timer+EDITTIMEOUT);
+	// Erster oder Zweiter Tastendruck bewirkt nichts, geht nur in Editier-Modus
+	if(!upkey || !downkey)
+	{
+		if (editmode != g_uch_ERT_Editmode) editmode++;
+		WRITE_DELAY_RECORD(9, 1, 0, timer + EDITTIMEOUT);
 	}
 
-	WRITE_DELAY_RECORD(8,1,0,timer+4);
+	WRITE_DELAY_RECORD(8, 1, 0, timer + 4);
 
-	interrupted=1;			// Flag setzen, dass unterbrochen wurde
-	KBCON=0;				// Interrupt-Flag löschen
-	EKBI=1;					// Keyboard Interrupt wieder frei geben
+	interrupted = 1;	// Flag setzen, dass unterbrochen wurde
+	KBCON = 0;			// Interrupt-Flag löschen
+	EKBI = 1;			// Keyboard Interrupt wieder frei geben
 }
 
 
@@ -644,8 +635,6 @@ void restart_app(void)		// Alle Applikations-Parameter zurücksetzen
 	
 	unsigned char objno, bitmask, ctrl, n, m;
   
-
-
 						// P0.3 push-pull for charging the capacitor
 	P0M1= 0x24;			// others bidirectional,
 	P0M2= 0x08;			// P0_5 & P0_2 high impedance for adc inputs
@@ -676,8 +665,8 @@ void restart_app(void)		// Alle Applikations-Parameter zurücksetzen
 	BL=0;
 
 
-	
-	
+	g_uch_ERT_Version = ERT_VERSION(eeprom[ERTSPEC]); // ermittle ERT Version
+	g_uch_ERT_Editmode = ERT_EDITMODE(eeprom[ERTSPEC]); // ermittle Editmode
 	editmode=0;
 	
 

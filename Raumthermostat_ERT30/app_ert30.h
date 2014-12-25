@@ -1,9 +1,27 @@
+#ifndef FB_APP_ERT_H
+#define FB_APP_ERT_H
 
-#ifndef FB_APP_ERT
-#define FB_APP_ERT
+#define ERT30_230V	0 // 230 V Version des ERT30
+#define ERT30_24V	1 // 24 V Version des ERT30
 
-//#define V24		// 24V Version, auskommentieren für 230V Version
+#define EDITMIN		1		// Feld in Array dactemp[] hier 9°C
+#define EDITMAX		63		// Feld in Array dactemp[] hier 40°C
 
+unsigned char g_uch_ERT_Editmode;	// legt fest wie oft eine Taste gedrückt werden muss um in den Editiermodus zu gelangen
+									// Alten Versionen = 1, neue Versionen ab ca. 2008 = 2
+									// Ersetzt früheres define EDITMODE
+unsigned char g_uch_ERT_Version;	// legt fest welches ERT Model verwendet wird bspw. ERT30 -> 230V
+									// oder ERT30 -> 24 V
+									// Ersetz früheres define V24
+
+// Bitmasken
+#define BITMASK_ERT_VERSION		0x03	// 0000 0011
+#define BITMASK_ERT_EDITMODE	0x0C	// 0000 1100
+// Hilfsfunktionen für Bitmasken
+#define ERT_VERSION(x) (x & BITMASK_ERT_VERSION)
+#define ERT_EDITMODE(x) ((x & BITMASK_ERT_EDITMODE) >> 2)
+
+#define ERTSPEC				0xC8	// ERT spezifische Angaben wie bspw. Editmode
 #define	TEMPCORR			0xCA	// Abgleichwert für Temperaturanzeige (-127 bis 128)
 #define FUNKTION			0xCB	// schalten oder wert senden
 
@@ -91,7 +109,7 @@ __xdata extern unsigned int lux;
 __xdata extern unsigned char overrun, dimmwert, underrun, sequence, lockatt, resend;
 extern volatile __xdata unsigned char solltemplcd, solltemplpc;
 extern __bit lastrly;
-extern volatile __bit editmode;
+extern volatile unsigned char editmode;
 
 
 extern struct delayrecord {
@@ -111,11 +129,14 @@ extern struct delayrecord delrec[10];
 void restart_app(void);					// Alle Applikations-Parameter zurücksetzen
 void schwelle(unsigned char objno);
 void delay_timer(void);					// zählt alle 130ms die Variable Timer hoch und prüft Queue
+void write_value_req(void);
+void read_value_req(void);
 unsigned long read_obj_value(unsigned char objno);
 void write_obj_value(unsigned char objno,int objvalue);
 int eis5_to_int100(int eis5);
 char eis5_to_char2(int eis5);
 unsigned int int100_to_eis5(int int100);
 void sync(void);
-void key(void) __interrupt(7);
-#endif
+void key(void) __interrupt 7;
+
+#endif // FB_APP_ERT_H
