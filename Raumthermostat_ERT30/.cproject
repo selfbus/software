@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?fileVersion 4.0.0?>
-
-<cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
+<?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
 	<storageModule moduleId="org.eclipse.cdt.core.settings">
 		<cconfiguration id="cdt.managedbuild.config.sdcc.exe.release.93422360">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.sdcc.exe.release.93422360" moduleId="org.eclipse.cdt.core.settings" name="Release">
@@ -23,6 +21,7 @@
 							<tool command="sdcc --stack-auto -c" errorParsers="" id="cdt.managedbuild.tool.sdcc.c.compiler.exe.release.146817974" name="SDCC Compiler" superClass="cdt.managedbuild.tool.sdcc.c.compiler.exe.release">
 								<option id="sdcc.c.compiler.option.include.paths.311082523" name="Include paths (-I)" superClass="sdcc.c.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;C:\Programme\SDCC\include\mcs51&quot;"/>
+									<listOptionValue builtIn="false" value="/usr/share/sdcc/include/mcs51"/>
 								</option>
 								<option id="sdcc.c.compiler.option.preprocessor.def.symbols.267138851" name="Defined symbols (-D)" superClass="sdcc.c.compiler.option.preprocessor.def.symbols"/>
 								<option id="sdcc.c.compiler.category.other.iramsize.1744600722" name="Check internal ram usage (--iram-size)" superClass="sdcc.c.compiler.category.other.iramsize" value="256" valueType="string"/>

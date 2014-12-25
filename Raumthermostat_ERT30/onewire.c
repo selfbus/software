@@ -6,7 +6,7 @@
 #include "onewire.h"
 
 #ifdef LPC936
-#include <P89LPC935_6.h>
+#include <p89lpc935_6.h>
 #else
 #include <P89LPC922.h>
 #endif

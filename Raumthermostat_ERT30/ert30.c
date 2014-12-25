@@ -53,7 +53,7 @@
 
 #include "hardware.h"
 
-#include <P89LPC935_6.h>
+#include <p89lpc935_6.h>
 #include "lib_lpc936/fb_lpc936.h"
 
 #include "app_ert30.h"
