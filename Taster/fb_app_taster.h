@@ -28,9 +28,9 @@
 //#define LPC936        // LPC936 anstatt LPC922
 
 #ifdef LPC936
-	#include <Releases/fb_lpc936_1.53.h>
+	#include <Releases/fb_lpc936_1.55.h>
 #else
-    #include <Releases/fb_lpc922_1.53.h>
+    #include <Releases/fb_lpc922_1.55.h>
 #endif
 
 
