@@ -9,7 +9,7 @@
 #include "rm_com.h"
 #include "rm_const.h"
 
-#include <fb_lpc922_1.53.h>
+#include <fb_lpc922.h>
 
 
 // Maximale Anzahl Zeichen einer Nachricht vom Rauchmelder, exklusive STX und ETX

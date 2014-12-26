@@ -6,10 +6,13 @@
  *  published by the Free Software Foundation.
  */
 
-#include <fb_lpc922_1.53.h>
+#include <fb_lpc922.h>
 
 #include "rm_app.h"
 #include "rm_com.h"
+
+// Default EEPROM values
+static __code unsigned char __at (EEPROM_ADDR + 0x17) start_pa[2]={0xFF,0xFF};      // Default PA is 15.15.255
 
 
 void main(void)
