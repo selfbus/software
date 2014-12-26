@@ -41,6 +41,7 @@ const unsigned char bitmask_1[8] ={0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80};
 static __code unsigned char __at 0x1D03 manufacturer[2]={0,4};	// Herstellercode 0x0004 = Jung
 static __code unsigned char __at 0x1D0C port_A_direction={0};	// PORT A Direction Bit Setting
 static __code unsigned char __at 0x1D0D run_state={255};		// Run-Status (00=stop FF=run)
+__code unsigned int __at (EEPROM_ADDR + 0x17) start_pa={0xFFFF};      // Default PA is 15.15.255
 
 
 void main(void)

@@ -20,9 +20,9 @@
 //#define debugmode
 #include  "../com/debug.h"
 #ifdef LPC936
-	#include <fb_lpc936_1.53.h>
+	#include <fb_lpc936_1.55.h>
 #else
-#include <fb_lpc922_1.53.h>
+#include <fb_lpc922_1.55.h>
 #endif
 
 #define USERRAMADDRH  	0x1C	// UserRam start
@@ -34,8 +34,8 @@
 #define TIMERANZ		0x09	// timeranzahl (17)
 #define PROTTIMER		TIMERANZ-1// PROTTIMER ist stets der letzte timer(0-7user,8prot,Gesmatzahl=9)
 
-#define VERSION 10
-#define TYPE    0x01
+#define VERSION 11
+#define TYPE    0x02
 
 #if TYPE == 1
 # define wertgeber
