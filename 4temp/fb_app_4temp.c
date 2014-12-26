@@ -28,9 +28,9 @@ int __idata __at (0xFE-0x10) lasttemp[4];
 int __idata __at (0xFE-0x18) lastsendtemp[4];
 unsigned char grenzwerte;	// Grenzwertobjekte
 // DEBUG ========================
-unsigned char grenzwert_eingang=0;
-int schwelle1, schwelle2;
-unsigned char reaktion, objno;
+//unsigned char grenzwert_eingang=0;
+//int schwelle1, schwelle2;
+//unsigned char reaktion, objno;
 
 unsigned int mess_diff;
 int mess_change;
@@ -159,11 +159,11 @@ unsigned int sendewert(unsigned char objno)
 */
 void grenzwert (unsigned char eingang)
 {
-	//int schwelle1, schwelle2;
-	//unsigned char reaktion, objno;
-	//unsigned char grenzwert_eingang=0;
+	int schwelle1, schwelle2;
+	unsigned char reaktion, objno;
+	unsigned char grenzwert_eingang=0;
 	__bit gw_changed = 0;
-	grenzwert_eingang = 0;
+	//grenzwert_eingang = 0;
 
 
 	eingang &= 0x03;	    // Nur bis 3 erlaubt

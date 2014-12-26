@@ -22,6 +22,7 @@
 
 #include "fb_app_4temp.h"
 #include "4temp_onewire.h"
+#include "watchdog.h"
 
 #ifdef DEBUG_H_
 	// Setup the debug variables
@@ -35,9 +36,10 @@ extern unsigned char family_code[4];
 // immer neu geschrieben werden muss.
 // Geräteparameter setzen, diese können von der ETS übschrieben werden wenn Schreibschutz nicht aktiv
 static __code unsigned char __at (EEPROM_ADDR + 0x03) manufacturer[2]={0x00,0x08};	// Herstellercode 0x0008 = GIRA
-static __code unsigned char __at (EEPROM_ADDR + 0x05) device_type[2]={0x04, 0x38};	// 1080 Selfbus 4temp
+static __code unsigned char __at (EEPROM_ADDR + 0x05) device_type[2]={0xB0, 0x03};	// 45059 Analog-Sensor 4fach
 static __code unsigned char __at (EEPROM_ADDR + 0x0C) port_A_direction={0};			// PORT A Direction Bit Setting
 static __code unsigned char __at (EEPROM_ADDR + 0x0D) run_state={255};				// Run-Status (00=stop FF=run)
+static __code unsigned char __at (EEPROM_ADDR + 0x17) start_pa[2]={0xFF,0xFF};      // Default PA is 15.15.255
 #endif
 
 
@@ -69,6 +71,8 @@ void main(void)
 		while (!TF0)
 			;
 	}
+	WATCHDOG_INIT
+	WATCHDOG_START
 	restart_app();
 // Needs to be after restart_app
 #ifdef DEBUG_H_
@@ -81,6 +85,8 @@ void main(void)
 	// Hauptschleife
 	// ***************************************************************************
 	do  {
+	    WATCHDOG_FEED
+
 #ifdef DEBUG_H_
 		// Here happens the serial communication with the PC
 		DEBUG_POINT;
@@ -108,6 +114,10 @@ void main(void)
 				}
 				else
 				{
+				    // Buswiederkehr bearbeiten wenn sensor nicht vorhanden
+				    if (sende_sofort_bus_return)
+                       bus_return();
+
 				    onewire_error |= bitmask_1[kanal<<1];    // not connected
 				    kanal++;                    // No present sensor, next channel
 				}
@@ -138,7 +148,7 @@ void main(void)
 
 					// Buswiederkehr bearbeiten
 					if (sende_sofort_bus_return)
-						bus_return();
+					    bus_return();
 				}
 
                 sequence=1;

@@ -20,7 +20,7 @@
 #include <fb_lpc922.h>
 
 // Include to enable debug options within the project
-#include "debug.h"
+//#include "debug.h"
 
 
 // Damit die Eclipse Code Analyse nicht so viele Warnungen anzeigt:
