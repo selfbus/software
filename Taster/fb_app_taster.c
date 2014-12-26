@@ -210,7 +210,7 @@ void button_changed( unsigned char buttonno, __bit buttonval)
 			timerstate[buttonno+4]=((eeprom[0xD3+(buttonno*4)]&0x10)>>4)+0x30;
 		}
 		else {	// Taster losgelassen
-			if (timerstate[buttonno+4] == 0x40) {//innerhalb T2
+			if (timerstate[buttonno+4] >= 0x40) {//innerhalb T2
 				write_obj_value(buttonno,((eeprom[0xD3+(buttonno*4)]&0x10)>>4));
 				send_obj_value(buttonno);
 			}

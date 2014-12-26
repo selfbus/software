@@ -17,10 +17,11 @@
 #include "fb_app_4temp.h"
 #include "4temp_onewire.h"
 
-
 unsigned char timerbase[TIMERANZ];	// Speicherplatz für die Zeitbasis
 unsigned char timercnt[TIMERANZ];   // speicherplatz für den timercounter und 1 status bit
 unsigned int timer;		            // Timer für Schaltverzögerungen, wird alle 130ms hochgezählt
+// DS TEST
+unsigned char family_code[4];
 
 int __idata __at (0xFE-0x08) temp[4];	// Temperaturwerte speichern
 int __idata __at (0xFE-0x10) lasttemp[4];
@@ -66,11 +67,12 @@ void write_value_req(unsigned char objno)
 */
 void read_value_req(unsigned char objno)    // Empfangenes read_value_request Telegramm verarbeiten
 {
-	unsigned char objflags;
+//	unsigned char objflags;
 
-	objflags=read_objflags(objno);		    // Objekt Flags lesen
+	//objflags=read_objflags(objno);		    // Objekt Flags lesen
 	// Objekt lesen, nur wenn read enable gesetzt (Bit3) und Kommunikation zulaessig (Bit2)
-	if((objflags&0x0C)==0x0C) send_obj_value(objno+64);
+	//if((objflags&0x0C)==0x0C)
+	    send_obj_value(objno+64);
 }
 
 
@@ -91,6 +93,18 @@ unsigned long read_obj_value(unsigned char objno) 	// gibt den Wert eines Objekt
 
 	return(objvalue);
 }
+
+
+// Messwert senden wenn kein Fehler erkannt wurde
+__bit check_and_send(unsigned char object)
+{
+    // Object 0,2,4,6 entspricht Messwert 0-3
+    if( family_code[object>>1] && !((onewire_error>>object) & 0x03))
+        return send_obj_value(object);
+    else
+        return 0;
+}
+
 
 
 /**
@@ -125,7 +139,7 @@ unsigned int sendewert(unsigned char objno)
 	// Sendeformat EIS 5
 	else
 	{
-		eis5temp=(temp[objno_help]>>3)&0x07FF;			// durch 8 teilen, da sp�ter Exponent 3 dazukommt
+		eis5temp=(temp[objno_help]>>3)&0x07FF;			// durch 8 teilen, da später Exponent 3 dazukommt
 		eis5temp=eis5temp+(0x18 << 8);
 		if (temp[objno_help]<0) eis5temp+=0x8000;		// Vorzeichen
 
@@ -219,7 +233,7 @@ void grenzwert (unsigned char eingang)
 /**
 * Senden bei Messwertdifferenz
 *	überprüft die Messwertdifferenz
-*	schreibt die Verzögerungszeit ins delrec
+*	senden über delay_timer
 *
 * \param  eingang
 *
@@ -227,9 +241,6 @@ void grenzwert (unsigned char eingang)
 */
 void messwert (unsigned char eingang)
 {
-	//unsigned int mess_diff;
-	//int mess_change;
-
 	eingang &= 0x03;	// Nur bis 3 erlaubt
 
 	// Senden bei Messwertdifferenz
@@ -246,8 +257,6 @@ void messwert (unsigned char eingang)
 		{
 			mess_change=temp[eingang]-lastsendtemp[eingang];
 		}
-
-//		if (mess_change<0) mess_change=0-mess_change;
 
 		if(mess_change>mess_diff)
 		{
@@ -299,7 +308,7 @@ void delay_timer(void)
 	// ab Hier die aktion...
 	for(tmr_obj=0;tmr_obj<=8;tmr_obj++)
 	{
-		verz_start = eeprom[0x79]&0x55;
+		//verz_start = eeprom[0x79]&0x55;
 
 		if(timercnt[tmr_obj]==0x80)		// 0x00 = Timer abgelaufen und aktiv
 		{
@@ -311,7 +320,7 @@ void delay_timer(void)
 				//zyk_faktor=eeprom[0x61+objno]&0x7F;
 
 				// Messwert senden
-				send_obj_value(tmr_obj<<1);
+				check_and_send(tmr_obj<<1);
 
 				// Grenzwert senden wenn aktiv
 				if ( (eeprom[0x75+tmr_obj]) & 0x80)
@@ -324,8 +333,7 @@ void delay_timer(void)
 			{
 				objno_help=tmr_obj-4;
 
-				send_obj_value(objno_help<<1);
-				//lastsendtemp[objno_help]=temp[objno_help];
+				check_and_send(objno_help<<1);
 
 				// Zeit holen und deaktivieren, Bit 7 = 0
 				//zykval_help=(eeprom[0x69+(eingang>>1)])>>(4*(!(eingang&0x01)))&0x0F;
@@ -349,13 +357,18 @@ void delay_timer(void)
 				{
 					if (verz_start & 0x40)	    // Start mit Eingang 4
 					{
-						send_obj_value(n);
+						check_and_send(n);
 					}
 					verz_start = verz_start<<2;	// vorheringer Eingang
 				}
-
 			}
 		}
+	}
+	// Timer 9, Sensor conversation wait
+	if (timercnt[9] == 0x80)
+	{
+	    timercnt[9] = 0;        // Prevent next run before restart
+	    sequence=4;             // Konvertierung abgeschlossen
 	}
 }
 
@@ -377,7 +390,7 @@ void bus_return(void)
 	if (sende_sofort_bus_return&(0x80>>kanal_help))
 	{
 		// Messwerte
-		send_obj_value(kanal_help);
+		check_and_send(kanal_help);
 		sende_sofort_bus_return &= 0xFF-(0x80>>kanal_help);	// Löschen wenn gesendet
 	}
 
@@ -400,11 +413,6 @@ void bus_return(void)
 void restart_app()		// Alle Applikations-Parameter zurücksetzen
 {
 	unsigned char n;
-
-	// Done in delay_timer now
-	//RTCCON=0x60;		// RTC anhalten und Flag löschen
-	//RTCH=0x0E;			// reload Real Time Clock, 65ms
-	//RTCL=0xA0;
 
 	// Port Konfigurieren
 	// Port 0
@@ -445,13 +453,12 @@ void restart_app()		// Alle Applikations-Parameter zurücksetzen
 		lastsendtemp[n]=0;
 
 		// Sendeverzögerung bei Messwertdifferenz
-		//zykval_help=(eeprom[0x69+(eingang>>1)])>>(4*(!(eingang&0x01)))&0x0F;
 		// Zeit holen und deaktivieren, Bit 7 = 0
 		if(n & 0x01)	// 0,2
 		{
 			timercnt[n+4] = (eeprom[0x69+(n>>1)] & 0x0F);
 		}
-		else						// 1,3
+		else			// 1,3
 		{
 			timercnt[n+4] = (eeprom[0x69+(n>>1)] >>4);
 		}
@@ -462,12 +469,29 @@ void restart_app()		// Alle Applikations-Parameter zurücksetzen
 			timerbase[n+4] = 3;	// 8,4 Sekunde
 		else
 			timerbase[n+4] = 0;	// 130ms, kleinste Zeit
+
+		// Find DS Type by Family Code of each sensor
+		// 0x10 = DS1820/DS18S20
+		// 0x28 = DS18B20
+		// 0x00 = No Sensor found
+		kanal = n;
+		if (ow_init())
+		{
+		    ow_write(0x33);         // Read-ROM command
+		    if(!ow_read(8))         // Read 64bit Lasered ROM-Code
+		        family_code[n] = onewire_receive[0];
+		}
+		else
+		    family_code[n] = 0x00;  // No Sensor
 	}
 
-	sequence=1;
-	kanal=0;
+    timerbase[9] = 0;   // Timerbase 10, ensure to be 0
+	sequence=1;         // Start sequence
+	kanal=0;            // channel 0
 	timer=0;			// Timer-Variable, wird alle 130ms inkrementiert
-/*
+
+#ifdef DEBUG_H_
+	// Werte hier schreiben anstatt per static __code wenn Debug aktiv
 	EA=0;				// Interrupts sperren, damit flashen nicht unterbrochen wird
 	START_WRITECYCLE
 	WRITE_BYTE(0x01,0x03,0x00)	    // Herstellercode 0x0008 = GIRA
@@ -480,7 +504,7 @@ void restart_app()		// Alle Applikations-Parameter zurücksetzen
 	//WRITE_BYTE(0x01,0x12,0x3A)	// COMMSTAB Pointer
 	STOP_WRITECYCLE
 	EA=1;				// Interrupts freigeben
-*/
+#endif
 
 	RTCCON=0x81; 		//RTC starten und flag setzen -> delay timer setzt RTC
 }

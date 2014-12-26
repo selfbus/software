@@ -31,6 +31,7 @@
 * 				trimbar über RS
 * 		1.05	neue LIB
 *		1.07    Anpassung für LPC936, Lib 1.53, Line-Scan Bugfix
+* 		1.08	BUGfix LIB 1.55
 */
 
 //#define debugmode
@@ -60,7 +61,7 @@
 
 #define VERSION		107
 
-unsigned char __at 0x00 RAM[00];
+unsigned char __idata __at 0x00 RAM[00];
 
 unsigned char object_value[12];	// wird hier deklariert um den Speicher besser auszunutzen!!!
 
