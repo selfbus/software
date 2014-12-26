@@ -35,8 +35,8 @@
 */
 
 //#define debugmode
-//#define NOPROGLED //typ 0,2 Die Progled blinkt im Progmodus da sie auch Betriebs LED ist
-//#define NOPROGBUTTON	//typ 1,3 es ist kein prog Taster vorhanden sondern progmode wird durch druecken von taste 1&3 oder 2&4 aktiviert
+#define NOPROGLED //typ 0,2 Die Progled blinkt im Progmodus da sie auch Betriebs LED ist
+#define NOPROGBUTTON	//typ 1,3 es ist kein prog Taster vorhanden sondern progmode wird durch druecken von taste 1&3 oder 2&4 aktiviert
 
 
 #include "fb_app_taster.h"
@@ -62,7 +62,7 @@
 #define VERSION		107
 
 unsigned char __idata __at 0x00 RAM[00];
-
+__code unsigned int __at (EEPROM_ADDR + 0x17) start_pa={0xFFFF};      // Default PA is 15.15.255
 unsigned char object_value[12];	// wird hier deklariert um den Speicher besser auszunutzen!!!
 
 
