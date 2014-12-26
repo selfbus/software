@@ -946,6 +946,6 @@ void restart_app(void) 		// Alle Applikations-Parameter zurücksetzen
 	STOP_WRITECYCLE
 	EA=1;						// Interrupts freigeben
 	IT0=0;// ??
-	RTCCON=0x81;
+	RTCCON=0x81;				// RTC starten und OV flag setzen
 	//EX0=1;
 }

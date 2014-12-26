@@ -72,6 +72,8 @@
 *   3.37	Handbedienung mit zerodetection integrieren. bug RTC 8ms- 65ms gefixt
 * 	3.37fb	Betrifft spi version(feedback). Pulse verlängert, Rücklesen eingebaut(kein zerodetect mehr möglich, Brücke nötig!
 * 			auf PCB Bot von INT0 an C5 und Pin 9 shiftreg)
+* 	3.38	connected timout hinzugefügt
+* 	3.39	LIB 1.55 initiale PA jetzt 15.15.255
  TODO 
  
 * @todo:
@@ -81,7 +83,7 @@
 //#include <P89LPC922.h>
 //#include "fb_lpc922_1.53.h"
 #include "fb_app_out.h"
-//#include  "../com/debug.h"
+#include  "../com/debug.h"
 #include "../com/fb_rs232.h"
 #include"../com/watchdog.h"
 
@@ -120,9 +122,10 @@
 		#endif
 	#endif
 #endif
-#define VERSION 37
+#define VERSION 39
 
 unsigned char __at 0x00 RAM[00]; 
+__code unsigned int __at (EEPROM_ADDR + 0x17) start_pa={0xFFFF};      // Default PA is 15.15.255
 
 
 void main(void)
@@ -374,7 +377,7 @@ void main(void)
 		}//end if(RI...
 		
 #else //ifndef debugmode
-//DEBUGPOINT;
+DEBUGPOINT;
 #endif
 #endif // ifndef BUS_DOWN
 		TASTER=1;				// Pin als Eingang schalten um Taster abzufragen
