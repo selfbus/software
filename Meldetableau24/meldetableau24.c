@@ -21,7 +21,7 @@
 //#include <P89LPC922.h>
 //#include "../lib_lpc922/Releases/fb_lpc922_1.4x.h"
 #include "fb_app_meldetableau24.h"
-//#include "../com/debug.h"
+#include "../com/debug.h"
 //#include "../com/debug.c"
 #include "../com/fb_rs232.h"
 #include"../com/watchdog.h"
@@ -50,11 +50,15 @@ void main(void)
 	TASTER=0;
 	cal=trimsave;
 	TRIM = TRIM+trimsave;
-	RS_INIT_600
 
+#ifdef debugmode
+	RS_INIT_115200
+#else
+	RS_INIT_600
+#endif
+	
 	SBUF=0x55;
 
-	TASTER=0;
 	for (n=0;n<50;n++) {		// Warten bis Bus stabil
 		TR0=0;					// Timer 0 anhalten
 		TH0=eeprom[ADDRTAB+1];	// Timer 0 setzen mit phys. Adr. damit Geräte unterschiedlich beginnen zu senden
@@ -70,7 +74,9 @@ void main(void)
 	bus_return();							// Aktionen bei Busspannungswiederkehr
 
 	do  {
-		//DEBUGPOINT
+#ifdef debugmode		
+		DEBUGPOINT
+#endif
 		WATCHDOG_FEED	
 		
 		if(APPLICATION_RUN) {	// nur wenn run-mode gesetzt
@@ -78,6 +84,31 @@ void main(void)
 			delay_timer();
 			LED_schalten();
 		}
+
+			
+		cmd;	
+
+
+		//   ###  QUIT_button ###
+		if(!QUIT){ 		// Quitt-Taster gedrückt
+			if(quit_button_level<100)	quit_button_level++;
+			else{
+				if(!quit_button_pressed)
+				{
+						if(eeprom[0xEE]&0x08) reset_obj=1;
+						if(eeprom[0xEE]&0x80)erease_alarm(1);
+						if((eeprom[0xEE]&0x09)==9)send_obj_value(26);
+				}
+				quit_button_pressed=1;
+			}
+		}
+		else {
+			if(quit_button_level>0)quit_button_level--;
+			else quit_button_pressed=0;
+		}
+
+				
+		}// end if(APLICATION_RUN)
 		else if (RTCCON>=0x80 && connected)	// Realtime clock ueberlauf
 				{			// wenn connected den timeout für Unicast connect behandeln
 				RTCCON=0x61;// RTC flag löschen
@@ -86,12 +117,9 @@ void main(void)
 					connected_timeout ++;
 					}
 					else send_obj_value(T_DISCONNECT);// wenn timeout dann disconnect, flag und var wird in build_tel() gelöscht
-				}
+		}
 			
-
-			
-		cmd;	
-		
+#ifndef debugmode		
 		if (RI){
 			RI=0;
 			cmd=SBUF;
@@ -131,29 +159,7 @@ void main(void)
 				SBUF=TYPE;
 			}
 		}//end if(RI...
-		
-
-
-		//   ###  QUIT_button ###
-		if(!QUIT){ 		// Quitt-Taster gedrückt
-			if(quit_button_level<100)	quit_button_level++;
-			else{
-				if(!quit_button_pressed)
-				{
-						if(eeprom[0xEE]&0x08) reset_obj=1;
-						if(eeprom[0xEE]&0x80)erease_alarm(1);
-						if((eeprom[0xEE]&0x09)==9)send_obj_value(26);
-				}
-				quit_button_pressed=1;
-			}
-		}
-		else {
-			if(quit_button_level>0)quit_button_level--;
-			else quit_button_pressed=0;
-		}
-
-				
-		}// end if(APLICATION_RUN)
+#endif		
 		
 		
 		n= tx_buffer[(tx_nextsend-1)&0x07];//n ist die letzte objno

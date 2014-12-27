@@ -16,6 +16,7 @@
 #define FB_APP_LC
 
 //#define debugmode
+
 #ifdef LPC936
 	#include <fb_lpc936_1.55.h>
 #else

@@ -430,7 +430,7 @@ void restart_app(void)		// Alle Applikations-Parameter zurücksetzen
 	EA=1;						// Interrupts freigeben
 	blink=0;					// init  pattern der Blinkanzeige
 	
-	RTCCON=0x61;		// RTC starten und ov flag setzen
+	RTCCON=0x81;		// RTC starten und ov flag setzen
 
 	beep_state=0;
 	timercnt[0]=1;
