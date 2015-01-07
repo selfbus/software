@@ -39,13 +39,16 @@
 *				Soft-Reset eingebaut, dadurch wird auch am LPC ein Reset durchgeführt.
 *				Define für EDITMODE eingefügt. Es kann damit festgelegt werden, wie oft eine Taste gedrückt
 *				werden muss, bis man in den Editiermodus kommt.
-*		1.23	Für diese Version wird die ert30g.vd benötigt.
+*		1.23	Für diese Version wird ert30g.vd1 benötigt.
 *				Die ERT30 Version wird in der ETS eingestellt (230V oder 24V).
 *				Der Temperatursensor wird nun in der onewire Bibliothek automatisch erkannt,
 *				hierzu muss vor der Verwendung von read_temp() ow_read_rom() aufgerufen werden.
 *				Des Weiteren wird die Temperaturabfrage auf dem onewire mittels einer CRC8 Checksumme
 *				geprüft. Im Fehlerfall (Keine Geräte am onewire oder CRC Fehler erkannt)
 *				wird die Debug LED einmalig eingeschalten.
+*		1.24	Für diese Version wird ert30h.vd1 benötigt. ert30h.vd1 funktioniert mit ETS3/4.
+*				Herstellercode in 0x004C für Bosch und Devicetype in 1130 (0x046A) geändert.
+*
 *
 * Todo: Echter Hardware-Reset im Layout (EAGLE) einfügen
 * 		Frostschutz per ETS und am Geräte mit buttons aktivieren

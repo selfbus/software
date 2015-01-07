@@ -19,8 +19,8 @@
 #include "app_ert30.h"
 
 
-
-
+unsigned char g_uch_ERT_Editmode;
+unsigned char g_uch_ERT_Version;
 
 //const __code unsigned char __at 0x3600 SOLLMANU=40;
 
@@ -131,6 +131,9 @@ void schwelle(unsigned char objno)		// Luxschwelle prüfen und reagieren
 					if (temp < ((solltemplpc - (hysterese*2))*50)) under=1;
 				}
 				else {
+					// Prüfen warum kubi hier den Lux-Schwelwert verwendet, wenn hier doch
+					// die Temperaturen verarbeitet werden sollen.
+					// TODO LUXSCHWELLWERT in TEMPERATURSCHWELWERTx ändern?!
 					schwellwert=eeprom[LUXSCHWELLWERT-offset];
 					hysterese = ctrl & 0x07;
 					if (schwellwert<51) {	//>51 : Temperaturschwelle inaktiv
@@ -561,7 +564,7 @@ void sync(void)
 		EA=1;
 	}
 
-	// War bisher reduntant da so oder so im editmode, weil in main() bereits eine
+	// War bisher redundant da so oder so im editmode, weil in main() bereits eine
 	// Differenz festgestellt wurde, also müssen auch Tasten simuliert werden!
 	editmode = 1;
 	WRITE_DELAY_RECORD(9, 1, 0, timer + EDITTIMEOUT)
@@ -611,7 +614,7 @@ void key (void) __interrupt (7)
 	// Wenn im Editiermodus
 	if (editmode == g_uch_ERT_Editmode)
 	{
-		if (!upkey && solltemplcd < 70) solltemplcd++;	// + Taste gedrückt
+		if (!upkey && solltemplcd < 70) solltemplcd++;		// + Taste gedrückt
 		if (!downkey && solltemplcd > 20) solltemplcd--;	// - Taste gedrückt
 		solltemplpc = solltemplcd;
 	}
@@ -786,10 +789,10 @@ void restart_app(void)		// Alle Applikations-Parameter zurücksetzen
 	WRITE_DELAY_RECORD(5,1,0,timer+70);
 
 	START_WRITECYCLE;			// Applikations-spezifische eeprom Eintraege schreiben
-	WRITE_EEPROM(0x03,0x00);	// Herstellercode: 0x0000 Freebus
-  	WRITE_EEPROM(0x04,0x00);
-  	WRITE_EEPROM(0x05,0x10);	// Gerätetyp: 0x1000
-  	WRITE_EEPROM(0x06,0x00);
+	WRITE_EEPROM(0x03,0x00);	// Herstellercode: 0x004C Bosch
+  	WRITE_EEPROM(0x04,0x4C);
+  	WRITE_EEPROM(0x05,0x04);	// Devicetype: 1130 (0x046A)
+  	WRITE_EEPROM(0x06,0x6A);
   	WRITE_EEPROM(0x07,0x01);	// Software-Versionsnummer
   	WRITE_EEPROM(0x0C,0x00);	// PORT A Direction Bit Setting
   	WRITE_EEPROM(0x0D,0xFF);	// Run-Status (00=stop FF=run)

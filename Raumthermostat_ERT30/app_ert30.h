@@ -7,12 +7,12 @@
 #define EDITMIN		1		// Feld in Array dactemp[] hier 9°C
 #define EDITMAX		63		// Feld in Array dactemp[] hier 40°C
 
-unsigned char g_uch_ERT_Editmode;	// legt fest wie oft eine Taste gedrückt werden muss um in den Editiermodus zu gelangen
-									// Alten Versionen = 1, neue Versionen ab ca. 2008 = 2
-									// Ersetzt früheres define EDITMODE
-unsigned char g_uch_ERT_Version;	// legt fest welches ERT Model verwendet wird bspw. ERT30 -> 230V
-									// oder ERT30 -> 24 V
-									// Ersetz früheres define V24
+extern unsigned char g_uch_ERT_Editmode;	// legt fest wie oft eine Taste gedrückt werden muss um in den Editiermodus zu gelangen
+											// Alten Versionen = 1, neue Versionen ab ca. 2008 = 2
+											// Ersetzt früheres define EDITMODE
+extern unsigned char g_uch_ERT_Version;		// legt fest welches ERT Model verwendet wird bspw. ERT30 -> 230V
+											// oder ERT30 -> 24 V
+											// Ersetz früheres define V24
 
 // Bitmasken
 #define BITMASK_ERT_VERSION		0x03	// 0000 0011
