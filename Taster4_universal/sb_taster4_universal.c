@@ -28,7 +28,7 @@
 *       1.02    Bugfix 1-Flächendimmer, Lichtszene
 *       1.03    Bugfix Helligkeitswert nur 1x speichern, Remove NOPROGBUTTON
 *       1.04    Timebase fuer Temperaturmessung nach Restart_App verschoben
-*       2.04    Neue Versionsnummer 2.x (die alte Jung FW ist 1.x)
+*       2.04    Bugfix BetriebLED invertiert. Neue Versionsnummer 2.x (die alte Jung FW ist 1.x)
 */
 
 #include "sb_app_taster4_universal.h"
@@ -269,7 +269,7 @@ void main(void)
 
 #ifdef NOPROGLED
 		if (status60 & 0x01) TASTER = blink;    // LED blinkt im Prog-Mode
-		else TASTER = (eeprom[0xE2] & 0x01);    // LED ist an oder aus gemaess Parameter fuer Betriebs-LED
+		else TASTER = !(eeprom[0xE2] & 0x01);   // LED ist an oder aus gemaess Parameter fuer Betriebs-LED
 #else
 		if (status60 & 0x01) TASTER = 0;        // LED leuchtet im Prog-Mode
 		else TASTER = 1;                        // LED aus
