@@ -45,6 +45,8 @@ void main(void)
     unsigned char n, tasterpegel=0;
     __bit tastergetoggelt=0;
 
+    unsigned char ee_local; // Zwischenspeicher um Flash zu sparen
+
     int th;
     // Port 0 all open drain
     P0M1 = 0xff;
@@ -102,18 +104,21 @@ void main(void)
         {
             if(RTCCON>=0x80) delay_timer();     // Realtime clock Ueberlauf
 
+            // Get into local variable to safe flash
+            ee_local = eeprom[SENSOR_TYPE+kanal];
+
             // Start temperature conversion for all connected DS sensors
             if (sequence==1)
             {
                 for(kanal=0;kanal<=3;kanal++)
                 {
-                    if(eeprom[SENSOR_TYPE+kanal] &0x01)     // DS temperature sensor
+                    if(ee_local &0x01)     // DS temperature sensor
                     {
                         interrupted=0;
                         if(family_code[kanal] && start_tempconversion())    // Start convert if sensor known
                         {
                             if(!interrupted)
-                               family_code[kanal] |= 0x80;  // Convert done
+                               family_code[kanal] |= 0x80;  // Convert done TODO mabe not needed
                         }
                         else    // No Sensor configured
                         {
@@ -135,32 +140,36 @@ void main(void)
             // Read DS Sensor
             else if(sequence==4)        // && !TR1 // can be used to sync
             {
-                // Temperatur einlesen + Übergabe Sensortyp
-                th=read_temp(family_code[kanal]);   // Read sensor with detected codes
-                // interrupted/crc error -60
-                // sensor not found -61
-                if(th>-5600)
+                if(ee_local &0x01)     // DS temperature sensor
                 {
-                    messwerte[kanal]=th;
+                    // Temperatur einlesen + Übergabe Sensortyp
+                    th=read_temp(family_code[kanal]);   // Read sensor with detected codes
+                    // interrupted/crc error -60
+                    // sensor not found -61
+                    if(th>-5600)
+                    {
+                        // Safe with offset
+                        messwerte[kanal*2] = th + (signed char) eeprom[TEMP_OFFSET+ 2*kanal];
 
-                    // Grenzwerte
-                    //grenzwert(kanal);
+                        // Grenzwerte
+                        //grenzwert(kanal);
 
-                    // Messwertdifferenz
-                    messwert(kanal);
+                        // Messwertdifferenz
+                        messwert(kanal);
 
-                    // Buswiederkehr bearbeiten
-                    //if (sende_sofort_bus_return)
-                      //  bus_return();
+                        // Buswiederkehr bearbeiten
+                        //if (sende_sofort_bus_return)
+                          //  bus_return();
+                    }
                 }
-
                 // Prolong waiting for DHT Sensor, if any
-                if(eeprom[SENSOR_TYPE+kanal] &0x02)
+                else if(ee_local &0x02)
                     timercnt[9] = 9;        // add approx. 1s
 
-                if (kanal<3)    // Next channel
-                    kanal++;
-                else            // Reached last channel
+                // Next channel
+                //if (kanal<3)
+                kanal++;
+                if (kanal >3) //else            // Reached last channel
                 {
                     timercnt[9] |= 0x80;   // start timer
                     kanal = 0;
@@ -170,24 +179,32 @@ void main(void)
             // Read DHT Sensor
             else if(sequence==6)
             {
-                if(eeprom[SENSOR_TYPE+kanal] &0x02) // DHT sensor starts answering directly
+                if(ee_local &0x02) // DHT sensor starts answering directly
                 {
-                    if(eeprom[SENSOR_TYPE+kanal] &0x20) // Generate reset pulse for DHT 1x
+                    if(ee_local &0x04) // Generate reset pulse for DHT 1x
                         dht1x_init(kanal);
-                    dht_ow_receive(kanal);  // Read DHT sensor
+                    family_code[kanal] = dht_ow_receive(kanal);  // Read DHT sensor
+                    dht_decode(ee_local &0x04);
+
+                    // Safe with offset
+                    messwerte[kanal*2] = dht_temp + (signed char) eeprom[TEMP_OFFSET+ 2*kanal];
+                    messwerte[(kanal+1)*2] = dht_humid + (signed char) eeprom[HUMID_OFFSET+ 2*kanal];
                 }
 
-                if (kanal<3)
-                    kanal++;
-                else
+               // if (kanal<3)
+                kanal++;
+                if (kanal >3) //else
                 {
                     sequence = 1;
                 }
             }
 
-            // Something went wrong
+            // Something went wrong TODO for DEBUG ONLY!!
             else if(sequence>6)
-                while(1);
+            {
+                while(1)   {       TASTER = 0; // ProgLed Ein; }
+                }
+            }
 
         } // end if(APPLICATION_RUN)
 

@@ -28,7 +28,7 @@
   //#define OWDATA  P1_1  // Define fixed Data-Pin for one one-wire DS Sensor
 #endif
 #ifdef DHT
-  #define DHT_PORT P1  // Define the Port for DHT Sensor
+  #define DHT_PORT P0  // Define the Port for DHT Sensor
 #endif
 
 /*************************************************************************
@@ -86,8 +86,8 @@ void owdelay(
     void dht1x_init(unsigned char hw_channel);
     __bit dht_decode(unsigned char sensor_type);
     unsigned char dht_ow_receive (unsigned char hw_channel);
-    extern int /*__idata __at (0xFE-0x28) */dht_temp;
-    extern int /*__idata __at (0xFE-0x2A) */dht_humid;
+    extern int dht_temp;
+    extern int dht_humid;
 # endif // #ifdef DHT
 
 #  ifdef SOFT_DELAY

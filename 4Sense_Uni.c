@@ -369,7 +369,7 @@ unsigned char dht_ow_receive(unsigned char hw_channel)
   {
     wait_count++;
     if(wait_count > 100) {      // Error: DHT Sensor LOW Timeout
-      onewire_receive[0] = onewire_receive[1] = onewire_receive[2] = onewire_receive[3] = 0; // Delete previous sample
+     // onewire_receive[0] = onewire_receive[1] = onewire_receive[2] = onewire_receive[3] = 0; // Delete previous sample
       return 1;
     }
   }
@@ -380,7 +380,7 @@ unsigned char dht_ow_receive(unsigned char hw_channel)
     wait_count++;
     if(wait_count > 100)       // Error: DHT HIGH Response Timeout
     {
-      onewire_receive[0] = onewire_receive[1] = onewire_receive[2] = onewire_receive[3] = 0; // Delete previous sample
+    //  onewire_receive[0] = onewire_receive[1] = onewire_receive[2] = onewire_receive[3] = 0; // Delete previous sample
       return 2;
     }
   }

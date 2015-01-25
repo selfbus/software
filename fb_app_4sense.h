@@ -30,7 +30,9 @@
 #endif
 
 // 4Sense VD
-#define SENSOR_TYPE     0xB7    // next 3
+#define SENSOR_TYPE     0xB7    // *n
+#define TEMP_OFFSET     0xBB    // *2n
+#define HUMID_OFFSET    0xBC    // *2n
 
 
 // Anzahl Timer

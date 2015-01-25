@@ -407,7 +407,7 @@ void restart_app()      // Alle Applikations-Parameter zurücksetzen
     SSTAT = 0;
 
     // Zeit für Sendeverzögerung bei Busspannungswiederkehr in Timer 8 laden
-    timerbase[8] = 4;   // 2 Sekunde als Basis
+    timerbase[0] = ( eeprom[0xB0] & 0x0F );
     timercnt[8] = ( (eeprom[0xA0]>>1) | 0x80);  // Zeit holen, Timer einschalten - Bit7
 
     // Verhalten bei Busspannungswiederkehr Messwerte
