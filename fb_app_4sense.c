@@ -6,7 +6,7 @@
  * /____/_____//____/_/   /_____/\____//____/
  *
  *  Copyright (c) 2010 Jan Wegner
- *  Copyright (c) 2014 Stefan Haller
+ *  Copyright (c) 2014-2015 Stefan Haller
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 2 as
@@ -14,23 +14,24 @@
  *
  */
 
-#include <fb_lpc922.h>
 #include "fb_app_4sense.h"
-#include "4sense_onewire.h"
+#include "4Sense_Uni.h"
 
 
 unsigned char timerbase[TIMERANZ];	// Speicherplatz für die Zeitbasis
 unsigned char timercnt[TIMERANZ];   // speicherplatz für den timercounter und 1 status bit
 unsigned int timer;		            // Timer für Schaltverzögerungen, wird alle 130ms hochgezählt
+// DS TEST
+unsigned char __idata __at (0xFE-0x2B) family_code[4];
 
-int __idata __at (0xFE-0x10) temp_humid[8];	// Temperatur und Luftfeuchte speichern
+int __idata __at (0xFE-0x10) messwerte[8];	// Temperatur und Luftfeuchte speichern
 int __idata __at (0xFE-0x18) lasttemp[4];
-int __idata __at (0xFE-0x20) lastsend[8];
+int __idata __at (0xFE-0x28) lastsend[8];
 unsigned int grenzwerte;	// Grenzwertobjekte
 // DEBUG ========================
-unsigned char grenzwert_eingang=0;
-int schwelle1, schwelle2;
-unsigned char reaktion, objno;
+//unsigned char grenzwert_eingang=0;
+//int schwelle1, schwelle2;
+//unsigned char reaktion, objno;
 
 unsigned int mess_diff;
 int mess_change;
@@ -43,56 +44,49 @@ unsigned char sequence;
 unsigned char sende_sofort_bus_return;
 
 
-/**
-* Empfangenes write_value_request Telegramm verarbeiten
-*	unbenutzt, Objekte können nicht geschrieben werden
-*
-* \param  void
-*
-* @return void
-*/
+// Empfangenes write_value_request Telegramm verarbeiten
+// unbenutzt, Objekte können nicht geschrieben werden
 void write_value_req(unsigned char objno)
 {
-	// nix zu schreiben
+    // nix zu schreiben
     objno;
 }
 
 
-/**
-* Empfangenes read_value_request Telegramm verarbeiten
-*
-* \param  Objekt das beantwortet werden soll
-*
-* @return void
-*/
+// Empfangenes read_value_request Telegramm verarbeiten
 void read_value_req(unsigned char objno)    // Empfangenes read_value_request Telegramm verarbeiten
 {
-//	unsigned char objflags;
-
-//	objflags=read_objflags(objno);		    // Objekt Flags lesen
-	// Objekt lesen, nur wenn read enable gesetzt (Bit3) und Kommunikation zulaessig (Bit2)
-	//if((objflags&0x0C)==0x0C)
-	    send_obj_value(objno+64);
+        send_obj_value(objno+64);
 }
 
 
 // Objektwert von Lib angefordert
-unsigned long read_obj_value(unsigned char objno) 	// gibt den Wert eines Objektes zurueck
+unsigned long read_obj_value(unsigned char objno)   // gibt den Wert eines Objektes zurueck
 {
-	unsigned long objvalue=0;
+    unsigned long objvalue=0;
 
-	// Temp Messwerte Objekte 0,2,4,6
-	// Humid Messwerte Objekte 1,3,5,7
-    if(objno<7)
-    {
-        objvalue= sendewert(objno);
-        lastsend[objno]=temp_humid[objno];
-    }
-    // Grenzwerte Objekte 8-10,11-13,14-16,17-19
+    // Messwerte Objekte 0,2,4,6
+        if((objno&0x01)==0)
+        {
+            objvalue=sendewert(objno);
+            lastsend[objno>>1]=messwerte[objno>>1];
+        }
+        // Grenzwerte Objekte 1,3,5,7
+        else
+            objvalue= (grenzwerte>>objno)&0x01;
+
+    return(objvalue);
+}
+
+
+// Messwert senden wenn kein Fehler erkannt wurde
+__bit check_and_send(unsigned char object)
+{
+    // Object 0,2,4,6 entspricht Messwert 0-3
+    if( !((onewire_error>>object) & 0x03))
+        return send_obj_value(object);
     else
-        objvalue= (grenzwerte>>(objno-8) & 0x01);
-
-	return(objvalue);
+        return 0;
 }
 
 
@@ -105,124 +99,124 @@ unsigned long read_obj_value(unsigned char objno) 	// gibt den Wert eines Objekt
 */
 unsigned int sendewert(unsigned char objno)
 {
-	int eis5temp, eis6temp;
-	unsigned char n;
+    int eis5temp, eis6temp;
+    unsigned char objno_help, n;
 
-	eis6temp=-5500;
-	n=255;
+    objno_help=objno>>1;
 
-	// Sendeformat EIS 6
-	// Adressen A9, BD, D1, E5
-	// Bit 6= Temp, 7= Humid
-	if ( (eeprom[0xA9+((objno>>1)*20)] & (0x40<<(objno &0x01))) )
-	{
-		while(eis6temp<temp_humid[objno])
-		{
-			n++;
-			eis6temp+=70;
-			if (n&0x01) eis6temp++;
-		}
-		return n;
-	}
+    eis6temp=-5500;
+    n=255;
 
-	// Sendeformat EIS 5
-	else
-	{
-		eis5temp=(temp_humid[objno]>>3)&0x07FF;			// durch 8 teilen, da später Exponent 3 dazukommt
-		eis5temp=eis5temp+(0x18 << 8);
-		if (temp_humid[objno]<0) eis5temp+=0x8000;		// Vorzeichen
+    // Sendeformat EIS 6
+    if ((eeprom[0xA4]>>4)&(1<<objno_help))
+    {
+        while(eis6temp<messwerte[objno])
+        {
+            n++;
+            eis6temp+=70;
+            if (n&0x01) eis6temp++;
+        }
+        return n;
+    }
 
-		return eis5temp;
-	}
+    // Sendeformat EIS 5
+    else
+    {
+        eis5temp=(messwerte[objno_help]>>3)&0x07FF;          // durch 8 teilen, da später Exponent 3 dazukommt
+        eis5temp=eis5temp+(0x18 << 8);
+        if (messwerte[objno_help]<0) eis5temp+=0x8000;       // Vorzeichen
+
+        return eis5temp;
+    }
 }
 
 
 /**
 * Senden bei Grenzwertüber- bzw. unterschreitung
-*	überprüft die Grenzwerte
-*	schreibt die Objektwerte und sendet Telegramm
+*   überprüft die Grenzwerte
+*   schreibt die Objektwerte und sendet Telegramm
 *
 * \param  eingang
 *
 * @return void
-*/
+*/ /*
 void grenzwert (unsigned char eingang)
 {
-	//int schwelle1, schwelle2;
-	//unsigned char reaktion, objno;
-	//unsigned char grenzwert_eingang=0;
-	__bit gw_changed = 0;
-	grenzwert_eingang = 0;
+    int schwelle1, schwelle2;
+    unsigned char reaktion, objno;
+    unsigned char grenzwert_eingang=0;
+    __bit gw_changed = 0;
+    //grenzwert_eingang = 0;
 
 
-	eingang &= 0x03;	    // Nur bis 3 erlaubt
-	// Objekt für Eingang
-	objno=(eingang<<1)+1;	// Objekte 1,3,5,7
+    eingang &= 0x03;        // Nur bis 3 erlaubt
+    // Objekt für Eingang
+    objno=(eingang<<1)+1;   // Objekte 1,3,5,7
 
-	// Reaktion und Schwellen lesen
-	reaktion=eeprom[0x6D+eingang];
-	schwelle1=-5500+180*(eeprom[0x71+eingang]&0x7F);
-	schwelle2=-5500+180*(eeprom[0x75+eingang]&0x7F);
-	//schwelle2 = ((eeprom[0xB0] & (eeprom[0xB1]<<8)) /10);
-
-
-	//steigend
-	if ((lasttemp[eingang]<schwelle2 || sende_sofort_bus_return) && temp_humid[eingang]>schwelle2) {	// GW 2 überschritten
-		if (reaktion&0x0C)
-		{
-			grenzwert_eingang= (reaktion>>2)&0x01;
-			gw_changed = 1;
-		} }
-
-	if ((lasttemp[eingang]<schwelle1 || sende_sofort_bus_return) && temp_humid[eingang]>schwelle1) {	// GW 1 überschritten
-		if (reaktion&0xC0)
-		{
-			grenzwert_eingang= (reaktion>>6)&0x01;
-			gw_changed = 1;
-		} }
+    // Reaktion und Schwellen lesen
+    reaktion=eeprom[0x6D+eingang];
+    schwelle1=-5500+180*(eeprom[0x71+eingang]&0x7F);
+    schwelle2=-5500+180*(eeprom[0x75+eingang]&0x7F);
+    //schwelle2 = ((eeprom[0xB0] & (eeprom[0xB1]<<8)) /10);
 
 
-	//fallend
-	if ((lasttemp[eingang]>schwelle1 || sende_sofort_bus_return) && temp_humid[eingang]<schwelle1) {	// GW 1 unterschritten
-		if (reaktion&0x30)
-		{
-			grenzwert_eingang= (reaktion>>4)&0x01;
-			gw_changed = 1;
-		} }
+    //steigend
+    if ((lasttemp[eingang]<schwelle2 || sende_sofort_bus_return) && temp[eingang]>schwelle2) {  // GW 2 überschritten
+        if (reaktion&0x0C)
+        {
+            grenzwert_eingang= (reaktion>>2)&0x01;
+            gw_changed = 1;
+        } }
 
-	if ((lasttemp[eingang]>schwelle2 || sende_sofort_bus_return) && temp_humid[eingang]<schwelle2) {	// GW 2 unterschritten
-		if (reaktion&0x03)
-		{
-			grenzwert_eingang= reaktion&0x01;
-			gw_changed = 1;
-		} }
+    if ((lasttemp[eingang]<schwelle1 || sende_sofort_bus_return) && temp[eingang]>schwelle1) {  // GW 1 überschritten
+        if (reaktion&0xC0)
+        {
+            grenzwert_eingang= (reaktion>>6)&0x01;
+            gw_changed = 1;
+        } }
 
-	// Grenzwert dem Eingangsobjekt zuordnen
-	if(grenzwert_eingang)
-	{
-		grenzwerte |= (1<<objno);
-	}
-	else
-	{
-		grenzwerte &= ~(1<<objno);
-	}
 
-	// Nicht senden nach Neustart
-	if(gw_changed && !sende_sofort_bus_return)
-	//if(gw_changed)
-	{
-		send_obj_value(objno);
-	}
+    //fallend
+    if ((lasttemp[eingang]>schwelle1 || sende_sofort_bus_return) && temp[eingang]<schwelle1) {  // GW 1 unterschritten
+        if (reaktion&0x30)
+        {
+            grenzwert_eingang= (reaktion>>4)&0x01;
+            gw_changed = 1;
+        } }
 
-	// Aktuellen Wert speichern
-	lasttemp[eingang]=temp_humid[eingang];
-}
+    if ((lasttemp[eingang]>schwelle2 || sende_sofort_bus_return) && temp[eingang]<schwelle2) {  // GW 2 unterschritten
+        if (reaktion&0x03)
+        {
+            grenzwert_eingang= reaktion&0x01;
+            gw_changed = 1;
+        } }
+
+    // Grenzwert dem Eingangsobjekt zuordnen
+    if(grenzwert_eingang)
+    {
+        grenzwerte |= (1<<objno);
+    }
+    else
+    {
+        grenzwerte &= ~(1<<objno);
+    }
+
+    // Nicht senden nach Neustart
+    if(gw_changed && !sende_sofort_bus_return)
+    //if(gw_changed)
+    {
+        send_obj_value(objno);
+    }
+
+    // Aktuellen Wert speichern
+    lasttemp[eingang]=temp[eingang];
+} */
 
 
 /**
 * Senden bei Messwertdifferenz
-*	überprüft die Messwertdifferenz
-*	schreibt die Verzögerungszeit ins delrec
+*   überprüft die Messwertdifferenz
+*   senden über delay_timer
 *
 * \param  eingang
 *
@@ -230,42 +224,37 @@ void grenzwert (unsigned char eingang)
 */
 void messwert (unsigned char eingang)
 {
-	//unsigned int mess_diff;
-	//int mess_change;
+    eingang &= 0x03;    // Nur bis 3 erlaubt
 
-	eingang &= 0x03;	// Nur bis 3 erlaubt
+    // Senden bei Messwertdifferenz
+    if (eeprom[0x65+eingang]&0x80)
+    {
+        // Senden ab x % Messwertdifferenz
+        mess_diff=180*(eeprom[0x65+eingang]&0x7F);
 
-	// Senden bei Messwertdifferenz
-	if (eeprom[0x65+eingang]&0x80)
-	{
-		// Senden ab x % Messwertdifferenz
-		mess_diff=180*(eeprom[0x65+eingang]&0x7F);
+        if (messwerte[eingang]<=lastsend[eingang])
+        {
+            mess_change=lastsend[eingang]-messwerte[eingang];
+        }
+        else
+        {
+            mess_change=messwerte[eingang]-lastsend[eingang];
+        }
 
-		if (temp_humid[eingang]<=lastsend[eingang])
-		{
-			mess_change=lastsend[eingang]-temp_humid[eingang];
-		}
-		else
-		{
-			mess_change=temp_humid[eingang]-lastsend[eingang];
-		}
-
-//		if (mess_change<0) mess_change=0-mess_change;
-
-		if(mess_change>mess_diff)
-		{
-			// Sendeverzögerung bei Messwertdifferenz
-			timercnt[eingang+4] |= 0x80;	// Einschalten
-		}
-	}
+        if(mess_change>mess_diff)
+        {
+            // Sendeverzögerung bei Messwertdifferenz
+            timercnt[eingang+4] |= 0x80;    // Einschalten
+        }
+    }
 }
 
 
 /**
 * zählt alle 130ms die Variable Timer hoch und prüft Queue
-*	Zyklisch senden Messwerte und Grenzwerte
-*	Verzögerungszeit senden Messwerte
-*	Sendeverzögerung Messwerte bei Busspannungswiederkehr
+*   Zyklisch senden Messwerte und Grenzwerte
+*   Verzögerungszeit senden Messwerte
+*   Sendeverzögerung Messwerte bei Busspannungswiederkehr
 *
 * \param  void
 *
@@ -273,123 +262,126 @@ void messwert (unsigned char eingang)
 */
 void delay_timer(void)
 {
-	unsigned char tmr_obj,n,m, verz_start;
-	unsigned char objno_help;
-	unsigned int timerflags;
+    unsigned char tmr_obj,n,m, verz_start;
+    unsigned char objno_help;
+    unsigned int timerflags;
 
-	tmr_obj = 0;		// Timer Objekt
-	RTCCON=0x61;		// RTC starten
+    tmr_obj = 0;        // Timer Objekt
+    // Reconfig because of t_connect timeout!!
+    RTCCON=0x60;        // RTC anhalten und Flag löschen
+    RTCH=0x0E;          // reload Real Time Clock, 65ms
+    RTCL=0xA0;
+    RTCCON=0x61;        // RTC starten
 
-		timer++;
-		timerflags = timer&(~(timer-1));
-		for(n=0;n<16;n++){
-			if(timerflags & 0x0001){                // positive flags erzeugen und schieben
-				for(m=0;m<TIMERANZ;m++){            // die timer der reihe nach checken und dec wenn laufen
-					if ((timerbase[m]& 0x0F)==n){   // wenn die base mit der gespeicherten base übereinstimmt
-						if (timercnt[m]>0x80){      // wenn der counter läuft...
-							timercnt[m]=timercnt[m]-1;// den timer [m]decrementieren
-						}// end if (timercnt...
-					}//end if(timerbase...
-				}// end  for(m..
-			}// end if timer...
-			timerflags = timerflags>>1;
-		}//end for (n=...
+        timer++;
+        timerflags = timer&(~(timer-1));
+        for(n=0;n<16;n++){
+            if(timerflags & 0x0001){                // positive flags erzeugen und schieben
+                for(m=0;m<TIMERANZ;m++){            // die timer der reihe nach checken und dec wenn laufen
+                    if ((timerbase[m]& 0x0F)==n){   // wenn die base mit der gespeicherten base übereinstimmt
+                        if (timercnt[m]>0x80){      // wenn der counter läuft...
+                            timercnt[m]=timercnt[m]-1;// den timer [m]decrementieren
+                        }// end if (timercnt...
+                    }//end if(timerbase...
+                }// end  for(m..
+            }// end if timer...
+            timerflags = timerflags>>1;
+        }//end for (n=...
 
-	// ab Hier die aktion...
-	for(tmr_obj=0;tmr_obj<=8;tmr_obj++)
-	{
-		verz_start = eeprom[0x79]&0x55;
+    // ab Hier die aktion...
+    for(tmr_obj=0;tmr_obj<=8;tmr_obj++)
+    {
+        if(timercnt[tmr_obj]==0x80)     // 0x00 = Timer abgelaufen und aktiv
+        {
+            // Zyklisch Senden Eingänge Messwert und Grenzwert
+            if (tmr_obj<=3)
+            {
+                // Zyklisch senden Faktor holen
+                timercnt[tmr_obj] = eeprom[0x61+tmr_obj];
+                //zyk_faktor=eeprom[0x61+objno]&0x7F;
 
-		if(timercnt[tmr_obj]==0x80)		// 0x00 = Timer abgelaufen und aktiv
-		{
-			// Zyklisch Senden Eingänge Messwert und Grenzwert
-			if (tmr_obj<=3)
-			{
-				// Zyklisch senden Faktor holen
-				timercnt[tmr_obj] = eeprom[0x61+tmr_obj];
-				//zyk_faktor=eeprom[0x61+objno]&0x7F;
+                // Messwert senden
+                check_and_send(tmr_obj<<1);
 
-				// Messwert senden
-				send_obj_value(tmr_obj<<1);
+                // Grenzwert senden wenn aktiv
+                if ( (eeprom[0x75+tmr_obj]) & 0x80)
+                {
+                    send_obj_value((tmr_obj<<1)+1);
+                }
+            }
+            // Sendeverzögerung Eingänge Messwertedifferenz
+            else if (tmr_obj<=7)
+            {
+                objno_help=tmr_obj-4;
 
-				// Grenzwert senden wenn aktiv
-				if ( (eeprom[0x75+tmr_obj]) & 0x80)
-				{
-					send_obj_value((tmr_obj<<1)+1);
-				}
-			}
-			// Sendeverzögerung Eingänge Messwertedifferenz
-			else if (tmr_obj<=7)
-			{
-				objno_help=tmr_obj-4;
+                check_and_send(objno_help<<1);
 
-				send_obj_value(objno_help<<1);
-				lastsend[objno_help]=temp_humid[objno_help];
+                // Zeit holen und deaktivieren, Bit 7 = 0
+                //zykval_help=(eeprom[0x69+(eingang>>1)])>>(4*(!(eingang&0x01)))&0x0F;
+                if(objno_help & 0x01)   // 0,2
+                {
+                    timercnt[tmr_obj] = (eeprom[0x69+(objno_help>>1)] & 0x0F);
+                }
+                else                        // 1,3
+                {
+                    timercnt[tmr_obj] = (eeprom[0x69+(objno_help>>1)] >>4);
+                }
+            }
+            // Sendeverzögerung Eingänge Messwerte Busspannungswiederkehr über Objekt 8
+            else
+            {
+                timercnt[8] = 0;    // Timer 8 anhalten
+                // Verzögertes senden aktiv, Bit 0,2,4,6
+                verz_start = eeprom[0x79]&0x55;
 
-				// Zeit holen und deaktivieren, Bit 7 = 0
-				//zykval_help=(eeprom[0x69+(eingang>>1)])>>(4*(!(eingang&0x01)))&0x0F;
-				if(objno_help & 0x01)	// 0,2
-				{
-					timercnt[tmr_obj] = (eeprom[0x69+(objno_help>>1)] & 0x0F);
-				}
-				else						// 1,3
-				{
-					timercnt[tmr_obj] = (eeprom[0x69+(objno_help>>1)] >>4);
-				}
-			}
-			// Sendeverzögerung Eingänge Messwerte Busspannungswiederkehr über Objekt 8
-			else
-			{
-				timercnt[8] = 0;	// Timer 8 anhalten
-				// Verzögertes senden aktiv, Bit 0,2,4,6
-				verz_start = eeprom[0x79]&0x55;
-
-				for (n=0;n<=6;n+=2)
-				{
-					if (verz_start & 0x40)	    // Start mit Eingang 4
-					{
-						send_obj_value(n);
-					}
-					verz_start = verz_start<<2;	// vorheringer Eingang
-				}
-
-			}
-		}
-	}
+                for (n=0;n<=6;n+=2)
+                {
+                    if (verz_start & 0x40)      // Start mit Eingang 4
+                    {
+                        check_and_send(n);
+                    }
+                    verz_start = verz_start<<2; // vorheringer Eingang
+                }
+            }
+        }
+    }
+    // Timer 9, Sensor conversation wait
+    if (timercnt[9] == 0x80)
+    {
+        timercnt[9] = 0;        // Prevent next run before restart
+        sequence++;             // Konvertierung abgeschlossen
+    }
 }
 
 
 /**
 * Verhalten bei Busspannungswiederkehr
-*	sofortiges Senden der Messwerte und Grenzwerte bei Busspannungswiederkehr
+*   sofortiges Senden der Messwerte und Grenzwerte bei Busspannungswiederkehr
 *
 * \param  void
 *
 * @return void
-*/
+*/ /*
 void bus_return(void)
 {
-	unsigned char kanal_help;
+    unsigned char kanal_help;
 
-	kanal_help=kanal<<1;
+    kanal_help=kanal<<1;
 
-	if (sende_sofort_bus_return&(0x80>>kanal_help))
-	{
-		// Messwerte
-		send_obj_value(kanal*5);
-		sende_sofort_bus_return &= 0xFF-(0x80>>kanal_help);	// Löschen wenn gesendet
-	}
+    if (sende_sofort_bus_return&(0x80>>kanal_help))
+    {
+        // Messwerte
+        check_and_send(kanal_help);
+        sende_sofort_bus_return &= 0xFF-(0x80>>kanal_help); // Löschen wenn gesendet
+    }
 
-	if (sende_sofort_bus_return&(0x40>>kanal_help))
-	{
-		// Grenzwerte
-	    // TODO prüfung ob grenzwert eingeschaltet? an sich nicht nötig da keine GA auf Com-objekt liegen sollte
-		send_obj_value(kanal+2);
-		send_obj_value(kanal+3);
-		send_obj_value(kanal+4);
-		sende_sofort_bus_return &= 0xFF-(0x40>>kanal_help); // Löschen wenn gesendet
-	}
-}
+    if (sende_sofort_bus_return&(0x40>>kanal_help))
+    {
+        // Grenzwerte
+        send_obj_value(kanal_help+1);
+        sende_sofort_bus_return &= 0xFF-(0x40>>kanal_help); // Löschen wenn gesendet
+    }
+} */
 
 
 /**
@@ -399,85 +391,97 @@ void bus_return(void)
 *
 * @return void
 */
-void restart_app()		// Alle Applikations-Parameter zurücksetzen
+void restart_app()      // Alle Applikations-Parameter zurücksetzen
 {
-	unsigned char n;
+    unsigned char n;
 
-	RTCCON=0x60;		// RTC anhalten und Flag löschen
-	RTCH=0x0E;			// reload Real Time Clock, 65ms
-	RTCL=0xA0;
+    // Port Konfigurieren
+    // Port 0
+    P0M1= 0x00;
+    P0M2= 0x00; // alle auf quasi bidirektional
+    // Port 1, nach restart_hw()!
+    P1M1 &= ~0x03;  // P1.0/TXD auf input wg. Busdown Erkennung
+    P1M2 &= ~0x03;
+    ES = 0;
+    SCON = 0;
+    SSTAT = 0;
 
-	// Port Konfigurieren
-	// Port 0
-	P0M1= 0x00;
-	P0M2= 0x00;	// alle auf quasi bidirektional
-	// Port 1, nach restart_hw()!
-//	P1M1 &= ~0x03;	// P1.0/TXD auf input wg. Busdown Erkennung
-//	P1M2 &= ~0x03;
+    // Zeit für Sendeverzögerung bei Busspannungswiederkehr in Timer 8 laden
+    timerbase[8] = 4;   // 2 Sekunde als Basis
+    timercnt[8] = ( (eeprom[0xA0]>>1) | 0x80);  // Zeit holen, Timer einschalten - Bit7
 
+    // Verhalten bei Busspannungswiederkehr Messwerte
+    sende_sofort_bus_return = eeprom[0x79]&0xAA;
 
-	// Zeit für Sendeverzögerung bei Busspannungswiederkehr in Timer 8 laden
-	// TODO Faktor wird nur für 1. Messwert geholt, 2-4 fehlen noch
-	timerbase[8] = eeprom[0xF9] & 0xF0 ;    // Basis
-	timercnt[8] = ( (eeprom[0xFB]>>1) | 0x80);	// Zeit holen, Timer einschalten - Bit7
+    // Zyklisches Senden konfigurieren
+    for(n=0;n<=3;n++)
+    {
+        // zyk Senden Basis für alle Eingänge, Beschränkung alte VD
+        timerbase[n] = eeprom[0x060]&0x0F;
 
-	// Verhalten bei Busspannungswiederkehr Messwerte (jeweils Bit 1)
-	sende_sofort_bus_return = eeprom[0xFA]&0xAA;
+        // Faktor und aktiv Bit7 holen
+        timercnt[n] = eeprom[0x61+n];
 
-	// Zyklisches Senden konfigurieren
-	for(n=0;n<=3;n++)
-	{
-		// zyk Senden Basis pro Kanal
-	    // TODO DHT Kanäle haben 2 unterschiedliche Basen, fehlt noch
-		timerbase[n] = eeprom[0xB7+(n*20)] & 0x0F;
+        // Verhalten bei Busspannungswiederkehr Grenzwerte
+        sende_sofort_bus_return |= (eeprom[0x71+n]&0x80)>>(2*n+1);
 
-		// Faktor und aktiv Bit7 holen
-		timercnt[n] = eeprom[0xB5+(n*20)];
+        // Werte initialisieren
+        messwerte[n]=0;
+        lasttemp[n]=0;
+        lastsend[n]=0;
 
-		// Verhalten bei Busspannungswiederkehr Grenzwerte (Bit 0-3)
-		sende_sofort_bus_return |= (eeprom[0xF9] & (0x01<<n) );
+        // Sendeverzögerung bei Messwertdifferenz
+        // Zeit holen und deaktivieren, Bit 7 = 0
+        if(n & 0x01)    // 0,2
+        {
+            timercnt[n+4] = (eeprom[0x69+(n>>1)] & 0x0F);
+        }
+        else            // 1,3
+        {
+            timercnt[n+4] = (eeprom[0x69+(n>>1)] >>4);
+        }
+        // Zeitbasis setzen, TODO: Anpassung an neue/alte VD
+        if (timercnt[n+4] >0)
+            timerbase[n+4] = 3; // 1 Sekunde
+        else if (timercnt[n+4] >5)
+            timerbase[n+4] = 3; // 8,4 Sekunde
+        else
+            timerbase[n+4] = 0; // 130ms, kleinste Zeit
 
-		// Werte initialisieren
-		temp_humid[n]=0;
-		lasttemp[n]=0;
-		lastsend[n]=0;
+        // Find DS Type by Family Code of each sensor
+        // 0x10 = DS1820/DS18S20
+        // 0x28 = DS18B20
+        // 0x00 = No Sensor found
+        kanal = n;
+        if (ow_init())
+        {
+            ow_write(0x33);         // Read-ROM command
+            if(!ow_read(8))         // Read 64bit Lasered ROM-Code
+                family_code[n] = onewire_receive[0];
+        }
+        else
+            family_code[n] = 0x00;  // No Sensor
+    }
 
-		// Sendeverzögerung bei Messwertdifferenz
-		//zykval_help=(eeprom[0x69+(eingang>>1)])>>(4*(!(eingang&0x01)))&0x0F;
-		// Zeit holen und deaktivieren, Bit 7 = 0
-		if(n & 0x01)	// 0,2
-		{
-			timercnt[n+4] = (eeprom[0x69+(n>>1)] & 0x0F);
-		}
-		else						// 1,3
-		{
-			timercnt[n+4] = (eeprom[0x69+(n>>1)] >>4);
-		}
-		// Zeitbasis setzen, TODO: Anpassung an neue/alte VD
-		if (timercnt[n+4] >0)
-			timerbase[n+4] = 3;	// 1 Sekunde
-		else if (timercnt[n+4] >5)
-			timerbase[n+4] = 3;	// 8,4 Sekunde
-		else
-			timerbase[n+4] = 0;	// 130ms, kleinste Zeit
-	}
+    timerbase[9] = 0;   // Timerbase 10, ensure to be 0
+    sequence=1;         // Start sequence
+    kanal=0;            // channel 0
+    timer=0;            // Timer-Variable, wird alle 130ms inkrementiert
 
-	sequence=1;
-	kanal=0;
-	timer=0;			// Timer-Variable, wird alle 130ms inkrementiert
+#ifdef DEBUG_H_
+    // Werte hier schreiben anstatt per static __code wenn Debug aktiv
+    EA=0;               // Interrupts sperren, damit flashen nicht unterbrochen wird
+    START_WRITECYCLE
+    WRITE_BYTE(0x01,0x03,0x00)   // Herstellercode 0x004C = Robert Bosch
+    WRITE_BYTE(0x01,0x04,0x4C)
+    //WRITE_BYTE(0x01,0x05,0x04)      // Devicetype 0x0438 = Selfbus 1080 4sense
+    //WRITE_BYTE(0x01,0x06,0x38)
+    //WRITE_BYTE(0x01,0x07,0x01)    // Versionnumber of application programm
+    WRITE_BYTE(0x01,0x0C,0x00)      // PORT A Direction Bit Setting
+    //WRITE_BYTE(0x01,0x0D,0xFF)    // Run-Status (00=stop FF=run)
+    STOP_WRITECYCLE
+    EA=1;               // Interrupts freigeben
+#endif
 
-	EA=0;				// Interrupts sperren, damit flashen nicht unterbrochen wird
-	START_WRITECYCLE
-	WRITE_BYTE(0x01,0x03,0x00)	    // Herstellercode 0x004C = Robert Bosch (76)
-	WRITE_BYTE(0x01,0x04,0x4C)
-	WRITE_BYTE(0x01,0x05,0x04)	    // Devicetype 0x0438 = Selfbus 1080 4temp
-	WRITE_BYTE(0x01,0x06,0x38)
-	//WRITE_BYTE(0x01,0x07,0x01)	// Versionnumber of application programm
-	WRITE_BYTE(0x01,0x0C,0x00)	    // PORT A Direction Bit Setting
-	//WRITE_BYTE(0x01,0x0D,0xFF)	// Run-Status (00=stop FF=run)
-	STOP_WRITECYCLE
-	EA=1;				// Interrupts freigeben
-
-
-	RTCCON=0x61; 		//RTC starten
+    RTCCON=0x81;        //RTC starten und flag setzen -> delay timer setzt RTC
 }
