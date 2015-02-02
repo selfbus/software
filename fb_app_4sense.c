@@ -63,15 +63,15 @@ void read_value_req(unsigned char objno)    // Empfangenes read_value_request Te
 // Objektwert von Lib angefordert
 unsigned long read_obj_value(unsigned char objno)   // gibt den Wert eines Objektes zurueck
 {
-    unsigned long objvalue=0;
+    unsigned long objvalue;
 
-    // Messwerte Objekte 0,2,4,6
-        if((objno&0x01)==0)
+    // Messwerte Temperatur/Feuchte Objekte 0-7
+        if(objno<8)
         {
             objvalue=sendewert(objno);
-            lastsend[objno>>1]=messwerte[objno>>1];
+            lastsend[objno]=messwerte[objno];
         }
-        // Grenzwerte Objekte 1,3,5,7
+        // Grenzwerte Objekte ab 8
         else
             objvalue= (grenzwerte>>objno)&0x01;
 
@@ -83,10 +83,10 @@ unsigned long read_obj_value(unsigned char objno)   // gibt den Wert eines Objek
 __bit check_and_send(unsigned char object)
 {
     // Object 0,2,4,6 entspricht Messwert 0-3
-    if( !((onewire_error>>object) & 0x03))
+ //   if( !((onewire_error>>object) & 0x03))
         return send_obj_value(object);
-    else
-        return 0;
+ //   else
+ //       return 0;
 }
 
 
@@ -107,26 +107,25 @@ unsigned int sendewert(unsigned char objno)
     eis6temp=-5500;
     n=255;
 
-    // Sendeformat EIS 6
-    if ((eeprom[0xA4]>>4)&(1<<objno_help))
-    {
-        while(eis6temp<messwerte[objno])
-        {
-            n++;
-            eis6temp+=70;
-            if (n&0x01) eis6temp++;
-        }
-        return n;
-    }
-
-    // Sendeformat EIS 5
-    else
+    // Sendeformat EIS 6 (DPT5/6)
+    if ((eeprom[SENSOR_TYPE]>>6) & objno)
     {
         eis5temp=(messwerte[objno_help]>>3)&0x07FF;          // durch 8 teilen, da später Exponent 3 dazukommt
         eis5temp=eis5temp+(0x18 << 8);
         if (messwerte[objno_help]<0) eis5temp+=0x8000;       // Vorzeichen
 
         return eis5temp;
+    }
+    // Sendeformat EIS 5 (DPT9)
+    else
+    {
+        while(eis6temp<messwerte[objno])
+        {
+           n++;
+           eis6temp+=70;
+           if (n&0x01) eis6temp++;
+        }
+        return n;
     }
 }
 
@@ -218,33 +217,36 @@ void grenzwert (unsigned char eingang)
 *   überprüft die Messwertdifferenz
 *   senden über delay_timer
 *
-* \param  eingang
+* \param  messwert
 *
 * @return void
 */
-void messwert (unsigned char eingang)
+void send_messdiff (unsigned char messwert)
 {
-    eingang &= 0x03;    // Nur bis 3 erlaubt
+    // TODO get messdiff and mess_change local, join with ee_local
+    unsigned char ee_local; // Local copy to save flash
+
+    messwert &= 0x07;    // Nur bis 7 erlaubt
+    ee_local = eeprom[TEMP_MESSDIFF+messwert];
 
     // Senden bei Messwertdifferenz
-    if (eeprom[0x65+eingang]&0x80)
+    if (ee_local &0x80)
     {
-        // Senden ab x % Messwertdifferenz
-        mess_diff=180*(eeprom[0x65+eingang]&0x7F);
+        // Senden ab Messwertdifferenz
+        mess_diff = (ee_local &0x7F) *10;
 
-        if (messwerte[eingang]<=lastsend[eingang])
+        if (messwerte[messwert]<=lastsend[messwert])
         {
-            mess_change=lastsend[eingang]-messwerte[eingang];
+            mess_change=lastsend[messwert]-messwerte[messwert];
         }
         else
         {
-            mess_change=messwerte[eingang]-lastsend[eingang];
+            mess_change=messwerte[messwert]-lastsend[messwert];
         }
 
         if(mess_change>mess_diff)
         {
-            // Sendeverzögerung bei Messwertdifferenz
-            timercnt[eingang+4] |= 0x80;    // Einschalten
+            check_and_send(messwert);
         }
     }
 }
@@ -259,6 +261,10 @@ void messwert (unsigned char eingang)
 * \param  void
 *
 * @return void
+*
+* Timer 0-7     Messwerte 0-7
+* Timer 8
+* Timer x       Sample timer
 */
 void delay_timer(void)
 {
@@ -293,28 +299,31 @@ void delay_timer(void)
     {
         if(timercnt[tmr_obj]==0x80)     // 0x00 = Timer abgelaufen und aktiv
         {
-            // Zyklisch Senden Eingänge Messwert und Grenzwert
-            if (tmr_obj<=3)
+            // Zyklisch Senden Messwerte
+            if (tmr_obj<=7)
             {
-                // Zyklisch senden Faktor holen
-                timercnt[tmr_obj] = eeprom[0x61+tmr_obj];
-                //zyk_faktor=eeprom[0x61+objno]&0x7F;
+                // Zyklisch senden Faktor laden
+                timercnt[tmr_obj] = eeprom[TEMP_ZYKLSEND +tmr_obj];
 
                 // Messwert senden
-                check_and_send(tmr_obj<<1);
-
-                // Grenzwert senden wenn aktiv
-                if ( (eeprom[0x75+tmr_obj]) & 0x80)
-                {
-                    send_obj_value((tmr_obj<<1)+1);
-                }
+                check_and_send(tmr_obj);
             }
-            // Sendeverzögerung Eingänge Messwertedifferenz
+            // Zyklisch Senden Grenzwerte
             else if (tmr_obj<=7)
             {
                 objno_help=tmr_obj-4;
 
                 check_and_send(objno_help<<1);
+
+
+
+                // Grenzwert senden wenn aktiv
+                            if ( (eeprom[0x75+tmr_obj]) & 0x80)
+                            {
+                                send_obj_value((tmr_obj<<1)+1);
+                            }
+
+
 
                 // Zeit holen und deaktivieren, Bit 7 = 0
                 //zykval_help=(eeprom[0x69+(eingang>>1)])>>(4*(!(eingang&0x01)))&0x0F;
@@ -414,13 +423,22 @@ void restart_app()      // Alle Applikations-Parameter zurücksetzen
     sende_sofort_bus_return = eeprom[0x79]&0xAA;
 
     // Zyklisches Senden konfigurieren
-    for(n=0;n<=3;n++)
+    for(n=0;n<=7;n++)
     {
+/*       if(n & 0x01)
+       {
+           timerbase[n] = (eeprom[THBASE_ZYKLSEND+(n>>1)] >> 4);
+       }
+       else
+       {
+           timerbase[n] = (eeprom[THBASE_ZYKLSEND+(n>>1)] &0xF0);
+       }
+*/
         // zyk Senden Basis für alle Eingänge, Beschränkung alte VD
-        timerbase[n] = eeprom[0x060]&0x0F;
+        timerbase[n] = (eeprom[THBASE_ZYKLSEND+(n>>1)] >> (4 *(n&0x01))) &0x0F;
 
         // Faktor und aktiv Bit7 holen
-        timercnt[n] = eeprom[0x61+n];
+        timercnt[n] = eeprom[TEMP_ZYKLSEND +n];
 
         // Verhalten bei Busspannungswiederkehr Grenzwerte
         sende_sofort_bus_return |= (eeprom[0x71+n]&0x80)>>(2*n+1);
@@ -434,33 +452,26 @@ void restart_app()      // Alle Applikations-Parameter zurücksetzen
         // Zeit holen und deaktivieren, Bit 7 = 0
         if(n & 0x01)    // 0,2
         {
-            timercnt[n+4] = (eeprom[0x69+(n>>1)] & 0x0F);
+           // timercnt[n+4] = (eeprom[0x69+(n>>1)] & 0x0F);
         }
         else            // 1,3
         {
-            timercnt[n+4] = (eeprom[0x69+(n>>1)] >>4);
+        //    timercnt[n+4] = (eeprom[0x69+(n>>1)] >>4);
         }
-        // Zeitbasis setzen, TODO: Anpassung an neue/alte VD
-        if (timercnt[n+4] >0)
-            timerbase[n+4] = 3; // 1 Sekunde
-        else if (timercnt[n+4] >5)
-            timerbase[n+4] = 3; // 8,4 Sekunde
-        else
-            timerbase[n+4] = 0; // 130ms, kleinste Zeit
 
         // Find DS Type by Family Code of each sensor
         // 0x10 = DS1820/DS18S20
         // 0x28 = DS18B20
         // 0x00 = No Sensor found
-        kanal = n;
+        kanal = (n>>1);
         if (ow_init())
         {
             ow_write(0x33);         // Read-ROM command
             if(!ow_read(8))         // Read 64bit Lasered ROM-Code
-                family_code[n] = onewire_receive[0];
+                family_code[kanal] = onewire_receive[0];
         }
         else
-            family_code[n] = 0x00;  // No Sensor
+            family_code[kanal] = 0x00;  // No Sensor
     }
 
     timerbase[9] = 0;   // Timerbase 10, ensure to be 0

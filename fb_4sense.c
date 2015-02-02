@@ -14,7 +14,18 @@
  *
  *
  * Versionen:   0.01  erste Version
+ *
+ *
+ * Com-Objekte
+ * 0,2,4,6  = Temperatur
+ * 1,3,5,7  = Feuchte
+ * 8,9,10   = Grenzwerte Sensor 1
+ * 11,12,13 = Grenzwerte Sensor 2
+ * 14,15,16 = Grenzwerte Sensor 3
+ * 17,18,19 = Grenzwerte Sensor 4
+ * 20       = Diagnose
  */
+
 
 #include "fb_app_4sense.h"
 #include "4Sense_Uni.h"
@@ -118,7 +129,7 @@ void main(void)
                         if(family_code[kanal] && start_tempconversion())    // Start convert if sensor known
                         {
                             if(!interrupted)
-                               family_code[kanal] |= 0x80;  // Convert done TODO mabe not needed
+                               family_code[kanal] |= 0x80;  // Convert done TODO maybe not needed
                         }
                         else    // No Sensor configured
                         {
@@ -155,7 +166,7 @@ void main(void)
                         //grenzwert(kanal);
 
                         // Messwertdifferenz
-                        messwert(kanal);
+                        send_messdiff(2*kanal);
 
                         // Buswiederkehr bearbeiten
                         //if (sende_sofort_bus_return)
@@ -189,6 +200,17 @@ void main(void)
                     // Safe with offset
                     messwerte[kanal*2] = dht_temp + (signed char) eeprom[TEMP_OFFSET+ 2*kanal];
                     messwerte[(kanal+1)*2] = dht_humid + (signed char) eeprom[HUMID_OFFSET+ 2*kanal];
+
+                     // Grenzwerte
+                     //grenzwert(kanal);
+
+                     // Messwertdifferenz
+                     send_messdiff(2*kanal);
+                     send_messdiff(2*(kanal+1));
+
+                     // Buswiederkehr bearbeiten
+                     //if (sende_sofort_bus_return)
+                       //  bus_return();
                 }
 
                // if (kanal<3)
