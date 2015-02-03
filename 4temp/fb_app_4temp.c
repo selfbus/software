@@ -421,9 +421,9 @@ void restart_app()		// Alle Applikations-Parameter zurücksetzen
 	// Port 1, nach restart_hw()!
 	P1M1 &= ~0x03;	// P1.0/TXD auf input wg. Busdown Erkennung
 	P1M2 &= ~0x03;
-	ES = 0;
-	SCON = 0;
-	SSTAT = 0;
+	//ES = 0;
+	//SCON = 0;
+	//SSTAT = 0;
 
 	// Zeit für Sendeverzögerung bei Busspannungswiederkehr in Timer 8 laden
 	timerbase[8] = 4;	// 2 Sekunde als Basis
@@ -475,6 +475,7 @@ void restart_app()		// Alle Applikations-Parameter zurücksetzen
 		// 0x28 = DS18B20
 		// 0x00 = No Sensor found
 		kanal = n;
+		EA=0;   // Ensure we are not interrupted
 		if (ow_init())
 		{
 		    ow_write(0x33);         // Read-ROM command
@@ -483,6 +484,7 @@ void restart_app()		// Alle Applikations-Parameter zurücksetzen
 		}
 		else
 		    family_code[n] = 0x00;  // No Sensor
+		EA=1;   // Enable interrupts again
 	}
 
     timerbase[9] = 0;   // Timerbase 10, ensure to be 0
