@@ -199,14 +199,14 @@ void main(void)
 
                     // Safe with offset
                     messwerte[kanal*2] = dht_temp + (signed char) eeprom[TEMP_OFFSET+ 2*kanal];
-                    messwerte[(kanal+1)*2] = dht_humid + (signed char) eeprom[HUMID_OFFSET+ 2*kanal];
+                    messwerte[kanal*2+1] = dht_humid + (signed char) eeprom[HUMID_OFFSET+ 2*kanal];
 
                      // Grenzwerte
                      //grenzwert(kanal);
 
                      // Messwertdifferenz
                      send_messdiff(2*kanal);
-                     send_messdiff(2*(kanal+1));
+                     send_messdiff(2*kanal+1);
 
                      // Buswiederkehr bearbeiten
                      //if (sende_sofort_bus_return)

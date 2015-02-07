@@ -68,7 +68,7 @@ unsigned long read_obj_value(unsigned char objno)   // gibt den Wert eines Objek
     // Messwerte Temperatur/Feuchte Objekte 0-7
         if(objno<8)
         {
-            objvalue=sendewert(objno);
+            objvalue=sendewert(objno);  // Messwert umwandeln
             lastsend[objno]=messwerte[objno];
         }
         // Grenzwerte Objekte ab 8
@@ -99,26 +99,18 @@ __bit check_and_send(unsigned char object)
 */
 unsigned int sendewert(unsigned char objno)
 {
-    int eis5temp, eis6temp;
-    unsigned char objno_help, n;
+    int eis5temp;//, eis6temp;
+    //unsigned char n;
 
-    objno_help=objno>>1;
-
-    eis6temp=-5500;
-    n=255;
+    //eis6temp=-5500;
+    //n=255;
 
     // Sendeformat EIS 6 (DPT5/6)
-    if ((eeprom[SENSOR_TYPE]>>6) & objno)
+    //if ((eeprom[SENSOR_TYPE]>>6) & objno)
+    if ( eeprom[SENSOR_TYPE+(objno>>1)] & (0x40<<(objno &0x01)) )
     {
-        eis5temp=(messwerte[objno_help]>>3)&0x07FF;          // durch 8 teilen, da später Exponent 3 dazukommt
-        eis5temp=eis5temp+(0x18 << 8);
-        if (messwerte[objno_help]<0) eis5temp+=0x8000;       // Vorzeichen
-
-        return eis5temp;
-    }
-    // Sendeformat EIS 5 (DPT9)
-    else
-    {
+        return ((char)(messwerte[objno]/100));
+        /*
         while(eis6temp<messwerte[objno])
         {
            n++;
@@ -126,6 +118,15 @@ unsigned int sendewert(unsigned char objno)
            if (n&0x01) eis6temp++;
         }
         return n;
+        */
+    }
+    // Sendeformat EIS 5 (DPT9)
+    else
+    {
+        eis5temp=(messwerte[objno]>>3)&0x07FF;          // durch 8 teilen, da später Exponent 3 dazukommt
+        eis5temp=eis5temp+(0x18 << 8);
+        if (messwerte[objno]<0) eis5temp+=0x8000;       // Vorzeichen
+        return eis5temp;
     }
 }
 
@@ -244,7 +245,7 @@ void send_messdiff (unsigned char messwert)
             mess_change=messwerte[messwert]-lastsend[messwert];
         }
 
-        if(mess_change>mess_diff)
+        if(mess_change>=mess_diff)
         {
             check_and_send(messwert);
         }
@@ -411,9 +412,9 @@ void restart_app()      // Alle Applikations-Parameter zurücksetzen
     // Port 1, nach restart_hw()!
     P1M1 &= ~0x03;  // P1.0/TXD auf input wg. Busdown Erkennung
     P1M2 &= ~0x03;
-    ES = 0;
-    SCON = 0;
-    SSTAT = 0;
+//    ES = 0;
+//    SCON = 0;
+//    SSTAT = 0;
 
     // Zeit für Sendeverzögerung bei Busspannungswiederkehr in Timer 8 laden
     timerbase[0] = ( eeprom[0xB0] & 0x0F );
@@ -464,6 +465,7 @@ void restart_app()      // Alle Applikations-Parameter zurücksetzen
         // 0x28 = DS18B20
         // 0x00 = No Sensor found
         kanal = (n>>1);
+        EA=0;   // Ensure we are not interrupted
         if (ow_init())
         {
             ow_write(0x33);         // Read-ROM command
@@ -472,6 +474,7 @@ void restart_app()      // Alle Applikations-Parameter zurücksetzen
         }
         else
             family_code[kanal] = 0x00;  // No Sensor
+        EA=1;   // Enable interrupts again
     }
 
     timerbase[9] = 0;   // Timerbase 10, ensure to be 0
