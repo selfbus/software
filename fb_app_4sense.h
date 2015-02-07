@@ -42,6 +42,11 @@
 #define HUMID_ZYKLSEND  0xCC    // *2n
 #define THBASE_ZYKLSEND 0xD5    // *1/2n
 
+#define GW_REAKTION     0xDB    // *1/2n
+#define GW_SCHWELLE1    0xE7    // 3*n
+#define GW_SCHWELLE2    0xE9    // 3*n
+#define GW_SCHWELLE3    0xEB    // 3*n
+
 
 
 

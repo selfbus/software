@@ -16,6 +16,7 @@
 
 #include "fb_app_4sense.h"
 #include "4Sense_Uni.h"
+#include <stdlib.h>
 
 
 unsigned char timerbase[TIMERANZ];	// Speicherplatz für die Zeitbasis
@@ -33,8 +34,8 @@ unsigned int grenzwerte;	// Grenzwertobjekte
 //int schwelle1, schwelle2;
 //unsigned char reaktion, objno;
 
-unsigned int mess_diff;
-int mess_change;
+//unsigned int mess_diff;
+//int mess_change;
 
 
 
@@ -100,6 +101,8 @@ __bit check_and_send(unsigned char object)
 unsigned int sendewert(unsigned char objno)
 {
     int eis5temp;//, eis6temp;
+
+/*
     //unsigned char n;
 
     //eis6temp=-5500;
@@ -110,18 +113,19 @@ unsigned int sendewert(unsigned char objno)
     if ( eeprom[SENSOR_TYPE+(objno>>1)] & (0x40<<(objno &0x01)) )
     {
         return ((char)(messwerte[objno]/100));
-        /*
-        while(eis6temp<messwerte[objno])
-        {
-           n++;
-           eis6temp+=70;
-           if (n&0x01) eis6temp++;
-        }
-        return n;
-        */
+
+//        while(eis6temp<messwerte[objno])
+//        {
+//           n++;
+//           eis6temp+=70;
+//           if (n&0x01) eis6temp++;
+//        }
+//        return n;
+
     }
     // Sendeformat EIS 5 (DPT9)
     else
+*/
     {
         eis5temp=(messwerte[objno]>>3)&0x07FF;          // durch 8 teilen, da später Exponent 3 dazukommt
         eis5temp=eis5temp+(0x18 << 8);
@@ -139,57 +143,49 @@ unsigned int sendewert(unsigned char objno)
 * \param  eingang
 *
 * @return void
-*/ /*
+*/
 void grenzwert (unsigned char eingang)
 {
-    int schwelle1, schwelle2;
-    unsigned char reaktion, objno;
+    int schwelle;
+    unsigned char reaktion1;
+    unsigned char objno;
     unsigned char grenzwert_eingang=0;
     __bit gw_changed = 0;
-    //grenzwert_eingang = 0;
+    unsigned char i;
 
 
-    eingang &= 0x03;        // Nur bis 3 erlaubt
+    //eingang &= 0x07;        // Nur bis 7 erlaubt
     // Objekt für Eingang
     objno=(eingang<<1)+1;   // Objekte 1,3,5,7
 
     // Reaktion und Schwellen lesen
-    reaktion=eeprom[0x6D+eingang];
-    schwelle1=-5500+180*(eeprom[0x71+eingang]&0x7F);
-    schwelle2=-5500+180*(eeprom[0x75+eingang]&0x7F);
-    //schwelle2 = ((eeprom[0xB0] & (eeprom[0xB1]<<8)) /10);
+    //reaktion = (eeprom[GW_REAKTION +(eingang>>1)] >> (4 *(eingang&0x01))) &0x0F;
+    reaktion1 = (eeprom[GW_REAKTION +(eingang>>1)] >>4);
+    //reaktion2 = (eeprom[GW_REAKTION +(eingang>>1)] &0x0F);
 
+    // 3 Grenzwerte bearbeiten
+    for(i=0;i<3;i++)
+    {
+        schwelle = (int)eeprom[GW_SCHWELLE1+i +(eingang*3)];
 
-    //steigend
-    if ((lasttemp[eingang]<schwelle2 || sende_sofort_bus_return) && temp[eingang]>schwelle2) {  // GW 2 überschritten
-        if (reaktion&0x0C)
-        {
-            grenzwert_eingang= (reaktion>>2)&0x01;
-            gw_changed = 1;
-        } }
+        //steigend
+        if ((lasttemp[eingang]<schwelle || sende_sofort_bus_return) && messwerte[eingang]>schwelle) {  // GW überschritten
+            if (reaktion1 &0x08)    // Reaktion Überschreiten aktiv
+            {
+                grenzwert_eingang = (reaktion1 >>2)&0x01;
+                gw_changed = 1;
+            }
+        }
 
-    if ((lasttemp[eingang]<schwelle1 || sende_sofort_bus_return) && temp[eingang]>schwelle1) {  // GW 1 überschritten
-        if (reaktion&0xC0)
-        {
-            grenzwert_eingang= (reaktion>>6)&0x01;
-            gw_changed = 1;
-        } }
-
-
-    //fallend
-    if ((lasttemp[eingang]>schwelle1 || sende_sofort_bus_return) && temp[eingang]<schwelle1) {  // GW 1 unterschritten
-        if (reaktion&0x30)
-        {
-            grenzwert_eingang= (reaktion>>4)&0x01;
-            gw_changed = 1;
-        } }
-
-    if ((lasttemp[eingang]>schwelle2 || sende_sofort_bus_return) && temp[eingang]<schwelle2) {  // GW 2 unterschritten
-        if (reaktion&0x03)
-        {
-            grenzwert_eingang= reaktion&0x01;
-            gw_changed = 1;
-        } }
+        //fallend
+        if ((lasttemp[eingang]>schwelle || sende_sofort_bus_return) && messwerte[eingang]<schwelle) {  // GW unterschritten
+            if (reaktion1 &0x02)    // Reaktion Unterschreiten aktiv
+            {
+                grenzwert_eingang = (reaktion1 >>1)&0x01;
+                gw_changed = 1;
+            }
+        }
+    }
 
     // Grenzwert dem Eingangsobjekt zuordnen
     if(grenzwert_eingang)
@@ -209,8 +205,8 @@ void grenzwert (unsigned char eingang)
     }
 
     // Aktuellen Wert speichern
-    lasttemp[eingang]=temp[eingang];
-} */
+    lasttemp[eingang]=messwerte[eingang];
+}
 
 
 /**
@@ -224,6 +220,9 @@ void grenzwert (unsigned char eingang)
 */
 void send_messdiff (unsigned char messwert)
 {
+    unsigned int mess_diff;
+    int mess_change;
+
     // TODO get messdiff and mess_change local, join with ee_local
     unsigned char ee_local; // Local copy to save flash
 
@@ -235,7 +234,7 @@ void send_messdiff (unsigned char messwert)
     {
         // Senden ab Messwertdifferenz
         mess_diff = (ee_local &0x7F) *10;
-
+/*
         if (messwerte[messwert]<=lastsend[messwert])
         {
             mess_change=lastsend[messwert]-messwerte[messwert];
@@ -244,8 +243,9 @@ void send_messdiff (unsigned char messwert)
         {
             mess_change=messwerte[messwert]-lastsend[messwert];
         }
-
-        if(mess_change>=mess_diff)
+*/
+        mess_change = lastsend[messwert]-messwerte[messwert];
+        if( abs(mess_change) >= mess_diff )
         {
             check_and_send(messwert);
         }
@@ -435,7 +435,7 @@ void restart_app()      // Alle Applikations-Parameter zurücksetzen
            timerbase[n] = (eeprom[THBASE_ZYKLSEND+(n>>1)] &0xF0);
        }
 */
-        // zyk Senden Basis für alle Eingänge, Beschränkung alte VD
+        // zyk Senden Basis für alle Eingänge
         timerbase[n] = (eeprom[THBASE_ZYKLSEND+(n>>1)] >> (4 *(n&0x01))) &0x0F;
 
         // Faktor und aktiv Bit7 holen
