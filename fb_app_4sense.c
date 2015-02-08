@@ -33,13 +33,10 @@ unsigned int grenzwerte;	// Grenzwertobjekte
 //unsigned char grenzwert_eingang=0;
 //int schwelle1, schwelle2;
 //unsigned char reaktion, objno;
+unsigned char objno;
+int schwelle;
+unsigned char help_obj;
 
-//unsigned int mess_diff;
-//int mess_change;
-
-
-
-//unsigned char kanal;
 //unsigned char zyk_senden_basis;
 unsigned char sequence;
 unsigned char sende_sofort_bus_return;
@@ -67,14 +64,14 @@ unsigned long read_obj_value(unsigned char objno)   // gibt den Wert eines Objek
     unsigned long objvalue;
 
     // Messwerte Temperatur/Feuchte Objekte 0-7
-        if(objno<8)
+        if(objno<2)     // TODO anpassung fertige VD <8
         {
             objvalue=sendewert(objno);  // Messwert umwandeln
             lastsend[objno]=messwerte[objno];
         }
         // Grenzwerte Objekte ab 8
         else
-            objvalue= (grenzwerte>>objno)&0x01;
+            objvalue= (grenzwerte>>(objno-2))&0x01; // TODO fertige VD -8
 
     return(objvalue);
 }
@@ -102,7 +99,7 @@ unsigned int sendewert(unsigned char objno)
 {
     int eis5temp;//, eis6temp;
 
-/*
+/*  This takes a lot of Flash, disabled meanwhile
     //unsigned char n;
 
     //eis6temp=-5500;
@@ -140,29 +137,30 @@ unsigned int sendewert(unsigned char objno)
 *   überprüft die Grenzwerte
 *   schreibt die Objektwerte und sendet Telegramm
 *
-* \param  eingang
+* \param  eingang, Sensoreingang 0-3
 *
 * @return void
 */
 void grenzwert (unsigned char eingang)
 {
-    int schwelle;
+    //int schwelle;
     unsigned char reaktion;
     unsigned char zuordnung;
 
-    unsigned char objno=0;
+   // unsigned char objno=0;
     unsigned char grenzwert_eingang = 0;
     __bit gw_changed = 0;
     unsigned char i;
-    unsigned char help_obj;
+    //unsigned char help_obj;
 
-    //eingang &= 0x03;        // Nur bis 3 erlaubt
+    eingang &= 0x03;        // Nur bis 3 erlaubt, 5byte Flash verbrauch
 
     // Reaktion und Schwellen lesen
     //reaktion1 = (eeprom[GW_REAKTION +(eingang>>1)] >>4);
     //reaktion2 = (eeprom[GW_REAKTION +(eingang>>1)] &0x0F);
 
-    zuordnung = eeprom[GW_ZUORDNUNG+eingang];
+    zuordnung = (eeprom[GW_ZUORDNUNG+eingang] >>1); // TODO fix in VD!?
+    sende_sofort_bus_return = 0;    // TODO fix later, disable now
 
     // 3 Grenzwerte bearbeiten
     for(i=0;i<3;i++)
@@ -170,8 +168,9 @@ void grenzwert (unsigned char eingang)
         help_obj=i+ eingang*3;
         objno = eingang+ (zuordnung&0x01);
 
-        reaktion = (eeprom[GW_REAKTION +(eingang>>1)] >> (4 *(eingang&0x01))) &0x0F;
-        schwelle = (int)eeprom[GW_SCHWELLE1+help_obj];
+        reaktion = (eeprom[GW_REAKTION +(2*eingang + (i>>1))] >> (4 *(i&0x01))) &0x0F;
+        //TODO jedes byte muss einzeln gelesen werden
+        schwelle = eeprom[GW_SCHWELLE1+(2*help_obj)]*10;   // *10 braucht 40byte!
 
         //steigend
         if ((lasttemp[objno]<schwelle || sende_sofort_bus_return) && messwerte[objno]>schwelle) {  // GW überschritten
@@ -206,15 +205,15 @@ void grenzwert (unsigned char eingang)
         //if(gw_changed && !sende_sofort_bus_return)
         if(gw_changed)
         {
-            send_obj_value(8+ help_obj);
+            send_obj_value(2+ help_obj);    //TODO anpassung fertige VD >8
+
+            // Aktuellen Wert speichern
+            lasttemp[objno]=messwerte[objno];
         }
 
         // Nächste Zuordnung
         zuordnung = zuordnung>>2;
     }
-
-    // Aktuellen Wert speichern
-    lasttemp[objno]=messwerte[objno];
 }
 
 
@@ -223,7 +222,7 @@ void grenzwert (unsigned char eingang)
 *   überprüft die Messwertdifferenz
 *   senden über delay_timer
 *
-* \param  messwert
+* \param  messwert, 0,2,4,6 = temp; 1,3,5,7 = humid
 *
 * @return void
 */
@@ -232,7 +231,6 @@ void send_messdiff (unsigned char messwert)
     unsigned int mess_diff;
     int mess_change;
 
-    // TODO get messdiff and mess_change local, join with ee_local
     unsigned char ee_local; // Local copy to save flash
 
     messwert &= 0x07;    // Nur bis 7 erlaubt
@@ -244,6 +242,7 @@ void send_messdiff (unsigned char messwert)
         // Senden ab Messwertdifferenz
         mess_diff = (ee_local &0x7F) *10;
 /*
+        // Alternative solution without abs()
         if (messwerte[messwert]<=lastsend[messwert])
         {
             mess_change=lastsend[messwert]-messwerte[messwert];
@@ -254,7 +253,7 @@ void send_messdiff (unsigned char messwert)
         }
 */
         mess_change = lastsend[messwert]-messwerte[messwert];
-        if( abs(mess_change) > mess_diff )
+        if( abs(mess_change) > mess_diff )  //TODO must be >= if VD is doesn't allow 0 any more
         {
             check_and_send(messwert);
         }
@@ -319,21 +318,17 @@ void delay_timer(void)
                 check_and_send(tmr_obj);
             }
             // Zyklisch Senden Grenzwerte
-            else if (tmr_obj<=7)
+            else if (tmr_obj<=11)
             {
                 objno_help=tmr_obj-4;
 
-                check_and_send(objno_help<<1);
-
-
+                //check_and_send(objno_help<<1);
 
                 // Grenzwert senden wenn aktiv
-                            if ( (eeprom[0x75+tmr_obj]) & 0x80)
-                            {
-                                send_obj_value((tmr_obj<<1)+1);
-                            }
-
-
+                if ( (eeprom[0x75+tmr_obj]) & 0x80)
+                {
+                    send_obj_value((tmr_obj<<1)+1);
+                }
 
                 // Zeit holen und deaktivieren, Bit 7 = 0
                 //zykval_help=(eeprom[0x69+(eingang>>1)])>>(4*(!(eingang&0x01)))&0x0F;
@@ -346,10 +341,10 @@ void delay_timer(void)
                     timercnt[tmr_obj] = (eeprom[0x69+(objno_help>>1)] >>4);
                 }
             }
-            // Sendeverzögerung Eingänge Messwerte Busspannungswiederkehr über Objekt 8
+            // Sendeverzögerung Eingänge Messwerte Busspannungswiederkehr über Objekt 12
             else
             {
-                timercnt[8] = 0;    // Timer 8 anhalten
+                timercnt[12] = 0;    // Timer 8 anhalten
                 // Verzögertes senden aktiv, Bit 0,2,4,6
                 verz_start = eeprom[0x79]&0x55;
 
@@ -357,7 +352,7 @@ void delay_timer(void)
                 {
                     if (verz_start & 0x40)      // Start mit Eingang 4
                     {
-                        check_and_send(n);
+                        //check_and_send(n);
                     }
                     verz_start = verz_start<<2; // vorheringer Eingang
                 }

@@ -204,7 +204,7 @@ void main(void)
                         messwerte[kanal*2+1] = dht_humid + (signed char) eeprom[HUMID_OFFSET+ 2*kanal];
 
                          // Grenzwerte
-                         //grenzwert(kanal);
+                         grenzwert(kanal);
 
                          // Messwertdifferenz
                          send_messdiff(2*kanal);
