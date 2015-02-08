@@ -123,7 +123,8 @@ void main(void)
             {
                 for(kanal=0;kanal<=3;kanal++)
                 {
-                    if(ee_local &0x01)     // DS temperature sensor
+                    if(eeprom[SENSOR_TYPE+kanal] &0x01)     // DS temperature sensor
+                    //if(ee_local &0x01)     // DS temperature sensor
                     {
                         interrupted=0;
                         if(family_code[kanal] && start_tempconversion())    // Start convert if sensor known
@@ -143,7 +144,7 @@ void main(void)
             // Warten bis DS Sensoren fertig sind
             else if (sequence==2)
             {
-                timercnt[9] = 0x80+7;   // wait approx. 0.9s for sensor to be done
+                timercnt[13] = 0x80+7;   // wait approx. 0.9s for sensor to be done
                                         // secuence 3 set by delaytimer
                 kanal = 0;
                 sequence=3;             // Konvertierung abgeschlossen
@@ -175,14 +176,14 @@ void main(void)
                 }
                 // Prolong waiting for DHT Sensor, if any
                 else if(ee_local &0x02)
-                    timercnt[9] = 9;        // add approx. 1s
+                    timercnt[13] = 9;        // add approx. 1s
 
                 // Next channel
                 //if (kanal<3)
                 kanal++;
                 if (kanal >3) //else            // Reached last channel
                 {
-                    timercnt[9] |= 0x80;   // start timer
+                    timercnt[13] |= 0x80;   // start timer
                     kanal = 0;
                     sequence = 5;
                 }
@@ -196,21 +197,23 @@ void main(void)
                         dht1x_init(kanal);
                     family_code[kanal] = dht_ow_receive(kanal);  // Read DHT sensor
                     dht_decode(ee_local &0x04);
+                    {
 
-                    // Safe with offset
-                    messwerte[kanal*2] = dht_temp + (signed char) eeprom[TEMP_OFFSET+ 2*kanal];
-                    messwerte[kanal*2+1] = dht_humid + (signed char) eeprom[HUMID_OFFSET+ 2*kanal];
+                        // Safe with offset
+                        messwerte[kanal*2] = dht_temp + (signed char) eeprom[TEMP_OFFSET+ 2*kanal];
+                        messwerte[kanal*2+1] = dht_humid + (signed char) eeprom[HUMID_OFFSET+ 2*kanal];
 
-                     // Grenzwerte
-                     //grenzwert(kanal);
+                         // Grenzwerte
+                         //grenzwert(kanal);
 
-                     // Messwertdifferenz
-                     send_messdiff(2*kanal);
-                     send_messdiff(2*kanal+1);
+                         // Messwertdifferenz
+                         send_messdiff(2*kanal);
+                         send_messdiff(2*kanal+1);
 
-                     // Buswiederkehr bearbeiten
-                     //if (sende_sofort_bus_return)
-                       //  bus_return();
+                         // Buswiederkehr bearbeiten
+                         //if (sende_sofort_bus_return)
+                           //  bus_return();
+                    }
                 }
 
                // if (kanal<3)

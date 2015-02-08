@@ -42,7 +42,9 @@
 #define HUMID_ZYKLSEND  0xCC    // *2n
 #define THBASE_ZYKLSEND 0xD5    // *1/2n
 
+#define GW_ZUORDNUNG    0xD7    // *n
 #define GW_REAKTION     0xDB    // *1/2n
+#define GW_ZYKL_BASE    0xDC    // 2*n
 #define GW_SCHWELLE1    0xE7    // 3*n
 #define GW_SCHWELLE2    0xE9    // 3*n
 #define GW_SCHWELLE3    0xEB    // 3*n
@@ -51,7 +53,7 @@
 
 
 // Anzahl Timer
-#define TIMERANZ	10	// 4 Timer Messwert zyklisch, 4 Sendeverzögerung Messwertdiff, Sendeverzögerung start
+#define TIMERANZ	14	// 4 Timer Messwert zyklisch, 4 Sendeverzögerung Messwertdiff, Sendeverzögerung start
 
 void restart_app(void);		// Alle Applikations-Parameter zurücksetzen
 void write_value_req(unsigned char objno);		    // Routine zur Verarbeitung eingegegangener Telegramme zum Schreiben eines Objektwertes
@@ -66,10 +68,9 @@ void send_messdiff (unsigned char eingang);
 
 extern unsigned int timer;				        // Timer für zyklisches senden, wird alle 130ms hochgezählt
 extern __bit delay_toggle;				        // um nur jedes 2. Mal die delay routine auszuführen
-extern int __idata __at (0xFE-0x10) messwerte[8];    // Temperatur und Luftfeuchte speichern
+extern int __idata __at (0xFE-16) messwerte[8]; // Temperatur und Luftfeuchte speichern
 
 extern unsigned char timercnt[TIMERANZ];        // speicherplatz für den timercounter und 1 status bit
-extern unsigned char zyk_senden_basis;
 extern unsigned char sequence;
 extern unsigned char sende_sofort_bus_return;
 
