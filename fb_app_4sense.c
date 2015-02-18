@@ -33,9 +33,11 @@ unsigned int grenzwerte;	// Grenzwertobjekte
 //unsigned char grenzwert_eingang=0;
 //int schwelle1, schwelle2;
 //unsigned char reaktion, objno;
-unsigned char objno;
+
+
+//unsigned char objno;
 int schwelle;
-unsigned char help_obj;
+//unsigned char help_obj;
 
 //unsigned char zyk_senden_basis;
 unsigned char sequence;
@@ -147,17 +149,13 @@ void grenzwert (unsigned char eingang)
     unsigned char reaktion;
     unsigned char zuordnung;
 
-   // unsigned char objno=0;
-    unsigned char grenzwert_eingang = 0;
-    __bit gw_changed = 0;
+    unsigned char objno=0;
+    unsigned char help_obj;
+    __bit grenzwert_eingang;
+    __bit gw_changed;
     unsigned char i;
-    //unsigned char help_obj;
 
     eingang &= 0x03;        // Nur bis 3 erlaubt, 5byte Flash verbrauch
-
-    // Reaktion und Schwellen lesen
-    //reaktion1 = (eeprom[GW_REAKTION +(eingang>>1)] >>4);
-    //reaktion2 = (eeprom[GW_REAKTION +(eingang>>1)] &0x0F);
 
     zuordnung = (eeprom[GW_ZUORDNUNG+eingang] >>1); // TODO fix in VD!?
     sende_sofort_bus_return = 0;    // TODO fix later, disable now
@@ -165,18 +163,21 @@ void grenzwert (unsigned char eingang)
     // 3 Grenzwerte bearbeiten
     for(i=0;i<3;i++)
     {
+        grenzwert_eingang = 0;  // Clear
+        gw_changed = 0;         // Clear
+
         help_obj=i+ eingang*3;
-        objno = eingang+ (zuordnung&0x01);
+        objno = 2*eingang+ (zuordnung&0x01);
 
         reaktion = (eeprom[GW_REAKTION +(2*eingang + (i>>1))] >> (4 *(i&0x01))) &0x0F;
-        //TODO jedes byte muss einzeln gelesen werden
-        schwelle = eeprom[GW_SCHWELLE1+(2*help_obj)]*10;   // *10 braucht 40byte!
+        schwelle = (int)((eeprom[GW_SCHWELLE1L+(help_obj*2)]<<8) | eeprom[GW_SCHWELLE1H+(help_obj*2)])*10;
+        //schwelle = schwelle<<3 + schwelle<<1;     // alternate *10
 
         //steigend
         if ((lasttemp[objno]<schwelle || sende_sofort_bus_return) && messwerte[objno]>schwelle) {  // GW überschritten
             if (reaktion &0x08)    // Reaktion Überschreiten aktiv
             {
-                grenzwert_eingang = (reaktion >>2)&0x01;
+                grenzwert_eingang = (reaktion >>2) &0x01;
                 gw_changed = 1;
             }
         }
@@ -190,21 +191,16 @@ void grenzwert (unsigned char eingang)
             }
         }
 
-
-        // Grenzwert dem Eingangsobjekt zuordnen
-        if(grenzwert_eingang)
-        {
-            grenzwerte |= (1<<help_obj);
-        }
-        else
-        {
-            grenzwerte &= ~(1<<help_obj);
-        }
-
         // Nicht senden nach Neustart
         //if(gw_changed && !sende_sofort_bus_return)
         if(gw_changed)
         {
+            // Neuen Grenzwert dem Eingangsobjekt zuordnen
+            if(grenzwert_eingang)
+                grenzwerte |= (1<<help_obj);
+            else
+                grenzwerte &= ~(1<<help_obj);
+
             send_obj_value(2+ help_obj);    //TODO anpassung fertige VD >8
 
             // Aktuellen Wert speichern
