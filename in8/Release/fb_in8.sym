@@ -4,475 +4,6 @@ Symbol Table
 
     .__.ABS.                                                    =  0000 G
     A                                                              00E0 
- 19 A$fb_in8$1000                                                  0213 GR
- 19 A$fb_in8$1001                                                  0215 GR
- 19 A$fb_in8$1002                                                  0218 GR
- 19 A$fb_in8$1003                                                  0219 GR
- 19 A$fb_in8$1004                                                  021A GR
- 19 A$fb_in8$1005                                                  021C GR
- 19 A$fb_in8$1006                                                  021D GR
- 19 A$fb_in8$1007                                                  021F GR
- 19 A$fb_in8$1010                                                  0220 GR
- 19 A$fb_in8$1011                                                  0221 GR
- 19 A$fb_in8$1012                                                  0223 GR
- 19 A$fb_in8$1013                                                  0224 GR
- 19 A$fb_in8$1014                                                  0226 GR
- 19 A$fb_in8$1015                                                  0228 GR
- 19 A$fb_in8$1016                                                  0229 GR
- 19 A$fb_in8$1017                                                  022C GR
- 19 A$fb_in8$1019                                                  022D GR
- 19 A$fb_in8$1020                                                  022E GR
- 19 A$fb_in8$1021                                                  0230 GR
- 19 A$fb_in8$1022                                                  0231 GR
- 19 A$fb_in8$1023                                                  0232 GR
- 19 A$fb_in8$1024                                                  0233 GR
- 19 A$fb_in8$1025                                                  0234 GR
- 19 A$fb_in8$1026                                                  0236 GR
- 19 A$fb_in8$1027                                                  0237 GR
- 19 A$fb_in8$1028                                                  023A GR
- 19 A$fb_in8$1029                                                  023B GR
- 19 A$fb_in8$1030                                                  023C GR
- 19 A$fb_in8$1031                                                  023E GR
- 19 A$fb_in8$1032                                                  023F GR
- 19 A$fb_in8$1033                                                  0241 GR
- 19 A$fb_in8$1034                                                  0244 GR
- 19 A$fb_in8$1035                                                  0245 GR
- 19 A$fb_in8$1036                                                  0247 GR
- 19 A$fb_in8$1037                                                  0249 GR
- 19 A$fb_in8$1038                                                  024A GR
- 19 A$fb_in8$1040                                                  024C GR
- 19 A$fb_in8$1041                                                  024D GR
- 19 A$fb_in8$1043                                                  024E GR
- 19 A$fb_in8$1044                                                  0251 GR
- 19 A$fb_in8$1045                                                  0253 GR
- 19 A$fb_in8$1048                                                  0254 GR
- 19 A$fb_in8$1049                                                  0255 GR
- 19 A$fb_in8$1053                                                  0258 GR
- 19 A$fb_in8$1054                                                  025A GR
- 19 A$fb_in8$1055                                                  025C GR
- 19 A$fb_in8$1056                                                  025E GR
- 19 A$fb_in8$1057                                                  0260 GR
- 19 A$fb_in8$1058                                                  0263 GR
- 19 A$fb_in8$1059                                                  0265 GR
- 19 A$fb_in8$1060                                                  0267 GR
- 19 A$fb_in8$1061                                                  0269 GR
- 19 A$fb_in8$1062                                                  026B GR
- 19 A$fb_in8$1066                                                  026D GR
- 19 A$fb_in8$1067                                                  026E GR
- 19 A$fb_in8$1068                                                  0270 GR
- 19 A$fb_in8$1069                                                  0271 GR
- 19 A$fb_in8$1073                                                  0273 GR
- 19 A$fb_in8$1074                                                  0274 GR
- 19 A$fb_in8$1078                                                  0277 GR
- 19 A$fb_in8$1080                                                  0279 GR
- 19 A$fb_in8$1081                                                  027A GR
- 19 A$fb_in8$1082                                                  027C GR
- 19 A$fb_in8$1085                                                  027E GR
- 19 A$fb_in8$1086                                                  027F GR
- 19 A$fb_in8$1087                                                  0281 GR
- 19 A$fb_in8$1088                                                  0282 GR
- 19 A$fb_in8$1089                                                  0283 GR
- 19 A$fb_in8$1090                                                  0285 GR
- 19 A$fb_in8$1091                                                  0286 GR
- 19 A$fb_in8$1092                                                  0288 GR
- 19 A$fb_in8$1093                                                  0289 GR
- 19 A$fb_in8$1094                                                  028B GR
- 19 A$fb_in8$1095                                                  028D GR
- 19 A$fb_in8$1096                                                  028E GR
- 19 A$fb_in8$1097                                                  028F GR
- 19 A$fb_in8$1100                                                  0292 GR
- 19 A$fb_in8$1103                                                  0295 GR
- 19 A$fb_in8$1104                                                  0296 GR
- 19 A$fb_in8$1105                                                  0297 GR
- 19 A$fb_in8$1106                                                  0298 GR
- 19 A$fb_in8$1107                                                  029A GR
- 19 A$fb_in8$1108                                                  029B GR
- 19 A$fb_in8$1109                                                  029D GR
- 19 A$fb_in8$1110                                                  029E GR
- 19 A$fb_in8$1113                                                  02A0 GR
- 19 A$fb_in8$1114                                                  02A3 GR
- 19 A$fb_in8$1118                                                  02A5 GR
- 19 A$fb_in8$1119                                                  02A6 GR
- 19 A$fb_in8$1123                                                  02A8 GR
- 19 A$fb_in8$1124                                                  02AA GR
- 19 A$fb_in8$1125                                                  02AC GR
- 19 A$fb_in8$1126                                                  02AE GR
- 19 A$fb_in8$1129                                                  02B1 GR
- 19 A$fb_in8$1132                                                  02B4 GR
- 19 A$fb_in8$1133                                                  02B6 GR
- 19 A$fb_in8$1134                                                  02B8 GR
- 19 A$fb_in8$1137                                                  02BA GR
- 19 A$fb_in8$1138                                                  02BC GR
- 19 A$fb_in8$1142                                                  02BE GR
- 19 A$fb_in8$1143                                                  02C1 GR
- 19 A$fb_in8$1144                                                  02C3 GR
- 19 A$fb_in8$1145                                                  02C5 GR
- 19 A$fb_in8$1146                                                  02C8 GR
- 19 A$fb_in8$1147                                                  02CA GR
- 19 A$fb_in8$1151                                                  02CC GR
- 19 A$fb_in8$1152                                                  02CF GR
- 19 A$fb_in8$1156                                                  02D2 GR
- 19 A$fb_in8$1159                                                  02D4 GR
- 19 A$fb_in8$1162                                                  02D6 GR
- 19 A$fb_in8$1163                                                  02D8 GR
- 19 A$fb_in8$1164                                                  02DA GR
- 19 A$fb_in8$1165                                                  02DD GR
- 19 A$fb_in8$1166                                                  02DF GR
- 19 A$fb_in8$1167                                                  02E1 GR
- 19 A$fb_in8$1171                                                  02E3 GR
- 19 A$fb_in8$1173                                                  02E5 GR
- 19 A$fb_in8$1174                                                  02E7 GR
- 19 A$fb_in8$1175                                                  02E8 GR
- 19 A$fb_in8$1176                                                  02EA GR
- 19 A$fb_in8$1177                                                  02EB GR
- 19 A$fb_in8$1183                                                  02ED GR
- 19 A$fb_in8$1184                                                  02F0 GR
- 19 A$fb_in8$1188                                                  02F2 GR
- 19 A$fb_in8$1191                                                  02F4 GR
- 19 A$fb_in8$1197                                                  02F7 GR
- 19 A$fb_in8$1198                                                  02FA GR
- 19 A$fb_in8$1202                                                  02FC GR
- 19 A$fb_in8$1206                                                  02FF GR
- 19 A$fb_in8$1209                                                  0302 GR
- 19 A$fb_in8$1212                                                  0304 GR
- 19 A$fb_in8$1216                                                  0305 GR
- 19 A$fb_in8$1219                                                  0308 GR
- 19 A$fb_in8$1222                                                  030A GR
- 19 A$fb_in8$1226                                                  030B GR
- 19 A$fb_in8$1229                                                  030E GR
- 19 A$fb_in8$1232                                                  0310 GR
- 19 A$fb_in8$1235                                                  0313 GR
- 19 A$fb_in8$1238                                                  0316 GR
- 19 A$fb_in8$1241                                                  0319 GR
- 19 A$fb_in8$1244                                                  031B GR
- 19 A$fb_in8$1247                                                  031E GR
- 19 A$fb_in8$1251                                                  0320 GR
- 19 A$fb_in8$1252                                                  0323 GR
- 19 A$fb_in8$1256                                                  0326 GR
- 19 A$fb_in8$1262                                                  0329 GR
- 19 A$fb_in8$1263                                                  032C GR
- 19 A$fb_in8$1267                                                  032E GR
- 19 A$fb_in8$1271                                                  0331 GR
- 19 A$fb_in8$1277                                                  0334 GR
- 19 A$fb_in8$1278                                                  0337 GR
- 19 A$fb_in8$1282                                                  0339 GR
- 19 A$fb_in8$1286                                                  033C GR
- 19 A$fb_in8$1289                                                  033E GR
- 19 A$fb_in8$1292                                                  0341 GR
- 19 A$fb_in8$1293                                                  0343 GR
- 19 A$fb_in8$1294                                                  0344 GR
- 19 A$fb_in8$1296                                                  0347 GR
- 19 A$fb_in8$1297                                                  0349 GR
- 19 A$fb_in8$1298                                                  034B GR
- 19 A$fb_in8$1299                                                  034C GR
- 19 A$fb_in8$1300                                                  034D GR
- 19 A$fb_in8$1304                                                  034F GR
- 19 A$fb_in8$1305                                                  0352 GR
- 19 A$fb_in8$1309                                                  0355 GR
- 19 A$fb_in8$1310                                                  0357 GR
- 19 A$fb_in8$1314                                                  0359 GR
- 19 A$fb_in8$1315                                                  035B GR
- 19 A$fb_in8$1316                                                  035C GR
- 19 A$fb_in8$1317                                                  035D GR
- 19 A$fb_in8$1318                                                  035F GR
- 19 A$fb_in8$1319                                                  0361 GR
- 19 A$fb_in8$1320                                                  0362 GR
- 19 A$fb_in8$1321                                                  0363 GR
- 19 A$fb_in8$1325                                                  0365 GR
- 19 A$fb_in8$1329                                                  0367 GR
- 19 A$fb_in8$1330                                                  0369 GR
- 19 A$fb_in8$1331                                                  036B GR
- 19 A$fb_in8$1332                                                  036C GR
- 19 A$fb_in8$1334                                                  036F GR
- 19 A$fb_in8$1335                                                  0370 GR
- 19 A$fb_in8$1336                                                  0371 GR
- 19 A$fb_in8$1337                                                  0372 GR
- 19 A$fb_in8$1338                                                  0374 GR
- 19 A$fb_in8$1341                                                  0376 GR
- 19 A$fb_in8$1342                                                  0379 GR
- 19 A$fb_in8$1343                                                  037C GR
- 19 A$fb_in8$1346                                                  037E GR
- 10 A$fb_in8$516                                                   0000 GR
- 10 A$fb_in8$517                                                   0003 GR
- 10 A$fb_in8$519                                                   000B GR
- 10 A$fb_in8$521                                                   0013 GR
- 10 A$fb_in8$523                                                   001B GR
- 18 A$fb_in8$538                                                   0000 GR
- 10 A$fb_in8$545                                                   001E GR
- 10 A$fb_in8$547                                                   0021 GR
- 19 A$fb_in8$583                                                   0000 GR
- 19 A$fb_in8$584                                                   0002 GR
- 19 A$fb_in8$585                                                   0005 GR
- 19 A$fb_in8$586                                                   0007 GR
- 19 A$fb_in8$589                                                   0009 GR
- 19 A$fb_in8$590                                                   000B GR
- 19 A$fb_in8$591                                                   000C GR
- 19 A$fb_in8$594                                                   000E GR
- 19 A$fb_in8$595                                                   0010 GR
- 19 A$fb_in8$596                                                   0011 GR
- 19 A$fb_in8$597                                                   0012 GR
- 19 A$fb_in8$600                                                   0014 GR
- 19 A$fb_in8$603                                                   0016 GR
- 19 A$fb_in8$606                                                   0018 GR
- 19 A$fb_in8$607                                                   001A GR
- 19 A$fb_in8$608                                                   001B GR
- 19 A$fb_in8$609                                                   001D GR
- 19 A$fb_in8$610                                                   001E GR
- 19 A$fb_in8$611                                                   0020 GR
- 19 A$fb_in8$614                                                   0022 GR
- 19 A$fb_in8$617                                                   0024 GR
- 19 A$fb_in8$618                                                   0027 GR
- 19 A$fb_in8$619                                                   002A GR
- 19 A$fb_in8$620                                                   002C GR
- 19 A$fb_in8$624                                                   002E GR
- 19 A$fb_in8$625                                                   0031 GR
- 19 A$fb_in8$626                                                   0032 GR
- 19 A$fb_in8$627                                                   0033 GR
- 19 A$fb_in8$628                                                   0034 GR
- 19 A$fb_in8$632                                                   0035 GR
- 19 A$fb_in8$633                                                   0038 GR
- 19 A$fb_in8$634                                                   0039 GR
- 19 A$fb_in8$635                                                   003A GR
- 19 A$fb_in8$636                                                   003C GR
- 19 A$fb_in8$637                                                   003D GR
- 19 A$fb_in8$638                                                   003E GR
- 19 A$fb_in8$641                                                   0040 GR
- 19 A$fb_in8$644                                                   0043 GR
- 19 A$fb_in8$647                                                   0045 GR
- 19 A$fb_in8$648                                                   0047 GR
- 19 A$fb_in8$649                                                   0049 GR
- 19 A$fb_in8$650                                                   004C GR
- 19 A$fb_in8$653                                                   004E GR
- 19 A$fb_in8$654                                                   0051 GR
- 19 A$fb_in8$655                                                   0054 GR
- 19 A$fb_in8$656                                                   0057 GR
- 19 A$fb_in8$657                                                   005A GR
- 19 A$fb_in8$658                                                   005D GR
- 19 A$fb_in8$659                                                   0060 GR
- 19 A$fb_in8$662                                                   0063 GR
- 19 A$fb_in8$665                                                   0066 GR
- 19 A$fb_in8$666                                                   0068 GR
- 19 A$fb_in8$667                                                   006B GR
- 19 A$fb_in8$668                                                   006D GR
- 19 A$fb_in8$671                                                   006F GR
- 19 A$fb_in8$674                                                   0072 GR
- 19 A$fb_in8$675                                                   0074 GR
- 19 A$fb_in8$677                                                   0076 GR
- 19 A$fb_in8$678                                                   0078 GR
- 19 A$fb_in8$679                                                   007B GR
- 19 A$fb_in8$680                                                   007C GR
- 19 A$fb_in8$681                                                   007D GR
- 19 A$fb_in8$682                                                   007E GR
- 19 A$fb_in8$683                                                   0080 GR
- 19 A$fb_in8$684                                                   0083 GR
- 19 A$fb_in8$685                                                   0084 GR
- 19 A$fb_in8$686                                                   0085 GR
- 19 A$fb_in8$687                                                   0086 GR
- 19 A$fb_in8$688                                                   0088 GR
- 19 A$fb_in8$689                                                   0089 GR
- 19 A$fb_in8$690                                                   008B GR
- 19 A$fb_in8$691                                                   008D GR
- 19 A$fb_in8$693                                                   008F GR
- 19 A$fb_in8$694                                                   0090 GR
- 19 A$fb_in8$695                                                   0091 GR
- 19 A$fb_in8$696                                                   0092 GR
- 19 A$fb_in8$697                                                   0093 GR
- 19 A$fb_in8$698                                                   0094 GR
- 19 A$fb_in8$700                                                   0095 GR
- 19 A$fb_in8$701                                                   0098 GR
- 19 A$fb_in8$702                                                   0099 GR
- 19 A$fb_in8$703                                                   009A GR
- 19 A$fb_in8$704                                                   009B GR
- 19 A$fb_in8$705                                                   009C GR
- 19 A$fb_in8$706                                                   009D GR
- 19 A$fb_in8$707                                                   009F GR
- 19 A$fb_in8$710                                                   00A1 GR
- 19 A$fb_in8$713                                                   00A4 GR
- 19 A$fb_in8$716                                                   00A7 GR
- 19 A$fb_in8$719                                                   00AA GR
- 19 A$fb_in8$723                                                   00AD GR
- 19 A$fb_in8$724                                                   00AF GR
- 19 A$fb_in8$725                                                   00B1 GR
- 19 A$fb_in8$728                                                   00B3 GR
- 19 A$fb_in8$731                                                   00B5 GR
- 19 A$fb_in8$734                                                   00B8 GR
- 19 A$fb_in8$737                                                   00BB GR
- 19 A$fb_in8$740                                                   00BD GR
- 19 A$fb_in8$741                                                   00BE GR
- 19 A$fb_in8$742                                                   00C1 GR
- 19 A$fb_in8$743                                                   00C2 GR
- 19 A$fb_in8$747                                                   00C4 GR
- 19 A$fb_in8$748                                                   00C7 GR
- 19 A$fb_in8$749                                                   00C9 GR
- 19 A$fb_in8$750                                                   00CC GR
- 19 A$fb_in8$751                                                   00CF GR
- 19 A$fb_in8$752                                                   00D2 GR
- 19 A$fb_in8$755                                                   00D4 GR
- 19 A$fb_in8$756                                                   00D6 GR
- 19 A$fb_in8$757                                                   00D9 GR
- 19 A$fb_in8$758                                                   00DC GR
- 19 A$fb_in8$759                                                   00DF GR
- 19 A$fb_in8$765                                                   00E1 GR
- 19 A$fb_in8$766                                                   00E3 GR
- 19 A$fb_in8$767                                                   00E6 GR
- 19 A$fb_in8$768                                                   00E9 GR
- 19 A$fb_in8$771                                                   00EB GR
- 19 A$fb_in8$774                                                   00ED GR
- 19 A$fb_in8$777                                                   00F0 GR
- 19 A$fb_in8$780                                                   00F3 GR
- 19 A$fb_in8$783                                                   00F5 GR
- 19 A$fb_in8$784                                                   00F8 GR
- 19 A$fb_in8$785                                                   00F9 GR
- 19 A$fb_in8$786                                                   00FA GR
- 19 A$fb_in8$787                                                   00FB GR
- 19 A$fb_in8$788                                                   00FE GR
- 19 A$fb_in8$790                                                   0100 GR
- 19 A$fb_in8$792                                                   0103 GR
- 19 A$fb_in8$793                                                   0106 GR
- 19 A$fb_in8$795                                                   0109 GR
- 19 A$fb_in8$796                                                   010B GR
- 19 A$fb_in8$797                                                   010E GR
- 19 A$fb_in8$801                                                   0111 GR
- 19 A$fb_in8$802                                                   0113 GR
- 19 A$fb_in8$803                                                   0115 GR
- 19 A$fb_in8$804                                                   0118 GR
- 19 A$fb_in8$805                                                   011B GR
- 19 A$fb_in8$806                                                   011D GR
- 19 A$fb_in8$809                                                   011F GR
- 19 A$fb_in8$812                                                   0122 GR
- 19 A$fb_in8$815                                                   0125 GR
- 19 A$fb_in8$816                                                   0128 GR
- 19 A$fb_in8$817                                                   012A GR
- 19 A$fb_in8$818                                                   012C GR
- 19 A$fb_in8$819                                                   012F GR
- 19 A$fb_in8$820                                                   0131 GR
- 19 A$fb_in8$824                                                   0133 GR
- 19 A$fb_in8$828                                                   0135 GR
- 19 A$fb_in8$829                                                   0137 GR
- 19 A$fb_in8$830                                                   013A GR
- 19 A$fb_in8$834                                                   013C GR
- 19 A$fb_in8$835                                                   013E GR
- 19 A$fb_in8$836                                                   0140 GR
- 19 A$fb_in8$837                                                   0141 GR
- 19 A$fb_in8$838                                                   0143 GR
- 19 A$fb_in8$839                                                   0144 GR
- 19 A$fb_in8$840                                                   0145 GR
- 19 A$fb_in8$841                                                   0146 GR
- 19 A$fb_in8$842                                                   0149 GR
- 19 A$fb_in8$843                                                   014A GR
- 19 A$fb_in8$844                                                   014B GR
- 19 A$fb_in8$845                                                   014C GR
- 19 A$fb_in8$846                                                   014E GR
- 19 A$fb_in8$847                                                   014F GR
- 19 A$fb_in8$848                                                   0151 GR
- 19 A$fb_in8$851                                                   0153 GR
- 19 A$fb_in8$852                                                   0155 GR
- 19 A$fb_in8$853                                                   0156 GR
- 19 A$fb_in8$854                                                   0157 GR
- 19 A$fb_in8$855                                                   0159 GR
- 19 A$fb_in8$856                                                   015B GR
- 19 A$fb_in8$857                                                   015D GR
- 19 A$fb_in8$858                                                   0160 GR
- 19 A$fb_in8$859                                                   0162 GR
- 19 A$fb_in8$863                                                   0164 GR
- 19 A$fb_in8$864                                                   0166 GR
- 19 A$fb_in8$865                                                   0167 GR
- 19 A$fb_in8$866                                                   0168 GR
- 19 A$fb_in8$867                                                   0169 GR
- 19 A$fb_in8$868                                                   016C GR
- 19 A$fb_in8$869                                                   016D GR
- 19 A$fb_in8$870                                                   016E GR
- 19 A$fb_in8$871                                                   0170 GR
- 19 A$fb_in8$874                                                   0172 GR
- 19 A$fb_in8$875                                                   0173 GR
- 19 A$fb_in8$876                                                   0174 GR
- 19 A$fb_in8$877                                                   0175 GR
- 19 A$fb_in8$878                                                   0177 GR
- 19 A$fb_in8$881                                                   0179 GR
- 19 A$fb_in8$882                                                   017B GR
- 19 A$fb_in8$883                                                   017C GR
- 19 A$fb_in8$884                                                   017D GR
- 19 A$fb_in8$887                                                   017E GR
- 19 A$fb_in8$888                                                   0180 GR
- 19 A$fb_in8$889                                                   0181 GR
- 19 A$fb_in8$890                                                   0182 GR
- 19 A$fb_in8$891                                                   0183 GR
- 19 A$fb_in8$892                                                   0185 GR
- 19 A$fb_in8$896                                                   0186 GR
- 19 A$fb_in8$897                                                   0188 GR
- 19 A$fb_in8$898                                                   018A GR
- 19 A$fb_in8$901                                                   018C GR
- 19 A$fb_in8$902                                                   018E GR
- 19 A$fb_in8$903                                                   0190 GR
- 19 A$fb_in8$904                                                   0193 GR
- 19 A$fb_in8$905                                                   0195 GR
- 19 A$fb_in8$909                                                   0197 GR
- 19 A$fb_in8$911                                                   0199 GR
- 19 A$fb_in8$912                                                   019A GR
- 19 A$fb_in8$913                                                   019C GR
- 19 A$fb_in8$914                                                   019E GR
- 19 A$fb_in8$918                                                   01A1 GR
- 19 A$fb_in8$919                                                   01A3 GR
- 19 A$fb_in8$920                                                   01A4 GR
- 19 A$fb_in8$921                                                   01A5 GR
- 19 A$fb_in8$922                                                   01A7 GR
- 19 A$fb_in8$923                                                   01A9 GR
- 19 A$fb_in8$924                                                   01AC GR
- 19 A$fb_in8$925                                                   01AD GR
- 19 A$fb_in8$926                                                   01AE GR
- 19 A$fb_in8$929                                                   01B1 GR
- 19 A$fb_in8$930                                                   01B3 GR
- 19 A$fb_in8$931                                                   01B5 GR
- 19 A$fb_in8$932                                                   01B7 GR
- 19 A$fb_in8$933                                                   01B9 GR
- 19 A$fb_in8$934                                                   01BC GR
- 19 A$fb_in8$935                                                   01BE GR
- 19 A$fb_in8$936                                                   01C0 GR
- 19 A$fb_in8$937                                                   01C2 GR
- 19 A$fb_in8$938                                                   01C4 GR
- 19 A$fb_in8$939                                                   01C6 GR
- 19 A$fb_in8$942                                                   01C8 GR
- 19 A$fb_in8$943                                                   01C9 GR
- 19 A$fb_in8$944                                                   01CA GR
- 19 A$fb_in8$945                                                   01CB GR
- 19 A$fb_in8$946                                                   01CD GR
- 19 A$fb_in8$947                                                   01D0 GR
- 19 A$fb_in8$948                                                   01D1 GR
- 19 A$fb_in8$949                                                   01D2 GR
- 19 A$fb_in8$950                                                   01D4 GR
- 19 A$fb_in8$951                                                   01D5 GR
- 19 A$fb_in8$952                                                   01D8 GR
- 19 A$fb_in8$953                                                   01D9 GR
- 19 A$fb_in8$954                                                   01DB GR
- 19 A$fb_in8$955                                                   01DD GR
- 19 A$fb_in8$956                                                   01DE GR
- 19 A$fb_in8$958                                                   01E0 GR
- 19 A$fb_in8$959                                                   01E1 GR
- 19 A$fb_in8$961                                                   01E2 GR
- 19 A$fb_in8$962                                                   01E5 GR
- 19 A$fb_in8$963                                                   01E7 GR
- 19 A$fb_in8$964                                                   01E8 GR
- 19 A$fb_in8$965                                                   01EB GR
- 19 A$fb_in8$967                                                   01ED GR
- 19 A$fb_in8$968                                                   01EF GR
- 19 A$fb_in8$970                                                   01F2 GR
- 19 A$fb_in8$973                                                   01F4 GR
- 19 A$fb_in8$974                                                   01F7 GR
- 19 A$fb_in8$975                                                   01FA GR
- 19 A$fb_in8$978                                                   01FC GR
- 19 A$fb_in8$979                                                   01FF GR
- 19 A$fb_in8$980                                                   0200 GR
- 19 A$fb_in8$982                                                   0202 GR
- 19 A$fb_in8$986                                                   0205 GR
- 19 A$fb_in8$987                                                   0206 GR
- 19 A$fb_in8$988                                                   0208 GR
- 19 A$fb_in8$991                                                   0209 GR
- 19 A$fb_in8$992                                                   020A GR
- 19 A$fb_in8$993                                                   020B GR
- 19 A$fb_in8$994                                                   020D GR
- 19 A$fb_in8$997                                                   020F GR
- 19 A$fb_in8$998                                                   0210 GR
- 19 A$fb_in8$999                                                   0211 GR
     A.0                                                            00E0 
     A.1                                                            00E1 
     A.2                                                            00E2 
@@ -500,126 +31,6 @@ Symbol Table
     B.5                                                            00F5 
     B.6                                                            00F6 
     B.7                                                            00F7 
- 19 C$fb_in8.c$100$3$3                                          =  00BB GR
- 19 C$fb_in8.c$105$1$1                                          =  00C4 GR
- 19 C$fb_in8.c$106$1$1                                          =  00D4 GR
- 19 C$fb_in8.c$108$1$1                                          =  00E1 GR
- 19 C$fb_in8.c$109$2$4                                          =  00E1 GR
- 19 C$fb_in8.c$111$2$4                                          =  00EB GR
- 19 C$fb_in8.c$112$2$4                                          =  00ED GR
- 19 C$fb_in8.c$113$2$4                                          =  00F0 GR
- 19 C$fb_in8.c$114$2$4                                          =  00F3 GR
- 19 C$fb_in8.c$117$2$4                                          =  00F5 GR
- 19 C$fb_in8.c$121$3$5                                          =  0111 GR
- 19 C$fb_in8.c$123$3$5                                          =  011F GR
- 19 C$fb_in8.c$125$4$6                                          =  0122 GR
- 19 C$fb_in8.c$126$4$6                                          =  0125 GR
- 19 C$fb_in8.c$127$4$6                                          =  0133 GR
- 19 C$fb_in8.c$130$3$5                                          =  0135 GR
- 19 C$fb_in8.c$135$4$7                                          =  013C GR
- 19 C$fb_in8.c$137$5$8                                          =  0153 GR
- 19 C$fb_in8.c$141$4$7                                          =  0164 GR
- 19 C$fb_in8.c$142$4$7                                          =  0172 GR
- 19 C$fb_in8.c$144$4$7                                          =  0179 GR
- 19 C$fb_in8.c$145$4$7                                          =  017E GR
- 19 C$fb_in8.c$150$3$5                                          =  0186 GR
- 19 C$fb_in8.c$151$4$9                                          =  018C GR
- 19 C$fb_in8.c$155$1$1                                          =  0197 GR
- 19 C$fb_in8.c$155$3$5                                          =  0273 GR
- 19 C$fb_in8.c$156$1$1                                          =  01A1 GR
- 19 C$fb_in8.c$157$4$10                                         =  01B1 GR
- 19 C$fb_in8.c$158$4$10                                         =  01C8 GR
- 19 C$fb_in8.c$159$5$11                                         =  01F4 GR
- 19 C$fb_in8.c$160$6$12                                         =  0205 GR
- 19 C$fb_in8.c$161$6$12                                         =  0209 GR
- 19 C$fb_in8.c$162$7$13                                         =  020F GR
- 19 C$fb_in8.c$163$7$13                                         =  0220 GR
- 19 C$fb_in8.c$164$7$13                                         =  0254 GR
- 19 C$fb_in8.c$165$8$14                                         =  0258 GR
- 19 C$fb_in8.c$169$5$11                                         =  026D GR
- 19 C$fb_in8.c$175$3$5                                          =  02A5 GR
- 19 C$fb_in8.c$175$4$15                                         =  0277 GR
- 19 C$fb_in8.c$176$4$15                                         =  027E GR
- 19 C$fb_in8.c$177$5$16                                         =  0292 GR
- 19 C$fb_in8.c$178$6$17                                         =  0295 GR
- 19 C$fb_in8.c$179$6$17                                         =  02A0 GR
- 19 C$fb_in8.c$188$2$4                                          =  02A8 GR
- 19 C$fb_in8.c$190$3$18                                         =  02B1 GR
- 19 C$fb_in8.c$191$3$18                                         =  02B4 GR
- 19 C$fb_in8.c$193$4$19                                         =  02BA GR
- 19 C$fb_in8.c$195$3$18                                         =  02BE GR
- 19 C$fb_in8.c$199$2$4                                          =  02CC GR
- 19 C$fb_in8.c$200$3$20                                         =  02D2 GR
- 19 C$fb_in8.c$201$3$20                                         =  02D4 GR
- 19 C$fb_in8.c$202$3$20                                         =  02D6 GR
- 19 C$fb_in8.c$205$3$4                                          =  02E3 GR
- 19 C$fb_in8.c$211$2$4                                          =  02ED GR
- 19 C$fb_in8.c$212$3$22                                         =  02ED GR
- 19 C$fb_in8.c$213$3$22                                         =  02F2 GR
- 19 C$fb_in8.c$214$3$22                                         =  02F4 GR
- 19 C$fb_in8.c$215$4$23                                         =  02F7 GR
- 19 C$fb_in8.c$216$4$23                                         =  02F7 GR
- 19 C$fb_in8.c$217$4$23                                         =  02FC GR
- 19 C$fb_in8.c$219$3$22                                         =  02FF GR
- 19 C$fb_in8.c$220$4$24                                         =  0302 GR
- 19 C$fb_in8.c$221$4$24                                         =  0304 GR
- 19 C$fb_in8.c$223$3$22                                         =  0305 GR
- 19 C$fb_in8.c$224$4$25                                         =  0308 GR
- 19 C$fb_in8.c$225$4$25                                         =  030A GR
- 19 C$fb_in8.c$227$3$22                                         =  030B GR
- 19 C$fb_in8.c$228$4$26                                         =  030E GR
- 19 C$fb_in8.c$229$4$26                                         =  0310 GR
- 19 C$fb_in8.c$231$4$26                                         =  0313 GR
- 19 C$fb_in8.c$232$4$26                                         =  0316 GR
- 19 C$fb_in8.c$234$4$26                                         =  0319 GR
- 19 C$fb_in8.c$235$4$26                                         =  031B GR
- 19 C$fb_in8.c$236$4$26                                         =  031E GR
- 19 C$fb_in8.c$238$3$22                                         =  0320 GR
- 19 C$fb_in8.c$240$3$22                                         =  0326 GR
- 19 C$fb_in8.c$241$4$27                                         =  0329 GR
- 19 C$fb_in8.c$242$4$27                                         =  0329 GR
- 19 C$fb_in8.c$243$4$27                                         =  032E GR
- 19 C$fb_in8.c$245$3$22                                         =  0331 GR
- 19 C$fb_in8.c$246$4$28                                         =  0334 GR
- 19 C$fb_in8.c$247$4$28                                         =  0334 GR
- 19 C$fb_in8.c$248$4$28                                         =  0339 GR
- 19 C$fb_in8.c$261$2$4                                          =  033C GR
- 19 C$fb_in8.c$262$2$4                                          =  033E GR
- 19 C$fb_in8.c$263$3$29                                         =  0341 GR
- 19 C$fb_in8.c$265$4$30                                         =  034F GR
- 19 C$fb_in8.c$266$4$30                                         =  0355 GR
- 19 C$fb_in8.c$270$3$31                                         =  0359 GR
- 19 C$fb_in8.c$271$3$31                                         =  0365 GR
- 19 C$fb_in8.c$273$2$4                                          =  0367 GR
- 19 C$fb_in8.c$275$1$1                                          =  0376 GR
- 19 C$fb_in8.c$276$1$1                                          =  037E GR
- 19 C$fb_in8.c$46$0$0                                           =  0000 GR
- 19 C$fb_in8.c$48$1$0                                           =  0009 GR
- 19 C$fb_in8.c$52$1$0                                           =  000E GR
- 19 C$fb_in8.c$62$1$0                                           =  0014 GR
- 19 C$fb_in8.c$63$1$0                                           =  0016 GR
- 19 C$fb_in8.c$65$1$1                                           =  0018 GR
- 19 C$fb_in8.c$67$1$1                                           =  0022 GR
- 19 C$fb_in8.c$68$1$1                                           =  0024 GR
- 19 C$fb_in8.c$69$1$1                                           =  002E GR
- 19 C$fb_in8.c$70$1$1                                           =  0035 GR
- 19 C$fb_in8.c$71$1$1                                           =  0040 GR
- 19 C$fb_in8.c$73$1$1                                           =  0043 GR
- 19 C$fb_in8.c$74$1$1                                           =  0045 GR
- 19 C$fb_in8.c$77$1$1                                           =  004E GR
- 19 C$fb_in8.c$78$1$1                                           =  0063 GR
- 19 C$fb_in8.c$85$1$1                                           =  0066 GR
- 19 C$fb_in8.c$87$1$1                                           =  006F GR
- 19 C$fb_in8.c$89$1$1                                           =  0072 GR
- 19 C$fb_in8.c$89$2$2                                           =  00BD GR
- 19 C$fb_in8.c$91$3$3                                           =  00A1 GR
- 19 C$fb_in8.c$92$3$3                                           =  00A4 GR
- 19 C$fb_in8.c$93$3$3                                           =  00A7 GR
- 19 C$fb_in8.c$94$3$3                                           =  00AA GR
- 19 C$fb_in8.c$95$3$3                                           =  00AD GR
- 19 C$fb_in8.c$97$3$3                                           =  00B3 GR
- 19 C$fb_in8.c$98$3$3                                           =  00B5 GR
- 19 C$fb_in8.c$99$3$3                                           =  00B8 GR
     CPRL2                                                          00C8 
     CT2                                                            00C9 
     CY                                                             00D7 
@@ -635,146 +46,6 @@ Symbol Table
     EXEN2                                                          00CB 
     EXF2                                                           00CE 
     F0                                                             00D5 
- 1D Ffb_in8$manufacturer$0$0                                    =  1D03 GR
- 1E Ffb_in8$port_A_direction$0$0                                =  1D0C GR
- 1F Ffb_in8$run_state$0$0                                       =  1D0D GR
-    G$ACC$0$0                                                   =  00E0 G
-    G$AUXR1$0$0                                                 =  00A2 G
-    G$B$0$0                                                     =  00F0 G
-    G$BRGCON$0$0                                                =  00BD G
-    G$BRGR0$0$0                                                 =  00BE G
-    G$BRGR1$0$0                                                 =  00BF G
-    G$CMP1$0$0                                                  =  00AC G
-    G$CMP2$0$0                                                  =  00AD G
-    G$DIVM$0$0                                                  =  0095 G
-    G$DPH$0$0                                                   =  0083 G
-    G$DPL$0$0                                                   =  0082 G
-    G$FMADRH$0$0                                                =  00E7 G
-    G$FMADRL$0$0                                                =  00E6 G
-    G$FMCON$0$0                                                 =  00E4 G
-    G$FMDATA$0$0                                                =  00E5 G
-    G$I2ADR$0$0                                                 =  00DB G
-    G$I2CON$0$0                                                 =  00D8 G
-    G$I2CON_0$0$0                                               =  00D8 G
-    G$I2CON_2$0$0                                               =  00DA G
-    G$I2CON_3$0$0                                               =  00DB G
-    G$I2CON_4$0$0                                               =  00DC G
-    G$I2CON_5$0$0                                               =  00DD G
-    G$I2CON_6$0$0                                               =  00DE G
-    G$I2DAT$0$0                                                 =  00DA G
-    G$I2SCLH$0$0                                                =  00DD G
-    G$I2SCLL$0$0                                                =  00DC G
-    G$I2STAT$0$0                                                =  00D9 G
-    G$IEN0$0$0                                                  =  00A8 G
-    G$IEN0_0$0$0                                                =  00A8 G
-    G$IEN0_1$0$0                                                =  00A9 G
-    G$IEN0_2$0$0                                                =  00AA G
-    G$IEN0_3$0$0                                                =  00AB G
-    G$IEN0_4$0$0                                                =  00AC G
-    G$IEN0_5$0$0                                                =  00AD G
-    G$IEN0_6$0$0                                                =  00AE G
-    G$IEN0_7$0$0                                                =  00AF G
-    G$IEN1$0$0                                                  =  00E8 G
-    G$IEN1_0$0$0                                                =  00E8 G
-    G$IEN1_1$0$0                                                =  00E9 G
-    G$IEN1_2$0$0                                                =  00EA G
-    G$IP0$0$0                                                   =  00B8 G
-    G$IP0H$0$0                                                  =  00B7 G
-    G$IP0_0$0$0                                                 =  00B8 G
-    G$IP0_1$0$0                                                 =  00B9 G
-    G$IP0_2$0$0                                                 =  00BA G
-    G$IP0_3$0$0                                                 =  00BB G
-    G$IP0_4$0$0                                                 =  00BC G
-    G$IP0_5$0$0                                                 =  00BD G
-    G$IP0_6$0$0                                                 =  00BE G
-    G$IP1$0$0                                                   =  00F8 G
-    G$IP1H$0$0                                                  =  00F7 G
-    G$IP1_0$0$0                                                 =  00F8 G
-    G$IP1_1$0$0                                                 =  00F9 G
-    G$IP1_2$0$0                                                 =  00FA G
-    G$IP1_6$0$0                                                 =  00FE G
-    G$KBCON$0$0                                                 =  0094 G
-    G$KBMASK$0$0                                                =  0086 G
-    G$KBPATN$0$0                                                =  0093 G
-    G$P0$0$0                                                    =  0080 G
-    G$P0M1$0$0                                                  =  0084 G
-    G$P0M2$0$0                                                  =  0085 G
-    G$P0_0$0$0                                                  =  0080 G
-    G$P0_1$0$0                                                  =  0081 G
-    G$P0_2$0$0                                                  =  0082 G
-    G$P0_3$0$0                                                  =  0083 G
-    G$P0_4$0$0                                                  =  0084 G
-    G$P0_5$0$0                                                  =  0085 G
-    G$P0_6$0$0                                                  =  0086 G
-    G$P0_7$0$0                                                  =  0087 G
-    G$P1$0$0                                                    =  0090 G
-    G$P1M1$0$0                                                  =  0091 G
-    G$P1M2$0$0                                                  =  0092 G
-    G$P1_0$0$0                                                  =  0090 G
-    G$P1_1$0$0                                                  =  0091 G
-    G$P1_2$0$0                                                  =  0092 G
-    G$P1_3$0$0                                                  =  0093 G
-    G$P1_4$0$0                                                  =  0094 G
-    G$P1_5$0$0                                                  =  0095 G
-    G$P1_6$0$0                                                  =  0096 G
-    G$P1_7$0$0                                                  =  0097 G
-    G$P3$0$0                                                    =  00B0 G
-    G$P3M1$0$0                                                  =  00B1 G
-    G$P3M2$0$0                                                  =  00B2 G
-    G$P3_0$0$0                                                  =  00B0 G
-    G$P3_1$0$0                                                  =  00B1 G
-    G$PCON$0$0                                                  =  0087 G
-    G$PCONA$0$0                                                 =  00B5 G
-    G$PSW$0$0                                                   =  00D0 G
-    G$PSW_0$0$0                                                 =  00D0 G
-    G$PSW_1$0$0                                                 =  00D1 G
-    G$PSW_2$0$0                                                 =  00D2 G
-    G$PSW_3$0$0                                                 =  00D3 G
-    G$PSW_4$0$0                                                 =  00D4 G
-    G$PSW_5$0$0                                                 =  00D5 G
-    G$PSW_6$0$0                                                 =  00D6 G
-    G$PSW_7$0$0                                                 =  00D7 G
-    G$PT0AD$0$0                                                 =  00F6 G
-    G$RSTSRC$0$0                                                =  00DF G
-    G$RTCCON$0$0                                                =  00D1 G
-    G$RTCH$0$0                                                  =  00D2 G
-    G$RTCL$0$0                                                  =  00D3 G
-    G$SADDR$0$0                                                 =  00A9 G
-    G$SADEN$0$0                                                 =  00B9 G
-    G$SBUF$0$0                                                  =  0099 G
-    G$SCON$0$0                                                  =  0098 G
-    G$SCON_0$0$0                                                =  0098 G
-    G$SCON_1$0$0                                                =  0099 G
-    G$SCON_2$0$0                                                =  009A G
-    G$SCON_3$0$0                                                =  009B G
-    G$SCON_4$0$0                                                =  009C G
-    G$SCON_5$0$0                                                =  009D G
-    G$SCON_6$0$0                                                =  009E G
-    G$SCON_7$0$0                                                =  009F G
-    G$SP$0$0                                                    =  0081 G
-    G$SSTAT$0$0                                                 =  00BA G
-    G$TAMOD$0$0                                                 =  008F G
-    G$TCON$0$0                                                  =  0088 G
-    G$TCON_0$0$0                                                =  0088 G
-    G$TCON_1$0$0                                                =  0089 G
-    G$TCON_2$0$0                                                =  008A G
-    G$TCON_3$0$0                                                =  008B G
-    G$TCON_4$0$0                                                =  008C G
-    G$TCON_5$0$0                                                =  008D G
-    G$TCON_6$0$0                                                =  008E G
-    G$TCON_7$0$0                                                =  008F G
-    G$TH0$0$0                                                   =  008C G
-    G$TH1$0$0                                                   =  008D G
-    G$TL0$0$0                                                   =  008A G
-    G$TL1$0$0                                                   =  008B G
-    G$TMOD$0$0                                                  =  0089 G
-    G$TRIM$0$0                                                  =  0096 G
-    G$WDCON$0$0                                                 =  00A7 G
-    G$WDL$0$0                                                   =  00C1 G
-    G$WFEED1$0$0                                                =  00C2 G
-    G$WFEED2$0$0                                                =  00C3 G
- 1A G$bitmask_1$0$0                                             =  0000 GR
- 19 G$main$0$0                                                  =  0000 GR
     IE                                                             00A8 
     IE.0                                                           00A8 
     IE.1                                                           00A9 
@@ -796,7 +67,6 @@ Symbol Table
     IP.5                                                           00BD 
     IT0                                                            0088 
     IT1                                                            008A 
-    Lfb_in8.main$trimsave$1$1                                   =  1CFF G
     OV                                                             00D2 
     P                                                              00D0 
     P0                                                             0080 
@@ -909,7 +179,6 @@ Symbol Table
     TR1                                                            008E 
     TR2                                                            00CA 
     TXD                                                            00B1 
- 19 XG$main$0$0                                                 =  037E GR
     _ACC                                                        =  00E0 G
     _AUXR1                                                      =  00A2 G
     _B                                                          =  00F0 G
@@ -1047,42 +316,38 @@ Symbol Table
     _WFEED1                                                     =  00C2 G
     _WFEED2                                                     =  00C3 G
     _X1_int                                                        **** GX
- 10 __interrupt_vect                                               0000 R
+  F __interrupt_vect                                               0000 R
     __mcs51_genRAMCLEAR                                            **** GX
     __mcs51_genXINIT                                               **** GX
     __mcs51_genXRAMCLEAR                                           **** GX
     __sdcc_gsinit_startup                                          **** GX
- 10 __sdcc_program_startup                                         001E GR
-  8 __start__stack                                                 0000 GR
- 1A _bitmask_1                                                     0000 GR
+  F __sdcc_program_startup                                         001E GR
+  7 __start__stack                                                 0000 GR
+ 19 _bitmask_1                                                     0000 GR
     _blocked                                                       **** GX
     _bp                                                            **** GX
     _bus_return                                                    **** GX
     _connected                                                     **** GX
-    _connected_timeout                                             **** GX
     _delay_timer                                                   **** GX
     _eeprom                                                        **** GX
- 19 _main                                                          0000 GR
-    _main_trimsave_1_1                                          =  1CFF 
- 1D _manufacturer                                                  1D03 R
+ 18 _main                                                          0000 GR
+    _main_trimsave_1_43                                         =  1CFF 
     _p0h                                                           **** GX
     _pin_changed                                                   **** GX
- 1E _port_A_direction                                              1D0C R
     _portbuffer                                                    **** GX
     _process_tel                                                   **** GX
     _read_obj_value                                                **** GX
     _restart_app                                                   **** GX
     _restart_hw                                                    **** GX
- 1F _run_state                                                     1D0D R
     _send_obj_value                                                **** GX
-    _spi_in_out                                                    **** GX
+    _space                                                      =  01CE G
     _status60                                                      **** GX
     _tel_arrived                                                   **** GX
     _tel_sent                                                      **** GX
     _timerbase                                                     **** GX
     _timercnt                                                      **** GX
-    _timerstate                                                    **** GX
-    _zaehlervalue                                                  **** GX
+    _watchdog_init                                                 **** GX
+    _watchdog_start                                                **** GX
     a                                                              00E0 
     a.0                                                            00E0 
     a.1                                                            00E1 
@@ -1288,28 +553,24 @@ Area Table
    4 REG_BANK_0                                 size    8   flags 4
    5 BIT_BANK                                   size    1   flags 4
    6 DSEG                                       size    0   flags 0
-   7 OSEG                                       size    0   flags 4
-   8 SSEG                                       size    1   flags 0
-   9 ISEG                                       size    0   flags 0
-   A IABS                                       size    0   flags 8
-   B BSEG                                       size    0   flags 80
-   C PSEG                                       size    0   flags 50
-   D XSEG                                       size    0   flags 40
-   E XABS                                       size    0   flags 48
-   F XISEG                                      size    0   flags 40
-  10 HOME                                       size   23   flags 20
-  11 GSINIT0                                    size    0   flags 20
-  12 GSINIT1                                    size    0   flags 20
-  13 GSINIT2                                    size    0   flags 20
-  14 GSINIT3                                    size    0   flags 20
-  15 GSINIT4                                    size    0   flags 20
-  16 GSINIT5                                    size    0   flags 20
-  17 GSINIT                                     size    0   flags 20
-  18 GSFINAL                                    size    3   flags 20
-  19 CSEG                                       size  37F   flags 20
-  1A CONST                                      size    8   flags 20
-  1B XINIT                                      size    0   flags 20
-  1C CABS                                       size    0   flags 28
-  1D CABS2                                      size    2   flags 28
-  1E CABS3                                      size    1   flags 28
-  1F CABS4                                      size    1   flags 28
+   7 SSEG                                       size    1   flags 0
+   8 ISEG                                       size    0   flags 0
+   9 IABS                                       size    0   flags 8
+   A BSEG                                       size    0   flags 80
+   B PSEG                                       size    0   flags 50
+   C XSEG                                       size    0   flags 40
+   D XABS                                       size    0   flags 48
+   E XISEG                                      size    0   flags 40
+   F HOME                                       size   23   flags 20
+  10 GSINIT0                                    size    0   flags 20
+  11 GSINIT1                                    size    0   flags 20
+  12 GSINIT2                                    size    0   flags 20
+  13 GSINIT3                                    size    0   flags 20
+  14 GSINIT4                                    size    0   flags 20
+  15 GSINIT5                                    size    0   flags 20
+  16 GSINIT                                     size    0   flags 20
+  17 GSFINAL                                    size    3   flags 20
+  18 CSEG                                       size  2E8   flags 20
+  19 CONST                                      size    8   flags 20
+  1A XINIT                                      size    0   flags 20
+  1B CABS                                       size    0   flags 28

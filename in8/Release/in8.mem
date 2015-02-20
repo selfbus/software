@@ -7,7 +7,7 @@ Internal RAM layout:
 0x40:|a|a|a|a|a|a|a|a|a|a|a|a|b|b|b|b|
 0x50:|b|b|b|b|b|b|b|b|b|b|b|b|b|b|b|b|
 0x60:|b|b|b|b|b|b|b|b|b|b|b|b|b|b|b|b|
-0x70:|b|b|b|b|b|b|b|b|b|b|b|b|c|S|S|S|
+0x70:|b|b|b|b|b|b|b|b|b|b|b|c|S|S|S|S|
 0x80:|S|S|S|S|S|S|S|S|S|S|S|S|S|S|S|S|
 0x90:|S|S|S|S|S|S|S|S|S|S|S|S|S|S|S|S|
 0xa0:|S|S|S|S|S|S|S|S|S|S|S|S|S|S|S|S|
@@ -18,11 +18,11 @@ Internal RAM layout:
 0xf0:|S|S|S|S|S|S|S|S|S|S|S|S|S|S|S|S|
 0-3:Reg Banks, T:Bit regs, a-z:Data, B:Bits, Q:Overlay, I:iData, S:Stack, A:Absolute
 
-Stack starts at: 0x7d (sp set to 0x7c) with 131 bytes available.
+Stack starts at: 0x7c (sp set to 0x7b) with 132 bytes available.
 
 Other memory:
    Name             Start    End      Size     Max     
    ---------------- -------- -------- -------- --------
    PAGED EXT. RAM                         0      256   
    EXTERNAL RAM                           0    65536   
-   ROM/EPROM/FLASH  0x0000   0x1cb1    7350    65536   
+   ROM/EPROM/FLASH  0x0000   0x1b77    7032    65536   

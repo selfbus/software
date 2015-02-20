@@ -21,7 +21,7 @@
 							<builder arguments="-k" buildPath="${workspace_loc:/Rauchmelder}/Release" id="org.eclipse.cdt.build.core.internal.builder.1845671483" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="CDT Internal Builder" superClass="org.eclipse.cdt.build.core.internal.builder"/>
 							<tool command="sdcc --stack-auto -c" errorParsers="" id="cdt.managedbuild.tool.sdcc.c.compiler.exe.release.146817974" name="SDCC Compiler" superClass="cdt.managedbuild.tool.sdcc.c.compiler.exe.release">
 								<option id="sdcc.c.compiler.option.include.paths.311082523" name="Include paths (-I)" superClass="sdcc.c.compiler.option.include.paths" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lib_lpc922}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lib_lpc922/Releases}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.sdcc.c.compiler.input.164525614" superClass="cdt.managedbuild.tool.sdcc.c.compiler.input"/>
 							</tool>

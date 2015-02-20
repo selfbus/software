@@ -1,9 +1,9 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.1.4 #7479 (Mar 23 2012) (MINGW32)
-; This file was generated Tue Nov 06 15:48:14 2012
+; This file was generated Tue Nov 06 16:04:10 2012
 ;--------------------------------------------------------
-	.module spi
+	.module watchdog
 	.optsdcc -mmcs51 --model-small
 	
 ;--------------------------------------------------------
@@ -144,7 +144,10 @@
 	.globl _P3
 	.globl _P1
 	.globl _P0
-	.globl _spi_in_out
+	.globl _watchdog_init
+	.globl _watchdog_feed
+	.globl _watchdog_start
+	.globl _watchdog_stop
 ;--------------------------------------------------------
 ; special function registers
 ;--------------------------------------------------------
@@ -296,6 +299,20 @@ _P3_1	=	0x00b1
 	.area REG_BANK_0	(REL,OVR,DATA)
 	.ds 8
 ;--------------------------------------------------------
+; overlayable bit register bank
+;--------------------------------------------------------
+	.area BIT_BANK	(REL,OVR,DATA)
+bits:
+	.ds 1
+	b0 = bits[0]
+	b1 = bits[1]
+	b2 = bits[2]
+	b3 = bits[3]
+	b4 = bits[4]
+	b5 = bits[5]
+	b6 = bits[6]
+	b7 = bits[7]
+;--------------------------------------------------------
 ; internal ram data
 ;--------------------------------------------------------
 	.area DSEG    (DATA)
@@ -358,16 +375,13 @@ _P3_1	=	0x00b1
 ;--------------------------------------------------------
 	.area CSEG    (CODE)
 ;------------------------------------------------------------
-;Allocation info for local variables in function 'spi_in_out'
+;Allocation info for local variables in function 'watchdog_init'
 ;------------------------------------------------------------
-;daten                     Allocated to registers r7 
-;n                         Allocated to registers r6 
-;------------------------------------------------------------
-;	../spi.c:58: unsigned char spi_in_out(void)
+;	C:/Freebus/C_Programme/oldisprogramm/com/watchdog.c:34: void watchdog_init(void)
 ;	-----------------------------------------
-;	 function spi_in_out
+;	 function watchdog_init
 ;	-----------------------------------------
-_spi_in_out:
+_watchdog_init:
 	ar7 = 0x07
 	ar6 = 0x06
 	ar5 = 0x05
@@ -376,56 +390,87 @@ _spi_in_out:
 	ar2 = 0x02
 	ar1 = 0x01
 	ar0 = 0x00
-;	../spi.c:60: unsigned char daten=0, n;
-	mov	r7,#0x00
-;	../spi.c:62: READ=1;
-	setb	_P0_2
-;	../spi.c:63: WRITE=0;
-	clr	_P0_5
-;	../spi.c:65: do
-00105$:
-;	../spi.c:68: if(interrupted){
-	jnb	_interrupted,00117$
-;	../spi.c:69: READ=0;
-	clr	_P0_2
-;	../spi.c:70: READ=1;
-	setb	_P0_2
-;	../spi.c:71: interrupted=0;
-	clr	_interrupted
-;	../spi.c:74: for(n=0;n<=7;n++)
-00117$:
-	mov	r6,#0x00
-00108$:
-	mov	a,r6
-	add	a,#0xff - 0x07
-	jc	00106$
-;	../spi.c:76: CLK=0;
-	clr	_P0_0
-;	../spi.c:77: daten<<=1;
-	mov	a,r7
-	add	a,r7
-	mov	r7,a
-;	../spi.c:78: if (SER_IN) daten++;
-	jnb	_P0_1,00104$
-	inc	r7
-00104$:
-;	../spi.c:79: SER_OUT=SER_IN;
-	mov	c,_P0_1
-	mov	_P0_3,c
-;	../spi.c:80: CLK=1;
-	setb	_P0_0
-;	../spi.c:74: for(n=0;n<=7;n++)
-	inc	r6
-	sjmp	00108$
-00106$:
-;	../spi.c:83: }while (interrupted);
-	jb	_interrupted,00105$
-;	../spi.c:85: READ=0;
-	clr	_P0_2
-;	../spi.c:86: WRITE=1;
-	setb	_P0_5
-;	../spi.c:88: return daten;
-	mov	dpl,r7
+;	C:/Freebus/C_Programme/oldisprogramm/com/watchdog.c:41: WDL = 0xFF;
+	mov	_WDL,#0xFF
+;	C:/Freebus/C_Programme/oldisprogramm/com/watchdog.c:43: EA = 0;
+	clr	_IEN0_7
+;	C:/Freebus/C_Programme/oldisprogramm/com/watchdog.c:44: WDCON = 0xE5;
+	mov	_WDCON,#0xE5
+;	C:/Freebus/C_Programme/oldisprogramm/com/watchdog.c:45: WFEED1 = 0xA5;
+	mov	_WFEED1,#0xA5
+;	C:/Freebus/C_Programme/oldisprogramm/com/watchdog.c:46: WFEED2 = 0x5A;
+	mov	_WFEED2,#0x5A
+;	C:/Freebus/C_Programme/oldisprogramm/com/watchdog.c:48: EA=1;
+	setb	_IEN0_7
+	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function 'watchdog_feed'
+;------------------------------------------------------------
+;	C:/Freebus/C_Programme/oldisprogramm/com/watchdog.c:56: void watchdog_feed(void)
+;	-----------------------------------------
+;	 function watchdog_feed
+;	-----------------------------------------
+_watchdog_feed:
+;	C:/Freebus/C_Programme/oldisprogramm/com/watchdog.c:62: EA = 0;
+	clr	_IEN0_7
+;	C:/Freebus/C_Programme/oldisprogramm/com/watchdog.c:64: WFEED1 = 0xA5;
+	mov	_WFEED1,#0xA5
+;	C:/Freebus/C_Programme/oldisprogramm/com/watchdog.c:65: WFEED2 = 0x5A;
+	mov	_WFEED2,#0x5A
+;	C:/Freebus/C_Programme/oldisprogramm/com/watchdog.c:68: EA=1;
+	setb	_IEN0_7
+	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function 'watchdog_start'
+;------------------------------------------------------------
+;eacopy                    Allocated to registers b0 
+;------------------------------------------------------------
+;	C:/Freebus/C_Programme/oldisprogramm/com/watchdog.c:76: void watchdog_start(void)
+;	-----------------------------------------
+;	 function watchdog_start
+;	-----------------------------------------
+_watchdog_start:
+;	C:/Freebus/C_Programme/oldisprogramm/com/watchdog.c:81: eacopy = EA;
+	mov	c,_IEN0_7
+	mov	b0,c
+;	C:/Freebus/C_Programme/oldisprogramm/com/watchdog.c:82: EA = 0;
+	clr	_IEN0_7
+;	C:/Freebus/C_Programme/oldisprogramm/com/watchdog.c:84: WDCON |= 0x04;
+	orl	_WDCON,#0x04
+;	C:/Freebus/C_Programme/oldisprogramm/com/watchdog.c:86: WFEED1 = 0xA5;
+	mov	_WFEED1,#0xA5
+;	C:/Freebus/C_Programme/oldisprogramm/com/watchdog.c:87: WFEED2 = 0x5A;
+	mov	_WFEED2,#0x5A
+;	C:/Freebus/C_Programme/oldisprogramm/com/watchdog.c:89: EA = eacopy;
+	mov	c,b0
+	mov	_IEN0_7,c
+	ret
+;------------------------------------------------------------
+;Allocation info for local variables in function 'watchdog_stop'
+;------------------------------------------------------------
+;eacopy                    Allocated to registers b0 
+;------------------------------------------------------------
+;	C:/Freebus/C_Programme/oldisprogramm/com/watchdog.c:97: void watchdog_stop(void)
+;	-----------------------------------------
+;	 function watchdog_stop
+;	-----------------------------------------
+_watchdog_stop:
+;	C:/Freebus/C_Programme/oldisprogramm/com/watchdog.c:102: eacopy = EA;
+	mov	c,_IEN0_7
+	mov	b0,c
+;	C:/Freebus/C_Programme/oldisprogramm/com/watchdog.c:103: EA = 0;
+	clr	_IEN0_7
+;	C:/Freebus/C_Programme/oldisprogramm/com/watchdog.c:105: WDCON &= ~0x04;
+	mov	r7,_WDCON
+	anl	ar7,#0xFB
+	mov	_WDCON,r7
+;	C:/Freebus/C_Programme/oldisprogramm/com/watchdog.c:107: WFEED1 = 0xA5;
+	mov	_WFEED1,#0xA5
+;	C:/Freebus/C_Programme/oldisprogramm/com/watchdog.c:108: WFEED2 = 0x5A;
+	mov	_WFEED2,#0x5A
+;	C:/Freebus/C_Programme/oldisprogramm/com/watchdog.c:110: EA = eacopy;
+	mov	c,b0
+	mov	_IEN0_7,c
 	ret
 	.area CSEG    (CODE)
 	.area CONST   (CODE)

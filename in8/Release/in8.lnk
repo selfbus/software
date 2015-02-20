@@ -1,9 +1,7 @@
--muwx
--i in8.hex
--M
+-myuxi
 -Y
 -b HOME = 0x0000
--b DSEG = 0x0020
+-b DSEG = 0x001f
 -b ISEG = 0x0000
 -b BSEG = 0x0000
 -k C:\Freebus\C_Programme\oldisprogramm\lib_lpc922\Release
@@ -16,6 +14,5 @@
 -l libfloat
 ./fb_app_in8.rel
 ./fb_in8.rel
-./watchdog.rel
 
 -e
