@@ -1,3 +1,6 @@
+2014-12-26 Version 2.21
+		Update auf Library 1.55
+
 2014-10-20 Version 2.20
 		Added temperature offset feature. This version is compiled with VD Version Lock,
 		ETS download will fail if VD and Firmware version do not match!

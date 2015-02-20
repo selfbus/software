@@ -1,7 +1,7 @@
                               1 ;--------------------------------------------------------
                               2 ; File Created by SDCC : free open source ANSI-C Compiler
-                              3 ; Version 3.1.4 #7479 (Mar 23 2012) (MINGW32)
-                              4 ; This file was generated Tue Nov 06 16:08:30 2012
+                              3 ; Version 3.1.0 #7066 (Jun 14 2012) (Linux)
+                              4 ; This file was generated Fri Oct 24 21:14:10 2014
                               5 ;--------------------------------------------------------
                               6 	.module fb_in8
                               7 	.optsdcc -mmcs51 --model-small
@@ -9,998 +9,1367 @@
                               9 ;--------------------------------------------------------
                              10 ; Public variables in this module
                              11 ;--------------------------------------------------------
-                             12 	.globl _space
-                             13 	.globl _bitmask_1
-                             14 	.globl _main
-                             15 	.globl _watchdog_start
-                             16 	.globl _watchdog_init
-                             17 	.globl _bus_return
-                             18 	.globl _restart_app
-                             19 	.globl _read_obj_value
-                             20 	.globl _delay_timer
-                             21 	.globl _pin_changed
-                             22 	.globl _process_tel
-                             23 	.globl _restart_hw
-                             24 	.globl _send_obj_value
-                             25 	.globl _P3_1
-                             26 	.globl _P3_0
-                             27 	.globl _P1_7
-                             28 	.globl _P1_6
-                             29 	.globl _P1_5
-                             30 	.globl _P1_4
-                             31 	.globl _P1_3
-                             32 	.globl _P1_2
-                             33 	.globl _P1_1
-                             34 	.globl _P1_0
-                             35 	.globl _P0_7
-                             36 	.globl _P0_6
-                             37 	.globl _P0_5
-                             38 	.globl _P0_4
-                             39 	.globl _P0_3
-                             40 	.globl _P0_2
-                             41 	.globl _P0_1
-                             42 	.globl _P0_0
-                             43 	.globl _I2CON_0
-                             44 	.globl _I2CON_2
-                             45 	.globl _I2CON_3
-                             46 	.globl _I2CON_4
-                             47 	.globl _I2CON_5
-                             48 	.globl _I2CON_6
-                             49 	.globl _SCON_7
-                             50 	.globl _SCON_6
-                             51 	.globl _SCON_5
-                             52 	.globl _SCON_4
-                             53 	.globl _SCON_3
-                             54 	.globl _SCON_2
-                             55 	.globl _SCON_1
-                             56 	.globl _SCON_0
-                             57 	.globl _IP0_0
-                             58 	.globl _IP0_1
-                             59 	.globl _IP0_2
-                             60 	.globl _IP0_3
-                             61 	.globl _IP0_4
-                             62 	.globl _IP0_5
-                             63 	.globl _IP0_6
-                             64 	.globl _IP1_0
-                             65 	.globl _IP1_1
-                             66 	.globl _IP1_2
-                             67 	.globl _IP1_6
-                             68 	.globl _IEN1_0
-                             69 	.globl _IEN1_1
-                             70 	.globl _IEN1_2
-                             71 	.globl _IEN0_0
-                             72 	.globl _IEN0_1
-                             73 	.globl _IEN0_2
-                             74 	.globl _IEN0_3
-                             75 	.globl _IEN0_4
-                             76 	.globl _IEN0_5
-                             77 	.globl _IEN0_6
-                             78 	.globl _IEN0_7
-                             79 	.globl _TCON_0
-                             80 	.globl _TCON_1
-                             81 	.globl _TCON_2
-                             82 	.globl _TCON_3
-                             83 	.globl _TCON_4
-                             84 	.globl _TCON_5
-                             85 	.globl _TCON_6
-                             86 	.globl _TCON_7
-                             87 	.globl _PSW_7
-                             88 	.globl _PSW_6
-                             89 	.globl _PSW_5
-                             90 	.globl _PSW_4
-                             91 	.globl _PSW_3
-                             92 	.globl _PSW_2
-                             93 	.globl _PSW_1
-                             94 	.globl _PSW_0
-                             95 	.globl _IEN1
-                             96 	.globl _IP0H
-                             97 	.globl _WFEED2
-                             98 	.globl _WFEED1
-                             99 	.globl _WDL
-                            100 	.globl _WDCON
-                            101 	.globl _TRIM
-                            102 	.globl _TAMOD
-                            103 	.globl _SSTAT
-                            104 	.globl _RTCL
-                            105 	.globl _RTCH
-                            106 	.globl _RTCCON
-                            107 	.globl _RSTSRC
-                            108 	.globl _PT0AD
-                            109 	.globl _PCONA
-                            110 	.globl _P3M2
-                            111 	.globl _P3M1
-                            112 	.globl _P1M2
-                            113 	.globl _P1M1
-                            114 	.globl _P0M2
-                            115 	.globl _P0M1
-                            116 	.globl _KBPATN
-                            117 	.globl _KBMASK
-                            118 	.globl _KBCON
-                            119 	.globl _IP1H
-                            120 	.globl _IP1
-                            121 	.globl _I2STAT
-                            122 	.globl _I2SCLL
-                            123 	.globl _I2SCLH
-                            124 	.globl _I2DAT
-                            125 	.globl _I2CON
-                            126 	.globl _I2ADR
-                            127 	.globl _FMDATA
-                            128 	.globl _FMCON
-                            129 	.globl _FMADRL
-                            130 	.globl _FMADRH
-                            131 	.globl _DIVM
-                            132 	.globl _CMP2
-                            133 	.globl _CMP1
-                            134 	.globl _BRGCON
-                            135 	.globl _BRGR1
-                            136 	.globl _BRGR0
-                            137 	.globl _SADEN
-                            138 	.globl _SADDR
-                            139 	.globl _AUXR1
-                            140 	.globl _SBUF
-                            141 	.globl _SCON
-                            142 	.globl _IP0
-                            143 	.globl _IEN0
-                            144 	.globl _TH1
-                            145 	.globl _TH0
-                            146 	.globl _TL1
-                            147 	.globl _TL0
-                            148 	.globl _TMOD
-                            149 	.globl _TCON
-                            150 	.globl _PCON
-                            151 	.globl _DPH
-                            152 	.globl _DPL
-                            153 	.globl _SP
-                            154 	.globl _B
-                            155 	.globl _ACC
-                            156 	.globl _PSW
-                            157 	.globl _P3
-                            158 	.globl _P1
-                            159 	.globl _P0
+                             12 	.globl _bitmask_1
+                             13 	.globl _main
+                             14 	.globl _spi_in_out
+                             15 	.globl _bus_return
+                             16 	.globl _restart_app
+                             17 	.globl _read_obj_value
+                             18 	.globl _delay_timer
+                             19 	.globl _pin_changed
+                             20 	.globl _process_tel
+                             21 	.globl _restart_hw
+                             22 	.globl _send_obj_value
+                             23 	.globl _P3_1
+                             24 	.globl _P3_0
+                             25 	.globl _P1_7
+                             26 	.globl _P1_6
+                             27 	.globl _P1_5
+                             28 	.globl _P1_4
+                             29 	.globl _P1_3
+                             30 	.globl _P1_2
+                             31 	.globl _P1_1
+                             32 	.globl _P1_0
+                             33 	.globl _P0_7
+                             34 	.globl _P0_6
+                             35 	.globl _P0_5
+                             36 	.globl _P0_4
+                             37 	.globl _P0_3
+                             38 	.globl _P0_2
+                             39 	.globl _P0_1
+                             40 	.globl _P0_0
+                             41 	.globl _I2CON_0
+                             42 	.globl _I2CON_2
+                             43 	.globl _I2CON_3
+                             44 	.globl _I2CON_4
+                             45 	.globl _I2CON_5
+                             46 	.globl _I2CON_6
+                             47 	.globl _SCON_7
+                             48 	.globl _SCON_6
+                             49 	.globl _SCON_5
+                             50 	.globl _SCON_4
+                             51 	.globl _SCON_3
+                             52 	.globl _SCON_2
+                             53 	.globl _SCON_1
+                             54 	.globl _SCON_0
+                             55 	.globl _IP0_0
+                             56 	.globl _IP0_1
+                             57 	.globl _IP0_2
+                             58 	.globl _IP0_3
+                             59 	.globl _IP0_4
+                             60 	.globl _IP0_5
+                             61 	.globl _IP0_6
+                             62 	.globl _IP1_0
+                             63 	.globl _IP1_1
+                             64 	.globl _IP1_2
+                             65 	.globl _IP1_6
+                             66 	.globl _IEN1_0
+                             67 	.globl _IEN1_1
+                             68 	.globl _IEN1_2
+                             69 	.globl _IEN0_0
+                             70 	.globl _IEN0_1
+                             71 	.globl _IEN0_2
+                             72 	.globl _IEN0_3
+                             73 	.globl _IEN0_4
+                             74 	.globl _IEN0_5
+                             75 	.globl _IEN0_6
+                             76 	.globl _IEN0_7
+                             77 	.globl _TCON_0
+                             78 	.globl _TCON_1
+                             79 	.globl _TCON_2
+                             80 	.globl _TCON_3
+                             81 	.globl _TCON_4
+                             82 	.globl _TCON_5
+                             83 	.globl _TCON_6
+                             84 	.globl _TCON_7
+                             85 	.globl _PSW_7
+                             86 	.globl _PSW_6
+                             87 	.globl _PSW_5
+                             88 	.globl _PSW_4
+                             89 	.globl _PSW_3
+                             90 	.globl _PSW_2
+                             91 	.globl _PSW_1
+                             92 	.globl _PSW_0
+                             93 	.globl _IEN1
+                             94 	.globl _IP0H
+                             95 	.globl _WFEED2
+                             96 	.globl _WFEED1
+                             97 	.globl _WDL
+                             98 	.globl _WDCON
+                             99 	.globl _TRIM
+                            100 	.globl _TAMOD
+                            101 	.globl _SSTAT
+                            102 	.globl _RTCL
+                            103 	.globl _RTCH
+                            104 	.globl _RTCCON
+                            105 	.globl _RSTSRC
+                            106 	.globl _PT0AD
+                            107 	.globl _PCONA
+                            108 	.globl _P3M2
+                            109 	.globl _P3M1
+                            110 	.globl _P1M2
+                            111 	.globl _P1M1
+                            112 	.globl _P0M2
+                            113 	.globl _P0M1
+                            114 	.globl _KBPATN
+                            115 	.globl _KBMASK
+                            116 	.globl _KBCON
+                            117 	.globl _IP1H
+                            118 	.globl _IP1
+                            119 	.globl _I2STAT
+                            120 	.globl _I2SCLL
+                            121 	.globl _I2SCLH
+                            122 	.globl _I2DAT
+                            123 	.globl _I2CON
+                            124 	.globl _I2ADR
+                            125 	.globl _FMDATA
+                            126 	.globl _FMCON
+                            127 	.globl _FMADRL
+                            128 	.globl _FMADRH
+                            129 	.globl _DIVM
+                            130 	.globl _CMP2
+                            131 	.globl _CMP1
+                            132 	.globl _BRGCON
+                            133 	.globl _BRGR1
+                            134 	.globl _BRGR0
+                            135 	.globl _SADEN
+                            136 	.globl _SADDR
+                            137 	.globl _AUXR1
+                            138 	.globl _SBUF
+                            139 	.globl _SCON
+                            140 	.globl _IP0
+                            141 	.globl _IEN0
+                            142 	.globl _TH1
+                            143 	.globl _TH0
+                            144 	.globl _TL1
+                            145 	.globl _TL0
+                            146 	.globl _TMOD
+                            147 	.globl _TCON
+                            148 	.globl _PCON
+                            149 	.globl _DPH
+                            150 	.globl _DPL
+                            151 	.globl _SP
+                            152 	.globl _B
+                            153 	.globl _ACC
+                            154 	.globl _PSW
+                            155 	.globl _P3
+                            156 	.globl _P1
+                            157 	.globl _P0
+                            158 ;--------------------------------------------------------
+                            159 ; special function registers
                             160 ;--------------------------------------------------------
-                            161 ; special function registers
-                            162 ;--------------------------------------------------------
-                            163 	.area RSEG    (ABS,DATA)
-   0000                     164 	.org 0x0000
-                    0080    165 _P0	=	0x0080
+                            161 	.area RSEG    (ABS,DATA)
+   0000                     162 	.org 0x0000
+                    0080    163 G$P0$0$0 == 0x0080
+                    0080    164 _P0	=	0x0080
+                    0090    165 G$P1$0$0 == 0x0090
                     0090    166 _P1	=	0x0090
-                    00B0    167 _P3	=	0x00b0
-                    00D0    168 _PSW	=	0x00d0
-                    00E0    169 _ACC	=	0x00e0
-                    00F0    170 _B	=	0x00f0
-                    0081    171 _SP	=	0x0081
-                    0082    172 _DPL	=	0x0082
-                    0083    173 _DPH	=	0x0083
-                    0087    174 _PCON	=	0x0087
-                    0088    175 _TCON	=	0x0088
-                    0089    176 _TMOD	=	0x0089
-                    008A    177 _TL0	=	0x008a
-                    008B    178 _TL1	=	0x008b
-                    008C    179 _TH0	=	0x008c
-                    008D    180 _TH1	=	0x008d
-                    00A8    181 _IEN0	=	0x00a8
-                    00B8    182 _IP0	=	0x00b8
-                    0098    183 _SCON	=	0x0098
-                    0099    184 _SBUF	=	0x0099
-                    00A2    185 _AUXR1	=	0x00a2
-                    00A9    186 _SADDR	=	0x00a9
-                    00B9    187 _SADEN	=	0x00b9
-                    00BE    188 _BRGR0	=	0x00be
-                    00BF    189 _BRGR1	=	0x00bf
-                    00BD    190 _BRGCON	=	0x00bd
-                    00AC    191 _CMP1	=	0x00ac
-                    00AD    192 _CMP2	=	0x00ad
-                    0095    193 _DIVM	=	0x0095
-                    00E7    194 _FMADRH	=	0x00e7
-                    00E6    195 _FMADRL	=	0x00e6
-                    00E4    196 _FMCON	=	0x00e4
-                    00E5    197 _FMDATA	=	0x00e5
-                    00DB    198 _I2ADR	=	0x00db
-                    00D8    199 _I2CON	=	0x00d8
-                    00DA    200 _I2DAT	=	0x00da
-                    00DD    201 _I2SCLH	=	0x00dd
-                    00DC    202 _I2SCLL	=	0x00dc
-                    00D9    203 _I2STAT	=	0x00d9
-                    00F8    204 _IP1	=	0x00f8
-                    00F7    205 _IP1H	=	0x00f7
-                    0094    206 _KBCON	=	0x0094
-                    0086    207 _KBMASK	=	0x0086
-                    0093    208 _KBPATN	=	0x0093
-                    0084    209 _P0M1	=	0x0084
-                    0085    210 _P0M2	=	0x0085
-                    0091    211 _P1M1	=	0x0091
-                    0092    212 _P1M2	=	0x0092
-                    00B1    213 _P3M1	=	0x00b1
-                    00B2    214 _P3M2	=	0x00b2
-                    00B5    215 _PCONA	=	0x00b5
-                    00F6    216 _PT0AD	=	0x00f6
-                    00DF    217 _RSTSRC	=	0x00df
-                    00D1    218 _RTCCON	=	0x00d1
-                    00D2    219 _RTCH	=	0x00d2
-                    00D3    220 _RTCL	=	0x00d3
-                    00BA    221 _SSTAT	=	0x00ba
-                    008F    222 _TAMOD	=	0x008f
-                    0096    223 _TRIM	=	0x0096
-                    00A7    224 _WDCON	=	0x00a7
-                    00C1    225 _WDL	=	0x00c1
-                    00C2    226 _WFEED1	=	0x00c2
-                    00C3    227 _WFEED2	=	0x00c3
-                    00B7    228 _IP0H	=	0x00b7
-                    00E8    229 _IEN1	=	0x00e8
-                            230 ;--------------------------------------------------------
-                            231 ; special function bits
-                            232 ;--------------------------------------------------------
-                            233 	.area RSEG    (ABS,DATA)
-   0000                     234 	.org 0x0000
-                    00D0    235 _PSW_0	=	0x00d0
-                    00D1    236 _PSW_1	=	0x00d1
-                    00D2    237 _PSW_2	=	0x00d2
-                    00D3    238 _PSW_3	=	0x00d3
-                    00D4    239 _PSW_4	=	0x00d4
-                    00D5    240 _PSW_5	=	0x00d5
-                    00D6    241 _PSW_6	=	0x00d6
-                    00D7    242 _PSW_7	=	0x00d7
-                    008F    243 _TCON_7	=	0x008f
-                    008E    244 _TCON_6	=	0x008e
-                    008D    245 _TCON_5	=	0x008d
-                    008C    246 _TCON_4	=	0x008c
-                    008B    247 _TCON_3	=	0x008b
-                    008A    248 _TCON_2	=	0x008a
-                    0089    249 _TCON_1	=	0x0089
-                    0088    250 _TCON_0	=	0x0088
-                    00AF    251 _IEN0_7	=	0x00af
-                    00AE    252 _IEN0_6	=	0x00ae
-                    00AD    253 _IEN0_5	=	0x00ad
-                    00AC    254 _IEN0_4	=	0x00ac
-                    00AB    255 _IEN0_3	=	0x00ab
-                    00AA    256 _IEN0_2	=	0x00aa
-                    00A9    257 _IEN0_1	=	0x00a9
-                    00A8    258 _IEN0_0	=	0x00a8
-                    00EA    259 _IEN1_2	=	0x00ea
-                    00E9    260 _IEN1_1	=	0x00e9
-                    00E8    261 _IEN1_0	=	0x00e8
-                    00FE    262 _IP1_6	=	0x00fe
-                    00FA    263 _IP1_2	=	0x00fa
-                    00F9    264 _IP1_1	=	0x00f9
-                    00F8    265 _IP1_0	=	0x00f8
-                    00BE    266 _IP0_6	=	0x00be
-                    00BD    267 _IP0_5	=	0x00bd
-                    00BC    268 _IP0_4	=	0x00bc
-                    00BB    269 _IP0_3	=	0x00bb
-                    00BA    270 _IP0_2	=	0x00ba
-                    00B9    271 _IP0_1	=	0x00b9
-                    00B8    272 _IP0_0	=	0x00b8
-                    0098    273 _SCON_0	=	0x0098
-                    0099    274 _SCON_1	=	0x0099
-                    009A    275 _SCON_2	=	0x009a
-                    009B    276 _SCON_3	=	0x009b
-                    009C    277 _SCON_4	=	0x009c
-                    009D    278 _SCON_5	=	0x009d
-                    009E    279 _SCON_6	=	0x009e
-                    009F    280 _SCON_7	=	0x009f
-                    00DE    281 _I2CON_6	=	0x00de
-                    00DD    282 _I2CON_5	=	0x00dd
-                    00DC    283 _I2CON_4	=	0x00dc
-                    00DB    284 _I2CON_3	=	0x00db
-                    00DA    285 _I2CON_2	=	0x00da
-                    00D8    286 _I2CON_0	=	0x00d8
-                    0080    287 _P0_0	=	0x0080
-                    0081    288 _P0_1	=	0x0081
-                    0082    289 _P0_2	=	0x0082
-                    0083    290 _P0_3	=	0x0083
-                    0084    291 _P0_4	=	0x0084
-                    0085    292 _P0_5	=	0x0085
-                    0086    293 _P0_6	=	0x0086
-                    0087    294 _P0_7	=	0x0087
-                    0090    295 _P1_0	=	0x0090
-                    0091    296 _P1_1	=	0x0091
-                    0092    297 _P1_2	=	0x0092
-                    0093    298 _P1_3	=	0x0093
-                    0094    299 _P1_4	=	0x0094
-                    0095    300 _P1_5	=	0x0095
-                    0096    301 _P1_6	=	0x0096
-                    0097    302 _P1_7	=	0x0097
-                    00B0    303 _P3_0	=	0x00b0
-                    00B1    304 _P3_1	=	0x00b1
-                            305 ;--------------------------------------------------------
-                            306 ; overlayable register banks
-                            307 ;--------------------------------------------------------
-                            308 	.area REG_BANK_0	(REL,OVR,DATA)
-   0000                     309 	.ds 8
-                            310 ;--------------------------------------------------------
-                            311 ; overlayable bit register bank
-                            312 ;--------------------------------------------------------
-                            313 	.area BIT_BANK	(REL,OVR,DATA)
-   0000                     314 bits:
-   0000                     315 	.ds 1
-                    8000    316 	b0 = bits[0]
-                    8100    317 	b1 = bits[1]
-                    8200    318 	b2 = bits[2]
-                    8300    319 	b3 = bits[3]
-                    8400    320 	b4 = bits[4]
-                    8500    321 	b5 = bits[5]
-                    8600    322 	b6 = bits[6]
-                    8700    323 	b7 = bits[7]
-                            324 ;--------------------------------------------------------
-                            325 ; internal ram data
-                            326 ;--------------------------------------------------------
-                            327 	.area DSEG    (DATA)
-                            328 ;--------------------------------------------------------
-                            329 ; overlayable items in internal ram 
-                            330 ;--------------------------------------------------------
-                            331 ;--------------------------------------------------------
-                            332 ; Stack segment in internal ram 
-                            333 ;--------------------------------------------------------
-                            334 	.area	SSEG	(DATA)
-   0000                     335 __start__stack:
-   0000                     336 	.ds	1
-                            337 
-                            338 ;--------------------------------------------------------
-                            339 ; indirectly addressable internal ram data
-                            340 ;--------------------------------------------------------
-                            341 	.area ISEG    (DATA)
-                            342 ;--------------------------------------------------------
-                            343 ; absolute internal ram data
-                            344 ;--------------------------------------------------------
-                            345 	.area IABS    (ABS,DATA)
-                            346 	.area IABS    (ABS,DATA)
-                            347 ;--------------------------------------------------------
-                            348 ; bit data
-                            349 ;--------------------------------------------------------
-                            350 	.area BSEG    (BIT)
-                            351 ;--------------------------------------------------------
-                            352 ; paged external ram data
-                            353 ;--------------------------------------------------------
-                            354 	.area PSEG    (PAG,XDATA)
-                            355 ;--------------------------------------------------------
-                            356 ; external ram data
-                            357 ;--------------------------------------------------------
-                            358 	.area XSEG    (XDATA)
-                            359 ;--------------------------------------------------------
-                            360 ; absolute external ram data
-                            361 ;--------------------------------------------------------
-                            362 	.area XABS    (ABS,XDATA)
-                            363 ;--------------------------------------------------------
-                            364 ; external initialized ram data
-                            365 ;--------------------------------------------------------
-                            366 	.area XISEG   (XDATA)
-                            367 	.area HOME    (CODE)
-                            368 	.area GSINIT0 (CODE)
-                            369 	.area GSINIT1 (CODE)
-                            370 	.area GSINIT2 (CODE)
-                            371 	.area GSINIT3 (CODE)
-                            372 	.area GSINIT4 (CODE)
-                            373 	.area GSINIT5 (CODE)
-                            374 	.area GSINIT  (CODE)
-                            375 	.area GSFINAL (CODE)
-                            376 	.area CSEG    (CODE)
-                            377 ;--------------------------------------------------------
-                            378 ; interrupt vector 
-                            379 ;--------------------------------------------------------
-                            380 	.area HOME    (CODE)
-   0000                     381 __interrupt_vect:
-   0000 02s00r00            382 	ljmp	__sdcc_gsinit_startup
-   0003 32                  383 	reti
-   0004                     384 	.ds	7
-   000B 32                  385 	reti
-   000C                     386 	.ds	7
-   0013 02s00r00            387 	ljmp	_X1_int
-   0016                     388 	.ds	5
-   001B 02s00r00            389 	ljmp	_T1_int
-                            390 ;--------------------------------------------------------
-                            391 ; global & static initialisations
-                            392 ;--------------------------------------------------------
-                            393 	.area HOME    (CODE)
-                            394 	.area GSINIT  (CODE)
-                            395 	.area GSFINAL (CODE)
-                            396 	.area GSINIT  (CODE)
-                            397 	.globl __sdcc_gsinit_startup
-                            398 	.globl __sdcc_program_startup
-                            399 	.globl __start__stack
-                            400 	.globl __mcs51_genXINIT
-                            401 	.globl __mcs51_genXRAMCLEAR
-                            402 	.globl __mcs51_genRAMCLEAR
-                            403 	.area GSFINAL (CODE)
-   0000 02s00r1E            404 	ljmp	__sdcc_program_startup
-                            405 ;--------------------------------------------------------
-                            406 ; Home
-                            407 ;--------------------------------------------------------
-                            408 	.area HOME    (CODE)
-                            409 	.area HOME    (CODE)
-   001E                     410 __sdcc_program_startup:
-   001E 12s00r00            411 	lcall	_main
-                            412 ;	return from main will lock up
-   0021 80 FE               413 	sjmp .
-                            414 ;--------------------------------------------------------
-                            415 ; code
-                            416 ;--------------------------------------------------------
-                            417 	.area CSEG    (CODE)
-                            418 ;------------------------------------------------------------
-                            419 ;Allocation info for local variables in function 'main'
-                            420 ;------------------------------------------------------------
-                            421 ;n                         Allocated to registers r7 
-                            422 ;cmd                       Allocated to registers r7 
-                            423 ;tasterpegel               Allocated to stack - _bp +1
-                            424 ;cal                       Allocated to registers r6 
-                            425 ;base                      Allocated to registers r4 r5 
-                            426 ;pin                       Allocated to registers 
-                            427 ;tmp                       Allocated to registers r4 
-                            428 ;objno                     Allocated to registers r5 
-                            429 ;objstate                  Allocated to registers r2 
-                            430 ;wduf                      Allocated to registers b1 
-                            431 ;tastergetoggelt           Allocated to registers b0 
-                            432 ;------------------------------------------------------------
-                            433 ;	../fb_in8.c:39: void main(void)
-                            434 ;	-----------------------------------------
-                            435 ;	 function main
-                            436 ;	-----------------------------------------
-   0000                     437 _main:
-                    0007    438 	ar7 = 0x07
-                    0006    439 	ar6 = 0x06
-                    0005    440 	ar5 = 0x05
-                    0004    441 	ar4 = 0x04
-                    0003    442 	ar3 = 0x03
-                    0002    443 	ar2 = 0x02
-                    0001    444 	ar1 = 0x01
-                    0000    445 	ar0 = 0x00
-   0000 C0*00               446 	push	_bp
-   0002 85 81*00            447 	mov	_bp,sp
-   0005 05 81               448 	inc	sp
-                            449 ;	../fb_in8.c:41: unsigned char n,cmd,tasterpegel=0;
-   0007 A8*00               450 	mov	r0,_bp
-   0009 08                  451 	inc	r0
-   000A 76 00               452 	mov	@r0,#0x00
-                            453 ;	../fb_in8.c:52: __bit wduf,tastergetoggelt=0;
-   000C C2*00               454 	clr	b0
-                            455 ;	../fb_in8.c:53: wduf=WDCON&0x02;
-   000E E5 A7               456 	mov	a,_WDCON
-   0010 03                  457 	rr	a
-   0011 54 01               458 	anl	a,#0x01
-   0013 FE                  459 	mov	r6,a
-   0014 24 FF               460 	add	a,#0xff
-   0016 92*00               461 	mov	b1,c
-                            462 ;	../fb_in8.c:54: TASTER=1;
-   0018 D2 97               463 	setb	_P1_7
-                            464 ;	../fb_in8.c:55: if(!TASTER && wduf)cal=0;
-   001A 20 97 07            465 	jb	_P1_7,00102$
-   001D 30*00 04            466 	jnb	b1,00102$
-   0020 7E 00               467 	mov	r6,#0x00
-   0022 80 07               468 	sjmp	00103$
-   0024                     469 00102$:
-                            470 ;	../fb_in8.c:56: else cal=trimsave;
-   0024 90 1C FF            471 	mov	dptr,#_main_trimsave_1_43
-   0027 E4                  472 	clr	a
-   0028 93                  473 	movc	a,@a+dptr
-   0029 FD                  474 	mov	r5,a
-   002A FE                  475 	mov	r6,a
-   002B                     476 00103$:
-                            477 ;	../fb_in8.c:57: TRIM = (TRIM+trimsave);
-   002B 90 1C FF            478 	mov	dptr,#_main_trimsave_1_43
-   002E E4                  479 	clr	a
-   002F 93                  480 	movc	a,@a+dptr
-   0030 AC 96               481 	mov	r4,_TRIM
-   0032 2C                  482 	add	a,r4
-   0033 FD                  483 	mov	r5,a
-   0034 8D 96               484 	mov	_TRIM,r5
-                            485 ;	../fb_in8.c:58: TRIM &= 0x3F;//oberen 2 bits ausblenden
-   0036 53 96 3F            486 	anl	_TRIM,#0x3F
-                            487 ;	../fb_in8.c:60: restart_hw();				// Hardware zurücksetzen
-   0039 C0 06               488 	push	ar6
-   003B C0*00               489 	push	bits
-   003D 12s00r00            490 	lcall	_restart_hw
-   0040 D0*00               491 	pop	bits
-                            492 ;	../fb_in8.c:63: BRGCON&=0xFE;	// Baudrate Generator stoppen
-   0042 53 BD FE            493 	anl	_BRGCON,#0xFE
-                            494 ;	../fb_in8.c:64: P1M1&=0xFC;		// RX und TX auf bidirectional setzen
-   0045 53 91 FC            495 	anl	_P1M1,#0xFC
-                            496 ;	../fb_in8.c:65: P1M2&=0xFC;
-   0048 53 92 FC            497 	anl	_P1M2,#0xFC
-                            498 ;	../fb_in8.c:66: SCON=0x50;		// Mode 1, receive enable
-   004B 75 98 50            499 	mov	_SCON,#0x50
-                            500 ;	../fb_in8.c:67: SSTAT|=0xE0;	// TI wird am Ende des Stopbits gesetzt und Interrupt nur bei RX und double TX buffer an
-   004E 43 BA E0            501 	orl	_SSTAT,#0xE0
-                            502 ;	../fb_in8.c:68: BRGCON|=0x02;	// Baudrate Generator verwenden aber noch gestoppt
-   0051 43 BD 02            503 	orl	_BRGCON,#0x02
-                            504 ;	../fb_in8.c:69: BRGR1=0x2F;	// Baudrate = cclk/((BRGR1,BRGR0)+16)
-   0054 75 BF 2F            505 	mov	_BRGR1,#0x2F
-                            506 ;	../fb_in8.c:70: BRGR0=0xF0;	// für 115200 0030 nehmen, autocal: 600bd= 0x2FF0
-   0057 75 BE F0            507 	mov	_BRGR0,#0xF0
-                            508 ;	../fb_in8.c:71: BRGCON|=0x01;	// Baudrate Generator starten
-   005A 43 BD 01            509 	orl	_BRGCON,#0x01
-                            510 ;	../fb_in8.c:72: SBUF=0x55;
-   005D 75 99 55            511 	mov	_SBUF,#0x55
-                            512 ;	../fb_in8.c:78: restart_app();			// Anwendungsspezifische Einstellungen zurücksetzen
-   0060 C0*00               513 	push	bits
-   0062 12s00r00            514 	lcall	_restart_app
-   0065 D0*00               515 	pop	bits
-   0067 D0 06               516 	pop	ar6
-                            517 ;	../fb_in8.c:81: portbuffer=P0;			// zunächst keine Änderungen bei Busspannungswiederkehr
-   0069 85 80*00            518 	mov	_portbuffer,_P0
-                            519 ;	../fb_in8.c:82: p0h=portbuffer;
-   006C 85*00*00            520 	mov	_p0h,_portbuffer
-                            521 ;	../fb_in8.c:87: if(!wduf){
-   006F 20*00 52            522 	jb	b1,00109$
-                            523 ;	../fb_in8.c:89: for(base=0;base<=(eeprom[0xD4]<<(eeprom[0xFE]>>4)) ;base++){//faktor startverz hohlen und um basis nach links schieben
-   0072 7C 00               524 	mov	r4,#0x00
-   0074 7D 00               525 	mov	r5,#0x00
-   0076                     526 00179$:
-   0076 C0 06               527 	push	ar6
-   0078 90s00rD4            528 	mov	dptr,#(_eeprom + 0x00d4)
-   007B E4                  529 	clr	a
-   007C 93                  530 	movc	a,@a+dptr
-   007D FB                  531 	mov	r3,a
-   007E 7A 00               532 	mov	r2,#0x00
-   0080 90s00rFE            533 	mov	dptr,#(_eeprom + 0x00fe)
-   0083 E4                  534 	clr	a
-   0084 93                  535 	movc	a,@a+dptr
-   0085 C4                  536 	swap	a
-   0086 54 0F               537 	anl	a,#0x0F
-   0088 FE                  538 	mov	r6,a
-   0089 8E F0               539 	mov	b,r6
-   008B 05 F0               540 	inc	b
-   008D 80 06               541 	sjmp	00288$
-   008F                     542 00287$:
-   008F EB                  543 	mov	a,r3
-   0090 2B                  544 	add	a,r3
-   0091 FB                  545 	mov	r3,a
-   0092 EA                  546 	mov	a,r2
-   0093 33                  547 	rlc	a
-   0094 FA                  548 	mov	r2,a
-   0095                     549 00288$:
-   0095 D5 F0 F7            550 	djnz	b,00287$
-   0098 C3                  551 	clr	c
-   0099 EB                  552 	mov	a,r3
-   009A 9C                  553 	subb	a,r4
-   009B EA                  554 	mov	a,r2
-   009C 9D                  555 	subb	a,r5
-   009D D0 06               556 	pop	ar6
-   009F 40 23               557 	jc	00109$
-                            558 ;	../fb_in8.c:91: RTCCON=0x60;		// RTC anhalten und Flag löschen
-   00A1 75 D1 60            559 	mov	_RTCCON,#0x60
-                            560 ;	../fb_in8.c:92: RTCH=0x1D;			// reload Real Time Clock für 65ms
-   00A4 75 D2 1D            561 	mov	_RTCH,#0x1D
-                            562 ;	../fb_in8.c:93: RTCL=0x40;
-   00A7 75 D3 40            563 	mov	_RTCL,#0x40
-                            564 ;	../fb_in8.c:94: RTCCON=0x61;		// RTC starten
-   00AA 75 D1 61            565 	mov	_RTCCON,#0x61
-                            566 ;	../fb_in8.c:95: while (RTCCON<=0x7F) ;	// Realtime clock ueberlauf abwarten
-   00AD                     567 00105$:
-   00AD E5 D1               568 	mov	a,_RTCCON
-   00AF 24 80               569 	add	a,#0xff - 0x7F
-   00B1 50 FA               570 	jnc	00105$
-                            571 ;	../fb_in8.c:97: EA = 0;
-   00B3 C2 AF               572 	clr	_IEN0_7
-                            573 ;	../fb_in8.c:98: WFEED1 = 0xA5;
-   00B5 75 C2 A5            574 	mov	_WFEED1,#0xA5
-                            575 ;	../fb_in8.c:99: WFEED2 = 0x5A;
-   00B8 75 C3 5A            576 	mov	_WFEED2,#0x5A
-                            577 ;	../fb_in8.c:100: EA=1;
-   00BB D2 AF               578 	setb	_IEN0_7
-                            579 ;	../fb_in8.c:89: for(base=0;base<=(eeprom[0xD4]<<(eeprom[0xFE]>>4)) ;base++){//faktor startverz hohlen und um basis nach links schieben
-   00BD 0C                  580 	inc	r4
-   00BE BC 00 B5            581 	cjne	r4,#0x00,00179$
-   00C1 0D                  582 	inc	r5
-   00C2 80 B2               583 	sjmp	00179$
-   00C4                     584 00109$:
-                            585 ;	../fb_in8.c:105: watchdog_init();
-   00C4 C0 06               586 	push	ar6
-   00C6 C0*00               587 	push	bits
-   00C8 12s00r00            588 	lcall	_watchdog_init
-   00CB D0*00               589 	pop	bits
-                            590 ;	../fb_in8.c:106: watchdog_start();
-   00CD C0*00               591 	push	bits
-   00CF 12s00r00            592 	lcall	_watchdog_start
-   00D2 D0*00               593 	pop	bits
-   00D4 D0 06               594 	pop	ar6
-                            595 ;	../fb_in8.c:108: if(!wduf)bus_return();			// Anwendungsspezifische Einstellungen zurücksetzen
-   00D6 20*00 0B            596 	jb	b1,00111$
-   00D9 C0 06               597 	push	ar6
-   00DB C0*00               598 	push	bits
-   00DD 12s00r00            599 	lcall	_bus_return
-   00E0 D0*00               600 	pop	bits
-   00E2 D0 06               601 	pop	ar6
-   00E4                     602 00111$:
-                            603 ;	../fb_in8.c:110: TASTER=1;
-   00E4 D2 97               604 	setb	_P1_7
-                            605 ;	../fb_in8.c:111: do  {
-   00E6                     606 00176$:
-                            607 ;	../fb_in8.c:114: EA = 0;
-   00E6 C2 AF               608 	clr	_IEN0_7
-                            609 ;	../fb_in8.c:115: WFEED1 = 0xA5;
-   00E8 75 C2 A5            610 	mov	_WFEED1,#0xA5
-                            611 ;	../fb_in8.c:116: WFEED2 = 0x5A;
-   00EB 75 C3 5A            612 	mov	_WFEED2,#0x5A
-                            613 ;	../fb_in8.c:117: EA=1;
-   00EE D2 AF               614 	setb	_IEN0_7
-                            615 ;	../fb_in8.c:120: if(APPLICATION_RUN){	  
-   00F0 90s00r0D            616 	mov	dptr,#(_eeprom + 0x000d)
-   00F3 E4                  617 	clr	a
-   00F4 93                  618 	movc	a,@a+dptr
-   00F5 FD                  619 	mov	r5,a
-   00F6 BD FF 02            620 	cjne	r5,#0xFF,00293$
-   00F9 80 03               621 	sjmp	00294$
-   00FB                     622 00293$:
-   00FB 02s02r36            623 	ljmp	00133$
-   00FE                     624 00294$:
-   00FE 30*00 03            625 	jnb	_connected,00295$
-   0101 02s02r36            626 	ljmp	00133$
-   0104                     627 00295$:
-   0104 E5*00               628 	mov	a,_status60
-   0106 30 E0 03            629 	jnb	acc.0,00296$
-   0109 02s02r36            630 	ljmp	00133$
-   010C                     631 00296$:
-                            632 ;	../fb_in8.c:122: p0h=P0;				// prüfen ob ein Eingang sich geändert hat
-   010C 85 80*00            633 	mov	_p0h,_P0
-                            634 ;	../fb_in8.c:126: if (p0h!=portbuffer) 
-   010F E5*00               635 	mov	a,_portbuffer
-   0111 B5*00 02            636 	cjne	a,_p0h,00297$
-   0114 80 31               637 	sjmp	00116$
-   0116                     638 00297$:
-                            639 ;	../fb_in8.c:128: for(n=0;n<8;n++)					// jeden Eingangspin einzel prüfen
-   0116 7D 00               640 	mov	r5,#0x00
-   0118                     641 00183$:
-   0118 BD 08 00            642 	cjne	r5,#0x08,00298$
-   011B                     643 00298$:
-   011B 50 27               644 	jnc	00186$
-                            645 ;	../fb_in8.c:132: if (((p0h^portbuffer) & bitmask_1[n])&& !(blocked & bitmask_1[n]) )//kürzeste Version
-   011D E5*00               646 	mov	a,_portbuffer
-   011F 65*00               647 	xrl	a,_p0h
-   0121 FC                  648 	mov	r4,a
-   0122 ED                  649 	mov	a,r5
-   0123 90s00r00            650 	mov	dptr,#_bitmask_1
-   0126 93                  651 	movc	a,@a+dptr
-   0127 FB                  652 	mov	r3,a
-   0128 5C                  653 	anl	a,r4
-   0129 60 16               654 	jz	00185$
-   012B EB                  655 	mov	a,r3
-   012C 55*00               656 	anl	a,_blocked
-   012E 70 11               657 	jnz	00185$
-                            658 ;	../fb_in8.c:134: pin_changed(n);				// Änderung verarbeiten
-   0130 8D 82               659 	mov	dpl,r5
-   0132 C0 06               660 	push	ar6
-   0134 C0 05               661 	push	ar5
-   0136 C0*00               662 	push	bits
-   0138 12s00r00            663 	lcall	_pin_changed
-   013B D0*00               664 	pop	bits
-   013D D0 05               665 	pop	ar5
-   013F D0 06               666 	pop	ar6
-   0141                     667 00185$:
-                            668 ;	../fb_in8.c:128: for(n=0;n<8;n++)					// jeden Eingangspin einzel prüfen
-   0141 0D                  669 	inc	r5
-   0142 80 D4               670 	sjmp	00183$
-   0144                     671 00186$:
-                            672 ;	../fb_in8.c:137: portbuffer=p0h;					// neuen Portzustand in buffer speichern
-   0144 85*00*00            673 	mov	_portbuffer,_p0h
-   0147                     674 00116$:
-                            675 ;	../fb_in8.c:142: if (RTCCON>=0x80){
-   0147 74 80               676 	mov	a,#0x100 - 0x80
-   0149 25 D1               677 	add	a,_RTCCON
-   014B 50 0B               678 	jnc	00219$
-                            679 ;	../fb_in8.c:143: delay_timer();	// Realtime clock ueberlauf
-   014D C0 06               680 	push	ar6
-   014F C0*00               681 	push	bits
-   0151 12s00r00            682 	lcall	_delay_timer
-   0154 D0*00               683 	pop	bits
-   0156 D0 06               684 	pop	ar6
-                            685 ;	../fb_in8.c:147: for(objno=0;objno<=7;objno++){	
-   0158                     686 00219$:
-   0158 7D 00               687 	mov	r5,#0x00
-   015A                     688 00187$:
-   015A ED                  689 	mov	a,r5
-   015B 24 F8               690 	add	a,#0xff - 0x07
-   015D 50 03               691 	jnc	00303$
-   015F 02s02r36            692 	ljmp	00133$
-   0162                     693 00303$:
-                            694 ;	../fb_in8.c:148: tmp=(eeprom[0xD5+(objno*4)]&0x0C);//0xD5/ bit 2-3 zykl senden aktiv 
-   0162 C0 06               695 	push	ar6
-   0164 ED                  696 	mov	a,r5
-   0165 2D                  697 	add	a,r5
-   0166 25 E0               698 	add	a,acc
-   0168 24 D5               699 	add	a,#0xD5
-   016A 90s00r00            700 	mov	dptr,#_eeprom
-   016D 93                  701 	movc	a,@a+dptr
-   016E FC                  702 	mov	r4,a
-   016F 53 04 0C            703 	anl	ar4,#0x0C
-                            704 ;	../fb_in8.c:149: objstate=read_obj_value(objno);
-   0172 8D 82               705 	mov	dpl,r5
-   0174 C0 05               706 	push	ar5
-   0176 C0 04               707 	push	ar4
-   0178 C0*00               708 	push	bits
-   017A 12s00r00            709 	lcall	_read_obj_value
-   017D AA 82               710 	mov	r2,dpl
-   017F AB 83               711 	mov	r3,dph
-   0181 AE F0               712 	mov	r6,b
-   0183 D0*00               713 	pop	bits
-   0185 D0 04               714 	pop	ar4
-   0187 D0 05               715 	pop	ar5
-                            716 ;	../fb_in8.c:150: if (((eeprom[0xCE+(objno>>1)] >> ((objno & 0x01)*4)) & 0x0F)==1){// bei Funktion=Schalten
-   0189 ED                  717 	mov	a,r5
-   018A C3                  718 	clr	c
-   018B 13                  719 	rrc	a
-   018C 24 CE               720 	add	a,#0xCE
-   018E 90s00r00            721 	mov	dptr,#_eeprom
-   0191 93                  722 	movc	a,@a+dptr
-   0192 FF                  723 	mov	r7,a
-   0193 74 01               724 	mov	a,#0x01
-   0195 5D                  725 	anl	a,r5
-   0196 75 F0 04            726 	mov	b,#0x04
-   0199 A4                  727 	mul	ab
-   019A F5 F0               728 	mov	b,a
-   019C 05 F0               729 	inc	b
-   019E EF                  730 	mov	a,r7
-   019F 80 02               731 	sjmp	00305$
-   01A1                     732 00304$:
-   01A1 C3                  733 	clr	c
-   01A2 13                  734 	rrc	a
-   01A3                     735 00305$:
-   01A3 D5 F0 FB            736 	djnz	b,00304$
-   01A6 54 0F               737 	anl	a,#0x0F
-   01A8 FF                  738 	mov	r7,a
-   01A9 BF 01 02            739 	cjne	r7,#0x01,00306$
-   01AC 80 05               740 	sjmp	00307$
-   01AE                     741 00306$:
-   01AE D0 06               742 	pop	ar6
-   01B0 02s02r32            743 	ljmp	00189$
-   01B3                     744 00307$:
-   01B3 D0 06               745 	pop	ar6
-                            746 ;	../fb_in8.c:151: if ((tmp==0x04 && objstate==1)||(tmp==0x08 && objstate==0)|| tmp==0x0C){//bei zykl senden aktiviert
-   01B5 BC 04 05            747 	cjne	r4,#0x04,00128$
-   01B8 BA 01 02            748 	cjne	r2,#0x01,00310$
-   01BB 80 09               749 	sjmp	00123$
-   01BD                     750 00310$:
-   01BD                     751 00128$:
-   01BD BC 08 03            752 	cjne	r4,#0x08,00129$
-   01C0 EA                  753 	mov	a,r2
-   01C1 60 03               754 	jz	00123$
-   01C3                     755 00129$:
-   01C3 BC 0C 66            756 	cjne	r4,#0x0C,00124$
-   01C6                     757 00123$:
-                            758 ;	../fb_in8.c:152: n=timercnt[objno];
-   01C6 ED                  759 	mov	a,r5
-   01C7 24r00               760 	add	a,#_timercnt
-   01C9 F9                  761 	mov	r1,a
-                            762 ;	../fb_in8.c:153: if ((n & 0x7F) ==0){ 		//    wenn aus oder abgelaufen
-   01CA E7                  763 	mov	a,@r1
-   01CB FF                  764 	mov	r7,a
-   01CC 54 7F               765 	anl	a,#0x7F
-   01CE 70 62               766 	jnz	00189$
-                            767 ;	../fb_in8.c:154: timercnt[objno] = (eeprom[0xD6+(objno*4)]& 0x3F)+ 0x80 ;//0xD6 Faktor Zyklisch senden x.1 + x.2 )+ einschalten
-   01D0 ED                  768 	mov	a,r5
-   01D1 2D                  769 	add	a,r5
-   01D2 25 E0               770 	add	a,acc
-   01D4 24 D6               771 	add	a,#0xD6
-   01D6 90s00r00            772 	mov	dptr,#_eeprom
-   01D9 93                  773 	movc	a,@a+dptr
-   01DA FC                  774 	mov	r4,a
-   01DB 74 3F               775 	mov	a,#0x3F
-   01DD 5C                  776 	anl	a,r4
-   01DE 24 80               777 	add	a,#0x80
-   01E0 F7                  778 	mov	@r1,a
-                            779 ;	../fb_in8.c:155: timerbase[objno]=(eeprom[0xF6+((objno+1)>>1)]>>(4*((objno&0x01)^0x01)))&0x07;	//Basis zyklisch senden
-   01E1 ED                  780 	mov	a,r5
-   01E2 24r00               781 	add	a,#_timerbase
-   01E4 F9                  782 	mov	r1,a
-   01E5 8D 03               783 	mov	ar3,r5
-   01E7 7C 00               784 	mov	r4,#0x00
-   01E9 0B                  785 	inc	r3
-   01EA BB 00 01            786 	cjne	r3,#0x00,00318$
-   01ED 0C                  787 	inc	r4
-   01EE                     788 00318$:
-   01EE EC                  789 	mov	a,r4
-   01EF A2 E7               790 	mov	c,acc.7
-   01F1 13                  791 	rrc	a
-   01F2 CB                  792 	xch	a,r3
-   01F3 13                  793 	rrc	a
-   01F4 CB                  794 	xch	a,r3
-   01F5 74 F6               795 	mov	a,#0xF6
-   01F7 2B                  796 	add	a,r3
-   01F8 90s00r00            797 	mov	dptr,#_eeprom
-   01FB 93                  798 	movc	a,@a+dptr
-   01FC FC                  799 	mov	r4,a
-   01FD 74 01               800 	mov	a,#0x01
-   01FF 5D                  801 	anl	a,r5
-   0200 64 01               802 	xrl	a,#0x01
-   0202 75 F0 04            803 	mov	b,#0x04
-   0205 A4                  804 	mul	ab
-   0206 F5 F0               805 	mov	b,a
-   0208 05 F0               806 	inc	b
-   020A EC                  807 	mov	a,r4
-   020B 80 02               808 	sjmp	00320$
-   020D                     809 00319$:
-   020D C3                  810 	clr	c
-   020E 13                  811 	rrc	a
-   020F                     812 00320$:
-   020F D5 F0 FB            813 	djnz	b,00319$
-   0212 54 07               814 	anl	a,#0x07
-   0214 F7                  815 	mov	@r1,a
-                            816 ;	../fb_in8.c:156: if (n & 0x80){// wenn timer ein war
-   0215 EF                  817 	mov	a,r7
-   0216 30 E7 19            818 	jnb	acc.7,00189$
-                            819 ;	../fb_in8.c:157: send_obj_value(objno);		// Eingang x.1 zyklisch senden
-   0219 8D 82               820 	mov	dpl,r5
-   021B C0 06               821 	push	ar6
-   021D C0 05               822 	push	ar5
-   021F C0*00               823 	push	bits
-   0221 12s00r00            824 	lcall	_send_obj_value
-   0224 D0*00               825 	pop	bits
-   0226 D0 05               826 	pop	ar5
-   0228 D0 06               827 	pop	ar6
-   022A 80 06               828 	sjmp	00189$
-   022C                     829 00124$:
-                            830 ;	../fb_in8.c:161: else timercnt[objno]=0;
-   022C ED                  831 	mov	a,r5
-   022D 24r00               832 	add	a,#_timercnt
-   022F F8                  833 	mov	r0,a
-   0230 76 00               834 	mov	@r0,#0x00
-   0232                     835 00189$:
-                            836 ;	../fb_in8.c:147: for(objno=0;objno<=7;objno++){	
-   0232 0D                  837 	inc	r5
-   0233 02s01r5A            838 	ljmp	00187$
-   0236                     839 00133$:
-                            840 ;	../fb_in8.c:180: if (tel_arrived || tel_sent) { 
-   0236 20*00 03            841 	jb	_tel_arrived,00136$
-   0239 30*00 11            842 	jnb	_tel_sent,00137$
-   023C                     843 00136$:
-                            844 ;	../fb_in8.c:181: tel_arrived=0;
-   023C C2*00               845 	clr	_tel_arrived
-                            846 ;	../fb_in8.c:182: tel_sent=0;
-   023E C2*00               847 	clr	_tel_sent
-                            848 ;	../fb_in8.c:183: process_tel();
-   0240 C0 06               849 	push	ar6
-   0242 C0*00               850 	push	bits
-   0244 12s00r00            851 	lcall	_process_tel
-   0247 D0*00               852 	pop	bits
-   0249 D0 06               853 	pop	ar6
-   024B 80 0A               854 	sjmp	00138$
-   024D                     855 00137$:
-                            856 ;	../fb_in8.c:186: for(n=0;n<100;n++);	// falls Hauptroutine keine Zeit verbraucht, der PROG LED etwas Zeit geben, damit sie auch leuchten kann
-   024D 7F 64               857 	mov	r7,#0x64
-   024F                     858 00193$:
-   024F 8F 05               859 	mov	ar5,r7
-   0251 1D                  860 	dec	r5
-   0252 8D 07               861 	mov	ar7,r5
-   0254 EF                  862 	mov	a,r7
-   0255 70 F8               863 	jnz	00193$
-   0257                     864 00138$:
-                            865 ;	../fb_in8.c:190: if (RI){
-                            866 ;	../fb_in8.c:191: RI=0;
-   0257 10 98 02            867 	jbc	_SCON_0,00325$
-   025A 80 4A               868 	sjmp	00164$
-   025C                     869 00325$:
-                            870 ;	../fb_in8.c:192: cmd=SBUF;
-   025C AF 99               871 	mov	r7,_SBUF
-                            872 ;	../fb_in8.c:193: if(cmd=='c'){
-   025E BF 63 08            873 	cjne	r7,#0x63,00144$
-                            874 ;	../fb_in8.c:194: while(!TI);
-   0261                     875 00140$:
-                            876 ;	../fb_in8.c:195: TI=0;
-   0261 10 99 02            877 	jbc	_SCON_1,00328$
-   0264 80 FB               878 	sjmp	00140$
-   0266                     879 00328$:
-                            880 ;	../fb_in8.c:196: SBUF=0x55;
-   0266 75 99 55            881 	mov	_SBUF,#0x55
-   0269                     882 00144$:
-                            883 ;	../fb_in8.c:198: if(cmd=='+'){
-   0269 BF 2B 03            884 	cjne	r7,#0x2B,00146$
-                            885 ;	../fb_in8.c:199: TRIM--;
-   026C 15 96               886 	dec	_TRIM
-                            887 ;	../fb_in8.c:200: cal--;
-   026E 1E                  888 	dec	r6
-   026F                     889 00146$:
-                            890 ;	../fb_in8.c:202: if(cmd=='-'){
-   026F BF 2D 03            891 	cjne	r7,#0x2D,00148$
-                            892 ;	../fb_in8.c:203: TRIM++;
-   0272 05 96               893 	inc	_TRIM
-                            894 ;	../fb_in8.c:204: cal++;
-   0274 0E                  895 	inc	r6
-   0275                     896 00148$:
-                            897 ;	../fb_in8.c:206: if(cmd=='w'){
-   0275 BF 77 12            898 	cjne	r7,#0x77,00150$
-                            899 ;	../fb_in8.c:207: EA=0;
-   0278 C2 AF               900 	clr	_IEN0_7
-                            901 ;	../fb_in8.c:208: START_WRITECYCLE;	//cal an 0x1bff schreiben
-   027A 75 E4 00            902 	mov	_FMCON,#0x00
-                            903 ;	../fb_in8.c:210: FMADRH= 0x1C;		
-   027D 75 E7 1C            904 	mov	_FMADRH,#0x1C
-                            905 ;	../fb_in8.c:211: FMADRL= 0xFF; 
-   0280 75 E6 FF            906 	mov	_FMADRL,#0xFF
-                            907 ;	../fb_in8.c:213: FMDATA=	cal;
-   0283 8E E5               908 	mov	_FMDATA,r6
-                            909 ;	../fb_in8.c:214: STOP_WRITECYCLE;
-   0285 75 E4 68            910 	mov	_FMCON,#0x68
-                            911 ;	../fb_in8.c:215: EA=1;				//int wieder freigeben
-   0288 D2 AF               912 	setb	_IEN0_7
-   028A                     913 00150$:
-                            914 ;	../fb_in8.c:217: if(cmd=='p')status60^=0x81;	// Prog-Bit und Parity-Bit im system_state toggeln
-   028A BF 70 03            915 	cjne	r7,#0x70,00152$
-   028D 63*00 81            916 	xrl	_status60,#0x81
-   0290                     917 00152$:
-                            918 ;	../fb_in8.c:219: if(cmd=='v'){
-   0290 BF 76 08            919 	cjne	r7,#0x76,00157$
-                            920 ;	../fb_in8.c:220: while(!TI);
-   0293                     921 00153$:
-                            922 ;	../fb_in8.c:221: TI=0;
-   0293 10 99 02            923 	jbc	_SCON_1,00339$
-   0296 80 FB               924 	sjmp	00153$
-   0298                     925 00339$:
-                            926 ;	../fb_in8.c:222: SBUF=VERSION;
-   0298 75 99 07            927 	mov	_SBUF,#0x07
-   029B                     928 00157$:
-                            929 ;	../fb_in8.c:224: if(cmd=='t'){
-   029B BF 74 08            930 	cjne	r7,#0x74,00164$
-                            931 ;	../fb_in8.c:225: while(!TI);
-   029E                     932 00158$:
-                            933 ;	../fb_in8.c:226: TI=0;
-   029E 10 99 02            934 	jbc	_SCON_1,00342$
-   02A1 80 FB               935 	sjmp	00158$
-   02A3                     936 00342$:
-                            937 ;	../fb_in8.c:227: SBUF=TYPE;
-   02A3 75 99 02            938 	mov	_SBUF,#0x02
-   02A6                     939 00164$:
-                            940 ;	../fb_in8.c:232: TASTER=1;				// Pin als Eingang schalten um Taster abzufragen
-   02A6 D2 97               941 	setb	_P1_7
-                            942 ;	../fb_in8.c:233: if(!TASTER){ // Taster gedrückt
-   02A8 20 97 18            943 	jb	_P1_7,00174$
-                            944 ;	../fb_in8.c:234: if(tasterpegel<255)	tasterpegel++;
-   02AB A8*00               945 	mov	r0,_bp
-   02AD 08                  946 	inc	r0
-   02AE B6 FF 00            947 	cjne	@r0,#0xFF,00344$
-   02B1                     948 00344$:
-   02B1 50 06               949 	jnc	00168$
-   02B3 A8*00               950 	mov	r0,_bp
-   02B5 08                  951 	inc	r0
-   02B6 06                  952 	inc	@r0
-   02B7 80 18               953 	sjmp	00175$
-   02B9                     954 00168$:
-                            955 ;	../fb_in8.c:236: if(!tastergetoggelt)status60^=0x81;	// Prog-Bit und Parity-Bit im system_state toggeln
-   02B9 20*00 03            956 	jb	b0,00166$
-   02BC 63*00 81            957 	xrl	_status60,#0x81
-   02BF                     958 00166$:
-                            959 ;	../fb_in8.c:237: tastergetoggelt=1;
-   02BF D2*00               960 	setb	b0
-   02C1 80 0E               961 	sjmp	00175$
-   02C3                     962 00174$:
-                            963 ;	../fb_in8.c:241: if(tasterpegel>0) tasterpegel--;
-   02C3 A8*00               964 	mov	r0,_bp
-   02C5 08                  965 	inc	r0
-   02C6 E6                  966 	mov	a,@r0
-   02C7 60 06               967 	jz	00171$
-   02C9 A8*00               968 	mov	r0,_bp
-   02CB 08                  969 	inc	r0
-   02CC 16                  970 	dec	@r0
-   02CD 80 02               971 	sjmp	00175$
-   02CF                     972 00171$:
-                            973 ;	../fb_in8.c:242: else tastergetoggelt=0;
-   02CF C2*00               974 	clr	b0
-   02D1                     975 00175$:
-                            976 ;	../fb_in8.c:244: TASTER=!(status60 & 0x01);	// LED entsprechend Prog-Bit schalten (low=LED an)
-   02D1 E5*00               977 	mov	a,_status60
-   02D3 54 01               978 	anl	a,#0x01
-   02D5 FF                  979 	mov	r7,a
-   02D6 B4 01 00            980 	cjne	a,#0x01,00348$
-   02D9                     981 00348$:
-   02D9 E4                  982 	clr	a
-   02DA 33                  983 	rlc	a
-   02DB FF                  984 	mov	r7,a
-   02DC 24 FF               985 	add	a,#0xff
-   02DE 92 97               986 	mov	_P1_7,c
-                            987 ;	../fb_in8.c:246: } while(1);
-   02E0 02s00rE6            988 	ljmp	00176$
-   02E3 15 81               989 	dec	sp
-   02E5 D0*00               990 	pop	_bp
-   02E7 22                  991 	ret
-                            992 	.area CSEG    (CODE)
-                            993 	.area CONST   (CODE)
-   0000                     994 _bitmask_1:
-   0000 01                  995 	.db #0x01	; 1
-   0001 02                  996 	.db #0x02	; 2
-   0002 04                  997 	.db #0x04	; 4
-   0003 08                  998 	.db #0x08	; 8
-   0004 10                  999 	.db #0x10	; 16
-   0005 20                 1000 	.db #0x20	; 32
-   0006 40                 1001 	.db #0x40	; 64
-   0007 80                 1002 	.db #0x80	; 128
-                    01CE   1003 _space	=	0x01ce
-                    1CFF   1004 _main_trimsave_1_43	=	0x1cff
-                           1005 	.area XINIT   (CODE)
-                           1006 	.area CABS    (ABS,CODE)
+                    00B0    167 G$P3$0$0 == 0x00b0
+                    00B0    168 _P3	=	0x00b0
+                    00D0    169 G$PSW$0$0 == 0x00d0
+                    00D0    170 _PSW	=	0x00d0
+                    00E0    171 G$ACC$0$0 == 0x00e0
+                    00E0    172 _ACC	=	0x00e0
+                    00F0    173 G$B$0$0 == 0x00f0
+                    00F0    174 _B	=	0x00f0
+                    0081    175 G$SP$0$0 == 0x0081
+                    0081    176 _SP	=	0x0081
+                    0082    177 G$DPL$0$0 == 0x0082
+                    0082    178 _DPL	=	0x0082
+                    0083    179 G$DPH$0$0 == 0x0083
+                    0083    180 _DPH	=	0x0083
+                    0087    181 G$PCON$0$0 == 0x0087
+                    0087    182 _PCON	=	0x0087
+                    0088    183 G$TCON$0$0 == 0x0088
+                    0088    184 _TCON	=	0x0088
+                    0089    185 G$TMOD$0$0 == 0x0089
+                    0089    186 _TMOD	=	0x0089
+                    008A    187 G$TL0$0$0 == 0x008a
+                    008A    188 _TL0	=	0x008a
+                    008B    189 G$TL1$0$0 == 0x008b
+                    008B    190 _TL1	=	0x008b
+                    008C    191 G$TH0$0$0 == 0x008c
+                    008C    192 _TH0	=	0x008c
+                    008D    193 G$TH1$0$0 == 0x008d
+                    008D    194 _TH1	=	0x008d
+                    00A8    195 G$IEN0$0$0 == 0x00a8
+                    00A8    196 _IEN0	=	0x00a8
+                    00B8    197 G$IP0$0$0 == 0x00b8
+                    00B8    198 _IP0	=	0x00b8
+                    0098    199 G$SCON$0$0 == 0x0098
+                    0098    200 _SCON	=	0x0098
+                    0099    201 G$SBUF$0$0 == 0x0099
+                    0099    202 _SBUF	=	0x0099
+                    00A2    203 G$AUXR1$0$0 == 0x00a2
+                    00A2    204 _AUXR1	=	0x00a2
+                    00A9    205 G$SADDR$0$0 == 0x00a9
+                    00A9    206 _SADDR	=	0x00a9
+                    00B9    207 G$SADEN$0$0 == 0x00b9
+                    00B9    208 _SADEN	=	0x00b9
+                    00BE    209 G$BRGR0$0$0 == 0x00be
+                    00BE    210 _BRGR0	=	0x00be
+                    00BF    211 G$BRGR1$0$0 == 0x00bf
+                    00BF    212 _BRGR1	=	0x00bf
+                    00BD    213 G$BRGCON$0$0 == 0x00bd
+                    00BD    214 _BRGCON	=	0x00bd
+                    00AC    215 G$CMP1$0$0 == 0x00ac
+                    00AC    216 _CMP1	=	0x00ac
+                    00AD    217 G$CMP2$0$0 == 0x00ad
+                    00AD    218 _CMP2	=	0x00ad
+                    0095    219 G$DIVM$0$0 == 0x0095
+                    0095    220 _DIVM	=	0x0095
+                    00E7    221 G$FMADRH$0$0 == 0x00e7
+                    00E7    222 _FMADRH	=	0x00e7
+                    00E6    223 G$FMADRL$0$0 == 0x00e6
+                    00E6    224 _FMADRL	=	0x00e6
+                    00E4    225 G$FMCON$0$0 == 0x00e4
+                    00E4    226 _FMCON	=	0x00e4
+                    00E5    227 G$FMDATA$0$0 == 0x00e5
+                    00E5    228 _FMDATA	=	0x00e5
+                    00DB    229 G$I2ADR$0$0 == 0x00db
+                    00DB    230 _I2ADR	=	0x00db
+                    00D8    231 G$I2CON$0$0 == 0x00d8
+                    00D8    232 _I2CON	=	0x00d8
+                    00DA    233 G$I2DAT$0$0 == 0x00da
+                    00DA    234 _I2DAT	=	0x00da
+                    00DD    235 G$I2SCLH$0$0 == 0x00dd
+                    00DD    236 _I2SCLH	=	0x00dd
+                    00DC    237 G$I2SCLL$0$0 == 0x00dc
+                    00DC    238 _I2SCLL	=	0x00dc
+                    00D9    239 G$I2STAT$0$0 == 0x00d9
+                    00D9    240 _I2STAT	=	0x00d9
+                    00F8    241 G$IP1$0$0 == 0x00f8
+                    00F8    242 _IP1	=	0x00f8
+                    00F7    243 G$IP1H$0$0 == 0x00f7
+                    00F7    244 _IP1H	=	0x00f7
+                    0094    245 G$KBCON$0$0 == 0x0094
+                    0094    246 _KBCON	=	0x0094
+                    0086    247 G$KBMASK$0$0 == 0x0086
+                    0086    248 _KBMASK	=	0x0086
+                    0093    249 G$KBPATN$0$0 == 0x0093
+                    0093    250 _KBPATN	=	0x0093
+                    0084    251 G$P0M1$0$0 == 0x0084
+                    0084    252 _P0M1	=	0x0084
+                    0085    253 G$P0M2$0$0 == 0x0085
+                    0085    254 _P0M2	=	0x0085
+                    0091    255 G$P1M1$0$0 == 0x0091
+                    0091    256 _P1M1	=	0x0091
+                    0092    257 G$P1M2$0$0 == 0x0092
+                    0092    258 _P1M2	=	0x0092
+                    00B1    259 G$P3M1$0$0 == 0x00b1
+                    00B1    260 _P3M1	=	0x00b1
+                    00B2    261 G$P3M2$0$0 == 0x00b2
+                    00B2    262 _P3M2	=	0x00b2
+                    00B5    263 G$PCONA$0$0 == 0x00b5
+                    00B5    264 _PCONA	=	0x00b5
+                    00F6    265 G$PT0AD$0$0 == 0x00f6
+                    00F6    266 _PT0AD	=	0x00f6
+                    00DF    267 G$RSTSRC$0$0 == 0x00df
+                    00DF    268 _RSTSRC	=	0x00df
+                    00D1    269 G$RTCCON$0$0 == 0x00d1
+                    00D1    270 _RTCCON	=	0x00d1
+                    00D2    271 G$RTCH$0$0 == 0x00d2
+                    00D2    272 _RTCH	=	0x00d2
+                    00D3    273 G$RTCL$0$0 == 0x00d3
+                    00D3    274 _RTCL	=	0x00d3
+                    00BA    275 G$SSTAT$0$0 == 0x00ba
+                    00BA    276 _SSTAT	=	0x00ba
+                    008F    277 G$TAMOD$0$0 == 0x008f
+                    008F    278 _TAMOD	=	0x008f
+                    0096    279 G$TRIM$0$0 == 0x0096
+                    0096    280 _TRIM	=	0x0096
+                    00A7    281 G$WDCON$0$0 == 0x00a7
+                    00A7    282 _WDCON	=	0x00a7
+                    00C1    283 G$WDL$0$0 == 0x00c1
+                    00C1    284 _WDL	=	0x00c1
+                    00C2    285 G$WFEED1$0$0 == 0x00c2
+                    00C2    286 _WFEED1	=	0x00c2
+                    00C3    287 G$WFEED2$0$0 == 0x00c3
+                    00C3    288 _WFEED2	=	0x00c3
+                    00B7    289 G$IP0H$0$0 == 0x00b7
+                    00B7    290 _IP0H	=	0x00b7
+                    00E8    291 G$IEN1$0$0 == 0x00e8
+                    00E8    292 _IEN1	=	0x00e8
+                            293 ;--------------------------------------------------------
+                            294 ; special function bits
+                            295 ;--------------------------------------------------------
+                            296 	.area RSEG    (ABS,DATA)
+   0000                     297 	.org 0x0000
+                    00D0    298 G$PSW_0$0$0 == 0x00d0
+                    00D0    299 _PSW_0	=	0x00d0
+                    00D1    300 G$PSW_1$0$0 == 0x00d1
+                    00D1    301 _PSW_1	=	0x00d1
+                    00D2    302 G$PSW_2$0$0 == 0x00d2
+                    00D2    303 _PSW_2	=	0x00d2
+                    00D3    304 G$PSW_3$0$0 == 0x00d3
+                    00D3    305 _PSW_3	=	0x00d3
+                    00D4    306 G$PSW_4$0$0 == 0x00d4
+                    00D4    307 _PSW_4	=	0x00d4
+                    00D5    308 G$PSW_5$0$0 == 0x00d5
+                    00D5    309 _PSW_5	=	0x00d5
+                    00D6    310 G$PSW_6$0$0 == 0x00d6
+                    00D6    311 _PSW_6	=	0x00d6
+                    00D7    312 G$PSW_7$0$0 == 0x00d7
+                    00D7    313 _PSW_7	=	0x00d7
+                    008F    314 G$TCON_7$0$0 == 0x008f
+                    008F    315 _TCON_7	=	0x008f
+                    008E    316 G$TCON_6$0$0 == 0x008e
+                    008E    317 _TCON_6	=	0x008e
+                    008D    318 G$TCON_5$0$0 == 0x008d
+                    008D    319 _TCON_5	=	0x008d
+                    008C    320 G$TCON_4$0$0 == 0x008c
+                    008C    321 _TCON_4	=	0x008c
+                    008B    322 G$TCON_3$0$0 == 0x008b
+                    008B    323 _TCON_3	=	0x008b
+                    008A    324 G$TCON_2$0$0 == 0x008a
+                    008A    325 _TCON_2	=	0x008a
+                    0089    326 G$TCON_1$0$0 == 0x0089
+                    0089    327 _TCON_1	=	0x0089
+                    0088    328 G$TCON_0$0$0 == 0x0088
+                    0088    329 _TCON_0	=	0x0088
+                    00AF    330 G$IEN0_7$0$0 == 0x00af
+                    00AF    331 _IEN0_7	=	0x00af
+                    00AE    332 G$IEN0_6$0$0 == 0x00ae
+                    00AE    333 _IEN0_6	=	0x00ae
+                    00AD    334 G$IEN0_5$0$0 == 0x00ad
+                    00AD    335 _IEN0_5	=	0x00ad
+                    00AC    336 G$IEN0_4$0$0 == 0x00ac
+                    00AC    337 _IEN0_4	=	0x00ac
+                    00AB    338 G$IEN0_3$0$0 == 0x00ab
+                    00AB    339 _IEN0_3	=	0x00ab
+                    00AA    340 G$IEN0_2$0$0 == 0x00aa
+                    00AA    341 _IEN0_2	=	0x00aa
+                    00A9    342 G$IEN0_1$0$0 == 0x00a9
+                    00A9    343 _IEN0_1	=	0x00a9
+                    00A8    344 G$IEN0_0$0$0 == 0x00a8
+                    00A8    345 _IEN0_0	=	0x00a8
+                    00EA    346 G$IEN1_2$0$0 == 0x00ea
+                    00EA    347 _IEN1_2	=	0x00ea
+                    00E9    348 G$IEN1_1$0$0 == 0x00e9
+                    00E9    349 _IEN1_1	=	0x00e9
+                    00E8    350 G$IEN1_0$0$0 == 0x00e8
+                    00E8    351 _IEN1_0	=	0x00e8
+                    00FE    352 G$IP1_6$0$0 == 0x00fe
+                    00FE    353 _IP1_6	=	0x00fe
+                    00FA    354 G$IP1_2$0$0 == 0x00fa
+                    00FA    355 _IP1_2	=	0x00fa
+                    00F9    356 G$IP1_1$0$0 == 0x00f9
+                    00F9    357 _IP1_1	=	0x00f9
+                    00F8    358 G$IP1_0$0$0 == 0x00f8
+                    00F8    359 _IP1_0	=	0x00f8
+                    00BE    360 G$IP0_6$0$0 == 0x00be
+                    00BE    361 _IP0_6	=	0x00be
+                    00BD    362 G$IP0_5$0$0 == 0x00bd
+                    00BD    363 _IP0_5	=	0x00bd
+                    00BC    364 G$IP0_4$0$0 == 0x00bc
+                    00BC    365 _IP0_4	=	0x00bc
+                    00BB    366 G$IP0_3$0$0 == 0x00bb
+                    00BB    367 _IP0_3	=	0x00bb
+                    00BA    368 G$IP0_2$0$0 == 0x00ba
+                    00BA    369 _IP0_2	=	0x00ba
+                    00B9    370 G$IP0_1$0$0 == 0x00b9
+                    00B9    371 _IP0_1	=	0x00b9
+                    00B8    372 G$IP0_0$0$0 == 0x00b8
+                    00B8    373 _IP0_0	=	0x00b8
+                    0098    374 G$SCON_0$0$0 == 0x0098
+                    0098    375 _SCON_0	=	0x0098
+                    0099    376 G$SCON_1$0$0 == 0x0099
+                    0099    377 _SCON_1	=	0x0099
+                    009A    378 G$SCON_2$0$0 == 0x009a
+                    009A    379 _SCON_2	=	0x009a
+                    009B    380 G$SCON_3$0$0 == 0x009b
+                    009B    381 _SCON_3	=	0x009b
+                    009C    382 G$SCON_4$0$0 == 0x009c
+                    009C    383 _SCON_4	=	0x009c
+                    009D    384 G$SCON_5$0$0 == 0x009d
+                    009D    385 _SCON_5	=	0x009d
+                    009E    386 G$SCON_6$0$0 == 0x009e
+                    009E    387 _SCON_6	=	0x009e
+                    009F    388 G$SCON_7$0$0 == 0x009f
+                    009F    389 _SCON_7	=	0x009f
+                    00DE    390 G$I2CON_6$0$0 == 0x00de
+                    00DE    391 _I2CON_6	=	0x00de
+                    00DD    392 G$I2CON_5$0$0 == 0x00dd
+                    00DD    393 _I2CON_5	=	0x00dd
+                    00DC    394 G$I2CON_4$0$0 == 0x00dc
+                    00DC    395 _I2CON_4	=	0x00dc
+                    00DB    396 G$I2CON_3$0$0 == 0x00db
+                    00DB    397 _I2CON_3	=	0x00db
+                    00DA    398 G$I2CON_2$0$0 == 0x00da
+                    00DA    399 _I2CON_2	=	0x00da
+                    00D8    400 G$I2CON_0$0$0 == 0x00d8
+                    00D8    401 _I2CON_0	=	0x00d8
+                    0080    402 G$P0_0$0$0 == 0x0080
+                    0080    403 _P0_0	=	0x0080
+                    0081    404 G$P0_1$0$0 == 0x0081
+                    0081    405 _P0_1	=	0x0081
+                    0082    406 G$P0_2$0$0 == 0x0082
+                    0082    407 _P0_2	=	0x0082
+                    0083    408 G$P0_3$0$0 == 0x0083
+                    0083    409 _P0_3	=	0x0083
+                    0084    410 G$P0_4$0$0 == 0x0084
+                    0084    411 _P0_4	=	0x0084
+                    0085    412 G$P0_5$0$0 == 0x0085
+                    0085    413 _P0_5	=	0x0085
+                    0086    414 G$P0_6$0$0 == 0x0086
+                    0086    415 _P0_6	=	0x0086
+                    0087    416 G$P0_7$0$0 == 0x0087
+                    0087    417 _P0_7	=	0x0087
+                    0090    418 G$P1_0$0$0 == 0x0090
+                    0090    419 _P1_0	=	0x0090
+                    0091    420 G$P1_1$0$0 == 0x0091
+                    0091    421 _P1_1	=	0x0091
+                    0092    422 G$P1_2$0$0 == 0x0092
+                    0092    423 _P1_2	=	0x0092
+                    0093    424 G$P1_3$0$0 == 0x0093
+                    0093    425 _P1_3	=	0x0093
+                    0094    426 G$P1_4$0$0 == 0x0094
+                    0094    427 _P1_4	=	0x0094
+                    0095    428 G$P1_5$0$0 == 0x0095
+                    0095    429 _P1_5	=	0x0095
+                    0096    430 G$P1_6$0$0 == 0x0096
+                    0096    431 _P1_6	=	0x0096
+                    0097    432 G$P1_7$0$0 == 0x0097
+                    0097    433 _P1_7	=	0x0097
+                    00B0    434 G$P3_0$0$0 == 0x00b0
+                    00B0    435 _P3_0	=	0x00b0
+                    00B1    436 G$P3_1$0$0 == 0x00b1
+                    00B1    437 _P3_1	=	0x00b1
+                            438 ;--------------------------------------------------------
+                            439 ; overlayable register banks
+                            440 ;--------------------------------------------------------
+                            441 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                     442 	.ds 8
+                            443 ;--------------------------------------------------------
+                            444 ; overlayable bit register bank
+                            445 ;--------------------------------------------------------
+                            446 	.area BIT_BANK	(REL,OVR,DATA)
+   0000                     447 bits:
+   0000                     448 	.ds 1
+                    8000    449 	b0 = bits[0]
+                    8100    450 	b1 = bits[1]
+                    8200    451 	b2 = bits[2]
+                    8300    452 	b3 = bits[3]
+                    8400    453 	b4 = bits[4]
+                    8500    454 	b5 = bits[5]
+                    8600    455 	b6 = bits[6]
+                    8700    456 	b7 = bits[7]
+                            457 ;--------------------------------------------------------
+                            458 ; internal ram data
+                            459 ;--------------------------------------------------------
+                            460 	.area DSEG    (DATA)
+                            461 ;--------------------------------------------------------
+                            462 ; overlayable items in internal ram 
+                            463 ;--------------------------------------------------------
+                            464 	.area OSEG    (OVR,DATA)
+                            465 ;--------------------------------------------------------
+                            466 ; Stack segment in internal ram 
+                            467 ;--------------------------------------------------------
+                            468 	.area	SSEG	(DATA)
+   0000                     469 __start__stack:
+   0000                     470 	.ds	1
+                            471 
+                            472 ;--------------------------------------------------------
+                            473 ; indirectly addressable internal ram data
+                            474 ;--------------------------------------------------------
+                            475 	.area ISEG    (DATA)
+                            476 ;--------------------------------------------------------
+                            477 ; absolute internal ram data
+                            478 ;--------------------------------------------------------
+                            479 	.area IABS    (ABS,DATA)
+                            480 	.area IABS    (ABS,DATA)
+                            481 ;--------------------------------------------------------
+                            482 ; bit data
+                            483 ;--------------------------------------------------------
+                            484 	.area BSEG    (BIT)
+                            485 ;--------------------------------------------------------
+                            486 ; paged external ram data
+                            487 ;--------------------------------------------------------
+                            488 	.area PSEG    (PAG,XDATA)
+                            489 ;--------------------------------------------------------
+                            490 ; external ram data
+                            491 ;--------------------------------------------------------
+                            492 	.area XSEG    (XDATA)
+                            493 ;--------------------------------------------------------
+                            494 ; absolute external ram data
+                            495 ;--------------------------------------------------------
+                            496 	.area XABS    (ABS,XDATA)
+                            497 ;--------------------------------------------------------
+                            498 ; external initialized ram data
+                            499 ;--------------------------------------------------------
+                            500 	.area XISEG   (XDATA)
+                            501 	.area HOME    (CODE)
+                            502 	.area GSINIT0 (CODE)
+                            503 	.area GSINIT1 (CODE)
+                            504 	.area GSINIT2 (CODE)
+                            505 	.area GSINIT3 (CODE)
+                            506 	.area GSINIT4 (CODE)
+                            507 	.area GSINIT5 (CODE)
+                            508 	.area GSINIT  (CODE)
+                            509 	.area GSFINAL (CODE)
+                            510 	.area CSEG    (CODE)
+                            511 ;--------------------------------------------------------
+                            512 ; interrupt vector 
+                            513 ;--------------------------------------------------------
+                            514 	.area HOME    (CODE)
+   0000                     515 __interrupt_vect:
+   0000 02s00r00            516 	ljmp	__sdcc_gsinit_startup
+   0003 32                  517 	reti
+   0004                     518 	.ds	7
+   000B 32                  519 	reti
+   000C                     520 	.ds	7
+   0013 02s00r00            521 	ljmp	_X1_int
+   0016                     522 	.ds	5
+   001B 02s00r00            523 	ljmp	_T1_int
+                            524 ;--------------------------------------------------------
+                            525 ; global & static initialisations
+                            526 ;--------------------------------------------------------
+                            527 	.area HOME    (CODE)
+                            528 	.area GSINIT  (CODE)
+                            529 	.area GSFINAL (CODE)
+                            530 	.area GSINIT  (CODE)
+                            531 	.globl __sdcc_gsinit_startup
+                            532 	.globl __sdcc_program_startup
+                            533 	.globl __start__stack
+                            534 	.globl __mcs51_genXINIT
+                            535 	.globl __mcs51_genXRAMCLEAR
+                            536 	.globl __mcs51_genRAMCLEAR
+                            537 	.area GSFINAL (CODE)
+   0000 02s00r1E            538 	ljmp	__sdcc_program_startup
+                            539 ;--------------------------------------------------------
+                            540 ; Home
+                            541 ;--------------------------------------------------------
+                            542 	.area HOME    (CODE)
+                            543 	.area HOME    (CODE)
+   001E                     544 __sdcc_program_startup:
+   001E 12s00r00            545 	lcall	_main
+                            546 ;	return from main will lock up
+   0021 80 FE               547 	sjmp .
+                            548 ;--------------------------------------------------------
+                            549 ; code
+                            550 ;--------------------------------------------------------
+                            551 	.area CSEG    (CODE)
+                            552 ;------------------------------------------------------------
+                            553 ;Allocation info for local variables in function 'main'
+                            554 ;------------------------------------------------------------
+                            555 ;n                         Allocated to registers r6 
+                            556 ;cmd                       Allocated to registers r7 
+                            557 ;tasterpegel               Allocated to stack - _bp +1
+                            558 ;cal                       Allocated to registers r5 
+                            559 ;base                      Allocated to registers r3 r4 
+                            560 ;pin                       Allocated to stack - _bp +2
+                            561 ;tmp                       Allocated to registers r4 
+                            562 ;objno                     Allocated to registers r7 
+                            563 ;objstate                  Allocated to registers r2 
+                            564 ;wduf                      Allocated to registers b2 
+                            565 ;tastergetoggelt           Allocated to registers b0 
+                            566 ;bus_return_ready          Allocated to registers b1 
+                            567 ;------------------------------------------------------------
+                    0000    568 	G$main$0$0 ==.
+                    0000    569 	C$fb_in8.c$46$0$0 ==.
+                            570 ;	../fb_in8.c:46: void main(void)
+                            571 ;	-----------------------------------------
+                            572 ;	 function main
+                            573 ;	-----------------------------------------
+   0000                     574 _main:
+                    0007    575 	ar7 = 0x07
+                    0006    576 	ar6 = 0x06
+                    0005    577 	ar5 = 0x05
+                    0004    578 	ar4 = 0x04
+                    0003    579 	ar3 = 0x03
+                    0002    580 	ar2 = 0x02
+                    0001    581 	ar1 = 0x01
+                    0000    582 	ar0 = 0x00
+   0000 C0*00               583 	push	_bp
+   0002 85 81*00            584 	mov	_bp,sp
+   0005 05 81               585 	inc	sp
+   0007 05 81               586 	inc	sp
+                    0009    587 	C$fb_in8.c$48$1$0 ==.
+                            588 ;	../fb_in8.c:48: unsigned char n,cmd,tasterpegel=0;
+   0009 A8*00               589 	mov	r0,_bp
+   000B 08                  590 	inc	r0
+   000C 76 00               591 	mov	@r0,#0x00
+                    000E    592 	C$fb_in8.c$52$1$0 ==.
+                            593 ;	../fb_in8.c:52: unsigned char pin=0;
+   000E A8*00               594 	mov	r0,_bp
+   0010 08                  595 	inc	r0
+   0011 08                  596 	inc	r0
+   0012 76 00               597 	mov	@r0,#0x00
+                    0014    598 	C$fb_in8.c$62$1$0 ==.
+                            599 ;	../fb_in8.c:62: __bit tastergetoggelt=0;
+   0014 C2*00               600 	clr	b0
+                    0016    601 	C$fb_in8.c$63$1$0 ==.
+                            602 ;	../fb_in8.c:63: __bit bus_return_ready=0; 
+   0016 C2*00               603 	clr	b1
+                    0018    604 	C$fb_in8.c$65$1$1 ==.
+                            605 ;	../fb_in8.c:65: wduf=WDCON&0x02;
+   0018 E5 A7               606 	mov	a,_WDCON
+   001A 03                  607 	rr	a
+   001B 54 01               608 	anl	a,#0x01
+   001D FD                  609 	mov	r5,a
+   001E 24 FF               610 	add	a,#0xff
+   0020 92*00               611 	mov	b2,c
+                    0022    612 	C$fb_in8.c$67$1$1 ==.
+                            613 ;	../fb_in8.c:67: TASTER=1;
+   0022 D2 97               614 	setb	_P1_7
+                    0024    615 	C$fb_in8.c$68$1$1 ==.
+                            616 ;	../fb_in8.c:68: if(!TASTER && wduf)cal=0;
+   0024 20 97 07            617 	jb	_P1_7,00102$
+   0027 30*00 04            618 	jnb	b2,00102$
+   002A 7D 00               619 	mov	r5,#0x00
+   002C 80 07               620 	sjmp	00103$
+   002E                     621 00102$:
+                    002E    622 	C$fb_in8.c$69$1$1 ==.
+                            623 ;	../fb_in8.c:69: else cal=trimsave;
+   002E 90 1C FF            624 	mov	dptr,#_main_trimsave_1_1
+   0031 E4                  625 	clr	a
+   0032 93                  626 	movc	a,@a+dptr
+   0033 FC                  627 	mov	r4,a
+   0034 FD                  628 	mov	r5,a
+   0035                     629 00103$:
+                    0035    630 	C$fb_in8.c$70$1$1 ==.
+                            631 ;	../fb_in8.c:70: TRIM = (TRIM+trimsave);
+   0035 90 1C FF            632 	mov	dptr,#_main_trimsave_1_1
+   0038 E4                  633 	clr	a
+   0039 93                  634 	movc	a,@a+dptr
+   003A AB 96               635 	mov	r3,_TRIM
+   003C 2B                  636 	add	a,r3
+   003D FC                  637 	mov	r4,a
+   003E 8C 96               638 	mov	_TRIM,r4
+                    0040    639 	C$fb_in8.c$71$1$1 ==.
+                            640 ;	../fb_in8.c:71: TRIM &= 0x3F;//oberen 2 bits ausblenden
+   0040 53 96 3F            641 	anl	_TRIM,#0x3F
+                    0043    642 	C$fb_in8.c$73$1$1 ==.
+                            643 ;	../fb_in8.c:73: TASTER=0;
+   0043 C2 97               644 	clr	_P1_7
+                    0045    645 	C$fb_in8.c$74$1$1 ==.
+                            646 ;	../fb_in8.c:74: restart_hw();				// Hardware zurücksetzen
+   0045 C0 05               647 	push	ar5
+   0047 C0*00               648 	push	bits
+   0049 12s00r00            649 	lcall	_restart_hw
+   004C D0*00               650 	pop	bits
+                    004E    651 	C$fb_in8.c$77$1$1 ==.
+                            652 ;	../fb_in8.c:77: RS_INIT_600
+   004E 53 BD FE            653 	anl	_BRGCON,#0xFE
+   0051 75 98 50            654 	mov	_SCON,#0x50
+   0054 43 BA E0            655 	orl	_SSTAT,#0xE0
+   0057 43 BD 02            656 	orl	_BRGCON,#0x02
+   005A 75 BF 2F            657 	mov	_BRGR1,#0x2F
+   005D 75 BE F0            658 	mov	_BRGR0,#0xF0
+   0060 43 BD 01            659 	orl	_BRGCON,#0x01
+                    0063    660 	C$fb_in8.c$78$1$1 ==.
+                            661 ;	../fb_in8.c:78: SBUF=0x55;// 'U' senden
+   0063 75 99 55            662 	mov	_SBUF,#0x55
+                    0066    663 	C$fb_in8.c$85$1$1 ==.
+                            664 ;	../fb_in8.c:85: restart_app();			// Anwendungsspezifische Einstellungen zurücksetzen
+   0066 C0*00               665 	push	bits
+   0068 12s00r00            666 	lcall	_restart_app
+   006B D0*00               667 	pop	bits
+   006D D0 05               668 	pop	ar5
+                    006F    669 	C$fb_in8.c$87$1$1 ==.
+                            670 ;	../fb_in8.c:87: if(!wduf){
+   006F 20*00 52            671 	jb	b2,00109$
+                    0072    672 	C$fb_in8.c$89$1$1 ==.
+                            673 ;	../fb_in8.c:89: for(base=0;base<=(eeprom[0xD4]<<(eeprom[0xFE]>>4)) ;base++){//faktor startverz hohlen und um basis nach links schieben
+   0072 7B 00               674 	mov	r3,#0x00
+   0074 7C 00               675 	mov	r4,#0x00
+   0076                     676 00196$:
+   0076 C0 05               677 	push	ar5
+   0078 90s00rD4            678 	mov	dptr,#(_eeprom + 0x00d4)
+   007B E4                  679 	clr	a
+   007C 93                  680 	movc	a,@a+dptr
+   007D FA                  681 	mov	r2,a
+   007E 7D 00               682 	mov	r5,#0x00
+   0080 90s00rFE            683 	mov	dptr,#(_eeprom + 0x00fe)
+   0083 E4                  684 	clr	a
+   0084 93                  685 	movc	a,@a+dptr
+   0085 C4                  686 	swap	a
+   0086 54 0F               687 	anl	a,#0x0F
+   0088 FF                  688 	mov	r7,a
+   0089 8F F0               689 	mov	b,r7
+   008B 05 F0               690 	inc	b
+   008D 80 06               691 	sjmp	00271$
+   008F                     692 00270$:
+   008F EA                  693 	mov	a,r2
+   0090 2A                  694 	add	a,r2
+   0091 FA                  695 	mov	r2,a
+   0092 ED                  696 	mov	a,r5
+   0093 33                  697 	rlc	a
+   0094 FD                  698 	mov	r5,a
+   0095                     699 00271$:
+   0095 D5 F0 F7            700 	djnz	b,00270$
+   0098 C3                  701 	clr	c
+   0099 EA                  702 	mov	a,r2
+   009A 9B                  703 	subb	a,r3
+   009B ED                  704 	mov	a,r5
+   009C 9C                  705 	subb	a,r4
+   009D D0 05               706 	pop	ar5
+   009F 40 23               707 	jc	00109$
+                    00A1    708 	C$fb_in8.c$91$3$3 ==.
+                            709 ;	../fb_in8.c:91: RTCCON=0x60;		// RTC anhalten und Flag löschen
+   00A1 75 D1 60            710 	mov	_RTCCON,#0x60
+                    00A4    711 	C$fb_in8.c$92$3$3 ==.
+                            712 ;	../fb_in8.c:92: RTCH=0x1D;			// reload Real Time Clock für 65ms
+   00A4 75 D2 1D            713 	mov	_RTCH,#0x1D
+                    00A7    714 	C$fb_in8.c$93$3$3 ==.
+                            715 ;	../fb_in8.c:93: RTCL=0x40;
+   00A7 75 D3 40            716 	mov	_RTCL,#0x40
+                    00AA    717 	C$fb_in8.c$94$3$3 ==.
+                            718 ;	../fb_in8.c:94: RTCCON=0x61;		// RTC starten
+   00AA 75 D1 61            719 	mov	_RTCCON,#0x61
+                    00AD    720 	C$fb_in8.c$95$3$3 ==.
+                            721 ;	../fb_in8.c:95: while (RTCCON<=0x7F) ;	// Realtime clock ueberlauf abwarten
+   00AD                     722 00105$:
+   00AD E5 D1               723 	mov	a,_RTCCON
+   00AF 24 80               724 	add	a,#0xff - 0x7F
+   00B1 50 FA               725 	jnc	00105$
+                    00B3    726 	C$fb_in8.c$97$3$3 ==.
+                            727 ;	../fb_in8.c:97: EA = 0;
+   00B3 C2 AF               728 	clr	_IEN0_7
+                    00B5    729 	C$fb_in8.c$98$3$3 ==.
+                            730 ;	../fb_in8.c:98: WFEED1 = 0xA5;
+   00B5 75 C2 A5            731 	mov	_WFEED1,#0xA5
+                    00B8    732 	C$fb_in8.c$99$3$3 ==.
+                            733 ;	../fb_in8.c:99: WFEED2 = 0x5A;
+   00B8 75 C3 5A            734 	mov	_WFEED2,#0x5A
+                    00BB    735 	C$fb_in8.c$100$3$3 ==.
+                            736 ;	../fb_in8.c:100: EA=1;
+   00BB D2 AF               737 	setb	_IEN0_7
+                    00BD    738 	C$fb_in8.c$89$2$2 ==.
+                            739 ;	../fb_in8.c:89: for(base=0;base<=(eeprom[0xD4]<<(eeprom[0xFE]>>4)) ;base++){//faktor startverz hohlen und um basis nach links schieben
+   00BD 0B                  740 	inc	r3
+   00BE BB 00 B5            741 	cjne	r3,#0x00,00196$
+   00C1 0C                  742 	inc	r4
+   00C2 80 B2               743 	sjmp	00196$
+   00C4                     744 00109$:
+                    00C4    745 	C$fb_in8.c$105$1$1 ==.
+                            746 ;	../fb_in8.c:105: WATCHDOG_INIT
+   00C4 75 C1 FF            747 	mov	_WDL,#0xFF
+   00C7 C2 AF               748 	clr	_IEN0_7
+   00C9 75 A7 E5            749 	mov	_WDCON,#0xE5
+   00CC 75 C2 A5            750 	mov	_WFEED1,#0xA5
+   00CF 75 C3 5A            751 	mov	_WFEED2,#0x5A
+   00D2 D2 AF               752 	setb	_IEN0_7
+                    00D4    753 	C$fb_in8.c$106$1$1 ==.
+                            754 ;	../fb_in8.c:106: WATCHDOG_START
+   00D4 C2 AF               755 	clr	_IEN0_7
+   00D6 43 A7 04            756 	orl	_WDCON,#0x04
+   00D9 75 C2 A5            757 	mov	_WFEED1,#0xA5
+   00DC 75 C3 5A            758 	mov	_WFEED2,#0x5A
+   00DF D2 AF               759 	setb	_IEN0_7
+                    00E1    760 	C$fb_in8.c$108$1$1 ==.
+                            761 ;	../fb_in8.c:108: do  {
+   00E1                     762 00193$:
+                    00E1    763 	C$fb_in8.c$109$2$4 ==.
+                            764 ;	../fb_in8.c:109: WATCHDOG_FEED 	    // feed the watchdog
+   00E1 C2 AF               765 	clr	_IEN0_7
+   00E3 75 C2 A5            766 	mov	_WFEED1,#0xA5
+   00E6 75 C3 5A            767 	mov	_WFEED2,#0x5A
+   00E9 D2 AF               768 	setb	_IEN0_7
+                    00EB    769 	C$fb_in8.c$111$2$4 ==.
+                            770 ;	../fb_in8.c:111: EA = 0;
+   00EB C2 AF               771 	clr	_IEN0_7
+                    00ED    772 	C$fb_in8.c$112$2$4 ==.
+                            773 ;	../fb_in8.c:112: WFEED1 = 0xA5;
+   00ED 75 C2 A5            774 	mov	_WFEED1,#0xA5
+                    00F0    775 	C$fb_in8.c$113$2$4 ==.
+                            776 ;	../fb_in8.c:113: WFEED2 = 0x5A;
+   00F0 75 C3 5A            777 	mov	_WFEED2,#0x5A
+                    00F3    778 	C$fb_in8.c$114$2$4 ==.
+                            779 ;	../fb_in8.c:114: EA=1;
+   00F3 D2 AF               780 	setb	_IEN0_7
+                    00F5    781 	C$fb_in8.c$117$2$4 ==.
+                            782 ;	../fb_in8.c:117: if(APPLICATION_RUN){	  
+   00F5 90s00r0D            783 	mov	dptr,#(_eeprom + 0x000d)
+   00F8 E4                  784 	clr	a
+   00F9 93                  785 	movc	a,@a+dptr
+   00FA FF                  786 	mov	r7,a
+   00FB BF FF 02            787 	cjne	r7,#0xFF,00275$
+   00FE 80 03               788 	sjmp	00276$
+   0100                     789 00275$:
+   0100 02s02rA8            790 	ljmp	00149$
+   0103                     791 00276$:
+   0103 30*00 03            792 	jnb	_connected,00277$
+   0106 02s02rA8            793 	ljmp	00149$
+   0109                     794 00277$:
+   0109 E5*00               795 	mov	a,_status60
+   010B 30 E0 03            796 	jnb	acc.0,00278$
+   010E 02s02rA8            797 	ljmp	00149$
+   0111                     798 00278$:
+                    0111    799 	C$fb_in8.c$121$3$5 ==.
+                            800 ;	../fb_in8.c:121: p0h=spi_in_out();
+   0111 C0 05               801 	push	ar5
+   0113 C0*00               802 	push	bits
+   0115 12s00r00            803 	lcall	_spi_in_out
+   0118 85 82*00            804 	mov	_p0h,dpl
+   011B D0*00               805 	pop	bits
+   011D D0 05               806 	pop	ar5
+                    011F    807 	C$fb_in8.c$123$3$5 ==.
+                            808 ;	../fb_in8.c:123: if(!bus_return_ready)
+   011F 20*00 13            809 	jb	b1,00113$
+                    0122    810 	C$fb_in8.c$125$4$6 ==.
+                            811 ;	../fb_in8.c:125: portbuffer=p0h;
+   0122 85*00*00            812 	mov	_portbuffer,_p0h
+                    0125    813 	C$fb_in8.c$126$4$6 ==.
+                            814 ;	../fb_in8.c:126: if(!wduf)bus_return();			// Anwendungsspezifische Einstellungen zurücksetzen
+   0125 20*00 0B            815 	jb	b2,00111$
+   0128 C0 05               816 	push	ar5
+   012A C0*00               817 	push	bits
+   012C 12s00r00            818 	lcall	_bus_return
+   012F D0*00               819 	pop	bits
+   0131 D0 05               820 	pop	ar5
+   0133                     821 00111$:
+                    0133    822 	C$fb_in8.c$127$4$6 ==.
+                            823 ;	../fb_in8.c:127: bus_return_ready=1;
+   0133 D2*00               824 	setb	b1
+   0135                     825 00113$:
+                    0135    826 	C$fb_in8.c$130$3$5 ==.
+                            827 ;	../fb_in8.c:130: if (p0h!=portbuffer) 
+   0135 E5*00               828 	mov	a,_portbuffer
+   0137 B5*00 02            829 	cjne	a,_p0h,00281$
+   013A 80 4A               830 	sjmp	00118$
+   013C                     831 00281$:
+                    013C    832 	C$fb_in8.c$135$4$7 ==.
+                            833 ;	../fb_in8.c:135: if (((p0h^portbuffer) & bitmask_1[pin])&& !(blocked & bitmask_1[pin]) )//kürzeste Version
+   013C E5*00               834 	mov	a,_portbuffer
+   013E 65*00               835 	xrl	a,_p0h
+   0140 FF                  836 	mov	r7,a
+   0141 A8*00               837 	mov	r0,_bp
+   0143 08                  838 	inc	r0
+   0144 08                  839 	inc	r0
+   0145 E6                  840 	mov	a,@r0
+   0146 90s00r00            841 	mov	dptr,#_bitmask_1
+   0149 93                  842 	movc	a,@a+dptr
+   014A FC                  843 	mov	r4,a
+   014B 5F                  844 	anl	a,r7
+   014C 60 16               845 	jz	00115$
+   014E EC                  846 	mov	a,r4
+   014F 55*00               847 	anl	a,_blocked
+   0151 70 11               848 	jnz	00115$
+                    0153    849 	C$fb_in8.c$137$5$8 ==.
+                            850 ;	../fb_in8.c:137: pin_changed(pin);				// Änderung verarbeiten
+   0153 A8*00               851 	mov	r0,_bp
+   0155 08                  852 	inc	r0
+   0156 08                  853 	inc	r0
+   0157 86 82               854 	mov	dpl,@r0
+   0159 C0 05               855 	push	ar5
+   015B C0*00               856 	push	bits
+   015D 12s00r00            857 	lcall	_pin_changed
+   0160 D0*00               858 	pop	bits
+   0162 D0 05               859 	pop	ar5
+   0164                     860 00115$:
+                    0164    861 	C$fb_in8.c$141$4$7 ==.
+                            862 ;	../fb_in8.c:141: portbuffer|=(p0h& bitmask_1[pin]);					// neuen Portzustand in buffer speichern
+   0164 A8*00               863 	mov	r0,_bp
+   0166 08                  864 	inc	r0
+   0167 08                  865 	inc	r0
+   0168 E6                  866 	mov	a,@r0
+   0169 90s00r00            867 	mov	dptr,#_bitmask_1
+   016C 93                  868 	movc	a,@a+dptr
+   016D FF                  869 	mov	r7,a
+   016E 55*00               870 	anl	a,_p0h
+   0170 42*00               871 	orl	_portbuffer,a
+                    0172    872 	C$fb_in8.c$142$4$7 ==.
+                            873 ;	../fb_in8.c:142: portbuffer&=(p0h| ~bitmask_1[pin]);					// neuen Portzustand in buffer speichern
+   0172 EF                  874 	mov	a,r7
+   0173 F4                  875 	cpl	a
+   0174 FF                  876 	mov	r7,a
+   0175 45*00               877 	orl	a,_p0h
+   0177 52*00               878 	anl	_portbuffer,a
+                    0179    879 	C$fb_in8.c$144$4$7 ==.
+                            880 ;	../fb_in8.c:144: pin++;	// nächsten pin prüfen..
+   0179 A8*00               881 	mov	r0,_bp
+   017B 08                  882 	inc	r0
+   017C 08                  883 	inc	r0
+   017D 06                  884 	inc	@r0
+                    017E    885 	C$fb_in8.c$145$4$7 ==.
+                            886 ;	../fb_in8.c:145: pin&=0x07;// maximal 0-7
+   017E A8*00               887 	mov	r0,_bp
+   0180 08                  888 	inc	r0
+   0181 08                  889 	inc	r0
+   0182 E6                  890 	mov	a,@r0
+   0183 54 07               891 	anl	a,#0x07
+   0185 F6                  892 	mov	@r0,a
+   0186                     893 00118$:
+                    0186    894 	C$fb_in8.c$150$3$5 ==.
+                            895 ;	../fb_in8.c:150: if (RTCCON>=0x80){
+   0186 74 80               896 	mov	a,#0x100 - 0x80
+   0188 25 D1               897 	add	a,_RTCCON
+   018A 50 0B               898 	jnc	00236$
+                    018C    899 	C$fb_in8.c$151$4$9 ==.
+                            900 ;	../fb_in8.c:151: delay_timer();	// Realtime clock ueberlauf
+   018C C0 05               901 	push	ar5
+   018E C0*00               902 	push	bits
+   0190 12s00r00            903 	lcall	_delay_timer
+   0193 D0*00               904 	pop	bits
+   0195 D0 05               905 	pop	ar5
+                    0197    906 	C$fb_in8.c$155$1$1 ==.
+                            907 ;	../fb_in8.c:155: for(objno=0;objno<=7;objno++){	
+   0197                     908 00236$:
+   0197 7F 00               909 	mov	r7,#0x00
+   0199                     910 00200$:
+   0199 EF                  911 	mov	a,r7
+   019A 24 F8               912 	add	a,#0xff - 0x07
+   019C 50 03               913 	jnc	00285$
+   019E 02s02r77            914 	ljmp	00203$
+   01A1                     915 00285$:
+                    01A1    916 	C$fb_in8.c$156$1$1 ==.
+                            917 ;	../fb_in8.c:156: tmp=(eeprom[0xD5+(objno*4)]&0x0C);//0xD5/ bit 2-3 zykl senden aktiv 
+   01A1 C0 05               918 	push	ar5
+   01A3 EF                  919 	mov	a,r7
+   01A4 2F                  920 	add	a,r7
+   01A5 25 E0               921 	add	a,acc
+   01A7 24 D5               922 	add	a,#0xD5
+   01A9 90s00r00            923 	mov	dptr,#_eeprom
+   01AC 93                  924 	movc	a,@a+dptr
+   01AD FC                  925 	mov	r4,a
+   01AE 53 04 0C            926 	anl	ar4,#0x0C
+                    01B1    927 	C$fb_in8.c$157$4$10 ==.
+                            928 ;	../fb_in8.c:157: objstate=read_obj_value(objno);
+   01B1 8F 82               929 	mov	dpl,r7
+   01B3 C0 07               930 	push	ar7
+   01B5 C0 04               931 	push	ar4
+   01B7 C0*00               932 	push	bits
+   01B9 12s00r00            933 	lcall	_read_obj_value
+   01BC AA 82               934 	mov	r2,dpl
+   01BE AB 83               935 	mov	r3,dph
+   01C0 AD F0               936 	mov	r5,b
+   01C2 D0*00               937 	pop	bits
+   01C4 D0 04               938 	pop	ar4
+   01C6 D0 07               939 	pop	ar7
+                    01C8    940 	C$fb_in8.c$158$4$10 ==.
+                            941 ;	../fb_in8.c:158: if (((eeprom[0xCE+(objno>>1)] >> ((objno & 0x01)*4)) & 0x0F)==1){// bei Funktion=Schalten
+   01C8 EF                  942 	mov	a,r7
+   01C9 C3                  943 	clr	c
+   01CA 13                  944 	rrc	a
+   01CB 24 CE               945 	add	a,#0xCE
+   01CD 90s00r00            946 	mov	dptr,#_eeprom
+   01D0 93                  947 	movc	a,@a+dptr
+   01D1 FE                  948 	mov	r6,a
+   01D2 74 01               949 	mov	a,#0x01
+   01D4 5F                  950 	anl	a,r7
+   01D5 75 F0 04            951 	mov	b,#0x04
+   01D8 A4                  952 	mul	ab
+   01D9 F5 F0               953 	mov	b,a
+   01DB 05 F0               954 	inc	b
+   01DD EE                  955 	mov	a,r6
+   01DE 80 02               956 	sjmp	00287$
+   01E0                     957 00286$:
+   01E0 C3                  958 	clr	c
+   01E1 13                  959 	rrc	a
+   01E2                     960 00287$:
+   01E2 D5 F0 FB            961 	djnz	b,00286$
+   01E5 54 0F               962 	anl	a,#0x0F
+   01E7 FE                  963 	mov	r6,a
+   01E8 BE 01 02            964 	cjne	r6,#0x01,00288$
+   01EB 80 05               965 	sjmp	00289$
+   01ED                     966 00288$:
+   01ED D0 05               967 	pop	ar5
+   01EF 02s02r73            968 	ljmp	00202$
+   01F2                     969 00289$:
+   01F2 D0 05               970 	pop	ar5
+                    01F4    971 	C$fb_in8.c$159$5$11 ==.
+                            972 ;	../fb_in8.c:159: if ((tmp==0x04 && objstate==1)||(tmp==0x08 && objstate==0)|| tmp==0x0C){//bei zykl senden aktiviert
+   01F4 BC 04 05            973 	cjne	r4,#0x04,00133$
+   01F7 BA 01 02            974 	cjne	r2,#0x01,00292$
+   01FA 80 09               975 	sjmp	00128$
+   01FC                     976 00292$:
+   01FC                     977 00133$:
+   01FC BC 08 03            978 	cjne	r4,#0x08,00134$
+   01FF EA                  979 	mov	a,r2
+   0200 60 03               980 	jz	00128$
+   0202                     981 00134$:
+   0202 BC 0C 68            982 	cjne	r4,#0x0C,00129$
+   0205                     983 00128$:
+                    0205    984 	C$fb_in8.c$160$6$12 ==.
+                            985 ;	../fb_in8.c:160: n=timercnt[objno];
+   0205 EF                  986 	mov	a,r7
+   0206 24r00               987 	add	a,#_timercnt
+   0208 F9                  988 	mov	r1,a
+                    0209    989 	C$fb_in8.c$161$6$12 ==.
+                            990 ;	../fb_in8.c:161: if ((n & 0x7F) ==0){ 		//    wenn aus oder abgelaufen
+   0209 E7                  991 	mov	a,@r1
+   020A FE                  992 	mov	r6,a
+   020B 54 7F               993 	anl	a,#0x7F
+   020D 70 64               994 	jnz	00202$
+                    020F    995 	C$fb_in8.c$162$7$13 ==.
+                            996 ;	../fb_in8.c:162: timercnt[objno] = (eeprom[0xD6+(objno*4)]& 0x3F)+ 0x80 ;//0xD6 Faktor Zyklisch senden x.1 + x.2 )+ einschalten
+   020F EF                  997 	mov	a,r7
+   0210 2F                  998 	add	a,r7
+   0211 25 E0               999 	add	a,acc
+   0213 24 D6              1000 	add	a,#0xD6
+   0215 90s00r00           1001 	mov	dptr,#_eeprom
+   0218 93                 1002 	movc	a,@a+dptr
+   0219 FC                 1003 	mov	r4,a
+   021A 74 3F              1004 	mov	a,#0x3F
+   021C 5C                 1005 	anl	a,r4
+   021D 24 80              1006 	add	a,#0x80
+   021F F7                 1007 	mov	@r1,a
+                    0220   1008 	C$fb_in8.c$163$7$13 ==.
+                           1009 ;	../fb_in8.c:163: timerbase[objno]=(eeprom[0xF6+((objno+1)>>1)]>>(4*((objno&0x01)^0x01)))&0x07;	//Basis zyklisch senden
+   0220 EF                 1010 	mov	a,r7
+   0221 24r00              1011 	add	a,#_timerbase
+   0223 F9                 1012 	mov	r1,a
+   0224 8F 03              1013 	mov	ar3,r7
+   0226 7C 00              1014 	mov	r4,#0x00
+   0228 0B                 1015 	inc	r3
+   0229 BB 00 01           1016 	cjne	r3,#0x00,00300$
+   022C 0C                 1017 	inc	r4
+   022D                    1018 00300$:
+   022D EC                 1019 	mov	a,r4
+   022E A2 E7              1020 	mov	c,acc.7
+   0230 13                 1021 	rrc	a
+   0231 CB                 1022 	xch	a,r3
+   0232 13                 1023 	rrc	a
+   0233 CB                 1024 	xch	a,r3
+   0234 74 F6              1025 	mov	a,#0xF6
+   0236 2B                 1026 	add	a,r3
+   0237 90s00r00           1027 	mov	dptr,#_eeprom
+   023A 93                 1028 	movc	a,@a+dptr
+   023B FC                 1029 	mov	r4,a
+   023C 74 01              1030 	mov	a,#0x01
+   023E 5F                 1031 	anl	a,r7
+   023F 64 01              1032 	xrl	a,#0x01
+   0241 75 F0 04           1033 	mov	b,#0x04
+   0244 A4                 1034 	mul	ab
+   0245 F5 F0              1035 	mov	b,a
+   0247 05 F0              1036 	inc	b
+   0249 EC                 1037 	mov	a,r4
+   024A 80 02              1038 	sjmp	00302$
+   024C                    1039 00301$:
+   024C C3                 1040 	clr	c
+   024D 13                 1041 	rrc	a
+   024E                    1042 00302$:
+   024E D5 F0 FB           1043 	djnz	b,00301$
+   0251 54 07              1044 	anl	a,#0x07
+   0253 F7                 1045 	mov	@r1,a
+                    0254   1046 	C$fb_in8.c$164$7$13 ==.
+                           1047 ;	../fb_in8.c:164: if (n & 0x80){// wenn timer ein war
+   0254 EE                 1048 	mov	a,r6
+   0255 30 E7 1B           1049 	jnb	acc.7,00202$
+                    0258   1050 	C$fb_in8.c$165$8$14 ==.
+                           1051 ;	../fb_in8.c:165: while(!send_obj_value(objno));//send_obj_value(objno);		// Eingang x.1 zyklisch senden
+   0258                    1052 00121$:
+   0258 8F 82              1053 	mov	dpl,r7
+   025A C0 07              1054 	push	ar7
+   025C C0 05              1055 	push	ar5
+   025E C0*00              1056 	push	bits
+   0260 12s00r00           1057 	lcall	_send_obj_value
+   0263 D0*00              1058 	pop	bits
+   0265 D0 05              1059 	pop	ar5
+   0267 D0 07              1060 	pop	ar7
+   0269 50 ED              1061 	jnc	00121$
+   026B 80 06              1062 	sjmp	00202$
+   026D                    1063 00129$:
+                    026D   1064 	C$fb_in8.c$169$5$11 ==.
+                           1065 ;	../fb_in8.c:169: else timercnt[objno]=0;
+   026D EF                 1066 	mov	a,r7
+   026E 24r00              1067 	add	a,#_timercnt
+   0270 F8                 1068 	mov	r0,a
+   0271 76 00              1069 	mov	@r0,#0x00
+   0273                    1070 00202$:
+                    0273   1071 	C$fb_in8.c$155$3$5 ==.
+                           1072 ;	../fb_in8.c:155: for(objno=0;objno<=7;objno++){	
+   0273 0F                 1073 	inc	r7
+   0274 02s01r99           1074 	ljmp	00200$
+   0277                    1075 00203$:
+                    0277   1076 	C$fb_in8.c$175$4$15 ==.
+                           1077 ;	../fb_in8.c:175: for (objno=0;objno<=1;objno++){
+   0277 7F 00              1078 	mov	r7,#0x00
+   0279                    1079 00204$:
+   0279 EF                 1080 	mov	a,r7
+   027A 24 FE              1081 	add	a,#0xff - 0x01
+   027C 40 4E              1082 	jc	00150$
+                    027E   1083 	C$fb_in8.c$176$4$15 ==.
+                           1084 ;	../fb_in8.c:176: if(timerstate[objno]==0 && (timerbase[objno]& 0x40)== 0x40){//Impulszähler,Schaltzaehler
+   027E EF                 1085 	mov	a,r7
+   027F 24r00              1086 	add	a,#_timerstate
+   0281 F9                 1087 	mov	r1,a
+   0282 E7                 1088 	mov	a,@r1
+   0283 70 20              1089 	jnz	00206$
+   0285 EF                 1090 	mov	a,r7
+   0286 24r00              1091 	add	a,#_timerbase
+   0288 F9                 1092 	mov	r1,a
+   0289 87 04              1093 	mov	ar4,@r1
+   028B 74 40              1094 	mov	a,#0x40
+   028D 5C                 1095 	anl	a,r4
+   028E FB                 1096 	mov	r3,a
+   028F BB 40 13           1097 	cjne	r3,#0x40,00206$
+                    0292   1098 	C$fb_in8.c$177$5$16 ==.
+                           1099 ;	../fb_in8.c:177: if (!TR1){// warten bis statemachine fertig ist...
+   0292 20 8E 10           1100 	jb	_TCON_6,00206$
+                    0295   1101 	C$fb_in8.c$178$6$17 ==.
+                           1102 ;	../fb_in8.c:178: zaehlervalue[objno]=0;
+   0295 EF                 1103 	mov	a,r7
+   0296 2F                 1104 	add	a,r7
+   0297 FB                 1105 	mov	r3,a
+   0298 24r00              1106 	add	a,#_zaehlervalue
+   029A F8                 1107 	mov	r0,a
+   029B 76 00              1108 	mov	@r0,#0x00
+   029D 08                 1109 	inc	r0
+   029E 76 00              1110 	mov	@r0,#0x00
+                    02A0   1111 	C$fb_in8.c$179$6$17 ==.
+                           1112 ;	../fb_in8.c:179: timerbase[objno]&= ~0x40;
+   02A0 53 04 BF           1113 	anl	ar4,#0xBF
+   02A3 A7 04              1114 	mov	@r1,ar4
+   02A5                    1115 00206$:
+                    02A5   1116 	C$fb_in8.c$175$3$5 ==.
+                           1117 ;	../fb_in8.c:175: for (objno=0;objno<=1;objno++){
+   02A5 0F                 1118 	inc	r7
+   02A6 80 D1              1119 	sjmp	00204$
+   02A8                    1120 00149$:
+                    02A8   1121 	C$fb_in8.c$188$2$4 ==.
+                           1122 ;	../fb_in8.c:188: else if (RTCCON>=0x80 && connected)	// Realtime clock ueberlauf
+   02A8 74 80              1123 	mov	a,#0x100 - 0x80
+   02AA 25 D1              1124 	add	a,_RTCCON
+   02AC 50 1E              1125 	jnc	00150$
+   02AE 30*00 1B           1126 	jnb	_connected,00150$
+                    02B1   1127 	C$fb_in8.c$190$3$18 ==.
+                           1128 ;	../fb_in8.c:190: RTCCON=0x61;// RTC flag löschen
+   02B1 75 D1 61           1129 	mov	_RTCCON,#0x61
+                    02B4   1130 	C$fb_in8.c$191$3$18 ==.
+                           1131 ;	../fb_in8.c:191: if(connected_timeout <= 110)// 11x 520ms --> ca 6 Sekunden
+   02B4 E5*00              1132 	mov	a,_connected_timeout
+   02B6 24 91              1133 	add	a,#0xff - 0x6E
+   02B8 40 04              1134 	jc	00143$
+                    02BA   1135 	C$fb_in8.c$193$4$19 ==.
+                           1136 ;	../fb_in8.c:193: connected_timeout ++;
+   02BA 05*00              1137 	inc	_connected_timeout
+   02BC 80 0E              1138 	sjmp	00150$
+   02BE                    1139 00143$:
+                    02BE   1140 	C$fb_in8.c$195$3$18 ==.
+                           1141 ;	../fb_in8.c:195: else send_obj_value(T_DISCONNECT);// wenn timeout dann disconnect, flag und var wird in build_tel() gelöscht
+   02BE 75 82 85           1142 	mov	dpl,#0x85
+   02C1 C0 05              1143 	push	ar5
+   02C3 C0*00              1144 	push	bits
+   02C5 12s00r00           1145 	lcall	_send_obj_value
+   02C8 D0*00              1146 	pop	bits
+   02CA D0 05              1147 	pop	ar5
+   02CC                    1148 00150$:
+                    02CC   1149 	C$fb_in8.c$199$2$4 ==.
+                           1150 ;	../fb_in8.c:199: if (tel_arrived || tel_sent) { 
+   02CC 20*00 03           1151 	jb	_tel_arrived,00153$
+   02CF 30*00 11           1152 	jnb	_tel_sent,00154$
+   02D2                    1153 00153$:
+                    02D2   1154 	C$fb_in8.c$200$3$20 ==.
+                           1155 ;	../fb_in8.c:200: tel_arrived=0;
+   02D2 C2*00              1156 	clr	_tel_arrived
+                    02D4   1157 	C$fb_in8.c$201$3$20 ==.
+                           1158 ;	../fb_in8.c:201: tel_sent=0;
+   02D4 C2*00              1159 	clr	_tel_sent
+                    02D6   1160 	C$fb_in8.c$202$3$20 ==.
+                           1161 ;	../fb_in8.c:202: process_tel();
+   02D6 C0 05              1162 	push	ar5
+   02D8 C0*00              1163 	push	bits
+   02DA 12s00r00           1164 	lcall	_process_tel
+   02DD D0*00              1165 	pop	bits
+   02DF D0 05              1166 	pop	ar5
+   02E1 80 0A              1167 	sjmp	00155$
+   02E3                    1168 00154$:
+                    02E3   1169 	C$fb_in8.c$205$3$4 ==.
+                           1170 ;	../fb_in8.c:205: for(n=0;n<100;n++);	// falls Hauptroutine keine Zeit verbraucht, der PROG LED etwas Zeit geben, damit sie auch leuchten kann
+   02E3 7E 64              1171 	mov	r6,#0x64
+   02E5                    1172 00210$:
+   02E5 8E 07              1173 	mov	ar7,r6
+   02E7 1F                 1174 	dec	r7
+   02E8 8F 06              1175 	mov	ar6,r7
+   02EA EE                 1176 	mov	a,r6
+   02EB 70 F8              1177 	jnz	00210$
+   02ED                    1178 00155$:
+                    02ED   1179 	C$fb_in8.c$211$2$4 ==.
+                           1180 ;	../fb_in8.c:211: if (RI){
+                    02ED   1181 	C$fb_in8.c$212$3$22 ==.
+                           1182 ;	../fb_in8.c:212: RI=0;
+   02ED 10 98 02           1183 	jbc	_SCON_0,00316$
+   02F0 80 4A              1184 	sjmp	00181$
+   02F2                    1185 00316$:
+                    02F2   1186 	C$fb_in8.c$213$3$22 ==.
+                           1187 ;	../fb_in8.c:213: cmd=SBUF;
+   02F2 AF 99              1188 	mov	r7,_SBUF
+                    02F4   1189 	C$fb_in8.c$214$3$22 ==.
+                           1190 ;	../fb_in8.c:214: if(cmd=='c'){
+   02F4 BF 63 08           1191 	cjne	r7,#0x63,00161$
+                    02F7   1192 	C$fb_in8.c$215$4$23 ==.
+                           1193 ;	../fb_in8.c:215: while(!TI);
+   02F7                    1194 00157$:
+                    02F7   1195 	C$fb_in8.c$216$4$23 ==.
+                           1196 ;	../fb_in8.c:216: TI=0;
+   02F7 10 99 02           1197 	jbc	_SCON_1,00319$
+   02FA 80 FB              1198 	sjmp	00157$
+   02FC                    1199 00319$:
+                    02FC   1200 	C$fb_in8.c$217$4$23 ==.
+                           1201 ;	../fb_in8.c:217: SBUF=0x55;
+   02FC 75 99 55           1202 	mov	_SBUF,#0x55
+   02FF                    1203 00161$:
+                    02FF   1204 	C$fb_in8.c$219$3$22 ==.
+                           1205 ;	../fb_in8.c:219: if(cmd=='+'){
+   02FF BF 2B 03           1206 	cjne	r7,#0x2B,00163$
+                    0302   1207 	C$fb_in8.c$220$4$24 ==.
+                           1208 ;	../fb_in8.c:220: TRIM--;
+   0302 15 96              1209 	dec	_TRIM
+                    0304   1210 	C$fb_in8.c$221$4$24 ==.
+                           1211 ;	../fb_in8.c:221: cal--;
+   0304 1D                 1212 	dec	r5
+   0305                    1213 00163$:
+                    0305   1214 	C$fb_in8.c$223$3$22 ==.
+                           1215 ;	../fb_in8.c:223: if(cmd=='-'){
+   0305 BF 2D 03           1216 	cjne	r7,#0x2D,00165$
+                    0308   1217 	C$fb_in8.c$224$4$25 ==.
+                           1218 ;	../fb_in8.c:224: TRIM++;
+   0308 05 96              1219 	inc	_TRIM
+                    030A   1220 	C$fb_in8.c$225$4$25 ==.
+                           1221 ;	../fb_in8.c:225: cal++;
+   030A 0D                 1222 	inc	r5
+   030B                    1223 00165$:
+                    030B   1224 	C$fb_in8.c$227$3$22 ==.
+                           1225 ;	../fb_in8.c:227: if(cmd=='w'){
+   030B BF 77 12           1226 	cjne	r7,#0x77,00167$
+                    030E   1227 	C$fb_in8.c$228$4$26 ==.
+                           1228 ;	../fb_in8.c:228: EA=0;
+   030E C2 AF              1229 	clr	_IEN0_7
+                    0310   1230 	C$fb_in8.c$229$4$26 ==.
+                           1231 ;	../fb_in8.c:229: START_WRITECYCLE;	//cal an 0x1cff schreiben
+   0310 75 E4 00           1232 	mov	_FMCON,#0x00
+                    0313   1233 	C$fb_in8.c$231$4$26 ==.
+                           1234 ;	../fb_in8.c:231: FMADRH= 0x1C;		
+   0313 75 E7 1C           1235 	mov	_FMADRH,#0x1C
+                    0316   1236 	C$fb_in8.c$232$4$26 ==.
+                           1237 ;	../fb_in8.c:232: FMADRL= 0xFF; 
+   0316 75 E6 FF           1238 	mov	_FMADRL,#0xFF
+                    0319   1239 	C$fb_in8.c$234$4$26 ==.
+                           1240 ;	../fb_in8.c:234: FMDATA=	cal;
+   0319 8D E5              1241 	mov	_FMDATA,r5
+                    031B   1242 	C$fb_in8.c$235$4$26 ==.
+                           1243 ;	../fb_in8.c:235: STOP_WRITECYCLE;
+   031B 75 E4 68           1244 	mov	_FMCON,#0x68
+                    031E   1245 	C$fb_in8.c$236$4$26 ==.
+                           1246 ;	../fb_in8.c:236: EA=1;				//int wieder freigeben
+   031E D2 AF              1247 	setb	_IEN0_7
+   0320                    1248 00167$:
+                    0320   1249 	C$fb_in8.c$238$3$22 ==.
+                           1250 ;	../fb_in8.c:238: if(cmd=='p')status60^=0x81;	// Prog-Bit und Parity-Bit im system_state toggeln
+   0320 BF 70 03           1251 	cjne	r7,#0x70,00169$
+   0323 63*00 81           1252 	xrl	_status60,#0x81
+   0326                    1253 00169$:
+                    0326   1254 	C$fb_in8.c$240$3$22 ==.
+                           1255 ;	../fb_in8.c:240: if(cmd=='v'){
+   0326 BF 76 08           1256 	cjne	r7,#0x76,00174$
+                    0329   1257 	C$fb_in8.c$241$4$27 ==.
+                           1258 ;	../fb_in8.c:241: while(!TI);
+   0329                    1259 00170$:
+                    0329   1260 	C$fb_in8.c$242$4$27 ==.
+                           1261 ;	../fb_in8.c:242: TI=0;
+   0329 10 99 02           1262 	jbc	_SCON_1,00330$
+   032C 80 FB              1263 	sjmp	00170$
+   032E                    1264 00330$:
+                    032E   1265 	C$fb_in8.c$243$4$27 ==.
+                           1266 ;	../fb_in8.c:243: SBUF=VERSION;
+   032E 75 99 0A           1267 	mov	_SBUF,#0x0A
+   0331                    1268 00174$:
+                    0331   1269 	C$fb_in8.c$245$3$22 ==.
+                           1270 ;	../fb_in8.c:245: if(cmd=='t'){
+   0331 BF 74 08           1271 	cjne	r7,#0x74,00181$
+                    0334   1272 	C$fb_in8.c$246$4$28 ==.
+                           1273 ;	../fb_in8.c:246: while(!TI);
+   0334                    1274 00175$:
+                    0334   1275 	C$fb_in8.c$247$4$28 ==.
+                           1276 ;	../fb_in8.c:247: TI=0;
+   0334 10 99 02           1277 	jbc	_SCON_1,00333$
+   0337 80 FB              1278 	sjmp	00175$
+   0339                    1279 00333$:
+                    0339   1280 	C$fb_in8.c$248$4$28 ==.
+                           1281 ;	../fb_in8.c:248: SBUF=TYPE;
+   0339 75 99 0B           1282 	mov	_SBUF,#0x0B
+   033C                    1283 00181$:
+                    033C   1284 	C$fb_in8.c$261$2$4 ==.
+                           1285 ;	../fb_in8.c:261: TASTER=1;				// Pin als Eingang schalten um Taster abzufragen
+   033C D2 97              1286 	setb	_P1_7
+                    033E   1287 	C$fb_in8.c$262$2$4 ==.
+                           1288 ;	../fb_in8.c:262: if(!TASTER){ // Taster gedrückt
+   033E 20 97 18           1289 	jb	_P1_7,00191$
+                    0341   1290 	C$fb_in8.c$263$3$29 ==.
+                           1291 ;	../fb_in8.c:263: if(tasterpegel<255)	tasterpegel++;
+   0341 A8*00              1292 	mov	r0,_bp
+   0343 08                 1293 	inc	r0
+   0344 B6 FF 00           1294 	cjne	@r0,#0xFF,00335$
+   0347                    1295 00335$:
+   0347 50 06              1296 	jnc	00185$
+   0349 A8*00              1297 	mov	r0,_bp
+   034B 08                 1298 	inc	r0
+   034C 06                 1299 	inc	@r0
+   034D 80 18              1300 	sjmp	00192$
+   034F                    1301 00185$:
+                    034F   1302 	C$fb_in8.c$265$4$30 ==.
+                           1303 ;	../fb_in8.c:265: if(!tastergetoggelt)status60^=0x81;	// Prog-Bit und Parity-Bit im system_state toggeln
+   034F 20*00 03           1304 	jb	b0,00183$
+   0352 63*00 81           1305 	xrl	_status60,#0x81
+   0355                    1306 00183$:
+                    0355   1307 	C$fb_in8.c$266$4$30 ==.
+                           1308 ;	../fb_in8.c:266: tastergetoggelt=1;
+   0355 D2*00              1309 	setb	b0
+   0357 80 0E              1310 	sjmp	00192$
+   0359                    1311 00191$:
+                    0359   1312 	C$fb_in8.c$270$3$31 ==.
+                           1313 ;	../fb_in8.c:270: if(tasterpegel>0) tasterpegel--;
+   0359 A8*00              1314 	mov	r0,_bp
+   035B 08                 1315 	inc	r0
+   035C E6                 1316 	mov	a,@r0
+   035D 60 06              1317 	jz	00188$
+   035F A8*00              1318 	mov	r0,_bp
+   0361 08                 1319 	inc	r0
+   0362 16                 1320 	dec	@r0
+   0363 80 02              1321 	sjmp	00192$
+   0365                    1322 00188$:
+                    0365   1323 	C$fb_in8.c$271$3$31 ==.
+                           1324 ;	../fb_in8.c:271: else tastergetoggelt=0;
+   0365 C2*00              1325 	clr	b0
+   0367                    1326 00192$:
+                    0367   1327 	C$fb_in8.c$273$2$4 ==.
+                           1328 ;	../fb_in8.c:273: TASTER=!(status60 & 0x01);	// LED entsprechend Prog-Bit schalten (low=LED an)
+   0367 E5*00              1329 	mov	a,_status60
+   0369 54 01              1330 	anl	a,#0x01
+   036B FF                 1331 	mov	r7,a
+   036C B4 01 00           1332 	cjne	a,#0x01,00339$
+   036F                    1333 00339$:
+   036F E4                 1334 	clr	a
+   0370 33                 1335 	rlc	a
+   0371 FF                 1336 	mov	r7,a
+   0372 24 FF              1337 	add	a,#0xff
+   0374 92 97              1338 	mov	_P1_7,c
+                    0376   1339 	C$fb_in8.c$275$1$1 ==.
+                           1340 ;	../fb_in8.c:275: } while(1);
+   0376 02s00rE1           1341 	ljmp	00193$
+   0379 85*00 81           1342 	mov	sp,_bp
+   037C D0*00              1343 	pop	_bp
+                    037E   1344 	C$fb_in8.c$276$1$1 ==.
+                    037E   1345 	XG$main$0$0 ==.
+   037E 22                 1346 	ret
+                           1347 	.area CSEG    (CODE)
+                           1348 	.area CONST   (CODE)
+                    0000   1349 G$bitmask_1$0$0 == .
+   0000                    1350 _bitmask_1:
+   0000 01                 1351 	.db #0x01	; 1
+   0001 02                 1352 	.db #0x02	; 2
+   0002 04                 1353 	.db #0x04	; 4
+   0003 08                 1354 	.db #0x08	; 8
+   0004 10                 1355 	.db #0x10	; 16
+   0005 20                 1356 	.db #0x20	; 32
+   0006 40                 1357 	.db #0x40	; 64
+   0007 80                 1358 	.db #0x80	; 128
+                    1CFF   1359 Lfb_in8.main$trimsave$1$1 == 0x1cff
+                    1CFF   1360 _main_trimsave_1_1	=	0x1cff
+                           1361 	.area XINIT   (CODE)
+                           1362 	.area CABS    (ABS,CODE)
+   1D03                    1363 	.org 0x1D03
+                    1D03   1364 Ffb_in8$manufacturer$0$0 == .
+   1D03                    1365 _manufacturer:
+   1D03 00                 1366 	.db #0x00	; 0
+   1D04 04                 1367 	.db #0x04	; 4
+   1D0C                    1368 	.org 0x1D0C
+                    1D0C   1369 Ffb_in8$port_A_direction$0$0 == .
+   1D0C                    1370 _port_A_direction:
+   1D0C 00                 1371 	.db #0x00	; 0
+   1D0D                    1372 	.org 0x1D0D
+                    1D0D   1373 Ffb_in8$run_state$0$0 == .
+   1D0D                    1374 _run_state:
+   1D0D FF                 1375 	.db #0xFF	; 255
