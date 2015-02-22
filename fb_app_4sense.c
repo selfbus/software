@@ -19,11 +19,13 @@
 #include <stdlib.h>
 
 
-unsigned char timerbase[TIMERANZ];	// Speicherplatz für die Zeitbasis
+unsigned char __idata __at (0xFE-66) timerbase[TIMERANZ];	// Speicherplatz für die Zeitbasis
+//unsigned char __idata __at (0xFE-80) timercnt[TIMERANZ];   // speicherplatz für den timercounter und 1 status bit
+//unsigned char timerbase[TIMERANZ]; // Speicherplatz für die Zeitbasis
 unsigned char timercnt[TIMERANZ];   // speicherplatz für den timercounter und 1 status bit
 unsigned int timer;		            // Timer für Schaltverzögerungen, wird alle 130ms hochgezählt
 // DS TEST
-unsigned char __idata __at (0xFE-0x52) family_code[4];
+unsigned char __idata __at (0xFE-52) family_code[4];
 
 int __idata __at (0xFE-16) messwerte[8];	// Temperatur und Luftfeuchte speichern
 int __idata __at (0xFE-32) lasttemp[8];
@@ -267,14 +269,14 @@ void send_messdiff (unsigned char messwert)
 *
 * @return void
 *
-* Timer 0-7     Messwerte 0-7
-* Timer 8
+* Timer 0-7     Messwerte Obj. 0-7
+* Timer 8-11    Grenzwerte Obj. 8-19
 * Timer x       Sample timer
 */
 void delay_timer(void)
 {
     unsigned char tmr_obj,n,m, verz_start;
-    unsigned char objno_help;
+    //unsigned char objno_help;
     unsigned int timerflags;
 
     tmr_obj = 0;        // Timer Objekt
@@ -304,7 +306,7 @@ void delay_timer(void)
     {
         if(timercnt[tmr_obj]==0x80)     // 0x00 = Timer abgelaufen und aktiv
         {
-            // Zyklisch Senden Messwerte
+            // Zyklisch Senden Messwerte, Obj. 0-7
             if (tmr_obj<=7)
             {
                 // Zyklisch senden Faktor laden
@@ -313,19 +315,19 @@ void delay_timer(void)
                 // Messwert senden
                 check_and_send(tmr_obj);
             }
-            // Zyklisch Senden Grenzwerte
+            // Zyklisch Senden Grenzwerte, Obj. >7
             else if (tmr_obj<=11)
             {
-                objno_help=tmr_obj-4;
+                // 3 Grenzwerte senden  // TODO anpassung neue VD
+                send_obj_value(tmr_obj-6);
+                send_obj_value(tmr_obj-6+1);
+                send_obj_value(tmr_obj-6+2);
 
-                //check_and_send(objno_help<<1);
+                // Zyklisch senden Faktor laden
+                timercnt[tmr_obj] = eeprom[GW_ZYKL_FAKT+(tmr_obj-8)];
 
-                // Grenzwert senden wenn aktiv
-                if ( (eeprom[0x75+tmr_obj]) & 0x80)
-                {
-                    send_obj_value((tmr_obj<<1)+1);
-                }
 
+                /*
                 // Zeit holen und deaktivieren, Bit 7 = 0
                 //zykval_help=(eeprom[0x69+(eingang>>1)])>>(4*(!(eingang&0x01)))&0x0F;
                 if(objno_help & 0x01)   // 0,2
@@ -335,7 +337,7 @@ void delay_timer(void)
                 else                        // 1,3
                 {
                     timercnt[tmr_obj] = (eeprom[0x69+(objno_help>>1)] >>4);
-                }
+                }*/
             }
             // Sendeverzögerung Eingänge Messwerte Busspannungswiederkehr über Objekt 12
             else
@@ -441,11 +443,12 @@ void restart_app()      // Alle Applikations-Parameter zurücksetzen
            timerbase[n] = (eeprom[THBASE_ZYKLSEND+(n>>1)] &0xF0);
        }
 */
-        // zyk Senden Basis für alle Eingänge
+        // zykl. Senden Messwerte Basis, 8x
         timerbase[n] = (eeprom[THBASE_ZYKLSEND+(n>>1)] >> (4 *(n&0x01))) &0x0F;
-        // Faktor und aktiv Bit7 holen
+        // Faktor und aktiv Bit7 holen, 8x
         timercnt[n] = eeprom[TEMP_ZYKLSEND +n];
 
+        // TODO folgendes muss noch angepasst werden
         // Verhalten bei Busspannungswiederkehr Grenzwerte
         sende_sofort_bus_return |= (eeprom[0x71+n]&0x80)>>(2*n+1);
 
@@ -464,8 +467,11 @@ void restart_app()      // Alle Applikations-Parameter zurücksetzen
 
     for (kanal=0;kanal<=3;kanal++)
     {
-        // zyk. Senden Basis Grenzwerte
-        timerbase[n+8] = (eeprom[GW_ZYKL_BASE +2*n] >>4);
+        // zyk. Senden Basis Grenzwerte, 4x
+        timerbase[kanal+8] = (eeprom[GW_ZYKL_BASE +2*kanal] >>4);
+        // zyk. Senden Faktor Grenzwerte, 4x
+        timercnt[kanal+8] = eeprom[GW_ZYKL_FAKT+kanal];
+
 
         // Find DS Type by Family Code of each sensor
         // 0x10 = DS1820/DS18S20

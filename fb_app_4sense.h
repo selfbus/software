@@ -30,6 +30,9 @@
 #endif
 
 // 4Sense VD
+#define RE_ZYKL_SEND    0xB1    // *1/2n
+#define RE_ZYKL_S_FAKT  0xB3    // *n
+
 #define SENSOR_TYPE     0xB7    // *n
 
 #define TEMP_OFFSET     0xBB    // *2n
@@ -45,6 +48,7 @@
 #define GW_ZUORDNUNG    0xD7    // *n
 #define GW_REAKTION     0xDB    // *1/2n
 #define GW_ZYKL_BASE    0xDC    // 2*n
+#define GW_ZYKL_FAKT    0xE3    // n
 #define GW_SCHWELLE1L   0xE7    // 3*n
 #define GW_SCHWELLE1H   0xE8    // 3*n
 #define GW_SCHWELLE2L   0xE9    // 3*n
