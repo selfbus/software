@@ -423,7 +423,7 @@ void restart_app()      // Alle Applikations-Parameter zurücksetzen
     timercnt[12] = ( (eeprom[0xA0]>>1) | 0x80);  // Zeit holen, Timer einschalten - Bit7
 
     // Verhalten bei Busspannungswiederkehr Messwerte
-    sende_sofort_bus_return = eeprom[0x79]&0xAA;
+    //sende_sofort_bus_return = eeprom[0x79]&0xAA;
 
     // Zyklisches Senden konfigurieren
     for(n=0;n<=7;n++)
@@ -433,20 +433,37 @@ void restart_app()      // Alle Applikations-Parameter zurücksetzen
         lasttemp[n]=0;
         lastsend[n]=0;
 
-
-/*       if(n & 0x01)
-       {
-           timerbase[n] = (eeprom[THBASE_ZYKLSEND+(n>>1)] >> 4);
-       }
-       else
-       {
-           timerbase[n] = (eeprom[THBASE_ZYKLSEND+(n>>1)] &0xF0);
-       }
-*/
+        // Verhalten bei Busspannungswiederkehr Messwerte
         // zykl. Senden Messwerte Basis, 8x
         timerbase[n] = (eeprom[THBASE_ZYKLSEND+(n>>1)] >> (4 *(n&0x01))) &0x0F;
-        // Faktor und aktiv Bit7 holen, 8x
-        timercnt[n] = eeprom[TEMP_ZYKLSEND +n];
+
+        sende_sofort_bus_return = eeprom[RE_ZYKL_S_FAKT+(n>>1)];
+
+        if(sende_sofort_bus_return)
+        {
+            // Faktor und aktiv Bit7 holen, gleich für einen Kanal
+            timercnt[n] = sende_sofort_bus_return;
+        }
+        else
+        {
+            // Faktor und aktiv Bit7 holen, 8x
+            timercnt[n] = eeprom[TEMP_ZYKLSEND +n];
+        }
+
+
+
+
+
+        /*       if(n & 0x01)
+               {
+                   timerbase[n] = (eeprom[THBASE_ZYKLSEND+(n>>1)] >> 4);
+               }
+               else
+               {
+                   timerbase[n] = (eeprom[THBASE_ZYKLSEND+(n>>1)] &0xF0);
+               }
+        */
+
 
         // TODO folgendes muss noch angepasst werden
         // Verhalten bei Busspannungswiederkehr Grenzwerte

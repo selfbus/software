@@ -30,6 +30,7 @@
 #endif
 
 // 4Sense VD
+#define RE_ZYKL_S_BASE  0xB0    // 0
 #define RE_ZYKL_SEND    0xB1    // *1/2n
 #define RE_ZYKL_S_FAKT  0xB3    // *n
 
