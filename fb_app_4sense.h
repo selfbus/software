@@ -5,7 +5,6 @@
  *  ___/ / /__  / /__/ /__// /_/ / /_/ /___/ /
  * /____/_____//____/_/   /_____/\____//____/
  *
- *  Copyright (c) 2010 Jan Wegner
  *  Copyright (c) 2014-2015 Stefan Haller
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -30,8 +29,8 @@
 #endif
 
 // 4Sense VD
-#define RE_ZYKL_S_BASE  0xB0    // 0
-#define RE_ZYKL_SEND    0xB1    // *1/2n
+#define RE_ZYKL_S_BASE  0xB1    // 0
+#define RE_SEND_GW      0xB2    // 0
 #define RE_ZYKL_S_FAKT  0xB3    // *n
 
 #define SENSOR_TYPE     0xB7    // *n
@@ -78,6 +77,5 @@ extern int __idata __at (0xFE-16) messwerte[8]; // Temperatur und Luftfeuchte sp
 
 extern unsigned char timercnt[TIMERANZ];        // speicherplatz für den timercounter und 1 status bit
 extern unsigned char sequence;
-extern unsigned char sende_sofort_bus_return;
 
 #endif

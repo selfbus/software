@@ -5,7 +5,6 @@
  *  ___/ / /__  / /__/ /__// /_/ / /_/ /___/ /
  * /____/_____//____/_/   /_____/\____//____/
  *
- *  Copyright (c) 2010 Jan Wegner
  *  Copyright (c) 2014-2015 Stefan Haller
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -27,23 +26,20 @@ unsigned int timer;		            // Timer für Schaltverzögerungen, wird alle 1
 // DS TEST
 unsigned char __idata __at (0xFE-52) family_code[4];
 
-int __idata __at (0xFE-16) messwerte[8];	// Temperatur und Luftfeuchte speichern
-int __idata __at (0xFE-32) lasttemp[8];
-int __idata __at (0xFE-48) lastsend[8];
+int __idata __at (0xFE-16) messwerte[8];	// Current temperature and humidity
+int __idata __at (0xFE-32) lasttemp[8];     // Old threshold value for temp and humid
+int __idata __at (0xFE-48) lastsend[8];     // Last send temp and humid
+
 unsigned int grenzwerte;	// Grenzwertobjekte
+unsigned char gw_init_done; // 0 when all thresholds have been initialized
+
+
 // DEBUG ========================
-//unsigned char grenzwert_eingang=0;
-//int schwelle1, schwelle2;
 //unsigned char reaktion, objno;
-
-
-//unsigned char objno;
-int schwelle;
-//unsigned char help_obj;
+//int schwelle;
 
 //unsigned char zyk_senden_basis;
 unsigned char sequence;
-unsigned char sende_sofort_bus_return;
 
 
 // Empfangenes write_value_request Telegramm verarbeiten
@@ -68,14 +64,14 @@ unsigned long read_obj_value(unsigned char objno)   // gibt den Wert eines Objek
     unsigned long objvalue;
 
     // Messwerte Temperatur/Feuchte Objekte 0-7
-        if(objno<2)     // TODO anpassung fertige VD <8
+        if(objno<4)     // TODO anpassung fertige VD <8
         {
             objvalue=sendewert(objno);  // Messwert umwandeln
             lastsend[objno]=messwerte[objno];
         }
         // Grenzwerte Objekte ab 8
         else
-            objvalue= (grenzwerte>>(objno-2))&0x01; // TODO fertige VD -8
+            objvalue= (grenzwerte>>(objno-4))&0x01; // TODO fertige VD -8
 
     return(objvalue);
 }
@@ -147,20 +143,40 @@ unsigned int sendewert(unsigned char objno)
 */
 void grenzwert (unsigned char eingang)
 {
-    //int schwelle;
-    unsigned char reaktion;
-    unsigned char zuordnung;
-
-    unsigned char objno=0;
-    unsigned char help_obj;
-    __bit grenzwert_eingang;
-    __bit gw_changed;
+    int schwelle;               // Schwellwert, Hilfsvariable
+    unsigned char reaktion;     // Reaktion, Hilfsvariable
+    unsigned char zuordnung;    // Temperatur oder Feuchte
+    unsigned char objno;        // Messwert im Array
+    unsigned char help_obj;     // Hilfsvariable, spart Flash
     unsigned char i;
+    __bit grenzwert_eingang;    // zu sendeneder Wert bei Über-Unterschreiten
+    __bit gw_changed;           // GW hat sich geändert
+    __bit gw_init=0;            // Initialize threshold
 
-    eingang &= 0x03;        // Nur bis 3 erlaubt, 5byte Flash verbrauch
 
-    zuordnung = (eeprom[GW_ZUORDNUNG+eingang] >>1); // TODO fix in VD!?
-    sende_sofort_bus_return = 0;    // TODO fix later, disable now
+    // Nur bis 3 erlaubt, nicht unbedingt nötig
+    eingang &= 0x03;
+
+    // Check if thresholds need to be initialized and send after start
+    if(gw_init_done &bitmask_1[eingang])
+    {
+        gw_init_done &= ~bitmask_1[eingang];  // Clear bit
+        gw_init = 1;
+
+        // Send directly
+        if(eeprom[RE_SEND_GW] &bitmask_1[eingang])
+        //if(sende_sofort_bus_return &bitmask_1[eingang])
+        {
+            timercnt[eingang+8] = 0x80;
+        }
+        else // zyk. Senden Faktor Grenzwerte
+        {
+            timercnt[eingang+8] = eeprom[GW_ZYKL_FAKT+kanal];
+        }
+    }
+
+    // GW Zuordnung, Feuchte (Bit 1), Temp wäre Bit 0
+    zuordnung = (eeprom[GW_ZUORDNUNG+eingang] >>1);
 
     // 3 Grenzwerte bearbeiten
     for(i=0;i<3;i++)
@@ -176,7 +192,7 @@ void grenzwert (unsigned char eingang)
         //schwelle = schwelle<<3 + schwelle<<1;     // alternate *10
 
         //steigend
-        if ((lasttemp[objno]<schwelle || sende_sofort_bus_return) && messwerte[objno]>schwelle) {  // GW überschritten
+        if ((lasttemp[objno]<schwelle || gw_init) && messwerte[objno]>schwelle) {  // GW überschritten
             if (reaktion &0x08)    // Reaktion Überschreiten aktiv
             {
                 grenzwert_eingang = (reaktion >>2) &0x01;
@@ -185,7 +201,7 @@ void grenzwert (unsigned char eingang)
         }
 
         //fallend
-        if ((lasttemp[objno]>schwelle || sende_sofort_bus_return) && messwerte[objno]<schwelle) {  // GW unterschritten
+        if ((lasttemp[objno]>schwelle || gw_init) && messwerte[objno]<schwelle) {  // GW unterschritten
             if (reaktion &0x02)    // Reaktion Unterschreiten aktiv
             {
                 grenzwert_eingang = (reaktion &0x01);
@@ -193,17 +209,16 @@ void grenzwert (unsigned char eingang)
             }
         }
 
-        // Nicht senden nach Neustart
-        //if(gw_changed && !sende_sofort_bus_return)
         if(gw_changed)
         {
             // Neuen Grenzwert dem Eingangsobjekt zuordnen
             if(grenzwert_eingang)
-                grenzwerte |= (1<<help_obj);
+                grenzwerte |= bitmask_1[help_obj];
             else
-                grenzwerte &= ~(1<<help_obj);
+                grenzwerte &= ~(bitmask_1[help_obj]);
 
-            send_obj_value(2+ help_obj);    //TODO anpassung fertige VD >8
+            if(!gw_init) // Do NOT send during initialization
+                send_obj_value(4+ help_obj);    //TODO anpassung fertige VD >8
 
             // Aktuellen Wert speichern
             lasttemp[objno]=messwerte[objno];
@@ -275,7 +290,7 @@ void send_messdiff (unsigned char messwert)
 */
 void delay_timer(void)
 {
-    unsigned char tmr_obj,n,m, verz_start;
+    unsigned char tmr_obj,n,m,gw_object;
     //unsigned char objno_help;
     unsigned int timerflags;
 
@@ -309,7 +324,7 @@ void delay_timer(void)
             // Zyklisch Senden Messwerte, Obj. 0-7
             if (tmr_obj<=7)
             {
-                // Zyklisch senden Faktor laden
+                // Zyklisch senden Faktor neu laden
                 timercnt[tmr_obj] = eeprom[TEMP_ZYKLSEND +tmr_obj];
 
                 // Messwert senden
@@ -319,11 +334,13 @@ void delay_timer(void)
             else if (tmr_obj<=11)
             {
                 // 3 Grenzwerte senden  // TODO anpassung neue VD
-                send_obj_value(tmr_obj-6);
-                send_obj_value(tmr_obj-6+1);
-                send_obj_value(tmr_obj-6+2);
+                gw_object = 4+ (tmr_obj-8)*3;
 
-                // Zyklisch senden Faktor laden
+                send_obj_value(gw_object);
+                send_obj_value(gw_object+1);
+                send_obj_value(gw_object+2);
+
+                // Zyklisch senden Faktor neu laden
                 timercnt[tmr_obj] = eeprom[GW_ZYKL_FAKT+(tmr_obj-8)];
 
 
@@ -342,18 +359,8 @@ void delay_timer(void)
             // Sendeverzögerung Eingänge Messwerte Busspannungswiederkehr über Objekt 12
             else
             {
+                // TODO kann gelöscht werden, timer 13 ist frei
                 timercnt[12] = 0;    // Timer 8 anhalten
-                // Verzögertes senden aktiv, Bit 0,2,4,6
-                verz_start = eeprom[0x79]&0x55;
-
-                for (n=0;n<=6;n+=2)
-                {
-                    if (verz_start & 0x40)      // Start mit Eingang 4
-                    {
-                        //check_and_send(n);
-                    }
-                    verz_start = verz_start<<2; // vorheringer Eingang
-                }
             }
         }
     }
@@ -405,7 +412,7 @@ void bus_return(void)
 */
 void restart_app()      // Alle Applikations-Parameter zurücksetzen
 {
-    unsigned char n;
+    unsigned char n,temp_var;
 
     // Port Konfigurieren
     // Port 0
@@ -414,16 +421,8 @@ void restart_app()      // Alle Applikations-Parameter zurücksetzen
     // Port 1, nach restart_hw()!
     P1M1 &= ~0x03;  // P1.0/TXD auf input wg. Busdown Erkennung
     P1M2 &= ~0x03;
-//    ES = 0;
-//    SCON = 0;
-//    SSTAT = 0;
 
-    // Zeit für Sendeverzögerung bei Busspannungswiederkehr in Timer 8 laden
-    timerbase[0] = ( eeprom[0xB0] & 0x0F );
-    timercnt[12] = ( (eeprom[0xA0]>>1) | 0x80);  // Zeit holen, Timer einschalten - Bit7
-
-    // Verhalten bei Busspannungswiederkehr Messwerte
-    //sende_sofort_bus_return = eeprom[0x79]&0xAA;
+    gw_init_done = 0x0F;   // thresholds to init 0-3
 
     // Zyklisches Senden konfigurieren
     for(n=0;n<=7;n++)
@@ -433,52 +432,19 @@ void restart_app()      // Alle Applikations-Parameter zurücksetzen
         lasttemp[n]=0;
         lastsend[n]=0;
 
-        // Verhalten bei Busspannungswiederkehr Messwerte
-        // zykl. Senden Messwerte Basis, 8x
+        // zykl. Senden Messwerte Basis, 8x laden
         timerbase[n] = (eeprom[THBASE_ZYKLSEND+(n>>1)] >> (4 *(n&0x01))) &0x0F;
 
-        sende_sofort_bus_return = eeprom[RE_ZYKL_S_FAKT+(n>>1)];
-
-        if(sende_sofort_bus_return)
+        // Verhalten bei Busspannungswiederkehr, 2 Messwerte je Kanal mit gleichem Faktor laden
+        temp_var = eeprom[RE_ZYKL_S_FAKT+(n>>1)];
+        if(temp_var &0x80)  // Verzögert senden eingeschaltet
         {
-            // Faktor und aktiv Bit7 holen, gleich für einen Kanal
-            timercnt[n] = sende_sofort_bus_return;
+            timercnt[n] = temp_var;
         }
         else
         {
-            // Faktor und aktiv Bit7 holen, 8x
+            // Gleich zyklisch senden Faktor laden
             timercnt[n] = eeprom[TEMP_ZYKLSEND +n];
-        }
-
-
-
-
-
-        /*       if(n & 0x01)
-               {
-                   timerbase[n] = (eeprom[THBASE_ZYKLSEND+(n>>1)] >> 4);
-               }
-               else
-               {
-                   timerbase[n] = (eeprom[THBASE_ZYKLSEND+(n>>1)] &0xF0);
-               }
-        */
-
-
-        // TODO folgendes muss noch angepasst werden
-        // Verhalten bei Busspannungswiederkehr Grenzwerte
-        sende_sofort_bus_return |= (eeprom[0x71+n]&0x80)>>(2*n+1);
-
-
-        // Sendeverzögerung bei Messwertdifferenz
-        // Zeit holen und deaktivieren, Bit 7 = 0
-        if(n & 0x01)    // 0,2
-        {
-           // timercnt[n+4] = (eeprom[0x69+(n>>1)] & 0x0F);
-        }
-        else            // 1,3
-        {
-        //    timercnt[n+4] = (eeprom[0x69+(n>>1)] >>4);
         }
     }
 
@@ -486,9 +452,8 @@ void restart_app()      // Alle Applikations-Parameter zurücksetzen
     {
         // zyk. Senden Basis Grenzwerte, 4x
         timerbase[kanal+8] = (eeprom[GW_ZYKL_BASE +2*kanal] >>4);
-        // zyk. Senden Faktor Grenzwerte, 4x
-        timercnt[kanal+8] = eeprom[GW_ZYKL_FAKT+kanal];
-
+        // zyk. Senden Faktor Grenzwerte wird in grenzwerte() initialisiert nach erfolgtem GW Init!
+        timercnt[kanal+8] = 0x00;   // Abschalten TODO ist das nötig??
 
         // Find DS Type by Family Code of each sensor
         // 0x10 = DS1820/DS18S20
@@ -506,7 +471,7 @@ void restart_app()      // Alle Applikations-Parameter zurücksetzen
         EA=1;   // Enable interrupts again
     }
 
-    timerbase[13] = 0;  // Timerbase 10, ensure to be 0
+    timerbase[13] = 0;  // Timerbase 13, ensure to be 0
     sequence=1;         // Start sequence
     kanal=0;            // channel 0
     timer=0;            // Timer-Variable, wird alle 130ms inkrementiert

@@ -164,7 +164,7 @@ void main(void)
                         messwerte[kanal*2] = th + (signed char) eeprom[TEMP_OFFSET+ 2*kanal];
 
                         // Grenzwerte
-                        //grenzwert(kanal);
+                        grenzwert(kanal);
 
                         // Messwertdifferenz
                         send_messdiff(2*kanal);
