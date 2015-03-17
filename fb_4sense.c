@@ -144,7 +144,7 @@ void main(void)
             // Warten bis DS Sensoren fertig sind
             else if (sequence==2)
             {
-                timercnt[13] = 0x80+7;   // wait approx. 0.9s for sensor to be done
+                timercnt[12] = 0x80+7;   // wait approx. 0.9s for sensor to be done
                                         // secuence 3 set by delaytimer
                 kanal = 0;
                 sequence=3;             // Konvertierung abgeschlossen
@@ -176,14 +176,14 @@ void main(void)
                 }
                 // Prolong waiting for DHT Sensor, if any
                 else if(ee_local &0x02)
-                    timercnt[13] = 9;        // add approx. 1s
+                    timercnt[12] = 9;        // add approx. 1s
 
                 // Next channel
                 //if (kanal<3)
                 kanal++;
                 if (kanal >3) //else            // Reached last channel
                 {
-                    timercnt[13] |= 0x80;   // start timer
+                    timercnt[12] |= 0x80;   // start timer
                     kanal = 0;
                     sequence = 5;
                 }

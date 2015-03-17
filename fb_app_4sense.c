@@ -99,15 +99,14 @@ unsigned int sendewert(unsigned char objno)
 {
     int eis5temp;//, eis6temp;
 
-/*  This takes a lot of Flash, disabled meanwhile
+  /*This takes a lot of Flash (approx. 170byte), disabled meanwhile
     //unsigned char n;
 
     //eis6temp=-5500;
     //n=255;
 
     // Sendeformat EIS 6 (DPT5/6)
-    //if ((eeprom[SENSOR_TYPE]>>6) & objno)
-    if ( eeprom[SENSOR_TYPE+(objno>>1)] & (0x40<<(objno &0x01)) )
+    if ( eeprom[SENSOR_TYPE+(objno>>1)] & (bitmask_1[6+(objno &0x01)]) ) // 0x40<<(objno &0x01)) )
     {
         return ((char)(messwerte[objno]/100));
 
@@ -163,13 +162,20 @@ void grenzwert (unsigned char eingang)
         gw_init_done &= ~bitmask_1[eingang];  // Clear bit
         gw_init = 1;
 
-        // Send directly
-        if(eeprom[RE_SEND_GW] &bitmask_1[eingang])
-        //if(sende_sofort_bus_return &bitmask_1[eingang])
+
+        help_obj = (eeprom[RE_SEND_GW]>>(2*eingang)) & 0x03;
+
+        // if else ist etwas kompakter als switch
+        //if(eeprom[RE_SEND_GW] &bitmask_1[eingang])
+        if (help_obj==1)        // Send directly
         {
             timercnt[eingang+8] = 0x80;
         }
-        else // zyk. Senden Faktor Grenzwerte
+        else if (help_obj==2)  // verzögert senden
+        {
+            timercnt[eingang+8] = eeprom[RE_GW_S_FAKT] | 0x80;
+        }
+        else // nicht senden -> zyk. Senden Faktor Grenzwerte
         {
             timercnt[eingang+8] = eeprom[GW_ZYKL_FAKT+kanal];
         }
@@ -286,7 +292,7 @@ void send_messdiff (unsigned char messwert)
 *
 * Timer 0-7     Messwerte Obj. 0-7
 * Timer 8-11    Grenzwerte Obj. 8-19
-* Timer x       Sample timer
+* Timer 12      Sample timer
 */
 void delay_timer(void)
 {
@@ -317,7 +323,7 @@ void delay_timer(void)
         }//end for (n=...
 
     // ab Hier die aktion...
-    for(tmr_obj=0;tmr_obj<=12;tmr_obj++)
+    for(tmr_obj=0;tmr_obj<=11;tmr_obj++)
     {
         if(timercnt[tmr_obj]==0x80)     // 0x00 = Timer abgelaufen und aktiv
         {
@@ -331,7 +337,7 @@ void delay_timer(void)
                 check_and_send(tmr_obj);
             }
             // Zyklisch Senden Grenzwerte, Obj. >7
-            else if (tmr_obj<=11)
+            else
             {
                 // 3 Grenzwerte senden  // TODO anpassung neue VD
                 gw_object = 4+ (tmr_obj-8)*3;
@@ -342,32 +348,13 @@ void delay_timer(void)
 
                 // Zyklisch senden Faktor neu laden
                 timercnt[tmr_obj] = eeprom[GW_ZYKL_FAKT+(tmr_obj-8)];
-
-
-                /*
-                // Zeit holen und deaktivieren, Bit 7 = 0
-                //zykval_help=(eeprom[0x69+(eingang>>1)])>>(4*(!(eingang&0x01)))&0x0F;
-                if(objno_help & 0x01)   // 0,2
-                {
-                    timercnt[tmr_obj] = (eeprom[0x69+(objno_help>>1)] & 0x0F);
-                }
-                else                        // 1,3
-                {
-                    timercnt[tmr_obj] = (eeprom[0x69+(objno_help>>1)] >>4);
-                }*/
-            }
-            // Sendeverzögerung Eingänge Messwerte Busspannungswiederkehr über Objekt 12
-            else
-            {
-                // TODO kann gelöscht werden, timer 13 ist frei
-                timercnt[12] = 0;    // Timer 8 anhalten
             }
         }
     }
-    // Timer 13, Sensor conversation wait
-    if (timercnt[13] == 0x80)
+    // Timer 12, Sensor conversation wait
+    if (timercnt[12] == 0x80)
     {
-        timercnt[13] = 0;       // Prevent next run before restart
+        timercnt[12] = 0;       // Prevent next run before restart
         sequence++;             // Konvertierung abgeschlossen
     }
 }
@@ -436,7 +423,7 @@ void restart_app()      // Alle Applikations-Parameter zurücksetzen
         timerbase[n] = (eeprom[THBASE_ZYKLSEND+(n>>1)] >> (4 *(n&0x01))) &0x0F;
 
         // Verhalten bei Busspannungswiederkehr, 2 Messwerte je Kanal mit gleichem Faktor laden
-        temp_var = eeprom[RE_ZYKL_S_FAKT+(n>>1)];
+        temp_var = eeprom[RE_MW_S_FAKT+(n>>1)];
         if(temp_var &0x80)  // Verzögert senden eingeschaltet
         {
             timercnt[n] = temp_var;
@@ -471,7 +458,7 @@ void restart_app()      // Alle Applikations-Parameter zurücksetzen
         EA=1;   // Enable interrupts again
     }
 
-    timerbase[13] = 0;  // Timerbase 13, ensure to be 0
+    timerbase[12] = 0;  // Sensor sample timer 12 turned off
     sequence=1;         // Start sequence
     kanal=0;            // channel 0
     timer=0;            // Timer-Variable, wird alle 130ms inkrementiert

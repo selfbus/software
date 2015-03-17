@@ -29,9 +29,9 @@
 #endif
 
 // 4Sense VD
-#define RE_ZYKL_S_BASE  0xB1    // 0
+#define RE_GW_S_FAKT    0xB1    // 0
 #define RE_SEND_GW      0xB2    // 0
-#define RE_ZYKL_S_FAKT  0xB3    // *n
+#define RE_MW_S_FAKT    0xB3    // *n
 
 #define SENSOR_TYPE     0xB7    // *n
 
@@ -58,7 +58,7 @@
 
 
 // Anzahl Timer
-#define TIMERANZ	14	// 4 Timer Messwert zyklisch, 4 Sendeverzögerung Messwertdiff, Sendeverzögerung start
+#define TIMERANZ	13	// 8 Timer Messwert zyklisch, 4 Timer GW zyklisch, 1 Timer Sensor sample
 
 void restart_app(void);		// Alle Applikations-Parameter zurücksetzen
 void write_value_req(unsigned char objno);		    // Routine zur Verarbeitung eingegegangener Telegramme zum Schreiben eines Objektwertes
