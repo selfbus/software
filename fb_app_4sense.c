@@ -64,14 +64,14 @@ unsigned long read_obj_value(unsigned char objno)   // gibt den Wert eines Objek
     unsigned long objvalue;
 
     // Messwerte Temperatur/Feuchte Objekte 0-7
-        if(objno<4)     // TODO anpassung fertige VD <8
+        if(objno<8)     // TODO anpassung fertige VD <8, OK
         {
             objvalue=sendewert(objno);  // Messwert umwandeln
             lastsend[objno]=messwerte[objno];
         }
         // Grenzwerte Objekte ab 8
         else
-            objvalue= (grenzwerte>>(objno-4))&0x01; // TODO fertige VD -8
+            objvalue= (grenzwerte>>(objno-8))&0x01; // TODO fertige VD -8, OK
 
     return(objvalue);
 }
@@ -224,7 +224,7 @@ void grenzwert (unsigned char eingang)
                 grenzwerte &= ~(bitmask_1[help_obj]);
 
             if(!gw_init) // Do NOT send during initialization
-                send_obj_value(4+ help_obj);    //TODO anpassung fertige VD >8
+                send_obj_value(8+ help_obj);    //TODO anpassung fertige VD >8, OK
 
             // Aktuellen Wert speichern
             lasttemp[objno]=messwerte[objno];
@@ -339,12 +339,12 @@ void delay_timer(void)
             // Zyklisch Senden Grenzwerte, Obj. >7
             else
             {
-                // 3 Grenzwerte senden  // TODO anpassung neue VD
-                gw_object = 4+ (tmr_obj-8)*3;
+                // 3 Grenzwerte senden  // TODO anpassung neue VD, OK
+                gw_object = 8+ (tmr_obj-8)*3;
 
-                send_obj_value(gw_object);
-                send_obj_value(gw_object+1);
-                send_obj_value(gw_object+2);
+                send_obj_value(gw_object);   // 8,11,14,17
+                send_obj_value(gw_object+1); // 9.12,15,18
+                send_obj_value(gw_object+2); // 10,13,16,19
 
                 // Zyklisch senden Faktor neu laden
                 timercnt[tmr_obj] = eeprom[GW_ZYKL_FAKT+(tmr_obj-8)];

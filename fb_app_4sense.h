@@ -19,7 +19,7 @@
 #include <fb_lpc922.h>
 
 // Include to enable debug options within the project
-#include "debug.h"
+//#include "debug.h"
 
 
 // Damit die Eclipse Code Analyse nicht so viele Warnungen anzeigt:
@@ -43,7 +43,7 @@
 
 #define TEMP_ZYKLSEND   0xCB    // *2n
 #define HUMID_ZYKLSEND  0xCC    // *2n
-#define THBASE_ZYKLSEND 0xD5    // *1/2n
+#define THBASE_ZYKLSEND 0xD3    // *1/2n
 
 #define GW_ZUORDNUNG    0xD7    // *n
 #define GW_REAKTION     0xDB    // *1/2n
