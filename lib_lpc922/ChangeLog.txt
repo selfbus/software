@@ -1,11 +1,19 @@
-    _____ ______ __   __________  __  _______
-   / ___// ____// /  / ____/ __ )/ / / / ___/
-   \__ \/ __/  / /  / /__ / __  / / / /\__ \
-  ___/ / /__  / /__/ /__// /_/ / /_/ /___/ /
- /____/_____//____/_/   /_____/\____//____/
+    _____ ________    __________  __  _______     __    ________  ____  ___    ______  __
+   / ___// ____/ /   / ____/ __ )/ / / / ___/    / /   /  _/ __ )/ __ \/   |  / __ \ \/ /
+   \__ \/ __/ / /   / /_  / __  / / / /\__ \    / /    / // __  / /_/ / /| | / /_/ /\  / 
+  ___/ / /___/ /___/ __/ / /_/ / /_/ /___/ /   / /____/ // /_/ / _, _/ ___ |/ _, _/ / /  
+ /____/_____/_____/_/   /_____/\____//____/   /_____/___/_____/_/ |_/_/  |_/_/ |_| /_/   
 
 Selfbus Library für LPC922/LPC936
 =================================
+2015-04-03  Version 1.56
+		- ADC Read PDU hinzugefügt und somit das Auslesen der Geräte-Info massiv beschleunigt,
+		  zum aktivieren Lib mit ADC_RESPONSE Option compilieren.
+
+2014-12-24  Version 1.55
+        - Bug beim Schreiben auf Statusbyte 60 behoben
+        - Senden des NACK in Verbindung mit not_me behoben
+
 2014-10-19  Version 1.54
 		- VD Version Lock Option hinzugefügt
 

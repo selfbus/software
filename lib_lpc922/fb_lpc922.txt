@@ -1,13 +1,23 @@
-﻿    _____ ______ __   __________  __  _______
-   / ___// ____// /  / ____/ __ )/ / / / ___/
-   \__ \/ __/  / /  / /__ / __  / / / /\__ \
-  ___/ / /__  / /__/ /__// /_/ / /_/ /___/ /
- /____/_____//____/_/   /_____/\____//____/
+    _____ ________    __________  __  _______     __    ________  ____  ___    ______  __
+   / ___// ____/ /   / ____/ __ )/ / / / ___/    / /   /  _/ __ )/ __ \/   |  / __ \ \/ /
+   \__ \/ __/ / /   / /_  / __  / / / /\__ \    / /    / // __  / /_/ / /| | / /_/ /\  / 
+  ___/ / /___/ /___/ __/ / /_/ / /_/ /___/ /   / /____/ // /_/ / _, _/ ___ |/ _, _/ / /  
+ /____/_____/_____/_/   /_____/\____//____/   /_____/___/_____/_/ |_/_/  |_/_/ |_| /_/   
 
 Selfbus Library für LPC922/LPC936
 =================================
-Version 1.51
+Version 1.56
 
+Compiler Optionen:
+------------------
+LOCK_VD_VERSION   Schreibschutz auf Adresse 0x0101-0x0107, verhindert das Überschreiben der Hersteller ID, Geräte ID und VD Version.
+LOCK_DEVICE_ID    Schreibschutz auf Adresse 0x0101-0x0106, verhindert das Überschreiben der Hersteller ID und Geräte ID.
+				  LOCK_VD_VERSION ist dominant falls beide Lock-Optionen gleichzeitig aktiv sein sollten. Falls die ETS versucht
+				  auf die gesperrten Speicherstellen zu schreiben, bricht der Download Vorgang mit einer Fehlermeldung ab.
+				  Somit lässt sich das Parametrieren mit einer inkompatiblen VD, bzw. VD Version über den Bus verhindern.
+
+ADC_RESPONSE      Aktiviert die Unterstützung für ADCRead und ADCResponse PDUs. Es wird ein fiktiver Wert für die Bus Spannung
+                  und den PEI-Type gesendet und somit das Auslesen der Geräte Info massiv beschleunigt.
 
 
 Globale Variablen, die in der Applikation abgefragt oder geändert werden können:
@@ -77,7 +87,7 @@ eeprom[255]		ist ein Bereich im Flash, der nur gelesen werden kann, entspricht d
 				muß der Flashbereich 0x1D00 bis 0x1DFF geflasht werden, dazu stehen Makros
 				zur Verfügung (s.u.)
 				
-userram[255]	wird vermutlich nicht mehr verwendet in Zukunft
+userram[255]	entfallen da er nicht mehr benötigt wurde, sowie um Flash freizugeben
 
 
 Funktionen in der Library:

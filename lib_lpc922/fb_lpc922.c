@@ -1,11 +1,11 @@
 /*
- *    _____ ______ __   __________  __  _______ *
- *   / ___// ____// /  / ____/ __ )/ / / / ___/ *
- *   \__ \/ __/  / /  / /__ / __  / / / /\__ \  *
- *  ___/ / /__  / /__/ /__// /_/ / /_/ /___/ /  *
- * /____/_____//____/_/   /_____/\____//____/   *
+ *    _____ ________    __________  __  _______     __    ________  ____  ___    ______  __
+ *   / ___// ____/ /   / ____/ __ )/ / / / ___/    / /   /  _/ __ )/ __ \/   |  / __ \ \/ /
+ *   \__ \/ __/ / /   / /_  / __  / / / /\__ \    / /    / // __  / /_/ / /| | / /_/ /\  / 
+ *  ___/ / /___/ /___/ __/ / /_/ / /_/ /___/ /   / /____/ // /_/ / _, _/ ___ |/ _, _/ / /  
+ * /____/_____/_____/_/   /_____/\____//____/   /_____/___/_____/_/ |_/_/  |_/_/ |_| /_/   
  *
- *  Copyright (c) 2014 		Stefan Haller
+ *  Copyright (c) 2014-2015 Stefan Haller
  *  Copyright (c) 2013-2014 Andreas Krieger
  *  Copyright (c) 2009-2013 Andreas Krebs <kubi@krebsworld.de>
  *
@@ -90,7 +90,7 @@ void T1_int(void) __interrupt (3) 	// Timer 1 Interrupt
 		TF1=0;			// Timer1-flag loeschen						1 cycle
 		TR1=1;			// Timer1 starten							1 cycle
 		if(tx_nextsend != tx_nextwrite) { 			// wenn zu sendendes Objekt vorhanden
-			
+
 			// __bit build_tel(unsigned char objno)
 			//{
 				unsigned char objno=tx_buffer[tx_nextsend];
@@ -125,7 +125,7 @@ void T1_int(void) __interrupt (3) 	// Timer 1 Interrupt
 						else telegramm[7]=0x80;				// write_value_request Telegramm (nicht angefordert)
 
 						objtype=eeprom[eeprom[COMMSTABPTR]+objno+objno+objno+4];
-						
+
 						if(objtype>6) length=objtype-5; else length=1;
 						telegramm[5]=0xE0+length;
 						if (length>1) telegramm[length+6]=objvalue; else telegramm[7]+=(objvalue&0x3F);
@@ -144,17 +144,16 @@ void T1_int(void) __interrupt (3) 	// Timer 1 Interrupt
 					telegramm[4]=conl;
 
 					switch(objno&0x1F) {
-					case 1:	// NCD ACK Quittierung (129)
+					case 1:	// NCD ACK Quittierung (129) mit Paketnummer vom Sender, nicht der Eigenen!!!
 						telegramm[5]=0x60;					// DRL
 						telegramm[6]=senders_pcount + 0xC2;	// Bit 6,7(TCPI = 11 NCD Quittierung) und Bit 0,1 (10=ACK)
-															// geackt wird immer die Paketnummer vom Sender, nicht die eigene!!!
 						break;
 					case 2:	// read mask response (130)
 					    telegramm[5]=0x63;					// DRL
 					    telegramm[6]=pcount + 0x43;			// bei response immer eigene Paketnummer senden
 					    telegramm[7]=0x40;
-					    telegramm[8]=0x00;
-					    telegramm[9]=0x12;					// Maskenversion 1 = BCU1
+					    telegramm[8]=0x00;                  // Medium Type 0 (TP1), FW Type 0
+					    telegramm[9]=0x12;					// FW Version 1.2 (Maskenversion 1.2 = BCU1)
 					    inc_pcount=1;
 					    break;
 					case 3:	// read PA response (131)
@@ -185,6 +184,22 @@ void T1_int(void) __interrupt (3) 	// Timer 1 Interrupt
 						telegramm[6]=0x81;
 						connected=0;
 						break;
+#ifdef ADC_RESPONSE
+					case 6: // READ_ADC_RESPONSE (134)
+					    telegramm[5]=0x64;                  // DRL
+                        telegramm[6]=pcount |0x41;          // eigener Paketzaehler, TCPI und erstes Befehlsbit
+                        telegramm[7]=mem_adrh |0x40;        // ARCRead Response for selected channel
+                        telegramm[8]=mem_adrl;              // Requested sample count
+                        telegramm[9]=0x06;                  // ADC1 Bus Voltage 0x0610 = 29.1V (ADC = U/0.1875)
+                        telegramm[10]=0x10;                 // 0x0602=28.8V, 0x0605=28.9V, 0x0642=30V, 0x0648=30.2V
+                        inc_pcount=1;                       // ADC4 PEI Type 0x0610 = reserved PEI 15
+                        break;
+
+					case 7: // NCD ACK Quittierung (135) mit eigener Paketnummer
+                        telegramm[5]=0x60;                  // DRL
+                        telegramm[6]=pcount + 0xC2;         // Bit 6,7(TCPI = 11 NCD Quittierung) und Bit 0,1 (10=ACK)
+                        break;
+#endif
 					}
 					build_ok=1;
 				}
@@ -557,11 +572,11 @@ void process_tel(void)
 				FMCON=0x68;				// write command, schreibt pageregister ins flash und versetzt CPU in idle fuer 4ms
 				EA=1;
 			}
-			
-			
-			
-			
-			
+
+
+
+
+
 			if(tpdu==BROADCAST_PDU_READ_PA && apdu==READ_PHYSADDR_REQUEST) send_obj_value(READ_PHYSADDR_RESPONSE);	// 00000001 00000000
 		}
 	}
@@ -573,6 +588,14 @@ void process_tel(void)
 
 				// Unicast
 				switch (tpdu) {	// transport layer control field
+#ifdef ADC_RESPONSE
+                case DATA_PDU_ADC_READ:
+                    mem_adrh = telegramm[7];    // Remember ADC Channel, reuse mem_adrh to save ram
+                    mem_adrl = telegramm[8];    // Remember sample count
+                    send_obj_value(NCD_ACK_OWN);
+                    send_obj_value(READ_ADC_RESPONSE);
+                    break;
+#endif
 
 				case DATA_PDU_MEMORY_OPERATIONS:
 					if(connected){
