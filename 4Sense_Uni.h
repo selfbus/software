@@ -20,6 +20,8 @@
 *************************************************************************/
 #define DHT           // Define DHT to enable DHT sensor support
 #define DS_SERIES     // Define to enable DS sensor support
+// DO NOT USE PARASITE, not tested!!
+//#define OWPARASITE    // Enable parasite mode by setting IO to push-pull
 
 /*************************************************************************
   Port and Date Pin definitions

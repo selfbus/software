@@ -1,15 +1,15 @@
 /*
- *    _____ ______ __   __________  __  _______
- *   / ___// ____// /  / ____/ __ )/ / / / ___/
- *   \__ \/ __/  / /  / /__ / __  / / / /\__ \
- *  ___/ / /__  / /__/ /__// /_/ / /_/ /___/ /
- * /____/_____//____/_/   /_____/\____//____/
+ *    _____ ________    __________  __  _______    __ __ _____
+ *   / ___// ____/ /   / ____/ __ )/ / / / ___/   / // // ___/___  ____  ________
+ *   \__ \/ __/ / /   / /_  / __  / / / /\__ \   / // /_\__ \/ _ \/ __ \/ ___/ _ \
+ *  ___/ / /___/ /___/ __/ / /_/ / /_/ /___/ /  /__  _____/ /  __/ / / (__  /  __/
+ * /____/_____/_____/_/   /_____/\____//____/     /_/ /____/\___/_/ /_/____/\___/
  *
- *  Copyright (c) 2014-2015 Stefan Haller
+ * Copyright (c) 2014-2015 Stefan Haller
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License version 2 as
- *  published by the Free Software Foundation.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
  *
  */
 
@@ -19,7 +19,10 @@
 #include <fb_lpc922.h>
 
 // Include to enable debug options within the project
-//#include "debug.h"
+#include "debug.h"
+
+// Max allowed stack value
+#define STACK_MAX   (0xFE-66)
 
 
 // Damit die Eclipse Code Analyse nicht so viele Warnungen anzeigt:

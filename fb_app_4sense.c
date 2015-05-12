@@ -1,15 +1,15 @@
 /*
- *    _____ ______ __   __________  __  _______
- *   / ___// ____// /  / ____/ __ )/ / / / ___/
- *   \__ \/ __/  / /  / /__ / __  / / / /\__ \
- *  ___/ / /__  / /__/ /__// /_/ / /_/ /___/ /
- * /____/_____//____/_/   /_____/\____//____/
+ *    _____ ________    __________  __  _______    __ __ _____
+ *   / ___// ____/ /   / ____/ __ )/ / / / ___/   / // // ___/___  ____  ________
+ *   \__ \/ __/ / /   / /_  / __  / / / /\__ \   / // /_\__ \/ _ \/ __ \/ ___/ _ \
+ *  ___/ / /___/ /___/ __/ / /_/ / /_/ /___/ /  /__  _____/ /  __/ / / (__  /  __/
+ * /____/_____/_____/_/   /_____/\____//____/     /_/ /____/\___/_/ /_/____/\___/
  *
- *  Copyright (c) 2014-2015 Stefan Haller
+ * Copyright (c) 2014-2015 Stefan Haller
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License version 2 as
- *  published by the Free Software Foundation.
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
  *
  */
 
@@ -40,14 +40,21 @@ unsigned char gw_init_done; // 0 when all thresholds have been initialized
 
 //unsigned char zyk_senden_basis;
 unsigned char sequence;
+unsigned char sp_max;
+unsigned char debug_ga_answer;
 
 
 // Empfangenes write_value_request Telegramm verarbeiten
 // unbenutzt, Objekte können nicht geschrieben werden
 void write_value_req(unsigned char objno)
 {
-    // nix zu schreiben
-    objno;
+    // Debug GA
+    if (objno == 20)
+    {
+        debug_ga_answer = telegramm[8];
+        if(debug_ga_answer == 0xF5) // Trigger Software reset?
+                AUXR1|=0x08;        // Do Software Reset
+    }
 }
 
 
@@ -61,30 +68,51 @@ void read_value_req(unsigned char objno)    // Empfangenes read_value_request Te
 // Objektwert von Lib angefordert
 unsigned long read_obj_value(unsigned char objno)   // gibt den Wert eines Objektes zurueck
 {
-    unsigned long objvalue;
+    union   // Simplify data handling, reduce code size
+    {
+        unsigned long objvalue;
+        unsigned char byte[4];
+    } objvalue;
 
     // Messwerte Temperatur/Feuchte Objekte 0-7
-        if(objno<8)     // TODO anpassung fertige VD <8, OK
+        if(objno<8)
         {
-            objvalue=sendewert(objno);  // Messwert umwandeln
-            lastsend[objno]=messwerte[objno];
+            objvalue.objvalue = sendewert(objno);  // Messwert umwandeln
+            lastsend[objno] = messwerte[objno];
         }
-        // Grenzwerte Objekte ab 8
+        // Grenzwerte Objekte 8-20
+        else if (objno<20)
+            objvalue.byte[0] = (grenzwerte>>(objno-8)) &0x01;
+        // Debug Objekt 20
         else
-            objvalue= (grenzwerte>>(objno-8))&0x01; // TODO fertige VD -8, OK
+        {
+            if(debug_ga_answer == 1)
+            {
+                unsigned char n;
 
-    return(objvalue);
+                for(n=0;n<=3;n++)
+                    objvalue.byte[n] = family_code[n];
+            }
+            else
+            {
+                objvalue.byte[3] = onewire_error;
+                objvalue.byte[2] = STACK_MAX;
+                objvalue.byte[1] = sp_max;
+                objvalue.byte[0] = SP;
+            }
+        }
+    return(objvalue.objvalue);
 }
 
 
 // Messwert senden wenn kein Fehler erkannt wurde
 __bit check_and_send(unsigned char object)
 {
-    // Object 0,2,4,6 entspricht Messwert 0-3
- //   if( !((onewire_error>>object) & 0x03))
+    // Object 0-7 entspricht Messwert Sensoren 0-3
+    if( (onewire_error>>(object&0xFE)) & 0x03 )
+        return 0;   // Sensor Data not valid
+    else
         return send_obj_value(object);
- //   else
- //       return 0;
 }
 
 
@@ -98,6 +126,14 @@ __bit check_and_send(unsigned char object)
 unsigned int sendewert(unsigned char objno)
 {
     int eis5temp;//, eis6temp;
+
+    // Check stack pointer depth, this is most nested call
+     if (SP > sp_max)
+         sp_max = SP;
+
+     if (SP >= STACK_MAX)
+         WRITE_BYTE(0x01,0x0D,0xF7)    // Indicate Stack Overflow, holds app
+
 
   /*This takes a lot of Flash (approx. 170byte), disabled meanwhile
     //unsigned char n;
@@ -123,9 +159,9 @@ unsigned int sendewert(unsigned char objno)
     else
 */
     {
-        eis5temp=(messwerte[objno]>>3)&0x07FF;          // durch 8 teilen, da später Exponent 3 dazukommt
-        eis5temp=eis5temp+(0x18 << 8);
-        if (messwerte[objno]<0) eis5temp+=0x8000;       // Vorzeichen
+        eis5temp = (messwerte[objno]>>3) &0x07FF;          // durch 8 teilen, da später Exponent 3 dazukommt
+        eis5temp = eis5temp +(0x18 << 8);
+        if (messwerte[objno]<0) eis5temp += 0x8000;       // Vorzeichen
         return eis5temp;
     }
 }
@@ -163,7 +199,7 @@ void grenzwert (unsigned char eingang)
         gw_init = 1;
 
 
-        help_obj = (eeprom[RE_SEND_GW]>>(2*eingang)) & 0x03;
+        help_obj = (eeprom[RE_SEND_GW]>>(2*eingang)) &0x03;
 
         // if else ist etwas kompakter als switch
         //if(eeprom[RE_SEND_GW] &bitmask_1[eingang])
@@ -173,7 +209,7 @@ void grenzwert (unsigned char eingang)
         }
         else if (help_obj==2)  // verzögert senden
         {
-            timercnt[eingang+8] = eeprom[RE_GW_S_FAKT] | 0x80;
+            timercnt[eingang+8] = eeprom[RE_GW_S_FAKT] |0x80;
         }
         else // nicht senden -> zyk. Senden Faktor Grenzwerte
         {
@@ -190,8 +226,8 @@ void grenzwert (unsigned char eingang)
         grenzwert_eingang = 0;  // Clear
         gw_changed = 0;         // Clear
 
-        help_obj=i+ eingang*3;
-        objno = 2*eingang+ (zuordnung&0x01);
+        help_obj = i +eingang*3;
+        objno = 2*eingang +(zuordnung&0x01);
 
         reaktion = (eeprom[GW_REAKTION +(2*eingang + (i>>1))] >> (4 *(i&0x01))) &0x0F;
         schwelle = (int)((eeprom[GW_SCHWELLE1L+(help_obj*2)]<<8) | eeprom[GW_SCHWELLE1H+(help_obj*2)])*10;
@@ -458,6 +494,8 @@ void restart_app()      // Alle Applikations-Parameter zurücksetzen
         EA=1;   // Enable interrupts again
     }
 
+    //onewire_error = 0xFF; // Set all Error Flags, Reset during sequence = 1
+
     timerbase[12] = 0;  // Sensor sample timer 12 turned off
     sequence=1;         // Start sequence
     kanal=0;            // channel 0
@@ -467,13 +505,13 @@ void restart_app()      // Alle Applikations-Parameter zurücksetzen
     // Werte hier schreiben anstatt per static __code wenn Debug aktiv
     EA=0;               // Interrupts sperren, damit flashen nicht unterbrochen wird
     START_WRITECYCLE
-    WRITE_BYTE(0x01,0x03,0x00)   // Herstellercode 0x004C = Robert Bosch
+    WRITE_BYTE(0x01,0x03,0x00)      // Herstellercode 0x004C = Robert Bosch
     WRITE_BYTE(0x01,0x04,0x4C)
-    //WRITE_BYTE(0x01,0x05,0x04)      // Devicetype 0x0438 = Selfbus 1080 4sense
-    //WRITE_BYTE(0x01,0x06,0x38)
-    //WRITE_BYTE(0x01,0x07,0x01)    // Versionnumber of application programm
     WRITE_BYTE(0x01,0x0C,0x00)      // PORT A Direction Bit Setting
-    //WRITE_BYTE(0x01,0x0D,0xFF)    // Run-Status (00=stop FF=run)
+    //WRITE_BYTE(0x01,0x05,0x04)    // Devicetype 0x0438 = Selfbus 1080 4Sense
+    //WRITE_BYTE(0x01,0x06,0x38)
+    //WRITE_BYTE(0x01,0x07,0x05)    // Versionnumber of application programm
+    //WRITE_BYTE(0x01,0x0D,0xFF)    // Run-Error Status (00=stop FF=run)
     STOP_WRITECYCLE
     EA=1;               // Interrupts freigeben
 #endif

@@ -17,6 +17,8 @@
 
 #include "4Sense_Uni.h"
 
+#include <P89LPC922.h>
+
 #ifdef LPC936
     //#include <fb_lpc936_1.55.h>
     #include <fb_lpc936.h>
@@ -210,7 +212,7 @@ unsigned char ow_read(unsigned char bytes) // Read byte from one-wire device
    }
 
    if(crc) {
-     onewire_error |= bitmask_1[(kanal<<1)+1];;    // CRC Error
+     onewire_error |= bitmask_1[(kanal<<1)+1];    // CRC Error
    }
 
    return crc;
@@ -239,6 +241,9 @@ __bit start_tempconversion(void)
   if (ow_init()) {
     ow_write(0xCC);     // Skip-ROM command: alle parallel angeschlossenen Geräte werden angesprochen
     ow_write(0x44);     // start single temperature conversion command
+#ifdef OWPARASITE
+    P0M2 |= bitmask_1[kanal];   // Enable "strong pullup" by going to push-pull mode
+#endif
     return 1;
   }
   else
@@ -251,7 +256,11 @@ signed int read_temp(unsigned char sensortyp)
   signed int t;
   unsigned char retry;
 
-  onewire_error &= ~(3<<(kanal<<1)); // Reset channel error log
+  //onewire_error &= ~(3<<(kanal<<1)); // Reset channel error log
+
+#ifdef OWPARASITE
+    P0M2 &= ~bitmask_1[kanal];   // Disable "strong pullup" by going back to quasi bidirectional mode
+#endif
 
   // Try 2 times to send temperature request
   for(retry=0;retry<2;retry++)
