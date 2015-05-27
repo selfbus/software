@@ -19,9 +19,15 @@
 #include <fb_lpc922.h>
 
 // Include to enable debug options within the project
-#include "debug.h"
+//#include "debug.h"
 
-// Max allowed stack value
+// Enable DPT5 support, currently just with LPC936 if EXT_DEBUG_GA is used
+//#define SEND_DPT5
+
+// Enable Extented Debug GA Support
+#define EXT_DEBUG_GA
+
+// Max allowed stack value, MUST match to the lowest variable in the upper RAM!!
 #define STACK_MAX   (0xFE-66)
 
 

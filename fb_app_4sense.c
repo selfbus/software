@@ -51,7 +51,7 @@ void write_value_req(unsigned char objno)
     // Debug GA
     if (objno == 20)
     {
-        debug_ga_answer = telegramm[8];
+        debug_ga_answer = telegramm[11];
         if(debug_ga_answer == 0xF5) // Trigger Software reset?
                 AUXR1|=0x08;        // Do Software Reset
     }
@@ -86,19 +86,27 @@ unsigned long read_obj_value(unsigned char objno)   // gibt den Wert eines Objek
         // Debug Objekt 20
         else
         {
-            if(debug_ga_answer == 1)
+#ifdef EXT_DEBUG_GA
+            if(debug_ga_answer == 1)        // Grenzwerte
+            {
+                objvalue.byte[3] = onewire_error;
+                objvalue.byte[2] = gw_init_done;
+                objvalue.byte[0] = grenzwerte;
+                objvalue.byte[1] = grenzwerte>>8;
+            }
+            else if(debug_ga_answer == 2)   // Stack Info
+            {
+                objvalue.byte[2] = STACK_MAX;
+                objvalue.byte[1] = sp_max;
+                objvalue.byte[0] = SP;
+            }
+            else    // Family Code of each sensor
+#endif
             {
                 unsigned char n;
 
                 for(n=0;n<=3;n++)
                     objvalue.byte[n] = family_code[n];
-            }
-            else
-            {
-                objvalue.byte[3] = onewire_error;
-                objvalue.byte[2] = STACK_MAX;
-                objvalue.byte[1] = sp_max;
-                objvalue.byte[0] = SP;
             }
         }
     return(objvalue.objvalue);
@@ -134,8 +142,8 @@ unsigned int sendewert(unsigned char objno)
      if (SP >= STACK_MAX)
          WRITE_BYTE(0x01,0x0D,0xF7)    // Indicate Stack Overflow, holds app
 
-
-  /*This takes a lot of Flash (approx. 170byte), disabled meanwhile
+#ifdef SEND_DPT5
+    //This takes a lot of Flash (approx. 170byte), disabled meanwhile
     //unsigned char n;
 
     //eis6temp=-5500;
@@ -157,7 +165,7 @@ unsigned int sendewert(unsigned char objno)
     }
     // Sendeformat EIS 5 (DPT9)
     else
-*/
+#endif
     {
         eis5temp = (messwerte[objno]>>3) &0x07FF;          // durch 8 teilen, da später Exponent 3 dazukommt
         eis5temp = eis5temp +(0x18 << 8);
@@ -226,8 +234,8 @@ void grenzwert (unsigned char eingang)
         grenzwert_eingang = 0;  // Clear
         gw_changed = 0;         // Clear
 
-        help_obj = i +eingang*3;
-        objno = 2*eingang +(zuordnung&0x01);
+        help_obj = i +eingang*3;                // GW Object 0-11
+        objno = 2*eingang +(zuordnung&0x01);    // Is current GW Temperature or Humidity?
 
         reaktion = (eeprom[GW_REAKTION +(2*eingang + (i>>1))] >> (4 *(i&0x01))) &0x0F;
         schwelle = (int)((eeprom[GW_SCHWELLE1L+(help_obj*2)]<<8) | eeprom[GW_SCHWELLE1H+(help_obj*2)])*10;
@@ -237,7 +245,7 @@ void grenzwert (unsigned char eingang)
         if ((lasttemp[objno]<schwelle || gw_init) && messwerte[objno]>schwelle) {  // GW überschritten
             if (reaktion &0x08)    // Reaktion Überschreiten aktiv
             {
-                grenzwert_eingang = (reaktion >>2) &0x01;
+                grenzwert_eingang = ((reaktion >>2) &0x01);
                 gw_changed = 1;
             }
         }
@@ -255,9 +263,9 @@ void grenzwert (unsigned char eingang)
         {
             // Neuen Grenzwert dem Eingangsobjekt zuordnen
             if(grenzwert_eingang)
-                grenzwerte |= bitmask_1[help_obj];
+                grenzwerte |= 1<<(help_obj);
             else
-                grenzwerte &= ~(bitmask_1[help_obj]);
+                grenzwerte &= ~(1<<(help_obj));
 
             if(!gw_init) // Do NOT send during initialization
                 send_obj_value(8+ help_obj);    //TODO anpassung fertige VD >8, OK

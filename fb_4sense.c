@@ -48,7 +48,7 @@ static __code unsigned char __at (EEPROM_ADDR + 0x03) manufacturer[2]={0x00,0x4C
 static __code unsigned char __at (EEPROM_ADDR + 0x05) device_type[2]={0x04,0x38};   // 0x0438 = Selfbus 1080 4sense #
 static __code unsigned char __at (EEPROM_ADDR + 0x07) vd_version={0x06};            // VD Version V0.6 #
 static __code unsigned char __at (EEPROM_ADDR + 0x08) eeprom_chk_limit={0xFF};      // EEPROM Check Limit
-static __code unsigned char __at (EEPROM_ADDR + 0x09) pei_type={0x00};              // Required PEI Type
+static __code unsigned char __at (EEPROM_ADDR + 0x09) pei_type={0x00};              // Required PEI Type, written by VD
 static __code unsigned char __at (EEPROM_ADDR + 0x0C) port_A_direction={0x00};      // PORT A Direction Bit Setting *
 static __code unsigned char __at (EEPROM_ADDR + 0x0D) run_error={0xFB};             // Run Time Error Flags, set when 0
 static __code unsigned int  __at (EEPROM_ADDR + 0x17) start_pa={0xFFFF};            // Default PA is 15.15.255 *
