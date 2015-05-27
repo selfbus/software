@@ -1,31 +1,31 @@
 /*
- *      __________  ________________  __  _______
- *     / ____/ __ \/ ____/ ____/ __ )/ / / / ___/
- *    / /_  / /_/ / __/ / __/ / __  / / / /\__ \ 
- *   / __/ / _, _/ /___/ /___/ /_/ / /_/ /___/ / 
- *  /_/   /_/ |_/_____/_____/_____/\____//____/  
- *                                      
+ *     _____ ________    __________  __  _______    ____        __
+ *    / ___// ____/ /   / ____/ __ )/ / / / ___/   / __ \__  __/ /_
+ *    \__ \/ __/ / /   / /_  / __  / / / /\__ \   / / / / / / / __/
+ *   ___/ / /___/ /___/ __/ / /_/ / /_/ /___/ /  / /_/ / /_/ / /_
+ *  /____/_____/_____/_/   /_____/\____//____/   \____/\__,_/\__/
+ *
  *  Copyright (c) 2008-2013 Andreas Krebs <kubi@krebsworld.de>
  *
  *  This program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License version 2 as
  *  published by the Free Software Foundation.
  *
- * 
+ *
  * 09.11.08	- delay_timer geht nicht mehr über flash sondern über globale variable delrec
  * 			- delay_timer auf 24bit reduziert statt 32bit
  * 			- port_schalten nur noch eimal pro telegramm für alle pins
  * 			- interrupt-steuerung bei respond() rausgenommen
  * 			- globale variablen pah, pal, rmstate entfernt
  * 			- write_obj_value aufrufe rausgenommen
- * 
+ *
  * 23.11.08 - Soft PWM während der Vollstromphase
  * 			- Handbetätigung in delay_timer eingefügt (hierzu P1.3 nötig !)
- *  
+ *
  * 01.01.09	- Soft PWM rausgenommen
  * 			- write_obj_value wieder reingenommen mit Überprüfung ob INT unterbrochen hat
  * 			- Rückmeldung bei Busspannungswiederkehr funktioniert jetzt
- * 
+ *
  * 13.02.09	- owntele ist ein zähler, wie oft ein gesendetes telegramm intern erneut verarbeitet wurde
  *
  * 12.11.09 - umgestellt auf statemachine-library
@@ -34,18 +34,17 @@
  * 			  kompletter Verzicht auf userram -> alle Stati in globalen Variablen
  *
  * 15.04.10 - Fehler mit den Logigverknüpfungen behoben
- * 
+ *
  * 02.01.11 - Ausgabe auf serielle Schieberegister für bistabile Relaise via Compilerschalter
- * 
+ *
  */
- 
 
-//#include <P89LPC922.h>
-//#include "fb_lpc922_1.53.h"
-#include  "fb_app_out.h"
-//#include  "../com/debug.h"
-#include "../com/fb_rs232.h"
-#include"../com/watchdog.h"
+
+#include "fb_app_out.h"
+#include "fb_rs232.h"
+#include "watchdog.h"
+
+const unsigned char bitmask_1[8] ={0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80};
 
 unsigned char timerbase[TIMERANZ];// Speicherplatz für die Zeitbasis und 4 status bits
 unsigned char timercnt[TIMERANZ];// speicherplatz für den timercounter und 1 status bit
@@ -61,15 +60,15 @@ unsigned char blocked;		// Sperrung der 8 Ausgänge (1=gesperrt)
 unsigned char logicstate;	// Zustand der Verknüpfungen pro Ausgang
 __bit delay_toggle;			// um nur jedes 2. Mal die delay routine auszuführen
 __bit portchanged;
-//__bit zeropulse;
 unsigned char rm_send;		// die von der main zu sendenden Rückmeldungen
+
 #ifdef zeroswitch
-unsigned char portausgabe_on;
-unsigned char portausgabe_off;
-volatile unsigned char schalten_state;
-unsigned char phival;
+ unsigned char portausgabe_on;
+ unsigned char portausgabe_off;
+ volatile unsigned char schalten_state;
+ unsigned char phival;
 #endif
-const unsigned char bitmask_1[8] ={0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80};
+
 
 
 void write_value_req(unsigned char objno) 				// Ausgänge schalten gemäß EIS 1 Protokoll (an/aus)
@@ -78,7 +77,7 @@ void write_value_req(unsigned char objno) 				// Ausgänge schalten gemäß EIS 1 P
   unsigned char blockstart, blockend, block_polarity;
   unsigned char obj_bitpattern, zf_bitpattern;
           obj_bitpattern=0x01<<(objno-8);
-          
+
           if (objno<8) object_schalten(objno,telegramm[7]&0x01);	// Objektnummer 0-7 entspricht den Ausgängen 1-8
 
           if (objno>7 && objno<12)	// Objektnummer 8-11 entspricht den Zusatzfunktionen 1-4
@@ -89,7 +88,7 @@ void write_value_req(unsigned char objno) 				// Ausgänge schalten gemäß EIS 1 P
             blockend=0;
             switch (objno-8)			// Zugeordneten Ausgang zu Zusatzfunktionsnr. in zfout speichern (1-8)
              {
-              case 0x00:		
+              case 0x00:
                 zfout=eeprom[FUNCASS]&0x0F;
                 blockstart=eeprom[BLOCKACT]&0x03;		// Verhalten bei Beginn der Sperrung
                 blockend=(eeprom[BLOCKACT]>>2)&0x03;	// Verhalten bei Ende der Sperrung
@@ -111,7 +110,7 @@ void write_value_req(unsigned char objno) 				// Ausgänge schalten gemäß EIS 1 P
             }
             zftyp=((eeprom[FUNCTYP])>>((objno-8)*2)) & 0x03;	// Typ der Zusatzfunktion
             zf_bitpattern=0x01<<(zfout-1);
-           
+
             switch (zftyp)
             {
               case 0x00:			// Verknüpfung
@@ -136,7 +135,7 @@ void write_value_req(unsigned char objno) 				// Ausgänge schalten gemäß EIS 1 P
 						if (blockend==0x02) portbuffer=portbuffer|zf_bitpattern;		// Bei Ende der Sperrung einschalten
                 	}
                 }
-                  
+
                 if (((telegramm[7]==0x81) && (block_polarity==0)) ||
                 	((telegramm[7]==0x80) && (block_polarity!=0)))
                 {	// Beginn der Sperrung
@@ -155,16 +154,16 @@ void write_value_req(unsigned char objno) 				// Ausgänge schalten gemäß EIS 1 P
 }
 
 
-/** 
+/**
 * Objektwert lesen wurde angefordert, read_value_response Telegramm zurücksenden
 *
-* 
+*
 * @return
-* 
+*
 */
 void read_value_req(unsigned char objno)
 {
- send_obj_value(objno+64);    
+ send_obj_value(objno+64);
 }
 
 
@@ -208,13 +207,13 @@ void write_obj_value(unsigned char objno,unsigned int objvalue)	// schreibt den 
 
 void object_schalten(unsigned char objno, __bit objstate)	// Schaltet einen Ausgang gemäß objstate und den zugörigen Parametern
 {
-	
+
 	unsigned char delay_base,delay_state,logicfunc,zfno;
 	unsigned char delay_onoff;
 	__bit off_disable;
-    
 
-	
+
+
 	off_disable=((eeprom[OFFDISABLE]>>objno)&0x01);	// nur ausschalten wenn AUS-Tete nicht ignoriert werden soll
 	if ((!objstate && !off_disable) || objstate) {
 		write_obj_value(objno,objstate);		// Objektwert speichern
@@ -231,7 +230,7 @@ void object_schalten(unsigned char objno, __bit objstate)	// Schaltet einen Ausg
 		}
 
 		if(((0x01<<objno) & blocked)==0 && (read_objflags(objno)&0x14)==0x14) {	// Objekt ist nicht gesperrt und Kommunikation zulässig (Bit 2 = communication enable) und Schreiben zulässig (Bit 4 = write enable)
-			delay_base=eeprom[(((objno+1)>>1)+DELAYTAB)];   
+			delay_base=eeprom[(((objno+1)>>1)+DELAYTAB)];
 			if((objno&0x01)==0x01) delay_base&=0x0F;
 			else delay_base=(delay_base&0xF0)>>4;
 			delay_onoff=0;
@@ -247,9 +246,9 @@ void object_schalten(unsigned char objno, __bit objstate)	// Schaltet einen Ausg
 				}
 				else delay_state=0x01;				// verzögert ausschalten
 			}
-                    
+
           			// Einschalten
-			if ( (objstate==1 && (logicfunc==0 || logicfunc==1 || (logicfunc>=2 && ((logicstate>>objno)&0x01)==0x01))) 
+			if ( (objstate==1 && (logicfunc==0 || logicfunc==1 || (logicfunc>=2 && ((logicstate>>objno)&0x01)==0x01)))
 					|| (objstate==0 && (logicfunc==1 && ((logicstate>>objno)&0x01)==0x01)) )
 			{
 				delay_onoff=eeprom[objno+0xDA];
@@ -259,18 +258,18 @@ void object_schalten(unsigned char objno, __bit objstate)	// Schaltet einen Ausg
 					if(((eeprom[0xEA]>>objno)&0x01)==0x01) { 			// Zeitschaltfunktion
 						delay_state=0x80;
 						delay_onoff=eeprom[objno+0xE2];
-					} 
+					}
 					if (((eeprom[RELMODE]>>objno)&0x01)==0x00) portbuffer=portbuffer|(0x01<<objno);	// sofort einschalten (Schliesserbetrieb)
 					else portbuffer=portbuffer&~(0x01<<objno);					// sofort einschalten (Öffnerbetrieb)
 				}
 				else delay_state=0x11;				// verzögert einschalten
 			}
 
-			if(delay_state!=0) {				// wenn Verzögerung, dann timer-Wert ins Flash schreiben  
+			if(delay_state!=0) {				// wenn Verzögerung, dann timer-Wert ins Flash schreiben
 				timercnt[objno]=delay_onoff|0x80;//delay_target=(delay_onoff<<delay_base)+timer;
 				timerbase[objno]=delay_base|(delay_state & 0xF0);//write_delay_record(objno,delay_state,delay_target);
 			}
-			else timercnt[objno]= 0;//clear_delay_record(objno);    
+			else timercnt[objno]= 0;//clear_delay_record(objno);
 		}
 	}
 }
@@ -280,7 +279,7 @@ void delay_timer(void)	// zählt alle 65ms die Variable Timer hoch und prüft Queu
 {
 	unsigned char objno,port_pattern,delay_zeit,delay_onoff,delay_base,n,m;
 	unsigned int timerflags;
-	
+
 	objno=0;
 
 		timer++;
@@ -297,15 +296,15 @@ void delay_timer(void)	// zählt alle 65ms die Variable Timer hoch und prüft Queu
 			}// end if timer...
 			timerflags = timerflags>>1;
 		}//end for (n=...
-		
+
 		// ab Hier die aktion...
-		
+
 		for(objno=0;objno<=7;objno++) {
-				if(timercnt[objno]==0x80) {			// 0x00 = delay Eintrag ist leer   
+				if(timercnt[objno]==0x80) {			// 0x00 = delay Eintrag ist leer
 					portchanged=1;
 					port_pattern=0x01<<objno;
 					if(timerbase[objno]&0x10) { //if(delay_state==0x81) {	// einschalten
-						if (((eeprom[RELMODE]>>objno)&0x01)==0x00) {				
+						if (((eeprom[RELMODE]>>objno)&0x01)==0x00) {
 							portbuffer=portbuffer|port_pattern;		// Einschalten (Schliesserbetrieb)
 						}
 						else {
@@ -315,11 +314,11 @@ void delay_timer(void)	// zählt alle 65ms die Variable Timer hoch und prüft Queu
 						delay_zeit=eeprom[0xEA];
 						delay_zeit=((delay_zeit>>objno)&0x01);
 						if(delay_zeit==0x01) {
-							delay_base=eeprom[(((objno+1)>>1)+0xF9)];   
+							delay_base=eeprom[(((objno+1)>>1)+0xF9)];
 							if((objno&0x01)==0x01) delay_base&=0x0F;
 							else delay_base=(delay_base&0xF0)>>4;
 							delay_onoff=eeprom[objno+0xE2];
-							if (delay_onoff!=0x00 && delay_zeit!=0x00) {  
+							if (delay_onoff!=0x00 && delay_zeit!=0x00) {
 								timercnt[objno]=delay_onoff|0x80;//
 								timerbase[objno]=delay_base;// Schaltverzögerung sichern
 							}
@@ -334,7 +333,7 @@ void delay_timer(void)	// zählt alle 65ms die Variable Timer hoch und prüft Queu
 						}
 						timercnt[objno]=0;
 					}
-			}   
+			}
 		}
 }
 //
@@ -365,27 +364,27 @@ ledport;
 		#ifdef MAX_PORTS_4
 		while( (TMOD&0x0F)==0x02 && ( TL0>0x72));// PWM scannen um "Hand"-Tasten abzufragen
 		#endif
-		interrupted=0;	  
+		interrupted=0;
 		P0_old=P0;// Port sichern
 	#ifdef MAX_PORTS_8
 		#ifdef zeroswitch
 		P1_0=1;	// TXD wird über Dioden auf low gezogen.
 		#else
 		P1_3= 1;			    //int0 auf 1, wird über Dioden und taster auf low IO gezogen.
-		#endif	
+		#endif
 		P0=~bitmask_1[n];
 		for(m=0;m<5;m++);
 		#ifdef zeroswitch
 			Taste=P1_0; // check TXD IO
-		#else			
+		#else
 			Taste=P1_3;// check INT0 IO
-		#endif	
+		#endif
 			P0=P0_old;// port zurückschreiben
-	#endif	
-		 
+	#endif
+
 	#ifdef MAX_PORTS_4
 //		ledport=0x01;
-//		for (n=0;n<4;n++) {  						
+//		for (n=0;n<4;n++) {
 			P0=~bitmask_1[n];
 			P0_5=1;			//P0.5 auf 1, wird über Dioden und taster auf low IO gezogen.
 //			for(m=0;m<10;m++);
@@ -430,7 +429,7 @@ void EX0_int (void) __interrupt (0)
 		PWM=0;			// Vollstrom an
 		TF0=0;			// Timer 0 für Haltezeit Vollstrom verwenden
 		TH0=einverzH;		// 1.8ms (10ms=6fff)
-		TL0=einverzL;		
+		TL0=einverzL;
 		TMOD=(TMOD & 0xF0) +1;		// Timer 0 als 16-Bit Timer
 		TAMOD=0x00;
 		TR0=1;
@@ -438,8 +437,8 @@ void EX0_int (void) __interrupt (0)
 		ET0=1;
 }
 
-	
-void timer0_int(void) __interrupt(1)	
+
+void timer0_int(void) __interrupt(1)
 	{
 	switch (schalten_state)
 	{
@@ -450,16 +449,16 @@ void timer0_int(void) __interrupt(1)
 			P0=portausgabe_on;
 			TF0=0;			// Timer 0 für Ausschaltzeitpunkt
 			TH0=ausverzH-phival;		// phival= 0 bis 51 einstellbar(main) default=16
-			TL0=0xFF;		
+			TL0=0xFF;
 			TR0=1;
-			
+
 			break;
 		case 2:
 			schalten_state=3;
 			P0=portausgabe_off;
 			TF0=0;			// Timer 0 für Haltezeit Vollstrom verwenden
 			TH0=0x02;		// 16ms (10ms=6fff)
-			TL0=0x00;		
+			TL0=0x00;
 			TR0=1;
 		break;
 		case 3:// PWM wieder einschalten
@@ -484,7 +483,7 @@ void port_schalten(void)		// Schaltet die Ports mit PWM, DUTY ist Pulsverhältnis
 	unsigned char n, pattern;
 
 #ifdef zeroswitch //### Nullspannungsschalter ###
-	
+
  #ifdef SPIBISTAB	//serielle schiebeausgang für bistabile Relaise
 		spi_2_out(sort_output(portbuffer));		// Ports schalten
 		PWM=0;
@@ -505,7 +504,7 @@ void port_schalten(void)		// Schaltet die Ports mit PWM, DUTY ist Pulsverhältnis
 	portchanged=0;
 
  #else	// also normaler out8 oder out4 mit zeroswitch
-	if(!EX0 && !schalten_state) {	//nur wenn schaltenstate inaktiv 
+	if(!EX0 && !schalten_state) {	//nur wenn schaltenstate inaktiv
 		portausgabe_on=portbuffer | oldportbuffer;
 		portausgabe_off=portbuffer;//& oldportbuffer;
 
@@ -561,9 +560,9 @@ void port_schalten(void)		// Schaltet die Ports mit PWM, DUTY ist Pulsverhältnis
 
 	oldportbuffer=portbuffer;
 	portchanged=0;
-	
-	
-	
+
+
+
    #else	//normaler out8 oder out4
 	if(portbuffer & ~oldportbuffer) {	// Vollstrom nur wenn ein relais eingeschaltet wird
 		TR0=0;
@@ -593,11 +592,11 @@ void port_schalten(void)		// Schaltet die Ports mit PWM, DUTY ist Pulsverhältnis
 		pattern=1<<n;
 		if((portbuffer&pattern)!=(oldportbuffer&pattern)) rm_send|=pattern;		//send_obj_value(n+12);
 	}
-	#endif	
+	#endif
 	oldportbuffer=portbuffer;
 	portchanged=0;
-	#endif	
-  #endif	
+	#endif
+  #endif
 #endif
 }
 
@@ -606,7 +605,7 @@ unsigned int sort_output(unsigned char portbuffer){
    unsigned int result;
    diff=portbuffer ^ oldportbuffer;
    result=0;
-   // A1 
+   // A1
 #ifdef MAX_PORTS_8
    if (diff & 0x01){
 	   if(portbuffer & 0x01){
@@ -644,7 +643,7 @@ unsigned int sort_output(unsigned char portbuffer){
 	      result|=0x0100;
 	   }
    }
-   
+
    // A5
    if (diff & 0x10){
 	   if(portbuffer & 0x10){
@@ -663,7 +662,7 @@ unsigned int sort_output(unsigned char portbuffer){
 	      result|=0x0001;
 	   }
    }
-   
+
    // A7
    if (diff & 0x40){
 	   if(portbuffer & 0x40){
@@ -702,7 +701,7 @@ unsigned int sort_output(unsigned char portbuffer){
 	      result|=0x0004;
 	   }
    }
-   
+
    // A3
    if (diff & 0x04){
 	   if(portbuffer & 0x04){
@@ -712,7 +711,7 @@ unsigned int sort_output(unsigned char portbuffer){
 	      result|=0x0010;
 	   }
    }
-   
+
    // A4
    if (diff & 0x08){
 	   if(portbuffer & 0x08){
@@ -720,7 +719,7 @@ unsigned int sort_output(unsigned char portbuffer){
 	   }
 	   else{
 	      result|=0x0040;
-	   }   
+	   }
    }
  #else
    // A2
@@ -741,7 +740,7 @@ unsigned int sort_output(unsigned char portbuffer){
 	      result|=0x0002;
 	   }
    }
-   
+
    // A5
    if (diff & 0x04){
 	   if(portbuffer & 0x10){
@@ -751,7 +750,7 @@ unsigned int sort_output(unsigned char portbuffer){
 	      result|=0x0080;
 	   }
    }
-   
+
    // A7
    if (diff & 0x08){
 	   if(portbuffer & 0x40){
@@ -762,7 +761,7 @@ unsigned int sort_output(unsigned char portbuffer){
 	   }
    }
  #endif
-#endif   
+#endif
    return result;
 
 }
@@ -772,7 +771,7 @@ void spi_2_out(unsigned int daten){
    unsigned char n, unten, mitte,LED_pattern;
    unsigned int spi_valid;
 
-	do{   
+	do{
 	   unten=daten>>8;
 	   mitte=daten & 0xFF;
 	   LED_pattern=portbuffer;
@@ -793,9 +792,9 @@ void spi_2_out(unsigned int daten){
 	   }
 	   LED_RCK=1;
 	   LED_RCK=0;
-	#ifdef MAX_PORTS_8     
+	#ifdef MAX_PORTS_8
 	   for(n=0;n<=7;n++){
-	
+
 	      BOT_OUT=(mitte & 0x080)>>7;
 	      mitte<<=1;
 	      CLK=1;
@@ -811,7 +810,7 @@ void spi_2_out(unsigned int daten){
 		 CLK=1;
 		 if(n<15)spi_valid<<=1;
 		 CLK=0;
-	   }   
+	   }
 	} while(spi_valid!=daten); // solange wiederholen bis Daten korrekt zurückgelesen wurden.
 }
 
@@ -879,7 +878,7 @@ void bus_down (void)
 	port_schalten();
 	while(!TF0);
 	for(n=0;n<250;n++)//ca 4 sekunden warten
-	{	
+	{
 		WATCHDOG_FEED
 		TF0=0;
 		while(!TF0);
@@ -903,12 +902,12 @@ void restart_app(void) 		// Alle Applikations-Parameter zurücksetzen
   #else
 	P0M2= 0x0F;
   #endif
-#endif	
- 
+#endif
+
 
 #ifdef SPIBISTAB
 	PWM=1;
-#else 
+#else
 	TMOD=(TMOD & 0xF0) + 2;		// Timer 0 als PWM
 	TAMOD=0x01;
 	TH0=DUTY;		// Pulsverhältnis PWM
@@ -917,23 +916,25 @@ void restart_app(void) 		// Alle Applikations-Parameter zurücksetzen
 #endif
 #ifdef zeroswitch
 	schalten_state=0;
-#endif	
+#endif
 	ET0=0;			// Interrupt für Timer 0 sperren
 	IT0=1;			// Int type flag0, 1=flankengetriggert
 	zf_state=0x00;		// Zustand der Zusatzfunktionen 1-4
 	blocked=0x00;		// Ausgänge nicht gesperrt
 	timer=0;			// Timer-Variable, wird alle 130ms inkrementiert
-  
+
 	logicstate=0;
 	delay_toggle=0;
-	
+
+// Wenn Debug Modus aktiv ist, dann Werte selber schreiben. Sonst via __code __at um Speicher zu sparen
+#ifdef DEBUG_MODE
 	EA=0;						// Interrupts sperren, damit flashen nicht unterbrochen wird
 	START_WRITECYCLE
 	WRITE_BYTE(0x01,0x03,0x00)	// Herstellercode 0x0004 = Jung
 	WRITE_BYTE(0x01,0x04,0x04)
 #ifdef MAX_PORTS_8				// 8-fach Aktor
 	WRITE_BYTE(0x01,0x05,0x20)	// Devicetype 0x2060 = Jung Aktor 2138.10
-	WRITE_BYTE(0x01,0x06,0x60)	
+	WRITE_BYTE(0x01,0x06,0x60)
 #endif
 #ifdef MAX_PORTS_4				// 4-fach Aktor
 	WRITE_BYTE(0x01,0x05,0x20)	// Devicetype 0x2062 = Jung Aktor 2134.16
@@ -945,6 +946,8 @@ void restart_app(void) 		// Alle Applikations-Parameter zurücksetzen
 	WRITE_BYTE(0x01,0x12,0x9A)	// COMMSTAB Pointer
 	STOP_WRITECYCLE
 	EA=1;						// Interrupts freigeben
+#endif
+
 	IT0=0;// ??
 	RTCCON=0x81;				// RTC starten und OV flag setzen
 	//EX0=1;

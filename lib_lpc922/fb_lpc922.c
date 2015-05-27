@@ -1,9 +1,9 @@
 /*
  *    _____ ________    __________  __  _______     __    ________  ____  ___    ______  __
  *   / ___// ____/ /   / ____/ __ )/ / / / ___/    / /   /  _/ __ )/ __ \/   |  / __ \ \/ /
- *   \__ \/ __/ / /   / /_  / __  / / / /\__ \    / /    / // __  / /_/ / /| | / /_/ /\  / 
- *  ___/ / /___/ /___/ __/ / /_/ / /_/ /___/ /   / /____/ // /_/ / _, _/ ___ |/ _, _/ / /  
- * /____/_____/_____/_/   /_____/\____//____/   /_____/___/_____/_/ |_/_/  |_/_/ |_| /_/   
+ *   \__ \/ __/ / /   / /_  / __  / / / /\__ \    / /    / // __  / /_/ / /| | / /_/ /\  /
+ *  ___/ / /___/ /___/ __/ / /_/ / /_/ /___/ /   / /____/ // /_/ / _, _/ ___ |/ _, _/ / /
+ * /____/_____/_____/_/   /_____/\____//____/   /_____/___/_____/_/ |_/_/  |_/_/ |_| /_/
  *
  *  Copyright (c) 2014-2015 Stefan Haller
  *  Copyright (c) 2013-2014 Andreas Krieger
@@ -190,9 +190,9 @@ void T1_int(void) __interrupt (3) 	// Timer 1 Interrupt
                         telegramm[6]=pcount |0x41;          // eigener Paketzaehler, TCPI und erstes Befehlsbit
                         telegramm[7]=mem_adrh |0x40;        // ARCRead Response for selected channel
                         telegramm[8]=mem_adrl;              // Requested sample count
-                        telegramm[9]=0x06;                  // ADC1 Bus Voltage 0x0610 = 29.1V (ADC = U/0.1875)
-                        telegramm[10]=0x10;                 // 0x0602=28.8V, 0x0605=28.9V, 0x0642=30V, 0x0648=30.2V
-                        inc_pcount=1;                       // ADC4 PEI Type 0x0610 = reserved PEI 15
+                        telegramm[9]=0x05;                  // ADC1 Bus Voltage 0x0610 = 29.1V (ADC = U/0.1875)
+                        telegramm[10]=0xA0;                 // 0x0602=28.8V, 0x0605=28.9V, 0x0642=30V, 0x0648=30.2V
+                        inc_pcount=1;                       // ADC4 PEI Type 0x0610 = PEI 15, 0x05A0 = PEI 14
                         break;
 
 					case 7: // NCD ACK Quittierung (135) mit eigener Paketnummer

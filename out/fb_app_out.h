@@ -1,10 +1,10 @@
 /*
- *      __________  ________________  __  _______
- *     / ____/ __ \/ ____/ ____/ __ )/ / / / ___/
- *    / /_  / /_/ / __/ / __/ / __  / / / /\__ \ 
- *   / __/ / _, _/ /___/ /___/ /_/ / /_/ /___/ / 
- *  /_/   /_/ |_/_____/_____/_____/\____//____/  
- *                                      
+ *     _____ ________    __________  __  _______    ____        __
+ *    / ___// ____/ /   / ____/ __ )/ / / / ___/   / __ \__  __/ /_
+ *    \__ \/ __/ / /   / /_  / __  / / / /\__ \   / / / / / / / __/
+ *   ___/ / /___/ /___/ __/ / /_/ / /_/ /___/ /  / /_/ / /_/ / /_
+ *  /____/_____/_____/_/   /_____/\____//____/   \____/\__,_/\__/
+ *
  *  Copyright (c) 2008-2013 Andreas Krebs <kubi@krebsworld.de>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -17,12 +17,16 @@
 #ifndef FB_APP_OUT
 #define FB_APP_OUT
 
-//#define debugmode
+//#define DEBUG_MODE
 
 #ifdef LPC936
-	#include <fb_lpc936_1.55.h>
+	#include <fb_lpc936.h>
 #else
-#include <fb_lpc922_1.55.h>
+#include <fb_lpc922.h>
+#endif
+
+#ifdef DEBUG_MODE
+    #include  "../com/debug.h"
 #endif
 
 
@@ -46,7 +50,7 @@
 	#endif
 #endif
 // Parameter-Adressen im EEPROM
-  
+
 #define FUNCASS		0xD8	// Startadresse der Zuordnung der Zusatzfunktionen (2 Byte)
 #define OFFDISABLE	0xEB	// Aus-Telegramm ignorieren
 #define FUNCTYP		0xED	// Typ der Zusatzfunktion
@@ -69,7 +73,7 @@
 
 #define REFRESH \
 		P0= oldportbuffer;	// refresh des Portzustandes in der hal
-							// für astabile Relaise 
+							// für astabile Relaise
 // SPI Konfiguration
 #define CLK			P0_3
 #define BOT_OUT		P0_0
