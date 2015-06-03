@@ -26,13 +26,18 @@
 #ifndef FB_APP
 #define FB_APP
 
+// Version number
+#define VER_MAJ     0x02    // 0x01 is old Jung FW
+#define VER_MIN     0x05
+
+
 //#define LPC936		// LPC936 anstatt LPC922
 
 #ifdef LPC936
-	//#include <fb_lpc936_1.54.h>
+	//#include <fb_lpc936_1.56.h>
     #include <fb_lpc936.h>
 #else
-    //#include <fb_lpc922_1.54.h>
+    //#include <fb_lpc922_1.56.h>
     #include <fb_lpc922.h>
 #endif
 

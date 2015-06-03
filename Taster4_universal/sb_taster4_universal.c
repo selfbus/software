@@ -29,6 +29,7 @@
 *       1.03    Bugfix Helligkeitswert nur 1x speichern, Remove NOPROGBUTTON
 *       1.04    Timebase fuer Temperaturmessung nach Restart_App verschoben
 *       2.04    Bugfix BetriebLED invertiert. Neue Versionsnummer 2.x (die alte Jung FW ist 1.x)
+*       2.05    Geräteinfo auslesen mit Lib 1.56
 */
 
 #include "sb_app_taster4_universal.h"
@@ -47,11 +48,16 @@
 // Wenn Debug aktiv ist werden die Werte in der restart_app() geschrieben damit die Konfiguration nicht
 // immer neu geschrieben werden muss.
 // Geraeteparameter setzen, diese können von der ETS uebschrieben werden wenn Schreibschutz nicht aktiv
-__code unsigned char __at (EEPROM_ADDR +0x03) manufacturer[2]={0x00,0x4C};  // Herstellercode 0x004C = Bosch
-__code unsigned char __at (EEPROM_ADDR +0x05) device_type[2]={0x04, 0x56};  // 0x0456 = Selfbus Taster4_universal
-__code unsigned char __at (EEPROM_ADDR +0x0C) port_A_direction={0};         // PORT A Direction Bit Setting
-__code unsigned char __at (EEPROM_ADDR +0x0D) run_state={255};              // Run-Status (00=stop FF=run)
-__code unsigned int __at  (EEPROM_ADDR +0x17) start_pa={0xFFFF};            // Default PA is 15.15.255
+static __code unsigned char __at (EEPROM_ADDR + 0x00) option_reg={0xFF};            // Option Register, ETS will write 0xFF
+static __code unsigned char __at (EEPROM_ADDR + 0x01) fw_version[2]={VER_MAJ,VER_MIN}; // Man. Data, used for FW Version
+static __code unsigned char __at (EEPROM_ADDR + 0x03) manufacturer[2]={0x00,0x4C};  // Herstellercode 0x004C = Bosch *
+static __code unsigned char __at (EEPROM_ADDR + 0x05) device_type[2]={0x04, 0x56};  // 0x0456 = Selfbus Taster4_universal
+static __code unsigned char __at (EEPROM_ADDR + 0x07) vd_version={0x03};            // VD Version V0.3 #
+static __code unsigned char __at (EEPROM_ADDR + 0x08) eeprom_chk_limit={0xFF};      // EEPROM Check Limit
+static __code unsigned char __at (EEPROM_ADDR + 0x09) pei_type={0x00};              // Required PEI Type, written by VD
+static __code unsigned char __at (EEPROM_ADDR + 0x0C) port_A_direction={0};         // PORT A Direction Bit Setting *
+static __code unsigned char __at (EEPROM_ADDR + 0x0D) run_error={0xFB};             // Run Time Error Flags, set when 0
+static __code unsigned int __at  (EEPROM_ADDR + 0x17) start_pa={0xFFFF};            // Default PA is 15.15.255 *
 #endif
 
 
@@ -64,8 +70,6 @@ int temp;
 unsigned int solltemp;
 unsigned char spreizung;
 
-
-#define VERSION		204
 
 #ifdef DEBUG_H_
     #warning Debug is active! UART is listening to the Debugger now!
