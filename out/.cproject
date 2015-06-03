@@ -25,6 +25,7 @@
 								<option id="sdcc.c.compiler.option.preprocessor.undef.symbol.808756175" name="Undefined symbols (-U)" superClass="sdcc.c.compiler.option.preprocessor.undef.symbol"/>
 								<option id="sdcc.c.compiler.option.include.paths.669837257" name="Include paths (-I)" superClass="sdcc.c.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="/usr/share/sdcc/include/mcs51"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lib_lpc922}&quot;"/>
 								</option>
 								<option id="sdcc.c.compiler.option.warnings.syntax.2093634220" name="Check syntax only (-fsyntax-only)" superClass="sdcc.c.compiler.option.warnings.syntax"/>
 								<option id="sdcc.c.compiler.option.warnings.pedantic.1907464980" name="Pedantic (-pedantic)" superClass="sdcc.c.compiler.option.warnings.pedantic"/>

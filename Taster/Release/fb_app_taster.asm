@@ -1,7 +1,7 @@
 ;--------------------------------------------------------
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.1.0 #7066 (Jun 14 2012) (Linux)
-; This file was generated Sat Oct 18 20:04:36 2014
+; This file was generated Wed Jun  3 21:35:55 2015
 ;--------------------------------------------------------
 	.module fb_app_taster
 	.optsdcc -mmcs51 --model-small
@@ -1264,7 +1264,7 @@ _button_changed:
 	sjmp	00147$
 00144$:
 	C$fb_app_taster.c$213$3$17 ==.
-;	../fb_app_taster.c:213: if (timerstate[buttonno+4] == 0x40) {//innerhalb T2
+;	../fb_app_taster.c:213: if (timerstate[buttonno+4] >= 0x40) {//innerhalb T2
 	mov	r0,_bp
 	inc	r0
 	mov	a,#0x04
@@ -1272,7 +1272,9 @@ _button_changed:
 	add	a,#_timerstate
 	mov	r1,a
 	mov	ar7,@r1
-	cjne	r7,#0x40,00141$
+	cjne	r7,#0x40,00198$
+00198$:
+	jc	00141$
 	C$fb_app_taster.c$214$4$18 ==.
 ;	../fb_app_taster.c:214: write_obj_value(buttonno,((eeprom[0xD3+(buttonno*4)]&0x10)>>4));
 	mov	r0,_bp
