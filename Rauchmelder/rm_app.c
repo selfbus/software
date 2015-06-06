@@ -447,8 +447,12 @@ unsigned long read_obj_value(unsigned char objno)
 		case RM_TYPE_LONG:
 			return answer_to_long(answer);
 
-		case RM_TYPE_QSEC:
-			return answer_to_long(answer) >> 2;
+		case RM_TYPE_QSEC:  // Betriebszeit verarbeiten
+		    lval = answer_to_long(answer) >> 2; // Wert in Sekunden
+		    if (eeprom[CONF_SEND_ENABLE] & CONF_ENABLE_OPERATION_TIME_TYPE)
+		        return lval / 3600; // Stunden, 16Bit
+		    else
+		        return lval;        // Sekunden, 32Bit
 
 		case RM_TYPE_INT:
 			return answer_to_int(answer);
@@ -457,7 +461,7 @@ unsigned long read_obj_value(unsigned char objno)
 			lval = ((int) answer[0]) + answer[1];
 			lval *= 25;  // in lval sind zwei Temperaturen, daher halber Multiplikator
 			lval -= 2000;
-			lval += (char)eeprom[0xFE] *10;  // Temperatur Abgleich
+			lval += (char)eeprom[CONF_TEMP_OFFSET] *10;  // Temperaturabgleich
 			return conv_dpt_9_001(lval);
 
 		case RM_TYPE_VOLT:
@@ -798,7 +802,7 @@ void restart_app()
 	errCode = 0;
 
 	// EEPROM initialisieren
-
+#ifdef DEBUG_H_
 	EA = 0;							// Interrupts sperren, damit Flashen nicht unterbrochen wird
 	START_WRITECYCLE;
 	WRITE_BYTE(0x01, 0x03, 0x00);	// Herstellercode 0x004C = Bosch
@@ -807,13 +811,13 @@ void restart_app()
 	// Wenn VD Version Lock oder Device Lock aktiv hier ID und Version setzen
 	WRITE_BYTE(0x01, 0x05, 0x03);	// Devicetype 1010 (0x03F2)
 	WRITE_BYTE(0x01, 0x06, 0xF2);
-	WRITE_BYTE(0x01, 0x07, 0x22);	// Version der Applikation: 2.2
+	WRITE_BYTE(0x01, 0x07, 0x23);	// Version der Applikation: 2.3
 
 	WRITE_BYTE(0x01, 0x0C, 0x00);	// PORT A Direction Bit Setting
 	WRITE_BYTE(0x01, 0x0D, 0xFF);	// Run-Status (00=stop FF=run)
-//	WRITE_BYTE(0x01, 0x12, 0xA0);	// COMMSTAB Pointer
 	STOP_WRITECYCLE;
 	EA = 1;							// Interrupts freigeben
+#endif
 
 	// init reload value and prescaler
 	// select Watchdog clock at 400kHz

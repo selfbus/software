@@ -8,6 +8,16 @@
 #ifndef rm_app_h
 #define rm_app_h
 
+// OPTIONS
+// Enable to activate device ID checking
+#define DEVICE_ID_CHECK
+
+
+// Current Firmware Version
+#define FW_VER_MAJ  0x02    // Major
+#define FW_VER_MIN  0x31    // Minor
+
+
 /**
  * Den Zustand der Alarme bearbeiten.
  */

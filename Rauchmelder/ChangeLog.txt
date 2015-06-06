@@ -1,3 +1,13 @@
+2015-06-06 Version 2.31
+        Add Device ID checkup to avoid starting with incompatible application
+
+2015-06-06 Version 2.30
+        Add selection of operation time sending format with VD >=2.3
+        Update auf Library 1.56
+
+2014-12-26 Version 2.21
+        Update auf Library 1.55
+
 2014-10-20 Version 2.20
 		Added temperature offset feature. This version is compiled with VD Version Lock,
 		ETS download will fail if VD and Firmware version do not match!

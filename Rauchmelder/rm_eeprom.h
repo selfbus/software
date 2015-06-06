@@ -57,6 +57,11 @@
 #define CONF_ENABLE_INFO_INTERVAL 0x10
 
 /**
+ * Bitmaske in CONF_SEND_ENABLE für Alarm verzögert senden.
+ */
+#define CONF_ENABLE_OPERATION_TIME_TYPE 0x08
+
+/**
  * Bits aktivieren das zyklische Senden der Com-Objekte 6..13
  */
 #define CONF_INFO_6TO13		252
@@ -65,3 +70,8 @@
  * Bits aktivieren das zyklische Senden der Com-Objekte 14..21
  */
 #define CONF_INFO_14TO21	253
+
+/**
+ * Temperaturabgleich -12/+12 Grad in 0.1°C Schritten
+ */
+#define CONF_TEMP_OFFSET    254
