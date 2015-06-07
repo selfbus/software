@@ -62,9 +62,10 @@ void main(void)
 	    {
 	        EA = 0;
 	        START_WRITECYCLE;
-	        WRITE_BYTE(0x01,0x0D,0xFB);    // Indicate Stack Overflow, holds app
+	        WRITE_BYTE(0x01,0x0D,0xFB); // Indicate Stack Overflow, holds app
 	        STOP_WRITECYCLE;
 	        EA = 1;
+	        break;                  // Flash just once
 	    }
 	}
 #endif

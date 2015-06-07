@@ -15,7 +15,7 @@
 
 // Current Firmware Version
 #define FW_VER_MAJ  0x02    // Major
-#define FW_VER_MIN  0x31    // Minor
+#define FW_VER_MIN  0x32    // Minor
 
 
 /**
