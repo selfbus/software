@@ -1,3 +1,6 @@
+2015-06-07 Version 2.32
+        Eventuell mehrfaches Flashen beim Device ID checkup behoben
+
 2015-06-06 Version 2.31
         Add Device ID checkup to avoid starting with incompatible application
 
