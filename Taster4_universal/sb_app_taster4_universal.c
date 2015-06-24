@@ -97,11 +97,11 @@ void button_changed(unsigned char buttonno, __bit buttonval)
 		{
 			if(!SE2 || SE2add)
 			{
-				command = (((eeprom[COMMAND+(buttonno*4)]) >> 6) & 0x03);	// Befehl beim druecken sofort ausfuehren
-			}
+				command = (((eeprom[COMMAND+(buttonno*4)]) >> 6) & 0x03);	// Befehl beim druecken 1. Ebene sofort ausfuehren
+			}											
 			if(SE2)
-			{
-				command |= (eeprom[COMMAND+(buttonno*4)]& 0x0C)|0x80;	// Befehl beim druecken 2.SE, bit 7 merkt die verspaetete Ausfuehrung in delay_timer nach Ablauf der Zeit
+			{										
+				command |= (eeprom[COMMAND+(buttonno*4)]& 0x0C)	|0x80;	// Befehl beim druecken 2.SE, bit 7 merkt die verspaetete Ausfuehrung in delay_timer nach Ablauf der Zeit
 				//die Zeiten laden
 				timercnt[buttonno+4]=eeprom[0xE8+(buttonno*4)]>>1;	// Faktor Dauer
 				timerbase[buttonno+4]=0;// Basis Dauer zwischen 1.SE und 2.SE
@@ -125,10 +125,11 @@ void button_changed(unsigned char buttonno, __bit buttonval)
 					command |= (((eeprom[COMMAND+(buttonno*4)]) >> 4) & 0x03);		// Befehl beim loslassen 1.SE
 				}
 			}
+		// In command: bit 0,1 Kommando für erste Ebene, Bit 2,3 für 2. Ebene, Bit 7 sendeflag für delay timer
 		timercnt[buttonno+4]=0;
 		timerstate[buttonno+4]=0;
 		}
-		for(bedienung=0;bedienung<=2;bedienung+=2)
+		for(bedienung=0;bedienung<=8;bedienung+=8)
 		{
 			switch ((command)&0x03) {	// Befehl des Tasters bei Schalten
 			case 1:		// EIN
@@ -138,14 +139,17 @@ void button_changed(unsigned char buttonno, __bit buttonval)
 				objval=0;
 				break;
 			case 3:		// UM
-				objval = read_obj_value(buttonno+(bedienung*4))&0x01;
+				objval = read_obj_value(buttonno+(bedienung))&0x01;
 				objval = !objval;
 				break;
 			}
 			if ((command)&0x03) {	// nur wenn EIN, UM oder AUS (0=keine Funktion)
-				write_obj_value(buttonno+(bedienung*4),objval);
-				if(command & 0x20)timerstate[buttonno+4]|=1;// bit 7 wird zu bit 5 wegen dem >>2
-				else send_obj_value(buttonno+(bedienung*4));// wenn nicht vorgemerkt sofort senden
+				if((bedienung>0)&&(command & 0x20))timerstate[buttonno+4]|=objval+8;// bit 7 wird zu bit 5 wegen dem >>2
+				else
+				{
+					write_obj_value(buttonno+(bedienung),objval);
+					send_obj_value(buttonno+(bedienung));// wenn nicht vorgemerkt sofort senden
+				}
 				if(!bedienung)switch_led(buttonno, objval);		// LED schalten nur fuer die erste ebene
 
 			}
@@ -639,7 +643,11 @@ void delay_timer(void)
 
     			break;
 */			case 0x90:	// 2.SchaltEbene
-					if (timerstate[objno]&0x01) send_obj_value(objno+4);
+					if (timerstate[objno]&0x08)// in 8 ist das verspätete senden geflaggt.
+					{
+						write_obj_value(objno+4,timerstate[objno]&0x01); //Objvalue aus timerstate holen und setzen
+						send_obj_value(objno+4);						// und senden
+					}
 					timerstate[objno]=0xA0;
 			break;
 			case 0xA0:
