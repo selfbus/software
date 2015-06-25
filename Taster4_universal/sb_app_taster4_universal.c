@@ -85,75 +85,78 @@ void button_changed(unsigned char buttonno, __bit buttonval)
 	__bit SE2,SE2add;
 
 	//Adresse Funktion Eingang:
-	switch (eeprom[FUNCTION+(buttonno)] & 0x07) {//done		// Funktion des Tasters
+	switch (eeprom[FUNCTION+(buttonno)] &0x07) {    // Funktion des Tasters
 
 	/*********************
 	 * Funktion Schalten
 	 *********************/
 	case 1:
-		SE2=((eeprom[0xE3+buttonno]&0x08));// 2.SchalEbene
-		SE2add=(eeprom[0xE8+buttonno*4]&0x01);//2.schalEbene zusaetzlich versus alternativ
-		if (buttonval)
+		SE2 = eeprom[0xE3+buttonno] &0x08;      // 2.SchalEbene
+		SE2add = eeprom[0xE8+buttonno*4] &0x01; // 2.schalEbene zusaetzlich versus alternativ
+		if (buttonval) // Taster gedrückt
 		{
-			if(!SE2 || SE2add)
+			if(!SE2 || SE2add) // wenn keine 2.SE oder zusaetzlich
 			{
-				command = (((eeprom[COMMAND+(buttonno*4)]) >> 6) & 0x03);	// Befehl beim druecken 1. Ebene sofort ausfuehren
-			}											
-			if(SE2)
-			{										
-				command |= (eeprom[COMMAND+(buttonno*4)]& 0x0C)	|0x80;	// Befehl beim druecken 2.SE, bit 7 merkt die verspaetete Ausfuehrung in delay_timer nach Ablauf der Zeit
-				//die Zeiten laden
-				timercnt[buttonno+4]=eeprom[0xE8+(buttonno*4)]>>1;	// Faktor Dauer
-				timerbase[buttonno+4]=0;// Basis Dauer zwischen 1.SE und 2.SE
-				timerstate[buttonno+4]=0x90;
+			    // In command: Bit 0,1 Kommando für erste Ebene, Bit 2,3 für 2. Ebene, Bit 7 sendeflag für delay timer
+				command = (eeprom[COMMAND+(buttonno*4)] >> 6) &0x03;    // Befehl beim druecken 1. Ebene sofort ausfuehren
+			}
+			if(SE2) // 2. SchaltEbene
+			{
+				command |= (eeprom[COMMAND+(buttonno*4)] &0x0C)	|0x80;  // Befehl beim druecken 2.SE, bit 7 merkt die verspaetete Ausfuehrung in delay_timer nach Ablauf der Zeit
+				// die Zeiten laden
+				timercnt[buttonno+4] = eeprom[0xE8+(buttonno*4)] >> 1;  // Faktor Dauer
+				timerbase[buttonno+4] = 0;                              // Basis Dauer zwischen 1.SE und 2.SE
+				timerstate[buttonno+4] = 0x90;
 			}
 		}
-		else //Taster losgelassen
+		else // Taster losgelassen
 		{
 			if(!SE2||SE2add) // wenn keine 2.SE oder zusaetzlich
 			{
-				command = (((eeprom[COMMAND+(buttonno*4)]) >> 4) & 0x03);		// Befehl beim loslassen 1.SE
+				command = (eeprom[COMMAND+(buttonno*4)] >> 4) &0x03;    // Befehl beim loslassen 1.SE
 			}
-			if (SE2)//2. SchaltEbene
+			if (SE2) // 2. SchaltEbene
 			{
-				if((timerstate[buttonno+4]>=0xA0))// timer  abgelaufen
+				if(timerstate[buttonno+4] >= 0xA0) // Timer 2. Ebene zwischenzeitlich abgelaufen
 				{
-					command |= (((eeprom[COMMAND+(buttonno*4)]) ) & 0x03)<<2;	// Befehl beim loslassen 2.SE
+					command |= ((eeprom[COMMAND+(buttonno*4)]) &0x03) << 2; // Befehl beim loslassen 2.SE
 				}
-				else if(!SE2add)// timer war nicht abgelaufen und 2.SE auf alternativ
+				else if(!SE2add)    // timer war nicht abgelaufen und 2.SE auf alternativ
 				{
-					command |= (((eeprom[COMMAND+(buttonno*4)]) >> 4) & 0x03);		// Befehl beim loslassen 1.SE
+					command |= ((eeprom[COMMAND+(buttonno*4)]) >> 4) &0x03; // Befehl beim loslassen 1.SE
 				}
 			}
-		// In command: bit 0,1 Kommando für erste Ebene, Bit 2,3 für 2. Ebene, Bit 7 sendeflag für delay timer
-		timercnt[buttonno+4]=0;
-		timerstate[buttonno+4]=0;
+			// Timer und State abgearbeitet
+			timercnt[buttonno+4] = 0;
+			timerstate[buttonno+4] = 0;
 		}
 		for(bedienung=0;bedienung<=8;bedienung+=8)
 		{
-			switch ((command)&0x03) {	// Befehl des Tasters bei Schalten
-			case 1:		// EIN
+			switch (command &0x03) { // Befehl des Tasters bei Schalten
+			case 1:     // EIN
 				objval=1;
 				break;
-			case 2:		// AUS
+			case 2:     // AUS
 				objval=0;
 				break;
-			case 3:		// UM
-				objval = read_obj_value(buttonno+(bedienung))&0x01;
+			case 3:     // UM
+				objval = read_obj_value(buttonno+bedienung) &0x01;
 				objval = !objval;
 				break;
 			}
-			if ((command)&0x03) {	// nur wenn EIN, UM oder AUS (0=keine Funktion)
-				if((bedienung>0)&&(command & 0x20))timerstate[buttonno+4]|=objval+8;// bit 7 wird zu bit 5 wegen dem >>2
+			if (command &0x03) { // nur wenn EIN, UM oder AUS (0=keine Funktion)
+				if((bedienung > 0) && (command &0x20))
+				    timerstate[buttonno+4] |= objval+8; // bit 7 wird zu bit 5 wegen dem >>2
 				else
 				{
-					write_obj_value(buttonno+(bedienung),objval);
-					send_obj_value(buttonno+(bedienung));// wenn nicht vorgemerkt sofort senden
+					write_obj_value(buttonno+bedienung, objval);
+					send_obj_value(buttonno+bedienung); // wenn nicht vorgemerkt sofort senden
 				}
-				if(!bedienung)switch_led(buttonno, objval);		// LED schalten nur fuer die erste ebene
+				if(!bedienung)
+				    switch_led(buttonno, objval);		// LED schalten nur fuer die erste ebene
 
 			}
-			command=command>>2;
+			command = command >> 2; // 2. SE auswählen
 		}
 		break;
 
@@ -162,41 +165,45 @@ void button_changed(unsigned char buttonno, __bit buttonval)
 	 * Funktion Dimmen
 	 ***********************/
 	case 2:
-		bedienung=eeprom[COMMAND+(buttonno*4)]&0x30;
-		if (buttonval) {	// Taster gedrueckt -> schauen wie lange gehalten
-			if ((eeprom[COMMAND+(buttonno*4)]) & 0x04)
-				switch_led(buttonno,0);	// wenn Betaetigungsanzeige, dann gleich beim druecken einschalten
+		bedienung = eeprom[COMMAND+(buttonno*4)] &0x30;
+		if(buttonval)   // Taster gedrueckt -> schauen wie lange gehalten
+		{
+			if((eeprom[COMMAND+(buttonno*4)]) &0x04)
+				switch_led(buttonno, 0);    // wenn Betaetigungsanzeige, dann gleich beim druecken einschalten
 
-			timercnt[buttonno+4]=eeprom[0xEA+(buttonno*4)]>>1;	// Faktor Dauer
-			timerbase[buttonno+4]=(eeprom[0xE7+(buttonno*4)]&0x07);// Basis Dauer zwischen kurz und langzeit
-			if (bedienung==0x20) {// umschalten der dimmrichtung...
-				if(read_obj_value(buttonno+8)&0x08)bedienung=0x30;//wenn heller, dann dunkler
-				else bedienung=0x10;//sonst heller
+			timercnt[buttonno+4] = eeprom[0xEA+(buttonno*4)] >> 1;      // Faktor Dauer
+			timerbase[buttonno+4] = eeprom[0xE7+(buttonno*4)] &0x07;    // Basis Dauer zwischen kurz und langzeit
+			if(bedienung == 0x20) { // umschalten der dimmrichtung...
+				if(read_obj_value(buttonno+8) &0x08)
+				    bedienung = 0x30;   // wenn heller, dann dunkler
+				else
+				    bedienung = 0x10;   // sonst heller
 			}
-			if (bedienung==0x10){	// heller
-				timerstate[buttonno+4]= ((eeprom[0xE8+(buttonno*4)]&0xF0)>>4)+0x28;	// dimmen
+			if(bedienung == 0x10){ // heller
+				timerstate[buttonno+4] = ((eeprom[0xE8+(buttonno*4)] &0xF0) >> 4) +0x28; // dimmen
 			}
-			if(bedienung==0x30){	//  dunkler
-				timerstate[buttonno+4]= ((eeprom[0xE8+(buttonno*4)]&0x0F))+0x20;	// dimmen
+			if(bedienung == 0x30){ //  dunkler
+				timerstate[buttonno+4]= ((eeprom[0xE8+(buttonno*4)]&0x0F))+0x20;	     // dimmen
 			}
-
-
 		}
-		else {		// Taster losgelassen
-			if ((timerstate[buttonno+4]& 0xF0)==0x20) { // wenn delaytimer noch lauft, dann Schalten, also EIS1 telegramm senden
-				if(bedienung==0x20) { //umschalten des Schaltzustandes
-					if(read_obj_value(buttonno)& 0x01)bedienung=0x30;//wenn ein, dann aus
-					else bedienung=0x10; // sonst ein
+		else // Taster losgelassen
+		{
+			if((timerstate[buttonno+4] &0xF0) == 0x20) { // wenn delaytimer noch lauft, dann Schalten, also EIS1 telegramm senden
+				if(bedienung == 0x20) {     // umschalten des Schaltzustandes
+					if(read_obj_value(buttonno) &0x01)
+					    bedienung = 0x30;   // wenn ein, dann aus
+					else
+					    bedienung = 0x10;   // sonst ein
 				}
-				if(bedienung== 0x10){	//  ein
-					write_obj_value(buttonno,1);
+				if(bedienung == 0x10) {	// ein
+					write_obj_value(buttonno, 1);
 					send_obj_value(buttonno);
-					switch_led(buttonno,1);
+					switch_led(buttonno, 1);
 				}
-				else{	//  aus
-					write_obj_value(buttonno,0);
+				else{ // aus
+					write_obj_value(buttonno, 0);
 					send_obj_value(buttonno);
-					switch_led(buttonno,0);
+					switch_led(buttonno, 0);
 				}
 			}
 			else {	// Timer schon abgelaufen (also dimmen), dann beim loslassen stop-telegramm senden
@@ -206,8 +213,8 @@ void button_changed(unsigned char buttonno, __bit buttonval)
 					send_obj_value(buttonno+8);// Stop Telegramm senden
 				}
 			}
-			timercnt[buttonno+4]=0;
-			timerstate[buttonno+4]=0;
+			timercnt[buttonno+4] = 0;
+			timerstate[buttonno+4] = 0;
 		}
 		break;
 
@@ -790,12 +797,4 @@ void restart_app(void)
 
 	//P2M1 &= ~0x80;
 	//P2M2 &= ~0x80; // P2.7 bidirektional
-
-	/*
-	// RC5 doesn't seem to work with the CCU since the timer does not reset when writing to TH2, TL2
-	RC5_Init();
-	// For Debug via Logic Analyzer
-	P2M1 &= ~0x0D;
-	P2M1 &= ~0x0D;
-	*/
 }

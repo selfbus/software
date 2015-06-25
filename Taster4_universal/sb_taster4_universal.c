@@ -30,6 +30,7 @@
 *       1.04    Timebase fuer Temperaturmessung nach Restart_App verschoben
 *       2.04    Bugfix BetriebLED invertiert. Neue Versionsnummer 2.x (die alte Jung FW ist 1.x)
 *       2.05    Geräteinfo auslesen mit Lib 1.56
+*       2.06    Bugfix Umschalten 2. Schaltebene
 */
 
 #include "sb_app_taster4_universal.h"
