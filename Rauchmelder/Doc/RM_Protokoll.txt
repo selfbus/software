@@ -34,19 +34,78 @@ als Hex String gesendet. Beispiel:
   <STX>822080F4<ETX> ist "822080" ... Summe 0x1F4, also Checksumme 0xF4, also "F4".
 
 
-02 - Unbekannt
---------------
+02 - Status abfragen
+--------------------
+
+Die Abfrage 02 liefert die gleichen Werte wie die Status Meldung 82 die vom RM
+selbstständig gesendet wird. Es unterscheidet sich nur das erste Byte der Antwort.
+Bei der 02 Status Abfrage ist das erste Byte der Antwort C2. Wenn der RM den Status
+selbstständig sendet dann ist das erste Byte 82.
 
 SEND: <STX>0262<ETX>
 RECV: <ACK>
 RECV: <STX>C228000000FF<ETX>
 SEND: <ACK>
 
-Unterschiedliche Werte wurden beobachtet, wobei wiederholen der Anfrage, ohne dass
-der RM was tut, den Wert nicht signifikant ändert:
+Daten:  1 Byte       : Bit 0: Unbekannt, verwendet beim Q-Melder (0x01)
+                       Bit 1: Defekt Meldung in Byte #4 (0x02)
+                       Bit 2: (0x04)
+                       Bit 3: Taste gedrückt (0x08)
+                       Bit 4: Rauchalarm - Bit5 ist dann auch gesetzt (0x10)
+                       Bit 5: 1=Batterie Betrieb, 0=Stützspannung über grüne Klemme (0x20)
+                       Bit 6: (0x40)
+                       Bit 7: (0x80)
+        1 Byte Status: Bit 0: Batterie schwach (0x01)
+                       Bit 1: Unbekannt (0x02)
+                       Bit 2: Rauchalarm (0x04)
+                       Bit 3: Wired Alarm (0x08)
+                       Bit 4: Wireless Alarm (0x10)
+                       Bit 5: Lokaler Testalarm (0x20)
+                       Bit 6: Wired Testalarm (0x40)
+                       Bit 7: Wireless Testalarm (0x80)
+        1 Byte       : Unbekannt, gemessene Werte: 0x00, 0x80
+        1 Byte Defekt: Bit 0: (0x01)
+                       Bit 1: (0x02)
+                       Bit 2: Temp Sensor 1 defekt (0x04)
+                       Bit 3: (0x08)
+                       Bit 4: Temp Sensor 2 defekt (0x10)
+                       Bit 5: (0x20)
+                       Bit 6: (0x40)
+                       Bit 7: (0x80)
 
-C228000000FF
-C220000000F7
+Die Beispiele hier kommen zum Teil (großteils?) nur bei der selbstständigen 82er Meldung
+vor - also nicht wundern ;-)
+
+C2 00 00 00 00 EA - Stützspannung wurde an der grünen Klemme angelegt.
+                    Wird auch gemeldet wenn nur 3,3V angelegt werden.
+                    82 20 00 00 00 EC wenn die externe Spannung wieder entfernt wird.
+C2 00 01 00 00 EB - Stützspannung wurde an der grünen Klemme angelegt, Batterie ist schwach.
+C2 08 01 00 00 F3 - Stützspannung, Batterie schwach, Taste gedrückt.
+C2 20 00 00 00 EC - Alarm beendet
+                    nachdem am Funk Handsender der Alarm deaktiviert wurde
+                    nachdem Wired Alarm über grüne Klemme beendet
+C2 20 08 00 00 F4 - Wired Alarm über grüne Klemme ausgelöst
+C2 20 40 00 00 F0 - Wired Testalarm über grüne Klemme ausgelöst. Ende: 82 20 00 00 00 EC
+C2 30 00 00 00 FD - Lokaler Alarm mit Harfön erzeugt
+C2 20 20 00 00 EE - Lokaler Testalarm, Taste nicht gedrückt
+C2 00 20 00 00 EC - Lokaler Testalarm, Taste nicht gedrückt, Stützspannung an grüner Klemme
+C2 28 20 00 00 F6 - Lokaler Testalarm, Taste gedrückt
+C2 20 04 00 00 F0 - Lokaler Rauchalarm, Taste nicht gedrückt
+C2 20 10 00 00 ED - Wireless Alarm (Remote über Funkmodul)
+C2 20 80 00 00 F4 - Wireless Testalarm (Remote über Funkmodul)
+C2 28 00 00 00 F4 - Taste gedrückt ohne Alarm
+C2 22 00 00 04 F2 - Temp Sensor 1 überbrückt (dh defekt)
+C2 22 00 00 10 EF - Temp Sensor 2 überbrückt (dh defekt)
+C2 20 01 00 00 ED - Batterie schwach
+C2 21 01 00 00 EE - Batterie schwach, Q-Melder
+C2 28 01 00 00 F5 - Batterie schwach, Taste gedrückt
+C2 21 00 00 00 ED - Eventuell Meldung dass die Rauchkammer nicht mehr defekt ist.
+C2 21 00 08 00 F5 - Unbekannt.
+C2 21 00 80 00 F5 - Könnte Rauchkammer Fehler sein. Aufgetreten bei: Rauchmelder gestartet,
+                    Rauchkammer war halb zerlegt.
+C2 21 01 08 00 F6 - kam als ich darauf wartete dass "Batterie schwach" nach Erhöhung
+                    der Spannung wieder irgendwie beendet würde. Wurde mit ~4 Piepsern
+                    begleitet.
 
 
 03 - Steuerbefehle
@@ -114,6 +173,8 @@ Empfangene Werte:
 C8 01 44 01 42 0B
 C8 01 54 01 52 0D
 C8 01 53 01 51 0B
+C8 01 72 01 45 0F (Q-Melder)
+C8 01 72 01 44 0E Q-Melder beim Erhöhen der Batterie Spannung nach Batterie leer.
 
 
 09 - Betriebszeit
@@ -160,7 +221,7 @@ SEND: <ACK>
 SEND: 0x02, 0x30, 0x43, 0x37, 0x33, 0x03
       (START "0C73" STOPP)
 
-REPLY: 2 Byte Batteriespannung: 01DB
+REPLY: 2 Byte Batteriespannung: 01DB  ... beim Q-Melder immer 0001
        1 Byte Temperatur #1: 52
        1 Byte Temperatur #2: 53
 
@@ -228,62 +289,7 @@ CF00FB00E64C
 ---------------------
 
 Wird vom Rauchmelder selbstständig gesendet.
-
-Daten:  1 Byte       : Bit 0: Unbekannt (0x01)
-                       Bit 1: Defekt Meldung in Byte #4 (0x02)
-                       Bit 2: (0x04)
-                       Bit 3: Taste gedrückt (0x08)
-                       Bit 4: Rauchalarm - Bit5 ist dann auch gesetzt (0x10)
-                       Bit 5: 1=Batterie Betrieb, 0=Stützspannung über grüne Klemme (0x20)
-                       Bit 6: (0x40)
-                       Bit 7: (0x80)
-        1 Byte Status: Bit 0: Batterie schwach (0x01)
-                       Bit 1: Unbekannt (0x02)
-                       Bit 2: Rauchalarm (0x04)
-                       Bit 3: Wired Alarm (0x08)
-                       Bit 4: Wireless Alarm (0x10)
-                       Bit 5: Lokaler Testalarm (0x20)
-                       Bit 6: Wired Testalarm (0x40)
-                       Bit 7: Wireless Testalarm (0x80)
-        1 Byte       : Unbekannt, gemessene Werte: 0x00, 0x80
-        1 Byte Defekt: Bit 0: (0x01)
-                       Bit 1: (0x02)
-                       Bit 2: Temp Sensor 1 defekt (0x04)
-                       Bit 3: (0x08)
-                       Bit 4: Temp Sensor 2 defekt (0x10)
-                       Bit 5: (0x20)
-                       Bit 6: (0x40)
-                       Bit 7: (0x80)
-
-82 00 00 00 00 EA - Stützspannung wurde an der grünen Klemme angelegt.
-                    Wird auch gemeldet wenn nur 3,3V angelegt werden.
-                    82 20 00 00 00 EC wenn die externe Spannung wieder entfernt wird.
-82 00 01 00 00 EB - Stützspannung wurde an der grünen Klemme angelegt, Batterie ist schwach.
-82 08 01 00 00 F3 - Stützspannung, Batterie schwach, Taste gedrückt.
-82 20 00 00 00 EC - Alarm beendet
-                    nachdem am Funk Handsender der Alarm deaktiviert wurde
-                    nachdem Wired Alarm über grüne Klemme beendet
-82 20 08 00 00 F4 - Wired Alarm über grüne Klemme ausgelöst
-82 20 40 00 00 F0 - Wired Testalarm über grüne Klemme ausgelöst. Ende: 82 20 00 00 00 EC
-82 30 00 00 00 FD - Lokaler Alarm mit Harfön erzeugt
-82 20 20 00 00 EE - Lokaler Testalarm, Taste nicht gedrückt
-82 00 20 00 00 EC - Lokaler Testalarm, Taste nicht gedrückt, Stützspannung an grüner Klemme
-82 28 20 00 00 F6 - Lokaler Testalarm, Taste gedrückt
-82 20 04 00 00 F0 - Lokaler Rauchalarm, Taste nicht gedrückt
-82 20 10 00 00 ED - Wireless Alarm (Remote über Funkmodul)
-82 20 80 00 00 F4 - Wireless Testalarm (Remote über Funkmodul)
-82 28 00 00 00 F4 - Taste gedrückt ohne Alarm
-82 22 00 00 04 F2 - Temp Sensor 1 überbrückt (dh defekt)
-82 22 00 00 10 EF - Temp Sensor 2 überbrückt (dh defekt)
-82 20 01 00 00 ED - Batterie schwach
-82 28 01 00 00 F5 - Batterie schwach, Taste gedrückt
-82 21 00 00 00 ED - Eventuell Meldung dass die Rauchkammer nicht mehr defekt ist.
-82 21 00 08 00 F5 - Unbekannt.
-82 21 00 80 00 F5 - Könnte Rauchkammer Fehler sein. Aufgetreten bei: Rauchmelder gestartet,
-                    Rauchkammer war halb zerlegt.
-82 21 01 08 00 F6 - kam als ich darauf wartete dass "Batterie schwach" nach Erhöhung
-                    der Spannung wieder irgendwie beendet würde. Wurde mit ~4 Piepsern
-                    begleitet.
+Das ist die gleiche Meldung wie die 02 Abfrage, nur mit 82 als erstes Byte statt 02.
 
 
 86 - Unbekannt
@@ -293,3 +299,4 @@ Daten:  1 Byte       : Bit 0: Unbekannt (0x01)
                     Kommt derzeit bei Taste am Rauchmelder 1sek gedrückt nachdem bei Stützspannung
                     die schwache Batterie durch eine neue Batterie ersetzt wurde. Entfernen
                     der Stützspannung und der Batterie entfernt diese Meldung wieder.
+
