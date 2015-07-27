@@ -31,6 +31,7 @@
 *       2.04    Bugfix BetriebLED invertiert. Neue Versionsnummer 2.x (die alte Jung FW ist 1.x)
 *       2.05    Geräteinfo auslesen mit Lib 1.56
 *       2.06    Bugfix Umschalten 2. Schaltebene
+*       2.07    Applikation wird bei falscher VD angehalten --> DEVICE_ID_CHECK
 */
 
 #include "sb_app_taster4_universal.h"
@@ -44,6 +45,10 @@
 
 #define NOPROGLED     // Die Progled blinkt im Progmodus da sie auch Betriebs LED ist
 
+// Default EEPROM values
+#ifdef DEVICE_ID_CHECK
+const static unsigned char dev_application_id[4] = {0x00,0x4C,0x04,0x56};
+#endif
 
 #ifndef DEBUG_H_
 // Wenn Debug aktiv ist werden die Werte in der restart_app() geschrieben damit die Konfiguration nicht
@@ -110,12 +115,29 @@ void main(void)
 	TASTER=0;
 	for (n=0;n<50;n++) {
 		TR0=0;					// Timer 0 anhalten
-		TH0=eeprom[ADDRTAB+1];	// Timer 0 setzen mit phys. Adr. damit Geraete unterschiedlich beginnen zu senden
-		TL0=eeprom[ADDRTAB+2];
+		TH0=0;	                // Timer 0 setzen mit phys. Adr. damit Geraete unterschiedlich beginnen zu senden
+		TL0=eeprom[ADDRTAB+2];  // Nur Low Byte der PA nutzen, sonst sehr kurze Wartezeit bei 15.15.255
 		TF0=0;					// ueberlauf-Flag zuruecksetzen
 		TR0=1;					// Timer 0 starten
 		while(!TF0);
 	}
+
+#ifdef DEVICE_ID_CHECK
+    // Only start if correct application has been loaded
+    for(n = 0; n<sizeof(dev_application_id); n++)
+    {
+        if(eeprom[0x03+n] != dev_application_id[n])
+        {
+            EA = 0;
+            START_WRITECYCLE;
+            WRITE_BYTE(0x01,0x0D,0xFB); // Indicate App Error, holds app
+            STOP_WRITECYCLE;
+            EA = 1;
+            break;                  // Flash just once
+        }
+    }
+#endif
+
 	restart_app();				// Anwendungsspezifische Einstellungen zuruecksetzen
 
 #ifdef DEBUG_H_

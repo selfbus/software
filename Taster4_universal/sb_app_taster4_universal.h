@@ -28,10 +28,14 @@
 
 // Version number
 #define VER_MAJ     0x02    // 0x01 is old Jung FW
-#define VER_MIN     0x06
-
+#define VER_MIN     0x07
 
 //#define LPC936		// LPC936 anstatt LPC922
+
+// OPTIONS
+// Enable to activate device ID checking
+#define DEVICE_ID_CHECK
+
 
 #ifdef LPC936
 	//#include <fb_lpc936_1.56.h>
