@@ -16,10 +16,19 @@
 #ifndef FB_APP_4sense
 #define FB_APP_4sense
 
+// Version number
+#define VER_MAJ     0x01
+#define VER_MIN     0x00
+
+
 #include <fb_lpc922.h>
 
 // Include to enable debug options within the project
 //#include "debug.h"
+
+// OPTIONS
+// Enable to activate device ID checking
+#define DEVICE_ID_CHECK
 
 // Enable DPT5 support, currently just with LPC936 if EXT_DEBUG_GA is used
 //#define SEND_DPT5
@@ -86,5 +95,7 @@ extern int __idata __at (0xFE-16) messwerte[8]; // Temperatur und Luftfeuchte sp
 
 extern unsigned char timercnt[TIMERANZ];        // speicherplatz für den timercounter und 1 status bit
 extern unsigned char sequence;
+
+extern unsigned char sp_max;                    // Max stack pointer value reached
 
 #endif

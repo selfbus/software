@@ -139,8 +139,6 @@ unsigned int sendewert(unsigned char objno)
      if (SP > sp_max)
          sp_max = SP;
 
-     if (SP >= STACK_MAX)
-         WRITE_BYTE(0x01,0x0D,0xF7)    // Indicate Stack Overflow, holds app
 
 #ifdef SEND_DPT5
     //This takes a lot of Flash (approx. 170byte), disabled meanwhile
