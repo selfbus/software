@@ -118,6 +118,9 @@ Diese Befehle wurden bei der Kommunikation Funkmodul mit Rauchmelder geloggt.
 03 00 01 24 - Batterie schwach, über Funk gemeldet. Alle 60sek wird mit zwei kurzen Piep
               signalisiert dass irgendwo eine Batterie schwach ist. Kein LED Signal.
               Mit 03 00 00 23 wird die Batterie-schwach Meldung wieder deaktiviert.
+03 00 80 2B	- Wireless Testalarm über Funkmodul (Q), RM sendet dann 82 20 80 00 00 F4
+03 00 02 25 - Pairing vom eigenen Funkmodul (Q) mit einem anderen Funkmodul (Dual)
+03 01 00 24 - ?Unbekannt: Bei Pairingversuch Funkmodul (Q) aufgetreten, mindestens ein RM war schon angelernt?
 03 02 01 26 - Zwei kurze Piep, wiederholen bewirkt nichts, erst nach Alarm Abschaltung, Testalarm möglich.
 03 02 02 27 - Pairing vom eigenen Funkmodul mit einem anderen Funkmodul
 03 02 10 26 - Wireless Alarm (über Funk), RM sendet dann 82 20 10 00 00 ED
@@ -173,8 +176,11 @@ Empfangene Werte:
 C8 01 44 01 42 0B
 C8 01 54 01 52 0D
 C8 01 53 01 51 0B
+
 C8 01 72 01 45 0F (Q-Melder)
 C8 01 72 01 44 0E Q-Melder beim Erhöhen der Batterie Spannung nach Batterie leer.
+C8 01 72 01 44 0E Vor neustart 4-6V Bereich (Q-Melder)
+C8 01 46 01 44 0F Nach neustart bei 6V (Q-Melder):
 
 
 09 - Betriebszeit
@@ -283,6 +289,54 @@ CF007A00772F
 CF0078007827
 CF00EF00F04A
 CF00FB00E64C
+
+Q-Melder, Test mit variabler Batteriespannung:
+Bei 8V:
+CF 00 7A 00 76 2E
+
+Bei 8.5V
+CF 00 7D 00 76 31
+CF 00 86 00 76 24
+CF 00 87 00 76 25
+
+Bei 8.2V
+CF 00 88 00 77 27
+
+Bei 8V:
+CF 00 8A 00 77 30
+CF 00 86 00 77 25
+
+Bei 9V:
+CF 00 84 00 77 23
+
+
+Testen ob Q-Melder auf andere Befehle reagiert:
+gesendeter Befehle mit Antwort vom Q-Melder
+
+gesendet 12 63
+C2 20 00 00 00 F7
+
+gesendet 14 65
+C4 15 08 70 97 1C
+
+gesendet 18 69
+C8 01 45 01 43 0D
+
+gesendet 1B 73
+CB 00 7B 00 00 1E
+
+gesendet 1C 74
+CC 01 E5 56 57 38
+
+gesendet 1D 75
+CD 00 00 00 00 07
+
+gesendet 1E 76
+CE 00 00 48
+
+gesendet 22 64
+C2 20 00 00 00 F7
+
 
 
 82 - Status Meldungen
