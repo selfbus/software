@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 .metadata/
 *~
 
 /Raumthermostat_ERT30/lib_lpc936/Release
+=======
+/Release
+/Debug
+>>>>>>> 6d7f7a8332de69f29171276b008553c0f74261e0
