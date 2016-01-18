@@ -22,6 +22,7 @@
 							<tool command="sdcc --stack-auto -c" errorParsers="" id="cdt.managedbuild.tool.sdcc.c.compiler.exe.release.146817974" name="SDCC Compiler" superClass="cdt.managedbuild.tool.sdcc.c.compiler.exe.release">
 								<option id="sdcc.c.compiler.option.include.paths.311082523" name="Include paths (-I)" superClass="sdcc.c.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lib_lpc922/Releases}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lib_lpc922}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.sdcc.c.compiler.input.164525614" superClass="cdt.managedbuild.tool.sdcc.c.compiler.input"/>
 							</tool>
@@ -67,15 +68,17 @@
 							<tool command="sdcc --stack-auto --debug -c" id="cdt.managedbuild.tool.sdcc.c.compiler.exe.debug.389691273" name="SDCC Compiler" superClass="cdt.managedbuild.tool.sdcc.c.compiler.exe.debug">
 								<option id="sdcc.c.compiler.option.include.paths.2081626950" name="Include paths (-I)" superClass="sdcc.c.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lib_lpc922/Releases}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lib_lpc922}&quot;"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.sdcc.c.compiler.input.1573597607" superClass="cdt.managedbuild.tool.sdcc.c.compiler.input"/>
 							</tool>
 							<tool id="cdt.managedbuild.tool.sdcc.c.linker.exe.debug.603230533" name="SDCC Linker" superClass="cdt.managedbuild.tool.sdcc.c.linker.exe.debug">
 								<option id="sdcc.c.link.option.paths.1200901517" name="Library search path (-L)" superClass="sdcc.c.link.option.paths" valueType="stringList">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lib_lpc922/Release}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lib_lpc922/Releases}&quot;"/>
 								</option>
 								<option id="sdcc.c.link.option.libs.1359860358" name="Libraries (-l)" superClass="sdcc.c.link.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" value="fb_lpc922_1.4x.lib"/>
+									<listOptionValue builtIn="false" value="fb_lpc922.lib"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.sdcc.c.linker.input.954669262" superClass="cdt.managedbuild.tool.sdcc.c.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_RELS)"/>

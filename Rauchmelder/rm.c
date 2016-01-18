@@ -1,4 +1,11 @@
 /*
+ *    _____ ________    __________  __  _______    ____  __  ___
+ *   / ___// ____/ /   / ____/ __ )/ / / / ___/   / __ \/  |/  /
+ *   \__ \/ __/ / /   / /_  / __  / / / /\__ \   / /_/ / /|_/ /
+ *  ___/ / /___/ /___/ __/ / /_/ / /_/ /___/ /  / _, _/ /  / /
+ * /____/_____/_____/_/   /_____/\____//____/  /_/ |_/_/  /_/
+ *
+ *  Copyright (c) 2015 Stefan Haller
  *  Copyright (c) 2013 Stefan Taferner <stefan.taferner@gmx.at>
  *
  *  This program is free software; you can redistribute it and/or modify

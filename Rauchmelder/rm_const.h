@@ -172,7 +172,7 @@
 #define RM_TYPE_TEMP 4
 
 // Rauchmelder Antwort: 2 Byte Spannung
-#define RM_TYPE_VOLT 5
+#define RM_TYPE_MVOLT 5
 
 // Rauchmelder Antwort: 4 Byte 1/4 Sekunden
 #define RM_TYPE_QSEC 6

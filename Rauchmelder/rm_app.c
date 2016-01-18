@@ -1,4 +1,11 @@
 /*
+ *    _____ ________    __________  __  _______    ____  __  ___
+ *   / ___// ____/ /   / ____/ __ )/ / / / ___/   / __ \/  |/  /
+ *   \__ \/ __/ / /   / /_  / __  / / / /\__ \   / /_/ / /|_/ /
+ *  ___/ / /___/ /___/ __/ / /_/ / /_/ /___/ /  / _, _/ /  / /
+ * /____/_____/_____/_/   /_____/\____//____/  /_/ |_/_/  /_/
+ *
+ *  Copyright (c) 2015 Stefan Haller
  *  Copyright (c) 2013 Stefan Taferner <stefan.taferner@gmx.at>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -47,7 +54,7 @@ const struct
 	/* 7 OBJ_OPERATING_TIME*/      { RM_CMD_OPERATING_TIME,  0, RM_TYPE_QSEC },
 	/* 8 OBJ_SMOKEBOX_VALUE*/      { RM_CMD_SMOKEBOX,        0, RM_TYPE_INT  },
 	/* 9 OBJ_POLLUTION*/           { RM_CMD_SMOKEBOX,        3, RM_TYPE_BYTE },
-	/*10 OBJ_BAT_VOLTAGE*/         { RM_CMD_BATTEMP,         0, RM_TYPE_VOLT },
+	/*10 OBJ_BAT_VOLTAGE*/         { RM_CMD_BATTEMP,         0, RM_TYPE_MVOLT },
 	/*11 OBJ_TEMP*/                { RM_CMD_BATTEMP,         2, RM_TYPE_TEMP },
 	/*12 OBJ_ERRCODE*/             { RM_CMD_INTERNAL,        0, RM_TYPE_NONE },
 	/*13 OBJ_BAT_LOW*/             { RM_CMD_INTERNAL,        0, RM_TYPE_NONE },
@@ -464,10 +471,10 @@ unsigned long read_obj_value(unsigned char objno)
 			lval += (char)eeprom[CONF_TEMP_OFFSET] *10;  // Temperaturabgleich
 			return conv_dpt_9_001(lval);
 
-		case RM_TYPE_VOLT:
+		case RM_TYPE_MVOLT:
 			lval = answer_to_int(answer);
 			lval *= 9184;
-			lval /= 5000;
+			lval /= 5;
 			return conv_dpt_9_001(lval);
 
 		default: // Fehler: unbekannter Datentyp
