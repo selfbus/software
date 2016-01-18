@@ -18,7 +18,7 @@
 
 // Version number
 #define VER_MAJ     0x01
-#define VER_MIN     0x00
+#define VER_MIN     0x01
 
 
 #include <fb_lpc922.h>
@@ -33,7 +33,7 @@
 // Enable DPT5 support, currently just with LPC936 if EXT_DEBUG_GA is used
 //#define SEND_DPT5
 
-// Enable Extented Debug GA Support
+// Enable Extended Debug GA Support
 #define EXT_DEBUG_GA
 
 // Max allowed stack value, MUST match to the lowest variable in the upper RAM!!
@@ -45,6 +45,19 @@
 # define __idata
 # define __code
 #endif
+
+// Set feature bits in VER_MAJ register
+
+#if defined (EXT_DEBUG_GA) && defined EXT_DEBUG_GA  // both features
+    #define VER_FEATURE  (VER_MAJ + 0x90)
+#elif defined (DEVICE_ID_CHECK) // Device ID check
+    #define VER_FEATURE  (VER_MAJ + 0x10)
+#elif defined (EXT_DEBUG_GA)    // Extended Debug GA
+    #define VER_FEATURE  (VER_MAJ + 0x80)
+#else                           // No extra feature
+    #define VER_FEATURE VER_MAJ
+#endif
+
 
 // 4Sense VD
 #define RE_GW_S_FAKT    0xB1    // 0

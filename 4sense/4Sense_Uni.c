@@ -339,9 +339,9 @@ __bit dht_decode(unsigned char sensor_type)
         // Humidity DHT1x Sensors
         dht_humid = onewire_receive[0]*100;
 
-        // Temperature DHT1x ( with handled negative temperatures )
-        if (onewire_receive[2] & 0x80) dht_temp = ((0x7F & onewire_receive[2]) *-100);
-        else  dht_temp = onewire_receive[2]*100;
+        // Temperature DHT1x
+        dht_temp = ((0x7F & onewire_receive[2]) *100);
+        if (onewire_receive[2] & 0x80) dht_temp *= -1; // with handled negative temperatures
       }
       break;
       case DHT2x_SENSOR:
@@ -349,9 +349,9 @@ __bit dht_decode(unsigned char sensor_type)
         // Humidity DHT2x Sensors
         dht_humid =  ((onewire_receive[0]<<8) + onewire_receive[1])*10 ;
 
-        // Temperature DHT2x ( with handled negative temperatures )
-        if (onewire_receive[2] & 0x80) dht_temp =  (((0x7F & onewire_receive[2])<<8) + onewire_receive[3])*10;
-        else  dht_temp =  ((onewire_receive[2]<<8) + onewire_receive[3])*10;
+        // Temperature DHT2x
+        dht_temp =  (((0x7F & onewire_receive[2])<<8) + onewire_receive[3])*10;
+        if (onewire_receive[2] & 0x80) dht_temp *= -1; // with handled negative temperatures
       }
       break;
       default:

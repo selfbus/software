@@ -50,7 +50,7 @@ extern unsigned char __idata __at (0xFE-52) family_code[4];
 // immer neu geschrieben werden muss.
 // Geräteparameter setzen, diese können von der ETS übschrieben werden wenn Schreibschutz nicht aktiv
 static __code unsigned char __at (EEPROM_ADDR + 0x00) option_reg={0xFF};            // Option Register, ETS will write 0xFF
-static __code unsigned char __at (EEPROM_ADDR + 0x01) fw_version[2]={VER_MAJ,VER_MIN};// Man. Data, used for FW Version
+static __code unsigned char __at (EEPROM_ADDR + 0x01) fw_version[2]={VER_FEATURE,VER_MIN};// Man. Data, used for FW Version
 static __code unsigned char __at (EEPROM_ADDR + 0x03) manufacturer[2]={0x00,0x4C};  // Herstellercode 0x004C = Robert Bosch *
 static __code unsigned char __at (EEPROM_ADDR + 0x05) device_type[2]={0x04,0x38};   // 0x0438 = Selfbus 1080 4sense #
 static __code unsigned char __at (EEPROM_ADDR + 0x07) vd_version={0x06};            // VD Version V0.6 #
