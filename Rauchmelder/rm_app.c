@@ -136,8 +136,11 @@ unsigned char extraAlarmCounter;
 #define EXTRA_ALARM_LIMIT 5
 
 
-// Countdown Zähler für zyklisches Senden eines Alarms oder Testalarms.
+// Countdown Zähler für zyklisches Senden eines Alarms.
 unsigned char alarmCounter;
+
+// Countdown Zähler für zyklisches Senden eines Testalarms.
+unsigned char TalarmCounter;
 
 // Countdown Zähler für zyklisches Senden des Alarm Zustands.
 unsigned char alarmStatusCounter;
@@ -682,10 +685,10 @@ void timer_event()
 		if (delayedAlarmCounter)
 		{
 			--delayedAlarmCounter;
-			if (!delayedAlarmCounter)
+			if (!delayedAlarmCounter)   // Verzögerungszeit abgelaufen
 			{
-				ARRAY_SET_BIT(objSendReqFlags, OBJ_ALARM_BUS);
-				ARRAY_SET_BIT(objSendReqFlags, OBJ_STAT_ALARM);
+				ARRAY_SET_BIT(objSendReqFlags, OBJ_ALARM_BUS);  // Vernetzung Alarm senden
+				ARRAY_SET_BIT(objSendReqFlags, OBJ_STAT_ALARM); // Status Alarm senden
 			}
 		}
 		else // Alarm zyklisch senden
@@ -695,22 +698,37 @@ void timer_event()
 				--alarmCounter;
 				if (!alarmCounter)
 				{
-					alarmCounter = eeprom[CONF_ALARM_INTERVAL];
+					alarmCounter = eeprom[CONF_ALARM_INTERVAL];     // Zykl. senden Zeit holen
+					ARRAY_SET_BIT(objSendReqFlags, OBJ_ALARM_BUS);
 					ARRAY_SET_BIT(objSendReqFlags, OBJ_STAT_ALARM);
 				}
 			}
 		}
 	}
+	// Kein Alarm, zyklisch senden
+	else
+	{
+	    if (eeprom[CONF_SEND_ENABLE] & CONF_ENABLE_ALARM_INTERVAL)
+            {
+                --alarmCounter;
+                if (!alarmCounter)
+                {
+                    alarmCounter = eeprom[CONF_ALARM_INTERVAL];     // Zykl. senden Zeit holen
+                    ARRAY_SET_BIT(objSendReqFlags, OBJ_STAT_ALARM);
+                }
+            }
+    }
 
 	// Testalarm: zyklisch senden
 	if (testAlarmLocal)
 	{
 		if (eeprom[CONF_SEND_ENABLE] & CONF_ENABLE_TALARM_INTERVAL)
 		{
-			--alarmCounter;
-			if (!alarmCounter)
+			--TalarmCounter;
+			if (!TalarmCounter)
 			{
-				alarmCounter = eeprom[CONF_TALARM_INTERVAL];
+				TalarmCounter = eeprom[CONF_TALARM_INTERVAL];
+				ARRAY_SET_BIT(objSendReqFlags, OBJ_TALARM_BUS);
 				ARRAY_SET_BIT(objSendReqFlags, OBJ_STAT_TALARM);
 			}
 		}
@@ -802,6 +820,7 @@ void restart_app()
 	infoSendObjno = 0;
 	infoCounter = 1;
 	alarmCounter = 1;
+	TalarmCounter = 1;
 	alarmStatusCounter = 1;
 	delayedAlarmCounter = 0;
 	extraAlarmCounter = 0;
