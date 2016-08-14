@@ -29,7 +29,9 @@ unsigned char telpos;			// Zeiger auf naechste Position im Array Telegramm
 unsigned char cs;				// checksum
 unsigned char fbrx_byte, fb_pattern;
 volatile unsigned char fb_state, repeat_count;
-
+#ifdef ACK_RESPONSE
+volatile unsigned char acked_tx_buffer_adresses;
+#endif
 unsigned char __at(0x00) RAM[00]; //nur fuer die Debug Ausgabe
 
 
@@ -76,7 +78,7 @@ void T1_int(void) __interrupt (3) 	// Timer 1 Interrupt
 {
 												//							5 (3..8) cycle Einsprung
 	__bit fbrx_bit;								//							30 cycle push etc.
-	unsigned char send_byte;//,n;
+	unsigned char send_byte;
 
 	switch (fb_state){
 
@@ -115,7 +117,9 @@ void T1_int(void) __interrupt (3) 	// Timer 1 Interrupt
 
 					if (gapos!=0xFE) // wenn keine Gruppenadresse hinterlegt nix tun
 					{
-						telegramm[0]=0xBC;
+						n=eeprom[COMMSTABPTR]+objno+objno+objno+3; //Adresse obj flags für Priorität holen
+						
+						telegramm[0]=0xB0 |((eeprom[n]&0x03)<< 2);// die prio ins erste Byte des tele einfügen
 						telegramm[1]=eeprom[ADDRTAB+1];
 						telegramm[2]=eeprom[ADDRTAB+2];
 						telegramm[3]=eeprom[ADDRTAB+1+gapos*2];
@@ -124,7 +128,7 @@ void T1_int(void) __interrupt (3) 	// Timer 1 Interrupt
 						if (type) telegramm[7]=0x40;		// read_value_response Telegramm (angefordert)
 						else telegramm[7]=0x80;				// write_value_request Telegramm (nicht angefordert)
 
-						objtype=eeprom[eeprom[COMMSTABPTR]+objno+objno+objno+4];
+						objtype=eeprom[n+1];		// eine Adresse höher ist objecttype
 
 						if(objtype>6) length=objtype-5; else length=1;
 						telegramm[5]=0xE0+length;
@@ -279,6 +283,9 @@ void T1_int(void) __interrupt (3) 	// Timer 1 Interrupt
 					wait_for_ack=0;							// Flag zurücksetzen, da wir es ja gerade abarbeiten
 					if (ack && parity_ok) {					// ACK empfangen und auch erwartet
 						repeat_count=4;						// keine Wiederholtelegramme mehr senden
+#ifdef ACK_RESPONSE
+						acked_tx_buffer_adresses|=(1<<tx_nextsend);
+#endif
 						if(inc_pcount) {
 							inc_pcount=0;
 							pcount+=4;

@@ -29,8 +29,8 @@
 // Optionen
 //#define LOCK_VD_VERSION   // Schreibschutz Adresse 0x01-0x07 (ca. 89Byte extra) oder
 //#define LOCK_DEVICE_ID    // Schreibschutz Adresse 0x01-0x06 (ca. 89Byte extra)
-#define ADC_RESPONSE      // Antwortet auf ADC Read Anfragen der ETS -> Geräte Info viel schneller! (ca. 73Byte extra)
-
+//#define ADC_RESPONSE      // Antwortet auf ADC Read Anfragen der ETS -> Geräte Info viel schneller! (ca. 73Byte extra)
+#define ACK_RESPONSE		// Flag-Array in dem die Adresse des Ringpuffers gesichert wird, dessen Objekt geackt wurde
 
 // Damit die Eclipse Code Analyse nicht so viele Warnungen anzeigt:
 #ifndef SDCC
@@ -143,6 +143,9 @@ extern unsigned char tx_buffer[8];
 extern unsigned char telpos;			// Zeiger auf naechste Position im Array Telegramm
 extern volatile __bit interrupted;		// wird durch interrupt-routine gesetzt. so kann eine andere routine pruefen, ob sie unterbrochen wurde
 extern volatile unsigned char fb_state;
+#ifdef ACK_RESPONSE
+extern volatile unsigned char acked_tx_buffer_adresses;
+#endif
 extern volatile __bit connected;
 extern __bit ack, nack, tel_arrived, tel_sent, auto_ack, wait_for_ack;
 extern __bit send_ack, send_nack, transparency;
