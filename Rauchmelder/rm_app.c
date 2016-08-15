@@ -699,24 +699,27 @@ void timer_event()
 				if (!alarmCounter)
 				{
 					alarmCounter = eeprom[CONF_ALARM_INTERVAL];     // Zykl. senden Zeit holen
-					ARRAY_SET_BIT(objSendReqFlags, OBJ_ALARM_BUS);
+					if (eeprom[CONF_SEND_ENABLE] & CONF_ENABLE_ALARM_INTERVAL_NW)
+                    {
+                        ARRAY_SET_BIT(objSendReqFlags, OBJ_ALARM_BUS);  // Vernetzung Alarm senden
+                    }
 					ARRAY_SET_BIT(objSendReqFlags, OBJ_STAT_ALARM);
 				}
 			}
 		}
 	}
-	// Kein Alarm, zyklisch senden
+	// Kein Alarm, zyklisch 0 senden
 	else
 	{
-	    if (eeprom[CONF_SEND_ENABLE] & CONF_ENABLE_ALARM_INTERVAL)
+	    if (eeprom[CONF_SEND_ENABLE] & CONF_ENABLE_TALARM_INTERVAL_S0)
+        {
+            --alarmCounter;
+            if (!alarmCounter)
             {
-                --alarmCounter;
-                if (!alarmCounter)
-                {
-                    alarmCounter = eeprom[CONF_ALARM_INTERVAL];     // Zykl. senden Zeit holen
-                    ARRAY_SET_BIT(objSendReqFlags, OBJ_STAT_ALARM);
-                }
+                alarmCounter = eeprom[CONF_ALARM_INTERVAL];     // Zykl. senden Zeit holen
+                ARRAY_SET_BIT(objSendReqFlags, OBJ_STAT_ALARM);
             }
+        }
     }
 
 	// Testalarm: zyklisch senden
@@ -728,7 +731,10 @@ void timer_event()
 			if (!TalarmCounter)
 			{
 				TalarmCounter = eeprom[CONF_TALARM_INTERVAL];
-				ARRAY_SET_BIT(objSendReqFlags, OBJ_TALARM_BUS);
+				if (eeprom[CONF_SEND_ENABLE] & CONF_ENABLE_TALARM_INTERVAL_NW)
+				{
+				    ARRAY_SET_BIT(objSendReqFlags, OBJ_TALARM_BUS);
+				}
 				ARRAY_SET_BIT(objSendReqFlags, OBJ_STAT_TALARM);
 			}
 		}

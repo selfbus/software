@@ -57,9 +57,24 @@
 #define CONF_ENABLE_INFO_INTERVAL 0x10
 
 /**
- * Bitmaske in CONF_SEND_ENABLE für Alarm verzögert senden.
+ * Bitmaske in CONF_SEND_ENABLE für Betriebszeit.
  */
 #define CONF_ENABLE_OPERATION_TIME_TYPE 0x08
+
+/**
+ * Bitmaske in CONF_SEND_ENABLE für Alarm Vernetzung zyklisch senden.
+ */
+#define CONF_ENABLE_ALARM_INTERVAL_NW 0x04
+
+/**
+ * Bitmaske in CONF_SEND_ENABLE für Testalarm Vernetzung zyklisch senden.
+ */
+#define CONF_ENABLE_TALARM_INTERVAL_NW 0x02
+
+/**
+ * Bitmaske in CONF_SEND_ENABLE für Testalarm Status bei 0 zyklisch senden.
+ */
+#define CONF_ENABLE_TALARM_INTERVAL_S0 0x01
 
 /**
  * Bits aktivieren das zyklische Senden der Com-Objekte 6..13

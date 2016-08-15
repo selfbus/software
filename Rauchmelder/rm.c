@@ -31,7 +31,7 @@ static __code unsigned char __at (EEPROM_ADDR + 0x00) option_reg={0xFF};        
 static __code unsigned char __at (EEPROM_ADDR + 0x01) fw_version[2]={FW_VER_MAJ,FW_VER_MIN};// Man. Data, used for FW Version
 static __code unsigned char __at (EEPROM_ADDR + 0x03) manufacturer[2]={0x00,0x4C};          // Herstellercode 0x004C = Robert Bosch *
 static __code unsigned char __at (EEPROM_ADDR + 0x05) device_type[2]={0x03,0xF2};           // Devicetype 1010 (0x03F2) #
-static __code unsigned char __at (EEPROM_ADDR + 0x07) vd_version={0x23};                    // VD Version V2.3 #
+static __code unsigned char __at (EEPROM_ADDR + 0x07) vd_version={0x24};                    // VD Version V2.4 #
 static __code unsigned char __at (EEPROM_ADDR + 0x08) eeprom_chk_limit={0xFF};              // EEPROM Check Limit
 static __code unsigned char __at (EEPROM_ADDR + 0x09) pei_type={0x00};                      // Required PEI Type, written by VD
 static __code unsigned char __at (EEPROM_ADDR + 0x0C) port_A_direction={0x00};              // PORT A Direction Bit Setting *
