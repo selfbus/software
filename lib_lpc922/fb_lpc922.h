@@ -30,7 +30,7 @@
 //#define LOCK_VD_VERSION   // Schreibschutz Adresse 0x01-0x07 (ca. 89Byte extra) oder
 //#define LOCK_DEVICE_ID    // Schreibschutz Adresse 0x01-0x06 (ca. 89Byte extra)
 //#define ADC_RESPONSE      // Antwortet auf ADC Read Anfragen der ETS -> Geräte Info viel schneller! (ca. 73Byte extra)
-#define ACK_RESPONSE		// Flag-Array in dem die Adresse des Ringpuffers gesichert wird, dessen Objekt geackt wurde
+//#define ACK_RESPONSE		// Flag-Array in dem die Adresse des Ringpuffers gesichert wird, dessen Objekt geackt wurde
 
 // Damit die Eclipse Code Analyse nicht so viele Warnungen anzeigt:
 #ifndef SDCC
