@@ -16,7 +16,7 @@
 
 
 #include <P89LPC922.h>
-#include <fb_lpc922_mini_1.4x.h>
+#include "../lib_LPC922_mini/fb_lpc922_mini.h"
 #include "fb_app_rs.h"
 #include "../com/fb_rs232.h"
 
@@ -50,7 +50,11 @@ __code unsigned int __at 0x1CFE baud=192;
  * 1DFE bis 1DFF	Baudrate
  */
 
-
+void send_obj_done(unsigned char objno, __bit succes)
+{
+objno;
+succes;
+}
 
 __bit build_tel(unsigned char objno)
 {
@@ -181,21 +185,18 @@ __bit build_tel(unsigned char objno)
 unsigned char gapos_in_gat(unsigned char gah, unsigned char gal)
 {
 	unsigned char ga_position,n;
-
+	
 	ga_position=0xFF; 			// default return Wert 0xFF = nicht gefunden
 	n=0;
 		while(ga_db[n].ga==((gah<<8)+gal) && n<=62){
 			n++;
 			}
-		if(n<62|| !filtermode)ga_position=n;// wenn GA gefunden oder kein filtermode aktiv ist...
+		if(n<62|| !filtermode)ga_position=n;// wenn GA gefunden oder kein filtermode aktiv ist... 
   return (ga_position);						// wird geackt
 }
 
-void send_obj_done(unsigned char objno, __bit success)
-{
-	objno;
-	success;
-}
+
+
 
 // Empfangenes Telegramm verarbeiten
 void write_value_req(void)
@@ -241,8 +242,7 @@ void write_value_req(void)
 					rs_send_dec(telegramm[10]);
 				}
 				if(length>4){
-					// EIS15 (String): immer 14 Byte, wird mit Null Bytes aufgefüllt
-					for(n=8;n <= length+6 && telegramm[n];n++){
+					for(n=8;n <= length+6;n++){
 						rs_send(telegramm[n]);
 					}
 				}
@@ -424,7 +424,7 @@ void restart_app(void)
 	
 	P0M1=0x00;
 	P0M2=0xC0;
-	P0=0xC0;
+	P0=0xC3;
 
 	for (n=0;n<255;n++) ;	// Warten bis Bus stabil
 	

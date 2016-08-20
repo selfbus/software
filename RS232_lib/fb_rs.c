@@ -1,4 +1,10 @@
 /*
+ *      __________  ________________  __  _______
+ *     / ____/ __ \/ ____/ ____/ __ )/ / / / ___/
+ *    / /_  / /_/ / __/ / __/ / __  / / / /\__ \
+ *   / __/ / _, _/ /___/ /___/ /_/ / /_/ /___/ /
+ *  /_/   /_/ |_/_____/_____/_____/\____//____/
+ *
  *  Copyright (c) 2008-2014 Andreas Krebs <kubi@krebsworld.de>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -31,13 +37,12 @@
 
 
 #include <P89LPC922.h>
-#include <fb_lpc922_mini_1.4x.h>
+#include "../com/fb_rs232.h"
+#include "../lib_LPC922_mini/fb_lpc922_mini.h"
 
 #include "fb_app_rs.h"
-
-#include <watchdog.h>
-#include <fb_rs232.c>
-
+#include"../com/watchdog.h"
+// kubi-----
 
 __bit filtermode,write_ok;
 __bit rsin_busy;
