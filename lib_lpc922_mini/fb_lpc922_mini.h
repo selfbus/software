@@ -26,6 +26,8 @@
 #define PORT	P0		// Port fuer 8-bit I/O
 #define RECEIVE_INT_ENABLE	EX1		// Interrupt enable Flag fuer Empfang
 
+#define TELEGRAM_REPEAT 4
+
 // Pseudo-Objekte für Unicast senden
 #define NCD_ACK						129
 #define READ_MASK_VERSION_RESPONSE	130
@@ -113,8 +115,10 @@
 
 
 // Globale Variablen
-extern unsigned char telegramm[23];
-extern unsigned char tx_buffer[8];
+//extern unsigned char __idata __at (0xFE-23) s_telegramm[23];
+extern unsigned char  telegramm[23];
+extern unsigned char __idata tx_buffer[8];
+
 extern unsigned char telpos;			// Zeiger auf naechste Position im Array Telegramm
 extern volatile __bit interrupted;		// wird durch interrupt-routine gesetzt. so kann eine andere routine pruefen, ob sie unterbrochen wurde
 extern volatile unsigned char fb_state;

@@ -26,15 +26,19 @@
  */
 
 
+
+
 #include <P89LPC922.h>
 #include "fb_lpc922_mini.h"
 
 unsigned char conh, conl;	// bei bestehender Verbindung phys. Adresse des Kommunikationspartners
 unsigned char pcount;		// Paketzaehler, Gruppenadresszaehler
 unsigned char mem_length, mem_adrh, mem_adrl, senders_pcount;	// länge bei memory_read_request
+unsigned char stackmax;
 
-unsigned char telegramm[23];
-unsigned char tx_buffer[8];		// Ringspeicher für zu sendende Telegramme
+
+unsigned char  telegramm[23];
+unsigned char __idata tx_buffer[8];		// Ringspeicher für zu sendende Telegramme
 unsigned char telpos;			// Zeiger auf naechste Position im Array Telegramm
 unsigned char cs;				// checksum
 unsigned char fbrx_byte, fb_pattern;
@@ -45,12 +49,13 @@ __code unsigned char __at 0x1D00 eeprom[255];	/// Bereich im Flash fuer EEPROM
 
 __bit parity_ok;			// Parity Bit des letzten empfangenen Bytes OK
 volatile __bit interrupted;	// Wird durch interrupt-routine gesetzt. So kann eine andere Routine pruefen, ob sie unterbrochen wurde
-__bit fb_parity, ack, nack, its_me, tel_arrived, tel_sent, auto_ack, fbtx_bit, wait_for_ack;
+__bit fb_parity, ack, nack, busy , its_me, tel_arrived, tel_sent, auto_ack, fbtx_bit, wait_for_ack;
 __bit send_ack, send_nack, transparency;
 volatile __bit connected;	/// Verbindung aufgebaut
 unsigned char tx_nextwrite, tx_nextsend;
 unsigned char status60;		// Statusbyte, das normalerweise im userram an Adresse 0x60 steht
 __bit inc_pcount;
+__bit telegramm_ok;
 
 
 
@@ -103,9 +108,9 @@ void T1_int(void) __interrupt (3) 	// Timer 1 Interrupt
 						tx_buffer[tx_nextsend]|=0x20;		// Bit für "wird gerade gesendet"
 						repeat_count=0;						// Wiederholungszähler für nicht geackte Telegramme
 					}
-					if (repeat_count<4) init_tx();		// Senden starten
+					if (repeat_count<TELEGRAM_REPEAT) init_tx();//<4		// Senden starten
 					else {		// wenn bereits 4 x wiederholt oder erfolgreich gesendet(geackt) -> nächstes Objekt
-						send_obj_done(tx_buffer[tx_nextsend]&0x1f, repeat_count&0x10);
+						//send_obj_done(tx_buffer[tx_nextsend]&0x1f, repeat_count&0x10);
 						tx_nextsend++;
 						tx_nextsend&=0x07;
 						wait_for_ack=0;
@@ -120,7 +125,7 @@ void T1_int(void) __interrupt (3) 	// Timer 1 Interrupt
 				EX1=1;	// ext1 int einschalten falls Empfang...
 			}
 			else {
-				send_obj_done(tx_buffer[tx_nextsend]&0x1f, 0);
+				//send_obj_done(tx_buffer[tx_nextsend]&0x1f, 0);
 				tx_nextsend++; //hier Zeiger erhöhen wenn Telegramm nicht gebildet werden konnte
 				tx_nextsend&=0x07;
 			}
@@ -158,8 +163,9 @@ void T1_int(void) __interrupt (3) 	// Timer 1 Interrupt
 					if (telpos==0) {						// erstes empfangenes Byte
 						if (fbrx_byte==0xCC) ack=1;				// ACK empfangen
 						if (fbrx_byte==0x0C) nack=1;			// NACK empfangen
+						if(fbrx_byte==0xC0)	busy=1;
 					}
-					if (!ack && !nack) {					// Datenbyte empfangen
+					if (!ack && !nack && (telpos<=22)) {					// Datenbyte empfangen
 						telegramm[telpos]=fbrx_byte;			// Byte speichern
 						cs^=fbrx_byte;							// Checksum berechnen
 						telpos++;								// Telegrammzeiger erhöhen
@@ -200,7 +206,7 @@ void T1_int(void) __interrupt (3) 	// Timer 1 Interrupt
 		break;
 
 	case 4:	//	Timeout, d.h. Telegramm-Ende
-		if (auto_ack && telpos>4) {		// wenn ACK gesendet werden soll und Telegramm zumindest 5 Bytes hat
+		if (auto_ack && telpos>7) {		// wenn ACK gesendet werden soll und Telegramm zumindest 5 Bytes hat
 			TR1=0;
 			TMOD=(TMOD & 0x0F) +0x10;	// Timer 1 als 16-Bit Timer
 			TH1=0xEF;					// Timer 1 auf ACK-Position setzen (15 Bit Pause = 2708µs (26 Bit) nach Beginn Startbit vom letzten Datenbyte)
@@ -212,20 +218,24 @@ void T1_int(void) __interrupt (3) 	// Timer 1 Interrupt
 				if (telegramm[3]==0 && telegramm[4]==0) its_me=1;				// Broadcast
 			}
 			else if(telegramm[3]==eeprom[ADDRTAB+1] && telegramm[4]==eeprom[ADDRTAB+2]) its_me=1;	// phys. Adresse
-			if ((cs==0xFF) && its_me) tel_arrived=1;
-			if ((cs==0xFF)) tel_arrived=1;
+			//checken ob Telegramm ok ist
+			if ((cs==0xFF)&&(((telegramm[5]&0x0F)+8)== (telpos))&& its_me)
+			{
+				telegramm_ok=1;
+				tel_arrived=1;//&&(telegramm[5]&0x0F== telpos-8)
+			}
 			fb_state=5;					// nächster state: ACK-Position erreicht
 		}
 		else {					// Telegramm soll nicht per ACK bestätigt werden
 
-			if (telpos>1) tel_arrived=1;	// trotzdem den Eingang eines Telegramms anzeigen
+			//if (telpos>1) tel_arrived=1;	// trotzdem den Eingang eines Telegramms anzeigen
 			init_rx();						// wieder in den Empfang zurück
 		}
 		break;
 
 	case 5:	// ACK-Position erreicht
 		TR1=0;
-		if (cs==0xFF) {	// Checksum OK
+		if (telegramm_ok) {	// Checksum OK
 			if (its_me) {					// Gerät adressiert
 				send_ack=1;
 				init_tx();						// Senden initiieren
@@ -352,6 +362,7 @@ void init_rx(void) 	// Empfangen initiieren (statemachine auf Anfang)
 	TR1=1;
 	EX1=1;
 	ET1=1;
+	telegramm_ok=0;
 }
 
 
@@ -381,7 +392,9 @@ void init_tx(void) 		// Checksum des Telegramms berechnen und Senden initiieren
 	//IE1=0;								// ext. int1 Flag zurücksetzen
 	EX1=0;								// ext. int1 inaktiv
 	TR1=1;								// Timer 1 starten
-	ET1=1;								// Timer 1 int. aktiv
+	ET1=1;	
+	//if(SP>stackmax)stackmax=SP;
+// Timer 1 int. aktiv
 }
 
 
