@@ -178,9 +178,10 @@ unsigned char gapos_in_gat(unsigned char gah, unsigned char gal) ;
 __bit build_tel(unsigned char objno) ;
 __bit send_obj_value(unsigned char objno);
 void restart_hw(void);
-void process_tel(void);     // Interrupt von Timer 1, 370us keine Busaktivitaet seit letztem Byte,                                      //   d.h. Telegramm wurde komplett uebertragen
-//void write_memory(void);      // write_memory_request - empfangene Daten in Speicher schreiben
-void set_pa(void);              // neue phys. Adresse programmieren
+void process_tel(void);     // Interrupt von Timer 1, 370us keine Busaktivitaet seit letztem Byte,
+                            // d.h. Telegramm wurde komplett uebertragen
+//void write_memory(void);  // write_memory_request - empfangene Daten in Speicher schreiben
+void set_pa(void);          // neue phys. Adresse programmieren
 unsigned char read_objflags(unsigned char objno);   // Objektflags lesen
 //OBSOLETE: unsigned char find_first_objno(unsigned char gah, unsigned char gal);
 
