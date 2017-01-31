@@ -14,31 +14,31 @@ Selfbus Library für LPC922/LPC936
         - Telegrammopriorität wird nun für das jeweilig Comobjekt anhand der Flags gesetzt 
 
 2015-04-03  Version 1.56
-		- ADC Read PDU hinzugefügt und somit das Auslesen der Geräte-Info massiv beschleunigt,
-		  zum aktivieren Lib mit ADC_RESPONSE Option compilieren.
+        - ADC Read PDU hinzugefügt und somit das Auslesen der Geräte-Info massiv beschleunigt,
+          zum aktivieren Lib mit ADC_RESPONSE Option compilieren.
 
 2014-12-24  Version 1.55
         - Bug beim Schreiben auf Statusbyte 60 behoben
         - Senden des NACK in Verbindung mit not_me behoben
 
 2014-10-19  Version 1.54
-		- VD Version Lock Option hinzugefügt
+        - VD Version Lock Option hinzugefügt
 
 2014-10-17  Version 1.53
-		- Connection Timeout Bugfix (LinienScan)
+        - Connection Timeout Bugfix (LinienScan)
 
 2014-07-23  Version 1.52
-		- USERRAM_ADDR_H hinzugefügt
+        - USERRAM_ADDR_H hinzugefügt
 
 2014-06-01  Version 1.51
         - Bug in LPC936 support behoben
 
-2014-05-18	Version 1.50
-		- RS232 Init Makros hinzugefügt
-		- Compile/Link Schutz eingebaut damit nicht lpc936 und lpc922 Lib/App gemischt werden können
-		- Prozessor Include in fb_lpc922.h verschoben
-		- Userram entfernt
-		- Busdebug entfernt
+2014-05-18  Version 1.50
+        - RS232 Init Makros hinzugefügt
+        - Compile/Link Schutz eingebaut damit nicht lpc936 und lpc922 Lib/App gemischt werden können
+        - Prozessor Include in fb_lpc922.h verschoben
+        - Userram entfernt
+        - Busdebug entfernt
 
 2014-04-03  Version 1.41-SNAPSHOT
         Support für P89LPC936
