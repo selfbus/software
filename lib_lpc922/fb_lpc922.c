@@ -5,7 +5,7 @@
  *  ___/ / /___/ /___/ __/ / /_/ / /_/ /___/ /   / /____/ // /_/ / _, _/ ___ |/ _, _/ / /
  * /____/_____/_____/_/   /_____/\____//____/   /_____/___/_____/_/ |_/_/  |_/_/ |_| /_/
  *
- *  Copyright (c) 2014-2015 Stefan Haller
+ *  Copyright (c) 2014-2017 Stefan Haller
  *  Copyright (c) 2013-2014 Andreas Krieger
  *  Copyright (c) 2009-2013 Andreas Krebs <kubi@krebsworld.de>
  *
@@ -40,7 +40,7 @@ __code unsigned char __at(EEPROM_ADDR) eeprom[255];	 /// Bereich im Flash fuer E
 
 __bit parity_ok;			// Parity Bit des letzten empfangenen Bytes OK
 volatile __bit interrupted;	// Wird durch interrupt-routine gesetzt. So kann eine andere Routine pruefen, ob sie unterbrochen wurde
-__bit fb_parity, ack, nack, its_me, tel_arrived, tel_sent, auto_ack, fbtx_bit, wait_for_ack;
+__bit fb_parity, ack, nack, its_me, tel_arrived, tel_sent, fbtx_bit, wait_for_ack;
 __bit send_ack, send_nack;//, transparency;
 volatile __bit connected;	/// Verbindung aufgebaut
 unsigned char tx_nextwrite, tx_nextsend;
@@ -118,7 +118,7 @@ void T1_int(void) __interrupt (3) 	// Timer 1 Interrupt
 					if (gapos!=0xFE) // wenn keine Gruppenadresse hinterlegt nix tun
 					{
 						n=eeprom[COMMSTABPTR]+objno+objno+objno+3; //Adresse obj flags für Priorität holen
-						
+
 						telegramm[0]=0xB0 |((eeprom[n]&0x03)<< 2);// die prio ins erste Byte des tele einfügen
 						telegramm[1]=eeprom[ADDRTAB+1];
 						telegramm[2]=eeprom[ADDRTAB+2];
@@ -315,7 +315,7 @@ void T1_int(void) __interrupt (3) 	// Timer 1 Interrupt
 		break;
 
 	case 4:	//	Timeout, d.h. Telegramm-Ende
-		if (auto_ack && telpos>7) {//>4		// wenn ACK/NACK gesendet werden soll und Telegramm zumindest 7 Bytes hat, da sonst ein NACK wenig Sinn macht
+		if ((telegramm[0]&0x80) && telpos>7) {// Telegramm Standard Frame und mindestens 7 Bytes, da sonst ein NACK wenig Sinn macht
 			TR1=0;
 			TMOD=(TMOD & 0x0F) +0x10;	// Timer 1 als 16-Bit Timer
 			TH1=0xEF;					// Timer 1 auf ACK / NACK -Position setzen (15 Bit Pause = 2708Âµs (26 Bit) nach Beginn Startbit vom letzten Datenbyte)
@@ -869,7 +869,6 @@ void restart_hw(void)
 	send_ack=0;
 	send_nack=0;
 	tel_arrived=0;	// kein Telegramm empfangen
-	auto_ack=1;		// empfangene Telegramme automatisch mit ack bestaetigen
 	tx_nextwrite=0;	// Zeiger auf naechste zu schreibende Objektnr. in tx_buffer
 	tx_nextsend=0;	// Zeiger auf naechste zu sendende Objektnr. in tx_buffer
 	pcount=0;		// Paketzaehler initialisieren

@@ -6,6 +6,13 @@
 
 Selfbus Library für LPC922/LPC936
 =================================
+2017-01-26  Version 1.58
+        - Option auto_ack entfernt
+        - Ignore non standard frames
+
+2016-08-18  Version 1.57
+        - Telegrammopriorität wird nun für das jeweilig Comobjekt anhand der Flags gesetzt 
+
 2015-04-03  Version 1.56
 		- ADC Read PDU hinzugefügt und somit das Auslesen der Geräte-Info massiv beschleunigt,
 		  zum aktivieren Lib mit ADC_RESPONSE Option compilieren.

@@ -5,7 +5,7 @@
  *  ___/ / /___/ /___/ __/ / /_/ / /_/ /___/ /   / /____/ // /_/ / _, _/ ___ |/ _, _/ / /
  * /____/_____/_____/_/   /_____/\____//____/   /_____/___/_____/_/ |_/_/  |_/_/ |_| /_/
  *
- *  Copyright (c) 2014-2015 Stefan Haller
+ *  Copyright (c) 2014-2017 Stefan Haller
  *  Copyright (c) 2013-2014 Andreas Krieger
  *  Copyright (c) 2009-2013 Andreas Krebs <kubi@krebsworld.de>
  *
@@ -29,7 +29,7 @@
 // Optionen
 //#define LOCK_VD_VERSION   // Schreibschutz Adresse 0x01-0x07 (ca. 89Byte extra) oder
 //#define LOCK_DEVICE_ID    // Schreibschutz Adresse 0x01-0x06 (ca. 89Byte extra)
-//#define ADC_RESPONSE      // Antwortet auf ADC Read Anfragen der ETS -> Geräte Info viel schneller! (ca. 73Byte extra)
+#define ADC_RESPONSE      // Antwortet auf ADC Read Anfragen der ETS -> Geräte Info viel schneller! (ca. 73Byte extra)
 //#define ACK_RESPONSE		// Flag-Array in dem die Adresse des Ringpuffers gesichert wird, dessen Objekt geackt wurde
 
 // Damit die Eclipse Code Analyse nicht so viele Warnungen anzeigt:
@@ -147,8 +147,8 @@ extern volatile unsigned char fb_state;
 extern volatile unsigned char acked_tx_buffer_adresses;
 #endif
 extern volatile __bit connected;
-extern __bit ack, nack, tel_arrived, tel_sent, auto_ack, wait_for_ack;
-extern __bit send_ack, send_nack, transparency;
+extern __bit ack, nack, tel_arrived, tel_sent, wait_for_ack;
+extern __bit send_ack, send_nack;
 extern unsigned char tx_nextwrite, tx_nextsend, status60;
 extern unsigned char connected_timeout;
 
