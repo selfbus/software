@@ -165,16 +165,16 @@ void main(void)
 
 		n = timer;  // Zeittakt holen
 		// LEDs aktualisieren
-        val = 255;  // Taster high, alle LEDs ein
         blink = ((n >>3)&0x01);
+        val = 0x0F; // alle LEDs ein
         for (x=0;x<4;x++)
         {
             if (eeprom[0xE3 +x] & 0x80) // blinken
             {
-                val &= ~(blink<<(x+4)); // LED ausschalten
+                val &= ~(blink<<x);     // LED ausschalten
             }
         }
-        LEDVAL = (LEDSTATE & val);
+        LEDVAL = (LEDSTATE & val)<<4;   // LED Werte für Ausgabe ausrichten (Bits 4-7)
 
 		// LED Helligkeit verstellbar via Taste 1+2 im Progmode
 		verstell = (n & 0x01);

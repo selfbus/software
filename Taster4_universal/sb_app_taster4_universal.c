@@ -498,8 +498,8 @@ void switch_led(unsigned char ledno, __bit onoff)
 		if((command&0x03)==3) onoff=!onoff;
 
 		ledvar=LEDSTATE;
-		ledvar&= ~(1<<(ledno+4));	// LEDs sind an Pin 4-7
-		ledvar |= (onoff<<(ledno+4));	// unteren 4 bits immer auf 1 lassen !!!
+		ledvar&= ~(1<<(ledno));	// LEDs sind an Pin 4-7
+		ledvar |= (onoff<<(ledno));	// unteren 4 bits immer auf 1 lassen !!!
 		LEDSTATE=ledvar;
 	}
 }
@@ -509,9 +509,8 @@ void timer0_int  (void) __interrupt (1) // Interrupt T0 fuer soft PWM LED
 {
   dimmcompare++;
   TF0=0;
-	if((dimmcompare) <= dimmwert) PORT = LEDVAL | 0x0F;// LEDs ein
-	else PORT = 0x0F;//LEDs aus
-	// unteren 4 bits immer auf 1 lassen !!!  //LEDSTATE=0x0F;
+	if((dimmcompare) <= dimmwert) PORT = LEDVAL | 0x0F;// LEDs ein, Taster immer ein
+	else PORT = 0x0F;//LEDs aus, Taster immer ein
 }
 
 
@@ -563,8 +562,7 @@ void delay_timer(void)
 			case 0x10:
 				if (objno<4) {	// LED bei Betaetigungsanzeige nach eingestellter Zeit ausschalten
 					ledvar=LEDSTATE;
-					ledvar &= ~(1<<(objno+4));	// LEDs sind an Pin 4-7
-					ledvar |= 0x0F;				// unbedingt taster pins wieder auf 1
+					ledvar &= ~(1<<(objno));	// LEDs sind an Pin 4-7
 					LEDSTATE=ledvar;
 					timerstate[objno]=0;
 				}
@@ -726,15 +724,10 @@ void restart_app(void)
 	unsigned char n;
 	__bit write_ok=0;
 
-	// Pin 0-3 fuer Taster
-	for (n=0;n<4;n++) {
-		SET_PORT_MODE_BIDIRECTIONAL(n)
-	}
-
-	// Pin 4-7 fuer LEDs
-	for (n=4;n<8;n++) {
-		SET_PORT_MODE_PUSHPULL(n)
-	}
+	// Pin 0-3 fuer Taster Bidirec
+	// Pin 4-7 fuer LEDs PushPull
+	P0M1= 0x00;
+	P0M2= 0xF0;
 
 	AUXR1|=0x80;        // Clock LPS, to reduce power consumption
 	PORT=0x0F;			// Taster auf high, LEDs zunaechst aus
@@ -771,8 +764,6 @@ void restart_app(void)
 		switch_led(n,0);	// LED's gemaess parametrierung, bei invertierter Anzeige -->ein
 	}
 
-	//LEDSTATE=0;
-
 	// set timer 0 autoreload 0.05ms
 	TR0=0;
 	TMOD &= 0xF0;
@@ -781,14 +772,14 @@ void restart_app(void)
 	TL0=0x47;
 	TR0=1;
 	 // set timer 0 isr priority to 0
-	IP0 &= 0xFC;  //FC		F6	fuer flackerfrei bei 1 kanal
-	IP0 |= 0x0C;  //0C		06	dto.
-	IP0H &= 0xF4; //
-	IP0H |= 0x04; // 		Timer 1 auf Level 2
+	IP0 &= 0xFC;
+	IP0 |= 0x0C;
+	IP0H &= 0xF4;
+	IP0H |= 0x04; // Timer 1 auf Level 2
 
 	ET0=1; // timer 0 interupt freigeben
 
-	TF0=0; //timer0 flag loeschen
+	TF0=0; // timer 0 flag loeschen
 	EA=1;  // Interrupts freigeben
 
 	// TODO, warum schreiben wir die base immer neu??
