@@ -32,6 +32,7 @@
 *       2.05    Geräteinfo auslesen mit Lib 1.56
 *       2.06    Bugfix Umschalten 2. Schaltebene
 *       2.07    Applikation wird bei falscher VD angehalten --> DEVICE_ID_CHECK
+*       2.08    Lib Update auf V1.58, LED Bugfix, Stromverbrach Clock gesenkt
 */
 
 #include "sb_app_taster4_universal.h"

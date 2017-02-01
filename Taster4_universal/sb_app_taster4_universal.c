@@ -480,9 +480,7 @@ void switch_led(unsigned char ledno, __bit onoff)
 			onoff=1;
 			break;
 		// case 2 ist Statusanzeige, onoff bleibt also unveraendert
-//		case 3:		// LED = invertierte Statusanzeige
-//			onoff=!onoff;
-//			break;
+		// case 3 LED = invertierte Statusanzeige siehe unten
 		case 4:		// LED = Betaetigungsanzeige
 			onoff=1;	// erstmal an beim druecken der Taste
 			timerstate[ledno]= 0x10;
@@ -490,13 +488,13 @@ void switch_led(unsigned char ledno, __bit onoff)
 			timercnt[ledno]= (eeprom[LED_DURATION]>>4)*8;	// dann ueber delay-timer aus
 		break;
 		case 5: // LED nach externen objekt
-		case 6:
-			// LED invertiert nach externen Objekt
-			onoff=(bitobject>>(ledno+4))&0x01;
+		case 7: // LED invertiert nach externen Objekt, siehe unten
+			onoff=(bitobject>>(ledno+4))&0x01;  // LED Werte stehen in bitobject 4-7
 		break;
 		default:
 			break;
 		}
+		// Case 3 und case 7, LED invertieren (diese Lösung spart Flash)
 		if((command&0x03)==3) onoff=!onoff;
 
 		ledvar=LEDSTATE;
@@ -738,6 +736,7 @@ void restart_app(void)
 		SET_PORT_MODE_PUSHPULL(n)
 	}
 
+	AUXR1|=0x80;        // Clock LPS, to reduce power consumption
 	PORT=0x0F;			// Taster auf high, LEDs zunaechst aus
 
 	button_buffer=0x0F;	// Variable fuer letzten abgearbeiteten Taster Status

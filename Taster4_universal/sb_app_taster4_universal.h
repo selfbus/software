@@ -28,7 +28,7 @@
 
 // Version number
 #define VER_MAJ     0x02    // 0x01 is old Jung FW
-#define VER_MIN     0x07
+#define VER_MIN     0x08
 
 //#define LPC936		// LPC936 anstatt LPC922
 
