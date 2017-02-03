@@ -5,7 +5,7 @@
  *  ___/ / /___/ /___/ __/ / /_/ / /_/ /___/ /  /__  _____/ /  __/ / / (__  /  __/
  * /____/_____/_____/_/   /_____/\____//____/     /_/ /____/\___/_/ /_/____/\___/
  *
- * Copyright (c) 2014-2015 Stefan Haller
+ * Copyright (c) 2014-2017 Stefan Haller
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -450,6 +450,7 @@ void restart_app()      // Alle Applikations-Parameter zurücksetzen
     // Port 1, nach restart_hw()!
     P1M1 &= ~0x03;  // P1.0/TXD auf input wg. Busdown Erkennung
     P1M2 &= ~0x03;
+    AUXR1|=0x80;    // Clock LPS, to reduce power consumption
 
     gw_init_done = 0x0F;   // thresholds to init 0-3
 

@@ -5,7 +5,7 @@
  *  ___/ / /___/ /___/ __/ / /_/ / /_/ /___/ /  /__  _____/ /  __/ / / (__  /  __/
  * /____/_____/_____/_/   /_____/\____//____/     /_/ /____/\___/_/ /_/____/\___/
  *
- * Copyright (c) 2014-2015 Stefan Haller
+ * Copyright (c) 2014-2017 Stefan Haller
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -18,7 +18,7 @@
 
 // Version number
 #define VER_MAJ     0x01
-#define VER_MIN     0x01
+#define VER_MIN     0x02
 
 
 #include <fb_lpc922.h>
@@ -48,7 +48,7 @@
 
 // Set feature bits in VER_MAJ register
 
-#if defined (EXT_DEBUG_GA) && defined EXT_DEBUG_GA  // both features
+#if defined (EXT_DEBUG_GA) && defined (DEVICE_ID_CHECK)  // both features
     #define VER_FEATURE  (VER_MAJ + 0x90)
 #elif defined (DEVICE_ID_CHECK) // Device ID check
     #define VER_FEATURE  (VER_MAJ + 0x10)

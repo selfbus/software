@@ -5,7 +5,7 @@
  *  ___/ / /___/ /___/ __/ / /_/ / /_/ /___/ /  /__  _____/ /  __/ / / (__  /  __/
  * /____/_____/_____/_/   /_____/\____//____/     /_/ /____/\___/_/ /_/____/\___/
  *
- * Copyright (c) 2014-2015 Stefan Haller
+ * Copyright (c) 2014-2017 Stefan Haller
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
@@ -16,6 +16,8 @@
  * Versionen:   0.01  erste Version
  *              0.10  Diagnose GA
  *              1.0   1st Release, Fix StackPointer check, DEVICE_ID_CHECK added
+ *              1.01  Bugfix, negative temperatures for DHT22 where send as positive
+ *              1.02  Update Lib to V1.58, reduce power consumption
  *
  * Com-Objekte
  * 0,2,4,6  = Temperatur

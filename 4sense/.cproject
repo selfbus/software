@@ -64,7 +64,7 @@
 					<folderInfo id="cdt.managedbuild.config.sdcc.exe.release.682020468.89444156." name="/" resourcePath="">
 						<toolChain id="cdt.managedbuild.toolchain.sdcc.exe.release.871326628" name="SDCC Tool Chain" superClass="cdt.managedbuild.toolchain.sdcc.exe.release">
 							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="cdt.managedbuild.target.sdcc.platform.exe.release.190181679" name="Release Platform" osList="solaris,linux,hpux,aix,qnx,win32" superClass="cdt.managedbuild.target.sdcc.platform.exe.release"/>
-							<builder buildPath="${workspace_loc:/ds_temp}/Release" id="org.eclipse.cdt.build.core.internal.builder.2138596545" keepEnvironmentInBuildfile="false" name="CDT Internal Builder" superClass="org.eclipse.cdt.build.core.internal.builder"/>
+							<builder buildPath="${workspace_loc:/4sense}/Release" id="org.eclipse.cdt.build.core.internal.builder.2138596545" keepEnvironmentInBuildfile="false" name="CDT Internal Builder" superClass="org.eclipse.cdt.build.core.internal.builder"/>
 							<tool command="sdcc --std-c99 -c --stack-auto --debug" id="cdt.managedbuild.tool.sdcc.c.compiler.exe.release.1983347638" name="SDCC Compiler" superClass="cdt.managedbuild.tool.sdcc.c.compiler.exe.release">
 								<option id="sdcc.c.compiler.option.include.paths.1154465236" name="Include paths (-I)" superClass="sdcc.c.compiler.option.include.paths" valueType="includePath">
 									<listOptionValue builtIn="false" value="/usr/share/sdcc/include/mcs51"/>
@@ -97,7 +97,7 @@
 		</cconfiguration>
 	</storageModule>
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-		<project id="ds_temp.cdt.managedbuild.target.sdcc.exe.1430904049" name="MCS51 family (SDCC)" projectType="cdt.managedbuild.target.sdcc.exe"/>
+		<project id="4sense.cdt.managedbuild.target.sdcc.exe.1430904049" name="MCS51 family (SDCC)" projectType="cdt.managedbuild.target.sdcc.exe"/>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="refreshScope" versionNumber="2">
