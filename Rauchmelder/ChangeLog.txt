@@ -1,3 +1,13 @@
+2017-02    Version 2.42
+        Update auf Lib 1.58
+
+2016-08    Version 2.41
+        Update auf Lib 1.57 Support für Prioritäten
+
+2016-08    Version 2.40
+        Zyklisches senden von Alaram und Tesalarm Status bei 0 hinzugefügt
+        mit VD 2.4
+
 2015-06-07 Version 2.32
         Eventuell mehrfaches Flashen beim Device ID checkup behoben
 

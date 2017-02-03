@@ -5,7 +5,7 @@
  *  ___/ / /___/ /___/ __/ / /_/ / /_/ /___/ /  / _, _/ /  / /
  * /____/_____/_____/_/   /_____/\____//____/  /_/ |_/_/  /_/
  *
- *  Copyright (c) 2015-2016 Stefan Haller
+ *  Copyright (c) 2015-2017 Stefan Haller
  *  Copyright (c) 2013 Stefan Taferner <stefan.taferner@gmx.at>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -23,7 +23,7 @@
 
 // Current Firmware Version
 #define FW_VER_MAJ  0x02    // Major
-#define FW_VER_MIN  0x41    // Minor
+#define FW_VER_MIN  0x42    // Minor
 
 
 /**
