@@ -75,6 +75,7 @@
 * 	3.38	connected timout hinzugefügt
 * 	3.39	LIB 1.55 initiale PA jetzt 15.15.255
 * 	3.40    EEPROM Default Werte werden in Release Builds nicht mehr bei jedem Neustart geflasht, LIB 1.56
+* 	3.41    Update auf Lib 1.58
  TODO
 
 * @todo:
@@ -122,7 +123,7 @@
 		#endif
 	#endif
 #endif
-#define VERSION 40
+#define VERSION 41
 
 unsigned char __at (0x00) RAM[00];
 
