@@ -42,7 +42,7 @@
 #include "onewire.h"
 
 // Options
-#define SENSOR_TYPE     0   // !=1 DS18B20
+#define SENSOR_TYPE     0   // 0= DS18B20, 1= DS18S20
 
 #define NOPROGLED     // Die Progled blinkt im Progmodus da sie auch Betriebs LED ist
 
@@ -56,7 +56,7 @@ const static unsigned char dev_application_id[4] = {0x00,0x4C,0x04,0x56};
 // immer neu geschrieben werden muss.
 // Geraeteparameter setzen, diese können von der ETS uebschrieben werden wenn Schreibschutz nicht aktiv
 static __code unsigned char __at (EEPROM_ADDR + 0x00) option_reg={0xFF};            // Option Register, ETS will write 0xFF
-static __code unsigned char __at (EEPROM_ADDR + 0x01) fw_version[2]={VER_MAJ,VER_MIN}; // Man. Data, used for FW Version
+static __code unsigned char __at (EEPROM_ADDR + 0x01) fw_version[2]={VER_MAJ+(SENSOR_TYPE*0x10),VER_MIN}; // Man. Data, used for FW Version
 static __code unsigned char __at (EEPROM_ADDR + 0x03) manufacturer[2]={0x00,0x4C};  // Herstellercode 0x004C = Bosch *
 static __code unsigned char __at (EEPROM_ADDR + 0x05) device_type[2]={0x04, 0x56};  // 0x0456 = Selfbus Taster4_universal
 static __code unsigned char __at (EEPROM_ADDR + 0x07) vd_version={0x03};            // VD Version V0.3 #
