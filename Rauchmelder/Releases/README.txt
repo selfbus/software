@@ -13,4 +13,7 @@ rm-2.11.hex                 rm-2.1b.vd1		Bugfix: LineScan
 rm-2.20.hex                 rm-2.2.vd1		Neu: Temperaturabgleich
 rm-2.21.hex                 rm-2.2.vd1		Lib 1.55
 rm-2.31.hex					rm-2.3.vd1		Add Device ID check
-rm-2.32.hex					rm-2.3.vd1		Bugfix Device ID check
+rm-2.32.hex					rm-2.3.vd1		Bugfix: Device ID check
+rm-2.40.hex					rm-2.4.vd1		Neu: Zyklisches senden bei Alaram/Tesalarm Status ab VD 2.4. VD Update nur erforderlich für neue Funktionen der V2.4x!
+rm-2.41.hex					rm-2.4.vd1		Lib 1.57
+rm-2.42.hex					rm-2.4.vd1		Lib 1.58
