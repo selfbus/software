@@ -313,7 +313,7 @@ void T1_int(void) __interrupt (3)   // Timer 1 Interrupt
         break;
 
     case 4: //  Timeout, d.h. Telegramm-Ende
-        if ((telegramm[0]&0x80) && (telpos>7)) { // Telegramm Standard Frame und mindestens 7 Bytes, da sonst ein NACK wenig Sinn macht
+        if (((telegramm[0]&0xD3)==0x90) && (telpos>7)) { // Telegramm Standard Frame und mindestens 7 Bytes, da sonst ein NACK wenig Sinn macht
             TR1=0;
             TMOD=(TMOD & 0x0F) +0x10;   // Timer 1 als 16-Bit Timer
             TH1=0xEF;                   // Timer 1 auf ACK / NACK -Position setzen (15 Bit Pause = 2708µs (26 Bit) nach Beginn Startbit vom letzten Datenbyte)
