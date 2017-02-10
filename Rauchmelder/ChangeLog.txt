@@ -5,6 +5,7 @@
         Update auf Lib 1.57 Support für Prioritäten
 
 2016-08    Version 2.40
+		Batteriespannung wird nun normkonform als DPT 9.020 in mV gesendet.
         Zyklisches senden von Alaram und Tesalarm Status bei 0 hinzugefügt
         mit VD 2.4
 
