@@ -1,10 +1,10 @@
 /*
  *      __________  ________________  __  _______
  *     / ____/ __ \/ ____/ ____/ __ )/ / / / ___/
- *    / /_  / /_/ / __/ / __/ / __  / / / /\__ \ 
- *   / __/ / _, _/ /___/ /___/ /_/ / /_/ /___/ / 
- *  /_/   /_/ |_/_____/_____/_____/\____//____/  
- *                                      
+ *    / /_  / /_/ / __/ / __/ / __  / / / /\__ \
+ *   / __/ / _, _/ /___/ /___/ /_/ / /_/ /___/ /
+ *  /_/   /_/ |_/_____/_____/_____/\____//____/
+ *
  *  Copyright (c) 2008 Andreas Krebs <kubi@krebsworld.de>
  *
  *  This program is free software; you can redistribute it and/or modify
@@ -14,9 +14,6 @@
  */
 
 
-
-//#include <P89LPC922.h>
-//#include "../lib_lpc922/fb_lpc922.h"
 
 #include "fb_app_in8.h"
 #include "../com/fb_rs232.h"
@@ -31,17 +28,17 @@ unsigned int objstate;		// Zwischenspeicher der Objektzustände x.1 (Bit 0-7) und
 unsigned char blocked;			//zwischenspeicherung der Sperren
 unsigned char timer_base,timer_state;			// Timer für Schaltverzögerungen, wird alle 130ms hochgezählt
 unsigned int timer;
-unsigned char timerbase[TIMERANZ];// Speicherplatz für die Zeitbasis 
+unsigned char timerbase[TIMERANZ];// Speicherplatz für die Zeitbasis
 unsigned char timercnt[TIMERANZ];// speicherplatz für den timercounter und 1 status bit
 unsigned char timerstate[TIMERANZ];//
 unsigned char pinnoX4,para_adr,pinno;
 unsigned char para_value;
 //unsigned char __at 0x08 objectvalue_zl[2];
-unsigned char __at 0x08 objectvalue_l[8];
-unsigned char __at 0x10	objectvalue_h[8];
-unsigned char __at 0x18 Sperre;
-unsigned int  __at 0x19 zaehlervalue[2];
-unsigned char __at 0x1E schrittzaehler[2];//
+unsigned char __at (0x08) objectvalue_l[8];
+unsigned char __at (0x10)	objectvalue_h[8];
+unsigned char __at (0x18) Sperre;
+unsigned int  __at (0x19) zaehlervalue[2];
+unsigned char __at (0x1E) schrittzaehler[2];//
 __bit objval=0,jobj=0;
 __bit st_Flanke=0;
 
@@ -88,14 +85,14 @@ void pin_changed(unsigned char pin_no)
          			schalten(st_Flanke,pinno+8);		// Flanke Eingang x.2
          }
 #endif
-     break;  
+     break;
       case 0x02:				// Funktion Dimmen
     		/***********************
     		 * Funktion Dimmen
     		 ***********************/
-#ifdef dimmer    		
+#ifdef dimmer
          if (st_Flanke){// Taster gedrueckt -> schauen wie lange gehalten
-  			timercnt[pinno]=0x80+(eeprom[0xD7+(pinnoX4)]&0x7F);	// Faktor/Dauer			
+  			timercnt[pinno]=0x80+(eeprom[0xD7+(pinnoX4)]&0x7F);	// Faktor/Dauer
 			timerbase[pinno]=timer_base;
 
    			objval=(read_obj_value(pinno+8)>>3)&0x01;
@@ -107,7 +104,7 @@ void pin_changed(unsigned char pin_no)
   			case 0x30:
   				objval=1;
   				break;
-  			default:	
+  			default:
   			//case 0x20:			// zweiflaechen dunkler parametriert
   			//case 0x40:
   				objval=0;
@@ -130,7 +127,7 @@ void pin_changed(unsigned char pin_no)
   				case 0x20:	// zweiflaechen aus
   					objval=0;
   					break;
-  				default:	
+  				default:
   			//	case 0x00:	// UM Einflaeche
   			//	case 0x30:	// UM-heller
   			//	case 0x40:	// UM-dunkler
@@ -141,18 +138,18 @@ void pin_changed(unsigned char pin_no)
   			}
   			else {	// Timer schon abgelaufen (also dimmen), dann beim loslassen stop-telegramm senden
   				tmp=read_obj_value(pinno+8);
-  				if (eeprom[0xD5+(pinnoX4)] & 0x08) {	// ... natuerlich nur wenn parameter dementsprechend 
+  				if (eeprom[0xD5+(pinnoX4)] & 0x08) {	// ... natuerlich nur wenn parameter dementsprechend
   					write_send(pinno+8, tmp & 0x08);		// Stop Telegramm
   				}
   				else write_obj_value(pinno+8,tmp & 0x08);	// auch wenn Stopp Telegramm nicht gesendet wird, Objektwert auf 0 setzen
 				timer_state=0;
 				timercnt[pinno]=0;
   			}
-  			
+
   		}
 #endif
         break;
-       
+
         case 0x03:				//Funktion Jalousie
         	/****************************
         	 * Funktion Jalousie
@@ -180,7 +177,7 @@ void pin_changed(unsigned char pin_no)
 	            	write_send( pinno, jobj);	// Kurzzeit telegramm immer bei Drücken senden
 	    			timercnt[pinno]=0x80+eeprom[0xD6+(pinno*4)];//Faktor Dauer )
 	    			timerbase[pinno]=timer_base;
-	    			// Zeit zwischen kurz und langzeit)	
+	    			// Zeit zwischen kurz und langzeit)
 	     			//
 	    			timer_state = jobj+0x80;
 	            }// ende Bedienkonzept lang-kurz-lang
@@ -191,11 +188,11 @@ void pin_changed(unsigned char pin_no)
     		}
         break;
 
-#ifdef wertgeber 
+#ifdef wertgeber
     	/**********************************************************
     	 * Funktion Wertgeber Dimmen,Temparatur,Helligkeit
     	 **********************************************************/
-       
+
         case 0x04:// Dimmwertgeber
         	para_value=0xFF;
         	typ=0x01;
@@ -209,33 +206,33 @@ void pin_changed(unsigned char pin_no)
         	n=0xD5+(pinno*4);
         	tmp=(((eeprom[n]&0x04)>>2)|(eeprom[n+1]&0x80)>>6);//in tmp steigend fallend reaktion
         	if (st_Flanke){// Taster gedrueckt       in tmp bit0 steigend, bit1 fallend
-        		
+
         		if(tmp&0x01) write_send( pinno+objoffset, eis5conversion((eeprom[n+2]& para_value),typ));	//wert senden
         	}//ende steigende Flanke
     		else {	// Taster losgelassen dimmwert senden
   			if (tmp>=0x02) write_send( pinno+objoffset, eis5conversion(eeprom[n+tmp]& para_value,typ));
     		}
          break;
- 
+
          case 0x05:
     	/*******************************************
     	 * Funktion Wertgeber Lichtszenen
     	 *******************************************/
         	 n=0xD5+(pinno*4);
         	 para_value=eeprom[n] & 0x0C;
-        	 
-		if (st_Flanke){// Taster gedrueckt 
+
+		if (st_Flanke){// Taster gedrueckt
 			if(para_value!=0x04) write_send( pinno,eeprom[n+2]&0x7F );	// Lichtszenennummer senden
 		}
 		else{
 			if(para_value>=0x04) write_send( pinno,eeprom[n+3]&0x7F );	// Lichtszenennummer senden
 		}
- 	
-        break;
-#endif        
 
-        
-#ifdef zaehler         
+        break;
+#endif
+
+
+#ifdef zaehler
          case 0x09:
         	/*******************************************
         	 * Funktion Impulszaehler
@@ -258,7 +255,7 @@ void pin_changed(unsigned char pin_no)
         				zaehlervalue[1]=0;//pinno-2 , da die parameter den zählereingangen zugeordnet sind
         				timercnt[1]=eeprom[0xD6]|0x80;//Torzeit setzen
         				timerbase[1]=((eeprom[0xF7]&0x0F))|0x80;
-        				
+
         			}
         		}
         		n = n & 0xF0;
@@ -283,7 +280,7 @@ void pin_changed(unsigned char pin_no)
             		zaehlervalue[pinno]++;// zählwert erhöhen
             		schrittzaehler[pinno]++;// schrittzähler erhöhen
             		maxzaehler=(eeprom[para_adr +2]<<8) +eeprom[para_adr+3];
-            		tmp=0;      
+            		tmp=0;
             		if (zaehlervalue[pinno]>=maxzaehler){// wenn zählwert erreicht
             			tmp=(n>>6);// parameter für ausgange 1Bit
             			if (tmp==0x03)tmp= (read_obj_value(pinno)^0x01);//UM
@@ -299,11 +296,11 @@ void pin_changed(unsigned char pin_no)
                 		schrittzaehler[pinno]=0;		// reset schrittzähler
                 	}
             	}
-        
+
         	break;
         default:
         break;
-#endif        	
+#endif
     }
 	timerstate[pinno]=timer_state;
   }// end if (debounce)...
@@ -322,11 +319,11 @@ int eis5conversion(unsigned char zahl,unsigned char Typ)
 	unsigned char exp=0;
 	unsigned int wert=0;
 	if (Typ==4){// Helligkeitwert
-		exp=3;// Da kleinster wert 50 lux*100=5000 ==> 5000/8 (exp=3) 
+		exp=3;// Da kleinster wert 50 lux*100=5000 ==> 5000/8 (exp=3)
 	 	wert=zahl*625;//= 625
 	}
 	if (Typ==6){// Temperaturwert kleinster wert =1 größter 31
-		
+
 		wert=zahl*100;// Hier reicht uns eine 16bit int var
 	}
 	if (Typ==7){// wenn Dimmwert ( EIS2, also keine Fließkomma)
@@ -342,7 +339,7 @@ int eis5conversion(unsigned char zahl,unsigned char Typ)
 }
 #endif
 
-/** 
+/**
 * zaehlt alle 130ms die Variable Timer hoch und prueft records
 *
 * \param void
@@ -374,7 +371,7 @@ void delay_timer(void)
 		}// end if timer...
 		timerflags = timerflags>>1;
 	}//end for (n=...
-	
+
 	for(objno=0;objno<8;objno++) {
 		timer_state=timerstate[objno];
 		if(timercnt[objno]==0x80) {
@@ -398,7 +395,7 @@ void delay_timer(void)
 						write_send( objno+8, timer_state & 0x01);	// Langzeit Telegramm senden
 						// *** delay record neu laden für Dauer Lamellenverstellung ***
 
-		    			m = eeprom[0xD7+(objno*4)];	// Faktor Dauer	Lamelle	T2	
+		    			m = eeprom[0xD7+(objno*4)];	// Faktor Dauer	Lamelle	T2
 		    			if (m > 3){// wenn lamellenverstellzeit >3 dann zeit sichern und kurztele zwecks stop
 		    				//d.h. bei minimum nach ETS Faktor=3 T2 ist abgeschaltet->kein stop
 		    				//damit kann Jalousie als schalter mit 2 schaltebenen verwendung finden
@@ -411,10 +408,10 @@ void delay_timer(void)
 						else timercnt[objno]=0;
 		    			//timerbase[objno]=0;
 			}
-			switch (timer_state & 0x50){		
+			switch (timer_state & 0x50){
 			case 0x10:
 						timerstate[objno]=0; // wenn T2 abgelaufen dann nichts mehr machen
-			break;		
+			break;
 #ifdef dimmer
 			case 0x40:
 				 // 0x4x fuer Dimmer Funktion
@@ -457,7 +454,7 @@ void schalten(__bit risefall, unsigned char pinno)	// Schaltbefehl senden
 			else sendval = func & 0x01;	// EIN   AUS
 			write_send(pinno,sendval);
 		}
-	
+
 }
 
 
@@ -470,16 +467,16 @@ unsigned char debounce(unsigned char pinno)	// Entprellzeit abwarten und prüfen 
   debtime=eeprom[DEBTIME];			// Entprellzeit in 0,5ms Schritten
   if (debtime>0) {
 	  for(n=0;n<debtime;n++){
-	  	for(w=112;w>0;w--); 
+	  	for(w=112;w>0;w--);
 	  	}// delay ca. 4,5µs
   }
 
 #ifndef IN8_2TE
   return ((~(P0^p0h))& bitmask_1[pinno]);//ret=1;
-  
+
 #else
   return ((~(spi_in_out()^p0h))& bitmask_1[pinno]);//ret=1;
-  
+
 #endif
 
 }
@@ -521,10 +518,10 @@ void write_value_req(unsigned char objno)		// Objekt-Wert setzen gemäß empfangen
     				}//ende if (objno<16)..
 
 }// end function
-    
+
 
 void sperren (unsigned char obj,unsigned char freigabe)
-{	
+{
 	__bit objval=0;
 	//__bit sending ;
 	//sending=1;
@@ -544,21 +541,21 @@ void sperren (unsigned char obj,unsigned char freigabe)
 				if (freigabe){ //ende sperre-> aktueller Zustand
 				objval= (portbuffer>>obj)& 0x01;
 				}
-				else{	
+				else{
     			objval=read_obj_value(obj)^0x01;//Tele invers senden
 				}
 			break;
 			default:
 			sendobj=255;
 		}
-		
+
 		//if (sending) write_send(obj,objval);
-	break;	
+	break;
 	case 0x02:// funktion Dimmer-sperren
 #ifdef dimmer
 		objval = read_obj_value(obj);
 		sendobj=obj;
-		if (freigabe){		// Ende Sperre  
+		if (freigabe){		// Ende Sperre
 			if (eeprom[0xD5+(obj*4)]&0x80) objval=0;
 			else sendobj=255;
 		}
@@ -578,7 +575,7 @@ void sperren (unsigned char obj,unsigned char freigabe)
 			}
 		}
 		//if (sending) write_send(obj,objval);	// value senden
-#endif		
+#endif
 	break;
 	case 0x03:// Funktion Jalousie - Sperren
 		sendobj=obj+8;
@@ -593,7 +590,7 @@ void sperren (unsigned char obj,unsigned char freigabe)
     			objval=read_obj_value(obj+8)^0x01;//neues Jaloobj invers zum langzeit
     		break;
 			default:
-			sendobj=255;	
+			sendobj=255;
 		}
 		//if (sending) write_send(obj+8,objval);
 	break;
@@ -602,17 +599,17 @@ void sperren (unsigned char obj,unsigned char freigabe)
 		write_obj_value(sendobj,objval);
 		while(!send_obj_value(sendobj));
 	}
-	
+
 }// End function
 
 
 
-/** 
+/**
 * Objektwert lesen wurde angefordert, read_value_response Telegramm zurücksenden
 *
-* 
+*
 * @return
-* 
+*
 */
 void read_value_req(unsigned char objno)
 {
@@ -633,7 +630,7 @@ void bus_return(void){
 	  //  ++++++++++++    Startverhalten bei Buswiederkehr ++++++++++
 	__bit objval=0;
 	blocked=0;
-	
+
 	for (n=0;n<8;n++){
 		  senden=0;
 		  timercnt[n]=0;// alle timer ausschalten
@@ -644,12 +641,12 @@ void bus_return(void){
 			case 0x01:// schalten
 			timerstate[n]=0;
 			case 0x03:// Jalousie
-		//  case 0x04:// Wertgeber(lichtszene)		
+		//  case 0x04:// Wertgeber(lichtszene)
 				switch(eeprom[0xD5+(n*4)]&0xC0){
 				case 0x40:
 					objval=1;
 					senden=1;
-				break;	
+				break;
 				case 0x80:
 					objval=0;
 					senden=1;
@@ -666,10 +663,10 @@ void bus_return(void){
 				if(eeprom[0xD8+(n*4)]&0x80){
 					objval=1;
 					senden=1;
-				//ansonsten nichts tun !	
+				//ansonsten nichts tun !
 				}
 			break;
-			case 0x09:	// timer für impulszähler starten falls kein sync angeschlossen 
+			case 0x09:	// timer für impulszähler starten falls kein sync angeschlossen
 				if (n<=1){
 					timercnt[n]=0x80;
 					timerbase[n]=0x80;
@@ -706,10 +703,10 @@ unsigned long read_obj_value(unsigned char objno)
 		}
 		else objvalue = objectvalue_l[objno]&(0xFF>>(7-objtype));
 	}
-	else {// also >15 
+	else {// also >15
 		objvalue=(Sperre>>(objno-16))&0x01;
 	}
-	return(objvalue);	
+	return(objvalue);
 
 }
 
@@ -718,9 +715,9 @@ unsigned long read_obj_value(unsigned char objno)
 void write_obj_value(unsigned char objno,long objvalue)
 {
 	unsigned char objtype;
-	
+
 	objtype=eeprom[eeprom[COMMSTABPTR]+objno+objno+objno+4];
-	
+
 	if (objno <= 15) {	// wenn objno <= anzahl objekte
 		if (objtype>=8){
 			//objno &= 0x07;
@@ -730,9 +727,9 @@ void write_obj_value(unsigned char objno,long objvalue)
 				objectvalue_l[objno&0x07]=objvalue & 0xFF;
 				}
 		}
-		else 			objectvalue_l[objno]=objvalue & 0xFF;		
+		else 			objectvalue_l[objno]=objvalue & 0xFF;
 	}
-	else {// also >15 
+	else {// also >15
 		Sperre &= (0xff-(bitmask_1[objno-16]));
 		Sperre |= ((objvalue&0x01)<<(objno-16));
 	}
@@ -745,7 +742,7 @@ unsigned long read_obj_value(unsigned char objno)
 	unsigned long objvalue=0;
 	unsigned char objtype;
 	objtype=eeprom[eeprom[COMMSTABPTR]+objno+objno+objno+4];
-	
+
 	if (objno <= 15) {	// wenn objno <= anzahl objekte
 		if (objtype>=8){// bei 16bit
 			objvalue=objectvalue_h[objno&0x07]<<8;
@@ -753,7 +750,7 @@ unsigned long read_obj_value(unsigned char objno)
 		}
 		else objvalue = objectvalue_l[objno]&(0xFF>>(7-objtype));
 	}
-	else {// also >15 
+	else {// also >15
 		objvalue=(Sperre>>(objno-16))&0x01;
 	}
 	return(objvalue);
@@ -764,9 +761,9 @@ unsigned long read_obj_value(unsigned char objno)
 void write_obj_value(unsigned char objno,long objvalue)
 {
 	unsigned char objtype;
-	
+
 	objtype=eeprom[eeprom[COMMSTABPTR]+objno+objno+objno+4];
-	
+
 	if (objno <= 15) {	// wenn objno <= anzahl objekte
 		if (objtype>=8){
 			objectvalue_h[objno&0x07]=objvalue>>8;
@@ -775,7 +772,7 @@ void write_obj_value(unsigned char objno,long objvalue)
 		objectvalue_l[objno]=objvalue & 0xFF;
 
 	}
-	else {// also >15 
+	else {// also >15
 		Sperre &= (0xff-(bitmask_1[objno-16]));
 		Sperre |= ((objvalue&0x01)<<(objno-16));
 	}
@@ -790,7 +787,7 @@ void restart_app(void)		// Alle Applikations-Parameter zurücksetzen
 	P0M2=0x00;	// 0_4-0_7 auf  push-pull
 	P0=0xFF;
 
-#else	
+#else
 #ifndef IN8_2TE
 	P0M1=0xFF;	//P0 auf input only (high impedance!)
 	P0M2=0x00;
@@ -802,10 +799,10 @@ void restart_app(void)		// Alle Applikations-Parameter zurücksetzen
 #endif
 #endif
 	RTCCON=0x81;		// RTC starten
-	
+
 	timer=0;			// Timer-Variable, wird alle 65ms inkrementiert
 /*
-  EA=0; 
+  EA=0;
   START_WRITECYCLE
   WRITE_BYTE(0x01,0x03,0x00)	// Herstellercode 0x0004 = Jung
   WRITE_BYTE(0x01,0x04,0x04)
@@ -818,6 +815,6 @@ void restart_app(void)		// Alle Applikations-Parameter zurücksetzen
   STOP_WRITECYCLE
 
   EA=1;
-*/  
- 
+*/
+
 }
