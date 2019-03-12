@@ -239,13 +239,13 @@ void pin_changed(unsigned char pin_no)
         	 *******************************************/
         	n=eeprom[0xD5+(pinno*4)];// Parameter Flanke für Zählimpuls
         	if (pinno<=1){// pinno 0-1 Zähleingnag
-        		if ((n&0x01 && st_Flanke)||(n&0x02 &! st_Flanke)){
+        		if ((n&0x01 && st_Flanke)||(n&0x02 && !st_Flanke)){
         			if (zaehlervalue[pinno]< 0xFFFF)zaehlervalue[pinno]++;
         		}
         	}
         	else{ //pinno also grösser 1, bei Impulszähler hier die Syncron eingänge
         		n=eeprom[0xD5+((pinno-2)*4)];// Parameter Flanke für Zählimpuls
-        		if ((n&0x04 && st_Flanke)||(n&0x08 &! st_Flanke)){
+        		if ((n&0x04 && st_Flanke)||(n&0x08 && !st_Flanke)){
         			if (pinno==2){
         				zaehlervalue[0]=0;//pinno-2 , da die parameter den zählereingangen zugeordnet sind
         				timercnt[0]=eeprom[0xD6]|0x80;//Torzeit setzen
@@ -276,7 +276,7 @@ void pin_changed(unsigned char pin_no)
         	break;
         case 10:// ### Schaltzähler ###
         	n=eeprom[0xD5+(pinno*4)];// Parameter Flanke für Zählimpuls
-            	if ((n&0x01 && st_Flanke)||(n&0x02 &! st_Flanke)){
+            	if ((n&0x01 && st_Flanke)||(n&0x02 && !st_Flanke)){
             		zaehlervalue[pinno]++;// zählwert erhöhen
             		schrittzaehler[pinno]++;// schrittzähler erhöhen
             		maxzaehler=(eeprom[para_adr +2]<<8) +eeprom[para_adr+3];
