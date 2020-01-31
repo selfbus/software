@@ -1,3 +1,10 @@
+2020-01-30 Version 1.0c
+		+ added parameter NoPWM to "void port_schalten(unsigned char ports, __bit NoPWM)"
+			this is used to be able to switch on the output-relais 1 & 2 after a knx-bus return in "void bus_return(void)"
+		* renamed variable blocked to gblocked to represent that its a global variable --> more todo here
+		* fixed blocking an output, did not send a response with the new state of the output
+		+ then blocking of an output ends, the output switches to the state represented by its switch-object (obj0 & obj1)
+
 2013-05-19 Version 1.0
         Sourcen übernommen, Version als 1.0 bezeichnet
         Eclipse Projekt angelegt

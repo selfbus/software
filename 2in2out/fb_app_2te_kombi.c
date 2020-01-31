@@ -35,13 +35,14 @@ __bit wait_bus_return;			//bit ist 1 bei aktiver Verzögerung bei Buswiederkehr
  * Aus
  *****/
 
-unsigned char portbuffer;		// Zwischenspeicherung der Portzustände
-unsigned char blocked;			// Sperrung der Ausgänge und Eingänge (1=gesperrt)
-unsigned char logicstate;		// Zustand der Verknüpfungen pro Ausgang
-long timer;						// Timer für Schaltverzögerungen, wird alle 130us hochgezählt
-__bit delay_toggle;				// um nur jedes 2. Mal die delay routine auszuführen
-unsigned char owntele;			// Anzahl der internen Verarbeitungen eines gesendeten Telegrammes (Rückmeldung)
-unsigned char respondpattern;	// bit wird auf 1 gesetzt wenn objekt eine rückmeldung ausgelöst hat
+unsigned char portbuffer;		    // Zwischenspeicherung der Portzustände
+unsigned char gblocked;			    // Sperrung der Ausgänge und Eingänge (1=gesperrt)
+unsigned char logicstate;		    // Zustand der Verknüpfungen pro Ausgang
+long timer;						    // Timer für Schaltverzögerungen, wird alle 130us hochgezählt
+__bit delay_toggle;				    // um nur jedes 2. Mal die delay routine auszuführen
+unsigned char owntele;			    // Anzahl der internen Verarbeitungen eines gesendeten Telegrammes (Rückmeldung)
+unsigned char respondpattern;	    // bit wird auf 1 gesetzt wenn objekt eine rückmeldung ausgelöst hat
+
 
 unsigned char objektwerte[12];
 
@@ -111,7 +112,7 @@ void button_changed(unsigned char buttonno, __bit buttonval)
 				}
 				else
 				{
-					if ((blocked&((buttonno+1)<<2))==0)
+					if ((gblocked&((buttonno+1)<<2))==0)
 					{
 						send_value(1,(buttonno + 2+8*n),objval);
 
@@ -136,7 +137,7 @@ void button_changed(unsigned char buttonno, __bit buttonval)
  ******************/
 
 /**
-* Schaltet einen Ausgang gemäß objstate und den zugörigen Parametern
+* Schaltet einen Ausgang gemäß objstate und den zugehörigen Parametern
 *
 * \param  objno <Beschreibung>
 * \param  objstate <Beschreibung>
@@ -171,7 +172,7 @@ void object_schalten(unsigned char objno, __bit objstate)
 		if (((eeprom[FUNCTYP]>>objno*2)&0x03)==0x00) logicfunc=(eeprom[LOGICTYP]>>objno*2)&0x03;
 
 
-		if((port_pattern & (blocked&0x03))==0 && (objflags&0x14)==0x14) {	// Objekt ist nicht gesperrt und Kommunikation zulässig (Bit 2 = communication enable) und Schreiben zulässig (Bit 4 = write enable)
+		if((port_pattern & (gblocked&0x03))==0 && (objflags&0x14)==0x14) {	// Objekt ist nicht gesperrt und Kommunikation zulässig (Bit 2 = communication enable) und Schreiben zulässig (Bit 4 = write enable)
 
 			if (objno==1) delay_base=eeprom[0xF7]& 0x0F;
 			else delay_base=(eeprom[0xF6]>>4) & 0x0F;
@@ -363,9 +364,9 @@ void delay_timer(void)
 *
 * @return void
 */
-void port_schalten(unsigned char ports)		//
+void port_schalten(unsigned char ports, __bit NoPWM)		//
 {
-	if(ports & ~userram[0x29]) {	// Vollstrom nur wenn ein relais eingeschaltet wird
+	if(NoPWM || (ports & ~userram[0x29])) {	// Vollstrom nur wenn ein relais eingeschaltet wird
 		TR0=0;
 		AUXR1&=0xE9;	// PWM von Timer 0 nicht mehr auf Pin ausgeben
 		PWM=0;			// Vollstrom an
@@ -486,6 +487,7 @@ void write_value_req(void)	//
 {
 	  unsigned char objno,gapos,atp,assno,n,gaposh,zftyp,objno_help;
 	  unsigned char blockstart,blockend,blockpol_help,blockact_help, ohs,m;
+	  unsigned char portstate, lastportstate, restorestate;
 	  __bit objval;
 
 	    gaposh=0;
@@ -567,16 +569,21 @@ void write_value_req(void)	//
 
 							if (((telegramm[7]==0x80) && (blockpol_help==0)) || ((telegramm[7]==0x81) && (blockpol_help!=0)))
 							{	// Ende der Sperrung
-								blocked=blocked&(0xFF-ohs);
-								if (blockend==0x01) portbuffer=portbuffer&(0xFF-ohs);	// Bei Ende der Sperrung ausschalten
-								if (blockend==0x02) portbuffer=portbuffer|ohs;		// Bei Ende der Sperrung einschalten
+								gblocked=gblocked&(0xFF-ohs);
+								if (blockend==0x01) portbuffer=portbuffer&(0xFF-ohs); 	    // Bei Ende der Sperrung ausschalten
+								else if (blockend==0x02) portbuffer=portbuffer|ohs; 		// Bei Ende der Sperrung einschalten
+								else {
+									restorestate = lese_objektwerte(objno_help); // Bei Ende der Sperrung Ursprungszustand wiederherstellen
+									portbuffer = portbuffer | (restorestate << objno_help);
+								}
 							}
 
 							if (((telegramm[7]==0x81) && (blockpol_help==0)) || ((telegramm[7]==0x80) && (blockpol_help!=0)))
 							{	// Beginn der Sperrung
-								blocked=blocked|(ohs);
-								if (blockstart==0x01) portbuffer=portbuffer&(0xFF-ohs);	// Bei Beginn der Sperrung ausschalten
-								if (blockstart==0x02) portbuffer=portbuffer|ohs;		// Bei Beginn der Sperrung einschalten
+								gblocked=gblocked|(ohs);
+								if (blockstart==0x01) portbuffer=portbuffer&(0xFF-ohs);     // Bei Beginn der Sperrung ausschalten
+								else if (blockstart==0x02) portbuffer=portbuffer|ohs; 		// Bei Beginn der Sperrung einschalten
+
 								delrec[objno_help*4]=0;	// ggf. Eintrag für Schaltverzögerung löschen
 							}
 							break;
@@ -584,6 +591,18 @@ void write_value_req(void)	//
 					//case 0x02:			// Zwangsstellung
 
 	        	  }
+
+	    	      if (portbuffer != userram[0x29]) {
+	    	    	  portchanged=1;//post für port_schalten hinterlegen
+
+	    	    	  lastportstate = userram[0x29] & 0x01;
+	    	    	  portstate = portbuffer & 0x01;
+	    	    	  if (portstate != lastportstate) respond(objno_help, portstate);  //Rückmeldeobjekt Ausgang 1 angepasst
+
+	    	    	  lastportstate = (userram[0x29] >> 1) & 0x01;
+	    			  portstate = (portbuffer >> 1) & 0x01;
+	    			  if (portstate != lastportstate) respond(objno_help, portstate);  //Rückmeldeobjekt Ausgang 2 angepasst
+	    	      }
 	          }
 
 
@@ -627,7 +646,7 @@ void write_value_req(void)	//
             	  if ((telegramm[7]-0x7f)==blockpol_help)
             	  {	// Ende der Sperrung
 
-            		  blocked=blocked&(0xFF-ohs);  // Bit 3 und 4 für die Eingänge Objekt 3 und 4
+            		  gblocked=gblocked&(0xFF-ohs);  // Bit 3 und 4 für die Eingänge Objekt 3 und 4
 
             		  if (blockend)
             		  {
@@ -655,7 +674,7 @@ void write_value_req(void)	//
             	  else
             	  {	// Beginn der Sperrung
 
-	                  blocked=blocked|(ohs);  // Bit 3 und 4 für die Eingänge Objekt 3 und 4
+	                  gblocked=gblocked|(ohs);  // Bit 3 und 4 für die Eingänge Objekt 3 und 4
 
 	                  if (blockstart)
 	                  {
@@ -682,7 +701,6 @@ void write_value_req(void)	//
 	          }// Ende Zusatzfunktionen Eingänge
 	        }
 	      }
-	      if (portbuffer != userram[0x29]) portchanged=1;//post für port_schalten hinterlegen
 	    }
 	    owntele=0;
 	    respondpattern=0;
@@ -878,8 +896,10 @@ void bus_return(void)
 	if(bw==0x01)  portbuffer=portbuffer & (0xFD);
 	if(bw==0x02)  portbuffer=portbuffer | (0x02);
 
-	portchanged=1;
 
+	port_schalten(portbuffer, 0x01); // dont use PWM to switch on the relais if needed
+
+	portchanged=1;
 
 	owntele=1;
 	respond(0,(portbuffer & 0x01));
@@ -991,9 +1011,9 @@ void restart_app(void)
 
 	owntele=0;
 	respondpattern=0;
-	blocked=0;
-
+	gblocked=0;
 	
+
 	// Beispiel für die Applikations-spezifischen Einträge im eeprom
 	EA=0;						// Interrupts sperren, damit flashen nicht unterbrochen wird
 	START_WRITECYCLE

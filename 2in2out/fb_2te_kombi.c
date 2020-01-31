@@ -71,7 +71,7 @@ void main(void)
 		else
 		{
 			if ((PORT & 0x0C) != button_buffer) port_changed(PORT & 0x0C);	// ein Taster wurde gedrueckt
-			if (portchanged) port_schalten(portbuffer);				// Ausgänge schalten
+			if (portchanged) port_schalten(portbuffer, 0x00);				// Ausgänge schalten
 		}
 
 		if(RTCCON>=0x80) delay_timer();	// Realtime clock Ueberlauf

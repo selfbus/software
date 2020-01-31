@@ -47,7 +47,7 @@ void read_value_req(void);
 void send_value(unsigned char type, unsigned char objno, unsigned int sval);
 void delay_timer(void);			// zählt alle 130ms die Variable Timer hoch und prüft Queue
 void respond(unsigned char objno, unsigned char rval);
-void port_schalten(unsigned char ports);	// Ausgänge schalten
+void port_schalten(unsigned char ports, __bit NoPWM); // Ausgänge schalten
 void object_schalten(unsigned char objno, __bit objstate);	// Objekt schalten
 void delay(int w);
 void bus_return(void);
