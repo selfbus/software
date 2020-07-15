@@ -317,7 +317,7 @@ void calibrate(void)
 void restart_hw(void)
 {
 	
-	DIVM=0;			// Taktferquenz nicht teilen -> volles Tempo
+	DIVM=0;			// Taktfrequenz nicht teilen -> volles Tempo
   
 	P1M1=0x14;		// Port 1 auf quasi-bidirektional,
 							// ausser P1.2(T0 als PWM Ausgang)=open-drain,

@@ -1,3 +1,6 @@
+2020-07-15 Version 1.0d
+		+ added watchdog functionality to main(void), file fb_2te_kombi.c
+
 2020-01-30 Version 1.0c
 		+ added parameter NoPWM to "void port_schalten(unsigned char ports, __bit NoPWM)"
 			this is used to be able to switch on the output-relais 1 & 2 after a knx-bus return in "void bus_return(void)"

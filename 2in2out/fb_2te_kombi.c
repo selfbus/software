@@ -32,6 +32,7 @@
 #include "2te_prot.h"
 #include "fb_app_2te_kombi.h"
 #include "2te_delay.h"
+#include "../com/watchdog.h"
 
 
 
@@ -55,13 +56,25 @@ void main(void)
 	restart_prot();				// Protokoll-relevante Parameter zuruecksetzen
 	restart_app();				// Anwendungsspezifische Einstellungen zuruecksetzen
 
+    // feed the watchdog
+    WATCHDOG_INIT
+    WATCHDOG_START
+	EA = 0;
+    WFEED1 = 0xA5;
+    WFEED2 = 0x5A;
+    EA=1;
+
 	do  {
 		
 		// ***************************************************************************
 		// Hier ist der Platz für wiederkehrende Abfragen, die nicht zeitkritisch sind
 		// ***************************************************************************
+		WATCHDOG_FEED 	    // feed the watchdog
 
-
+	    EA = 0;
+	    WFEED1 = 0xA5;
+	    WFEED2 = 0x5A;
+	    EA=1;
 
 
 		if (wait_bus_return) // prüfen ob Wartezeit noch läuft
