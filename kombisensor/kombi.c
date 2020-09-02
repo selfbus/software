@@ -9,6 +9,8 @@
 
 #include <P89LPC922.h>
 #include <fb_lpc922_1.51.h>
+//#include <fb_lpc922_1.58.h>
+//#include <fb_lpc922.h>
 
 #include "app_kombi.h"
 
@@ -24,6 +26,7 @@ signed int temp;
 unsigned int lux;
 unsigned char tasterpegel = 0;
 __bit tastergetoggelt = 0;
+__bit bFirstStart = 1;
 
 const unsigned char logtable[] =
 { 0, 9, 17, 27, 40, 53, 66, 79, 88, 96, 101, 106, 109, 112, 255 };
@@ -71,17 +74,21 @@ void main(void)
 	WFEED2 = 0x5A;
 	EA = 1;
 
+	bFirstStart = 1;
+
+
 	do
 	{
 		if (eeprom[0x0D] == 0xFF && fb_state == 0 && !connected)
 		{	// Nur wenn im run-mode und statemachine idle
-
 			ET1 = 0;									// statemachine stoppen
 			switch (sequence)
 			{
 			case 1:
-				if ((timer & 0x3F) == 0x30)
-				{	// nur alle 10 Sekunden wandeln
+				//if (((timer & 0x3F) == 0x30) || (bFirstStart)) //0x30 = 48 * 130ms = 6,24s // nur alle 10 Sekunden wandeln ?
+				if (((timer & 0x0F) == 0x0F) || (bFirstStart)) //0x0F = 15 * 130ms = 1,95s
+				{
+					bFirstStart = 0;
 					interrupted = 0;
 					start_tempconversion();				// Konvertierung starten
 					if (!interrupted)
@@ -90,8 +97,8 @@ void main(void)
 				ET1 = 1;						// statemachine starten
 				break;
 			case 2:
-				if ((timer & 0x07) == 0x07)
-				{	// nur ein mal pro Sekunde pollen
+				if ((timer & 0x07) == 0x07) // nur ein mal pro Sekunde pollen
+				{
 					interrupted = 0;
 					if (ow_read_bit() && !interrupted)
 						sequence = 3;	// Konvertierung abgeschlossen
@@ -208,12 +215,12 @@ void main(void)
 				break;
 			}
 
-			// Senden von Temp bei Änderung
+			// Senden von Temperatur bei Änderung
 			change = ((eeprom[TEMPPARAM] & 0x70) >> 4) * 100;// wenn change=0 wird nicht gesendet
 			if (change)
 			{
-				if (((temp + change) <= lasttemp)
-						|| ((lasttemp + change) <= temp))
+				//if (((temp + change) <= lasttemp) || ((lasttemp + change) <= temp)) // das funktioniert nicht
+				if ((temp > lasttemp && (temp - lasttemp) >= change) || (temp < lasttemp && (lasttemp - temp) >= change))
 				{	// bei Änderung um 1-3K
 					WRITE_DELAY_RECORD(1, 1, 1, timer + 1)
 					lasttemp = temp;
@@ -273,6 +280,17 @@ void main(void)
 				tastergetoggelt = 0;
 		}
 		TASTER = !(status60 & 0x01);// LED entsprechend Prog-Bit schalten (low=LED an)
+
+		if (status60 & 0x01)
+		{
+			// im Programmiermodus kurze Pause einlegen
+			/*
+			for (n = 0; n < 255; n++)
+			{
+			}	// etwas zeit zum leuchten, wenn Hauptschleife nicht aktiv
+			*/
+		}
+
 		if (fb_state == 0)
 			for (n = 0; n < 100; n++)
 			{

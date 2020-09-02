@@ -10,6 +10,8 @@
 
 #include <P89LPC922.h>
 #include <fb_lpc922_1.51.h>
+//#include <fb_lpc922_1.58.h>
+//#include <fb_lpc922.h>
 
 #include "app_kombi.h"
 
@@ -486,11 +488,14 @@ void restart_app(void)		// Alle Applikations-Parameter zurücksetzen
 	//write_obj_value(10,0);		// Sperre bei Neustart löschen
 	global_object_value_3_to_10 &= 0x7F;
 
-	for (objno = 2; objno < 9; objno++)
+	bFirstStart = 1;
+
+	for (objno = 0; objno < 9; objno++)
 		WRITE_DELAY_RECORD(objno, 0, 0, 0)// erstmal alle delay-records auf inaktiv setzen
+
 	if ((eeprom[0xD3] & 0x0F) != 0)
 	{
-		WRITE_DELAY_RECORD(0, 1, 1, timer + 50)
+		WRITE_DELAY_RECORD(0, 1, 1, timer + 50) //delay was too short so the timer sent a 0 for temperature before first measurment
 	}
 	if ((eeprom[0xD2] & 0x0F) != 0)
 	{
@@ -521,4 +526,10 @@ void restart_app(void)		// Alle Applikations-Parameter zurücksetzen
 	STOP_WRITECYCLE
 	;
 	EA = 1;
+
+	RTCCON = 0x60;	// Real Time Clock stoppen
+	RTCH = 0x1D;	// Real Time Clock auf 130ms laden (0,13s x 7372800 / 128)
+	RTCL = 0x40;// (RTC ist ein down-counter mit 128 bit prescaler und osc-clock)
+	RTCCON = 0x61;	// ... und starten
+
 }
