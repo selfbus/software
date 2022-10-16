@@ -14,7 +14,7 @@ Version 0.11 (0x01, 0x0B)
 VD Version 0.6 (28B18)
 ==========================================
 
-Temperatur und Luftfeuchte Messung über 4 DS18B20/DS18S20, DHT21/DHT22
+Temperatur und Luftfeuchte Messung über 4 DS18B20/DS18S20, DHT11, DHT21/DHT22
 
 Allgemein:
 Auslesen aller Objektzustände		ja, Flags beachten!

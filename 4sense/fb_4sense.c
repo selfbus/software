@@ -18,6 +18,7 @@
  *              1.0   1st Release, Fix StackPointer check, DEVICE_ID_CHECK added
  *              1.01  Bugfix, negative temperatures for DHT22 where send as positive
  *              1.02  Update Lib to V1.58, reduce power consumption
+ *              1.03  Bugfix, DHT11 not working
  *
  * Com-Objekte
  * 0,2,4,6  = Temperatur
@@ -229,11 +230,23 @@ void main(void)
             {
                 if(ee_local &0x02) // DHT sensor starts answering directly
                 {
-                    if(ee_local &0x04) // Generate reset pulse for DHT 1x
+                    unsigned char dhtType;
+                    if (ee_local & 0x08)
+                    {
+                        dhtType = DHT1x_SENSOR;
+                    }
+                    else
+                    {
+                        dhtType = DHT2x_SENSOR;
+                    }
+
+                    if(dhtType == DHT1x_SENSOR)
+                    { // Generate reset pulse for DHT 1x
                         dht1x_init(kanal);
+                    }
                     //family_code[kanal] = dht_ow_receive(kanal);  // Read DHT sensor, 0 if OK
 
-                    if(!dht_ow_receive(kanal) && dht_decode(ee_local &0x04))
+                    if(!dht_ow_receive(kanal) && dht_decode(dhtType))
                     {
                         onewire_error &= ~(3<<(kanal<<1)); // Reset channel error log
 
