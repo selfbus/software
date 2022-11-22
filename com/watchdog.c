@@ -33,7 +33,7 @@ RETURNS: Nothing
 ************************************************************************/
 void watchdog_init(void)
 {
-//  bit eacopy;
+//  __bit eacopy;
 
   // init reload value and prescaler
   // select Watchdog clock at 400kHz
@@ -55,7 +55,7 @@ CAUTION: watchdog_init must be called first
 ************************************************************************/
 void watchdog_feed(void)
 {
-//  bit eacopy;
+//  __bit eacopy;
 
   // disable interrupts
 //  eacopy = EA;

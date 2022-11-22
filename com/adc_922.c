@@ -16,7 +16,7 @@
 
 
 #include <P89LPC922.h>
-#include "../com/adc_922.h"
+#include "adc_922.h"
 
 unsigned char LowByte,HighByte,CMPx,CMPModex;
 unsigned char CMPbufaddr,CMPbuf[2];

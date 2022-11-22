@@ -46,12 +46,12 @@
 
 
 
-bit connected;	/// Programmiermodus, Verbindung steht
+__bit connected;	/// Programmiermodus, Verbindung steht
 unsigned char conh, conl;	/// bei bestehender Verbindung phys. Adresse des Kommunikationspartners
 unsigned char pcount;		/// Paketzaehler, Gruppenadresszaehler
 unsigned char last_tel;
-bit transparency;
-//bit con_timer_refresh;
+__bit transparency;
+//__bit con_timer_refresh;
 
 
 /** 
@@ -61,7 +61,7 @@ bit transparency;
 * 
 * @return 
 */
-void timer1(void) interrupt 3
+void timer1(void) __interrupt 3
 {
 	unsigned char tpdu;
 
@@ -177,9 +177,9 @@ void timer1(void) interrupt 3
 * 
 *
 */
-bit get_ack(void)
+__bit get_ack(void)
 {
-  bit ret;
+  __bit ret;
   unsigned int n;
 
   n=0;
@@ -660,10 +660,10 @@ unsigned char read_obj_type(unsigned char objno)
 *
 * @return
 */
-bit write_obj_value(unsigned char objno,int objvalue)
+__bit write_obj_value(unsigned char objno,int objvalue)
 {
 	unsigned char objtype, valuepointer, offset, commstab;
-	bit write_ok=0;
+	__bit write_ok=0;
 	
 	offset=objno*3;
 	commstab=eeprom[COMMSTABPTR];

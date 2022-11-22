@@ -32,8 +32,8 @@ unsigned char cs;			// checksum
 __code unsigned char __at 0x3600 userram[255];	/// Bereich im Flash fuer User-RAM
 __code unsigned char __at 0x3700 eeprom[255];	/// Bereich im Flash fuer EEPROM
 
-bit parity_ok;			/// Parity Bit des letzten empfangenen Bytes OK
-bit interrupted;		/// Wird durch interrupt-routine gesetzt. So kann eine andere Routine pruefen, ob sie unterbrochen wurde
+__bit parity_ok;		// Parity Bit des letzten empfangenen Bytes OK
+__bit interrupted;		// Wird durch interrupt-routine gesetzt. So kann eine andere Routine pruefen, ob sie unterbrochen wurde
 
 
 
@@ -80,7 +80,7 @@ void stop_rtc(void)
 */
 unsigned char get_byte(void)
 {
-  bit rbit,parity,ph;			
+  __bit rbit,parity,ph;
   unsigned char n,m,fbb;
   						
   EX1=0;				// Interrupt 1 sperren
@@ -129,7 +129,7 @@ unsigned char get_byte(void)
 *
 *
 */
-void ext_int0(void) interrupt 2
+void ext_int0(void) __interrupt 2
 {
   unsigned char fbbh;
 
@@ -173,10 +173,10 @@ void ext_int0(void) interrupt 2
 *
 * @return
 */
-bit sendbyte(unsigned char fbsb)
+__bit sendbyte(unsigned char fbsb)
 {
   unsigned char n,m;
-  bit sendbit,parity,error;
+  __bit sendbit,parity,error;
   
   parity=1;
   error=0;

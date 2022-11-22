@@ -90,15 +90,15 @@ extern unsigned char telpos;		// Zeiger auf naechste Position im Array Telegramm
 extern unsigned char cs;			// checksum
 extern __code unsigned char __at 0x3600 userram[255];	// Bereich im Flash fuer User-RAM
 extern __code unsigned char __at 0x3700 eeprom[255];	// Bereich im Flash fuer EEPROM
-extern bit parity_ok;		// Parity Bit des zuletzt empfangenen Bytes OK
-extern bit interrupted;		// wird durch interrupt-routine gesetzt. so kann eine andere routine pruefen, ob sie unterbrochen wurde
+extern __bit parity_ok;		// Parity Bit des zuletzt empfangenen Bytes OK
+extern __bit interrupted;		// wird durch interrupt-routine gesetzt. so kann eine andere routine pruefen, ob sie unterbrochen wurde
 
 
 
 // Funktionen
 unsigned char get_byte(void);
-void ext_int0(void) interrupt 2;
-bit sendbyte(unsigned char fbsb);
+void ext_int0(void) __interrupt 2;
+__bit sendbyte(unsigned char fbsb);
 unsigned char read_byte(unsigned char addrh, unsigned char addrl);
 void sysdelay(unsigned int deltime);
 void set_timer0(unsigned int deltime);
