@@ -47,7 +47,7 @@ void Get_SD_ADC(void) __naked
 	MOV _CMPbuf+1,_CMP2
 	MOV A,@R0 					; get CMPx indirectly, R0 is address of the variable CMPbuf
 	ANL A,#0x02					; only take the comparator output bit
-	MOV C,0xE1					; comparator output –> carry (0xE1 is second bit of ACC)
+	MOV C,0xE1					; comparator output -> carry (0xE1 is second bit of ACC)
 	CLR A
 	MOV CMPOUT,C 				; P0.0 = comparator output (charge capacitor when negative input is lower than positive)
 	
@@ -74,7 +74,7 @@ void Get_SD_ADC(void) __naked
 	MOV _CMPbuf+1,_CMP2
 	MOV A,@R0 				; get CMPx indirectly, R0 is address of the variable CMPbuf
 	ANL A,#0x02				; only take the comparator output bit
-	MOV C,0xE1				; comparator output –> carry (0xE1 is second bit of ACC)
+	MOV C,0xE1				; comparator output -> carry (0xE1 is second bit of ACC)
 	CLR A
 	MOV CMPOUT,C 			; comparator output (charge capacitor when negative input is lower than positive)
 	

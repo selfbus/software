@@ -18,12 +18,15 @@ __bit ow_init(void)		// one-wire Gerät initialisieren
 {
   __bit presence;
   unsigned char n;
-  
   presence=1;
   OWDATA=0;
   owdelay(2500);
   OWDATA=1;
-  for (n=0;n<255;n++) presence=presence & OWDATA;
+
+  for (n=0;n<255;n++)
+  {
+	  presence = presence & (__bit)OWDATA;
+  }
   presence=!presence;
   return (presence);
 }
@@ -116,10 +119,10 @@ signed int read_temp(void)					// Temperatur einlesen
   		
   		
 #ifdef DS18S20
-  		counts=ow_read();
-  		counts=ow_read();
-  		counts=ow_read();
-  		counts=ow_read();
+  		ow_read();
+  		ow_read();
+  		ow_read();
+  		ow_read();
   		counts=ow_read();		// counts remaining
   		
   		msb&=0xF8;				// oberen 3 Bits von LSB in untere 3 von MSB
@@ -148,7 +151,7 @@ signed int read_temp(void)					// Temperatur einlesen
   		if (sign) t=-t;		// Vorzeichen
   		
   	}
-  	else t=0xFFFF;				// im Fehlerfall 0xFFFF zurückmelden
+  	else t= (signed int)0xFFFF;				// im Fehlerfall 0xFFFF zurückmelden
   	return (t);
 }
 
