@@ -3,6 +3,8 @@
 	<name>kombisensor</name>
 	<comment></comment>
 	<projects>
+		<project>com</project>
+		<project>lib_lpc922</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

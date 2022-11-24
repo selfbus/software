@@ -32,6 +32,17 @@ Changes:
 2.09    alle 10 Sekunden Wandeln über RTC realisiert
 2.10    Verzögerung bei Verknüpfungsobjekten repariert
 2.11    bugfix Verknüpfung mit Verzögerung des Helligkeitsobjektes
+2.12    Variable bFirstStart verhindert das senden von 0°C and 0 lux nach dem Neustart der App
+2.13    Watchdog deaktiviert, portiert auf fp_lpc lib > 1.58 fuer ADC Read Anfragen der ETS
+
+2022-11-24 Darthyson
+		portiert auf Selfbus Library >1.58 (commit 04.02.2017 SHA-1: 4eb81d56885c6e13731c78e92206295304953ced "Lib, update gitignore file")
+		damit Kombisensor auf ADC Read Anfragen der ETS antwortet -> schnellere Geräteinfo.
+		neue config.h fuer Build-Konfigurationen des Kombisensors
+		Symbol "#define WATCHDOG" um den Watchdog des LPC zu verwenden, nutzt watchdog.h der fb_lpc922 Library (Flash-Groesse 0x1D00 beachten)
+		
+2020-09-02 Darthyson
+		neue Variable bFirstStart verhindert das senden von 0°C and 0 lux nach dem Neustart der App
 
 2014-08-05 StefanT
         Portierung auf Selfbus Library 1.52. Das ist aber nur die reine Portierung,

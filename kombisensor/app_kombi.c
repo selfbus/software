@@ -9,9 +9,7 @@
 #define uint8_t unsigned char
 
 #include <P89LPC922.h>
-#include <fb_lpc922_1.51.h>
-//#include <fb_lpc922_1.58.h>
-//#include <fb_lpc922.h>
+#include <fb_lpc922.h>
 
 #include "app_kombi.h"
 
@@ -42,16 +40,10 @@ __idata unsigned char overrun, underrun, dimmwert, sequence, lockatt, resend;
 int global_object_value_0_to_1[2];
 unsigned char global_object_value_3_to_10;
 
-#define DELREC_CNT 9
-
-struct delayrecord
-{
-	unsigned char delayactive;
-	unsigned char delaystate;
-	unsigned int delayvalue;
-};
+__bit bFirstStart;
 
 struct delayrecord delrec[DELREC_CNT];
+
 
 void schwelle(unsigned char objno)		// Luxschwelle prüfen und reagieren
 {
@@ -66,7 +58,7 @@ void schwelle(unsigned char objno)		// Luxschwelle prüfen und reagieren
 
 	offset = (objno - 3) * 5;
 	if (objno == 9)
-		offset++;        // da Verssatz in der Reihenfolge der Parameter
+		offset++;        // da Versatz in der Reihenfolge der Parameter
 
 	ctrl = eeprom[LUXCTRL - offset];
 
@@ -239,8 +231,13 @@ void schwelle(unsigned char objno)		// Luxschwelle prüfen und reagieren
 			}
 		}
 
+		if ((bFirstStart == 1) && (!over) && (!under))
+		{
+			under = 1; // erste Initialiserung der Schwellen nach einem Neustart der App
+		}
+
 		if (objno >= 8)
-			offset++;			// da Verssatz in der Reihenfolge der Parameter
+			offset++;			// da Versatz in der Reihenfolge der Parameter
 		if (over)
 			value = eeprom[LUX_OVER - offset];// zu sendender Wert bei überschreiten
 		else
@@ -254,7 +251,7 @@ void schwelle(unsigned char objno)		// Luxschwelle prüfen und reagieren
 			{ 	// wenn neu überschritten
 
 				if (delay == 0 || (resend & bitmask))
-				{// // wenn keine Verzögerung oder Sperre aufgehoben wurde, sofort senden
+				{   // wenn keine Verzögerung oder Sperre aufgehoben wurde, sofort senden
 					resend &= ~bitmask;
 					active = 3;	// Bit0=1=aktiv und Bit1=1=überschritten
 				}
@@ -318,13 +315,13 @@ void write_obj_value(unsigned char objno, int objvalue)
 {
 	unsigned char bitpattern;
 
-	bitpattern = 1 << (objno - 3);
 	if (objno <= 1)
 	{
 		global_object_value_0_to_1[objno] = objvalue;
 	}
 	if (objno >= 3 && objno <= 10)
 	{
+		bitpattern = 1 << (objno - 3);
 		if (objvalue)
 			global_object_value_3_to_10 |= bitpattern;
 		else
@@ -360,7 +357,7 @@ void write_value_req(unsigned char objno)
 
 void delay_timer(void)// zählt alle 130ms die Variable Timer hoch und prüft Einträge
 {
-	unsigned char delrecno, objno, delay_state, cycle_param = 0, ctrl, sperre;
+	unsigned char delrecno, objno, delay_state, cycle_param, ctrl, sperre;
 	__bit send, cyclic, over;
 
 	RTCCON = 0x60;	// Real Time Clock stoppen
@@ -490,16 +487,16 @@ void restart_app(void)		// Alle Applikations-Parameter zurücksetzen
 
 	bFirstStart = 1;
 
-	for (objno = 0; objno < 9; objno++)
+	for (objno = 0; objno < DELREC_CNT; objno++)
 		WRITE_DELAY_RECORD(objno, 0, 0, 0)// erstmal alle delay-records auf inaktiv setzen
 
 	if ((eeprom[0xD3] & 0x0F) != 0)
 	{
-		WRITE_DELAY_RECORD(0, 1, 1, timer + 50) //delay was too short so the timer sent a 0 for temperature before first measurment
+		WRITE_DELAY_RECORD(0, 1, 1, timer + 76) //start delay for first temperature 77 * 130ms = 10s
 	}
 	if ((eeprom[0xD2] & 0x0F) != 0)
 	{
-		WRITE_DELAY_RECORD(1, 1, 1, timer + 55)
+		WRITE_DELAY_RECORD(1, 1, 1, timer + 80) //start delay for first brightness 80 * 130ms = 10,4s
 	}
 
 	EA = 0;

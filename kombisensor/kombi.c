@@ -7,17 +7,23 @@
  *
  */
 
+#include "config.h"
 #include <P89LPC922.h>
-#include <fb_lpc922_1.51.h>
-//#include <fb_lpc922_1.58.h>
-//#include <fb_lpc922.h>
-
+#include <fb_lpc922.h>
 #include "app_kombi.h"
 
 #include <onewire.c>
 
 #define CMPOUT	0x80	// Comparator output zum Laden des Kondensators (0x80=P0.0 in HEX, da in asm verwendet)
 #include <adc_922.c>
+
+
+#ifdef WATCHDOG_ENABLED
+# include <watchdog.h>
+#else
+#   define WATCHDOG_INIT
+#   define WATCHDOG_FEED
+#endif
 
 unsigned int timer;
 unsigned int lastlux;
@@ -26,17 +32,14 @@ signed int temp;
 unsigned int lux;
 unsigned char tasterpegel = 0;
 __bit tastergetoggelt = 0;
-__bit bFirstStart = 1;
 
 const unsigned char logtable[] =
 { 0, 9, 17, 27, 40, 53, 66, 79, 88, 96, 101, 106, 109, 112, 255 };
 const unsigned char luxchange[] =
 { 100, 20, 10, 5, 3 };
 
-//#define DEBUG
-
 #ifdef DEBUG
-signed int ti=2000;
+   signed int ti=2000;
 #endif
 
 void main(void)
@@ -47,12 +50,7 @@ void main(void)
 	unsigned int exponent, eis5lux, rest;
 
 	// start watchdog 2,6 sec
-	WDL = 0xFF;
-	EA = 0;
-	WDCON = 0xE5;
-	WFEED1 = 0xA5;
-	WFEED2 = 0x5A;
-	EA = 1;
+	WATCHDOG_INIT;
 
 	restart_hw();				// Hardware zuruecksetzen
 
@@ -69,26 +67,21 @@ void main(void)
 	restart_app();			// Anwendungsspezifische Einstellungen zuruecksetzen
 
 	// feed watchdog
-	EA = 0;
-	WFEED1 = 0xA5;
-	WFEED2 = 0x5A;
-	EA = 1;
-
-	bFirstStart = 1;
-
+	WATCHDOG_FEED;
 
 	do
 	{
-		if (eeprom[0x0D] == 0xFF && fb_state == 0 && !connected)
-		{	// Nur wenn im run-mode und statemachine idle
+		if (tel_arrived)
+			process_tel();			// empfangenes Telegramm abarbeiten
+
+		if (APPLICATION_RUN && (fb_state == 0))
+		{	// Nur wenn im run-mode, statemachine idle, Prog-Mode aus und keine transport layer 4 Verbindung
 			ET1 = 0;									// statemachine stoppen
 			switch (sequence)
 			{
 			case 1:
-				//if (((timer & 0x3F) == 0x30) || (bFirstStart)) //0x30 = 48 * 130ms = 6,24s // nur alle 10 Sekunden wandeln ?
-				if (((timer & 0x0F) == 0x0F) || (bFirstStart)) //0x0F = 15 * 130ms = 1,95s
+				if ((timer & 0x0F) == 0x0F) // alle 1,95s wandeln (0x0F = 15 * 130ms = 1,95s)
 				{
-					bFirstStart = 0;
 					interrupted = 0;
 					start_tempconversion();				// Konvertierung starten
 					if (!interrupted)
@@ -129,7 +122,6 @@ void main(void)
 						if (temp < 0)
 							eis5temp += 0x8000;	// Vorzeichen
 						write_obj_value(1, eis5temp);
-
 						schwelle(6); // Temperaturschwellen prüfen und ggf. reagieren
 						schwelle(7);
 					}
@@ -140,78 +132,80 @@ void main(void)
 				interrupted = 0;
 				Get_ADC(3);		// ADC-Wert holen
 				ET1 = 1;			// statemachine starten
-				if (!interrupted)
+				if (interrupted)
 				{
-					n = 0;
-					if (HighByte >= 112)
-					{
-						lux = 65535;
-					}
-					else
-					{
-						/*
-						 while (HighByte >= logtable[n]) n++;
-
-						 if (n>1) {
-						 lux=8;
-						 lux=lux<<(n-1);	// unterer Wert
-						 }
-
-						 else lux=0;
-						 */
-						lux = 2;
-						while (HighByte >= logtable[n])
-						{
-							n++;
-							lux = lux * 2;
-						}
-						if (n <= 1)
-							lux = 0;
-
-						rest = HighByte - logtable[n - 1];
-						delta = logtable[n] - logtable[n - 1];
-
-						/*
-						 if (n<11) lux+=_divuint(rest<<(n+2),delta);
-						 else lux+=_divuint(rest<<(n-2),delta)<<4;
-						 */
-						if (n < 11)
-							m = n + 2;
-						else
-							m = n - 2;
-						rest = rest << m;
-						rest = _divuint(rest, delta);
-						if (n < 11)
-							lux += rest;
-						else
-							lux += rest << 4;
-
-						if (n < 7)
-							lux += (_divuint(LowByte << (n + 2), delta) >> 8);
-
-					}
-					if (lux != lastlux)
-					{
-						exponent = 0x3800;	// Exponent 7
-
-						eis5lux = lux >> 1;
-						eis5lux += lux >> 2;
-						eis5lux += lux >> 5;
-
-						while (eis5lux > 0x07FF)
-						{	// Exponent erhöhen falls Mantisse zu groß
-							eis5lux = eis5lux >> 1;
-							exponent += 0x0800;
-						}
-						eis5lux += exponent;
-
-						write_obj_value(0, eis5lux);// Lux Wert im userram speichern
-						schwelle(4);             // Helligkeitsschwellen 2 und 3
-						schwelle(5);
-					}
-					schwelle(3); // Helligkeitsschwelle 1 trotzdem jedes mal weil es auch Nachregelung sein könnte
-					sequence = 1;
+					break;
 				}
+				n = 0;
+				if (HighByte >= 112)
+				{
+					lux = 65535;
+				}
+				else
+				{
+					/*
+					 while (HighByte >= logtable[n]) n++;
+
+					 if (n>1) {
+					 lux=8;
+					 lux=lux<<(n-1);	// unterer Wert
+					 }
+
+					 else lux=0;
+					 */
+					lux = 2;
+					while (HighByte >= logtable[n])
+					{
+						n++;
+						lux = lux * 2;
+					}
+					if (n <= 1)
+						lux = 0;
+
+					rest = HighByte - logtable[n - 1];
+					delta = logtable[n] - logtable[n - 1];
+
+					/*
+					 if (n<11) lux+=_divuint(rest<<(n+2),delta);
+					 else lux+=_divuint(rest<<(n-2),delta)<<4;
+					 */
+					if (n < 11)
+						m = n + 2;
+					else
+						m = n - 2;
+					rest = rest << m;
+					rest = _divuint(rest, delta);
+					if (n < 11)
+						lux += rest;
+					else
+						lux += rest << 4;
+
+					if (n < 7)
+						lux += (_divuint(LowByte << (n + 2), delta) >> 8);
+
+				}
+				if (lux != lastlux)
+				{
+					exponent = 0x3800;	// Exponent 7
+
+					eis5lux = lux >> 1;
+					eis5lux += lux >> 2;
+					eis5lux += lux >> 5;
+
+					while (eis5lux > 0x07FF)
+					{	// Exponent erhöhen falls Mantisse zu groß
+						eis5lux = eis5lux >> 1;
+						exponent += 0x0800;
+					}
+					eis5lux += exponent;
+
+					write_obj_value(0, eis5lux);// Lux Wert im userram speichern
+					schwelle(4);             // Helligkeitsschwellen 2 und 3
+					schwelle(5);
+				}
+				schwelle(3); // Helligkeitsschwelle 1 trotzdem jedes mal weil es auch Nachregelung sein könnte
+				sequence = 1;
+				bFirstStart = 0;
 				break;
 			}
 
@@ -251,50 +245,32 @@ void main(void)
 		}	// Ende des Bereiches, der nur im run-state laufen darf
 
 		// feed watchdog
-		EA = 0;
-		WFEED1 = 0xA5;
-		WFEED2 = 0x5A;
-		EA = 1;
-
-		if (tel_arrived)
-			process_tel();			// empfangenes Telegramm abarbeiten
+		WATCHDOG_FEED;
 
 		// Programmiertaster abfragen
-		TASTER = 1;				// Pin als Eingang schalten um Taster abzufragen
+		TASTER = 1;	// Pin als Eingang schalten um Taster abzufragen
 		if (!TASTER)
-		{ // Taster gedrückt
-			if (tasterpegel < 255)
-				tasterpegel++;
+		{   // Taster gedrückt
+			if (tasterpegel == 255)
+			{
+				if (!tastergetoggelt) {
+					status60 ^= 0x81;// Prog-Bit und Parity-Bit im system_state toggeln
+				}
+				tastergetoggelt = 1;
+			}
 			else
 			{
-				if (!tastergetoggelt)
-					status60 ^= 0x81;// Prog-Bit und Parity-Bit im system_state toggeln
-				tastergetoggelt = 1;
+				tasterpegel++;
 			}
 		}
 		else
-		{
-			if (tasterpegel > 0)
-				tasterpegel--;
-			else
+		{   // Taster losgelassen
+			if (tasterpegel == 0)
 				tastergetoggelt = 0;
+			else
+				tasterpegel--;
 		}
-		TASTER = !(status60 & 0x01);// LED entsprechend Prog-Bit schalten (low=LED an)
-
-		if (status60 & 0x01)
-		{
-			// im Programmiermodus kurze Pause einlegen
-			/*
-			for (n = 0; n < 255; n++)
-			{
-			}	// etwas zeit zum leuchten, wenn Hauptschleife nicht aktiv
-			*/
-		}
-
-		if (fb_state == 0)
-			for (n = 0; n < 100; n++)
-			{
-			}	// etwas zeit zum leuchten, wenn Hauptschleife nicht aktiv
+		TASTER = !(status60 & 0x01); // LED entsprechend Prog-Bit schalten (low=LED an)
 	} while (1);
 }
 

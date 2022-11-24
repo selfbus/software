@@ -58,21 +58,25 @@
 #define LUXCYCLE1			0xFA
 #define LUXSCHWELLWERT		0xFB
 
-extern unsigned int timer, app_timer;// Timer für Schaltverzögerungen, wird alle 130us hochgezählt
+#define DELREC_CNT 9
+
+extern unsigned int timer;// Timer für Schaltverzögerungen, wird alle 130us hochgezählt
 extern int temp, lasttemp;
 extern unsigned int lux, lastlux;
 extern __idata unsigned char overrun, underrun, dimmwert, sequence, lockatt, resend;
 extern int global_object_value_0_to_1[2];
 extern unsigned char global_object_value_3_to_10;
+
 extern __bit bFirstStart;
 
-extern struct delayrecord
+struct delayrecord
 {
 	unsigned char delayactive;
 	unsigned char delaystate;
 	unsigned int delayvalue;
 };
-extern struct delayrecord delrec[9];
+
+extern struct delayrecord delrec[DELREC_CNT];
 
 #define WRITE_DELAY_RECORD(wdro,wdra,wdrs,wdrt) \
 	delrec[wdro].delayactive=wdra; \
@@ -87,4 +91,5 @@ void delay_timer(void);	// zählt alle 130ms die Variable Timer hoch und prüft Qu
 
 unsigned long read_obj_value(unsigned char objno);
 void write_obj_value(unsigned char objno, int objvalue);
-#endif
+
+#endif  /* FB_APP_KOMBI */
