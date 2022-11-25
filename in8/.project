@@ -3,6 +3,7 @@
 	<name>in8</name>
 	<comment></comment>
 	<projects>
+		<project>lib_lpc922</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

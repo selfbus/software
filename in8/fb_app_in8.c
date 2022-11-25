@@ -19,7 +19,7 @@
 #include "../com/fb_rs232.h"
 
 #ifdef IN8_2TE
-#include "spi.h"
+#   include "../com/spi.h"
 #endif
 
 //unsigned char prot_timer;
@@ -33,13 +33,14 @@ unsigned char timercnt[TIMERANZ];// speicherplatz für den timercounter und 1 sta
 unsigned char timerstate[TIMERANZ];//
 unsigned char pinnoX4,para_adr,pinno;
 unsigned char para_value;
-//unsigned char __at 0x08 objectvalue_zl[2];
+//unsigned char __at (0x08) objectvalue_zl[2];
 unsigned char __at (0x08) objectvalue_l[8];
 unsigned char __at (0x10)	objectvalue_h[8];
 unsigned char __at (0x18) Sperre;
 unsigned int  __at (0x19) zaehlervalue[2];
 unsigned char __at (0x1E) schrittzaehler[2];//
-__bit objval=0,jobj=0;
+__bit objval=0;
+__bit jobj=0;
 __bit st_Flanke=0;
 
 void pin_changed(unsigned char pin_no)
@@ -49,8 +50,11 @@ void pin_changed(unsigned char pin_no)
 	int maxzaehler;
 #endif
 	unsigned char tmp;
+#ifdef wertgeber
 	unsigned char objoffset=8;
 	unsigned char typ=0;
+#endif
+
 	unsigned char n;
 	timer_base=0;
 	para_value=0;
@@ -58,7 +62,6 @@ void pin_changed(unsigned char pin_no)
 	pinno=pin_no;
 	pinnoX4=pinno*4;
 	para_adr=0xD5+(pinnoX4);
-	n;
 
 	if (debounce(pinno))			// Entprellzeit abwarten und prüfen
   {
@@ -239,13 +242,13 @@ void pin_changed(unsigned char pin_no)
         	 *******************************************/
         	n=eeprom[0xD5+(pinno*4)];// Parameter Flanke für Zählimpuls
         	if (pinno<=1){// pinno 0-1 Zähleingnag
-        		if ((n&0x01 && st_Flanke)||(n&0x02 && !st_Flanke)){
+        		if (((n&0x01) && st_Flanke)||((n&0x02) && !st_Flanke)){
         			if (zaehlervalue[pinno]< 0xFFFF)zaehlervalue[pinno]++;
         		}
         	}
         	else{ //pinno also grösser 1, bei Impulszähler hier die Syncron eingänge
         		n=eeprom[0xD5+((pinno-2)*4)];// Parameter Flanke für Zählimpuls
-        		if ((n&0x04 && st_Flanke)||(n&0x08 && !st_Flanke)){
+        		if (((n&0x04) && st_Flanke)||((n&0x08) && !st_Flanke)){
         			if (pinno==2){
         				zaehlervalue[0]=0;//pinno-2 , da die parameter den zählereingangen zugeordnet sind
         				timercnt[0]=eeprom[0xD6]|0x80;//Torzeit setzen
@@ -276,14 +279,14 @@ void pin_changed(unsigned char pin_no)
         	break;
         case 10:// ### Schaltzähler ###
         	n=eeprom[0xD5+(pinno*4)];// Parameter Flanke für Zählimpuls
-            	if ((n&0x01 && st_Flanke)||(n&0x02 && !st_Flanke)){
+            	if (((n&0x01) && st_Flanke)||((n&0x02) && !st_Flanke)){
             		zaehlervalue[pinno]++;// zählwert erhöhen
             		schrittzaehler[pinno]++;// schrittzähler erhöhen
             		maxzaehler=(eeprom[para_adr +2]<<8) +eeprom[para_adr+3];
-            		tmp=0;
+
             		if (zaehlervalue[pinno]>=maxzaehler){// wenn zählwert erreicht
             			tmp=(n>>6);// parameter für ausgange 1Bit
-            			if (tmp==0x03)tmp= (read_obj_value(pinno)^0x01);//UM
+            			if (tmp==0x03)tmp=(read_obj_value(pinno)^0x01);//UM
                 		if (tmp==0x02)tmp=0;// AUS
             			write_send(pinno,tmp);// 1Bit objekt senden
             			send_obj_value(pinno+8);//16Bit objekt senden
@@ -314,19 +317,19 @@ void pin_changed(unsigned char pin_no)
 
 
 #ifdef wertgeber
-int eis5conversion(unsigned char zahl,unsigned char Typ)
+int eis5conversion(unsigned char zahl,unsigned char typ)
 {
 	unsigned char exp=0;
 	unsigned int wert=0;
-	if (Typ==4){// Helligkeitwert
+	if (typ==4){// Helligkeitwert
 		exp=3;// Da kleinster wert 50 lux*100=5000 ==> 5000/8 (exp=3)
 	 	wert=zahl*625;//= 625
 	}
-	if (Typ==6){// Temperaturwert kleinster wert =1 größter 31
+	if (typ==6){// Temperaturwert kleinster wert =1 größter 31
 
 		wert=zahl*100;// Hier reicht uns eine 16bit int var
 	}
-	if (Typ==7){// wenn Dimmwert ( EIS2, also keine Fließkomma)
+	if (typ==7){// wenn Dimmwert ( EIS2, also keine Fließkomma)
 		wert=zahl;
 	}
 	else{// fließkomma EIS5 berechnen
@@ -439,27 +442,25 @@ void delay_timer(void)
 
 }
 
-
 void schalten(__bit risefall, unsigned char pinno)	// Schaltbefehl senden
 {
-	unsigned char func,sendval=0;
+    unsigned char func;
+    unsigned char sendval;
 
-		func=eeprom[0xD7+(pinno & 0x07)*4]; //0xD7
-		if (pinno>=8)func=func>>4;			// wenn 2. Schaltobjekt dann obere 4 bit
-		if (risefall) func=(func>>2);		// Funktion bei steigender Flanke obere 2 bit
-		func=func&0x03;					// Funktion maskieren
-		if (func!=0)
-		{
-			if (func==0x03) sendval=read_obj_value(pinno) ^0x01;  //UM
-			else sendval = func & 0x01;	// EIN   AUS
-			write_send(pinno,sendval);
-		}
-
+    func=eeprom[0xD7+(pinno & 0x07)*4]; // 0xD7
+    if (pinno>=8) func=func>>4;         // wenn 2. Schaltobjekt dann obere 4 bit
+    if (risefall) func=(func>>2);       // Funktion bei steigender Flanke obere 2 bit
+    func=func&0x03;                     // Funktion maskieren
+    if (func==0)
+    {
+        return;
+    }
+    if (func==0x03)
+        sendval=read_obj_value(pinno) ^0x01; //UM
+    else
+        sendval = func & 0x01; // EIN/AUS
+    write_send(pinno,sendval);
 }
-
-
-
-
 
 unsigned char debounce(unsigned char pinno)	// Entprellzeit abwarten und prüfen !!
 {
@@ -483,41 +484,43 @@ unsigned char debounce(unsigned char pinno)	// Entprellzeit abwarten und prüfen 
 
 
 
-void write_value_req(unsigned char objno)		// Objekt-Wert setzen gemäß empfangenem EIS Telegramms
+void write_value_req(unsigned char objno) // Objekt-Wert setzen gemäß empfangenem EIS Telegramms
 {
-	unsigned char para_value,tmp;
-	unsigned char objtype;
-    objtype=eeprom[eeprom[COMMSTABPTR]+objno+objno+objno+4];
-    				if (objno<16) {					// Status der Eingangsobjekte 0-15
+    unsigned char para_value,tmp;
 #ifdef zaehler
-    					if (objtype<=6){
-	    					write_obj_value(objno,telegramm[7]& 0x3F); //bit 6+7 löschen (0x40,0x80)
-	    				}
-	    				if (objtype==7)write_obj_value(objno,telegramm[8]);
-	    				if (objtype==8)write_obj_value(objno,telegramm[9]+(telegramm[8]<<8));
-#else
-    					write_obj_value(objno,telegramm[7]& 0x3F); //bit 6+7 löschen (0x40,0x80)
+    unsigned char objtype;
+    objtype=eeprom[eeprom[COMMSTABPTR]+objno+objno+objno+4];
 #endif
-    				}
-    				else{		//16-23 Sperrobjekte
-    					tmp=telegramm[7]& 0x01;
-    					if (read_obj_value(objno)^tmp) {// nur wenn sich Objekt geändert hat
-	    					write_obj_value(objno,tmp);// objekt sichern
-	    					para_value= (eeprom[0xD5+((objno & 0x07)*4)]&0x03);
-	    					tmp = tmp ^ ((para_value) & 0x01);//bei 'nicht invertieren' invertieren,weil wir invertiert abfragen :-(
-	    					if (para_value){			// wenn eine sperre aktiviert parametriert ist
-	    						if(tmp){		//nicht gesperrt(invertierte Abfrage)
-	    							blocked=blocked & (0xff-(bitmask_1[objno&0x07]));
-	    						}
-	    						else {			//gesperrt
-	    							blocked=blocked |bitmask_1[objno&0x07];
-	    						}
-    							sperren(objno&0x07,tmp);//temp=1 bedeutet Freigabe
-	    					}//ende if para_value
-    					}//ende if read...
-    				}//ende if (objno<16)..
 
-}// end function
+    if (objno<16) { // Status der Eingangsobjekte 0-15
+#ifdef zaehler
+        if (objtype<=6){
+            write_obj_value(objno,telegramm[7]& 0x3F); //bit 6+7 löschen (0x40,0x80)
+        }
+        if (objtype==7)write_obj_value(objno,telegramm[8]);
+        if (objtype==8)write_obj_value(objno,telegramm[9]+(telegramm[8]<<8));
+#else
+        write_obj_value(objno,telegramm[7]& 0x3F); //bit 6+7 löschen (0x40,0x80)
+#endif
+    }
+    else{ //16-23 Sperrobjekte
+        tmp=telegramm[7]& 0x01;
+        if (read_obj_value(objno)^tmp) { // nur wenn sich Objekt geändert hat
+            write_obj_value(objno,tmp);  // objekt sichern
+            para_value= (eeprom[0xD5+((objno & 0x07)*4)]&0x03);
+            tmp = tmp ^ ((para_value) & 0x01);  //bei 'nicht invertieren' invertieren,weil wir invertiert abfragen :-(
+            if (para_value){                    // wenn eine sperre aktiviert parametriert ist
+                if(tmp){                        //nicht gesperrt(invertierte Abfrage)
+                    blocked=blocked & (0xff-(bitmask_1[objno&0x07]));
+                }
+                else { //gesperrt
+                    blocked=blocked |bitmask_1[objno&0x07];
+                }
+                sperren(objno&0x07,tmp); //temp=1 bedeutet Freigabe
+            } //ende if para_value
+        } //ende if read...
+    } //ende if (objno<16)..
+} // end function
 
 
 void sperren (unsigned char obj,unsigned char freigabe)

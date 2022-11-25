@@ -16,9 +16,16 @@
 #ifndef FB_APP_IN8
 #define FB_APP_IN8
 
-#define terminal
-//#define debugmode
-#include  "../com/debug.h"
+/**
+ * @def TERMINAL
+ */
+#define TERMINAL
+//#define DEBUGMODE
+
+#ifdef DEBUGMODE
+#   include  "../com/debug.h"
+#endif
+
 #ifdef LPC936
 	#include <fb_lpc936_1.55.h>
 #else
@@ -35,7 +42,43 @@
 #define PROTTIMER		TIMERANZ-1// PROTTIMER ist stets der letzte timer(0-7user,8prot,Gesmatzahl=9)
 
 #define VERSION 12
-//#define TYPE    0x02  // define here if not done by build configuration
+
+/**
+ * @def TYPE
+ * defines the build type
+ * @note define here if not done by build configuration
+ */
+//#define TYPE 0x02
+
+/**
+ * @def wertgeber
+ * enables ETS function "Wertgeber" for all inputs
+ */
+
+/**
+ * @def dimmer
+ * enables ETS function "Dimmen" for all inputs
+ */
+
+/**
+ * @def zykls
+ * enables ETS function "Zyklisch senden" for all inputs
+ */
+
+/**
+ * @def zaehler
+ * enables ETS function "Schaltzaehler" for all inputs
+ */
+
+/**
+ * @def IN8_2TE
+ * nur fuer shifter version des in8 /typebit 3
+ */
+
+/**
+ * @def in4
+ * schaltet P0_4 - P0_7 auf pullup
+ */
 
 #if TYPE == 1
 # define wertgeber
@@ -96,31 +139,25 @@
 # error "ungültiger TYPE"
 #endif
 
-//#define in4					// schaltet P0_4 - P0_7 auf pullup
-//#define IN8_2TE					// nur für shifter version des in8 /typebit 3
-//#define wertgeber				// mit Wertgeber
-//#define zaehler				// mit Zähler
-//#define dimmer					// mit Dimmfunktionen
-//#define zykls					// mit zyklisches senden
-
-
 extern unsigned char portbuffer,p0h;	// Zwischenspeicherung der Portzustände
 extern unsigned char blocked;	// Sperrobjekte
 extern unsigned char timerbase[TIMERANZ];// Speicherplatz für die Zeitbasis
 extern unsigned char timercnt[TIMERANZ];// speicherplatz für den timercounter und 1 status bit
 extern unsigned char timerstate[TIMERANZ];//
 extern unsigned int  __at (0x19) zaehlervalue[2];
-void pin_changed(unsigned char pinno);
+void pin_changed(unsigned char pin_no);
 void schalten(__bit risefall, unsigned char pinno);	// Schaltbefehl senden
 unsigned char pin_function(unsigned char pinno);	// Funktion des Eingangs ermitteln
 unsigned char debounce(unsigned char pinno);		// Entprellzeit abwarten und prüfen
 void send_cyclic(unsigned char pinno);
 unsigned char operation(unsigned char pinno);
 unsigned char switch_dim(unsigned char pinno);
-int eis5conversion(unsigned char zahl,unsigned char typ);
+#ifdef wertgeber
+   int eis5conversion(unsigned char zahl,unsigned char typ);
+#endif
 void delay_timer(void);
 //void write_value_req(void);
-void sperren(unsigned char objno,unsigned char freigabe);
+void sperren(unsigned char obj,unsigned char freigabe);
 unsigned long read_obj_value(unsigned char objno);
 void write_obj_value(unsigned char objno,long objvalue);
 //void read_value_req(void);
@@ -131,7 +168,7 @@ void restart_app(void);		// Alle Applikations-Parameter zurücksetzen
 void bus_return(void);// verhalten nach busspannungsrückkehr.
 extern const unsigned char bitmask_1[8];
 
-#endif
+#endif /* FB_APP_IN8 */
 
 /*Bedeutung der bits in timercnt[]:
    	bit 0-6 Zählwert

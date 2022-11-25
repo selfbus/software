@@ -26,15 +26,18 @@
 //				3.10	auf LIB 1.53, connected timeout, Sperre bugfix
 //              3.11    Lib 1.55
 //              3.12    Lib 1.58
+//              3.13    >Lib 1.58 (4.2.2017 commit SHA-1: 4eb81d56885c6e13731c78e92206295304953ced)
 
 
 #include "fb_app_in8.h"
 #include "../com/watchdog.h"
-#include "../com/fb_rs232.h"
+
+#if defined(TERMINAL) || defined(DEBUGMODE)
+#   include "../com/fb_rs232.h"
+#endif
 
 #ifdef IN8_2TE
-#include "../com/spi.h"
-
+#   include "../com/spi.h"
 #endif
 
 const unsigned char bitmask_1[8] ={0x01,0x02,0x04,0x08,0x10,0x20,0x40,0x80};
@@ -49,25 +52,32 @@ static __code unsigned int  __at (EEPROM_ADDR + 0x17) start_pa={0xFFFF};        
 
 void main(void)
 {
-	unsigned char n,cmd,tasterpegel=0;
+	unsigned char n;
+	unsigned char tasterpegel=0;
+#ifdef TERMINAL
+	unsigned char cmd;
 	signed char cal;
-	static __code signed char __at 0x1CFF trimsave;  unsigned int base;
+    static __code signed char __at (0x1CFF) trimsave; ///!> value of the internal oscillator trim register, can be changed over serial
+#endif
 
+	unsigned int base;
 	unsigned char pin=0;
 #ifdef zykls
-	unsigned char tmp,objno,objstate;
+	unsigned char tmp;
+	unsigned char objno;
+	unsigned char objstate;
 #else
 	#ifdef zaehler
-	unsigned char objno;
+	   unsigned char objno;
 	#endif
 #endif
 
 	__bit wduf;
 	__bit tastergetoggelt=0;
 	__bit bus_return_ready=0;
-	cmd,cal;
+
 	wduf=WDCON&0x02;
-#ifdef terminal
+#ifdef TERMINAL
 	TASTER=1;
 	if(!TASTER && wduf)cal=0;
 	else cal=trimsave;
@@ -75,18 +85,22 @@ void main(void)
 	TRIM &= 0x3F;//oberen 2 bits ausblenden
 #endif
 	TASTER=0;
-	restart_hw();				// Hardware zurücksetzen
-		// serielle Schnittstelle initialisieren
-#ifndef debugmode
-	RS_INIT_600
-	SBUF=0x55;// 'U' senden
-#else
-#	ifdef terminal
+	restart_hw(); // Hardware zurücksetzen
+
+// serielle Schnittstelle initialisieren
+#if defined(DEBUGMODE) && defined(TERMINAL)
 	RS_INIT_115200
-	SBUF=0x55;// 'U' senden
-#	endif
 #endif
-  restart_app();			// Anwendungsspezifische Einstellungen zurücksetzen
+
+#if defined(DEBUGMODE) && !defined(TERMINAL)
+	RS_INIT_600
+#endif
+
+#if defined(TERMINAL) || defined(DEBUGMODE)
+    SBUF=0x55;// 'U' senden
+#endif
+
+	restart_app();			// Anwendungsspezifische Einstellungen zurücksetzen
 
   if(!wduf){
   // Verzögerung Busspannungswiederkehr
@@ -98,11 +112,7 @@ void main(void)
 			RTCCON=0x61;		// RTC starten
 		    while (RTCCON<=0x7F) ;	// Realtime clock ueberlauf abwarten
 		    // feed the watchdog
-		    EA = 0;
-		    WFEED1 = 0xA5;
-		    WFEED2 = 0x5A;
-		    EA=1;
-
+		    WATCHDOG_FEED
 		    //	  stop_rtc;
 	  }
   }
@@ -111,12 +121,6 @@ void main(void)
 
   do  {
 		WATCHDOG_FEED 	    // feed the watchdog
-
-	    EA = 0;
-	    WFEED1 = 0xA5;
-	    WFEED2 = 0x5A;
-	    EA=1;
-
 
 	 if(APPLICATION_RUN){
 #ifndef IN8_2TE
@@ -213,8 +217,8 @@ void main(void)
 	}
 
 	// Eingehendes Terminal Kommando verarbeiten...
-#ifdef terminal
-#	ifndef debugmode
+#ifdef TERMINAL
+#	ifndef DEBUGMODE
 	if (RI){
 		RI=0;
 		cmd=SBUF;
@@ -256,11 +260,11 @@ void main(void)
 		}
 
 	}//end if(RI...
-#	else // wenn also debugmode + terminal
+#	else // wenn also DEBUGMODE + TERMINAL
 	DEBUGPOINT;
 #	endif
 #else
-#	ifdef debugmode// wenn nicht terminal und debugmode
+#	ifdef debugmode// wenn nicht TERMINAL und DEBUGMODE
 	DEBUGPOINT;
 #	endif
 #endif
