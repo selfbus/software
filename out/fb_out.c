@@ -76,6 +76,10 @@
 * 	3.39	LIB 1.55 initiale PA jetzt 15.15.255
 * 	3.40    EEPROM Default Werte werden in Release Builds nicht mehr bei jedem Neustart geflasht, LIB 1.56
 * 	3.41    Update auf Lib 1.58
+* 	3.42    ported to Selfbus Library >1.58
+            Selfbus Library >1.58 (commit 04.02.2017 SHA-1: 4eb81d56885c6e13731c78e92206295304953ced "Lib, update gitignore file").
+            lib with #define ADC_RESPONSE so will respond to ADCReadRequests from ETS -> faster device info.
+            added build-configs for different types
  TODO
 
 * @todo:
@@ -123,7 +127,7 @@
 		#endif
 	#endif
 #endif
-#define VERSION 41
+#define VERSION 42
 
 unsigned char __at (0x00) RAM[00];
 

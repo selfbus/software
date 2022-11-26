@@ -22,21 +22,63 @@
 #ifdef LPC936
 	#include <fb_lpc936.h>
 #else
-#include <fb_lpc922.h>
+#   include <fb_lpc922.h>
 #endif
 
 #ifdef DEBUG_MODE
     #include  "../com/debug.h"
 #endif
 
-
+/**
+ * @def IO_BISTAB
+ * out for io port controlled bi-stable relais
+ */
 //#define IO_BISTAB
+
+/**
+ * @def BUS_DOWN
+ * Bus voltage down detection (needs more implementation
+ */
 //#define BUS_DOWN
-#define MAX_PORTS_8		// Anzahl Ausgänge (nur 4 oder 8 erlaubt)
-//#define HAND				// Handsteuerung aktiv (auskommentieren wenn nicht gewünscht)
-//#define SPIBISTAB			// Serielle Ausgabe für bistabile relaise aktivieren
+
+/**
+ * @def MAX_PORTS_8
+ * out with 8 outputs (relais)
+ * @note only @ref MAX_PORTS_8 or @ref MAX_PORTS_4 can be defined, not both
+ */
+//#define MAX_PORTS_8 // Anzahl Ausgänge (nur 4 oder 8 erlaubt)
+
+/**
+ * @def MAX_PORTS_4
+ * out with 4 outputs (relais)
+ * @note only @ref MAX_PORTS_8 or @ref MAX_PORTS_4 can be defined, not both
+ */
+//#define MAX_PORTS_4 // Anzahl Ausgänge (nur 4 oder 8 erlaubt)
+
+/**
+ * @def HAND
+ * out with hand actuation
+ */
+//#define HAND // Handsteuerung aktiv (auskommentieren wenn nicht gewünscht)
+
+/**
+ * @def SPIBISTAB
+ * out for spi controlled bi-stable relais
+ */
+//#define SPIBISTAB // Serielle Ausgabe für bistabile relaise aktivieren
+
+/**
+ * @def zeroswitch
+ * out with zero-volt-detection switching relais
+ */
+//#define zeroswitch // für Platine mit Nullspannungserkennung
+
+/**
+ * @def panasonic
+ * panasonic relais specific timings.
+ * @note works only together with @ref zeroswitch
+ */
 //#define panasonic
-//#define zeroswitch			// für Platine mit Nullspannungserkennung
 
 #ifdef zeroswitch
 	#ifndef panasonic		//OMRON
