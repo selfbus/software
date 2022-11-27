@@ -18,7 +18,7 @@
 #define FB_DEBUG
 
 
-extern unsigned char __idata __at 0x00 RAM[00];
+extern unsigned char __idata __at (0x00) RAM[00];
 
 
 #define DEBUG \
