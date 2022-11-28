@@ -61,19 +61,19 @@ void port_changed(unsigned char portval)
 {
 	unsigned char n, buttonpattern, debtime;
 
-		debtime=eeprom[0xD2];			// Entprellzeit in 0,5ms Schritten
+    debtime=eeprom[0xD2]; // Entprellzeit in 0,5ms Schritten
 			for(n=0;n<debtime;n++) delay(110);
 
 			if ((PORT & 0x0C) == portval) {
 			for (n=0; n<=1; n++) {	// alle 2 Eingänge einzeln pruefen (koennten ja mehrere gleichzeitig gedrueckt worden sein)
-				buttonpattern=4<<n;
+        buttonpattern=4<<n;
 				if ((portval & buttonpattern) && !(button_buffer & buttonpattern)) button_changed(n,1);	// Taster losgelassen
 				if (!(portval & buttonpattern) && (button_buffer & buttonpattern)) button_changed(n,0);	// Taster gedrueckt
-			}
+            }
 			button_buffer=portval;	// aktuellen port wert in buffer fuer naechsten Vergleich uebernehmen
-		}
+        }
 
-}
+        }
 
 
 /**
@@ -87,7 +87,7 @@ void port_changed(unsigned char portval)
 void button_changed(unsigned char buttonno, __bit buttonval)
 {
 	unsigned char command,command_help;
-	__bit objval=0;
+	__bit objval;
 
 	unsigned char n,m;
 
@@ -147,7 +147,7 @@ void button_changed(unsigned char buttonno, __bit buttonval)
 void object_schalten(unsigned char objno, __bit objstate)
 {
 
-	unsigned char port_pattern,objflags,delay_base,delay_state,delay_zeit,logicfunc,zfno;
+	unsigned char port_pattern,objflags,delay_base,delay_state,delay_zeit,logicfunc;
 	unsigned long delay_target,delay_onoff;
 	__bit off_disable,rel_mode, objlogicstate;
 
@@ -166,7 +166,6 @@ void object_schalten(unsigned char objno, __bit objstate)
 		objflags=read_objflags(objno);			// Objekt Flags lesen
 		port_pattern=0x01<<objno;
 
-		zfno=0;
 		logicfunc=0;
 
 		if (((eeprom[FUNCTYP]>>objno*2)&0x03)==0x00) logicfunc=(eeprom[LOGICTYP]>>objno*2)&0x03;
@@ -177,7 +176,6 @@ void object_schalten(unsigned char objno, __bit objstate)
 			if (objno==1) delay_base=eeprom[0xF7]& 0x0F;
 			else delay_base=(eeprom[0xF6]>>4) & 0x0F;
 
-			delay_target=0;
 			delay_onoff=0;
 			delay_state=0;
 
@@ -253,7 +251,6 @@ void delay_timer(void)
 	RTCCON=0x60;		// RTC anhalten und Flag löschen
 	RTCH=0x0E;			// reload Real Time Clock
 	RTCL=0xA0;
-	objno=0;
 
 	if (delay_toggle) {	// RTC läuft auf 65ms, daher nur jedes 2. mal timer erhöhen
 		timer++;
@@ -292,7 +289,8 @@ void delay_timer(void)
 								else delay_base=(eeprom[0xF6]>>4) & 0x0F;
 
 								delay_onoff=eeprom[objno+0xE7];  //Ausschaltverzögerung angepasst
-								if (delay_onoff!=0x00 && delay_zeit!=0x00) {
+								//if (delay_onoff!=0x00 && delay_zeit!=0x00) {
+								if (delay_onoff!=0x00) {
 									delay_target=(delay_onoff<<delay_base)+timer;
 									write_delay_record(objno,0x80,delay_target);		// Schaltverzögerung in Flash schreiben
 								}
@@ -319,9 +317,7 @@ void delay_timer(void)
 						zyk_faktor=eeprom[0xDE+4*m]&0x7F;
 						zyk_basis=((eeprom[0xF7+m+4*o])>>(2*(objno&0x02))&0x0F);
 
-						zyk_val=(zyk_faktor<<zyk_basis);
-
-						zyk_val=zyk_val+timer;
+						zyk_val=(zyk_faktor<<zyk_basis) + timer;
 
 						delrec[objno*4+1]=zyk_val>>16;
 						delrec[objno*4+2]=zyk_val>>8;
@@ -489,8 +485,6 @@ void write_value_req(void)	//
 	  unsigned char blockstart,blockend,blockpol_help,blockact_help, ohs,m;
 	  unsigned char portstate, lastportstate, restorestate;
 	  __bit objval;
-
-	    gaposh=0;
 
 	    gapos=gapos_in_gat(telegramm[3],telegramm[4]);	// Position der Gruppenadresse in der Adresstabelle
 	    if (gapos!=0xFF)					// =0xFF falls nicht vorhanden
@@ -959,18 +953,19 @@ void restart_app(void)
 
 	unsigned long delay_target;
 	unsigned char zyk_basis, n, m, o,zyk_funk;
-	__bit write_ok=0;
 
 
 	RTCCON=0x60;		// RTC anhalten und Flag löschen
 	RTCH=0x0E;			// reload Real Time Clock
 	RTCL=0xA0;
 
-	P0M1=0x0C;
-	P0M2=0x03;
+	P0M1=0x0C;          // port 0 output mode 1
+	P0M2=0x03;          // port 0 output mode 2 =>
+	                    // pin 0.2 & 0.3 as inputs
+	                    // pin 0.0 & 0.1 as outputs (push-pull)
 
 	PORT=0x0C;				// Taster auf high, Ausgänge zunächst aus
-	button_buffer=0x0C;		// Variable für letzten abgearbeiteten Taster Status
+	button_buffer=~0x0C;	// Variable für letzten abgearbeiteten Taster Status
 
 
 	// zurücklesen der Objektwerte der Eingänge

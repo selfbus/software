@@ -1,3 +1,7 @@
+2022-11-27 Version 1.1
+        + Added ADCReadResponsePDU and therefore massively accelerated the reading of the device info via the ETS
+        * minor code size optimizations
+
 2020-07-15 Version 1.0d
 		+ added watchdog functionality to main(void), file fb_2te_kombi.c
 

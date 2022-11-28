@@ -51,7 +51,7 @@ unsigned char last_tel;
 __bit transparency;
 
 
-
+void send_adc_response(void);
 
 /** 
 * Interrupt von Timer 1, 370us keine Busaktivit�t seit letztem Byte,
@@ -63,8 +63,6 @@ __bit transparency;
 void timer1() __interrupt(3)
 {
 	unsigned char tpdu;
-
-
 	EX1=0;					// ext. Interrupt stoppen 
 	ET1=0;					// Interrupt von Timer 1 sperren
 	set_timer1(4830);		// 4720 und neu starten fuer korrekte Positionierung des ACK Bytes
@@ -97,8 +95,15 @@ void timer1() __interrupt(3)
 						
 						// Unicast, wenn Zieladresse physikalische Adresse ist					
 						switch (tpdu) {	// transport layer control field
-						
-						case 0x42:	// Data PDU - memory operations
+
+                        case 0x41:
+                            if ((telegramm[7]&0xC0)==0x80)  // APCI_ADC_READ_PDU
+                            {
+                                send_adc_response();
+                            }
+                            break;
+
+                        case 0x42:	// Data PDU - memory operations
 							if((telegramm[7]&0xC0)==0x80) write_memory();	// write_memory_request	
 							if((telegramm[7]&0xC0)==0x00) read_memory();	// read_memory_request
 							break;
@@ -286,7 +291,7 @@ void ncd_quit(void)
   telegramm[1]=eeprom[ADDRTAB+1];			// Quelladresse ist phys. Adresse
   telegramm[2]=eeprom[ADDRTAB+2];
   telegramm[5]=0x60;			// DRL
-  telegramm[6]|=0xC0;			// Bit 6 und 7 setzen (TCPI = 11 NCD Quittierung)
+  telegramm[6]|=0xC2;			// Bit 1, 6 und 7 setzen (TCPI = 11 NCD Quittierung)
   telegramm[6]&=0xFE;			// Bit 0 loeschen 
   send_telegramm();
 }
@@ -317,7 +322,27 @@ void read_masq(void)
 
 }
 
+void send_adc_response(void)
+{
+    unsigned char adcChannel;
+    unsigned char adcCount;
+    send_ack();
+    adcChannel = telegramm[7] & 0x3f;
+    adcCount = telegramm[8];
+    ncd_quit(); // NCD Quittierung senden
 
+    telegramm[0]=0xB0;                  // Control Byte
+    telegramm[5]=0x64;                  // DRL
+    telegramm[6]=(pcount<<2) |0x41;     // eigener Paketzaehler, TCPI und ersten Befehlsbits
+    telegramm[7]= 0xC0 | adcChannel;    // ADCRead Response for selected channel
+    telegramm[8]=adcCount;              // Requested sample count
+    telegramm[9]=0x05;                  // ADC1 Bus Voltage 0x0610 = 29.1V (ADC = U/0.1875)
+    telegramm[10]=0xA0;                 // 0x0602=28.8V, 0x0605=28.9V, 0x0642=30V, 0x0648=30.2V
+                                        // ADC4 PEI Type 0x0610 = PEI 15, 0x05A0 = PEI 14
+    send_telegramm();
+    pcount++;
+    pcount&=0x0F;
+}
 
 
 /** 
@@ -622,6 +647,7 @@ unsigned int read_obj_value(unsigned char objno)
 *
 * @return gibt den Typ eines Objektes zurueck
 */
+/*
 unsigned char read_obj_type(unsigned char objno)
 {
 	unsigned char  commstab, objtype;
@@ -633,6 +659,7 @@ unsigned char read_obj_type(unsigned char objno)
 	}
 	return(objtype);
 }
+*/
 
 
 

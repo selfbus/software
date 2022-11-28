@@ -3,6 +3,9 @@
 	<storageModule moduleId="org.eclipse.cdt.core.settings">
 		<cconfiguration id="cdt.managedbuild.config.sdcc.exe.release.1569019670">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.sdcc.exe.release.1569019670" moduleId="org.eclipse.cdt.core.settings" name="Release">
+				<macros>
+					<stringMacro name="version" type="VALUE_TEXT" value="1.1"/>
+				</macros>
 				<externalSettings/>
 				<extensions>
 					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
@@ -13,19 +16,19 @@
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactExtension="hex" artifactName="${ProjName}" buildProperties="" cleanCommand="rm -rf" description="" errorParsers="org.eclipse.cdt.core.MakeErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser" id="cdt.managedbuild.config.sdcc.exe.release.1569019670" name="Release" optionalBuildProperties="org.eclipse.cdt.docker.launcher.containerbuild.property.selectedvolumes=,org.eclipse.cdt.docker.launcher.containerbuild.property.volumes=" parent="cdt.managedbuild.config.sdcc.exe.release">
+				<configuration artifactExtension="hex" artifactName="${ProjName}-${version}" buildProperties="" cleanCommand="rm -rf" description="" errorParsers="org.eclipse.cdt.core.MakeErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser" id="cdt.managedbuild.config.sdcc.exe.release.1569019670" name="Release" optionalBuildProperties="org.eclipse.cdt.docker.launcher.containerbuild.property.enablement=null,org.eclipse.cdt.docker.launcher.containerbuild.property.selectedvolumes=,org.eclipse.cdt.docker.launcher.containerbuild.property.volumes=,org.eclipse.cdt.docker.launcher.containerbuild.property.image=null,org.eclipse.cdt.docker.launcher.containerbuild.property.connection=null" parent="cdt.managedbuild.config.sdcc.exe.release">
 					<folderInfo id="cdt.managedbuild.config.sdcc.exe.release.1569019670." name="/" resourcePath="">
 						<toolChain id="cdt.managedbuild.toolchain.sdcc.exe.release.812464582" name="SDCC Tool Chain" superClass="cdt.managedbuild.toolchain.sdcc.exe.release">
 							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="cdt.managedbuild.target.sdcc.platform.exe.release.86142582" name="Release Platform" osList="solaris,linux,hpux,aix,qnx,win32" superClass="cdt.managedbuild.target.sdcc.platform.exe.release"/>
-							<builder buildPath="${workspace_loc:/2in2out}/Release" id="cdt.managedbuild.target.sdcc.builder.exe.release.1650469652" keepEnvironmentInBuildfile="false" name="Sdcc Make" superClass="cdt.managedbuild.target.sdcc.builder.exe.release"/>
-							<tool command="sdcc -c --stack-auto" commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG}${OUTPUT_PREFIX}${OUTPUT} ${INPUTS}" id="cdt.managedbuild.tool.sdcc.c.compiler.exe.release.452788487" name="SDCC Compiler" superClass="cdt.managedbuild.tool.sdcc.c.compiler.exe.release">
+							<builder buildPath="${workspace_loc:/2in2out}/Release" id="org.eclipse.cdt.build.core.internal.builder.409480655" keepEnvironmentInBuildfile="false" name="CDT Internal Builder" superClass="org.eclipse.cdt.build.core.internal.builder"/>
+							<tool command="sdcc -c --stack-auto --opt-code-size" commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG}${OUTPUT_PREFIX}${OUTPUT} ${INPUTS}" id="cdt.managedbuild.tool.sdcc.c.compiler.exe.release.452788487" name="SDCC Compiler" superClass="cdt.managedbuild.tool.sdcc.c.compiler.exe.release">
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="sdcc.c.compiler.option.include.paths.32987999" name="Include paths (-I)" superClass="sdcc.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;D:\sdcc_eclipse\sdcc\include\mcs51&quot;"/>
+									<listOptionValue builtIn="false" value="/usr/share/sdcc/include/mcs51"/>
 								</option>
 								<option id="sdcc.c.compiler.option.warnings.allwarn.1389692" name="All warnings (-Wall)" superClass="sdcc.c.compiler.option.warnings.allwarn" useByScannerDiscovery="false" value="false" valueType="boolean"/>
 								<inputType id="cdt.managedbuild.tool.sdcc.c.compiler.input.2088348688" superClass="cdt.managedbuild.tool.sdcc.c.compiler.input"/>
 							</tool>
-							<tool command="sdcc --stack-auto" id="cdt.managedbuild.tool.sdcc.c.linker.exe.release.1281628243" name="SDCC Linker" superClass="cdt.managedbuild.tool.sdcc.c.linker.exe.release">
+							<tool command="sdcc --stack-auto  --opt-code-size --code-size 0x1C00 --xram-size 0" id="cdt.managedbuild.tool.sdcc.c.linker.exe.release.1281628243" name="SDCC Linker" superClass="cdt.managedbuild.tool.sdcc.c.linker.exe.release">
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="true" id="sdcc.c.link.option.paths.2115563876" name="Library search path (-L)" superClass="sdcc.c.link.option.paths" useByScannerDiscovery="false" valueType="stringList"/>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="true" id="sdcc.c.link.option.libs.1580488495" name="Libraries (-l)" superClass="sdcc.c.link.option.libs" useByScannerDiscovery="false" valueType="libs"/>
 								<inputType id="cdt.managedbuild.tool.sdcc.c.linker.input.1560466034" superClass="cdt.managedbuild.tool.sdcc.c.linker.input">
@@ -38,12 +41,18 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
+					<sourceEntries>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+					</sourceEntries>
 				</configuration>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
 		</cconfiguration>
 		<cconfiguration id="cdt.managedbuild.config.sdcc.exe.debug.1242894659">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.sdcc.exe.debug.1242894659" moduleId="org.eclipse.cdt.core.settings" name="Debug">
+				<macros>
+					<stringMacro name="version" type="VALUE_TEXT" value="1.1"/>
+				</macros>
 				<externalSettings/>
 				<extensions>
 					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
@@ -54,25 +63,20 @@
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactExtension="hex" artifactName="${ProjName}" buildProperties="" cleanCommand="rm -rf" description="" errorParsers="org.eclipse.cdt.core.MakeErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser" id="cdt.managedbuild.config.sdcc.exe.debug.1242894659" name="Debug" optionalBuildProperties="org.eclipse.cdt.docker.launcher.containerbuild.property.selectedvolumes=,org.eclipse.cdt.docker.launcher.containerbuild.property.volumes=" parent="cdt.managedbuild.config.sdcc.exe.debug">
+				<configuration artifactExtension="hex" artifactName="${ProjName}-${version}" buildProperties="" cleanCommand="rm -rf" description="" errorParsers="org.eclipse.cdt.core.MakeErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser" id="cdt.managedbuild.config.sdcc.exe.debug.1242894659" name="Debug" optionalBuildProperties="org.eclipse.cdt.docker.launcher.containerbuild.property.enablement=null,org.eclipse.cdt.docker.launcher.containerbuild.property.selectedvolumes=,org.eclipse.cdt.docker.launcher.containerbuild.property.volumes=,org.eclipse.cdt.docker.launcher.containerbuild.property.image=null,org.eclipse.cdt.docker.launcher.containerbuild.property.connection=null" parent="cdt.managedbuild.config.sdcc.exe.debug">
 					<folderInfo id="cdt.managedbuild.config.sdcc.exe.debug.1242894659." name="/" resourcePath="">
 						<toolChain id="cdt.managedbuild.toolchain.sdcc.exe.debug.376912143" name="SDCC Tool Chain" superClass="cdt.managedbuild.toolchain.sdcc.exe.debug">
 							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="cdt.managedbuild.target.sdcc.platform.exe.release.644040322" name="Release Platform" osList="solaris,linux,hpux,aix,qnx,win32" superClass="cdt.managedbuild.target.sdcc.platform.exe.release"/>
-							<builder buildPath="${workspace_loc:/2in2out/Debug}" id="cdt.managedbuild.target.sdcc.builder.exe.release.1022622693" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Sdcc Make" superClass="cdt.managedbuild.target.sdcc.builder.exe.release"/>
-							<tool command="sdcc -c --stack-auto" id="cdt.managedbuild.tool.sdcc.c.compiler.exe.debug.587617638" name="SDCC Compiler" superClass="cdt.managedbuild.tool.sdcc.c.compiler.exe.debug">
+							<builder buildPath="${workspace_loc:/2in2out}/Debug" id="org.eclipse.cdt.build.core.internal.builder.1803738397" keepEnvironmentInBuildfile="false" name="CDT Internal Builder" superClass="org.eclipse.cdt.build.core.internal.builder"/>
+							<tool command="sdcc -c --stack-auto --opt-code-size --debug" id="cdt.managedbuild.tool.sdcc.c.compiler.exe.debug.587617638" name="SDCC Compiler" superClass="cdt.managedbuild.tool.sdcc.c.compiler.exe.debug">
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="sdcc.c.compiler.option.include.paths.1653680290" name="Include paths (-I)" superClass="sdcc.c.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/lib_lpc922/Releases}&quot;"/>
 									<listOptionValue builtIn="false" value="/usr/share/sdcc/include/mcs51"/>
 								</option>
 								<inputType id="cdt.managedbuild.tool.sdcc.c.compiler.input.1726022182" superClass="cdt.managedbuild.tool.sdcc.c.compiler.input"/>
 							</tool>
-							<tool command="sdcc --stack-auto" id="cdt.managedbuild.tool.sdcc.c.linker.exe.debug.1094150573" name="SDCC Linker" superClass="cdt.managedbuild.tool.sdcc.c.linker.exe.debug">
-								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="sdcc.c.link.option.paths.1225444451" name="Library search path (-L)" superClass="sdcc.c.link.option.paths" valueType="stringList">
-									<listOptionValue builtIn="false" value="&quot;D:\SVN\Selfbus\software\trunk\lib_lpc922\Release&quot;"/>
-								</option>
-								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="sdcc.c.link.option.libs.1886098367" name="Libraries (-l)" superClass="sdcc.c.link.option.libs" valueType="libs">
-									<listOptionValue builtIn="false" value="fb_lpc922.lib"/>
-								</option>
+							<tool command="sdcc --stack-auto  --opt-code-size --code-size 0x1C00 --xram-size 0 --debug" id="cdt.managedbuild.tool.sdcc.c.linker.exe.debug.1094150573" name="SDCC Linker" superClass="cdt.managedbuild.tool.sdcc.c.linker.exe.debug">
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="true" id="sdcc.c.link.option.paths.1225444451" name="Library search path (-L)" superClass="sdcc.c.link.option.paths" useByScannerDiscovery="false" valueType="stringList"/>
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="true" id="sdcc.c.link.option.libs.1886098367" name="Libraries (-l)" superClass="sdcc.c.link.option.libs" useByScannerDiscovery="false" valueType="libs"/>
 								<inputType id="cdt.managedbuild.tool.sdcc.c.linker.input.1690433660" superClass="cdt.managedbuild.tool.sdcc.c.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_RELS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -83,6 +87,9 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
+					<sourceEntries>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+					</sourceEntries>
 				</configuration>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>

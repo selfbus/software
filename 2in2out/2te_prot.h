@@ -53,7 +53,7 @@ unsigned int find_ga(unsigned char objno);	// Gruppenadresse ueber Assoziationst
 unsigned char find_first_objno(unsigned char gah, unsigned char gal);
 void restart_prot(void);		// Protokoll-relevante Parameter zuruecksetzen
 //unsigned int read_obj_value(unsigned char objno);				// gibt den Wert eines Objektes zurueck
-unsigned char read_obj_type(unsigned char objno);		// gibt den Typ eines Objektes zurueck
+//unsigned char read_obj_type(unsigned char objno);		// gibt den Typ eines Objektes zurueck
 //bit write_obj_value(unsigned char objno,int objvalue);	// schreibt den aktuellen Wert eines Objektes ins 'USERRAM'
 void restart_app(void);			// Alle Applikations-Parameter zuruecksetzen
 

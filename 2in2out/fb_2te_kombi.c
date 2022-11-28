@@ -26,13 +26,16 @@
  *
  */
 
+#define WATCHDOG_ENABLED
 
 #include <P89LPC922.h>
 #include "fb_hal_lpc.h"
 #include "2te_prot.h"
 #include "fb_app_2te_kombi.h"
 #include "2te_delay.h"
-#include "../com/watchdog.h"
+#ifdef WATCHDOG_ENABLED
+#   include "../com/watchdog.h"
+#endif
 
 
 
@@ -57,25 +60,19 @@ void main(void)
 	restart_app();				// Anwendungsspezifische Einstellungen zuruecksetzen
 
     // feed the watchdog
-    WATCHDOG_INIT
+#ifdef WATCHDOG_ENABLED
+	WATCHDOG_INIT
     WATCHDOG_START
-	EA = 0;
-    WFEED1 = 0xA5;
-    WFEED2 = 0x5A;
-    EA=1;
+#endif
 
 	do  {
 		
 		// ***************************************************************************
 		// Hier ist der Platz für wiederkehrende Abfragen, die nicht zeitkritisch sind
 		// ***************************************************************************
+#ifdef WATCHDOG_ENABLED
 		WATCHDOG_FEED 	    // feed the watchdog
-
-	    EA = 0;
-	    WFEED1 = 0xA5;
-	    WFEED2 = 0x5A;
-	    EA=1;
-
+#endif
 
 		if (wait_bus_return) // prüfen ob Wartezeit noch läuft
 		{
@@ -110,7 +107,7 @@ void main(void)
 			STOP_WRITECYCLE;
 		}
 		TASTER=!(userram[0x060] & 0x01);	// LED entsprechend Prog-Bit schalten (low=LED an)
-		for(n=0;n<100;n++) {}		// falls Hauptroutine keine Zeit verbraucht, der LED etwas Zeit geben, damit sie auch leuchten kann
+		//for(n=0;n<100;n++) {}		// falls Hauptroutine keine Zeit verbraucht, der LED etwas Zeit geben, damit sie auch leuchten kann
   } while(1);
 }
 

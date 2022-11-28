@@ -43,6 +43,7 @@ __bit interrupted;		/// Wird durch interrupt-routine gesetzt. So kann eine ander
 *
 *
 */
+/*
 void start_rtc(unsigned char base)
 {
 	unsigned long rtcval=0;
@@ -55,18 +56,19 @@ void start_rtc(unsigned char base)
 	RTCL=rtcval;
 	RTCCON=0x61;	// ... und starten
 }
-
+*/
 
 /** 
 * RTC stoppen
 *
 *
 */
+/*
 void stop_rtc(void)
 {
 	RTCCON=0x60;
 }
-
+*/
 
 
 
@@ -79,7 +81,8 @@ void stop_rtc(void)
 */
 unsigned char get_byte(void)
 {
-  __bit rbit,parity,ph;
+  __bit rbit,parity;
+  __bit ph;
   unsigned char n,m,fbb;
   						
   EX1=0;				// Interrupt 1 sperren
@@ -104,9 +107,11 @@ unsigned char get_byte(void)
     rbit=FBINC;
     for(m=0;m<5;m++) rbit&=FBINC;	// zur Steigerung der Fehlertoleranz mehrfach lesen
     //fbb|=rbit<<n;
-    if (rbit) fbb+=n;
-    
-    if(rbit) ph=!ph;	// Paritybit berechnen
+    if (rbit)
+    {
+        fbb+=n;
+        ph=!ph;    // Paritybit berechnen
+    }
   }  
   while(!TF1);				
   TR1=0;
